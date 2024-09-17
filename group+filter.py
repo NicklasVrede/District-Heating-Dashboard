@@ -21,7 +21,7 @@ for col in cols_to_convert:
 
 
 grouped_data = data.groupby('Titel').agg({
-    'afbrud': 'sum',
+    'afbrud': 'mean', #bør være vægtet gennemsnit
     'afbrud_n': 'sum',
     'ledighed_nyudd_n': 'sum',
     'ledighed_nyudd': 'sum',
