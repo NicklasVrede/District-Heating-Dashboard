@@ -1,0 +1,3 @@
+decompose code and improve structure
+Improve the map, add ability for more details, like municipalities shown.
+Work on overlays.
