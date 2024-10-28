@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3.js Map of Denmark</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .map {
+            width: 90%;
+            height: 500px;
+            margin: 20px auto;
+        }
+        .controls {
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <input type="text" id="address" placeholder="Enter address">
+        <button onclick="showCoordinates()">Get Coordinates</button>
+        <p id="result"></p>
+    </div>
+    <div id="map" class="map"></div>
+    <script src="dashboard.js"></script>
+</body>
+</html>
