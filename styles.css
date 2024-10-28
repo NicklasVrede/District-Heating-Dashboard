@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items at the start to prevent overlap */
+    padding: 20px; /* Add padding to the container */
+}
+
+.map {
+    width: 60%; /* Adjust the width to fit better */
+    height: 500px;
+    margin: 20px; /* Center the map horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plant-display {
+    width: 35%;
+    height: 500px; /* Ensure the display area has the same height as the map */
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 20px;
+    overflow-y: auto;
+}
+
+.controls {
+    text-align: center;
+    margin: 20px;
+}
+
+.tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 5px;
+    font: 12px sans-serif;
+    background: #ffeb3b; /* Yellow background color for the tooltip */
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.circle {
+    fill: #ADD8E6; /* Light blue color for the circles */
+    stroke: #000; /* Black border color */
+    stroke-width: 0.5; /* Initial stroke width */
+}
+
+.map-path {
+    fill: #d3d3d3; /* Light grey color for the map */
+    stroke: #333; /* Dark grey stroke color */
+}
