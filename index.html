@@ -9,17 +9,19 @@
 </head>
 <body>
     <div class="controls">
-        <input type="text" id="address" placeholder="Enter address">
-        <button onclick="showCoordinates()">Lookup Address</button>
-        <p id="result">Please enter an address to look up.</p> <!-- Default text -->
+        <input type="text" id="address" placeholder="Enter address" oninput="autocompleteAddress()">
+        <button onclick="showCoordinates()">Search</button>
+        <label>
+            <input type="checkbox" id="toggle-areas" onclick="toggleAreas()"> Show Plant Areas
+        </label>
+        <div id="autocomplete-list" class="autocomplete-items"></div> <!-- Autocomplete container -->
     </div>
     <div class="container">
         <div id="map" class="map"></div>
         <div id="plant-display" class="plant-display"></div>
     </div>
     <div id="tooltip" class="tooltip" style="opacity: 0;"></div>
-    <script src="dashboard.js"></script>
-    <script src="get_coordinates.js"></script>
-    <script src="load_shapefile.js"></script>
+    <div id="toast-container" class="toast-container"></div> <!-- Toast container -->
+    <script type="module" src="main.js"></script>
 </body>
 </html>

@@ -1,4 +1,15 @@
 decompose code and improve structure
 make the plant class unique for each plant. (in the display)
-Improve the map, add ability for more details, like municipalities shown.
+Improve the map, add ability for more details, like municipalities shown. 
+    Look at mapbox instead.
 Work on overlays.
+
+https://www.geodanmark.dk/home/vejledninger/geofa/hent-geofa/ 
+
+https://dataforsyningen.dk/map
+
+brug gis.
+
+https://github.com/magnuslarsen/geoJSON-Danish-municipalities
+
+fix dublicate function "capitalizeFirstLetters"
