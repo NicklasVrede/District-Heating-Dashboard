@@ -34,7 +34,7 @@ Bogense Forsyningsselskab,"Fynsvej 5, 5400 Bogense, Denmark",55.552441,10.087939
 Bornholms Energi & Forsyning,"Industrivej 1, Rønne, 3700 Rønne, Denmark",55.096695,14.7185
 Borup Varmeværk,"Bækgårdsvej 62, 4140 Borup, Denmark",55.486066,11.969748
 Boulstrup-Hou Kraftvarmeværk,"Møllemarken 4, 8300 Odder, Denmark",55.923611,10.244058
-Bøvling Varmeværk,"Marievej 3, 7650 Bøvlingbjerg, Denmark",56.890986,8.524169
+Bøvling Varmeværk,"Marievej 3, 7650 Bøvlingbjerg, Denmark",56.435220,8.202650
 Brædstrup Fjernvarme,"Fjernvarmevej 2, 8740 Brædstrup, Denmark",55.976443,9.622564
 Bramming Fjernvarme,"Grønningen 7, 6740 Bramming, Denmark",55.476746,8.699162
 Brande Fjernvarme,"Mylius-Erichsensvej 39, 7330 Brande, Denmark",55.949264,9.124966
@@ -181,7 +181,7 @@ Løgstør Fjernvarmeværk,"Blekingevej 8, 9670 Løgstør, Denmark",56.959383,9.2
 Løgstrup Varmeværk,"Kølsenvej 14A, 8831 Løgstrup, Denmark",56.513313,9.340247
 Løgten-Skødstrup Fjernvarme,"Bakketoften 7, 8541 Skødstrup, Denmark",56.255957,10.301506
 Løgumkloster Fjernvarme,"Søndermarksvej 1, 6240 Løgumkloster, Denmark",55.052665,8.957691
-Lohals Varmeforsyning,"Bræmlevænget 3, 5953 Tranekær, Denmark",54.9976,10.8438
+Lohals Varmeforsyning,"Bræmlevænget 3, 5953 Tranekær, Denmark",55.126950,10.907330
 Løjt Kirkeby Fjernvarmeselskab,"Skovbyvej 4, 6200 Aabenraa, Denmark",55.083199,9.464455
 Løkken Varmeværk,"Industrivej 18, 9480 Løkken, Denmark",57.37129,9.727605
 Løkkensvejens Kraftvarmeværk,"Løkkensvej 730, 9480 Løkken, Denmark",57.410064,9.812225
@@ -420,7 +420,7 @@ Ulstrup Kraftvarmeværk,"Fredensvej 6, 8860 Ulstrup",56.389301,9.793236
 SØNDERBORG FJERNVARME AMBA,"Nørrekobbel 54, 6400 Sønderborg",54.92323,9.804853
 Glumsø Fjernvarme,"Erantisvej 17, 4171 Glumsø",55.351557,11.69294
 ELLIDSHØJ-FERSLEV KRAFTVARMEVÆRK,"Hasserisvej 174, 9000 Aalborg",57.039754,9.885167
-SPØTTRUP FJERNVARMEVÆRK,"Kærgårdsvej 2, 7860 Spøttrup",56.5476,8.9522
+SPØTTRUP FJERNVARMEVÆRK,"Kærgårdsvej 2, 7860 Spøttrup",56.645390,8.809500
 Viborg Varme,"Håndværkervej 6, 8800 Viborg",56.462658,9.398628
 Cobra Varme,"Egebakken 49, 6818 Årre",55.531122,8.655565
 Helle Energi,"Byparken 25, 6800 Varde",55.622273,8.598331
@@ -466,3 +466,4 @@ CHRISTIAN HØIER,"Hullebækvej 44, 4800 Nykøbing F",54.795851,11.92109
 FORS Varme Roskilde,"Betonvej 12, 4000 Roskilde",55.645789,12.125577
 NFS Varme,"Gasværksvej 2, 5800 Nyborg",55.311297,10.784
 DIN Forsyning A/S,"Ulvsundvej 1, 6715 Esbjerg N",55.511826,8.496007
+Nørre Broby Varmeværk, "Stationsvej 14, 5672 Broby",55.250831,10.226505

@@ -113,3 +113,15 @@ body, html {
 .toast.error {
     background-color: #dc3545;
 }
+
+.mapboxgl-popup {
+    pointer-events: none;
+}
+
+.mapboxgl-popup-content {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

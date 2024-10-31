@@ -3,7 +3,7 @@
 // Define the area styles directly
 export const areaStyles = {
     fill: {
-        id: 'areas-layer',
+        id: 'areas',
         type: 'fill',
         source: 'areas',
         layout: {},
