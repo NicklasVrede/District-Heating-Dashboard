@@ -1,0 +1,44 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.9,
+                    54.5
+                ]
+            },
+            "properties": {
+                "type": "protected_area",
+                "sizerank": 1,
+                "class": "national_park",
+                "tilequery": {
+                    "distance": 0,
+                    "geometry": "polygon",
+                    "layer": "landuse_overlay"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.9,
+                    54.5
+                ]
+            },
+            "properties": {
+                "tilequery": {
+                    "distance": 0,
+                    "geometry": "polygon",
+                    "layer": "water"
+                }
+            }
+        }
+    ]
+}

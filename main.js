@@ -1,83 +1,22 @@
-import { Plant } from './classes/Plant.js';
-import { initializeMap, loadMunicipalities, loadAreas } from './utils/javascript/map.js';
-import { delay } from './utils/javascript/utils.js';
-import { addPlantToSelection, removePlantFromSelection, updatePlantDisplay } from './utils/javascript/plantManagement.js';
+import { loadPlants, loadAreas } from './utils/javascript/loadData.js';
 
-// Create a tooltip
-const tooltip = d3.select("body").append("div")
-    .attr("class", "tooltip")
-    .style("position", "absolute")
-    .style("opacity", 0)
-    .style("background", "#fff")
-    .style("border", "1px solid #ccc")
-    .style("padding", "5px")
-    .style("border-radius", "5px")
-    .style("pointer-events", "none");
+// Set your Mapbox access token
+mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0MnFzYWFyZ3pveWJ1In0.V9qwBfsH4plxE_fz89kuYg'; // Replace with your Mapbox access token
 
-// Function to match plants with areas using the static dictionary
-function matchPlantsWithAreas(plants, plantToAreaMap, areas) {
-    const connections = [];
-    for (const plant of plants) {
-        const areaName = plantToAreaMap[plant.name];
-        if (areaName) {
-            const matchedArea = areas.find(area => area.properties.forsytekst === areaName);
-            if (matchedArea) {
-                plant.areaReference = matchedArea.properties.forsytekst;
-                connections.push({ plant: plant.name, area: matchedArea.properties.forsytekst });
-            }
-        }
-    }
-    return connections;
-}
+// Initialize the map and set its view to a specific location and zoom level
+const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+    center: [10.0, 56.0], // starting position [lng, lat] (centered on Denmark)
+    zoom: 6.5 // starting zoom
+});
 
-// Load and display the map data
-async function loadMapData() {
-    const { svgMap, g, projection, path } = initializeMap();
+// Enable scroll zoom
+map.scrollZoom.enable();
 
-    await loadMunicipalities(g, path);
-    await loadAreas(g, path, tooltip);
+// Set zoom around the mouse location
+map.scrollZoom.setWheelZoomRate(1); // Adjust the zoom rate if needed
 
-    // Load and plot the facilities from the CSV file with a delay
-    await delay(500); // Wait for 500 milliseconds
-
-    const circlesGroup = g.append("g");
-
-    d3.csv("data/addresses_with_coordinates.csv").then(function(data) {
-        const circles = circlesGroup.selectAll("circle")
-            .data(data)
-            .enter()
-            .append("circle")
-            .attr("class", "circle") // Apply the circle class
-            .attr("cx", d => projection([+d.longitude, +d.latitude])[0])
-            .attr("cy", d => projection([+d.longitude, +d.latitude])[1])
-            .attr("r", 3)
-            .on("mouseover", function(event, d) {
-                tooltip.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                tooltip.html(`<strong>${d.name}</strong><br/>`)
-                    .style("left", (event.pageX + 5) + "px")
-                    .style("top", (event.pageY - 28) + "px");
-            })
-            .on("mousemove", function(event) {
-                tooltip.style("left", (event.pageX + 5) + "px")
-                       .style("top", (event.pageY - 28) + "px");
-            })
-            .on("mouseout", function(d) {
-                tooltip.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-            })
-            .on("click", function(event, d) {
-                const plant = new Plant(d.name, d.address, d.latitude, d.longitude, d.metric1, d.metric2);
-                if (event.ctrlKey) {
-                    removePlantFromSelection(plant);
-                } else {
-                    addPlantToSelection(plant);
-                }
-            });
-    });
-}
-
-// Call the function to load map data
-loadMapData();
+// Load the plants and areas
+loadPlants(map);
+loadAreas(map);

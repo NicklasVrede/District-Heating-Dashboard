@@ -1,83 +1,24 @@
-import { capitalizeFirstLetters } from './utils.js';
+export function initialiseBaseMap() {
+    // Set your Mapbox access token
+    mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0MnFzYWFyZ3pveWJ1In0.V9qwBfsH4plxE_fz89kuYg'; // Replace with your Mapbox access token
 
-export const widthMap = 800;
-export const heightMap = 500;
-
-export function initializeMap() {
-    const svgMap = d3.select("#map")
-        .append("svg")
-        .attr("width", widthMap)
-        .attr("height", heightMap);
-
-    const g = svgMap.append("g");
-
-    const projection = d3.geoMercator()
-        .center([10, 56])
-        .scale(4000)
-        .translate([widthMap / 2, heightMap / 2]);
-
-    const path = d3.geoPath().projection(projection);
-
-    // Define the zoom behavior
-    const zoom = d3.zoom()
-        .scaleExtent([1, 30]) // Set the zoom scale extent
-        .on("zoom", (event) => {
-            g.attr("transform", event.transform);
-            g.selectAll("circle")
-                .attr("r", 3 / event.transform.k) // Adjust the radius based on the zoom level
-                .style("stroke-width", 0.5 / event.transform.k); // Adjust the stroke width based on the zoom level
-        });
-
-    // Apply the zoom behavior to the SVG element
-    svgMap.call(zoom);
-
-    return { svgMap, g, projection, path };
-}
-
-export function loadMunicipalities(g, path) {
-    return d3.json("maps/municipalities.geojson").then(function(geojson) {
-        g.append("g")
-            .selectAll("path")
-            .data(geojson.features)
-            .enter()
-            .append("path")
-            .attr("d", path)
-            .attr("class", "map-path"); // Apply the map-path class
+    // Initialize the map and set its view to a specific location and zoom level
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        center: [10.0, 56.0], // starting position [lng, lat] (centered on Denmark)
+        zoom: 5 // starting zoom
     });
-}
 
-export function loadAreas(g, path, tooltip) {
-    return d3.json("maps/areas.geojson").then(function(areasGeoJSON) {
-        g.append("g")
-            .attr("id", "areas-group")
-            .selectAll("path")
-            .data(areasGeoJSON.features)
-            .enter()
-            .append("path")
-            .attr("d", path)
-            .attr("class", d => d.properties.forsytekst === 'Fjernvarme under rekonstruktion' ? 'area-path special-area' : 'area-path') // Apply a different class for special areas
-            .attr("fill", "none")
-            .attr("stroke", d => d.properties.forsytekst === 'Fjernvarme under rekonstruktion' ? 'red' : 'blue') // Change stroke color conditionally
-            .attr("stroke-width", 1)
-            .on("mouseover", function(event, d) {
-                const transformedText = capitalizeFirstLetters(d.properties.forsytekst);
-                tooltip.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                tooltip.html(`<strong>${transformedText}</strong><br/>`)
-                    .style("left", (event.pageX + 5) + "px")
-                    .style("top", (event.pageY - 28) + "px");
-            })
-            .on("mousemove", function(event) {
-                tooltip.style("left", (event.pageX + 5) + "px")
-                       .style("top", (event.pageY - 28) + "px");
-            })
-            .on("mouseout", function(d) {
-                tooltip.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-            });
+    // Enable scroll zoom
+    map.scrollZoom.enable();
 
-        return areasGeoJSON;
-    });
+    // Set zoom around the mouse location
+    map.scrollZoom.setWheelZoomRate(1); // Adjust the zoom rate if needed
+
+    // Example of adding a marker
+    const marker = new mapboxgl.Marker()
+        .setLngLat([10.0, 56.0]) // Coordinates for the marker (centered on Denmark)
+        .setPopup(new mapboxgl.Popup().setHTML('<h3>Denmark</h3><p>Center of Denmark.</p>')) // Popup content
+        .addTo(map);
 }

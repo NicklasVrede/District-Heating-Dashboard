@@ -4,7 +4,14 @@ import requests
 # Your OpenCage API key
 api_key = 'e1337f0db4d14aeb8a69f6439fc005fc'
 
+# Counter for the number of requests
+request_counter = 0
+
 def geocode_address(address):
+    global request_counter
+    request_counter += 1
+    print(f"Request {request_counter}: Geocoding address: {address}")
+    
     response = requests.get(f'https://api.opencagedata.com/geocode/v1/json?q={address}&key={api_key}')
     data = response.json()
     if data['results']:
@@ -13,7 +20,9 @@ def geocode_address(address):
             'longitude': data['results'][0]['geometry']['lng']
         }
     else:
-        return None
+        if 'rate' in data:
+            print(f"Rate limit exceeded. {data['rate']['reset']} seconds until reset.")
+            exit()
 
 # Read the CSV file
 with open('data/addresses.csv', 'r', encoding='utf-8') as infile:
@@ -43,4 +52,4 @@ with open('data/addresses_with_coordinates.csv', 'w', newline='', encoding='utf-
         filtered_facility = {field: facility[field] for field in fieldnames}
         writer.writerow(filtered_facility)
 
-print('Geocoding complete. Results saved to addresses_with_coordinates.csv')
+print(f'Geocoding complete. {request_counter} requests made. Results saved to addresses_with_coordinates.csv')
