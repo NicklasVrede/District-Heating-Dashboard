@@ -22,6 +22,7 @@ function autocompleteAddress() {
             }
             data.results.forEach(result => {
                 const item = document.createElement('div');
+                item.className = 'autocomplete-item';
                 item.innerText = result.formatted;
                 item.addEventListener('click', () => {
                     input.value = result.formatted;
@@ -55,20 +56,11 @@ function geocodeAddress(address) {
     return fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}&key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
-            console.log('Geocode API response:', data); // Debugging statement
-            if (data.status.code === 402) {
-                showToast('Address API is dead 😢', 'error');
-            }
             if (data.results.length > 0) {
-                const { lat, lng } = data.results[0].geometry;
-                return { latitude: lat, longitude: lng };
+                return data.results[0].geometry;
             } else {
-                throw new Error(`No results found for address: ${address}`);
+                throw new Error('Address not found.');
             }
-        })
-        .catch(error => {
-            console.error('Error geocoding address:', error);
-            throw error;
         });
 }
 

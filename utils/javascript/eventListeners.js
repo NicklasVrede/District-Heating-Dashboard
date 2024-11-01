@@ -1,7 +1,4 @@
-import { highlightStyles } from '/styles/highlightStyles.js';
-
-// EDIT STYLES IN "styles/highlightStyles.js".
-
+import { highlightStyles } from '../../styles/highlightStyles.js';
 
 let isHoveringPlant = false;
 let areaTooltip = null;

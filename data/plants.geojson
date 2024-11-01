@@ -96,29 +96,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    11.728986,
-                    55.208853
+                    11.573434,
+                    55.461283
                 ]
             },
             "properties": {
                 "forsyid": "65278316",
-                "name": "AffaldPlus",
-                "address": "Ved Fjorden 20, 4700 Næstved, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    10.134176,
-                    56.161632
-                ]
-            },
-            "properties": {
-                "forsyid": "40844309",
-                "name": "AffaldVarme Aarhus",
-                "address": "Karen Blixens Boulevard 7, 8220 Brabrand, Denmark"
+                "name": "Affaldplus",
+                "address": "Kragelundsvej 12, 4180 Sorø"
             }
         },
         {
@@ -306,14 +291,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.470819,
-                    55.643664
+                    12.443321,
+                    55.63011
                 ]
             },
             "properties": {
                 "forsyid": "14250905",
                 "name": "Avedøre Fjernvarme",
-                "address": "Arnold Nielsens Boulevard 60, 2650 Hvidovre, Denmark"
+                "address": "Rebslagerporten 125 i Avedøre, 2650 Hvidovre"
             }
         },
         {
@@ -426,14 +411,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    10.197503,
-                    57.476686
+                    10.199172,
+                    57.542863
                 ]
             },
             "properties": {
                 "forsyid": "39678810",
                 "name": "Bindslev Fjernvarme",
-                "address": "Skolegade 3, 9881 Bindslev, Denmark"
+                "address": "Skolegade 5, 9881 Bindslev"
             }
         },
         {
@@ -516,8 +501,8 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    8.202650,
-                    56.435220
+                    8.20265,
+                    56.43522
                 ]
             },
             "properties": {
@@ -711,21 +696,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    8.496007,
-                    55.511826
-                ]
-            },
-            "properties": {
-                "forsyid": "43898353",
-                "name": "DIN Forsyning",
-                "address": "Ulvsundvej 1, 6715 Esbjerg N, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     10.289065,
                     57.163302
                 ]
@@ -846,21 +816,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.426876,
-                    55.972235
-                ]
-            },
-            "properties": {
-                "forsyid": "32654193",
-                "name": "Ejerlauget Båstrup Park",
-                "address": "Dannevang 401, 3480 Fredensborg, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     8.793305,
                     56.522412
                 ]
@@ -906,14 +861,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.175813,
-                    56.123484
+                    9.351491,
+                    56.169717
                 ]
             },
             "properties": {
                 "forsyid": "25161513",
                 "name": "Energi Ikast Varme",
-                "address": "Europavej 2, 7430 Ikast"
+                "address": "Birkevej 34, 7442 Engesvang"
             }
         },
         {
@@ -936,14 +891,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.197129,
-                    56.020136
+                    12.337772,
+                    55.866607
                 ]
             },
             "properties": {
                 "forsyid": "60183112",
                 "name": "Engholm Varmecentral",
-                "address": "Rådhusvej 3, 3450 Allerød, Denmark"
+                "address": "Rådhusparken 57, 3450 Allerød"
             }
         },
         {
@@ -951,14 +906,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.885479,
-                    57.011535
+                    9.336192,
+                    56.768058
                 ]
             },
             "properties": {
                 "forsyid": "53464718",
                 "name": "Farsø Varmeværk",
-                "address": "Johan Skjoldborgs Vej 12, 9640 Farsø, Denmark"
+                "address": "J. Skjoldborgs Vej 12, 9640 Farsø, Denmark"
             }
         },
         {
@@ -1116,21 +1071,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.125577,
-                    55.645789
-                ]
-            },
-            "properties": {
-                "forsyid": "33033125",
-                "name": "Fors Varme",
-                "address": "Betonvej 12, 4000 Roskilde, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     12.590461,
                     56.025224
                 ]
@@ -1266,21 +1206,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    10.352295,
-                    55.366648
-                ]
-            },
-            "properties": {
-                "forsyid": "81815119",
-                "name": "Gartnernes Fjernvarmeselskaber",
-                "address": "Sanderumvej 16, 5260 Odense S, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     9.999961,
                     56.562098
                 ]
@@ -1364,21 +1289,6 @@
                 "forsyid": "39272091",
                 "name": "Gentofte Gladsaxe Fjernvarme",
                 "address": "Bernstoffsvej 159, 2920 Charlottenlund, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    8.932975,
-                    55.761731
-                ]
-            },
-            "properties": {
-                "forsyid": "25509080",
-                "name": "GEV Varme",
-                "address": "Tårnvej 24, 7200 Grindsted, Denmark"
             }
         },
         {
@@ -1992,7 +1902,7 @@
             },
             "properties": {
                 "forsyid": "26089263",
-                "name": "HOFOR",
+                "name": "Hofor",
                 "address": "Ørestads Boulevard 35, 2300 København S, Denmark"
             }
         },
@@ -2376,14 +2286,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    10.118984,
-                    57.386057
+                    11.405157,
+                    55.660009
                 ]
             },
             "properties": {
                 "forsyid": "33033125",
                 "name": "Jyderup Varme A/S",
-                "address": " \"Lyngvej 6"
+                "address": "Lyngvej 6, 4450 Jyderup, Danmark"
             }
         },
         {
@@ -2706,8 +2616,8 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    10.907330,
-                    55.126950
+                    10.90733,
+                    55.12695
                 ]
             },
             "properties": {
@@ -2759,21 +2669,6 @@
                 "forsyid": "20066873",
                 "name": "Løkkensvejens Kraftvarmeværk",
                 "address": "Løkkensvej 730, 9480 Løkken, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    11.15952,
-                    54.82613
-                ]
-            },
-            "properties": {
-                "forsyid": "31151899",
-                "name": "Lolland Forsyning",
-                "address": "Stavangervej 13, 4900 Nakskov, Denmark"
             }
         },
         {
@@ -3117,7 +3012,7 @@
             },
             "properties": {
                 "forsyid": "30406443",
-                "name": "Nimtofte og Omegns Fjernvarmeforsyning",
+                "name": "Nimtofte Og Omegns Fjernvarmeforsyning",
                 "address": "Frederikslundvej 1, 8550 Ryomgård, Denmark"
             }
         },
@@ -3224,21 +3119,6 @@
                 "forsyid": "57494115",
                 "name": "Nykøbing Mors Fjernvarmeværk",
                 "address": "Kjærgaardsvej 20, 7900 Nykøbing M, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    11.6600349,
-                    55.9246925
-                ]
-            },
-            "properties": {
-                "forsyid": "57494115",
-                "name": "Nykøbing S. Varmeværk",
-                "address": "Billesvej 8-10, 4500 Nykøbing Sjælland, Denmark"
             }
         },
         {
@@ -3562,7 +3442,7 @@
                 "type": "Point",
                 "coordinates": [
                     8.79162,
-                    56.614620
+                    56.591628
                 ]
             },
             "properties": {
@@ -3591,29 +3471,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    11.883929,
-                    54.780093
-                ]
-            },
-            "properties": {
-                "forsyid": "34094187",
-                "name": "REFA Gedser Fjernvarme",
-                "address": "Energivej 4, 4000 Nykøbing F, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    11.883929,
-                    54.780093
+                    12.053318,
+                    54.818588
                 ]
             },
             "properties": {
                 "forsyid": "33756488",
-                "name": "REFA Horbelev Fjernvarme",
-                "address": "Energivej 4, 4000 Nykøbing F, Denmark"
+                "name": "Refa Horbelev Fjernvarme",
+                "address": "Søndre Vej 1, 4871 Horbelev"
             }
         },
         {
@@ -3636,14 +3501,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    8.702075,
-                    56.084481
+                    8.277016,
+                    56.090141
                 ]
             },
             "properties": {
                 "forsyid": "37560219",
                 "name": "Ringkøbing Fjernvarmeværk",
-                "address": "Kongevejen 19, 6950 Ringkøbing, Denmark"
+                "address": "Isagervej 41, 6950 Ringkøbing"
             }
         },
         {
@@ -3906,14 +3771,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    11.57651,
-                    55.950985
+                    9.69952,
+                    57.273618
                 ]
             },
             "properties": {
                 "forsyid": "20928719",
                 "name": "Saltum Fjernvarmeværk",
-                "address": "Th Jensensvej 5, 9493 Saltum, Denmark"
+                "address": "Ths. Jensensvej 5, 9493 Saltum"
             }
         },
         {
@@ -4026,14 +3891,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    11.142147,
-                    55.332409
+                    11.342991,
+                    55.41403
                 ]
             },
             "properties": {
                 "forsyid": "27736904",
-                "name": "SK Forsyning",
-                "address": "Lilleøvej 3, 4220 Korsør, Denmark"
+                "name": "Sk Forsyning",
+                "address": "Nordvej 6, 4200 Slagelse"
             }
         },
         {
@@ -4176,8 +4041,8 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.4551424,
-                    54.9899697
+                    9.492925,
+                    57.087998
                 ]
             },
             "properties": {
@@ -4296,21 +4161,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.804853,
-                    54.92323
-                ]
-            },
-            "properties": {
-                "forsyid": "32648541",
-                "name": "Sønderborg Varme",
-                "address": "Nørrekobbel 54, 6400 Sønderborg, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     9.729421,
                     57.005276
                 ]
@@ -4332,7 +4182,7 @@
             },
             "properties": {
                 "forsyid": "37325813",
-                "name": "Spjald Fjernvarme-og Vandværk",
+                "name": "Spjald Fjernvarme-Og Vandværk",
                 "address": "Rørvej 1, 6971 Spjald, Denmark"
             }
         },
@@ -4421,7 +4271,7 @@
                 ]
             },
             "properties": {
-                "forsyid": "26203333",
+                "forsyid": "26203562",
                 "name": "Struer Energi",
                 "address": "Jyllandsgade 1, 7600 Struer, Denmark"
             }
@@ -4812,7 +4662,7 @@
             },
             "properties": {
                 "forsyid": "17010131",
-                "name": "TREFOR Varme",
+                "name": "Trefor Varme",
                 "address": "Kokbjerg 30, 6000 Kolding, Denmark"
             }
         },
@@ -4962,7 +4812,7 @@
             },
             "properties": {
                 "forsyid": "51718011",
-                "name": "Vallensbæk Fjernvarme NORD",
+                "name": "Vallensbæk Fjernvarme Nord",
                 "address": "Horsbred 201, 2625 Vallensbæk"
             }
         },
@@ -4977,7 +4827,7 @@
             },
             "properties": {
                 "forsyid": "25009215",
-                "name": "Vallensbæk Fjernvarme SYD",
+                "name": "Vallensbæk Fjernvarme Syd",
                 "address": "Delta Park 11, 2665 Vallensbæk Strand, Denmark"
             }
         },
@@ -5046,21 +4896,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    10.212854,
-                    56.193164
-                ]
-            },
-            "properties": {
-                "forsyid": "28621027",
-                "name": "Vejlby Fjernvarme",
-                "address": "Tranekærvej 58, 8240 Risskov, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     9.542296,
                     55.710266
                 ]
@@ -5097,7 +4932,7 @@
             },
             "properties": {
                 "forsyid": "25482026",
-                "name": "VERDO Varme",
+                "name": "Verdo Varme",
                 "address": "Agerskellet 7, 8920 Randers NV, Denmark"
             }
         },
@@ -5151,8 +4986,8 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    8.600903,
-                    56.492477
+                    8.631093,
+                    56.091913
                 ]
             },
             "properties": {
@@ -5241,14 +5076,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    11.875184,
-                    54.765194
+                    11.885348,
+                    54.994752
                 ]
             },
             "properties": {
                 "forsyid": "30692446",
                 "name": "Vordingborg Fjernvarme",
-                "address": "Brovejen 10, 4760 Vordingborg, Denmark"
+                "address": "Danmarksvej 1, 4760 Vordingborg"
             }
         },
         {
@@ -5316,21 +5151,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.492925,
-                    57.087998
-                ]
-            },
-            "properties": {
-                "forsyid": "61668713",
-                "name": "Skovsgaard Varmeværk",
-                "address": "Poststrædet 28, Skovsgård, 9460 Brovst"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     10.005181,
                     56.879233
                 ]
@@ -5354,21 +5174,6 @@
                 "forsyid": "44336553",
                 "name": "Øt Havndal Fjernvarme",
                 "address": "Laursensvej 4, 8970 Havndal, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    10.503,
-                    56.3843
-                ]
-            },
-            "properties": {
-                "forsyid": "30406443",
-                "name": "Nimtofte",
-                "address": "Frederikslundvej 1, 8550 Ryomgaard, Denmark"
             }
         },
         {
@@ -5436,29 +5241,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    10.02027,
-                    56.490765
+                    9.006449,
+                    56.121734
                 ]
             },
             "properties": {
                 "forsyid": "25809807",
                 "name": "Verdo Varme Herning",
-                "address": "Agerskellet 7, 8920 Randers NV"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    8.496007,
-                    55.511826
-                ]
-            },
-            "properties": {
-                "forsyid": "32662498",
-                "name": "DIN Forsyning Varme",
-                "address": "Ulvsundvej 1, 6715 Esbjerg N, Denmark"
+                "address": "Miljøvej 6, 7400 Herning"
             }
         },
         {
@@ -5496,28 +5286,13 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.485974,
-                    55.535168
-                ]
-            },
-            "properties": {
-                "forsyid": "17010131",
-                "name": "Trefor Varme",
-                "address": "Kokbjerg 30, 6000 Kolding, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     10.238977,
                     55.109816
                 ]
             },
             "properties": {
                 "forsyid": "26721059",
-                "name": "FFV Varme Faaborg",
+                "name": "Ffv Varme Faaborg",
                 "address": "Værkmestervej 1, 5600 Faaborg, Denmark"
             }
         },
@@ -5541,28 +5316,13 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    8.772457,
-                    55.158958
-                ]
-            },
-            "properties": {
-                "forsyid": "20078480",
-                "name": "Nørrevejens Kraftvarmeværk",
-                "address": "Læssevej 7, 6780 Skærbæk, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     11.711996,
                     54.698441
                 ]
             },
             "properties": {
                 "forsyid": "34094187",
-                "name": "REFA Kettinge Forsyning",
+                "name": "Refa Kettinge Forsyning",
                 "address": "Fuglegårdsvej 10, 4892 Kettinge, Denmark"
             }
         },
@@ -5577,7 +5337,7 @@
             },
             "properties": {
                 "forsyid": "32555063",
-                "name": "REFA Stubbekøbing Fjernvarme",
+                "name": "Refa Stubbekøbing Fjernvarme",
                 "address": "Sivmosevej 2, 4850 Stubbekøbing, Denmark"
             }
         },
@@ -5586,14 +5346,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    11.728986,
-                    55.208853
+                    11.573434,
+                    55.461283
                 ]
             },
             "properties": {
                 "forsyid": "39170523",
                 "name": "Sorø Fjernvarme",
-                "address": "Ved Fjorden 20, 4700 Næstved"
+                "address": "Kragelundsvej 12, 4180 Sorø"
             }
         },
         {
@@ -5607,7 +5367,7 @@
             },
             "properties": {
                 "forsyid": "33032838",
-                "name": "Fors A/S",
+                "name": "FORS Varme Holbæk",
                 "address": "Tåstrup Møllevej 5, 4300 Holbæk, Denmark"
             }
         },
@@ -5631,21 +5391,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.272992,
-                    55.931563
-                ]
-            },
-            "properties": {
-                "forsyid": "20276991",
-                "name": "Hillerød Varme A/S - Meløse-St.Lyngby",
-                "address": "Ægirsvej 4, 3400 Hillerød"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     11.15952,
                     54.82613
                 ]
@@ -5654,21 +5399,6 @@
                 "forsyid": "31151899",
                 "name": "Lolland Varme",
                 "address": "Stavangervej 13, 4900 Nakskov"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    9.952196,
-                    57.259492
-                ]
-            },
-            "properties": {
-                "forsyid": "31157439",
-                "name": "Brønderslev Varme",
-                "address": "Virksomhedsvej 20, 9700 Brønderslev"
             }
         },
         {
@@ -5802,7 +5532,7 @@
             },
             "properties": {
                 "forsyid": "30587391",
-                "name": "Ejendomsselskabet ATPFA",
+                "name": "Ejendomsselskabet Atpfa",
                 "address": "Hammerichsgade 14, 2, 1611 København V"
             }
         },
@@ -5847,7 +5577,7 @@
             },
             "properties": {
                 "forsyid": "61877215",
-                "name": "Assens Fjernvarme FYN",
+                "name": "Assens Fjernvarme Fyn",
                 "address": "Stejlebjergvej 4, 5610 Assens"
             }
         },
@@ -5922,7 +5652,7 @@
             },
             "properties": {
                 "forsyid": "16946834",
-                "name": "KLOSTER KRAFTVARMEVÆRK AMBA",
+                "name": "Kloster Kraftvarmeværk Amba",
                 "address": "Klostervej 112, 6950 Ringkøbing"
             }
         },
@@ -5937,7 +5667,7 @@
             },
             "properties": {
                 "forsyid": "41540214",
-                "name": "DAGNÆS-BÆKKELUND VARMEVÆRK",
+                "name": "Dagnæs-Bækkelund Varmeværk",
                 "address": "Glentevej 8, 8700 Horsens"
             }
         },
@@ -5952,23 +5682,8 @@
             },
             "properties": {
                 "forsyid": "26612330",
-                "name": "Grindsted El- og Varmeværk",
+                "name": "Grindsted El- Og Varmeværk",
                 "address": "Tårnvej 24, 7200 Grindsted"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    8.496007,
-                    55.511826
-                ]
-            },
-            "properties": {
-                "forsyid": "32661149",
-                "name": "Din Forsygning",
-                "address": "Ulvsundvej 1, 6715 Esbjerg N"
             }
         },
         {
@@ -5982,7 +5697,7 @@
             },
             "properties": {
                 "forsyid": "18515830",
-                "name": "ÅDUM KRAFTVARMEVÆRK",
+                "name": "Ådum Kraftvarmeværk",
                 "address": "Skolegade 23, 6880 Tarm"
             }
         },
@@ -5991,14 +5706,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    10.778948,
-                    56.352715
+                    10.036772,
+                    56.538436
                 ]
             },
             "properties": {
                 "forsyid": "43687670",
                 "name": "Spentrup Varmeværk",
-                "address": "Tværvej 11, 8570 Trustrup"
+                "address": "Blichersvej 1, 8981 Spentrup"
             }
         },
         {
@@ -6006,14 +5721,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.501005,
-                    55.685144
+                    12.06087589263916,
+                    55.843528747558594
                 ]
             },
             "properties": {
-                "forsyid": "25625625",
-                "name": "E.ON VARME DANMARK",
-                "address": "Dirch Passers Allé 76, 2000 Frederiksberg"
+                "forsyid": "25215680",
+                "name": "E.On Varme Danmark",
+                "address": "Løgismose 1, 3600 Frederikssund"
             }
         },
         {
@@ -6036,14 +5751,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    8.519243,
-                    55.9427
+                    8.1194324,
+                    56.119999
                 ]
             },
             "properties": {
                 "forsyid": "33154607",
-                "name": "BIOENERGI VEST",
-                "address": "Ånumvej 28, 6900 Skjern"
+                "name": "Bioenergi Vest",
+                "address": "Vestkystvej 2, 6950 Ringkøbing"
             }
         },
         {
@@ -6057,23 +5772,8 @@
             },
             "properties": {
                 "forsyid": "32078737",
-                "name": "VARDE VARMEFORSYNING",
+                "name": "Varde Varmeforsyning",
                 "address": "Gl Kærvej 15, 6800 Varde"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    12.492612,
-                    55.901089
-                ]
-            },
-            "properties": {
-                "forsyid": "28366248",
-                "name": "DTU-HF",
-                "address": "Savsvinget 2, 2970 Hørsholm"
             }
         },
         {
@@ -6087,7 +5787,7 @@
             },
             "properties": {
                 "forsyid": "33258445",
-                "name": "VIDEBÆK VARM",
+                "name": "Videbæk Varm",
                 "address": "Godthaabsvej 3, 6920 Videbæk"
             }
         },
@@ -6096,14 +5796,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    8.617813,
-                    56.354488
+                    15.1171258,
+                    55.0607111
                 ]
             },
             "properties": {
                 "forsyid": "24251020",
-                "name": "K/S DIFKO LXV",
-                "address": "Sønderlandsgade 44, 7500 Holstebro"
+                "name": "K/S Difko Lxv",
+                "address": "Halmvænget, 3730 Nexø, Denmark"
             }
         },
         {
@@ -6132,7 +5832,7 @@
             },
             "properties": {
                 "forsyid": "35602313",
-                "name": "SØNDERBORG FJERNVARME AMBA",
+                "name": "Sønderborg Fjernvarme Amba",
                 "address": "Nørrekobbel 54, 6400 Sønderborg"
             }
         },
@@ -6156,28 +5856,13 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.885167,
-                    57.039754
-                ]
-            },
-            "properties": {
-                "forsyid": "17097342",
-                "name": "ELLIDSHØJ-FERSLEV KRAFTVARMEVÆRK",
-                "address": "Hasserisvej 174, 9000 Aalborg"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    8.809500,
-                    56.645390
+                    8.8095,
+                    56.64539
                 ]
             },
             "properties": {
                 "forsyid": "18676710",
-                "name": "SPØTTRUP FJERNVARMEVÆRK",
+                "name": "Spøttrup Fjernvarmeværk",
                 "address": "Kærgårdsvej 2, 7860 Spøttrup"
             }
         },
@@ -6237,7 +5922,7 @@
             },
             "properties": {
                 "forsyid": "17638181",
-                "name": "VESLØS FJERNVARME",
+                "name": "Vesløs Fjernvarme",
                 "address": "Møllebakvej 4, 7742 Vesløs"
             }
         },
@@ -6252,7 +5937,7 @@
             },
             "properties": {
                 "forsyid": "13348545",
-                "name": "TVIS TREKANTOMRÅDETS VARMETRANS",
+                "name": "Tvis Trekantområdets Varmetrans",
                 "address": "Tonne Kjærsvej 11, 7000 Fredericia"
             }
         },
@@ -6267,23 +5952,8 @@
             },
             "properties": {
                 "forsyid": "16838314",
-                "name": "NØRRE AABY KRAFTVARMEVÆRK",
+                "name": "Nørre Aaby Kraftvarmeværk",
                 "address": "Grønnegade 7, 5580 Nørre Aaby"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    9.842654,
-                    55.757205
-                ]
-            },
-            "properties": {
-                "forsyid": "30408446",
-                "name": "Hornsyld-Bråskov lokalråd",
-                "address": "Søndergade 44, 8783 Hornsyld"
             }
         },
         {
@@ -6297,7 +5967,7 @@
             },
             "properties": {
                 "forsyid": "25784510",
-                "name": "SEAS-NVE Udelys",
+                "name": "Seas-Nve Udelys",
                 "address": "Hovedgaden 36, 4520 Svinninge"
             }
         },
@@ -6312,7 +5982,7 @@
             },
             "properties": {
                 "forsyid": "69330428",
-                "name": "VESTEGNENS KRAFTVARMESELSKAB",
+                "name": "Vestegnens Kraftvarmeselskab",
                 "address": "Roskildevej 175, 2620 Albertslund"
             }
         },
@@ -6357,7 +6027,7 @@
             },
             "properties": {
                 "forsyid": "32473660",
-                "name": "HALSNÆS FORSYNING",
+                "name": "Halsnæs Forsyning",
                 "address": "Havnevej 8, 3300 Frederiksværk"
             }
         },
@@ -6372,7 +6042,7 @@
             },
             "properties": {
                 "forsyid": "13109710",
-                "name": "ULSTRUP VARMEVÆRK",
+                "name": "Ulstrup Varmeværk",
                 "address": "Fredensvej 6, 8860 Ulstrup"
             }
         },
@@ -6411,29 +6081,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.575205,
-                    56.200371
+                    8.892579,
+                    56.132427
                 ]
             },
             "properties": {
                 "forsyid": "28331959",
                 "name": "Eniig City Solutions",
-                "address": "Tietgensvej 4, 8600 Silkeborg"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    10.352295,
-                    55.366648
-                ]
-            },
-            "properties": {
-                "forsyid": "76498911",
-                "name": "GARTNERES VARMEFORSYNING I ÅSUM OG LANGESKOV",
-                "address": "Sanderumvej 16, 5250 Odense SV"
+                "address": "Nordgaden 4, 7400 Herning"
             }
         },
         {
@@ -6492,7 +6147,7 @@
             },
             "properties": {
                 "forsyid": "21430277",
-                "name": "NRGI LOKALVARME",
+                "name": "Nrgi Lokalvarme",
                 "address": "Dusager 22, 8200 Aarhus N"
             }
         },
@@ -6507,7 +6162,7 @@
             },
             "properties": {
                 "forsyid": "49001312",
-                "name": "GRUNDEJERF RØNNEHOLTPARKEN",
+                "name": "Grundejerf Rønneholtparken",
                 "address": "Ligustervangen 81, 3450 Allerød"
             }
         },
@@ -6531,14 +6186,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.591113,
-                    55.709956
+                    9.607015,
+                    54.931628
                 ]
             },
             "properties": {
                 "forsyid": "28667809",
-                "name": "GRÅSTEN FJERNVARME",
-                "address": "Sundkrogsgade 5, 2100 København Ø"
+                "name": "Gråsten Fjernvarme",
+                "address": "Sønderborg Landevej 3, 6300 Gråsten"
             }
         },
         {
@@ -6552,7 +6207,7 @@
             },
             "properties": {
                 "forsyid": "59283111",
-                "name": "AUGUSTENBORG FJERNVARME",
+                "name": "Augustenborg Fjernvarme",
                 "address": "Sundkrogsgade 5, 2100 København Ø"
             }
         },
@@ -6576,14 +6231,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    11.871455,
-                    54.767548
+                    11.934482,
+                    54.578006
                 ]
             },
             "properties": {
                 "forsyid": "32394817",
                 "name": "Gedser Fjernvarme",
-                "address": "Skolegade 24, 4800 Nykøbing F"
+                "address": "Smedevej 6, 4874 Gedser"
             }
         },
         {
@@ -6597,7 +6252,7 @@
             },
             "properties": {
                 "forsyid": "29189498",
-                "name": "Frederikshavn kommune",
+                "name": "Frederikshavn Kommune",
                 "address": "Rådhus Alle 100, 9900 Frederikshavn"
             }
         },
@@ -6612,23 +6267,8 @@
             },
             "properties": {
                 "forsyid": "19500438",
-                "name": "REJSBY KRAFTVARMEVÆRK",
+                "name": "Rejsby Kraftvarmeværk",
                 "address": "Rejsby Landevej 12B, 6780 Skærbæk"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    9.657912,
-                    55.645217
-                ]
-            },
-            "properties": {
-                "forsyid": "30137663",
-                "name": "Gårslev Fjernvarme",
-                "address": "Industrivej 2C, 7080 Børkop"
             }
         },
         {
@@ -6657,23 +6297,8 @@
             },
             "properties": {
                 "forsyid": "25165160",
-                "name": "FORSYNING HELSINGØR SERVICE",
+                "name": "Forsyning Helsingør Service",
                 "address": "Energivej 25, 3000 Helsingør"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    8.769,
-                    55.1574
-                ]
-            },
-            "properties": {
-                "forsyid": "19446077",
-                "name": "Frifelt/Roager Kraftvarmeværk",
-                "address": "Voddervej 2, 6780 Skærbæk"
             }
         },
         {
@@ -6687,7 +6312,7 @@
             },
             "properties": {
                 "forsyid": "20276991",
-                "name": "MELØSE - ST. LYNGBY ENERGISELSKAB",
+                "name": "Meløse - St. Lyngby Energiselskab",
                 "address": "Skolevej 7B, 3320 Skævinge"
             }
         },
@@ -6741,28 +6366,13 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    11.92109,
-                    54.795851
-                ]
-            },
-            "properties": {
-                "forsyid": "17035479",
-                "name": "CHRISTIAN HØIER",
-                "address": "Hullebækvej 44, 4800 Nykøbing F"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     12.125577,
                     55.645789
                 ]
             },
             "properties": {
                 "forsyid": "32837425",
-                "name": "FORS Varme Roskilde",
+                "name": "Fors Varme Roskilde",
                 "address": "Betonvej 12, 4000 Roskilde"
             }
         },
@@ -6777,7 +6387,7 @@
             },
             "properties": {
                 "forsyid": "29826641",
-                "name": "NFS Varme",
+                "name": "Nfs Varme",
                 "address": "Gasværksvej 2, 5800 Nyborg"
             }
         },
@@ -6792,8 +6402,38 @@
             },
             "properties": {
                 "forsyid": "32661149",
-                "name": "DIN Forsyning A/S",
+                "name": "Din Forsyning A/S",
                 "address": "Ulvsundvej 1, 6715 Esbjerg N"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.226505,
+                    55.250831
+                ]
+            },
+            "properties": {
+                "forsyid": "29214824",
+                "name": "Nørre Broby Varmeværk",
+                "address": "Stationsvej 14, 5672 Broby"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.75914,
+                    57.285288
+                ]
+            },
+            "properties": {
+                "forsyid": "13096414",
+                "name": "Vester Hjermitslev Varmeværk",
+                "address": "Ths. P. Hejlesvej 3, V. Hjermitslev, 9700 Brønderslev"
             }
         }
     ]

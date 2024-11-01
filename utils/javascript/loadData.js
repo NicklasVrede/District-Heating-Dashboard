@@ -2,6 +2,8 @@ import { plantStyles } from '../../styles/plantStyles.js';
 import { areaStyles } from '../../styles/areaStyles.js';
 import { addPlantEventListeners, addAreaEventListeners } from './eventListeners.js';
 
+
+
 export function loadPlants(map) {
     fetch('data/plants.geojson')
         .then(response => {

@@ -1,24 +1,25 @@
 import csv
 import json
 
-# Read the CSV file
+# Read the CSV file with plant coordinates
 with open('data/addresses_with_coordinates.csv', 'r', encoding='utf-8') as csvfile:
     csv_reader = csv.DictReader(csvfile)
     plants = {row['name']: row for row in csv_reader}
 
-# Read the JSON file
-with open('data/plant_to_area_map.json', 'r', encoding='utf-8') as jsonfile:
-    plant_to_area_map = json.load(jsonfile)
+# Read the CSV file with plant to area mapping
+with open('data/plant_to_areas_map.csv', 'r', encoding='utf-8') as csvfile:
+    csv_reader = csv.DictReader(csvfile)
+    plant_to_area_map = {row['name']: row['forsyid'] for row in csv_reader}
 
 # Combine the data
-for plant_name, area_id in plant_to_area_map.items():
+for plant_name, forsyid in plant_to_area_map.items():
     if plant_name in plants:
-        plants[plant_name]['area_id'] = area_id
+        plants[plant_name]['forsyid'] = forsyid
 
 # Create GeoJSON features
 features = []
 for plant in plants.values():
-    if 'latitude' in plant and 'longitude' in plant and plant['latitude'] and plant['longitude'] and 'area_id' in plant:
+    if 'latitude' in plant and 'longitude' in plant and plant['latitude'] and plant['longitude'] and 'forsyid' in plant:
         feature = {
             'type': 'Feature',
             'geometry': {
@@ -26,7 +27,7 @@ for plant in plants.values():
                 'coordinates': [float(plant['longitude']), float(plant['latitude'])]
             },
             'properties': {
-                'forsyid': plant['area_id'],
+                'forsyid': plant['forsyid'],
                 'name': plant['name'],
                 'address': plant['address']
             }
