@@ -118,26 +118,30 @@ export function addAreaEventListeners(map) {
 }
 
 function highlightArea(map, forsyid) {
+    // Highlight the area with the given forsyid
     map.setPaintProperty('areas', 'fill-color', [
         'case',
         ['==', ['get', 'forsyid'], forsyid],
-        highlightStyles.areaFillColor, // Highlight color
-        highlightStyles.areaDefaultFillColor  // Default color
+        highlightStyles.areaFillColor,
+        highlightStyles.areaDefaultFillColor
     ]);
+    // Highlight the border of the given area
     map.setPaintProperty('areas-border', 'line-color', [
         'case',
         ['==', ['get', 'forsyid'], forsyid],
-        highlightStyles.areaBorderColor, // Highlight color
-        highlightStyles.areaDefaultBorderColor  // Default color (blue)
+        highlightStyles.areaBorderColor,
+        highlightStyles.areaDefaultBorderColor
     ]);
 }
 
 function resetAreaHighlight(map) {
+    // Reset the area highlight
     map.setPaintProperty('areas', 'fill-color', highlightStyles.areaDefaultFillColor); // Reset to default color
     map.setPaintProperty('areas-border', 'line-color', highlightStyles.areaDefaultBorderColor); // Reset to default color (blue)
 }
 
 function highlightPlant(map, forsyid) {
+    // Highlight the plant with the given forsyid
     map.setFilter('highlighted-plant', ['==', ['get', 'forsyid'], forsyid]);
     map.setPaintProperty('highlighted-plant', 'circle-stroke-width', highlightStyles.plantStrokeWidth);
     map.setPaintProperty('highlighted-plant', 'circle-stroke-color', highlightStyles.plantStrokeColor);
@@ -146,6 +150,7 @@ function highlightPlant(map, forsyid) {
 }
 
 function removePlantHighlight(map) {
+    // Remove the plant highlight
     map.setFilter('highlighted-plant', ['==', ['get', 'forsyid'], '']);
     map.setPaintProperty('highlighted-plant', 'circle-stroke-width', highlightStyles.plantDefaultStrokeWidth);
     map.setPaintProperty('highlighted-plant', 'circle-blur', highlightStyles.plantDefaultBlur);
@@ -153,7 +158,9 @@ function removePlantHighlight(map) {
 }
 
 function updateSelectedPlants(map) {
+    // Initialise an array with keywords for mapbox filter
     const filters = ['in', 'forsyid'];
+    // Add all selected forsyids to the array
     selectionSet.forEach(forsyid => {
         filters.push(forsyid);
     });
