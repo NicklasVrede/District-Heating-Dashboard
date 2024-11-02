@@ -118,14 +118,12 @@ export function addAreaEventListeners(map) {
 }
 
 function highlightArea(map, forsyid) {
-    // Highlight the area with the given forsyid
     map.setPaintProperty('areas', 'fill-color', [
         'case',
         ['==', ['get', 'forsyid'], forsyid],
         highlightStyles.areaFillColor,
         highlightStyles.areaDefaultFillColor
     ]);
-    // Highlight the border of the given area
     map.setPaintProperty('areas-border', 'line-color', [
         'case',
         ['==', ['get', 'forsyid'], forsyid],
@@ -157,7 +155,7 @@ function removePlantHighlight(map) {
     map.setPaintProperty('highlighted-plant', 'circle-opacity', highlightStyles.plantDefaultOpacity);
 }
 
-function updateSelectedPlants(map) {
+export function updateSelectedPlants(map) {
     // Initialise an array with keywords for mapbox filter
     const filters = ['in', 'forsyid'];
     // Add all selected forsyids to the array
@@ -184,3 +182,4 @@ function toggleSelection(map, forsyid, isCtrlPressed) {
     }
     updateSelectedPlants(map);
 }
+

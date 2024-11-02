@@ -1,16 +1,15 @@
 export const highlightStyles = {
-    // Hightligt Styles
     areaFillColor: '#FF0000',
-    areaDefaultFillColor: '#FFFFFF',
+    areaDefaultFillColor: '#888888',
     areaBorderColor: '#FF0000',
-    areaDefaultBorderColor: '#0000FF',
-    plantStrokeWidth: 2,
+    areaDefaultBorderColor: '#0000ff',
+    plantStrokeWidth: 4,
     plantStrokeColor: '#FF0000',
-    plantBlur: 0,
-    plantOpacity: 1,
-    plantDefaultStrokeWidth: 1,
+    plantBlur: 0.5,
+    plantOpacity: 0.8,
+    plantDefaultStrokeWidth: 0,
     plantDefaultBlur: 0,
-    plantDefaultOpacity: 0.5,
+    plantDefaultOpacity: 1,
 
     // Selection styles
     selectedPlantColor: '#FF0000',

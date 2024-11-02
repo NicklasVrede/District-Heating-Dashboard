@@ -2946,14 +2946,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    10.1013,
-                    57.0039
+                    10.218072,
+                    56.962604
                 ]
             },
             "properties": {
                 "forsyid": "14324100",
                 "name": "Mou Kraftvarme",
-                "address": "Ny Høstemarksvej 28C, 9280 Storvorde, Denmark"
+                "address": "Ny Høstemarkvej 28 C, 9280 Storvorde"
             }
         },
         {
@@ -5181,14 +5181,14 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    10.778948,
-                    56.352715
+                    10.143291,
+                    56.438129
                 ]
             },
             "properties": {
                 "forsyid": "43649361",
                 "name": "Assentoft Forsyning",
-                "address": "Tværvej 11, 8570 Trustrup, Denmark"
+                "address": "Vandværksvej 34, 8960 Randers"
             }
         },
         {
@@ -5489,21 +5489,6 @@
                 "forsyid": "43703560",
                 "name": "Hjortsvang Fællesvarme",
                 "address": "Vesterbyvej 12, 7160 Tørring"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    12.5639402,
-                    55.6750598
-                ]
-            },
-            "properties": {
-                "forsyid": "30587391",
-                "name": "Ejendomsselskabet Atpfa",
-                "address": "Hammerichsgade 14, 2, 1611 København V"
             }
         },
         {

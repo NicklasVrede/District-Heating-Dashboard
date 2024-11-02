@@ -2,6 +2,8 @@ import { areaStyles } from './styles/areaStyles.js';
 import { plantStyles } from './styles/plantStyles.js';
 import { loadPlants, loadAreas } from './utils/javascript/loadData.js';
 import { searchAddress } from './utils/javascript/addressLookup.js';
+import { updateSelectedPlants } from './utils/javascript/eventListeners.js';
+import { clearSelection, selectAll } from './utils/javascript/selectionFunctions.js';
 
 // Set your Mapbox access token
 mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0MnFzYWFyZ3pveWJ1In0.V9qwBfsH4plxE_fz89kuYg'; 
@@ -14,7 +16,6 @@ export const map = new mapboxgl.Map({
     zoom: 6.5 // starting zoom
 });
 
-
 // Enable scroll zoom
 map.scrollZoom.enable();
 
@@ -25,7 +26,6 @@ map.scrollZoom.setWheelZoomRate(1);
 map.on('load', () => {
     loadPlants(map);
     loadAreas(map);
-    
 });
 
 // Expose the searchAddress function to the global scope
@@ -33,3 +33,9 @@ window.searchAddress = searchAddress;
 
 // Initialise the selection set
 export const selectionSet = new Set();
+
+// Expose the clearSelection function to the global scope
+window.clearSelection = () => clearSelection(map);
+
+// Expose the selectAll function to the global scope
+window.selectAll = () => selectAll(map);
