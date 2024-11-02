@@ -2,8 +2,6 @@ import { plantStyles } from '../../styles/plantStyles.js';
 import { areaStyles } from '../../styles/areaStyles.js';
 import { addPlantEventListeners, addAreaEventListeners } from './eventListeners.js';
 
-
-
 export function loadPlants(map) {
     fetch('data/plants.geojson')
         .then(response => {
@@ -40,6 +38,20 @@ export function loadPlants(map) {
                 filter: ['==', ['get', 'forsyid'], '']
             });
 
+            // Add a layer for selected plants with a different style
+            map.addLayer({
+                id: 'selected-plants',
+                type: 'circle',
+                source: 'plants',
+                paint: {
+                    'circle-radius': 8, // Larger radius for selected plants
+                    'circle-color': '#FF0000', // Red color for selected plants
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': '#000000' // Black border for selected plants
+                },
+                filter: ['in', 'forsyid', ''] // Initial filter to include no plants
+            });
+
             // Add event listeners for plants
             addPlantEventListeners(map);
         })
@@ -70,6 +82,18 @@ export function loadAreas(map) {
 
             // Add a border to the areas with custom styles
             map.addLayer(areaStyles.line);
+
+            // Add a layer for selected areas with a different style
+            map.addLayer({
+                id: 'selected-areas',
+                type: 'fill',
+                source: 'areas',
+                paint: {
+                    'fill-color': '#FF0000', // Red color for selected areas
+                    'fill-opacity': 0.5
+                },
+                filter: ['in', 'forsyid', ''] // Initial filter to include no areas
+            });
 
             // Add event listeners for areas
             addAreaEventListeners(map);

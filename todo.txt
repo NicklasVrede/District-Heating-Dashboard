@@ -16,3 +16,6 @@ Beregn mængden af addresser som forsyningen dækker
 
 
 evt ikon? https://www.recraft.ai/project/968e717c-89c8-4ba3-8071-76bf4556bfa1
+
+
+Add box selection?

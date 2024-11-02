@@ -96,21 +96,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    11.573434,
-                    55.461283
-                ]
-            },
-            "properties": {
-                "forsyid": "65278316",
-                "name": "Affaldplus",
-                "address": "Kragelundsvej 12, 4180 Sorø"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     10.378935,
                     57.197837
                 ]
@@ -5451,21 +5436,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.804853,
-                    54.92323
-                ]
-            },
-            "properties": {
-                "forsyid": "35602313",
-                "name": "Sønderborg Fjernvarm",
-                "address": "Nørrekobbel 54, 6400 Sønderborg"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     10.418318,
                     56.394258
                 ]
@@ -5832,7 +5802,7 @@
             },
             "properties": {
                 "forsyid": "35602313",
-                "name": "Sønderborg Fjernvarme Amba",
+                "name": "Sønderborg Fjernvarme",
                 "address": "Nørrekobbel 54, 6400 Sønderborg"
             }
         },
@@ -5961,21 +5931,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    11.464168,
-                    55.722625
-                ]
-            },
-            "properties": {
-                "forsyid": "25784510",
-                "name": "Seas-Nve Udelys",
-                "address": "Hovedgaden 36, 4520 Svinninge"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     12.341921,
                     55.661266
                 ]
@@ -6011,7 +5966,7 @@
                 ]
             },
             "properties": {
-                "forsyid": "40844244",
+                "forsyid": "40844309",
                 "name": "Kredsløb",
                 "address": "Karen Blixens Boulevard 7, 8220 Brabrand"
             }
@@ -6104,21 +6059,6 @@
                 "forsyid": "17828843",
                 "name": "Ravnkilde Kraftvarmeværk",
                 "address": "Skalborgvej 17, 9610 Nørager"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    10.182321,
-                    56.119726
-                ]
-            },
-            "properties": {
-                "forsyid": "43748068",
-                "name": "Bryrup Brinelaug",
-                "address": "Holmevej 180, 8270 Højbjerg"
             }
         },
         {
