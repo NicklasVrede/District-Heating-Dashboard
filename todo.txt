@@ -1,15 +1,18 @@
-decompose code and improve structure
-make the plant class unique for each plant. (in the display)
-Improve the map, add ability for more details, like municipalities shown. 
-    Look at mapbox instead.
 Work on overlays.
 
 https://www.geodanmark.dk/home/vejledninger/geofa/hent-geofa/ 
 
 https://dataforsyningen.dk/map
 
-brug gis.
+brug gis?
 
-https://github.com/magnuslarsen/geoJSON-Danish-municipalities
+Forbedre søgefelted ('enter' for at søge)
 
-fix dublicate function "capitalizeFirstLetters"
+Lav merge id script
+
+Beregn arealerne som hver forsyning dækker
+
+Beregn mængden af addresser som forsyningen dækker
+
+
+evt ikon? https://www.recraft.ai/project/968e717c-89c8-4ba3-8071-76bf4556bfa1

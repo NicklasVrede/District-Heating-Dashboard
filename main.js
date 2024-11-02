@@ -4,9 +4,9 @@ import { loadPlants, loadAreas } from './utils/javascript/loadData.js';
 import { searchAddress } from './utils/javascript/addressLookup.js';
 
 // Set your Mapbox access token
-mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0MnFzYWFyZ3pveWJ1In0.V9qwBfsH4plxE_fz89kuYg'; // Replace with your Mapbox access token
+mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0MnFzYWFyZ3pveWJ1In0.V9qwBfsH4plxE_fz89kuYg'; 
 
-// Initialize the map and set its view to a specific location and zoom level
+// Initialize the map
 export const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v11', // style URL
@@ -19,9 +19,9 @@ export const map = new mapboxgl.Map({
 map.scrollZoom.enable();
 
 // Set zoom around the mouse location
-map.scrollZoom.setWheelZoomRate(1); // Adjust the zoom rate if needed
+map.scrollZoom.setWheelZoomRate(1);
 
-// Load the plants and areas after the map has loaded
+// Load the plants and areas
 map.on('load', () => {
     loadPlants(map);
     loadAreas(map);
@@ -30,3 +30,6 @@ map.on('load', () => {
 
 // Expose the searchAddress function to the global scope
 window.searchAddress = searchAddress;
+
+// Initialise the selection set
+export const selectionSet = new Set();
