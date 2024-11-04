@@ -1,5 +1,6 @@
 import { highlightStyles } from '../../styles/highlightStyles.js';
 import { selectionSet } from '../../main.js';
+import { updateGraph } from './plotlyGraphs.js'; // Corrected import path
 
 let isHoveringPlant = false;
 let areaTooltip = null;
@@ -181,5 +182,5 @@ function toggleSelection(map, forsyid, isCtrlPressed) {
         }
     }
     updateSelectedPlants(map);
+    updateGraph(); // Update the graph whenever the selection changes
 }
-

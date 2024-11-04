@@ -1,12 +1,19 @@
 import { updateSelectedPlants } from './eventListeners.js';
-import { selectionSet } from '../../main.js'; // Adjust the path as needed
+import { selectionSet } from '../../main.js';
+import { updateGraph } from './plotlyGraphs.js';
 
 // Define the clearSelection function
 export function clearSelection(map) {
     // Clear the selection
     selectionSet.clear();
-    console.log('Cleared selection');
+    console.log('Cleared selection:', Array.from(selectionSet));
     updateSelectedPlants(map);
+
+    // Small wait for timing
+    setTimeout(() => {
+        console.log('Updating graph after clearing selection');
+        updateGraph(selectionSet);
+    }, 100); // Adjust the delay as needed
 }
 
 // Define the selectAll function
@@ -33,7 +40,8 @@ export function selectAll(map) {
             selectionSet.add(feature.properties.forsyid);
         });
 
-        console.log('Selected all features');
+        console.log('Selected all features:', Array.from(selectionSet));
         updateSelectedPlants(map);
+        updateGraph(selectionSet);  
     });
 }

@@ -33,7 +33,7 @@ Broager Fjernvarmeselskab,59352318
 Brøndby Fjernvarme,33269315
 Brørup Fjernvarme,13551472
 Brovst Fjernvarme,37809217
-Din Forsyning Varme,32662498
+Din Forsyning Varme,00000006
 Durup Fjernvarme,38929119
 Dybvad Varmeværk,40920013
 Ebeltoft Fjernvarmeværk,22703714
@@ -50,7 +50,7 @@ Faxe Fjernvarmeselskab,70831112
 Feldborg Kraftvarmeværk,17885278
 Fensmark Fjernvarmeværk,40402314
 Filskov Energiselskab,16263443
-Fjernvarme Fyn,30174968
+Fjernvarme Fyn,00000009
 Fjernvarmecentralen Avedøre Holme,22340417
 Fjerritslev Fjernvarme,45602516
 Flauenskjold Varmeværk,20023317
@@ -61,7 +61,7 @@ Frederiks Varmeværk,18552310
 Frederiksberg Forsyning,28500769
 Fur Kraftvarmeværk Amba,18474492
 Galten Varmeværk,43727516
-Gauerslund Fjernvarme,18150913
+Gauerslund Fjernvarme,00000010
 Gedsted Varmeværk,38864114
 Gelsted Fjernvarme,13148228
 Gentofte Gladsaxe Fjernvarme,39272091
@@ -248,19 +248,19 @@ Vrå Varmeværk,64771728
 Hallund Kraftvarmeværk,17932640
 Skovsgaard Varmeværk,61668713
 Blenstrup Kraftvarmeværk,17025686
-Fjernvarme Horsens,66166228
+Fjernvarme Horsens,00000003
 Assentoft Forsyning,43649361
-Din Forsyning A/S,32661149
+Din Forsyning A/S,00000006
 Rårup Fællesvarme,43513109
 Daugård Fællesvarme,41228784
 Trefor Varme,17010131
 Ffv Varme Faaborg,26721059
 Nfs Varme,29826641
 Nordals Fjernvarme,36941650
-Nørrevejens Kraftvarmeværk,20078480
+Nørrevejens Kraftvarmeværk,00000015
 Sdr. Nissum,21999040
 Rønde Fjernvarme,89711215
-Aalborg Forsyning,37271616
+Aalborg Forsyning,00000005
 Albertslund Forsyning,66137112
 Bornholms Energi & Forsyning,31582148
 Brønderslev Forsyning,31157439
@@ -268,12 +268,12 @@ Brøns Fjernvarme,19445933
 Christiansfeld Fjernvarme,63234214
 Dronninglund Fjernvarme,12233418
 E.On Ørslev-Terslev Kraftvarmeanlæg,25215680
-Frifelt/Roager Kraftvarme,74757773
+Frifelt/Roager Kraftvarme,00000014
 Frøstrup Fjernvarmeværk,15213140
 Fuglebjerg Fjernvarme,29580715
 Gjerlev Varmeværk,14492984
 Glostrup Forsyning,33043309
-Guldborgsund Forsyning,32559956
+Guldborgsund Forsyning,00000002
 Hillerød Forsyning,31592488
 Hjallerup Fjernvarme,34681228
 Hofor,26089263
@@ -305,13 +305,13 @@ Rødovre Kommunale Fjernvarmeforsyning,65307316
 Ryomgård Fjernvarme,57858311
 Sk Forsyning,27736904
 Snedsted Fjernvarme,52443016
-Sønderborg Forsyning,32648541
+Sønderborg Forsyning,00000018
 Sønderholm Kraftvarmeværk,15296275
 Spjald Fjernvarme-Og Vandværk,37325813
 Sunds Forsyning,41719613
 Svogerslev Fjernvarmecentral,50187128
 Tommerup St. Varmeforsyning,76326118
-Tønder Fjernvarme,36421312
+Tønder Fjernvarme,00000015
 Tranum Kraftvarmeværk,49965613
 Vildbjerg Tekniske Værker,37683310
 Øt Havndal Fjernvarme,44336553
@@ -359,7 +359,7 @@ Refa Kettinge Forsyning,34094187
 Refa Stubbekøbing Fjernvarme,32555063
 Aabenraa-Rødekro Fjernvarme,36152710
 Hillerød Varme A/S - Meløse-St.Lyngby,20276991
-Lolland Varme,31151899
+Lolland Varme,00000016
 Nykøbing Sj. Varmeværk,46917928
 Ulbjerg Kraftvarme,15234784
 Grønhøj Strand,11372732
@@ -377,9 +377,9 @@ Tårnbyforsyning Varme,32667740
 Vonge-Kollemorten Fællesvarme,43608940
 Gylling-Ørting-Falling Kraftvarmeværk,18468840
 Kloster Kraftvarmeværk Amba,16946834
-Dagnæs-Bækkelund Varmeværk,41540214
-Grindsted El- Og Varmeværk,26612330
-Din Forsygning,32661149
+Dagnæs-Bækkelund Varmeværk,00000003
+Grindsted El- Og Varmeværk,00000011
+Din Forsygning,00000006
 Ådum Kraftvarmeværk,18515830
 Spentrup Varmeværk,43687670
 E.On Varme Danmark,25215680
@@ -390,9 +390,9 @@ Videbæk Varm,33258445
 Verdo Varme Herning,25809807
 K/S Difko Lxv,24251020
 Ulstrup Kraftvarmeværk,13109710
-Sønderborg Fjernvarme,35602313
+Sønderborg Fjernvarme,00000018
 Glumsø Fjernvarme,43824384
-Ellidshøj-Ferslev Kraftvarmeværk,17097342
+Ellidshøj-Ferslev Kraftvarmeværk,00000005
 Spøttrup Fjernvarmeværk,18676710
 Cobra Varme,43596713
 Helle Energi,43597469
@@ -400,23 +400,23 @@ Vejen Varmeværk,57301414
 Vesløs Fjernvarme,17638181
 Tvis Trekantområdets Varmetrans,13348545
 Nørre Aaby Kraftvarmeværk,16838314
-Sorø Fjernvarme,39170523
+Sorø Fjernvarme,00000017
 Vestegnens Kraftvarmeselskab,69330428
 Ejby Fjernvarmecentral,38226215
-Kredsløb,40844309
+Kredsløb,00000004
 Halsnæs Forsyning,32473660
 Ulstrup Varmeværk,13109710
 Søndbjerg Fjernvarme,20237848
 Ålestrup Varme,44279118
-Eniig City Solutions,28331959
+Eniig City Solutions,00000007
 Ravnkilde Kraftvarmeværk,17828843
 Nørre-Snede Varmeværk,28193610
 Nrgi Lokalvarme,21430277
 Grundejerf Rønneholtparken,49001312
 Thyregod Fællesvarme,43538365
-Gråsten Fjernvarme,28667809
-Augustenborg Fjernvarme,59283111
-Hornsyld Klimavarme,42179787
+Gråsten Fjernvarme,00000019
+Augustenborg Fjernvarme,00000019
+Hornsyld Klimavarme,00000013
 Gedser Fjernvarme,32394817
 Frederikshavn Kommune,29189498
 Rejsby Kraftvarmeværk,19500438
@@ -428,6 +428,6 @@ Aale Fjernvarme,43587854
 Lynge-Uggeløse Fjernvarme,44166879
 Ry Varmeværk,22950312
 Bjæverskov Fjernvarme,43384414
-Fors Varme Roskilde,32837425
+Fors Varme Roskilde,00000008
 Nørre Broby Varmeværk,29214824
 Vester Hjermitslev Varmeværk,13096414
