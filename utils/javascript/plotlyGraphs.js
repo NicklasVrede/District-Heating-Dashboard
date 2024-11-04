@@ -42,7 +42,10 @@ function createOrUpdatePlotlyGraph(data, selectedForsyids) {
 
     const layout = {
         title: 'Data for Selected Forsyids',
-        xaxis: { title: 'Year' },
+        xaxis: { 
+            title: 'Year',
+            dtick: 1
+         },
         yaxis: { title: 'CO2 - El&Varme' } // Update the y-axis title
     };
 
