@@ -3,7 +3,7 @@ import { selectionSet } from '../../main.js';
 // Variable for data
 let cachedData = null;
 
-// Function to create or update a Plotly graph
+// Function to create or update a Plotly stacked bar graph
 function createOrUpdatePlotlyGraph(data, selectedForsyids) {
     const graphContainer = document.getElementById('graph-container');
 
@@ -16,37 +16,64 @@ function createOrUpdatePlotlyGraph(data, selectedForsyids) {
         return;
     }
 
-    const traces = selectedForsyids.map(forsyid => {
-        const forsyidData = data[forsyid];
+    const attributes = [
+        'Kul', 'Olie', 'Gas', 'Affald (fossil)', 'Halm', 'Skovflis', 'Brænde', 'Træpiller', 'Træaffald', 'Affald (bio)',
+        'Biobrændsler (bioolie)', 'Biogas', 'Overskudsvarme', 'Solvarme', 'El', 'andel kraftvarme', 'andel kedler'
+    ];
 
-        if (!forsyidData) {
-            console.warn(`No data found for forsyid ${forsyid}`);
-            return {
-                x: [],
-                y: [],
-                type: 'scatter',
-                name: `Forsyid ${forsyid} (No Data)`
-            };
-        }
+    const attributeColors = {
+        'Kul': 'black',
+        'Olie': 'brown',
+        'Gas': 'gray',
+        'Affald (fossil)': 'darkred',
+        'Halm': 'yellow',
+        'Skovflis': 'green',
+        'Brænde': 'saddlebrown',
+        'Træpiller': 'peru',
+        'Træaffald': 'darkorange',
+        'Affald (bio)': 'lightgreen',
+        'Biobrændsler (bioolie)': 'olive',
+        'Biogas': 'lime',
+        'Overskudsvarme': 'red',
+        'Solvarme': 'gold',
+        'El': 'blue',
+        'andel kraftvarme': 'purple',
+        'andel kedler': 'pink'
+    };
 
-        const years = Object.keys(forsyidData.data);
-        const values = years.map(year => forsyidData.data[year]['CO2 - El&Varme']); // Use the actual key 'CO2 - El&Varme'
+    const traces = attributes.map(attr => {
+        const x = [];
+        const y = [];
+
+        selectedForsyids.forEach(forsyid => {
+            const forsyidData = data[forsyid];
+
+            if (!forsyidData) {
+                console.warn(`No data found for forsyid ${forsyid}`);
+                x.push(`Forsyid ${forsyid} (No Data)`);
+                y.push(0);
+            } else {
+                x.push(forsyidData.name);
+                const years = Object.keys(forsyidData.data);
+                const value = years.reduce((sum, year) => sum + (forsyidData.data[year][attr] || 0), 0);
+                y.push(value);
+            }
+        });
 
         return {
-            x: years,
-            y: values,
-            type: 'scatter',
-            name: forsyidData.name // Use the name from the data
+            x: x,
+            y: y,
+            type: 'bar',
+            name: attr,
+            marker: { color: attributeColors[attr] }
         };
     });
 
     const layout = {
         title: 'Data for Selected Forsyids',
-        xaxis: { 
-            title: 'Year',
-            dtick: 1
-         },
-        yaxis: { title: 'CO2 - El&Varme' } // Update the y-axis title
+        xaxis: { title: 'Plants' },
+        yaxis: { title: 'Values' },
+        barmode: 'stack'
     };
 
     Plotly.react(graphContainer, traces, layout);
