@@ -8,8 +8,8 @@ export const areaStyles = {
         source: 'areas',
         layout: {},
         paint: {
-            'fill-color': '#9b94ff', // Custom fill color (red)
-            'fill-opacity': 0.2 // Custom fill opacity
+            'fill-color': '#9b94ff',
+            'fill-opacity': 0.2 
         }
     },
     line: {
@@ -18,9 +18,30 @@ export const areaStyles = {
         source: 'areas',
         layout: {},
         paint: {
-            'line-color': '#0000ff', // Custom line color (blue)
-            'line-width': 1, // Custom line width
-            'line-opacity': 0.5 // Custom line opacity
+            'line-color': '#0000ff',
+            'line-width': 1,
+            'line-opacity': 0.5
+        }
+    }
+};
+
+export const gasAreaStyles = {
+    fill: {
+        id: 'gas-areas-fill',
+        type: 'fill',
+        source: 'gas-areas',
+        paint: {
+            'fill-color': '#00FF00',
+            'fill-opacity': 0.1
+        }
+    },
+    line: {
+        id: 'gas-areas-line',
+        type: 'line',
+        source: 'gas-areas',
+        paint: {
+            'line-color': '#02ab02',
+            'line-width': 0.5
         }
     }
 };

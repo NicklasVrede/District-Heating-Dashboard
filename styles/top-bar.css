@@ -1,0 +1,120 @@
+/* top-bar.css */
+
+.top-bar {
+    padding: 1vh 2vw;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.toggle-frame {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    margin-left: 16px;
+}
+
+.toggle-frame:hover {
+    background-color: #45a049;
+}
+
+#toggle-gas-areas-label {
+    margin-right: 10px;
+    font-size: 16px;
+    font-family: Arial;
+}
+
+#toggle-gas-areas {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #4CAF50; /* Modern browsers support */
+}
+
+#toggle-gas-areas:checked {
+    background-color: #4CAF50;
+}
+
+#toggle-gas-areas:hover {
+    background-color: #45a049;
+}
+
+
+#clear-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#clear-button:hover {
+    background-color: #ff1a1a;
+}
+
+#clear-button:active {
+    background-color: #cc0000;
+}
+
+#clear-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.5);
+}
+
+
+#select-all {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+#select-all:hover {
+    background-color: #0056b3;
+}
+
+#select-all:active {
+    background-color: #004080;
+}
+
+#select-all:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+#graph-style-dropdown {
+    margin-left: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}

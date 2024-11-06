@@ -1,6 +1,7 @@
 import { plantStyles } from '../../styles/plantStyles.js';
-import { areaStyles } from '../../styles/areaStyles.js';
+import { areaStyles, gasAreaStyles } from '../../styles/areaStyles.js'; // Import gas area styles
 import { addPlantEventListeners, addAreaEventListeners } from './eventListeners.js';
+
 
 export function loadPlants(map) {
     fetch('data/plants.geojson')
@@ -100,5 +101,43 @@ export function loadAreas(map) {
         })
         .catch(error => {
             console.error('Error fetching area data:', error);
+        });
+}
+
+export function loadGasAreas(map) {
+    fetch('maps/gas_areas.geojson')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(geojson => {
+            console.log('Gas area data:', geojson); // Debugging: Log the gas area data
+
+            // Add the GeoJSON source to the map
+            map.addSource('gas-areas', {
+                type: 'geojson',
+                data: geojson
+            });
+
+            // hidden by default
+            map.addLayer({
+                ...gasAreaStyles.fill,
+                layout: {
+                    'visibility': 'none' // Hide the fill layer by default
+                }
+            });
+
+            // Add a border to the gas areas with custom styles, hidden by default
+            map.addLayer({
+                ...gasAreaStyles.line,
+                layout: {
+                    'visibility': 'none' // Hide the line layer by default
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching gas area data:', error);
         });
 }

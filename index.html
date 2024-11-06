@@ -5,6 +5,9 @@
     <title>Heating plants of Denmark</title>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/top-bar.css">
+    <link rel="stylesheet" href="styles/toast.css">
+    <link rel="stylesheet" href="styles/autocomplete.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
 <body>
@@ -12,26 +15,31 @@
         <div class="search-container">
             <input type="text" id="address" placeholder="Enter address" oninput="autocompleteAddress()">
             <button id="search-button" onclick="searchAddress()">Search</button>
-            <div id="autocomplete-list" class="autocomplete-items"></div> <!-- Autocomplete container -->
+            <div id="autocomplete-list" class="autocomplete-items"></div>
         </div>
-        <div class="clear-button-container">
+        <div class="buttons-container">
+            <label class="toggle-frame" onclick="toggleGasAreas(map)">
+                <span id="toggle-gas-areas-label">Toggle Gas Areas</span>
+                <input type="checkbox" id="toggle-gas-areas">
+            </label>
             <button id="select-all" onclick="selectAll()">Select All</button>
             <button id="clear-button" onclick="clearSelection()">Clear Selection</button>
         </div>
     </div>
     <div class="content">
-        <div id="map"></div> <!-- Map container -->
-        <div id="graph-container"></div> <!-- Graph container -->
+        <div id="map"></div>
+        <div id="divider"></div>
+        <div id="graph-container"></div>
     </div>
-    <div id="toast-container" class="toast-container"></div> <!-- Toast container -->
+    <div id="toast-container" class="toast-container"></div> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
-    <script src="https://unpkg.com/@turf/turf/turf.min.js"></script> <!-- Include Turf.js -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> <!-- Include Plotly -->
-    <script src="utils/javascript/autocomplete.js"></script> <!-- Load autocomplete.js first -->
+    <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> 
+    <script src="utils/javascript/autocomplete.js"></script>
     <script type="module" src="./main.js"></script>
-    <script type="module" src="./utils/javascript/addressLookup.js"></script> <!-- Load addressLookup.js -->
-    <script type="module" src="./utils/javascript/plotlyGraphs.js"></script> <!-- Load plotlyGraph.js -->
+    <script type="module" src="./utils/javascript/addressLookup.js"></script>
+    <script type="module" src="./utils/javascript/plotlyGraphs.js"></script> 
 </body>
 </html>
