@@ -3266,7 +3266,7 @@
                 ]
             },
             "properties": {
-                "forsyid": "43709739",
+                "forsyid": "10689414",
                 "name": "Øster Brønderslev Fjernvarmeselskab",
                 "address": "Ahornvej 26, 9700 Brønderslev, Denmark"
             }
@@ -4746,21 +4746,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.941,
-                    57.2702
-                ]
-            },
-            "properties": {
-                "forsyid": "13096414",
-                "name": "V. Hjermitslev Varmeværk",
-                "address": "Thomas P Hejlesvej 3V, 9700 Brønderslev, Denmark"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     12.372544,
                     55.786677
                 ]
@@ -6006,21 +5991,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.493562,
-                    56.697867
-                ]
-            },
-            "properties": {
-                "forsyid": "44279118",
-                "name": "Ålestrup Varme",
-                "address": "Elmegaardsvej 6, 9620 Aalestrup"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     8.892579,
                     56.132427
                 ]
@@ -6164,21 +6134,6 @@
                 "forsyid": "32394817",
                 "name": "Gedser Fjernvarme",
                 "address": "Smedevej 6, 4874 Gedser"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    10.533569,
-                    57.441444
-                ]
-            },
-            "properties": {
-                "forsyid": "29189498",
-                "name": "Frederikshavn Kommune",
-                "address": "Rådhus Alle 100, 9900 Frederikshavn"
             }
         },
         {

@@ -1,5 +1,7 @@
 const apiKey = 'e1337f0db4d14aeb8a69f6439fc005fc'; // Replace with your OpenCage API key
 
+let currentFocus = -1;  // Add this at the top of your file
+
 // Function to fetch address suggestions
 function autocompleteAddress() {
     const input = document.getElementById('address');
@@ -8,6 +10,7 @@ function autocompleteAddress() {
 
     if (!query) {
         list.innerHTML = '';
+        currentFocus = -1;  // Reset focus when query is empty
         return;
     }
 
@@ -16,6 +19,7 @@ function autocompleteAddress() {
         .then(data => {
             console.log('Autocomplete API response:', data); // Debugging statement
             list.innerHTML = '';
+            currentFocus = -1;  // Reset focus when updating list
             if (data.status.code === 402) {
                 showToast('Address API is dead 😢', 'error');
                 return;
@@ -87,6 +91,39 @@ function showToast(message, type) {
     }, 3000);
 }
 
+// Add this new function to handle keyboard navigation
+function handleKeyDown(e) {
+    const list = document.getElementById('autocomplete-list');
+    let items = list.getElementsByClassName('autocomplete-item');
+    
+    if (!items.length) return;
+
+    // Remove active class from current item
+    if (currentFocus >= 0 && items[currentFocus]) {
+        items[currentFocus].classList.remove('active');
+    }
+
+    if (e.key === 'ArrowDown') {
+        currentFocus++;
+        if (currentFocus >= items.length) currentFocus = 0;
+    } else if (e.key === 'ArrowUp') {
+        currentFocus--;
+        if (currentFocus < 0) currentFocus = items.length - 1;
+    } else if (e.key === 'Enter' && currentFocus > -1) {
+        e.preventDefault();
+        if (items[currentFocus]) {
+            document.getElementById('address').value = items[currentFocus].innerText;
+            list.innerHTML = '';
+            searchAddress();
+        }
+    }
+
+    // Add active class to new current item
+    if (currentFocus >= 0 && items[currentFocus]) {
+        items[currentFocus].classList.add('active');
+    }
+}
+
 // Ensure the toast container exists
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Adding toast container'); // Debugging statement
@@ -94,4 +131,18 @@ document.addEventListener('DOMContentLoaded', () => {
     toastContainer.id = 'toast-container';
     toastContainer.className = 'toast-container';
     document.body.appendChild(toastContainer);
+
+    const addressInput = document.getElementById('address');
+    addressInput.setAttribute('autocomplete', 'off');
+
+    // Add keyboard event listeners
+    addressInput.addEventListener('keydown', handleKeyDown);
+
+    // Add enter key listener
+    addressInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission if within a form
+            searchAddress();
+        }
+    });
 });

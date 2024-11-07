@@ -45,24 +45,28 @@ body, html {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-.content {
-    display: flex;
-    flex: 1;
-    width: 100%;
-}
-
 #map {
-    flex: 1;
-    border: 2px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    width: 50%;  /* Start with 50-50 split */
+    height: calc(100vh - 60px);  /* Assuming ~60px top-bar height */
+    left: 0;
 }
 
 #graph-container {
-    flex: 0.5;
-    height: 100%;
-    border: 2px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: auto;
+    position: absolute;
+    width: 50%;
+    height: calc(100vh - 60px);
+    right: 0;
+}
+
+#divider {
+    position: absolute;
+    left: 50%;
+    width: 8px;
+    height: calc(100vh - 60px);
+    background: #ccc;
+    cursor: col-resize;
+    z-index: 10;
 }
 
 .mapboxgl-popup {
@@ -92,3 +96,74 @@ body, html {
     margin: 0;
     font-size: 12px;
 }
+
+#divider {
+    position: absolute;
+    left: 50%;
+    width: 8px;
+    height: calc(100vh - 60px);
+    background: #e0e0e0;
+    cursor: col-resize;
+    z-index: 10;
+    transition: background-color 0.2s;
+    
+    /* Add visual indicators */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Add drag handle dots */
+#divider::after {
+    content: '⋮';  /* Three vertical dots */
+    font-size: 20px;
+    color: #666;
+    transform: rotate(90deg);
+    user-select: none;
+}
+
+/* Hover effect */
+#divider:hover {
+    background: #ccc;
+}
+
+/* Active state when dragging */
+#divider:active {
+    background: #999;
+}
+
+/* Tooltip */
+#divider::before {
+    content: 'Drag to resize';
+    position: absolute;
+    top: 20px;  /* Position at top instead of center */
+    left: 50%;
+    transform: translate(-50%, 0);  /* Only center horizontally */
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+#divider:hover::before {
+    opacity: 1;
+}
+
+.address-popup {
+    z-index: 1000;
+}
+
+.popup-content {
+    padding: 10px;
+}
+
+.autocomplete-item.active {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+

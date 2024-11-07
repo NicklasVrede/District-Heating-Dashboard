@@ -9,20 +9,17 @@ export function searchAddress() {
         return;
     }
 
-    console.log('Map sources in addressLookup.js:', map.getStyle().sources);
-
-    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}&key=${OPENCAGE_API_KEY}`)
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}&key=${OPENCAGE_API_KEY}`;
+    
+    fetch(url)
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return response.json();
         })
         .then(data => {
-            if (data.results.length > 0) {
-                const result = data.results[0];
-                const coordinates = result.geometry;
-                plotAddressOnMap(coordinates, address);
+            const result = data.results[0];
+            if (result) {
+                plotAddressOnMap(result.geometry, address);
             } else {
                 alert('Address not found.');
             }
@@ -46,87 +43,81 @@ function plotAddressOnMap(coordinates, address) {
         easing: (t) => t
     });
 
-    // Create an empty popup and attach it to the marker
-    const popup = new mapboxgl.Popup({ offset: 25, className: 'address-popup' })
-        .setLngLat([coordinates.lng, coordinates.lat])
-        .addTo(map);
-
-    marker.setPopup(popup);
-
-    // Add event listener for Ctrl-click to remove the marker
-    marker.getElement().addEventListener('click', (e) => {
-        if (e.ctrlKey) {
-            marker.remove();
-        }
+    // Create popup first and then attach to marker
+    const popup = new mapboxgl.Popup({ 
+        offset: 25, 
+        className: 'address-popup' 
     });
 
-    // Update the popup content after checking the supply plant
+    marker
+        .setPopup(popup)
+        .togglePopup()
+        .getElement().addEventListener('click', (e) => {
+            if (e.ctrlKey) marker.remove();
+        });
+
     checkIfWithinSupplyArea(coordinates, address, popup);
 }
 
 function checkIfWithinSupplyArea(coordinates, address, popup) {
-    console.log('Checking if within supply area:', coordinates); // Debugging statement
-
     try {
-        // Convert point to a GeoJSON point
         const pointGeoJSON = turf.point([coordinates.lng, coordinates.lat]);
-
-        // Get features from the 'areas' source
         const areasSource = map.getSource('areas');
-        if (!areasSource) {
-            throw new Error('Areas source not found.');
-        }
+        
+        if (!areasSource) throw new Error('Areas source not found.');
 
-        const areasFeatures = areasSource._data.features; // Access the GeoJSON features
+        const { forsyid, isWithinArea } = findContainingArea(pointGeoJSON, areasSource._data.features);
+        const supplyPlant = isWithinArea ? findSupplyPlant(forsyid) : 'Unknown';
 
-        // Check if point is within any area
-        let isWithinArea = false;
-        let forsyid = null;
-
-        for (const feature of areasFeatures) {
-            const polygon = feature; // GeoJSON of the polygon
-
-            // Check if the point is within the current polygon
-            if (turf.booleanPointInPolygon(pointGeoJSON, polygon)) {
-                isWithinArea = true;
-                forsyid = feature.properties.forsyid || null; // Assuming forsyid is in properties
-                break;
-            }
-        }
-
-        let supplyPlant = 'Unknown';
-        if (isWithinArea && forsyid) {
-            // Fetch the plant name using forsyid
-            const plantsSource = map.getSource('plants');
-            if (plantsSource) {
-                const plantsFeatures = plantsSource._data.features; // Access the GeoJSON features
-                for (const plantFeature of plantsFeatures) {
-                    if (plantFeature.properties.forsyid === forsyid) {
-                        supplyPlant = plantFeature.properties.name || 'Unknown'; // Assuming plant name is in properties
-                        break;
-                    }
-                }
-            }
-
-            // Highlight the supply area
-            map.setFilter('highlighted-area', ['==', 'forsyid', forsyid]);
-
-            // Highlight the supply plant
-            map.setFilter('highlighted-plant', ['==', 'forsyid', forsyid]);
-        } else {
-            // Clear the highlights if no area is found
-            map.setFilter('highlighted-area', ['==', 'forsyid', '']);
-            map.setFilter('highlighted-plant', ['==', 'forsyid', '']);
-        }
-
-        // Update the popup with the supply plant information and instructions
+        // Update map highlights
+        updateMapHighlights(forsyid, isWithinArea);
+        
+        // Update popup
         if (popup) {
-            popup.setHTML(`<div class="popup-content"><h4>${address}</h4><p>Supply Plant: ${supplyPlant}</p><p>Ctrl-click to remove this point.</p></div>`);
-        } else {
-            console.error('Popup is undefined.');
+            popup.setHTML(createPopupContent(address, supplyPlant));
         }
     } catch (error) {
         console.error('Error checking if within supply area:', error);
         alert('Error checking if within supply area.');
     }
+}
+
+// Helper functions
+function findContainingArea(point, features) {
+    for (const feature of features) {
+        if (turf.booleanPointInPolygon(point, feature)) {
+            return {
+                isWithinArea: true,
+                forsyid: feature.properties.forsyid || null
+            };
+        }
+    }
+    return { isWithinArea: false, forsyid: null };
+}
+
+function findSupplyPlant(forsyid) {
+    const plantsSource = map.getSource('plants');
+    if (!plantsSource) return 'Unknown';
+
+    const plant = plantsSource._data.features.find(
+        feature => feature.properties.forsyid === forsyid
+    );
+    return plant?.properties.name || 'Unknown';
+}
+
+function updateMapHighlights(forsyid, isWithinArea) {
+    const filterValue = isWithinArea ? forsyid : '';
+    map.setFilter('highlighted-area', ['==', 'forsyid', filterValue]);
+    map.setFilter('highlighted-plant', ['==', 'forsyid', filterValue]);
+}
+
+function createPopupContent(address, supplyPlant) {
+    console.log('Popup content:', { address, supplyPlant });
+    return `
+        <div class="popup-content">
+            <h4>${address}</h4>
+            <p>Supply Plant: ${supplyPlant}</p>
+            <p>Ctrl-click to remove this point.</p>
+        </div>
+    `;
 }

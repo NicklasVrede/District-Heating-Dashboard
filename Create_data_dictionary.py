@@ -40,6 +40,10 @@ for forsyid, group in grouped_data.groupby('forsyid'):
         'data': data_by_year
     }
 
+    # Check if 'CVRP' exists in the data and create 'prices' dictionary if it does
+    if 'CVRP' in data_by_year:
+        data_dict[forsyid]['data']['prices'] = {}
+
 # Save the data dictionary as a JSON file with UTF-8 encoding
 with open('data/data_dict.json', 'w', encoding='utf-8') as json_file:
     json.dump(data_dict, json_file, indent=4, ensure_ascii=False)
@@ -51,7 +55,7 @@ for forsyid in data_dict.keys():
 
 # Test the format:
 # Print the information about forsyid "34203563"
-forsyid_to_print = "34203563".zfill(8)
+forsyid_to_print = "17779710".zfill(8)
 if forsyid_to_print in data_dict:
     print(f"\nInformation for forsyid {forsyid_to_print}:")
     pprint(data_dict[forsyid_to_print])
