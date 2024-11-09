@@ -30,7 +30,10 @@ max_requests = config["max_requests"]
 
 def get_pnumber(search_term: str) -> str:
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False)
+        browser = playwright.chromium.launch(
+            headless=False,
+            args=['--no-first-run', '--no-startup-window', '--window-position=2000,0']
+        )
         context = browser.new_context()
         context.set_default_timeout(10000)
         page = context.new_page()
