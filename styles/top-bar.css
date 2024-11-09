@@ -1,5 +1,6 @@
 /* top-bar.css */
 
+/* Main Top Bar Container */
 .top-bar {
     padding: 1vh 2vw;
     background-color: #f8f8f8;
@@ -11,26 +12,107 @@
     position: relative;
 }
 
+/* Left Section Layout */
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Search Container Styles */
+.search-container {
+    display: flex;
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+}
+
+#address {
+    flex: 1;
+    padding: 0.5vh 1vw;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    box-sizing: border-box;
+}
+
+#search-button {
+    padding: 0.5vh 1vw;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.autocomplete-item.active {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+/* Dropdown Group Styles */
+.dropdown-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.focus-selector-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 3px 8px;
+    height: 32px;
+}
+
+.focus-selector-container label {
+    white-space: nowrap;
+    font-weight: 500;
+    color: #333;
+    font-size: 16px;
+    font-family: Arial;
+}
+
+.focus-selector-container select {
+    padding: 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    height: 28px;
+    width: 120px;
+    text-indent: 8px;
+}
+
+.focus-selector-container select:hover {
+    border-color: #888;
+}
+
+/* Buttons Container */
 .buttons-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 10px;
+    gap: 8px;
 }
 
+/* Toggle Gas Areas Styles */
 .toggle-frame {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-right: 10px;
-    background-color: #f9f9f9;
-    cursor: pointer;
+    padding: 0 10px;
+    border-radius: 4px;
     background-color: #4CAF50;
     color: white;
-    border: none;
-    margin-left: 16px;
+    cursor: pointer;
+    height: 32px;
 }
 
 .toggle-frame:hover {
@@ -41,13 +123,14 @@
     margin-right: 10px;
     font-size: 16px;
     font-family: Arial;
+    line-height: 1;
 }
 
 #toggle-gas-areas {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
-    accent-color: #4CAF50; /* Modern browsers support */
+    accent-color: #4CAF50;
 }
 
 #toggle-gas-areas:checked {
@@ -67,7 +150,6 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    margin-left: 10px;
     transition: background-color 0.3s ease;
 }
 
@@ -85,7 +167,7 @@
 }
 
 
-#select-all {
+#overview-button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -94,7 +176,6 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-left: 10px;
 }
 
 #select-all:hover {
@@ -117,4 +198,43 @@
     border-radius: 4px;
     border: 1px solid #ccc;
     cursor: pointer;
+}
+
+/* Action Buttons - Common Styles */
+.buttons-container button,
+#apply-filters,
+#overview-button,
+#clear-selection {
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 4px;
+    border: none;
+    font-size: 16px;
+    font-family: Arial;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+/* Apply Button Specific Styles */
+#apply-filters {
+    background-color: #007bff;
+    color: white;
+}
+
+#apply-filters:hover {
+    background-color: #0056b3;
+}
+
+#apply-filters:active {
+    background-color: #004080;
+}
+
+#apply-filters:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }

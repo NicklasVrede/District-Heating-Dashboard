@@ -14,17 +14,49 @@
 <body>
     <!-- Top Navigation Bar -->
     <div class="top-bar">
-        <div class="search-container">
-            <input type="text" id="address" autocomplete="off" placeholder="Can i get heating? (Address)" oninput="autocompleteAddress()">
-            <button id="search-button" onclick="searchAddress()">Search</button>
-            <div id="autocomplete-list" class="autocomplete-items"></div>
+        <div class="left-section">
+            <div class="search-container">
+                <input type="text" id="address" autocomplete="off" placeholder="Can i get heating? (Address)" oninput="autocompleteAddress()">
+                <button id="search-button" onclick="searchAddress()">Search</button>
+                <div id="autocomplete-list" class="autocomplete-items"></div>
+            </div>
+            <div class="dropdown-group">
+                <div class="focus-selector-container">
+                    <label for="focus-selector">Data Focus:</label>
+                    <select id="focus-selector" onchange="focusControls.changeFocus(this.value)">
+                        <option value="price">Price</option>
+                        <option value="production">Production</option>
+                        <option value="co2">CO2</option>
+                    </select>
+                </div>
+                <div class="focus-selector-container" id="measure-container" style="display: none;">
+                    <label for="measure-selector">Measure:</label>
+                    <select id="measure-selector">
+                        <option value="kul">Kul</option>
+                        <option value="olie">Olie</option>
+                        <option value="flis">Flis</option>
+                    </select>
+                </div>
+                <div class="focus-selector-container">
+                    <label for="entity-filter">Select:</label>
+                    <select id="entity-filter">
+                        <option value="none">None</option>
+                        <option value="top5">Top 5</option>
+                        <option value="top10">Top 10</option>
+                        <option value="middle5">Middle 5</option>
+                        <option value="bottom5">Bottom 5</option>
+                        <option value="bottom10">Bottom 10</option>
+                    </select>
+                </div>
+                <button id="apply-filters" onclick="focusControls.applyFilters()">Apply</button>
+            </div>
         </div>
         <div class="buttons-container">
             <label class="toggle-frame" onclick="toggleGasAreas(map)">
                 <span id="toggle-gas-areas-label">Toggle Gas Areas</span>
                 <input type="checkbox" id="toggle-gas-areas">
             </label>
-            <button id="select-all" onclick="selectAll()">Select All</button>
+            <button id="overview-button" onclick="selectAll()">Overview</button>
             <button id="clear-button" onclick="clearSelection()">Clear Selection</button>
         </div>
     </div>
@@ -51,5 +83,12 @@
     <script type="module" src="./main.js"></script>
     <script type="module" src="./utils/javascript/addressLookup.js"></script>
     <script type="module" src="./utils/javascript/plotlyGraphs.js"></script> 
+
+    <!-- Focus and Measure Controls -->
+    <script type="module">
+        import { changeFocus, applyFilters } from './utils/javascript/focusControls.js';
+        // Make functions available globally
+        window.focusControls = { changeFocus, applyFilters };
+    </script>
 </body>
 </html>
