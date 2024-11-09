@@ -178,15 +178,15 @@
     transition: background-color 0.3s ease;
 }
 
-#select-all:hover {
+#overview-button:hover {
     background-color: #0056b3;
 }
 
-#select-all:active {
+#overview-button:active {
     background-color: #004080;
 }
 
-#select-all:focus {
+#overview-button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
@@ -204,7 +204,7 @@
 .buttons-container button,
 #apply-filters,
 #overview-button,
-#clear-selection {
+#clear-button {
     height: 32px;
     padding: 0 16px;
     border-radius: 4px;
