@@ -13,7 +13,8 @@
             "properties": {
                 "forsyid": "36152710",
                 "name": "Aabenraa-Rødekro Fjernvarme",
-                "address": "Egelund 60, 6200 Aabenraa, Denmark"
+                "address": "Egelund 60, 6200 Aabenraa, Denmark",
+                "CVRP": "1010792947"
             }
         },
         {
@@ -28,7 +29,8 @@
             "properties": {
                 "forsyid": "17779710",
                 "name": "Aabybro Fjernvarme",
-                "address": "Ny Aabyvej 20, 9440 Åbybro, Denmark"
+                "address": "Ny Aabyvej 20, 9440 Åbybro, Denmark",
+                "CVRP": "1001358265"
             }
         },
         {
@@ -43,7 +45,8 @@
             "properties": {
                 "forsyid": "00000005",
                 "name": "Aalborg Forsyning",
-                "address": "Stigsborg Brygge 5, 9400 Nørresundby, Denmark"
+                "address": "Stigsborg Brygge 5, 9400 Nørresundby, Denmark",
+                "CVRP": "1021414294"
             }
         },
         {
@@ -58,7 +61,8 @@
             "properties": {
                 "forsyid": "14411313",
                 "name": "Aalestrup-Nørager Energi",
-                "address": "Elmegaardsvej 6, 9620 Aalestrup, Denmark"
+                "address": "Elmegaardsvej 6, 9620 Aalestrup, Denmark",
+                "CVRP": "1000738509"
             }
         },
         {
@@ -73,7 +77,8 @@
             "properties": {
                 "forsyid": "54442912",
                 "name": "Aars Fjernvarme",
-                "address": "Dybvad Møllevej 1, 9600 Aars, Denmark"
+                "address": "Dybvad Møllevej 1, 9600 Aars, Denmark",
+                "CVRP": "1003104672"
             }
         },
         {
@@ -88,7 +93,8 @@
             "properties": {
                 "forsyid": "24513718",
                 "name": "Ærøskøbing Fjernvarme",
-                "address": "Lerbækken 23, 5970 Ærøskøbing, Denmark"
+                "address": "Lerbækken 23, 5970 Ærøskøbing, Denmark",
+                "CVRP": "1001572715"
             }
         },
         {
@@ -103,7 +109,8 @@
             "properties": {
                 "forsyid": "19774015",
                 "name": "Agersted Varmeværk",
-                "address": "Gl. Kongevej 5, 9330 Dronninglund, Denmark"
+                "address": "Gl. Kongevej 5, 9330 Dronninglund, Denmark",
+                "CVRP": "1001516452 "
             }
         },
         {
@@ -118,7 +125,8 @@
             "properties": {
                 "forsyid": "66137112",
                 "name": "Albertslund Forsyning",
-                "address": "Vognporten 9, 2620 Albertslund, Denmark"
+                "address": "Vognporten 9, 2620 Albertslund, Denmark",
+                "CVRP": "1016203617"
             }
         },
         {
@@ -133,7 +141,8 @@
             "properties": {
                 "forsyid": "18027410",
                 "name": "Allingåbro Varmeværk",
-                "address": "Granbakkevej 1, 8961 Allingåbro, Denmark"
+                "address": "Granbakkevej 1, 8961 Allingåbro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -148,7 +157,8 @@
             "properties": {
                 "forsyid": "11304028",
                 "name": "Als Fjernvarme",
-                "address": "Rørsangervej 26, 9560 Hadsund, Denmark"
+                "address": "Rørsangervej 26, 9560 Hadsund, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -163,7 +173,8 @@
             "properties": {
                 "forsyid": "11271715",
                 "name": "Ans Kraftvarmeværk",
-                "address": "Søgade 6, 8643 Ans By, Denmark"
+                "address": "Søgade 6, 8643 Ans By, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -178,7 +189,8 @@
             "properties": {
                 "forsyid": "62749814",
                 "name": "Ansager Varmeværk",
-                "address": "Østre Alle 2, 6823 Ansager, Denmark"
+                "address": "Østre Alle 2, 6823 Ansager, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -193,7 +205,8 @@
             "properties": {
                 "forsyid": "70874814",
                 "name": "Arden Varmeværk",
-                "address": "Myhlenbergvej 64, 9510 Arden, Denmark"
+                "address": "Myhlenbergvej 64, 9510 Arden, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -208,7 +221,8 @@
             "properties": {
                 "forsyid": "54300514",
                 "name": "Asaa Fjernvarme",
-                "address": "Bolværksvej 1, 9340 Asaa, Denmark"
+                "address": "Bolværksvej 1, 9340 Asaa, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -223,7 +237,8 @@
             "properties": {
                 "forsyid": "27837417",
                 "name": "Assens Fjernvarme",
-                "address": "Fabriksvej 5, 9550 Mariager, Denmark"
+                "address": "Fabriksvej 5, 9550 Mariager, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -238,7 +253,8 @@
             "properties": {
                 "forsyid": "17750909",
                 "name": "Astrup Kraftvarmeværk",
-                "address": "Park Allé 2A, 9510 Arden, Denmark"
+                "address": "Park Allé 2A, 9510 Arden, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -253,7 +269,8 @@
             "properties": {
                 "forsyid": "39042010",
                 "name": "Aulum Fjernvarme",
-                "address": "Rugbjergvej 3, 7490 Aulum, Denmark"
+                "address": "Rugbjergvej 3, 7490 Aulum, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -268,7 +285,8 @@
             "properties": {
                 "forsyid": "25473914",
                 "name": "Auning Varmeværk",
-                "address": "Energivej 18, 8963 Auning, Denmark"
+                "address": "Energivej 18, 8963 Auning, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -283,7 +301,8 @@
             "properties": {
                 "forsyid": "14250905",
                 "name": "Avedøre Fjernvarme",
-                "address": "Rebslagerporten 125 i Avedøre, 2650 Hvidovre"
+                "address": "Rebslagerporten 125 i Avedøre, 2650 Hvidovre",
+                "CVRP": null
             }
         },
         {
@@ -298,7 +317,8 @@
             "properties": {
                 "forsyid": "18318636",
                 "name": "Bækmarksbro Varmeværk",
-                "address": "Bækmarksbrovej 4, 7660 Bækmarksbro, Denmark"
+                "address": "Bækmarksbrovej 4, 7660 Bækmarksbro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -313,7 +333,8 @@
             "properties": {
                 "forsyid": "58113719",
                 "name": "Bælum Varmeværk",
-                "address": "Grønnegade 4, 9574 Bælum, Denmark"
+                "address": "Grønnegade 4, 9574 Bælum, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -328,7 +349,8 @@
             "properties": {
                 "forsyid": "27827853",
                 "name": "Ballen/Brundby Fjernvarme",
-                "address": "Ballenvej 51, 8305 Samsø, Denmark"
+                "address": "Ballenvej 51, 8305 Samsø, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -343,7 +365,8 @@
             "properties": {
                 "forsyid": "27173012",
                 "name": "Balling-Rødding Varmeværk",
-                "address": "Anlægsvej 4, 7860 Spøttrup, Denmark"
+                "address": "Anlægsvej 4, 7860 Spøttrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -358,7 +381,8 @@
             "properties": {
                 "forsyid": "18962519",
                 "name": "Bedsted Fjernvarme",
-                "address": "Balsbyvej 3, 7755 Bedsted Thy, Denmark"
+                "address": "Balsbyvej 3, 7755 Bedsted Thy, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -373,7 +397,8 @@
             "properties": {
                 "forsyid": "29777373",
                 "name": "Benløseparkens Varmecentral",
-                "address": "Fredensvej 34, 4100 Ringsted, Denmark"
+                "address": "Fredensvej 34, 4100 Ringsted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -388,7 +413,8 @@
             "properties": {
                 "forsyid": "37251518",
                 "name": "Billund Varmeværk",
-                "address": "Møllevej 49, 7190 Billund, Denmark"
+                "address": "Møllevej 49, 7190 Billund, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -403,7 +429,8 @@
             "properties": {
                 "forsyid": "39678810",
                 "name": "Bindslev Fjernvarme",
-                "address": "Skolegade 5, 9881 Bindslev"
+                "address": "Skolegade 5, 9881 Bindslev",
+                "CVRP": null
             }
         },
         {
@@ -418,7 +445,8 @@
             "properties": {
                 "forsyid": "19231097",
                 "name": "Blåhøj Energiselskab",
-                "address": "Sdr. Ommevej 38, 7330 Brande, Denmark"
+                "address": "Sdr. Ommevej 38, 7330 Brande, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -433,7 +461,8 @@
             "properties": {
                 "forsyid": "64831712",
                 "name": "Bogense Forsyningsselskab",
-                "address": "Fynsvej 5, 5400 Bogense, Denmark"
+                "address": "Fynsvej 5, 5400 Bogense, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -448,7 +477,8 @@
             "properties": {
                 "forsyid": "31582148",
                 "name": "Bornholms Energi & Forsyning",
-                "address": "Industrivej 1, Rønne, 3700 Rønne, Denmark"
+                "address": "Industrivej 1, Rønne, 3700 Rønne, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -463,7 +493,8 @@
             "properties": {
                 "forsyid": "14898018",
                 "name": "Borup Varmeværk",
-                "address": "Bækgårdsvej 62, 4140 Borup, Denmark"
+                "address": "Bækgårdsvej 62, 4140 Borup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -478,7 +509,8 @@
             "properties": {
                 "forsyid": "18653087",
                 "name": "Boulstrup-Hou Kraftvarmeværk",
-                "address": "Møllemarken 4, 8300 Odder, Denmark"
+                "address": "Møllemarken 4, 8300 Odder, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -493,7 +525,8 @@
             "properties": {
                 "forsyid": "18683814",
                 "name": "Bøvling Varmeværk",
-                "address": "Marievej 3, 7650 Bøvlingbjerg, Denmark"
+                "address": "Marievej 3, 7650 Bøvlingbjerg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -508,7 +541,8 @@
             "properties": {
                 "forsyid": "64728210",
                 "name": "Brædstrup Fjernvarme",
-                "address": "Fjernvarmevej 2, 8740 Brædstrup, Denmark"
+                "address": "Fjernvarmevej 2, 8740 Brædstrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -523,7 +557,8 @@
             "properties": {
                 "forsyid": "63446319",
                 "name": "Bramming Fjernvarme",
-                "address": "Grønningen 7, 6740 Bramming, Denmark"
+                "address": "Grønningen 7, 6740 Bramming, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -538,7 +573,8 @@
             "properties": {
                 "forsyid": "58176613",
                 "name": "Brande Fjernvarme",
-                "address": "Mylius-Erichsensvej 39, 7330 Brande, Denmark"
+                "address": "Mylius-Erichsensvej 39, 7330 Brande, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -553,7 +589,8 @@
             "properties": {
                 "forsyid": "22927213",
                 "name": "Bredebro Varmeværk",
-                "address": "Søndergade 8, 6261 Bredebro, Denmark"
+                "address": "Søndergade 8, 6261 Bredebro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -568,7 +605,8 @@
             "properties": {
                 "forsyid": "34938717",
                 "name": "Bredsten-Balle Kraftvarmeværk",
-                "address": "Engvej 2, 7182 Bredsten, Denmark"
+                "address": "Engvej 2, 7182 Bredsten, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -583,7 +621,8 @@
             "properties": {
                 "forsyid": "59352318",
                 "name": "Broager Fjernvarmeselskab",
-                "address": "Østergade 21, 6310 Broager, Denmark"
+                "address": "Østergade 21, 6310 Broager, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -598,7 +637,8 @@
             "properties": {
                 "forsyid": "33269315",
                 "name": "Brøndby Fjernvarme",
-                "address": "Kirkebjerg Alle 92A, 2605 Brøndby, Denmark"
+                "address": "Kirkebjerg Alle 92A, 2605 Brøndby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -613,7 +653,8 @@
             "properties": {
                 "forsyid": "31157439",
                 "name": "Brønderslev Forsyning",
-                "address": "Virksomhedsvej 20, 9700 Brønderslev, Denmark"
+                "address": "Virksomhedsvej 20, 9700 Brønderslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -628,7 +669,8 @@
             "properties": {
                 "forsyid": "19445933",
                 "name": "Brøns Fjernvarme",
-                "address": "Hovedvejen 8D, 6780 Skærbæk, Denmark"
+                "address": "Hovedvejen 8D, 6780 Skærbæk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -643,7 +685,8 @@
             "properties": {
                 "forsyid": "13551472",
                 "name": "Brørup Fjernvarme",
-                "address": "Vandværksvej 5, 6650 Brørup, Denmark"
+                "address": "Vandværksvej 5, 6650 Brørup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -658,7 +701,8 @@
             "properties": {
                 "forsyid": "37809217",
                 "name": "Brovst Fjernvarme",
-                "address": "Bøge Bakker 3, 9460 Brovst, Denmark"
+                "address": "Bøge Bakker 3, 9460 Brovst, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -673,7 +717,8 @@
             "properties": {
                 "forsyid": "63234214",
                 "name": "Christiansfeld Fjernvarme",
-                "address": "Ravnhavevej 2, 6070 Christiansfeld, Denmark"
+                "address": "Ravnhavevej 2, 6070 Christiansfeld, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -688,7 +733,8 @@
             "properties": {
                 "forsyid": "12233418",
                 "name": "Dronninglund Fjernvarme",
-                "address": "Tidselbak Alle 18, 9330 Dronninglund, Denmark"
+                "address": "Tidselbak Alle 18, 9330 Dronninglund, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -703,7 +749,8 @@
             "properties": {
                 "forsyid": "38929119",
                 "name": "Durup Fjernvarme",
-                "address": "Møllevej 8, 7870 Roslev, Denmark"
+                "address": "Møllevej 8, 7870 Roslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -718,7 +765,8 @@
             "properties": {
                 "forsyid": "40920013",
                 "name": "Dybvad Varmeværk",
-                "address": "Jernbanegade 8A, 9352 Dybvad, Denmark"
+                "address": "Jernbanegade 8A, 9352 Dybvad, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -733,7 +781,8 @@
             "properties": {
                 "forsyid": "25215680",
                 "name": "E.On Ørslev-Terslev Kraftvarmeanlæg",
-                "address": "Terslev Skolevej 23, 4690 Haslev, Denmark"
+                "address": "Terslev Skolevej 23, 4690 Haslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -748,7 +797,8 @@
             "properties": {
                 "forsyid": "22703714",
                 "name": "Ebeltoft Fjernvarmeværk",
-                "address": "Hans Winthers Vej 9, 8400 Ebeltoft, Denmark"
+                "address": "Hans Winthers Vej 9, 8400 Ebeltoft, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -763,7 +813,8 @@
             "properties": {
                 "forsyid": "38130498",
                 "name": "Egebjerg Nærvarme",
-                "address": "Gelstrupvej 3, 4500 Nykøbing Sjælland, Denmark"
+                "address": "Gelstrupvej 3, 4500 Nykøbing Sjælland, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -778,7 +829,8 @@
             "properties": {
                 "forsyid": "35410538",
                 "name": "Egedal Fjernvarme",
-                "address": "Dam Holme 4B, 3660 Stenløse, Denmark"
+                "address": "Dam Holme 4B, 3660 Stenløse, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -793,7 +845,8 @@
             "properties": {
                 "forsyid": "14909516",
                 "name": "Egtved Varmeværk",
-                "address": "Søndergade 35, 6040 Egtved, Denmark"
+                "address": "Søndergade 35, 6040 Egtved, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -808,7 +861,8 @@
             "properties": {
                 "forsyid": "17816845",
                 "name": "Ejsing Fjernvarmeforsyning",
-                "address": "Østparken 52, 7830 Vinderup, Denmark"
+                "address": "Østparken 52, 7830 Vinderup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -823,7 +877,8 @@
             "properties": {
                 "forsyid": "17727915",
                 "name": "Ejstrupholm Varmeværk",
-                "address": "Vandværksvej 12, 7361 Ejstrupholm, Denmark"
+                "address": "Vandværksvej 12, 7361 Ejstrupholm, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -838,7 +893,8 @@
             "properties": {
                 "forsyid": "43860259",
                 "name": "Energi Hurup",
-                "address": "Nygade 22, 7760 Hurup Thy, Denmark"
+                "address": "Nygade 22, 7760 Hurup Thy, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -853,7 +909,8 @@
             "properties": {
                 "forsyid": "25161513",
                 "name": "Energi Ikast Varme",
-                "address": "Birkevej 34, 7442 Engesvang"
+                "address": "Birkevej 34, 7442 Engesvang",
+                "CVRP": null
             }
         },
         {
@@ -868,7 +925,8 @@
             "properties": {
                 "forsyid": "14928375",
                 "name": "Energi Vegger",
-                "address": "Skivumvej 2-4, 9240 Nibe, Denmark"
+                "address": "Skivumvej 2-4, 9240 Nibe, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -883,7 +941,8 @@
             "properties": {
                 "forsyid": "60183112",
                 "name": "Engholm Varmecentral",
-                "address": "Rådhusparken 57, 3450 Allerød"
+                "address": "Rådhusparken 57, 3450 Allerød",
+                "CVRP": null
             }
         },
         {
@@ -898,7 +957,8 @@
             "properties": {
                 "forsyid": "53464718",
                 "name": "Farsø Varmeværk",
-                "address": "J. Skjoldborgs Vej 12, 9640 Farsø, Denmark"
+                "address": "J. Skjoldborgs Vej 12, 9640 Farsø, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -913,7 +973,8 @@
             "properties": {
                 "forsyid": "10663210",
                 "name": "Farum Fjernvarme",
-                "address": "Stavnsholtvej 33, 3520 Farum, Denmark"
+                "address": "Stavnsholtvej 33, 3520 Farum, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -928,7 +989,8 @@
             "properties": {
                 "forsyid": "70831112",
                 "name": "Faxe Fjernvarmeselskab",
-                "address": "Knudsvej 2, 4640 Faxe, Denmark"
+                "address": "Knudsvej 2, 4640 Faxe, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -943,7 +1005,8 @@
             "properties": {
                 "forsyid": "17885278",
                 "name": "Feldborg Kraftvarmeværk",
-                "address": "Møllevej 4, 7540 Haderup, Denmark"
+                "address": "Møllevej 4, 7540 Haderup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -958,7 +1021,8 @@
             "properties": {
                 "forsyid": "40402314",
                 "name": "Fensmark Fjernvarmeværk",
-                "address": "Engvej 4, 4684 Holmegaard, Denmark"
+                "address": "Engvej 4, 4684 Holmegaard, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -973,7 +1037,8 @@
             "properties": {
                 "forsyid": "16263443",
                 "name": "Filskov Energiselskab",
-                "address": "Hjortlundvej 13, 7200 Grindsted, Denmark"
+                "address": "Hjortlundvej 13, 7200 Grindsted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -988,7 +1053,8 @@
             "properties": {
                 "forsyid": "00000009",
                 "name": "Fjernvarme Fyn",
-                "address": "Havnegade 120, 5000 Odense C, Denmark"
+                "address": "Havnegade 120, 5000 Odense C, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1003,7 +1069,8 @@
             "properties": {
                 "forsyid": "22340417",
                 "name": "Fjernvarmecentralen Avedøre Holme",
-                "address": "Nordholmen 1-3, 2650 Hvidovre, Denmark"
+                "address": "Nordholmen 1-3, 2650 Hvidovre, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1018,7 +1085,8 @@
             "properties": {
                 "forsyid": "45602516",
                 "name": "Fjerritslev Fjernvarme",
-                "address": "Industrivej 27, 9690 Fjerritslev, Denmark"
+                "address": "Industrivej 27, 9690 Fjerritslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1033,7 +1101,8 @@
             "properties": {
                 "forsyid": "20023317",
                 "name": "Flauenskjold Varmeværk",
-                "address": "Agertoften 12, 9330 Dronninglund, Denmark"
+                "address": "Agertoften 12, 9330 Dronninglund, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1048,7 +1117,8 @@
             "properties": {
                 "forsyid": "35419314",
                 "name": "Føns Nærvarme",
-                "address": "Ronæsbrovej 5C, 5580 Nørre Åby, Denmark"
+                "address": "Ronæsbrovej 5C, 5580 Nørre Åby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1063,7 +1133,8 @@
             "properties": {
                 "forsyid": "32654193",
                 "name": "Forsyning Helsingør",
-                "address": "Haderslevvej 25, 3000 Helsingør, Denmark"
+                "address": "Haderslevvej 25, 3000 Helsingør, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1078,7 +1149,8 @@
             "properties": {
                 "forsyid": "35478116",
                 "name": "Fredericia Fjernvarme",
-                "address": "Dalegade 38, 7000 Fredericia, Denmark"
+                "address": "Dalegade 38, 7000 Fredericia, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1093,7 +1165,8 @@
             "properties": {
                 "forsyid": "18552310",
                 "name": "Frederiks Varmeværk",
-                "address": "Vestergade 5, 7470 Karup J, Denmark"
+                "address": "Vestergade 5, 7470 Karup J, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1108,7 +1181,8 @@
             "properties": {
                 "forsyid": "28500769",
                 "name": "Frederiksberg Forsyning",
-                "address": "Stæhr Johansens vej 38, 2000 Frederiksberg, Denmark"
+                "address": "Stæhr Johansens vej 38, 2000 Frederiksberg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1123,7 +1197,8 @@
             "properties": {
                 "forsyid": "00000014",
                 "name": "Frifelt/Roager Kraftvarme",
-                "address": "Voddervej 2, 6780 Skærbæk, Denmark"
+                "address": "Voddervej 2, 6780 Skærbæk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1138,7 +1213,8 @@
             "properties": {
                 "forsyid": "15213140",
                 "name": "Frøstrup Fjernvarmeværk",
-                "address": "Håndværkervej 11, 7741 Frøstrup, Denmark"
+                "address": "Håndværkervej 11, 7741 Frøstrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1153,7 +1229,8 @@
             "properties": {
                 "forsyid": "29580715",
                 "name": "Fuglebjerg Fjernvarme",
-                "address": "Sandvedvej 31A, 4250 Fuglebjerg, Denmark"
+                "address": "Sandvedvej 31A, 4250 Fuglebjerg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1168,7 +1245,8 @@
             "properties": {
                 "forsyid": "18474492",
                 "name": "Fur Kraftvarmeværk Amba",
-                "address": "Vilietoften 4, 7884 Fur, Denmark"
+                "address": "Vilietoften 4, 7884 Fur, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1183,7 +1261,8 @@
             "properties": {
                 "forsyid": "43727516",
                 "name": "Galten Varmeværk",
-                "address": "Skolebakken 29, 8464 Galten, Denmark"
+                "address": "Skolebakken 29, 8464 Galten, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1198,7 +1277,8 @@
             "properties": {
                 "forsyid": "17737244",
                 "name": "Gassum/Hvidsten Kraftvarmeværk",
-                "address": "Mariagervej 497 A, 8981 Spentrup, Denmark"
+                "address": "Mariagervej 497 A, 8981 Spentrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1213,7 +1293,8 @@
             "properties": {
                 "forsyid": "00000010",
                 "name": "Gauerslund Fjernvarme",
-                "address": "Industrivej 2C, 7080 Børkop, Denmark"
+                "address": "Industrivej 2C, 7080 Børkop, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1228,7 +1309,8 @@
             "properties": {
                 "forsyid": "38864114",
                 "name": "Gedsted Varmeværk",
-                "address": "Nørrevold 2B, 9631 Gedsted, Denmark"
+                "address": "Nørrevold 2B, 9631 Gedsted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1243,7 +1325,8 @@
             "properties": {
                 "forsyid": "13148228",
                 "name": "Gelsted Fjernvarme",
-                "address": "Tømmervej 3, 5591 Gelsted, Denmark"
+                "address": "Tømmervej 3, 5591 Gelsted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1258,7 +1341,8 @@
             "properties": {
                 "forsyid": "18429772",
                 "name": "Genner-Hellevad-Hovslund",
-                "address": "Surbækvej 10, 6230 Rødekro, Denmark"
+                "address": "Surbækvej 10, 6230 Rødekro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1273,7 +1357,8 @@
             "properties": {
                 "forsyid": "39272091",
                 "name": "Gentofte Gladsaxe Fjernvarme",
-                "address": "Bernstoffsvej 159, 2920 Charlottenlund, Denmark"
+                "address": "Bernstoffsvej 159, 2920 Charlottenlund, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1288,7 +1373,8 @@
             "properties": {
                 "forsyid": "59162616",
                 "name": "Gilleleje Fjernvarme",
-                "address": "Fiskerengen 2, 3250 Gilleleje, Denmark"
+                "address": "Fiskerengen 2, 3250 Gilleleje, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1303,7 +1389,8 @@
             "properties": {
                 "forsyid": "38664018",
                 "name": "Give Fjernvarme",
-                "address": "Østerhovedvej 4, 7323 Give, Denmark"
+                "address": "Østerhovedvej 4, 7323 Give, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1318,7 +1405,8 @@
             "properties": {
                 "forsyid": "14492984",
                 "name": "Gjerlev Varmeværk",
-                "address": "Mercurvej 12, 8983 Gjerlev J, Denmark"
+                "address": "Mercurvej 12, 8983 Gjerlev J, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1333,7 +1421,8 @@
             "properties": {
                 "forsyid": "17063340",
                 "name": "Gjøl Private Kraftvarmeværk",
-                "address": "Drøvten 40, 9440 Åbybro, Denmark"
+                "address": "Drøvten 40, 9440 Åbybro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1348,7 +1437,8 @@
             "properties": {
                 "forsyid": "25387910",
                 "name": "Glamsbjerg-Haarby Varmeværk",
-                "address": "Teglværksvej 10, 5620 Glamsbjerg, Denmark"
+                "address": "Teglværksvej 10, 5620 Glamsbjerg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1363,7 +1453,8 @@
             "properties": {
                 "forsyid": "33043309",
                 "name": "Glostrup Forsyning",
-                "address": "Ørnebjergvej 7, 2600 Glostrup, Denmark"
+                "address": "Ørnebjergvej 7, 2600 Glostrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1378,7 +1469,8 @@
             "properties": {
                 "forsyid": "57762918",
                 "name": "Glyngøre Fjernvarmeværk",
-                "address": "Durupvej 22, 7870 Roslev, Denmark"
+                "address": "Durupvej 22, 7870 Roslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1393,7 +1485,8 @@
             "properties": {
                 "forsyid": "20049928",
                 "name": "Gørding Varmeværk",
-                "address": "Nørregade 55, 6690 Gørding, Denmark"
+                "address": "Nørregade 55, 6690 Gørding, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1408,7 +1501,8 @@
             "properties": {
                 "forsyid": "42742511",
                 "name": "Græsted Fjernvarme",
-                "address": "Mesterbuen 8, 3230 Græsted, Denmark"
+                "address": "Mesterbuen 8, 3230 Græsted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1423,7 +1517,8 @@
             "properties": {
                 "forsyid": "36294515",
                 "name": "Gram Fjernvarme",
-                "address": "Sønderbyvej 24, 6510 Gram, Denmark"
+                "address": "Sønderbyvej 24, 6510 Gram, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1438,7 +1533,8 @@
             "properties": {
                 "forsyid": "43774417",
                 "name": "Grenaa Varmeværk",
-                "address": "Energivej 6, 8500 Grenaa, Denmark"
+                "address": "Energivej 6, 8500 Grenaa, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1453,7 +1549,8 @@
             "properties": {
                 "forsyid": "33912773",
                 "name": "Greve  Fjernvarme",
-                "address": "Over Bølgen 4, 2670 Greve, Denmark"
+                "address": "Over Bølgen 4, 2670 Greve, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1468,7 +1565,8 @@
             "properties": {
                 "forsyid": "17256319",
                 "name": "Gudenådalens Energiselskab",
-                "address": "Realskolevej 18, 8850 Bjerringbro, Denmark"
+                "address": "Realskolevej 18, 8850 Bjerringbro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1483,7 +1581,8 @@
             "properties": {
                 "forsyid": "00000002",
                 "name": "Guldborgsund Forsyning",
-                "address": "Gaabensevej 116, 4800 Nykøbing F, Denmark"
+                "address": "Gaabensevej 116, 4800 Nykøbing F, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1498,7 +1597,8 @@
             "properties": {
                 "forsyid": "58061212",
                 "name": "Haderslev Fjernvarme",
-                "address": "Fjordagervej 15, 6100 Haderslev, Denmark"
+                "address": "Fjordagervej 15, 6100 Haderslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1513,7 +1613,8 @@
             "properties": {
                 "forsyid": "17761889",
                 "name": "Haderup Kraftvarmeværk",
-                "address": "Ørnevej 13, 7540 Haderup, Denmark"
+                "address": "Ørnevej 13, 7540 Haderup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1528,7 +1629,8 @@
             "properties": {
                 "forsyid": "67750411",
                 "name": "Hadsten Varmeværk",
-                "address": "Toftegårdsvej 30A, 8370 Hadsten, Denmark"
+                "address": "Toftegårdsvej 30A, 8370 Hadsten, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1543,7 +1645,8 @@
             "properties": {
                 "forsyid": "60567719",
                 "name": "Hadsund Fjernvarme",
-                "address": "Fabriksvej 1, 9560 Hadsund, Denmark"
+                "address": "Fabriksvej 1, 9560 Hadsund, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1558,7 +1661,8 @@
             "properties": {
                 "forsyid": "22662910",
                 "name": "Hals Fjernvarme",
-                "address": "Bygmestervej 9-11, 9370 Hals, Denmark"
+                "address": "Bygmestervej 9-11, 9370 Hals, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1573,7 +1677,8 @@
             "properties": {
                 "forsyid": "33033575",
                 "name": "Halsnæs Varme",
-                "address": "Gjethusparken 3, 3300 Frederiksværk, Denmark"
+                "address": "Gjethusparken 3, 3300 Frederiksværk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1588,7 +1693,8 @@
             "properties": {
                 "forsyid": "16374172",
                 "name": "Halvrimmen-Arentsminde Kraftvarmeværk",
-                "address": "Lyngvej 16, 9460 Brovst, Denmark"
+                "address": "Lyngvej 16, 9460 Brovst, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1603,7 +1709,8 @@
             "properties": {
                 "forsyid": "42272612",
                 "name": "Hammel Fjernvarme",
-                "address": "Irlandsvej 6, 8450 Hammel, Denmark"
+                "address": "Irlandsvej 6, 8450 Hammel, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1618,7 +1725,8 @@
             "properties": {
                 "forsyid": "23067919",
                 "name": "Hammershøj Fjernvarmeværk",
-                "address": "Hylde Alle 10, 8830 Tjele, Denmark"
+                "address": "Hylde Alle 10, 8830 Tjele, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1633,7 +1741,8 @@
             "properties": {
                 "forsyid": "23011514",
                 "name": "Hanstholm Varmeværk",
-                "address": "Molevej 13, 7730 Hanstholm, Denmark"
+                "address": "Molevej 13, 7730 Hanstholm, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1648,7 +1757,8 @@
             "properties": {
                 "forsyid": "16016438",
                 "name": "Harboøre Varmeværk",
-                "address": "Industrivej 1, 7673 Harboøre, Denmark"
+                "address": "Industrivej 1, 7673 Harboøre, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1663,7 +1773,8 @@
             "properties": {
                 "forsyid": "16408530",
                 "name": "Hashøj Kraftvarmeforsyning",
-                "address": "Industrivej 17, 4261 Dalmose, Denmark"
+                "address": "Industrivej 17, 4261 Dalmose, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1678,7 +1789,8 @@
             "properties": {
                 "forsyid": "54121016",
                 "name": "Haslev Fjernvarme",
-                "address": "Energivej 35, 4690 Haslev, Denmark"
+                "address": "Energivej 35, 4690 Haslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1693,7 +1805,8 @@
             "properties": {
                 "forsyid": "16566179",
                 "name": "Havndal Fjernvarme",
-                "address": "Laursensvej 4, 8970 Havndal, Denmark"
+                "address": "Laursensvej 4, 8970 Havndal, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1708,7 +1821,8 @@
             "properties": {
                 "forsyid": "29346909",
                 "name": "Havneby Varmeværk",
-                "address": "c/o Læssevej 7, 6780 Skærbæk, Denmark"
+                "address": "c/o Læssevej 7, 6780 Skærbæk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1723,7 +1837,8 @@
             "properties": {
                 "forsyid": "41529911",
                 "name": "Hedensted Fjernvarme",
-                "address": "Løsningvej 26, 8722 Hedensted, Denmark"
+                "address": "Løsningvej 26, 8722 Hedensted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1738,7 +1853,8 @@
             "properties": {
                 "forsyid": "15978538",
                 "name": "Hejnsvig Varmeværk",
-                "address": "Østermarksvej 25, 7250 Hejnsvig, Denmark"
+                "address": "Østermarksvej 25, 7250 Hejnsvig, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1753,7 +1869,8 @@
             "properties": {
                 "forsyid": "42760218",
                 "name": "Helsinge Fjernvarme",
-                "address": "Skovgårdsvej 4A, 3200 Helsinge, Denmark"
+                "address": "Skovgårdsvej 4A, 3200 Helsinge, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1768,7 +1885,8 @@
             "properties": {
                 "forsyid": "20745533",
                 "name": "Hemmet Varmeværk",
-                "address": "Bandsbølvej 28C, 6893 Hemmet, Denmark"
+                "address": "Bandsbølvej 28C, 6893 Hemmet, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1783,7 +1901,8 @@
             "properties": {
                 "forsyid": "31592488",
                 "name": "Hillerød Forsyning",
-                "address": "Ægirsvej 4, 3400 Hillerød, Denmark"
+                "address": "Ægirsvej 4, 3400 Hillerød, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1798,7 +1917,8 @@
             "properties": {
                 "forsyid": "10411912",
                 "name": "Hinnerup Fjernvarme",
-                "address": "Fanøvej 15, 8382 Hinnerup, Denmark"
+                "address": "Fanøvej 15, 8382 Hinnerup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1813,7 +1933,8 @@
             "properties": {
                 "forsyid": "45194817",
                 "name": "Hirtshals Fjernvarme",
-                "address": "Søndergade 14, 9850 Hirtshals, Denmark"
+                "address": "Søndergade 14, 9850 Hirtshals, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1828,7 +1949,8 @@
             "properties": {
                 "forsyid": "34681228",
                 "name": "Hjallerup Fjernvarme",
-                "address": "Gravensgade 18, 9320 Hjallerup, Denmark"
+                "address": "Gravensgade 18, 9320 Hjallerup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1843,7 +1965,8 @@
             "properties": {
                 "forsyid": "12389132",
                 "name": "Hjordkær Fjernvarmeværk",
-                "address": "Grønhøj 13, 6230 Rødekro, Denmark"
+                "address": "Grønhøj 13, 6230 Rødekro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1858,7 +1981,8 @@
             "properties": {
                 "forsyid": "64544616",
                 "name": "Hjørring Varmeforsyning",
-                "address": "Buen 7, 9800 Hjørring, Denmark"
+                "address": "Buen 7, 9800 Hjørring, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1873,7 +1997,8 @@
             "properties": {
                 "forsyid": "41429615",
                 "name": "Hobro Varmeværk",
-                "address": "Lupinvej 21, 9500 Hobro, Denmark"
+                "address": "Lupinvej 21, 9500 Hobro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1888,7 +2013,8 @@
             "properties": {
                 "forsyid": "26089263",
                 "name": "Hofor",
-                "address": "Ørestads Boulevard 35, 2300 København S, Denmark"
+                "address": "Ørestads Boulevard 35, 2300 København S, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1903,7 +2029,8 @@
             "properties": {
                 "forsyid": "13057117",
                 "name": "Høje Taastrup Fjernvarme",
-                "address": "Malervej 7A, 2630 Taastrup, Denmark"
+                "address": "Malervej 7A, 2630 Taastrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1918,7 +2045,8 @@
             "properties": {
                 "forsyid": "18849518",
                 "name": "Højslev Nr.Søby Fjernvarmeværk",
-                "address": "Søbyvej 48A, 7840 Højslev, Denmark"
+                "address": "Søbyvej 48A, 7840 Højslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1933,7 +2061,8 @@
             "properties": {
                 "forsyid": "62082313",
                 "name": "Holeby Fjernvarme",
-                "address": "Industrivej 1, 4960 Holeby, Denmark"
+                "address": "Industrivej 1, 4960 Holeby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1948,7 +2077,8 @@
             "properties": {
                 "forsyid": "39901811",
                 "name": "Holme-Lundshøj Fjernvarme",
-                "address": "Holme Byvej 14, 8270 Højbjerg, Denmark"
+                "address": "Holme Byvej 14, 8270 Højbjerg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1963,7 +2093,8 @@
             "properties": {
                 "forsyid": "36637919",
                 "name": "Holsted Varmeværk",
-                "address": "Overgade 11, 6670 Holsted, Denmark"
+                "address": "Overgade 11, 6670 Holsted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1978,7 +2109,8 @@
             "properties": {
                 "forsyid": "18968614",
                 "name": "Holte Fjernvarme",
-                "address": "Skovlytoften 5, 2840 Holte, Denmark"
+                "address": "Skovlytoften 5, 2840 Holte, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -1993,7 +2125,8 @@
             "properties": {
                 "forsyid": "29096716",
                 "name": "Høng Varmeværk",
-                "address": "Banemarken 8, 4270 Høng, Denmark"
+                "address": "Banemarken 8, 4270 Høng, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2008,7 +2141,8 @@
             "properties": {
                 "forsyid": "11218415",
                 "name": "Hørby Varmeværk",
-                "address": "Hjørringvej 101, 9300 Sæby, Denmark"
+                "address": "Hjørringvej 101, 9300 Sæby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2023,7 +2157,8 @@
             "properties": {
                 "forsyid": "64235818",
                 "name": "Hornbæk Fjernvarme",
-                "address": "Lille Evaldsvej 5, 3100 Hornbæk, Denmark"
+                "address": "Lille Evaldsvej 5, 3100 Hornbæk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2038,7 +2173,8 @@
             "properties": {
                 "forsyid": "43431714",
                 "name": "Hornslet Fjernvarme",
-                "address": "Amaliegårdvej 7, 8543 Hornslet, Denmark"
+                "address": "Amaliegårdvej 7, 8543 Hornslet, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2053,7 +2189,8 @@
             "properties": {
                 "forsyid": "22724118",
                 "name": "Hovedgaard Fjernvarmeværk",
-                "address": "Frydsvej 18, 8732 Hovedgård, Denmark"
+                "address": "Frydsvej 18, 8732 Hovedgård, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2068,7 +2205,8 @@
             "properties": {
                 "forsyid": "32720315",
                 "name": "Hundested Varmeværk",
-                "address": "Håndværkervej 14, 3390 Hundested, Denmark"
+                "address": "Håndværkervej 14, 3390 Hundested, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2083,7 +2221,8 @@
             "properties": {
                 "forsyid": "18440342",
                 "name": "Hundslund-Oldrup Kraftvarmeværk",
-                "address": "Guldagervej 4C, 8350 Hundslund, Denmark"
+                "address": "Guldagervej 4C, 8350 Hundslund, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2098,7 +2237,8 @@
             "properties": {
                 "forsyid": "16893773",
                 "name": "Hvalpsund Kraftvarme",
-                "address": "Hestbækvej 21, 9640 Farsø, Denmark"
+                "address": "Hestbækvej 21, 9640 Farsø, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2113,7 +2253,8 @@
             "properties": {
                 "forsyid": "44057212",
                 "name": "Hvalsø Kraftvarmeværk",
-                "address": "Åsvejen 12, 4330 Hvalsø, Denmark"
+                "address": "Åsvejen 12, 4330 Hvalsø, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2128,7 +2269,8 @@
             "properties": {
                 "forsyid": "24557413",
                 "name": "Hvidbjerg Fjernvarme",
-                "address": "Håndværkervej 2, 7790 Thyholm"
+                "address": "Håndværkervej 2, 7790 Thyholm",
+                "CVRP": null
             }
         },
         {
@@ -2143,7 +2285,8 @@
             "properties": {
                 "forsyid": "69914128",
                 "name": "Hvide Sande Fjernvarme",
-                "address": "Numitvej 25, 6960 Hvide Sande, Denmark"
+                "address": "Numitvej 25, 6960 Hvide Sande, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2158,7 +2301,8 @@
             "properties": {
                 "forsyid": "14926402",
                 "name": "Hvidebæk Fjernvarmeforsyning",
-                "address": "Hovvej 37A, 4490 Jerslev Sjælland, Denmark"
+                "address": "Hovvej 37A, 4490 Jerslev Sjælland, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2173,7 +2317,8 @@
             "properties": {
                 "forsyid": "57681268",
                 "name": "Hvidovre Fjernvarme",
-                "address": "Arnold Nielsens Boulevard 60, 1, 2650 Hvidovre, Denmark"
+                "address": "Arnold Nielsens Boulevard 60, 1, 2650 Hvidovre, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2188,7 +2333,8 @@
             "properties": {
                 "forsyid": "19596419",
                 "name": "Ingstrup Fjernvarme",
-                "address": "Hesteskoen 11, 9480 Løkken, Denmark"
+                "address": "Hesteskoen 11, 9480 Løkken, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2203,7 +2349,8 @@
             "properties": {
                 "forsyid": "11931316",
                 "name": "Ishøj Varmeværk",
-                "address": "Industrivangen 34, 2635 Ishøj, Denmark"
+                "address": "Industrivangen 34, 2635 Ishøj, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2218,7 +2365,8 @@
             "properties": {
                 "forsyid": "18155141",
                 "name": "Jægerspris Kraftvarme",
-                "address": "Håndværkervej 9, 3630 Jægerspris, Denmark"
+                "address": "Håndværkervej 9, 3630 Jægerspris, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2233,7 +2381,8 @@
             "properties": {
                 "forsyid": "17349317",
                 "name": "Jelling Varmeværk",
-                "address": "Nordkrogen 20 B, 7300 Jelling, Denmark"
+                "address": "Nordkrogen 20 B, 7300 Jelling, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2248,7 +2397,8 @@
             "properties": {
                 "forsyid": "16001910",
                 "name": "Jerslev Varmeværk",
-                "address": "Palægade 6, 9740 Jerslev J, Denmark"
+                "address": "Palægade 6, 9740 Jerslev J, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2263,7 +2413,8 @@
             "properties": {
                 "forsyid": "17000888",
                 "name": "Jetsmark Energiværk",
-                "address": "Nørregade 81, 9490 Pandrup, Denmark"
+                "address": "Nørregade 81, 9490 Pandrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2278,7 +2429,8 @@
             "properties": {
                 "forsyid": "33033125",
                 "name": "Jyderup Varme A/S",
-                "address": "Lyngvej 6, 4450 Jyderup, Danmark"
+                "address": "Lyngvej 6, 4450 Jyderup, Danmark",
+                "CVRP": null
             }
         },
         {
@@ -2293,7 +2445,8 @@
             "properties": {
                 "forsyid": "31774985",
                 "name": "Kalundborg Varmeforsyning",
-                "address": "Dokhavnsvej 15, 4400 Kalundborg, Denmark"
+                "address": "Dokhavnsvej 15, 4400 Kalundborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2308,7 +2461,8 @@
             "properties": {
                 "forsyid": "16859818",
                 "name": "Karup Varmeværk",
-                "address": "Godthåbsvej 2, 7470 Karup J, Denmark"
+                "address": "Godthåbsvej 2, 7470 Karup J, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2323,7 +2477,8 @@
             "properties": {
                 "forsyid": "32077404",
                 "name": "Kerteminde Forsyning",
-                "address": "Kohaven 12A, 5300 Kerteminde, Denmark"
+                "address": "Kohaven 12A, 5300 Kerteminde, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2338,7 +2493,8 @@
             "properties": {
                 "forsyid": "39325128",
                 "name": "Kibæk Varmeværk",
-                "address": "Energivej 6, 6933 Kibæk, Denmark"
+                "address": "Energivej 6, 6933 Kibæk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2353,7 +2509,8 @@
             "properties": {
                 "forsyid": "60247412",
                 "name": "Kjellerup Fjernvarme",
-                "address": "Industriparken 10, 8620 Kjellerup, Denmark"
+                "address": "Industriparken 10, 8620 Kjellerup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2368,7 +2525,8 @@
             "properties": {
                 "forsyid": "23220113",
                 "name": "Klejtrup Kraftvarmeværk",
-                "address": "Holger Sørensens Vej 1, 9500 Hobro, Denmark"
+                "address": "Holger Sørensens Vej 1, 9500 Hobro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2383,7 +2541,8 @@
             "properties": {
                 "forsyid": "28672330",
                 "name": "Køge Fjernvarme",
-                "address": "Nørre Centervej 64, 4600 Køge, Denmark"
+                "address": "Nørre Centervej 64, 4600 Køge, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2398,7 +2557,8 @@
             "properties": {
                 "forsyid": "33910134",
                 "name": "Kolind Fjernvarmeværk",
-                "address": "Nyhåbsvej 7, 8560 Kolind, Denmark"
+                "address": "Nyhåbsvej 7, 8560 Kolind, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2413,7 +2573,8 @@
             "properties": {
                 "forsyid": "51087119",
                 "name": "Kongerslev Fjernvarmeværk",
-                "address": "Fælledvej 2, 9293 Kongerslev, Denmark"
+                "address": "Fælledvej 2, 9293 Kongerslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2428,7 +2589,8 @@
             "properties": {
                 "forsyid": "23913615",
                 "name": "Kværndrup Fjernvarme",
-                "address": "Bøjdenvej 22B, 5772 Kværndrup, Denmark"
+                "address": "Bøjdenvej 22B, 5772 Kværndrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2443,7 +2605,8 @@
             "properties": {
                 "forsyid": "33063784",
                 "name": "Læsø Forsyning",
-                "address": "Doktorvejen 2, 9940 Læsø, Denmark"
+                "address": "Doktorvejen 2, 9940 Læsø, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2458,7 +2621,8 @@
             "properties": {
                 "forsyid": "31223717",
                 "name": "Langå Varmeværk",
-                "address": "Borgergade 6, 8870 Langå, Denmark"
+                "address": "Borgergade 6, 8870 Langå, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2473,7 +2637,8 @@
             "properties": {
                 "forsyid": "16091308",
                 "name": "Laurbjerg Kraftvarmeværk",
-                "address": "Hvidtjørnevej 25, 8870 Langå, Denmark"
+                "address": "Hvidtjørnevej 25, 8870 Langå, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2488,7 +2653,8 @@
             "properties": {
                 "forsyid": "15763515",
                 "name": "Lem Varmeværk",
-                "address": "Askevej 5, 6940 Lem St, Denmark"
+                "address": "Askevej 5, 6940 Lem St, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2503,7 +2669,8 @@
             "properties": {
                 "forsyid": "36892412",
                 "name": "Lemvig Varmeværk",
-                "address": "Vestavej 2, 7620 Lemvig, Denmark"
+                "address": "Vestavej 2, 7620 Lemvig, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2518,7 +2685,8 @@
             "properties": {
                 "forsyid": "17144847",
                 "name": "Lendum Kraftvarmeværk",
-                "address": "Tårsvej 37B, 9870 Sindal, Denmark"
+                "address": "Tårsvej 37B, 9870 Sindal, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2533,7 +2701,8 @@
             "properties": {
                 "forsyid": "60183112",
                 "name": "Lillerød Varmecentral",
-                "address": "Solvang 27, 3450 Allerød, Denmark"
+                "address": "Solvang 27, 3450 Allerød, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2548,7 +2717,8 @@
             "properties": {
                 "forsyid": "19201414",
                 "name": "Løgstør Fjernvarmeværk",
-                "address": "Blekingevej 8, 9670 Løgstør, Denmark"
+                "address": "Blekingevej 8, 9670 Løgstør, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2563,7 +2733,8 @@
             "properties": {
                 "forsyid": "18791013",
                 "name": "Løgstrup Varmeværk",
-                "address": "Kølsenvej 14A, 8831 Løgstrup, Denmark"
+                "address": "Kølsenvej 14A, 8831 Løgstrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2578,7 +2749,8 @@
             "properties": {
                 "forsyid": "22831615",
                 "name": "Løgten-Skødstrup Fjernvarme",
-                "address": "Bakketoften 7, 8541 Skødstrup, Denmark"
+                "address": "Bakketoften 7, 8541 Skødstrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2593,7 +2765,8 @@
             "properties": {
                 "forsyid": "66211118",
                 "name": "Løgumkloster Fjernvarme",
-                "address": "Søndermarksvej 1, 6240 Løgumkloster, Denmark"
+                "address": "Søndermarksvej 1, 6240 Løgumkloster, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2608,7 +2781,8 @@
             "properties": {
                 "forsyid": "16954748",
                 "name": "Lohals Varmeforsyning",
-                "address": "Bræmlevænget 3, 5953 Tranekær, Denmark"
+                "address": "Bræmlevænget 3, 5953 Tranekær, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2623,7 +2797,8 @@
             "properties": {
                 "forsyid": "12762038",
                 "name": "Løjt Kirkeby Fjernvarmeselskab",
-                "address": "Skovbyvej 4, 6200 Aabenraa, Denmark"
+                "address": "Skovbyvej 4, 6200 Aabenraa, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2638,7 +2813,8 @@
             "properties": {
                 "forsyid": "64761919",
                 "name": "Løkken Varmeværk",
-                "address": "Industrivej 18, 9480 Løkken, Denmark"
+                "address": "Industrivej 18, 9480 Løkken, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2653,7 +2829,8 @@
             "properties": {
                 "forsyid": "20066873",
                 "name": "Løkkensvejens Kraftvarmeværk",
-                "address": "Løkkensvej 730, 9480 Løkken, Denmark"
+                "address": "Løkkensvej 730, 9480 Løkken, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2668,7 +2845,8 @@
             "properties": {
                 "forsyid": "19908070",
                 "name": "Lønstrup Varmeforsyning",
-                "address": "Strandvejen 89, 2. sal, 9800 Hjørring, Denmark"
+                "address": "Strandvejen 89, 2. sal, 9800 Hjørring, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2683,7 +2861,8 @@
             "properties": {
                 "forsyid": "19191591",
                 "name": "Lørslev Fjernvarme",
-                "address": "Vænget 31, 9800 Hjørring, Denmark"
+                "address": "Vænget 31, 9800 Hjørring, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2698,7 +2877,8 @@
             "properties": {
                 "forsyid": "41524111",
                 "name": "Løsning Fjernvarme",
-                "address": "Fasanvej 2, 8723 Løsning, Denmark"
+                "address": "Fasanvej 2, 8723 Løsning, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2713,7 +2893,8 @@
             "properties": {
                 "forsyid": "42125814",
                 "name": "Lystrup Fjernvarme",
-                "address": "Hovmarken 2, 8520 Lystrup, Denmark"
+                "address": "Hovmarken 2, 8520 Lystrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2728,7 +2909,8 @@
             "properties": {
                 "forsyid": "36450819",
                 "name": "Malling Varmeværk",
-                "address": "Dampmøllevej 1A, 8340 Malling, Denmark"
+                "address": "Dampmøllevej 1A, 8340 Malling, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2743,7 +2925,8 @@
             "properties": {
                 "forsyid": "57871628",
                 "name": "Mariager Fjernvarmeværk",
-                "address": "Klostermarken 5, 9550 Mariager, Denmark"
+                "address": "Klostermarken 5, 9550 Mariager, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2758,7 +2941,8 @@
             "properties": {
                 "forsyid": "11135617",
                 "name": "Maribo Varmeværk",
-                "address": "C. E. Christiansens Vej 40, 4930 Maribo, Denmark"
+                "address": "C. E. Christiansens Vej 40, 4930 Maribo, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2773,7 +2957,8 @@
             "properties": {
                 "forsyid": "31220319",
                 "name": "Marstal Fjernvarme",
-                "address": "Jagtvej 2, 5960 Marstal, Denmark"
+                "address": "Jagtvej 2, 5960 Marstal, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2788,7 +2973,8 @@
             "properties": {
                 "forsyid": "29189668",
                 "name": "Mejlby Fjernvarme",
-                "address": "Dyssevej 17, 8981 Spentrup, Denmark"
+                "address": "Dyssevej 17, 8981 Spentrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2803,7 +2989,8 @@
             "properties": {
                 "forsyid": "16256234",
                 "name": "Mellerup Kraftvarmeværk",
-                "address": "Lodsvejen 29, 8930 Randers NØ, Denmark"
+                "address": "Lodsvejen 29, 8930 Randers NØ, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2818,7 +3005,8 @@
             "properties": {
                 "forsyid": "28621027",
                 "name": "Middelfart Fjernvarme",
-                "address": "Skærgårdsvej 2, 5500 Middelfart, Denmark"
+                "address": "Skærgårdsvej 2, 5500 Middelfart, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2833,7 +3021,8 @@
             "properties": {
                 "forsyid": "32476813",
                 "name": "Midtfyns Energi",
-                "address": "Østre Ringvej 43, 5750 Ringe, Denmark"
+                "address": "Østre Ringvej 43, 5750 Ringe, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2848,7 +3037,8 @@
             "properties": {
                 "forsyid": "40744517",
                 "name": "Midtlangeland Fjernvarme",
-                "address": "Spodsbjergvej 147 D, 5900 Rudkøbing, Denmark"
+                "address": "Spodsbjergvej 147 D, 5900 Rudkøbing, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2863,7 +3053,8 @@
             "properties": {
                 "forsyid": "33171412",
                 "name": "Møldrup Fjernvarme",
-                "address": "Bøgevej 1, 9632 Møldrup, Denmark"
+                "address": "Bøgevej 1, 9632 Møldrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2878,7 +3069,8 @@
             "properties": {
                 "forsyid": "44424010",
                 "name": "Mølholm Varmeværk",
-                "address": "Mølholm Landevej 14, 7100 Vejle, Denmark"
+                "address": "Mølholm Landevej 14, 7100 Vejle, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2893,7 +3085,8 @@
             "properties": {
                 "forsyid": "35580913",
                 "name": "Mørke Fjernvarme",
-                "address": "Fabriksvej 20, 8544 Mørke, Denmark"
+                "address": "Fabriksvej 20, 8544 Mørke, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2908,7 +3101,8 @@
             "properties": {
                 "forsyid": "23234114",
                 "name": "Mørkøv Varmeværk",
-                "address": "Holbækvej 236, 4440 Mørkøv, Denmark"
+                "address": "Holbækvej 236, 4440 Mørkøv, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2923,7 +3117,8 @@
             "properties": {
                 "forsyid": "31895901",
                 "name": "Morsø Forsyning",
-                "address": "Strandparken 19, 7900 Nykøbing M, Denmark"
+                "address": "Strandparken 19, 7900 Nykøbing M, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2938,7 +3133,8 @@
             "properties": {
                 "forsyid": "27253598",
                 "name": "Mosede Fjernvarmeværk",
-                "address": "Lundemosen 7, 2670 Greve, Denmark"
+                "address": "Lundemosen 7, 2670 Greve, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2953,7 +3149,8 @@
             "properties": {
                 "forsyid": "14324100",
                 "name": "Mou Kraftvarme",
-                "address": "Ny Høstemarkvej 28 C, 9280 Storvorde"
+                "address": "Ny Høstemarkvej 28 C, 9280 Storvorde",
+                "CVRP": null
             }
         },
         {
@@ -2968,7 +3165,8 @@
             "properties": {
                 "forsyid": "69995713",
                 "name": "Næstved Fjernvarme",
-                "address": "Maglemølle 62, 4700 Næstved, Denmark"
+                "address": "Maglemølle 62, 4700 Næstved, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2983,7 +3181,8 @@
             "properties": {
                 "forsyid": "68726018",
                 "name": "Nibe Varmeværk",
-                "address": "Hobrovej 46, 9240 Nibe, Denmark"
+                "address": "Hobrovej 46, 9240 Nibe, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -2998,7 +3197,8 @@
             "properties": {
                 "forsyid": "30406443",
                 "name": "Nimtofte Og Omegns Fjernvarmeforsyning",
-                "address": "Frederikslundvej 1, 8550 Ryomgård, Denmark"
+                "address": "Frederikslundvej 1, 8550 Ryomgård, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3013,7 +3213,8 @@
             "properties": {
                 "forsyid": "16934690",
                 "name": "Nordby Fjernvarme",
-                "address": "Bavnebjerg 44, 6720 Fanø, Denmark"
+                "address": "Bavnebjerg 44, 6720 Fanø, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3028,7 +3229,8 @@
             "properties": {
                 "forsyid": "14748539",
                 "name": "Norfors",
-                "address": "Savsvinget 2, 2970 Hørsholm, Denmark"
+                "address": "Savsvinget 2, 2970 Hørsholm, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3043,7 +3245,8 @@
             "properties": {
                 "forsyid": "60094411",
                 "name": "Nørre Alslev Fjernvarmeværk",
-                "address": "Peter L. Jensensvej 4, 4840 Nørre Alslev, Denmark"
+                "address": "Peter L. Jensensvej 4, 4840 Nørre Alslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3058,7 +3261,8 @@
             "properties": {
                 "forsyid": "11324312",
                 "name": "Nørre Nebel Fjernvarme",
-                "address": "Præstbølvej 9, 6830 Nørre-Nebel, Denmark"
+                "address": "Præstbølvej 9, 6830 Nørre-Nebel, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3073,7 +3277,8 @@
             "properties": {
                 "forsyid": "19998347",
                 "name": "Nørre Snede Varmeværk",
-                "address": "Horsensvej 19, 8766 Nørre-Snede, Denmark"
+                "address": "Horsensvej 19, 8766 Nørre-Snede, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3088,7 +3293,8 @@
             "properties": {
                 "forsyid": "29826641",
                 "name": "Nyborg Forsyning",
-                "address": "Gasværksvej 2, 5800 Nyborg, Denmark"
+                "address": "Gasværksvej 2, 5800 Nyborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3103,7 +3309,8 @@
             "properties": {
                 "forsyid": "57494115",
                 "name": "Nykøbing Mors Fjernvarmeværk",
-                "address": "Kjærgaardsvej 20, 7900 Nykøbing M, Denmark"
+                "address": "Kjærgaardsvej 20, 7900 Nykøbing M, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3118,7 +3325,8 @@
             "properties": {
                 "forsyid": "27695949",
                 "name": "Nysted Varmeværk",
-                "address": "Egevænget 1, 4880 Nysted, Denmark"
+                "address": "Egevænget 1, 4880 Nysted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3133,7 +3341,8 @@
             "properties": {
                 "forsyid": "29124655",
                 "name": "Odder Forsyningsselskab",
-                "address": "Skovdalsvej 8, 8300 Odder, Denmark"
+                "address": "Skovdalsvej 8, 8300 Odder, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3148,7 +3357,8 @@
             "properties": {
                 "forsyid": "34203563",
                 "name": "Odsherred Forsyning",
-                "address": "Hovedgaden 39, 4571 Grevinge, Denmark"
+                "address": "Hovedgaden 39, 4571 Grevinge, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3163,7 +3373,8 @@
             "properties": {
                 "forsyid": "12787111",
                 "name": "Oksbøl Varmeværk",
-                "address": "Industrivej 10, 6840 Oksbøl, Denmark"
+                "address": "Industrivej 10, 6840 Oksbøl, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3178,7 +3389,8 @@
             "properties": {
                 "forsyid": "35747028",
                 "name": "Ølgod Tekniske Værker",
-                "address": "Industrivej 9, 6870 Ølgod, Denmark"
+                "address": "Industrivej 9, 6870 Ølgod, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3193,7 +3405,8 @@
             "properties": {
                 "forsyid": "36678259",
                 "name": "Ollerup-Vester Skerninge-Ulbølle Fjernvarme",
-                "address": "Svendborgvej 85, 5762 Skerninge, Denmark"
+                "address": "Svendborgvej 85, 5762 Skerninge, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3208,7 +3421,8 @@
             "properties": {
                 "forsyid": "15320796",
                 "name": "Ørnhøj-Grønbjerg Kraftvarme",
-                "address": "Kjærsvej 13, 6973 Ørnhøj, Denmark"
+                "address": "Kjærsvej 13, 6973 Ørnhøj, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3223,7 +3437,8 @@
             "properties": {
                 "forsyid": "26364817",
                 "name": "Ørsted Fjernvarmeværk",
-                "address": "Rougsøvej 61G, 8950 Ørsted, Denmark"
+                "address": "Rougsøvej 61G, 8950 Ørsted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3238,7 +3453,8 @@
             "properties": {
                 "forsyid": "12868014",
                 "name": "Ørum Varmeværk",
-                "address": "Bøgevej 5-7, 8830 Tjele, Denmark"
+                "address": "Bøgevej 5-7, 8830 Tjele, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3253,7 +3469,8 @@
             "properties": {
                 "forsyid": "15567317",
                 "name": "Østbirk Varmeværk",
-                "address": "Industrivej 9, 8752 Østbirk, Denmark"
+                "address": "Industrivej 9, 8752 Østbirk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3268,7 +3485,8 @@
             "properties": {
                 "forsyid": "10689414",
                 "name": "Øster Brønderslev Fjernvarmeselskab",
-                "address": "Ahornvej 26, 9700 Brønderslev, Denmark"
+                "address": "Ahornvej 26, 9700 Brønderslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3283,7 +3501,8 @@
             "properties": {
                 "forsyid": "15278390",
                 "name": "Øster Hornum Varmeværk",
-                "address": "Tingager 11, 9530 Støvring, Denmark"
+                "address": "Tingager 11, 9530 Støvring, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3298,7 +3517,8 @@
             "properties": {
                 "forsyid": "19493288",
                 "name": "Øster Hurup Kraftvarmeværk",
-                "address": "Snedkervej 6, 9560 Hadsund, Denmark"
+                "address": "Snedkervej 6, 9560 Hadsund, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3313,7 +3533,8 @@
             "properties": {
                 "forsyid": "17689800",
                 "name": "Øster Toreby Varmeværk",
-                "address": "Agrovej 3, 4800 Nykøbing F, Denmark"
+                "address": "Agrovej 3, 4800 Nykøbing F, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3328,7 +3549,8 @@
             "properties": {
                 "forsyid": "15215674",
                 "name": "Østerild Fjernvarme",
-                "address": "Hedevej 1, 7700 Thisted, Denmark"
+                "address": "Hedevej 1, 7700 Thisted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3343,7 +3565,8 @@
             "properties": {
                 "forsyid": "20245417",
                 "name": "Østervraa Varmeværk",
-                "address": "Industrivej 3, 9750 Øster-Vrå, Denmark"
+                "address": "Industrivej 3, 9750 Øster-Vrå, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3358,7 +3581,8 @@
             "properties": {
                 "forsyid": "17629085",
                 "name": "Oue Kraftvarmeværk",
-                "address": "Mælkevejen 12, 9500 Hobro, Denmark"
+                "address": "Mælkevejen 12, 9500 Hobro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3373,7 +3597,8 @@
             "properties": {
                 "forsyid": "11325319",
                 "name": "Outrup Varmeværk",
-                "address": "Centrum 2, 6855 Outrup, Denmark"
+                "address": "Centrum 2, 6855 Outrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3388,7 +3613,8 @@
             "properties": {
                 "forsyid": "22725513",
                 "name": "Padborg Fjernvarme",
-                "address": "Haraldsdalsvej 11B, 6330 Padborg, Denmark"
+                "address": "Haraldsdalsvej 11B, 6330 Padborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3403,7 +3629,8 @@
             "properties": {
                 "forsyid": "67247817",
                 "name": "Præstø Fjernvarme",
-                "address": "Værkstedsvej 3, 4720 Præstø, Denmark"
+                "address": "Værkstedsvej 3, 4720 Præstø, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3418,7 +3645,8 @@
             "properties": {
                 "forsyid": "16340642",
                 "name": "Ræhr Fjernvarme",
-                "address": "Molevej 13, 7730 Hanstholm, Denmark"
+                "address": "Molevej 13, 7730 Hanstholm, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3433,7 +3661,8 @@
             "properties": {
                 "forsyid": "17038281",
                 "name": "Ramsing-Lem-Lihme Kraftvarmeværk",
-                "address": "Hasselvej 8, 7860 Spøttrup, Denmark"
+                "address": "Hasselvej 8, 7860 Spøttrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3448,7 +3677,8 @@
             "properties": {
                 "forsyid": "18211211",
                 "name": "Rask Mølle Varmeværk",
-                "address": "Vandværksvej 4, 8763 Rask Mølle, Denmark"
+                "address": "Vandværksvej 4, 8763 Rask Mølle, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3463,7 +3693,8 @@
             "properties": {
                 "forsyid": "33756488",
                 "name": "Refa Horbelev Fjernvarme",
-                "address": "Søndre Vej 1, 4871 Horbelev"
+                "address": "Søndre Vej 1, 4871 Horbelev",
+                "CVRP": null
             }
         },
         {
@@ -3478,7 +3709,8 @@
             "properties": {
                 "forsyid": "57205628",
                 "name": "Ribe Fjernvarme",
-                "address": "Mosevej 100, 6760 Ribe, Denmark"
+                "address": "Mosevej 100, 6760 Ribe, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3493,7 +3725,8 @@
             "properties": {
                 "forsyid": "37560219",
                 "name": "Ringkøbing Fjernvarmeværk",
-                "address": "Isagervej 41, 6950 Ringkøbing"
+                "address": "Isagervej 41, 6950 Ringkøbing",
+                "CVRP": null
             }
         },
         {
@@ -3508,7 +3741,8 @@
             "properties": {
                 "forsyid": "29777373",
                 "name": "Ringsted Forsyning",
-                "address": "Bragesvej 18, 4100 Ringsted, Denmark"
+                "address": "Bragesvej 18, 4100 Ringsted, Denmark",
+                "CVRP": " 1017780383"
             }
         },
         {
@@ -3523,7 +3757,8 @@
             "properties": {
                 "forsyid": "25452283",
                 "name": "Rise Fjernvarme",
-                "address": "St. Rise Landevej 2, 5970 Ærøskøbing, Denmark"
+                "address": "St. Rise Landevej 2, 5970 Ærøskøbing, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3538,7 +3773,8 @@
             "properties": {
                 "forsyid": "24591328",
                 "name": "Rødby Varmeværk",
-                "address": "Grønvej 7B, 4970 Rødby, Denmark"
+                "address": "Grønvej 7B, 4970 Rødby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3553,7 +3789,8 @@
             "properties": {
                 "forsyid": "16783013",
                 "name": "Rødbyhavn Fjernvarme",
-                "address": "Jøncksvej 1, 4970 Rødby, Denmark"
+                "address": "Jøncksvej 1, 4970 Rødby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3568,7 +3805,8 @@
             "properties": {
                 "forsyid": "67037111",
                 "name": "Rødding Fjernvarme",
-                "address": "Vestermarksvej 2B, 6630 Rødding, Denmark"
+                "address": "Vestermarksvej 2B, 6630 Rødding, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3583,7 +3821,8 @@
             "properties": {
                 "forsyid": "18211912",
                 "name": "Rødkærsbro Fjernvarmeværk",
-                "address": "Brandstrupvej 4A, 8840 Rødkærsbro, Denmark"
+                "address": "Brandstrupvej 4A, 8840 Rødkærsbro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3598,7 +3837,8 @@
             "properties": {
                 "forsyid": "65307316",
                 "name": "Rødovre Kommunale Fjernvarmeforsyning",
-                "address": "Tæbyvej 77, 2610 Rødovre, Denmark"
+                "address": "Tæbyvej 77, 2610 Rødovre, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3613,7 +3853,8 @@
             "properties": {
                 "forsyid": "89711215",
                 "name": "Rønde Fjernvarme",
-                "address": "Skrejrupvej 9 C, 8410 Rønde, Denmark"
+                "address": "Skrejrupvej 9 C, 8410 Rønde, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3628,7 +3869,8 @@
             "properties": {
                 "forsyid": "32945880",
                 "name": "Rønne Varme",
-                "address": "Sandemandsvej 1A, 3700 Rønne, Denmark"
+                "address": "Sandemandsvej 1A, 3700 Rønne, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3643,7 +3885,8 @@
             "properties": {
                 "forsyid": "41160128",
                 "name": "Roslev Fjernvarmeselskab",
-                "address": "Møllebuen 1, 7870 Roslev, Denmark"
+                "address": "Møllebuen 1, 7870 Roslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3658,7 +3901,8 @@
             "properties": {
                 "forsyid": "17926195",
                 "name": "Rostrup Kraftvarmeværk",
-                "address": "Kildevej 4, 9510 Arden, Denmark"
+                "address": "Kildevej 4, 9510 Arden, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3673,7 +3917,8 @@
             "properties": {
                 "forsyid": "39901811",
                 "name": "Rundhøj Fjernvarme",
-                "address": "Holmevej 202, 8270 Højbjerg, Denmark"
+                "address": "Holmevej 202, 8270 Højbjerg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3688,7 +3933,8 @@
             "properties": {
                 "forsyid": "22950312",
                 "name": "Ry Varmeværk",
-                "address": "Bakkelyvej 3, 8680 Ry"
+                "address": "Bakkelyvej 3, 8680 Ry",
+                "CVRP": null
             }
         },
         {
@@ -3703,7 +3949,8 @@
             "properties": {
                 "forsyid": "18807483",
                 "name": "Rye Kraftvarmeværk",
-                "address": "Hjarbækvej 7, 8680 Ry, Denmark"
+                "address": "Hjarbækvej 7, 8680 Ry, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3718,7 +3965,8 @@
             "properties": {
                 "forsyid": "57858311",
                 "name": "Ryomgård Fjernvarme",
-                "address": "Frederikslundvej 1, 8550 Ryomgård, Denmark"
+                "address": "Frederikslundvej 1, 8550 Ryomgård, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3733,7 +3981,8 @@
             "properties": {
                 "forsyid": "64429418",
                 "name": "Sæby Varmeværk",
-                "address": "Energivej 1, 9300 Sæby, Denmark"
+                "address": "Energivej 1, 9300 Sæby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3748,7 +3997,8 @@
             "properties": {
                 "forsyid": "19739112",
                 "name": "Sakskøbing Fjernvarmeselskab",
-                "address": "Lillemark 25, 4990 Sakskøbing, Denmark"
+                "address": "Lillemark 25, 4990 Sakskøbing, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3763,7 +4013,8 @@
             "properties": {
                 "forsyid": "20928719",
                 "name": "Saltum Fjernvarmeværk",
-                "address": "Ths. Jensensvej 5, 9493 Saltum"
+                "address": "Ths. Jensensvej 5, 9493 Saltum",
+                "CVRP": null
             }
         },
         {
@@ -3778,7 +4029,8 @@
             "properties": {
                 "forsyid": "20137193",
                 "name": "Sandved Tornemark Kraftvarmeværk",
-                "address": "Brandholtvej 6A, 4262 Sandved, Denmark"
+                "address": "Brandholtvej 6A, 4262 Sandved, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3793,7 +4045,8 @@
             "properties": {
                 "forsyid": "13363919",
                 "name": "Sdr. Felding Varmeværk",
-                "address": "Bjergevej 33, 7280 Sønder-Felding, Denmark"
+                "address": "Bjergevej 33, 7280 Sønder-Felding, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3808,7 +4061,8 @@
             "properties": {
                 "forsyid": "16964638",
                 "name": "Sdr. Herreds Kraftvarmeværker",
-                "address": "Næssundvej 327, 7960 Karby, Denmark"
+                "address": "Næssundvej 327, 7960 Karby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3823,7 +4077,8 @@
             "properties": {
                 "forsyid": "24989712",
                 "name": "Sdr. Omme Varmeværk",
-                "address": "Nedergårdsvej 30, 7260 Sdr. Omme, Denmark"
+                "address": "Nedergårdsvej 30, 7260 Sdr. Omme, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3838,7 +4093,8 @@
             "properties": {
                 "forsyid": "18693518",
                 "name": "Sig Varmeværk",
-                "address": "Sct. Gertrudsvej 6B, 6800 Varde, Denmark"
+                "address": "Sct. Gertrudsvej 6B, 6800 Varde, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3853,7 +4109,8 @@
             "properties": {
                 "forsyid": "31877733",
                 "name": "Silkeborg Forsyning",
-                "address": "Tietgensvej 3, 8600 Silkeborg, Denmark"
+                "address": "Tietgensvej 3, 8600 Silkeborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3868,7 +4125,8 @@
             "properties": {
                 "forsyid": "59426915",
                 "name": "Sindal Varmeforsyning",
-                "address": "Baggesvognsvej 32, 9870 Sindal, Denmark"
+                "address": "Baggesvognsvej 32, 9870 Sindal, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3883,7 +4141,8 @@
             "properties": {
                 "forsyid": "27736904",
                 "name": "Sk Forsyning",
-                "address": "Nordvej 6, 4200 Slagelse"
+                "address": "Nordvej 6, 4200 Slagelse",
+                "CVRP": null
             }
         },
         {
@@ -3898,7 +4157,8 @@
             "properties": {
                 "forsyid": "30990714",
                 "name": "Skærbæk Fjernvarme",
-                "address": "Læssevej 7, 6780 Skærbæk, Denmark"
+                "address": "Læssevej 7, 6780 Skærbæk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3913,7 +4173,8 @@
             "properties": {
                 "forsyid": "33507410",
                 "name": "Skagen Varmeværk",
-                "address": "Ellehammervej 21, 9990 Skagen, Denmark"
+                "address": "Ellehammervej 21, 9990 Skagen, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3928,7 +4189,8 @@
             "properties": {
                 "forsyid": "11278612",
                 "name": "Skals Kraftvarmeværk",
-                "address": "Solbakken 1, 8832 Skals, Denmark"
+                "address": "Solbakken 1, 8832 Skals, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3943,7 +4205,8 @@
             "properties": {
                 "forsyid": "37949019",
                 "name": "Skanderborg-Hørning Fjernvarme",
-                "address": "Danmarksvej 15, 8660 Skanderborg, Denmark"
+                "address": "Danmarksvej 15, 8660 Skanderborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3958,7 +4221,8 @@
             "properties": {
                 "forsyid": "26832217",
                 "name": "Skårup Fjernvarme",
-                "address": "Traverskiftet 1, 5881 Skårup Fyn, Denmark"
+                "address": "Traverskiftet 1, 5881 Skårup Fyn, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3973,7 +4237,8 @@
             "properties": {
                 "forsyid": "68326214",
                 "name": "Skive Fjernvarme",
-                "address": "Marius Jensens Vej 3, 7800 Skive, Denmark"
+                "address": "Marius Jensens Vej 3, 7800 Skive, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -3988,7 +4253,8 @@
             "properties": {
                 "forsyid": "46076915",
                 "name": "Skjern Fjernvarme",
-                "address": "Kongevej 41, 6900 Skjern, Denmark"
+                "address": "Kongevej 41, 6900 Skjern, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4003,7 +4269,8 @@
             "properties": {
                 "forsyid": "18496607",
                 "name": "Skørping Varmeværk",
-                "address": "Skørping Nord 11, 9520 Skørping, Denmark"
+                "address": "Skørping Nord 11, 9520 Skørping, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4018,7 +4285,8 @@
             "properties": {
                 "forsyid": "14454918",
                 "name": "Skovlund Varmeværk",
-                "address": "Nørremarken 20, 6823 Ansager, Denmark"
+                "address": "Nørremarken 20, 6823 Ansager, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4033,7 +4301,8 @@
             "properties": {
                 "forsyid": "61668713",
                 "name": "Skovsgård Varmeværk",
-                "address": "Poststræde 28, 9460 Brovst, Denmark"
+                "address": "Poststræde 28, 9460 Brovst, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4048,7 +4317,8 @@
             "properties": {
                 "forsyid": "19153908",
                 "name": "Skuldelev Energiselskab",
-                "address": "Egevej 27, 4050 Skibby, Denmark"
+                "address": "Egevej 27, 4050 Skibby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4063,7 +4333,8 @@
             "properties": {
                 "forsyid": "34937257",
                 "name": "Slagslunde Fjernvarme",
-                "address": "Blomstervej 17, 3660 Stenløse, Denmark"
+                "address": "Blomstervej 17, 3660 Stenløse, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4078,7 +4349,8 @@
             "properties": {
                 "forsyid": "21445711",
                 "name": "Smørum Kraftvarme",
-                "address": "Skebjergvej 25, 2765 Smørum, Denmark"
+                "address": "Skebjergvej 25, 2765 Smørum, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4093,7 +4365,8 @@
             "properties": {
                 "forsyid": "52443016",
                 "name": "Snedsted Fjernvarme",
-                "address": "Idrætsvej 1, 7752 Snedsted, Denmark"
+                "address": "Idrætsvej 1, 7752 Snedsted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4108,7 +4381,8 @@
             "properties": {
                 "forsyid": "18503379",
                 "name": "Snertinge-Særslev-Føllenslev Energiselskab",
-                "address": "Kirkemosevej 17, 4591 Føllenslev, Denmark"
+                "address": "Kirkemosevej 17, 4591 Føllenslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4123,7 +4397,8 @@
             "properties": {
                 "forsyid": "23104113",
                 "name": "Solrød Fjernvarme",
-                "address": "Lerbækvej 17, 2680 Solrød Strand, Denmark"
+                "address": "Lerbækvej 17, 2680 Solrød Strand, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4138,7 +4413,8 @@
             "properties": {
                 "forsyid": "00000018",
                 "name": "Sønderborg Forsyning",
-                "address": "Ellegårdvej 8, 6400 Sønderborg, Denmark"
+                "address": "Ellegårdvej 8, 6400 Sønderborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4153,7 +4429,8 @@
             "properties": {
                 "forsyid": "15296275",
                 "name": "Sønderholm Kraftvarmeværk",
-                "address": "Vestervej 50, 9240 Nibe, Denmark"
+                "address": "Vestervej 50, 9240 Nibe, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4168,7 +4445,8 @@
             "properties": {
                 "forsyid": "37325813",
                 "name": "Spjald Fjernvarme-Og Vandværk",
-                "address": "Rørvej 1, 6971 Spjald, Denmark"
+                "address": "Rørvej 1, 6971 Spjald, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4183,7 +4461,8 @@
             "properties": {
                 "forsyid": "56353712",
                 "name": "Stege Fjernvarme",
-                "address": "Elmevej 1 D, 4780 Stege"
+                "address": "Elmevej 1 D, 4780 Stege",
+                "CVRP": null
             }
         },
         {
@@ -4198,7 +4477,8 @@
             "properties": {
                 "forsyid": "64289713",
                 "name": "Stenstrup Fjernvarme",
-                "address": "Hostrupvej 28, 5771 Stenstrup, Denmark"
+                "address": "Hostrupvej 28, 5771 Stenstrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4213,7 +4493,8 @@
             "properties": {
                 "forsyid": "68738016",
                 "name": "Stoholm Fjernvarmeværk",
-                "address": "Industrivej 16, 7850 Stoholm Jylland, Denmark"
+                "address": "Industrivej 16, 7850 Stoholm Jylland, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4228,7 +4509,8 @@
             "properties": {
                 "forsyid": "16276111",
                 "name": "Støvring Kraftvarmeværk",
-                "address": "Hjedsbækvej 2, 9530 Støvring, Denmark"
+                "address": "Hjedsbækvej 2, 9530 Støvring, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4243,7 +4525,8 @@
             "properties": {
                 "forsyid": "42615919",
                 "name": "Strandby Varmeværk",
-                "address": "Ravmarken 8, 9970 Strandby, Denmark"
+                "address": "Ravmarken 8, 9970 Strandby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4258,7 +4541,8 @@
             "properties": {
                 "forsyid": "26203562",
                 "name": "Struer Energi",
-                "address": "Jyllandsgade 1, 7600 Struer, Denmark"
+                "address": "Jyllandsgade 1, 7600 Struer, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4273,7 +4557,8 @@
             "properties": {
                 "forsyid": "41719613",
                 "name": "Sunds Forsyning",
-                "address": "Teglgaardsvej 7A, 7451 Sunds, Denmark"
+                "address": "Teglgaardsvej 7A, 7451 Sunds, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4288,7 +4573,8 @@
             "properties": {
                 "forsyid": "15427078",
                 "name": "Svebølle-Viskinge Fjernvarmeselskab",
-                "address": "Frederiksberg 1D, 4470 Svebølle, Denmark"
+                "address": "Frederiksberg 1D, 4470 Svebølle, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4303,7 +4589,8 @@
             "properties": {
                 "forsyid": "22113410",
                 "name": "Svendborg Fjernvarme",
-                "address": "Bagergade 40A, 5700 Svendborg, Denmark"
+                "address": "Bagergade 40A, 5700 Svendborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4318,7 +4605,8 @@
             "properties": {
                 "forsyid": "50187128",
                 "name": "Svogerslev Fjernvarmecentral",
-                "address": "Stamvejen 11, 4000 Roskilde, Denmark"
+                "address": "Stamvejen 11, 4000 Roskilde, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4333,7 +4621,8 @@
             "properties": {
                 "forsyid": "17360698",
                 "name": "Sydfalster Varmeværk",
-                "address": "Håndværkervænget 16, 4873 Væggerløse, Denmark"
+                "address": "Håndværkervænget 16, 4873 Væggerløse, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4348,7 +4637,8 @@
             "properties": {
                 "forsyid": "17048244",
                 "name": "Sydlangeland Fjernvarme",
-                "address": "Østerskovvej 2B, 5932 Humble, Denmark"
+                "address": "Østerskovvej 2B, 5932 Humble, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4363,7 +4653,8 @@
             "properties": {
                 "forsyid": "64463411",
                 "name": "Taars Varmeværk",
-                "address": "Damhusvej 27, 9830 Tårs, Denmark"
+                "address": "Damhusvej 27, 9830 Tårs, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4378,7 +4669,8 @@
             "properties": {
                 "forsyid": "40893113",
                 "name": "Tarm Varmeværk",
-                "address": "Skolegade 23, 6880 Tarm, Denmark"
+                "address": "Skolegade 23, 6880 Tarm, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4393,7 +4685,8 @@
             "properties": {
                 "forsyid": "44185865",
                 "name": "Tårnby Forsyning",
-                "address": "Gemmas Alle 39, 2770 Kastrup, Denmark"
+                "address": "Gemmas Alle 39, 2770 Kastrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4408,7 +4701,8 @@
             "properties": {
                 "forsyid": "15608943",
                 "name": "Terndrup Fjernvarme",
-                "address": "Industriparken 30, 9575 Terndrup, Denmark"
+                "address": "Industriparken 30, 9575 Terndrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4423,7 +4717,8 @@
             "properties": {
                 "forsyid": "30992512",
                 "name": "Thisted Varmeforsyning",
-                "address": "Ringvej 26, 7700 Thisted, Denmark"
+                "address": "Ringvej 26, 7700 Thisted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4438,7 +4733,8 @@
             "properties": {
                 "forsyid": "12575130",
                 "name": "Thorsager Fjernvarmeværk",
-                "address": "Nørregade 26, 8410 Rønde, Denmark"
+                "address": "Nørregade 26, 8410 Rønde, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4453,7 +4749,8 @@
             "properties": {
                 "forsyid": "19470695",
                 "name": "Thorshøj Kraftvarmeværk",
-                "address": "Kobbervænget 4, 9750 Øster-Vrå, Denmark"
+                "address": "Kobbervænget 4, 9750 Øster-Vrå, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4468,7 +4765,8 @@
             "properties": {
                 "forsyid": "17168037",
                 "name": "Thorsminde Varmeværk",
-                "address": "Havnevej 11, 6990 Ulfborg, Denmark"
+                "address": "Havnevej 11, 6990 Ulfborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4483,7 +4781,8 @@
             "properties": {
                 "forsyid": "22883313",
                 "name": "Thorsø Fjernvarmeværk",
-                "address": "Thorsølundvej 6, 8881 Thorsø, Denmark"
+                "address": "Thorsølundvej 6, 8881 Thorsø, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4498,7 +4797,8 @@
             "properties": {
                 "forsyid": "16888079",
                 "name": "Thyborøn Fjernvarme",
-                "address": "Ærøvej 83, 7680 Thyborøn Havn, Denmark"
+                "address": "Ærøvej 83, 7680 Thyborøn Havn, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4513,7 +4813,8 @@
             "properties": {
                 "forsyid": "14528601",
                 "name": "Tim Kraftvarmeværk",
-                "address": "Høbrovej 9F, 6980 Tim, Denmark"
+                "address": "Høbrovej 9F, 6980 Tim, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4528,7 +4829,8 @@
             "properties": {
                 "forsyid": "10877814",
                 "name": "Tistrup Varmeværk",
-                "address": "Kastanievej 1, 6862 Tistrup, Denmark"
+                "address": "Kastanievej 1, 6862 Tistrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4543,7 +4845,8 @@
             "properties": {
                 "forsyid": "63690619",
                 "name": "Toftlund Fjernvarme",
-                "address": "Østerdalen 3, 6520 Toftlund, Denmark"
+                "address": "Østerdalen 3, 6520 Toftlund, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4558,7 +4861,8 @@
             "properties": {
                 "forsyid": "18292610",
                 "name": "Tommerup Bys Fjernvarmeforsyning",
-                "address": "Stadionvænget 6, 5690 Tommerup, Denmark"
+                "address": "Stadionvænget 6, 5690 Tommerup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4573,7 +4877,8 @@
             "properties": {
                 "forsyid": "76326118",
                 "name": "Tommerup St. Varmeforsyning",
-                "address": "Bannervej 22, 5690 Tommerup, Denmark"
+                "address": "Bannervej 22, 5690 Tommerup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4588,7 +4893,8 @@
             "properties": {
                 "forsyid": "00000015",
                 "name": "Tønder Fjernvarme",
-                "address": "Østergade 83, 6270 Tønder, Denmark"
+                "address": "Østergade 83, 6270 Tønder, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4603,7 +4909,8 @@
             "properties": {
                 "forsyid": "28709714",
                 "name": "Tørring Kraftvarmeværk",
-                "address": "Bygade 5A, 7160 Tørring, Denmark"
+                "address": "Bygade 5A, 7160 Tørring, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4618,7 +4925,8 @@
             "properties": {
                 "forsyid": "33016719",
                 "name": "Tranbjerg Varmeværk",
-                "address": "Jegstrupvænget 630, 8310 Tranbjerg J, Denmark"
+                "address": "Jegstrupvænget 630, 8310 Tranbjerg J, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4633,7 +4941,8 @@
             "properties": {
                 "forsyid": "49965613",
                 "name": "Tranum Kraftvarmeværk",
-                "address": "Uglevej 1, 9460 Brovst, Denmark"
+                "address": "Uglevej 1, 9460 Brovst, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4648,7 +4957,8 @@
             "properties": {
                 "forsyid": "17010131",
                 "name": "Trefor Varme",
-                "address": "Kokbjerg 30, 6000 Kolding, Denmark"
+                "address": "Kokbjerg 30, 6000 Kolding, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4663,7 +4973,8 @@
             "properties": {
                 "forsyid": "38073117",
                 "name": "Troldhede Kraftvarmeværk",
-                "address": "Aakjærsvej 24B, 6920 Videbæk, Denmark"
+                "address": "Aakjærsvej 24B, 6920 Videbæk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4678,7 +4989,8 @@
             "properties": {
                 "forsyid": "20095806",
                 "name": "Trustrup-Lyngby Varmeværk",
-                "address": "Tværvej 11, 8570 Trustrup, Denmark"
+                "address": "Tværvej 11, 8570 Trustrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4693,7 +5005,8 @@
             "properties": {
                 "forsyid": "17590286",
                 "name": "Tversted Kraftvarmeværk",
-                "address": "Løgtenvej 16, 9881 Bindslev, Denmark"
+                "address": "Løgtenvej 16, 9881 Bindslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4708,7 +5021,8 @@
             "properties": {
                 "forsyid": "16500313",
                 "name": "Uldum Varmeværk",
-                "address": "Industrisvinget 9, 7171 Uldum, Denmark"
+                "address": "Industrisvinget 9, 7171 Uldum, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4723,7 +5037,8 @@
             "properties": {
                 "forsyid": "13231028",
                 "name": "Ulfborg Fjernvarme",
-                "address": "Sportsvej 2, 6990 Ulfborg, Denmark"
+                "address": "Sportsvej 2, 6990 Ulfborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4738,7 +5053,8 @@
             "properties": {
                 "forsyid": "34916810",
                 "name": "Ulsted Varmeværk",
-                "address": "Teglgårdsvej 10, 9370 Hals, Denmark"
+                "address": "Teglgårdsvej 10, 9370 Hals, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4753,7 +5069,8 @@
             "properties": {
                 "forsyid": "10866111",
                 "name": "Værløse Varmeværk",
-                "address": "Klostergårdsvej 59, 3500 Værløse, Denmark"
+                "address": "Klostergårdsvej 59, 3500 Værløse, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4768,7 +5085,8 @@
             "properties": {
                 "forsyid": "18476339",
                 "name": "Værum - Ørum Kraftvarmeværk",
-                "address": "c/o Borgergade 6, 8870 Langå, Denmark"
+                "address": "c/o Borgergade 6, 8870 Langå, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4783,7 +5101,8 @@
             "properties": {
                 "forsyid": "51718011",
                 "name": "Vallensbæk Fjernvarme Nord",
-                "address": "Horsbred 201, 2625 Vallensbæk"
+                "address": "Horsbred 201, 2625 Vallensbæk",
+                "CVRP": null
             }
         },
         {
@@ -4798,7 +5117,8 @@
             "properties": {
                 "forsyid": "25009215",
                 "name": "Vallensbæk Fjernvarme Syd",
-                "address": "Delta Park 11, 2665 Vallensbæk Strand, Denmark"
+                "address": "Delta Park 11, 2665 Vallensbæk Strand, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4806,14 +5126,15 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    9.356065,
-                    55.355186
+                    9.2800979,
+                    55.4274787
                 ]
             },
             "properties": {
                 "forsyid": "55946817",
                 "name": "Vamdrup Fjernvarme",
-                "address": "Nygade 4, 6580 Vamdrup, Denmark"
+                "address": "Nygade 6, 6580 Vamdrup",
+                "CVRP": null
             }
         },
         {
@@ -4828,7 +5149,8 @@
             "properties": {
                 "forsyid": "18718685",
                 "name": "Veddum Skelund Visborg Kraftvarmeværk",
-                "address": "Pejtervej 14, 9560 Hadsund, Denmark"
+                "address": "Pejtervej 14, 9560 Hadsund, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4843,7 +5165,8 @@
             "properties": {
                 "forsyid": "19746933",
                 "name": "Vejby-Tisvilde Fjernvarme",
-                "address": "Møngevej 9B, 3210 Vejby, Denmark"
+                "address": "Møngevej 9B, 3210 Vejby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4858,7 +5181,8 @@
             "properties": {
                 "forsyid": "57301414",
                 "name": "Vejen Varmeværk",
-                "address": "Gørtlervej 4, 6600 Vejen"
+                "address": "Gørtlervej 4, 6600 Vejen",
+                "CVRP": null
             }
         },
         {
@@ -4873,7 +5197,8 @@
             "properties": {
                 "forsyid": "67932218",
                 "name": "Vejle Fjernvarme",
-                "address": "Langelinie 60, 7100 Vejle, Denmark"
+                "address": "Langelinie 60, 7100 Vejle, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4888,7 +5213,8 @@
             "properties": {
                 "forsyid": "27360912",
                 "name": "Vemb Varmeværk",
-                "address": "Vestergade 17, 7570 Vemb, Denmark"
+                "address": "Vestergade 17, 7570 Vemb, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4903,7 +5229,8 @@
             "properties": {
                 "forsyid": "25482026",
                 "name": "Verdo Varme",
-                "address": "Agerskellet 7, 8920 Randers NV, Denmark"
+                "address": "Agerskellet 7, 8920 Randers NV, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4918,7 +5245,8 @@
             "properties": {
                 "forsyid": "63195111",
                 "name": "Vestervig Fjernvarme",
-                "address": "Vestergade 14, 7770 Vestervig, Denmark"
+                "address": "Vestergade 14, 7770 Vestervig, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4933,7 +5261,8 @@
             "properties": {
                 "forsyid": "10866111",
                 "name": "Vestforbrænding",
-                "address": "Ejby Mosevej 219, 2600 Glostrup, Denmark"
+                "address": "Ejby Mosevej 219, 2600 Glostrup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4948,7 +5277,8 @@
             "properties": {
                 "forsyid": "26704065",
                 "name": "Vestforsyning Varme",
-                "address": "Nupark 51, 7500 Holstebro, Denmark"
+                "address": "Nupark 51, 7500 Holstebro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4963,7 +5293,8 @@
             "properties": {
                 "forsyid": "33258453",
                 "name": "Videbæk Energiforsyning",
-                "address": "Godthåbsvej 3, 6920 Videbæk, Denmark"
+                "address": "Godthåbsvej 3, 6920 Videbæk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4978,7 +5309,8 @@
             "properties": {
                 "forsyid": "37683310",
                 "name": "Vildbjerg Tekniske Værker",
-                "address": "Pugdalvej, 7480 Vildbjerg, Denmark"
+                "address": "Pugdalvej, 7480 Vildbjerg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -4993,7 +5325,8 @@
             "properties": {
                 "forsyid": "31220912",
                 "name": "Vinderup Varmeværk",
-                "address": "Sevelvej 67A, 7830 Vinderup, Denmark"
+                "address": "Sevelvej 67A, 7830 Vinderup, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5008,7 +5341,8 @@
             "properties": {
                 "forsyid": "70555018",
                 "name": "Vivild Varmeværk",
-                "address": "Søndermarksvej 39, 8961 Allingåbro, Denmark"
+                "address": "Søndermarksvej 39, 8961 Allingåbro, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5023,7 +5357,8 @@
             "properties": {
                 "forsyid": "16920274",
                 "name": "Voerså Kraftvarmeværk",
-                "address": "Kringelhedevej 17B, 9300 Sæby, Denmark"
+                "address": "Kringelhedevej 17B, 9300 Sæby, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5038,7 +5373,8 @@
             "properties": {
                 "forsyid": "28032617",
                 "name": "Vojens Fjernvarme",
-                "address": "Tingvejen 47, 6500 Vojens, Denmark"
+                "address": "Tingvejen 47, 6500 Vojens, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5053,7 +5389,8 @@
             "properties": {
                 "forsyid": "30692446",
                 "name": "Vordingborg Fjernvarme",
-                "address": "Danmarksvej 1, 4760 Vordingborg"
+                "address": "Danmarksvej 1, 4760 Vordingborg",
+                "CVRP": null
             }
         },
         {
@@ -5068,7 +5405,8 @@
             "properties": {
                 "forsyid": "18021080",
                 "name": "Vorupør Kraftvarmeværk",
-                "address": "Toosholmvej 6, 7700 Thisted, Denmark"
+                "address": "Toosholmvej 6, 7700 Thisted, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5083,7 +5421,8 @@
             "properties": {
                 "forsyid": "64771728",
                 "name": "Vrå Varmeværk",
-                "address": "Nygade 8, 9760 Vrå, Denmark"
+                "address": "Nygade 8, 9760 Vrå, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5098,7 +5437,8 @@
             "properties": {
                 "forsyid": "30173929",
                 "name": "Fredrikshavn Varme",
-                "address": "Knivholtvej 15, 9900 Frederikshavn, Denmark"
+                "address": "Knivholtvej 15, 9900 Frederikshavn, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5113,7 +5453,8 @@
             "properties": {
                 "forsyid": "17932640",
                 "name": "Hallund Kraftvarmeværk",
-                "address": "Blyvej 5, 9700 Brønderslev, Denmark"
+                "address": "Blyvej 5, 9700 Brønderslev, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5128,7 +5469,8 @@
             "properties": {
                 "forsyid": "17025686",
                 "name": "Blenstrup Kraftvarmeværk",
-                "address": "Vesterbygade 36B, 9520 Skørping, Denmark"
+                "address": "Vesterbygade 36B, 9520 Skørping, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5143,7 +5485,8 @@
             "properties": {
                 "forsyid": "44336553",
                 "name": "Øt Havndal Fjernvarme",
-                "address": "Laursensvej 4, 8970 Havndal, Denmark"
+                "address": "Laursensvej 4, 8970 Havndal, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5158,7 +5501,8 @@
             "properties": {
                 "forsyid": "00000003",
                 "name": "Fjernvarme Horsens",
-                "address": "Endelavevej 7, 8700 Horsens, Denmark"
+                "address": "Endelavevej 7, 8700 Horsens, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5173,7 +5517,8 @@
             "properties": {
                 "forsyid": "43649361",
                 "name": "Assentoft Forsyning",
-                "address": "Vandværksvej 34, 8960 Randers"
+                "address": "Vandværksvej 34, 8960 Randers",
+                "CVRP": null
             }
         },
         {
@@ -5188,7 +5533,8 @@
             "properties": {
                 "forsyid": "21999040",
                 "name": "Sdr. Nissum",
-                "address": "Kirkebyvej 25, 6990 Ulfborg, Denmark"
+                "address": "Kirkebyvej 25, 6990 Ulfborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5203,7 +5549,8 @@
             "properties": {
                 "forsyid": "15320796",
                 "name": "Ørnhøj Grønbjerg Kraftvarmeværk",
-                "address": " \"Kjærs Vej 13"
+                "address": " \"Kjærs Vej 13",
+                "CVRP": null
             }
         },
         {
@@ -5218,7 +5565,8 @@
             "properties": {
                 "forsyid": "25809807",
                 "name": "Verdo Varme Herning",
-                "address": "Miljøvej 6, 7400 Herning"
+                "address": "Miljøvej 6, 7400 Herning",
+                "CVRP": null
             }
         },
         {
@@ -5233,7 +5581,8 @@
             "properties": {
                 "forsyid": "43513109",
                 "name": "Rårup Fællesvarme",
-                "address": "Kirketoften 3, 7130 Juelsminde, Denmark"
+                "address": "Kirketoften 3, 7130 Juelsminde, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5248,7 +5597,8 @@
             "properties": {
                 "forsyid": "41228784",
                 "name": "Daugård Fællesvarme",
-                "address": "Strandvejen 39 8721 Daugård, Denmark"
+                "address": "Strandvejen 39 8721 Daugård, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5263,7 +5613,8 @@
             "properties": {
                 "forsyid": "26721059",
                 "name": "Ffv Varme Faaborg",
-                "address": "Værkmestervej 1, 5600 Faaborg, Denmark"
+                "address": "Værkmestervej 1, 5600 Faaborg, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5278,7 +5629,8 @@
             "properties": {
                 "forsyid": "36941650",
                 "name": "Nordals Fjernvarme",
-                "address": "2RJ7+QG, 6430 Nordborg"
+                "address": "2RJ7+QG, 6430 Nordborg",
+                "CVRP": null
             }
         },
         {
@@ -5293,7 +5645,8 @@
             "properties": {
                 "forsyid": "34094187",
                 "name": "Refa Kettinge Forsyning",
-                "address": "Fuglegårdsvej 10, 4892 Kettinge, Denmark"
+                "address": "Fuglegårdsvej 10, 4892 Kettinge, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5308,7 +5661,8 @@
             "properties": {
                 "forsyid": "32555063",
                 "name": "Refa Stubbekøbing Fjernvarme",
-                "address": "Sivmosevej 2, 4850 Stubbekøbing, Denmark"
+                "address": "Sivmosevej 2, 4850 Stubbekøbing, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5323,7 +5677,8 @@
             "properties": {
                 "forsyid": "00000017",
                 "name": "Sorø Fjernvarme",
-                "address": "Kragelundsvej 12, 4180 Sorø"
+                "address": "Kragelundsvej 12, 4180 Sorø",
+                "CVRP": null
             }
         },
         {
@@ -5338,7 +5693,8 @@
             "properties": {
                 "forsyid": "33032838",
                 "name": "FORS Varme Holbæk",
-                "address": "Tåstrup Møllevej 5, 4300 Holbæk, Denmark"
+                "address": "Tåstrup Møllevej 5, 4300 Holbæk, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5353,7 +5709,8 @@
             "properties": {
                 "forsyid": "17737147",
                 "name": "Manna-Thise Kraftvarmeværk",
-                "address": "Jens Thise Vej 50, 9700 Brønderslev"
+                "address": "Jens Thise Vej 50, 9700 Brønderslev",
+                "CVRP": null
             }
         },
         {
@@ -5368,7 +5725,8 @@
             "properties": {
                 "forsyid": "00000016",
                 "name": "Lolland Varme",
-                "address": "Stavangervej 13, 4900 Nakskov"
+                "address": "Stavangervej 13, 4900 Nakskov",
+                "CVRP": null
             }
         },
         {
@@ -5383,7 +5741,8 @@
             "properties": {
                 "forsyid": "46917928",
                 "name": "Nykøbing Sj. Varmeværk",
-                "address": "Billesvej 10, 4500 Nykøbing Sjælland"
+                "address": "Billesvej 10, 4500 Nykøbing Sjælland",
+                "CVRP": null
             }
         },
         {
@@ -5398,7 +5757,8 @@
             "properties": {
                 "forsyid": "15234784",
                 "name": "Ulbjerg Kraftvarme",
-                "address": "Håndværkervej 5, 8832 Skals"
+                "address": "Håndværkervej 5, 8832 Skals",
+                "CVRP": null
             }
         },
         {
@@ -5413,7 +5773,8 @@
             "properties": {
                 "forsyid": "11372732",
                 "name": "Grønhøj Strand",
-                "address": "Ingeborgvej 2, 9480 Løkken"
+                "address": "Ingeborgvej 2, 9480 Løkken",
+                "CVRP": null
             }
         },
         {
@@ -5428,7 +5789,8 @@
             "properties": {
                 "forsyid": "20486015",
                 "name": "Pindstrup Fjernvarme",
-                "address": "Bøgevej 26, 8550 Ryomgård"
+                "address": "Bøgevej 26, 8550 Ryomgård",
+                "CVRP": null
             }
         },
         {
@@ -5443,7 +5805,8 @@
             "properties": {
                 "forsyid": "18886499",
                 "name": "Ellehavegaard Energy",
-                "address": "Ellehavegårdsvej 2, 4800 Nykøbing F"
+                "address": "Ellehavegårdsvej 2, 4800 Nykøbing F",
+                "CVRP": null
             }
         },
         {
@@ -5458,7 +5821,8 @@
             "properties": {
                 "forsyid": "26203333",
                 "name": "Struer Energi Fjernvarme",
-                "address": "Jyllandsgade 1, 7600 Struer"
+                "address": "Jyllandsgade 1, 7600 Struer",
+                "CVRP": null
             }
         },
         {
@@ -5473,7 +5837,8 @@
             "properties": {
                 "forsyid": "43703560",
                 "name": "Hjortsvang Fællesvarme",
-                "address": "Vesterbyvej 12, 7160 Tørring"
+                "address": "Vesterbyvej 12, 7160 Tørring",
+                "CVRP": null
             }
         },
         {
@@ -5488,7 +5853,8 @@
             "properties": {
                 "forsyid": "26325471",
                 "name": "Onsbjerg Varmeværk",
-                "address": "Selsinggaarde 2, 8305 Samsø"
+                "address": "Selsinggaarde 2, 8305 Samsø",
+                "CVRP": null
             }
         },
         {
@@ -5503,7 +5869,8 @@
             "properties": {
                 "forsyid": "27185614",
                 "name": "Vissenbjerg Fjernvarme",
-                "address": "Nyvej 9, 5492 Vissenbjerg"
+                "address": "Nyvej 9, 5492 Vissenbjerg",
+                "CVRP": null
             }
         },
         {
@@ -5518,7 +5885,8 @@
             "properties": {
                 "forsyid": "61877215",
                 "name": "Assens Fjernvarme Fyn",
-                "address": "Stejlebjergvej 4, 5610 Assens"
+                "address": "Stejlebjergvej 4, 5610 Assens",
+                "CVRP": null
             }
         },
         {
@@ -5533,7 +5901,8 @@
             "properties": {
                 "forsyid": "27837417",
                 "name": "Assens Fjernvarme Mariager",
-                "address": "Fabriksvej 5, 9550 Mariager"
+                "address": "Fabriksvej 5, 9550 Mariager",
+                "CVRP": null
             }
         },
         {
@@ -5548,7 +5917,8 @@
             "properties": {
                 "forsyid": "32667740",
                 "name": "Tårnbyforsyning Varme",
-                "address": "Gemmas Alle 39, 2770 Kastrup"
+                "address": "Gemmas Alle 39, 2770 Kastrup",
+                "CVRP": null
             }
         },
         {
@@ -5563,7 +5933,8 @@
             "properties": {
                 "forsyid": "43608940",
                 "name": "Vonge-Kollemorten Fællesvarme",
-                "address": "Kollemortenvej 13, 7323 Give"
+                "address": "Kollemortenvej 13, 7323 Give",
+                "CVRP": null
             }
         },
         {
@@ -5578,7 +5949,8 @@
             "properties": {
                 "forsyid": "18468840",
                 "name": "Gylling-Ørting-Falling Kraftvarmeværk",
-                "address": "Persievej 5, 8300 Odder"
+                "address": "Persievej 5, 8300 Odder",
+                "CVRP": null
             }
         },
         {
@@ -5593,7 +5965,8 @@
             "properties": {
                 "forsyid": "16946834",
                 "name": "Kloster Kraftvarmeværk Amba",
-                "address": "Klostervej 112, 6950 Ringkøbing"
+                "address": "Klostervej 112, 6950 Ringkøbing",
+                "CVRP": null
             }
         },
         {
@@ -5608,7 +5981,8 @@
             "properties": {
                 "forsyid": "00000003",
                 "name": "Dagnæs-Bækkelund Varmeværk",
-                "address": "Glentevej 8, 8700 Horsens"
+                "address": "Glentevej 8, 8700 Horsens",
+                "CVRP": null
             }
         },
         {
@@ -5623,7 +5997,8 @@
             "properties": {
                 "forsyid": "00000011",
                 "name": "Grindsted El- Og Varmeværk",
-                "address": "Tårnvej 24, 7200 Grindsted"
+                "address": "Tårnvej 24, 7200 Grindsted",
+                "CVRP": null
             }
         },
         {
@@ -5638,7 +6013,8 @@
             "properties": {
                 "forsyid": "18515830",
                 "name": "Ådum Kraftvarmeværk",
-                "address": "Skolegade 23, 6880 Tarm"
+                "address": "Skolegade 23, 6880 Tarm",
+                "CVRP": null
             }
         },
         {
@@ -5653,7 +6029,8 @@
             "properties": {
                 "forsyid": "43687670",
                 "name": "Spentrup Varmeværk",
-                "address": "Blichersvej 1, 8981 Spentrup"
+                "address": "Blichersvej 1, 8981 Spentrup",
+                "CVRP": null
             }
         },
         {
@@ -5668,7 +6045,8 @@
             "properties": {
                 "forsyid": "25215680",
                 "name": "E.On Varme Danmark",
-                "address": "Løgismose 1, 3600 Frederikssund"
+                "address": "Løgismose 1, 3600 Frederikssund",
+                "CVRP": null
             }
         },
         {
@@ -5683,7 +6061,8 @@
             "properties": {
                 "forsyid": "21829617",
                 "name": "Haarby Kraft-Varme",
-                "address": "Toftevej 5, 5683 Haarby"
+                "address": "Toftevej 5, 5683 Haarby",
+                "CVRP": null
             }
         },
         {
@@ -5698,7 +6077,8 @@
             "properties": {
                 "forsyid": "33154607",
                 "name": "Bioenergi Vest",
-                "address": "Vestkystvej 2, 6950 Ringkøbing"
+                "address": "Vestkystvej 2, 6950 Ringkøbing",
+                "CVRP": null
             }
         },
         {
@@ -5713,7 +6093,8 @@
             "properties": {
                 "forsyid": "32078737",
                 "name": "Varde Varmeforsyning",
-                "address": "Gl Kærvej 15, 6800 Varde"
+                "address": "Gl Kærvej 15, 6800 Varde",
+                "CVRP": null
             }
         },
         {
@@ -5728,7 +6109,8 @@
             "properties": {
                 "forsyid": "33258445",
                 "name": "Videbæk Varm",
-                "address": "Godthaabsvej 3, 6920 Videbæk"
+                "address": "Godthaabsvej 3, 6920 Videbæk",
+                "CVRP": null
             }
         },
         {
@@ -5743,7 +6125,8 @@
             "properties": {
                 "forsyid": "24251020",
                 "name": "K/S Difko Lxv",
-                "address": "Halmvænget, 3730 Nexø, Denmark"
+                "address": "Halmvænget, 3730 Nexø, Denmark",
+                "CVRP": null
             }
         },
         {
@@ -5758,7 +6141,8 @@
             "properties": {
                 "forsyid": "13109710",
                 "name": "Ulstrup Kraftvarmeværk",
-                "address": "Fredensvej 6, 8860 Ulstrup"
+                "address": "Fredensvej 6, 8860 Ulstrup",
+                "CVRP": null
             }
         },
         {
@@ -5773,7 +6157,8 @@
             "properties": {
                 "forsyid": "00000018",
                 "name": "Sønderborg Fjernvarme",
-                "address": "Nørrekobbel 54, 6400 Sønderborg"
+                "address": "Nørrekobbel 54, 6400 Sønderborg",
+                "CVRP": null
             }
         },
         {
@@ -5788,7 +6173,8 @@
             "properties": {
                 "forsyid": "43824384",
                 "name": "Glumsø Fjernvarme",
-                "address": "Erantisvej 17, 4171 Glumsø"
+                "address": "Erantisvej 17, 4171 Glumsø",
+                "CVRP": null
             }
         },
         {
@@ -5803,7 +6189,8 @@
             "properties": {
                 "forsyid": "18676710",
                 "name": "Spøttrup Fjernvarmeværk",
-                "address": "Kærgårdsvej 2, 7860 Spøttrup"
+                "address": "Kærgårdsvej 2, 7860 Spøttrup",
+                "CVRP": null
             }
         },
         {
@@ -5818,7 +6205,8 @@
             "properties": {
                 "forsyid": "41897597",
                 "name": "Viborg Varme",
-                "address": "Håndværkervej 6, 8800 Viborg"
+                "address": "Håndværkervej 6, 8800 Viborg",
+                "CVRP": null
             }
         },
         {
@@ -5833,7 +6221,8 @@
             "properties": {
                 "forsyid": "43596713",
                 "name": "Cobra Varme",
-                "address": "Egebakken 49, 6818 Årre"
+                "address": "Egebakken 49, 6818 Årre",
+                "CVRP": null
             }
         },
         {
@@ -5848,7 +6237,8 @@
             "properties": {
                 "forsyid": "43597469",
                 "name": "Helle Energi",
-                "address": "Byparken 25, 6800 Varde"
+                "address": "Byparken 25, 6800 Varde",
+                "CVRP": null
             }
         },
         {
@@ -5863,7 +6253,8 @@
             "properties": {
                 "forsyid": "17638181",
                 "name": "Vesløs Fjernvarme",
-                "address": "Møllebakvej 4, 7742 Vesløs"
+                "address": "Møllebakvej 4, 7742 Vesløs",
+                "CVRP": null
             }
         },
         {
@@ -5878,7 +6269,8 @@
             "properties": {
                 "forsyid": "13348545",
                 "name": "Tvis Trekantområdets Varmetrans",
-                "address": "Tonne Kjærsvej 11, 7000 Fredericia"
+                "address": "Tonne Kjærsvej 11, 7000 Fredericia",
+                "CVRP": null
             }
         },
         {
@@ -5893,7 +6285,8 @@
             "properties": {
                 "forsyid": "16838314",
                 "name": "Nørre Aaby Kraftvarmeværk",
-                "address": "Grønnegade 7, 5580 Nørre Aaby"
+                "address": "Grønnegade 7, 5580 Nørre Aaby",
+                "CVRP": null
             }
         },
         {
@@ -5908,7 +6301,8 @@
             "properties": {
                 "forsyid": "69330428",
                 "name": "Vestegnens Kraftvarmeselskab",
-                "address": "Roskildevej 175, 2620 Albertslund"
+                "address": "Roskildevej 175, 2620 Albertslund",
+                "CVRP": null
             }
         },
         {
@@ -5923,7 +6317,8 @@
             "properties": {
                 "forsyid": "38226215",
                 "name": "Ejby Fjernvarmecentral",
-                "address": "Algade 6, 5500 Middelfart"
+                "address": "Algade 6, 5500 Middelfart",
+                "CVRP": null
             }
         },
         {
@@ -5938,7 +6333,8 @@
             "properties": {
                 "forsyid": "00000004",
                 "name": "Kredsløb",
-                "address": "Karen Blixens Boulevard 7, 8220 Brabrand"
+                "address": "Karen Blixens Boulevard 7, 8220 Brabrand",
+                "CVRP": null
             }
         },
         {
@@ -5953,7 +6349,8 @@
             "properties": {
                 "forsyid": "32473660",
                 "name": "Halsnæs Forsyning",
-                "address": "Havnevej 8, 3300 Frederiksværk"
+                "address": "Havnevej 8, 3300 Frederiksværk",
+                "CVRP": null
             }
         },
         {
@@ -5968,7 +6365,8 @@
             "properties": {
                 "forsyid": "13109710",
                 "name": "Ulstrup Varmeværk",
-                "address": "Fredensvej 6, 8860 Ulstrup"
+                "address": "Fredensvej 6, 8860 Ulstrup",
+                "CVRP": null
             }
         },
         {
@@ -5983,7 +6381,8 @@
             "properties": {
                 "forsyid": "20237848",
                 "name": "Søndbjerg Fjernvarme",
-                "address": "Ballevej 17, 7790 Thyholm"
+                "address": "Ballevej 17, 7790 Thyholm",
+                "CVRP": null
             }
         },
         {
@@ -5998,7 +6397,8 @@
             "properties": {
                 "forsyid": "00000007",
                 "name": "Eniig City Solutions",
-                "address": "Nordgaden 4, 7400 Herning"
+                "address": "Nordgaden 4, 7400 Herning",
+                "CVRP": null
             }
         },
         {
@@ -6013,7 +6413,8 @@
             "properties": {
                 "forsyid": "17828843",
                 "name": "Ravnkilde Kraftvarmeværk",
-                "address": "Skalborgvej 17, 9610 Nørager"
+                "address": "Skalborgvej 17, 9610 Nørager",
+                "CVRP": null
             }
         },
         {
@@ -6028,7 +6429,8 @@
             "properties": {
                 "forsyid": "28193610",
                 "name": "Nørre-Snede Varmeværk",
-                "address": "Horsensvej 19, 8766 Nørre Snede"
+                "address": "Horsensvej 19, 8766 Nørre Snede",
+                "CVRP": null
             }
         },
         {
@@ -6043,7 +6445,8 @@
             "properties": {
                 "forsyid": "21430277",
                 "name": "Nrgi Lokalvarme",
-                "address": "Dusager 22, 8200 Aarhus N"
+                "address": "Dusager 22, 8200 Aarhus N",
+                "CVRP": null
             }
         },
         {
@@ -6058,7 +6461,8 @@
             "properties": {
                 "forsyid": "49001312",
                 "name": "Grundejerf Rønneholtparken",
-                "address": "Ligustervangen 81, 3450 Allerød"
+                "address": "Ligustervangen 81, 3450 Allerød",
+                "CVRP": null
             }
         },
         {
@@ -6073,7 +6477,8 @@
             "properties": {
                 "forsyid": "43538365",
                 "name": "Thyregod Fællesvarme",
-                "address": "Skovlunden 101, 7323 Give"
+                "address": "Skovlunden 101, 7323 Give",
+                "CVRP": null
             }
         },
         {
@@ -6088,7 +6493,8 @@
             "properties": {
                 "forsyid": "00000019",
                 "name": "Gråsten Fjernvarme",
-                "address": "Sønderborg Landevej 3, 6300 Gråsten"
+                "address": "Sønderborg Landevej 3, 6300 Gråsten",
+                "CVRP": null
             }
         },
         {
@@ -6103,7 +6509,8 @@
             "properties": {
                 "forsyid": "00000019",
                 "name": "Augustenborg Fjernvarme",
-                "address": "Sundkrogsgade 5, 2100 København Ø"
+                "address": "Sundkrogsgade 5, 2100 København Ø",
+                "CVRP": null
             }
         },
         {
@@ -6118,7 +6525,8 @@
             "properties": {
                 "forsyid": "00000013",
                 "name": "Hornsyld Klimavarme",
-                "address": "Søndergade 44, 8783 Hornsyld"
+                "address": "Søndergade 44, 8783 Hornsyld",
+                "CVRP": null
             }
         },
         {
@@ -6133,7 +6541,8 @@
             "properties": {
                 "forsyid": "32394817",
                 "name": "Gedser Fjernvarme",
-                "address": "Smedevej 6, 4874 Gedser"
+                "address": "Smedevej 6, 4874 Gedser",
+                "CVRP": null
             }
         },
         {
@@ -6148,7 +6557,8 @@
             "properties": {
                 "forsyid": "19500438",
                 "name": "Rejsby Kraftvarmeværk",
-                "address": "Rejsby Landevej 12B, 6780 Skærbæk"
+                "address": "Rejsby Landevej 12B, 6780 Skærbæk",
+                "CVRP": null
             }
         },
         {
@@ -6163,7 +6573,8 @@
             "properties": {
                 "forsyid": "44473860",
                 "name": "Skibby Fjernvarme",
-                "address": "Sikavej 15, 4050 Skibby"
+                "address": "Sikavej 15, 4050 Skibby",
+                "CVRP": null
             }
         },
         {
@@ -6178,7 +6589,8 @@
             "properties": {
                 "forsyid": "25165160",
                 "name": "Forsyning Helsingør Service",
-                "address": "Energivej 25, 3000 Helsingør"
+                "address": "Energivej 25, 3000 Helsingør",
+                "CVRP": null
             }
         },
         {
@@ -6193,7 +6605,8 @@
             "properties": {
                 "forsyid": "20276991",
                 "name": "Meløse - St. Lyngby Energiselskab",
-                "address": "Skolevej 7B, 3320 Skævinge"
+                "address": "Skolevej 7B, 3320 Skævinge",
+                "CVRP": null
             }
         },
         {
@@ -6208,7 +6621,8 @@
             "properties": {
                 "forsyid": "43587854",
                 "name": "Aale Fjernvarme",
-                "address": "Aale Bygade 28A, 7160 Tørring"
+                "address": "Aale Bygade 28A, 7160 Tørring",
+                "CVRP": null
             }
         },
         {
@@ -6223,7 +6637,8 @@
             "properties": {
                 "forsyid": "44166879",
                 "name": "Lynge-Uggeløse Fjernvarme",
-                "address": "Nøglegårdsvænge 37, 3540 Lynge"
+                "address": "Nøglegårdsvænge 37, 3540 Lynge",
+                "CVRP": null
             }
         },
         {
@@ -6238,7 +6653,8 @@
             "properties": {
                 "forsyid": "43384414",
                 "name": "Bjæverskov Fjernvarme",
-                "address": "Nyvej 22, 4632 Bjæverskov"
+                "address": "Nyvej 22, 4632 Bjæverskov",
+                "CVRP": null
             }
         },
         {
@@ -6253,7 +6669,8 @@
             "properties": {
                 "forsyid": "00000008",
                 "name": "Fors Varme Roskilde",
-                "address": "Betonvej 12, 4000 Roskilde"
+                "address": "Betonvej 12, 4000 Roskilde",
+                "CVRP": null
             }
         },
         {
@@ -6268,7 +6685,8 @@
             "properties": {
                 "forsyid": "29826641",
                 "name": "Nfs Varme",
-                "address": "Gasværksvej 2, 5800 Nyborg"
+                "address": "Gasværksvej 2, 5800 Nyborg",
+                "CVRP": null
             }
         },
         {
@@ -6283,7 +6701,8 @@
             "properties": {
                 "forsyid": "00000006",
                 "name": "Din Forsyning A/S",
-                "address": "Ulvsundvej 1, 6715 Esbjerg N"
+                "address": "Ulvsundvej 1, 6715 Esbjerg N",
+                "CVRP": null
             }
         },
         {
@@ -6298,7 +6717,8 @@
             "properties": {
                 "forsyid": "29214824",
                 "name": "Nørre Broby Varmeværk",
-                "address": "Stationsvej 14, 5672 Broby"
+                "address": "Stationsvej 14, 5672 Broby",
+                "CVRP": null
             }
         },
         {
@@ -6313,7 +6733,8 @@
             "properties": {
                 "forsyid": "13096414",
                 "name": "Vester Hjermitslev Varmeværk",
-                "address": "Ths. P. Hejlesvej 3, V. Hjermitslev, 9700 Brønderslev"
+                "address": "Ths. P. Hejlesvej 3, V. Hjermitslev, 9700 Brønderslev",
+                "CVRP": null
             }
         }
     ]

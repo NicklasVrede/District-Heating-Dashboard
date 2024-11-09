@@ -18,7 +18,7 @@ function createOrUpdatePlotlyGraph(data, selectedForsyids) {
 
     const attributes = [
         'Kul', 'Olie', 'Gas', 'Affald (fossil)', 'Halm', 'Skovflis', 'Brænde', 'Træpiller', 'Træaffald', 'Affald (bio)',
-        'Biobrændsler (bioolie)', 'Biogas', 'Overskudsvarme', 'Solvarme', 'El', 'andel kraftvarme', 'andel kedler'
+        'Biobrændsler (bioolie)', 'Biogas', 'Overskudsvarme', 'Solvarme', 'El'
     ];
 
     const attributeColors = {
@@ -36,9 +36,7 @@ function createOrUpdatePlotlyGraph(data, selectedForsyids) {
         'Biogas': 'lime',
         'Overskudsvarme': 'red',
         'Solvarme': 'gold',
-        'El': 'blue',
-        'andel kraftvarme': 'purple',
-        'andel kedler': 'pink'
+        'El': 'blue'
     };
 
     const traces = attributes.map(attr => {
@@ -72,7 +70,7 @@ function createOrUpdatePlotlyGraph(data, selectedForsyids) {
     const layout = {
         title: 'Data for Selected Forsyids',
         xaxis: { title: 'Plants' },
-        yaxis: { title: 'Values' },
+        yaxis: { title: 'GJ produced (power & heating)' },
         barmode: 'stack'
     };
 

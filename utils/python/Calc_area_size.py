@@ -1,6 +1,8 @@
 import geopandas as gpd
 import pandas as pd
 
+# Todo, add to data instead of geojson.
+
 # Load the GeoJSON file
 areas_gdf = gpd.read_file('maps/areas.geojson')
 

@@ -30,7 +30,6 @@ export function addPlantEventListeners(map) {
                 <div class="mapboxgl-popup-content">
                     <strong>${feature.properties.name}</strong><br/>
                     <span>Forsyid: ${feature.properties.forsyid}</span><br/>
-                    <span>Supply area: ${feature.properties.total_area_km2}</span><br/>
                     <em>Click to select, Ctrl+Click to deselect</em>
                 </div>`;
             plantTooltip.style.visibility = 'visible';
