@@ -2,7 +2,7 @@
 
 /* Main Top Bar Container */
 .top-bar {
-    padding: 1vh 2vw;
+    padding: 8px 16px;
     background-color: #f8f8f8;
     border-bottom: 1px solid #ccc;
     display: flex;
@@ -10,30 +10,34 @@
     align-items: center;
     flex-shrink: 0;
     position: relative;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 /* Left Section Layout */
 .left-section {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 /* Search Container Styles */
 .search-container {
     display: flex;
     flex: 1;
-    max-width: 400px;
-    position: relative;
+    min-width: 300px;
+    max-width: 500px;
 }
 
 #address {
     flex: 1;
-    padding: 0.5vh 1vw;
+    padding: 8px 12px;
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 4px 0 0 4px;
     box-sizing: border-box;
+    min-width: 250px;
 }
 
 #search-button {
@@ -58,17 +62,18 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
 }
 
 .focus-selector-container {
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 3px 8px;
-    height: 32px;
+    border: none;
+    background: none;
 }
 
 .focus-selector-container label {
@@ -101,6 +106,7 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 /* Toggle Gas Areas Styles */
@@ -237,4 +243,166 @@
 #apply-filters:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+
+@media screen and (max-width: 830px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 8px;
+    }
+
+    .left-section {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .search-container {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 8px;
+    }
+
+    #address {
+        min-width: unset;
+    }
+
+    .dropdown-group {
+        flex-direction: row;
+        justify-content: center;
+        width: fit-content;
+        margin: 8px auto;
+        flex-wrap: nowrap;
+    }
+    
+    .focus-selector-container, 
+    .select-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    select {
+        min-width: 100px;
+    }
+    
+    #apply-filters {
+        margin-top: 8px;
+    }
+}
+
+/* For very small screens */
+@media screen and (max-width: 480px) {
+    .buttons-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .buttons-container button,
+    #apply-filters,
+    #overview-button,
+    #clear-button {
+        width: 100%;
+        margin: 4px 0;
+    }
+
+    .toggle-frame {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Add new class for the focus selector group */
+.focus-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.focus-selector-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#focus-selector {
+    margin-right: 0;
+}
+
+#apply-filters {
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 830px) {
+    .focus-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .focus-selector-container {
+        flex: 1;
+    }
+
+    #apply-filters {
+        margin-left: 8px;
+    }
+}
+
+.select-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.select-group select,
+#select-dropdown {
+    padding: 0.5vh 1vw;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+}
+
+#select-dropdown {
+    margin-right: 8px;
+}
+
+/* For mobile responsiveness */
+@media screen and (max-width: 830px) {
+    .select-group {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .select-group select,
+    #select-dropdown {
+        padding: 4px 8px; /* Use fixed padding for mobile */
+    }
+}
+
+
+@media screen and (max-width: 830px) {
+    .top-bar {
+        gap: 12px;
+    }
+
+    .search-container {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 8px;
+    }
+    
+    .dropdown-group {
+        flex-direction: row;
+        justify-content: center;
+        width: fit-content;
+        margin: 0 auto;
+        flex-wrap: nowrap;
+    }
 }

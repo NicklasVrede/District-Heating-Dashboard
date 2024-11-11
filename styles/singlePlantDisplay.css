@@ -1,0 +1,58 @@
+/* Graph Container Styles */
+#graph-container {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Plant Facts Styles */
+#plant-facts {
+    width: calc(100% - 30px);
+    height: auto;
+    min-height: 80px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin: 0 auto;
+}
+
+#plant-facts h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+#plant-facts p {
+    margin: 5px 0;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Ensure content container can scroll if needed */
+.content {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.reset-zoom-btn {
+    position: absolute;
+    top: 10px;
+    right: 160px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.reset-zoom-btn:hover {
+    background-color: #0056b3;
+} 

@@ -1,3 +1,7 @@
+:root {
+    --top-bar-height: 60px;  /* Define the top bar height as a variable */
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -5,7 +9,7 @@ body, html {
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* coloumn flexbox */
+    overflow: hidden;  /* Add this to prevent scrolling */
 }
 
 .search-container {
@@ -47,26 +51,37 @@ body, html {
 
 #map {
     position: absolute;
-    width: 50%;  /* Start with 50-50 split */
-    height: calc(100vh - 60px);  /* Assuming ~60px top-bar height */
+    width: calc(50% - 4px);
+    height: calc(100vh - var(--top-bar-height));
     left: 0;
 }
 
 #graph-container {
     position: absolute;
-    width: 50%;
-    height: calc(100vh - 60px);
     right: 0;
+    width: calc(50% - 4px - 15px);
+    height: calc(100vh - var(--top-bar-height));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 15px;
+    box-sizing: border-box;
 }
+
+.js-plotly-plot {
+    flex: 0.85; /* Takes 85% of the container height */
+}
+
 
 #divider {
     position: absolute;
     left: 50%;
     width: 8px;
-    height: calc(100vh - 60px);
-    background: #ccc;
+    height: calc(100vh - var(--top-bar-height));
+    background: #e0e0e0;
     cursor: col-resize;
     z-index: 10;
+    transform: translateX(-50%);
 }
 
 .mapboxgl-popup {
@@ -95,22 +110,6 @@ body, html {
 .address-popup .popup-content p {
     margin: 0;
     font-size: 12px;
-}
-
-#divider {
-    position: absolute;
-    left: 50%;
-    width: 8px;
-    height: calc(100vh - 60px);
-    background: #e0e0e0;
-    cursor: col-resize;
-    z-index: 10;
-    transition: background-color 0.2s;
-    
-    /* Add visual indicators */
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Add drag handle dots */

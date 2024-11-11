@@ -1,0 +1,11 @@
+#lost plants
+Din Forsyning Varme
+Din Forsygning,6,,,,
+Nørrevejens Kraftvarmeværk,15,,,,
+Nimtofte,30406443,,,,
+V. Hjermitslev Varmeværk,13096414,,,,
+Hillerød Varme A/S - Meløse-St.Lyngby,20276991,,,,
+Ellidshøj-Ferslev Kraftvarmeværk,5,,,,
+Ålestrup Varme,14411313,,,,
+Frederikshavn Varme,30173929,,,,
+Skovsgaard Varmeværk,61668713,,,,

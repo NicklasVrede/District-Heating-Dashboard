@@ -2,19 +2,9 @@ import csv
 import json
 
 # Read the CSV file with plant coordinates
-with open('data/addresses_with_coordinates.csv', 'r', encoding='utf-8') as csvfile:
+with open('data/plants.csv', 'r', encoding='utf-8') as csvfile:
     csv_reader = csv.DictReader(csvfile)
     plants = {row['name']: row for row in csv_reader}
-
-# Read the CSV file with plant to area mapping
-with open('data/plant_to_areas_map.csv', 'r', encoding='utf-8') as csvfile:
-    csv_reader = csv.DictReader(csvfile)
-    plant_to_area_map = {row['name']: row['forsyid'] for row in csv_reader}
-
-# Combine the data
-for plant_name, forsyid in plant_to_area_map.items():
-    if plant_name in plants:
-        plants[plant_name]['forsyid'] = forsyid
 
 # Create GeoJSON features
 features = []

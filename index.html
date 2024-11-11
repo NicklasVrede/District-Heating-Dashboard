@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="styles/top-bar.css">
     <link rel="stylesheet" href="styles/toast.css">
     <link rel="stylesheet" href="styles/autocomplete.css">
+    <link rel="stylesheet" href="styles/tooltip.css">
+    <link rel="stylesheet" href="styles/singlePlantDisplay.css">
+    <link rel="stylesheet" href="styles/twoPlants.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
@@ -24,7 +27,7 @@
             <div class="dropdown-group">
                 <div class="focus-selector-container">
                     <label for="focus-selector">Data Focus:</label>
-                    <select id="focus-selector" onchange="focusControls.changeFocus(this.value)">
+                    <select id="focus-selector">
                         <option value="price">Price</option>
                         <option value="production">Production</option>
                         <option value="co2">CO2</option>
@@ -38,9 +41,9 @@
                         <option value="flis">Flis</option>
                     </select>
                 </div>
-                <div class="focus-selector-container">
-                    <label for="select">Select:</label>
-                    <select id="select">
+                <div class="select-group">
+                    <label>Select:</label>
+                    <select id="select-dropdown">
                         <option value="none">None</option>
                         <option value="top5">Top 5</option>
                         <option value="top10">Top 10</option>
@@ -49,7 +52,7 @@
                         <option value="bottom10">Bottom 10</option>
                     </select>
                 </div>
-                <button id="apply-filters" onclick="focusControls.applyFilters()">Apply</button>
+                <button id="apply-filters">Apply</button>
             </div>
         </div>
         <div class="buttons-container">

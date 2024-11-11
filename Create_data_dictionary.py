@@ -1,107 +1,109 @@
 import pandas as pd
-from pprint import pprint
 import json
+import os
+import geopandas as gpd
 
-# Load the data from the CSV file with UTF-8 encoding
-data_df = pd.read_csv('data/data_om_fv_with_ids.csv', encoding='utf-8')
+# Load and prepare production data
+data_df = pd.read_csv('data/production_data_with_forsyid.csv', encoding='utf-8')
+data_df = data_df[data_df['forsyid'] != 0]  # Filter out unmatched plants
+data_df['forsyid'] = data_df['forsyid'].astype(str).str.zfill(8)  # Convert to 8-digit strings
 
-# Drop the 'names' column
-data_df = data_df.drop(columns=['names'])
+# Define mappings and columns
+energy_columns = [
+    'kul_TJ', 'fuelolie_TJ', 'spildolie_TJ', 'gasolie_TJ', 'raffinaderigas_TJ',
+    'lpg_TJ', 'naturgas_TJ', 'affald_TJ', 'biogas_TJ', 'halm_TJ', 'skovflis_TJ',
+    'trae- og biomasseaffald_TJ', 'traepiller_TJ', 'bio-olie_TJ', 'braendselsfrit_TJ',
+    'solenergi_TJ', 'vandkraft_TJ', 'elektricitet_TJ', 'omgivelsesvarme_TJ'
+]
 
-# Fill NA values in 'forsyid' with a placeholder (e.g., -1) or drop rows with NA values
-data_df['forsyid'] = pd.to_numeric(data_df['forsyid'], errors='coerce').fillna(-1).astype(int)
+# Create basic mappings (convert Series to native Python types)
+mappings = {
+    'name': data_df.groupby('forsyid')['plant_name'].first().to_dict(),
+    'idrift': data_df.groupby('forsyid')['idriftdato'].first().to_dict(),
+    'elkapacitet': data_df.groupby('forsyid')['elkapacitet_MW'].first().to_dict(),
+    'varmekapacitet': data_df.groupby('forsyid')['varmekapacitet_MW'].first().to_dict()
+}
 
-# Drop rows where 'forsyid' is -1
-data_df = data_df[data_df['forsyid'] != -1]
-
-# Convert 'forsyid' to strings and pad with zeros to ensure 8 digits
-data_df['forsyid'] = data_df['forsyid'].astype(str).str.zfill(8)
-
-# Load the plant-to-area mapping to get the names
-plant_to_areas_map_df = pd.read_csv('data/plant_to_areas_map.csv', encoding='utf-8')
-
-# Create a dictionary to map forsyid to names
-plant_to_areas_map_df['forsyid'] = plant_to_areas_map_df['forsyid'].astype(str).str.zfill(8)
-forsyid_to_name = plant_to_areas_map_df.set_index('forsyid')['name'].to_dict()
-
-# Group the data by 'forsyid' and 'År'
-grouped_data = data_df.groupby(['forsyid', 'År']).agg(lambda x: x.mean() if x.dtype.kind in 'biufc' else x.mode()[0]).reset_index()
-
-# Create the data dictionary for Plotly
-data_dict = {}
-
-# After loading the data, add this debug print
-print("Available columns in the dataset:")
-print(data_df.columns.tolist())
-
-
-for forsyid, group in grouped_data.groupby('forsyid'):
-    production_by_year = {}
-    
-    # Process each year's data
-    for _, row in group.iterrows():
-        year = row['År']
-        
-        # Get total heat delivery to network
-        total_heat = row.get('Varme_Lev_til_net', 0)
-        
-        # Calculate shares
-        chp_share = row.get('andel kraftvarme', 0)
-        boiler_share = row.get('andel kedler', 0)
-        other_share = row.get('andel andet', 0)
-        
-        year_data = {
-            # All fuels (CHP + boiler)
-            'Kul': round((chp_share * row.get(' kraftvarme - andel   Kul', 0) + 
-                   boiler_share * row.get(' kedler - andel   Kul', 0)) * total_heat),
-            'Olie': round((chp_share * row.get(' kraftvarme - andel   Olie', 0) + 
-                    boiler_share * row.get(' kedler - andel   Olie', 0)) * total_heat),
-            'Gas': round((chp_share * row.get(' kraftvarme - andel   Gas', 0) + 
-                   boiler_share * row.get(' kedler - andel   Gas', 0)) * total_heat),
-            'Affald (fossil)': round((chp_share * row.get(' kraftvarme - andel   Affald (fossil)', 0) + 
-                               boiler_share * row.get(' kedler - andel   Affald (fossil)', 0)) * total_heat),
-            'Halm': round((chp_share * row.get(' kraftvarme - andel   Halm', 0) + 
-                    boiler_share * row.get(' kedler - andel   Halm', 0)) * total_heat),
-            'Skovflis': round((chp_share * row.get(' kraftvarme - andel   Skovflis', 0) + 
-                        boiler_share * row.get(' kedler - andel   Skovflis', 0)) * total_heat),
-            'Brænde': round((chp_share * row.get(' kraftvarme - andel   Brænde', 0) + 
-                      boiler_share * row.get(' kedler - andel   Brænde', 0)) * total_heat),
-            'Træpiller': round((chp_share * row.get(' kraftvarme - andel   Træpiller', 0) + 
-                         boiler_share * row.get(' kedler - andel   Træpiller', 0)) * total_heat),
-            'Træaffald': round((chp_share * row.get(' kraftvarme - andel   Træaffald', 0) + 
-                         boiler_share * row.get(' kedler - andel   Træaffald', 0)) * total_heat),
-            'Affald (bio)': round((chp_share * row.get(' kraftvarme - andel   Affald (bio)', 0) + 
-                            boiler_share * row.get(' kedler - andel   Affald (bio)', 0)) * total_heat),
-            'Biobrændsler (bioolie)': round((chp_share * row.get(' kraftvarme - andel   Biobrændsler\r\n(bioolie)', 0) + 
-                                      boiler_share * row.get(' kedler - andel   Biobrændsler\r\n(bioolie)', 0)) * total_heat),
-            'Biogas': round((chp_share * row.get(' kraftvarme - andel   Biogas', 0) + 
-                      boiler_share * row.get(' kedler - andel   Biogas', 0)) * total_heat),
-            
-            # Other shares
-            'Overskudsvarme': round(other_share * row.get('Andet - andel overskudsvarme', 0) * total_heat),
-            'Solvarme': round(other_share * row.get('Andet - andel solvarme', 0) * total_heat),
-            'Varmepumper': round(other_share * row.get('Andet - andel varmepumper og elkedler', 0) * total_heat)
-        }
-        
-        production_by_year[year] = year_data
-
-    # Add the name and production data to the dictionary
-    name = forsyid_to_name.get(forsyid, 'Unknown')
-    data_dict[forsyid] = {
-        'name': name,
-        'production': production_by_year
+# Load CVRP mapping from GeoJSON
+with open('data/plants.geojson', 'r', encoding='utf-8') as f:
+    geojson_data = json.load(f)
+    forsyid_to_cvrp = {
+        f['properties']['forsyid']: str(f['properties']['CVRP']).strip()
+        for f in geojson_data['features']
+        if 'forsyid' in f['properties'] and 'CVRP' in f['properties']
     }
 
-# Save the data dictionary as a JSON file with UTF-8 encoding
-with open('data/data_dict.json', 'w', encoding='utf-8') as json_file:
-    json.dump(data_dict, json_file, indent=4, ensure_ascii=False)
+# Calculate areas
+areas_gdf = gpd.read_file('maps/areas.geojson')
+areas_gdf = areas_gdf.to_crs(epsg=32633)
+aggregated_areas = (areas_gdf.geometry.area / 1_000_000).groupby(areas_gdf['forsyid']).sum().round(2)
 
+# Convert areas to dictionary
+aggregated_areas = aggregated_areas.to_dict()
 
-# Test the format:
-# Print the information about forsyid "34203563"
-forsyid_to_print = "17779710".zfill(8)
-if forsyid_to_print in data_dict:
-    print(f"\nInformation for forsyid {forsyid_to_print}:")
-    pprint(data_dict[forsyid_to_print])
-else:
-    print(f"\nForsyid {forsyid_to_print} not found in the data.")
+# Process price files
+def safe_float_convert(value, year, price_type):
+    if pd.isna(value) or value == '-':
+        return None
+    try:
+        raw_value = float(str(value).replace('.', '').replace(',', '.'))
+        if year == '2019' and price_type in ['apartment_price', 'house_price']:
+            return int(round(raw_value / 100))
+        elif raw_value > 1000:  # apartment/house prices
+            return int(round(raw_value / 10))
+        return int(round(raw_value))
+    except (ValueError, TypeError):
+        return None
+
+price_data = {}
+price_files = [
+    ('fjernvarmepriser_jan_2019.csv', '2019'),
+    ('fjernvarmepriser_jan_2020.csv', '2020'),
+    ('fjernvarmepriser_jan_2021.csv', '2021'),
+    ('fjernvarmepriser_jan_2022.csv', '2022'),
+    ('fjernvarmepriser_jan_2023.csv', '2023'),
+    ('fjernvarmepriser_jan_2024.csv', '2024')
+]
+
+for filename, year in price_files:
+    try:
+        df = pd.read_csv(f'data/prices/{filename}', sep=';', encoding='utf-8')
+        price_dict = {}
+        for _, row in df.iterrows():
+            price_dict[str(row['PNummer'])] = {
+                'mwh_price': safe_float_convert(row.get('MWhPrisInklMoms'), year, 'mwh_price'),
+                'apartment_price': safe_float_convert(row.get('SamletForbugerprisBeboelseslejlighedInklMoms'), year, 'apartment_price'),
+                'house_price': safe_float_convert(row.get('SamletForbugerprisEnfamilieshusInklMoms'), year, 'house_price')
+            }
+        price_data[year] = price_dict
+    except Exception as e:
+        print(f"Error processing {filename}: {e}")
+
+# Create final data dictionary
+data_dict = {}
+for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid'):
+    data_dict[forsyid] = {
+        'name': mappings['name'].get(forsyid, 'Unknown'),
+        'idrift': mappings['idrift'].get(forsyid),
+        'elkapacitet_MW': float(mappings['elkapacitet'].get(forsyid, 0) or 0),
+        'varmekapacitet_MW': float(mappings['varmekapacitet'].get(forsyid, 0) or 0),
+        'total_area_km2': float(aggregated_areas.get(forsyid, 0) or 0),
+        'production': {
+            str(year): {col.replace('_TJ', ''): float(val.iloc[0] if hasattr(val, 'iloc') else val or 0)
+                       for col, val in yearly_data[energy_columns].items()}
+            for year, yearly_data in group.groupby('aar')
+        }
+    }
+    
+    # Add prices if available
+    cvrp = forsyid_to_cvrp.get(forsyid)
+    if cvrp:
+        prices = {year: prices[cvrp.strip()] 
+                 for year, prices in price_data.items() 
+                 if cvrp.strip() in prices}
+        if prices:
+            data_dict[forsyid]['prices'] = prices
+
+# Save the data
+with open('data/data_dict.json', 'w', encoding='utf-8') as f:
+    json.dump(data_dict, f, indent=4, ensure_ascii=False)

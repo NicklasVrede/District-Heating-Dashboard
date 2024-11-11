@@ -5,6 +5,24 @@ import { updateGraph } from './plotlyGraphs.js'; // Corrected import path
 let isHoveringPlant = false;
 let areaTooltip = null;
 
+// Helper function to format fuel type
+function formatFuelType(fuel) {
+    // Dictionary for specific replacements
+    const replacements = {
+        'traepiller': 'Træpiller',
+        'trae- og biomasseaffald': 'Træ- og biomasseaffald'
+        // Add more replacements if needed
+    };
+
+    // Check if the fuel is in our replacement dictionary
+    if (replacements[fuel]) {
+        return replacements[fuel];
+    }
+
+    // If not in dictionary, just capitalize first letter
+    return fuel.charAt(0).toUpperCase() + fuel.slice(1);
+}
+
 export function addPlantEventListeners(map) {
     // Create a tooltip for displaying plant information
     const plantTooltip = document.createElement('div');
@@ -27,10 +45,25 @@ export function addPlantEventListeners(map) {
             highlightArea(map, feature.properties.forsyid);
             highlightPlant(map, feature.properties.forsyid);
             plantTooltip.innerHTML = `
-                <div class="mapboxgl-popup-content">
-                    <strong>${feature.properties.name}</strong><br/>
-                    <span>Forsyid: ${feature.properties.forsyid}</span><br/>
-                    <em>Click to select, Ctrl+Click to deselect</em>
+                <div class="mapboxgl-popup-content tooltip-content">
+                    <h3 class="tooltip-title">${feature.properties.name}</h3>
+                    <div class="tooltip-body">
+                        <div class="tooltip-row">
+                            <span class="tooltip-label">ID:</span>
+                            <span class="tooltip-value">${feature.properties.forsyid}</span>
+                        </div>
+                        <div class="tooltip-row">
+                            <span class="tooltip-label">Main fuel:</span>
+                            <span class="tooltip-value">${formatFuelType(feature.properties.main_fuel)}</span>
+                        </div>
+                        <div class="tooltip-row">
+                            <span class="tooltip-label">Supply area:</span>
+                            <span class="tooltip-value">${feature.properties.total_area_km2} km²</span>
+                        </div>
+                    </div>
+                    <div class="tooltip-footer">
+                        <em>Click to select, Ctrl+Click to deselect</em>
+                    </div>
                 </div>`;
             plantTooltip.style.visibility = 'visible';
         }
@@ -77,13 +110,36 @@ export function addAreaEventListeners(map) {
             const features = map.queryRenderedFeatures(e.point, { layers: ['areas'] });
             if (features.length) {
                 const feature = features[0];
+                // Query the plants layer to get the matching plant data
+                const plantFeatures = map.querySourceFeatures('plants', {
+                    sourceLayer: '',
+                    filter: ['==', 'forsyid', feature.properties.forsyid]
+                });
+                
+                const plantData = plantFeatures.length ? plantFeatures[0].properties : null;
+                
                 highlightPlant(map, feature.properties.forsyid);
                 highlightArea(map, feature.properties.forsyid);
                 areaTooltip.innerHTML = `
-                    <div class="mapboxgl-popup-content">
-                        <strong>${feature.properties.forsytekst}</strong><br/>
-                        <span>Forsyid: ${feature.properties.forsyid}</span><br/>
-                        <em>Click to select, Ctrl+Click to deselect</em>
+                    <div class="mapboxgl-popup-content tooltip-content">
+                        <h3 class="tooltip-title">${feature.properties.forsytekst}</h3>
+                        <div class="tooltip-body">
+                            <div class="tooltip-row">
+                                <span class="tooltip-label">ID:</span>
+                                <span class="tooltip-value">${feature.properties.forsyid}</span>
+                            </div>
+                            <div class="tooltip-row">
+                                <span class="tooltip-label">Main fuel:</span>
+                                <span class="tooltip-value">${plantData ? formatFuelType(plantData.main_fuel) : 'unknown'}</span>
+                            </div>
+                            <div class="tooltip-row">
+                                <span class="tooltip-label">Supply area:</span>
+                                <span class="tooltip-value">${plantData ? plantData.total_area_km2 : 'unknown'} km²</span>
+                            </div>
+                        </div>
+                        <div class="tooltip-footer">
+                            <em>Click to select, Ctrl+Click to deselect</em>
+                        </div>
                     </div>`;
                 areaTooltip.style.visibility = 'visible';
             }
