@@ -1,431 +1,478 @@
 import { graphConfig } from '../config/graphConfig.js';
 import { showToast } from './toast.js';
 
-// Percentage for including the color in legend
-const LEGEND_THRESHOLD_PERCENTAGE = 2; // Minimum percentage to show in legend
-
-function createResetButton(container, callback) {
-    const existingButton = container.querySelector('.reset-zoom-btn');
-    if (existingButton) {
-        return existingButton;
-    }
-
-    const resetBtn = document.createElement('button');
-    resetBtn.innerHTML = 'Exit Distribution View';
-    resetBtn.className = 'reset-zoom-btn';
-    resetBtn.onclick = callback;
-    container.appendChild(resetBtn);
-    return resetBtn;
-}
+const LEGEND_THRESHOLD_PERCENTAGE = 2;
 
 export function createSinglePlantGraph(data, forsyid, focus) {
+    // Input validation
+    if (!data || !forsyid) {
+        console.error('Missing required parameters');
+        return;
+    }
+
     const graphContainer = document.getElementById('graph-container');
-    const plantData = data[forsyid.toString().padStart(8, '0')];
+    if (!graphContainer) {
+        console.error('Graph container not found');
+        return;
+    }
+
+    const plantId = forsyid.toString().padStart(8, '0');
+    const plantData = data[plantId];
     
-    if (!plantData) {
+    if (!plantData?.production) {
         showToast("No data available for the selected plant");
-        Plotly.purge(graphContainer);
         return;
     }
 
-    if (!plantData.production || Object.keys(plantData.production).length === 0) {
-        showToast("No production data available for the selected plant");
-        Plotly.purge(graphContainer);
-        return;
+    // Clear and setup graph containers
+    let titleElement = document.querySelector('.graph-title');
+    let productionGraph = document.querySelector('.production-graph');
+    let priceGraph = document.querySelector('.price-graph');
+    let infoBox = document.querySelector('.info-box');
+
+    // Create containers if they don't exist
+    if (!titleElement) {
+        titleElement = document.createElement('h2');
+        titleElement.className = 'graph-title';
+        graphContainer.insertBefore(titleElement, graphContainer.firstChild);
     }
 
-    const attributeMapping = {
-        'Kul': 'kul',
-        'Olie': ['fuelolie', 'spildolie', 'gasolie'],
-        'Gas': ['naturgas', 'lpg', 'raffinaderigas'],
-        'Affald': 'affald',
-        'Biogas': 'biogas',
-        'Skovflis': 'skovflis',
-        'Halm': 'halm',
-        'Træaffald': 'trae- og biomasseaffald',
-        'Træpiller': 'traepiller',
-        'Biobrændsler (bioolie)': 'bio-olie',
-        'Varmepumper': ['omgivelsesvarme', 'braendselsfrit'],
-        'Solvarme': 'solenergi',
-        'Elektricitet': 'elektricitet'
-    };
+    if (!productionGraph) {
+        productionGraph = document.createElement('div');
+        productionGraph.className = 'production-graph';
+        graphContainer.appendChild(productionGraph);
+    }
 
+    if (!priceGraph) {
+        priceGraph = document.createElement('div');
+        priceGraph.className = 'price-graph';
+        graphContainer.appendChild(priceGraph);
+    }
+
+    if (!infoBox) {
+        infoBox = document.createElement('div');
+        infoBox.className = 'info-box';
+        graphContainer.appendChild(infoBox);
+    }
+
+    // Set the title
+    titleElement.textContent = plantData.name || 'Selected Plant';
+
+    // Set content for graphs
+    productionGraph.innerHTML = '<canvas id="productionChart"></canvas>';
+    priceGraph.innerHTML = '<canvas id="priceChart"></canvas>';
+
+    // Initialize charts
+    const ctx = document.getElementById('productionChart').getContext('2d');
+    createPriceChart(plantData, priceGraph);
+
+    // Process data
     const productionYears = Object.keys(plantData.production)
         .filter(year => !isNaN(parseInt(year)))
         .sort();
 
-    const priceYears = Object.keys(plantData.prices)
-        .filter(year => !isNaN(parseInt(year)))
-        .sort();
-
-    const layout = {
-        grid: {
-            rows: 2,
-            columns: 1,
-            pattern: 'independent',
-            roworder: 'top to bottom',
-            rowheight: [0.6, 0.4]
-        },
-        height: 600,
-        title: `${plantData.name}`,
-        showlegend: true,
-        legend: {
-            orientation: 'v',
-            x: 1.1,
-            y: 0.5,
-            xanchor: 'left',
-        },
-        hovermode: 'x unified',
-        hoverlabel: {
-            namelength: -1
-        },
-        plot_bgcolor: 'white',
-        paper_bgcolor: 'white',
-        margin: {
-            t: 50,
-            b: 100,
-            l: 80,
-            r: 150
-        },
-        xaxis: {
-            title: 'Time (Year)',
-            showgrid: true,
-            gridwidth: 1,
-            gridcolor: '#E4E4E4',
-            domain: [0, 1],
-            dtick: 1,
-            hovertemplate: '%{x} - Total: %{customdata:,.0f} TJ<br>'
-        },
-        xaxis2: {
-            title: 'Time (Year)',
-            showgrid: true,
-            gridwidth: 1,
-            gridcolor: '#E4E4E4',
-            domain: [0, 1],
-            dtick: 1
-        },
-        yaxis: {
-            title: 'Production (TJ)',
-            showgrid: true,
-            gridwidth: 1,
-            gridcolor: '#E4E4E4',
-            rangemode: 'tozero'
-        },
-        yaxis2: {
-            title: 'Price (DKK)',
-            showgrid: true,
-            gridwidth: 1,
-            gridcolor: '#E4E4E4',
-            rangemode: 'tozero'
-        },
-        width: graphContainer.clientWidth * 0.95,
-        autosize: false
-    };
-
-    const productionTraces = graphConfig.attributes.map((attr, index) => {
-        const mappedKeys = graphConfig.fuelTypes[attr];
-        const y = productionYears.map(year => {
+    // Create datasets for each fuel type
+    const datasets = graphConfig.attributes.map(attr => {
+        const values = productionYears.map(year => {
+            const mappedKeys = graphConfig.fuelTypes[attr];
             if (Array.isArray(mappedKeys)) {
                 return mappedKeys.reduce((sum, key) => 
                     sum + (plantData.production[year]?.[key] || 0), 0);
-            } else if (mappedKeys) {
-                return plantData.production[year]?.[mappedKeys] || 0;
             }
-            return 0;
+            return plantData.production[year]?.[mappedKeys] || 0;
         });
 
-        // Calculate the percentage contribution of this fuel type
-        const totalProduction = productionYears.reduce((sum, year) => {
-            return sum + y[productionYears.indexOf(year)];
-        }, 0);
-
-        const totalAllProduction = productionYears.reduce((sum, year) => {
-            return sum + Object.values(plantData.production[year]).reduce((s, val) => s + (val || 0), 0);
-        }, 0);
-
-        const contributionPercentage = (totalProduction / totalAllProduction) * 100;
-        const meetsThreshold = contributionPercentage >= LEGEND_THRESHOLD_PERCENTAGE;
-
-        // Create hover text with percentage
-        const hoverText = productionYears.map(year => {
-            const yearValue = y[productionYears.indexOf(year)];
-            const yearTotal = Object.values(plantData.production[year]).reduce((sum, val) => sum + (val || 0), 0);
-            const yearPercentage = (yearValue / yearTotal) * 100;
-            return `%{y:,.0f} TJ (${attr} - ${yearPercentage.toFixed(1)}%)`; 
-        });
+        // Calculate percentage contribution
+        const totalAttr = values.reduce((sum, val) => sum + val, 0);
+        const totalAll = productionYears.reduce((sum, year) => 
+            sum + Object.values(plantData.production[year]).reduce((s, val) => s + (val || 0), 0), 0);
+        const percentage = (totalAttr / totalAll) * 100;
 
         return {
-            x: productionYears,
-            y: y,
-            type: 'scatter',
-            mode: 'lines',
-            stackgroup: 'one',
-            name: attr,
-            fill: 'tonexty',
-            line: {
-                width: 0.5,
-                color: graphConfig.colors[attr]
-            },
-            fillcolor: graphConfig.colors[attr],
-            yaxis: 'y',
-            xaxis: 'x',
-            showlegend: meetsThreshold,
-            hoverinfo: meetsThreshold ? 'name+y' : 'skip',
-            hovertemplate: meetsThreshold ? hoverText : undefined,
-            visible: true,
-            legendgroup: attr,
-            hoveron: meetsThreshold ? 'points+fills' : 'skip'
+            label: attr,
+            data: values,
+            backgroundColor: graphConfig.colors[attr],
+            borderColor: graphConfig.colors[attr],
+            fill: true,
+            hidden: percentage < LEGEND_THRESHOLD_PERCENTAGE
         };
     });
 
-    // Add a trace for the total (invisible but shows in hover)
-    const totalTrace = {
-        x: productionYears,
-        y: productionYears.map(() => 0),  // Dummy values
-        type: 'scatter',
-        mode: 'lines',
-        name: ' ',  // Empty name to avoid showing the line marker
-        hovertemplate: 'Total: %{customdata:,.0f} TJ<extra></extra>',  // Add "Total: " to the template
-        customdata: productionYears.map(year => 
-            Object.values(plantData.production[year]).reduce((sum, val) => sum + (val || 0), 0)
-        ),
-        showlegend: false,
-        visible: true,
-        yaxis: 'y',
-        xaxis: 'x',
-        line: {
-            width: 0,
-            color: 'rgba(0,0,0,0)'
-        }
+    // Store initial data for reset functionality
+    const initialData = {
+        data: data,
+        forsyid: forsyid,
+        focus: focus,
+        plantData: plantData,
+        productionYears: productionYears,
+        datasets: datasets
     };
 
-    const priceTraces = [
-        {
-            x: priceYears,
-            y: priceYears.map(year => plantData.prices[year]?.mwh_price || null),
-            type: 'scatter',
-            mode: 'lines+markers',
-            name: 'MWh Price (DKK)',
-            line: {
-                color: '#FF4560',
-                width: 2
+    // Create chart
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: productionYears,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'nearest',
+                axis: 'x',
+                intersect: false
             },
-            yaxis: 'y2',
-            xaxis: 'x2',
-            showlegend: true
+            onClick: function(event, elements) {
+                if (elements.length > 0) {
+                    const index = elements[0].index;
+                    const year = productionYears[index];
+                    createPieChart(this, plantData.production[year], year, initialData);
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    },
+                    grid: {
+                        color: '#E4E4E4'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Production (TJ)'
+                    },
+                    stacked: true,
+                    grid: {
+                        color: '#E4E4E4'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Production Distribution'
+                },
+                tooltip: {
+                    mode: 'index',
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const total = context.chart.data.datasets.reduce(
+                                (sum, dataset) => sum + (dataset.data[context.dataIndex] || 0), 
+                                0
+                            );
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `${context.dataset.label}: ${value.toFixed(0)} TJ (${percentage}%)`;
+                        },
+                        footer: function(tooltipItems) {
+                            const total = tooltipItems.reduce(
+                                (sum, item) => sum + item.raw, 
+                                0
+                            );
+                            return `Total: ${total.toFixed(0)} TJ`;
+                        }
+                    }
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x'
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x'
+                    }
+                },
+                legend: {
+                    position: 'right',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Update info box with plant facts
+    updateInfoBox(plantData);
+
+    return chart;
+}
+
+function createPieChart(originalChart, yearData, year, initialData) {
+    const ctx = originalChart.ctx;
+    
+    // Create reset button
+    const container = ctx.canvas.parentElement;
+    const resetBtn = document.createElement('button');
+    resetBtn.innerHTML = 'Back to Timeline';
+    resetBtn.style.cssText = `
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 8px 16px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+    `;
+    container.appendChild(resetBtn);
+
+    // Prepare pie data
+    const pieData = graphConfig.attributes.map(attr => {
+        const mappedKeys = graphConfig.fuelTypes[attr];
+        let value;
+        
+        if (Array.isArray(mappedKeys)) {
+            value = mappedKeys.reduce((sum, key) => 
+                sum + (yearData[key] || 0), 0);
+        } else {
+            value = yearData[mappedKeys] || 0;
+        }
+
+        return {
+            label: attr,
+            value: value,
+            color: graphConfig.colors[attr]
+        };
+    }).filter(item => item.value > 0);
+
+    const total = pieData.reduce((sum, item) => sum + item.value, 0);
+
+    // Destroy old chart with animation
+    originalChart.destroy();
+
+    // Create new chart with animation
+    const newChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: pieData.map(item => item.label),
+            datasets: [{
+                data: pieData.map(item => item.value),
+                backgroundColor: pieData.map(item => item.color),
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                animateScale: true,
+                animateRotate: true,
+                duration: 800,
+                easing: 'easeOutQuart'
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: `Production Distribution ${year}`
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `${context.label}: ${value.toFixed(0)} TJ (${percentage}%)`;
+                        }
+                    }
+                },
+                legend: {
+                    position: 'right',
+                    labels: {
+                        generateLabels: function(chart) {
+                            const data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                return data.labels.map((label, i) => {
+                                    const meta = chart.getDatasetMeta(0);
+                                    const value = data.datasets[0].data[i];
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return {
+                                        text: `${label} (${percentage}%)`,
+                                        fillStyle: data.datasets[0].backgroundColor[i],
+                                        hidden: meta.data[i].hidden ?? false,
+                                        index: i,
+                                        strokeStyle: '#fff',
+                                        lineWidth: 2
+                                    };
+                                });
+                            }
+                            return [];
+                        },
+                        usePointStyle: true,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    },
+                    onClick: function(e, legendItem, legend) {
+                        const index = legendItem.index;
+                        const chart = legend.chart;
+                        const meta = chart.getDatasetMeta(0);
+                        meta.data[index].hidden = !meta.data[index].hidden;
+                        chart.update();
+                    }
+                }
+            }
+        }
+    });
+
+    // Add reset button functionality
+    resetBtn.onclick = () => {
+        resetBtn.remove();
+        newChart.destroy();
+        createSinglePlantGraph(initialData.data, initialData.forsyid, initialData.focus);
+    };
+
+    return newChart;
+}
+
+function createPriceChart(plantData, container) {
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    
+    const years = ['2019', '2020', '2021', '2022', '2023', '2024'];
+    
+    const datasets = [
+        {
+            label: 'MWh Price',
+            data: years.map(year => plantData.prices?.[year]?.mwh_price || 0),
+            borderColor: '#FF6384',
+            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+            tension: 0.1,
+            fill: true
         },
         {
-            x: priceYears,
-            y: priceYears.map(year => plantData.prices[year]?.apartment_price || null),
-            type: 'scatter',
-            mode: 'lines+markers',
-            name: 'Apartment Price (DKK)',
-            line: {
-                color: '#00E396',
-                width: 2
-            },
-            yaxis: 'y2',
-            xaxis: 'x2',
-            showlegend: true
+            label: 'Apartment Price',
+            data: years.map(year => plantData.prices?.[year]?.apartment_price || 0),
+            borderColor: '#36A2EB',
+            backgroundColor: 'rgba(54, 162, 235, 0.1)',
+            tension: 0.1,
+            fill: true
         },
         {
-            x: priceYears,
-            y: priceYears.map(year => plantData.prices[year]?.house_price || null),
-            type: 'scatter',
-            mode: 'lines+markers',
-            name: 'House Price (DKK)',
-            line: {
-                color: '#008FFB',
-                width: 2
-            },
-            yaxis: 'y2',
-            xaxis: 'x2',
-            showlegend: true
+            label: 'House Price',
+            data: years.map(year => plantData.prices?.[year]?.house_price || 0),
+            borderColor: '#4BC0C0',
+            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+            tension: 0.1,
+            fill: true
         }
     ];
 
-    const allTraces = [totalTrace, ...productionTraces, ...priceTraces];
-
-    // Clean up any existing facts div
-    const existingFactsDiv = document.getElementById('plant-facts');
-    if (existingFactsDiv) {
-        existingFactsDiv.remove();
-    }
-
-    // Update the facts section with capacity and area information
-    if (plantData.idrift) {
-        const factsDiv = document.createElement('div');
-        factsDiv.id = 'plant-facts';
-        factsDiv.innerHTML = `
-            <h3>${plantData.name}</h3>
-            <p>In operation since: ${new Date(plantData.idrift).toLocaleDateString('da-DK')}</p>
-            ${plantData.elkapacitet_MW ? `<p>Electrical Capacity: ${plantData.elkapacitet_MW.toLocaleString('da-DK', {maximumFractionDigits: 2})} MW</p>` : ''}
-            ${plantData.varmekapacitet_MW ? `<p>Heat Capacity: ${plantData.varmekapacitet_MW.toLocaleString('da-DK', {maximumFractionDigits: 2})} MW</p>` : ''}
-            ${plantData.total_area_km2 ? `<p>Supply Area: ${plantData.total_area_km2.toLocaleString('da-DK', {maximumFractionDigits: 2})} km²</p>` : ''}
-        `;
-        // Insert facts div at the end of graph container
-        graphContainer.appendChild(factsDiv);
-    }
-
-    // Initial render with event binding
-    Plotly.newPlot(graphContainer, allTraces, layout).then(() => {
-        graphContainer.on('plotly_relayout', function(eventdata) {
-            console.log('Zoom event detected:', eventdata);
-
-            // Check if we're zoomed to a single year
-            if (eventdata['xaxis.range[0]'] && eventdata['xaxis.range[1]']) {
-                const zoomRange = eventdata['xaxis.range[1]'] - eventdata['xaxis.range[0]'];
-                console.log('Zoom range:', zoomRange);
-                
-                // If zoomed to roughly 1 year or less
-                if (zoomRange <= 1.0) {  // Increased threshold to 1 year
-                    const year = Math.round(eventdata['xaxis.range[0]']).toString();
-                    console.log('Creating pie chart for year:', year);
-                    
-                    // Check if we have data for this year
-                    if (!plantData.production[year]) {
-                        console.log('No data available for year:', year);
-                        return;
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            plugins: {
+                legend: {
+                    position: 'right',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
                     }
-
-                    // Create reset button
-                    createResetButton(graphContainer, () => {
-                        // Switch back to original graph
-                        Plotly.react(graphContainer, allTraces, layout).then(() => {
-                            // Remove the reset button after resetting
-                            const resetBtn = document.querySelector('.reset-zoom-btn');
-                            if (resetBtn) resetBtn.remove();
-                        });
-                    });
-
-                    // Create pie chart data for the selected year
-                    const pieData = [{
-                        values: graphConfig.attributes
-                            .filter(attr => {
-                                const mappedKeys = graphConfig.fuelTypes[attr];
-                                let value = 0;
-                                try {
-                                    if (Array.isArray(mappedKeys)) {
-                                        value = mappedKeys.reduce((sum, key) => 
-                                            sum + (plantData.production[year]?.[key] || 0), 0);
-                                    } else if (mappedKeys) {
-                                        value = plantData.production[year]?.[mappedKeys] || 0;
-                                    }
-                                    const yearTotal = Object.values(plantData.production[year])
-                                        .reduce((sum, val) => sum + (val || 0), 0);
-                                    const percentage = (value / yearTotal) * 100;
-                                    return percentage >= LEGEND_THRESHOLD_PERCENTAGE;
-                                } catch (e) {
-                                    console.log('Error calculating value for', attr, e);
-                                    return false;
-                                }
-                            })
-                            .map(attr => {
-                                const mappedKeys = graphConfig.fuelTypes[attr];
-                                if (Array.isArray(mappedKeys)) {
-                                    return mappedKeys.reduce((sum, key) => 
-                                        sum + (plantData.production[year]?.[key] || 0), 0);
-                                }
-                                return plantData.production[year]?.[mappedKeys] || 0;
-                            }),
-                        labels: graphConfig.attributes
-                            .filter(attr => {
-                                const mappedKeys = graphConfig.fuelTypes[attr];
-                                let value = 0;
-                                try {
-                                    if (Array.isArray(mappedKeys)) {
-                                        value = mappedKeys.reduce((sum, key) => 
-                                            sum + (plantData.production[year]?.[key] || 0), 0);
-                                    } else if (mappedKeys) {
-                                        value = plantData.production[year]?.[mappedKeys] || 0;
-                                    }
-                                    const yearTotal = Object.values(plantData.production[year])
-                                        .reduce((sum, val) => sum + (val || 0), 0);
-                                    const percentage = (value / yearTotal) * 100;
-                                    return percentage >= LEGEND_THRESHOLD_PERCENTAGE;
-                                } catch (e) {
-                                    console.log('Error calculating value for', attr, e);
-                                    return false;
-                                }
-                            }),
-                        type: 'pie',
-                        hole: 0.4,
-                        marker: {
-                            colors: graphConfig.attributes
-                                .filter(attr => {
-                                    const mappedKeys = graphConfig.fuelTypes[attr];
-                                    let value = 0;
-                                    try {
-                                        if (Array.isArray(mappedKeys)) {
-                                            value = mappedKeys.reduce((sum, key) => 
-                                                sum + (plantData.production[year]?.[key] || 0), 0);
-                                        } else if (mappedKeys) {
-                                            value = plantData.production[year]?.[mappedKeys] || 0;
-                                        }
-                                        const yearTotal = Object.values(plantData.production[year])
-                                            .reduce((sum, val) => sum + (val || 0), 0);
-                                        const percentage = (value / yearTotal) * 100;
-                                        return percentage >= LEGEND_THRESHOLD_PERCENTAGE;
-                                    } catch (e) {
-                                        console.log('Error calculating value for', attr, e);
-                                        return false;
-                                    }
-                                })
-                                .map(attr => graphConfig.colors[attr])
+                },
+                title: {
+                    display: true,
+                    text: 'Price Development'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const price = context.raw;
+                            return price === 0 ? 
+                                'No price data available' : 
+                                `Price: ${price.toFixed(0)} DKK`;
+                        }
+                    }
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x'
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true
                         },
-                        hovertemplate: '%{label}: %{value:,.0f} TJ (%{percent:.1f}%)<extra></extra>'
-                    }];
-
-                    // Modify pie layout to maintain grid structure
-                    const pieLayout = {
-                        grid: layout.grid,  // Keep the original grid
-                        height: layout.height,
-                        showlegend: true,
-                        legend: layout.legend,
-                        width: graphContainer.clientWidth * 0.95,
-                        autosize: false,
-                        // Add specific subplot settings
-                        annotations: [{
-                            text: `Production Distribution ${year}`,
-                            showarrow: false,
-                            x: 0.5,
-                            y: 1,
-                            xref: 'paper',
-                            yref: 'paper',
-                            xanchor: 'center',
-                            yanchor: 'bottom'
-                        }]
-                    };
-
-                    // Create combined data with pie chart and price traces
-                    const combinedData = [
-                        {...pieData[0], domain: {row: 0, column: 0}},  // Add domain for pie chart
-                        ...priceTraces  // Keep price traces
-                    ];
-
-                    // Update the plot with combined data
-                    Plotly.react(graphContainer, combinedData, pieLayout).then(() => {
-                        // Add double click handler for pie chart
-                        graphContainer.on('plotly_doubleclick', function() {
-                            Plotly.react(graphContainer, allTraces, layout).then(() => {
-                                Plotly.relayout(graphContainer, {
-                                    'xaxis.autorange': true,
-                                    'yaxis.autorange': true,
-                                    'xaxis2.autorange': true,
-                                    'yaxis2.autorange': true
-                                });
-                            });
-                        });
-                    });
-                } else {
-                    // Remove reset button if we're zoomed out
-                    const resetBtn = document.querySelector('.reset-zoom-btn');
-                    if (resetBtn) resetBtn.remove();
-                    
-                    // Switch back to original graph
-                    Plotly.react(graphContainer, allTraces, layout);
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    },
+                    grid: {
+                        color: '#E4E4E4'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Price (DKK)'
+                    },
+                    grid: {
+                        color: '#E4E4E4'
+                    },
+                    beginAtZero: true
                 }
             }
-        });
+        }
     });
+
+    return chart;
+}
+
+function updateInfoBox(plantData) {
+    const infoBox = document.querySelector('.info-box');
+    if (!infoBox) return;
+
+    // Format the commissioning date
+    const commissionDate = new Date(plantData.idrift).getFullYear();
+    
+    // Create the content without the title
+    infoBox.innerHTML = `
+        <ul style="list-style: none; padding: 0;">
+            <li><strong>Commissioned:</strong> ${commissionDate}</li>
+            <li><strong>Electrical Capacity:</strong> ${plantData.elkapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
+            <li><strong>Heat Capacity:</strong> ${plantData.varmekapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
+            <li><strong>Total Area:</strong> ${plantData.total_area_km2?.toFixed(2) || 'N/A'} km²</li>
+        </ul>
+    `;
+    
+    // Show the info box
+    infoBox.classList.add('visible');
 } 

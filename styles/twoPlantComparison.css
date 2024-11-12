@@ -1,0 +1,41 @@
+.two-plant-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.plant-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+/* Reuse existing graph box styles but with adjusted heights */
+.plant-column .production-graph {
+    height: 350px;
+}
+
+.plant-column .price-graph {
+    height: 250px;
+}
+
+/* Adjust info box for side-by-side layout */
+.plant-column .info-box {
+    min-height: auto;
+}
+
+/* Optional: Add a divider between columns */
+.plant-column:first-child {
+    padding-right: 10px;
+}
+
+.plant-column:last-child {
+    padding-left: 10px;
+}

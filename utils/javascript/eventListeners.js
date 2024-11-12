@@ -228,13 +228,11 @@ function toggleSelection(map, forsyid, isCtrlPressed) {
         // Remove from selection if Ctrl key is pressed
         if (selectionSet.has(forsyid)) {
             selectionSet.delete(forsyid);
-            console.log(`Removed selection for forsyid: ${forsyid}`);
         }
     } else {
         // Add to selection if Ctrl key is not pressed
         if (!selectionSet.has(forsyid)) {
             selectionSet.add(forsyid);
-            console.log(`Added selection for forsyid: ${forsyid}`);
         }
     }
     updateSelectedPlants(map);

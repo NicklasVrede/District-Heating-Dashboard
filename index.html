@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="styles/toast.css">
     <link rel="stylesheet" href="styles/autocomplete.css">
     <link rel="stylesheet" href="styles/tooltip.css">
-    <link rel="stylesheet" href="styles/singlePlantDisplay.css">
-    <link rel="stylesheet" href="styles/twoPlants.css">
+    <link rel="stylesheet" href="styles/graphBoxes.css">
+    <link rel="stylesheet" href="styles/twoPlantComparison.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -47,7 +48,6 @@
                         <option value="none">None</option>
                         <option value="top5">Top 5</option>
                         <option value="top10">Top 10</option>
-                        <option value="middle5">Middle 5</option>
                         <option value="bottom5">Bottom 5</option>
                         <option value="bottom10">Bottom 10</option>
                     </select>
@@ -69,7 +69,24 @@
     <div class="content">
         <div id="map"></div>
         <div id="divider"></div>
-        <div id="graph-container"></div>
+        <div id="graph-container">
+            <div class="two-plant-container">
+                <div class="plant-column">
+                    <!-- Plant 1 graphs and info -->
+                    <h2 class="graph-title">Plant 1</h2>
+                    <div class="production-graph">...</div>
+                    <div class="price-graph">...</div>
+                    <div class="info-box">...</div>
+                </div>
+                <div class="plant-column">
+                    <!-- Plant 2 graphs and info -->
+                    <h2 class="graph-title">Plant 2</h2>
+                    <div class="production-graph">...</div>
+                    <div class="price-graph">...</div>
+                    <div class="info-box">...</div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div id="toast-container" class="toast-container"></div> 
@@ -80,6 +97,9 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js' defer></script>
     <script src="https://unpkg.com/@turf/turf/turf.min.js" defer></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js" defer></script> 
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
 
     <!-- Application Scripts -->
     <script src="utils/javascript/autocomplete.js" defer></script>

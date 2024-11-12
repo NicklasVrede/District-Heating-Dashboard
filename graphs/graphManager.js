@@ -6,20 +6,21 @@ import { selectionSet } from '../main.js';
 // Variable for data caching
 let cachedData = null;
 
+let currentCleanup = null;
+
 // Function to determine which graph to display
 function navigateGraphs(data, selectedForsyids, focus) {
+    // Clean up previous visualization if exists
+    if (currentCleanup) {
+        currentCleanup();
+        currentCleanup = null;
+    }
+
     const graphContainer = document.getElementById('graph-container');
     
     if (!selectedForsyids || selectedForsyids.length === 0) {
         console.error('No forsyid selected');
-        // Clean up any existing facts div
-        const existingFactsDiv = document.getElementById('plant-facts');
-        if (existingFactsDiv) {
-            existingFactsDiv.remove();
-        }
-        if (graphContainer.data && graphContainer.data.length > 0) {
-            Plotly.purge(graphContainer);
-        }
+        graphContainer.innerHTML = '';
         return;
     }
 
@@ -37,7 +38,7 @@ function navigateGraphs(data, selectedForsyids, focus) {
             createSinglePlantGraph(data, selectedForsyids[0], focus);
             break;
         case 2:
-            createTwoPlantComparison(data, selectedForsyids);
+            currentCleanup = createTwoPlantComparison(data, selectedForsyids);
             break;
         default:
             createOrUpdatePlotlyGraph(data, selectedForsyids);

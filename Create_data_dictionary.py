@@ -42,15 +42,15 @@ aggregated_areas = (areas_gdf.geometry.area / 1_000_000).groupby(areas_gdf['fors
 aggregated_areas = aggregated_areas.to_dict()
 
 # Process price files
-def safe_float_convert(value, year, price_type):
+def safe_float_convert(value, year=None, price_type=None):
     if pd.isna(value) or value == '-':
         return None
     try:
         raw_value = float(str(value).replace('.', '').replace(',', '.'))
-        if year == '2019' and price_type in ['apartment_price', 'house_price']:
-            return int(round(raw_value / 100))
-        elif raw_value > 1000:  # apartment/house prices
-            return int(round(raw_value / 10))
+        if price_type == 'mwh_price' and year == '2022':
+            raw_value *= 0.1
+        if price_type in ['apartment_price', 'house_price'] and year == '2019':
+            raw_value *= 0.1
         return int(round(raw_value))
     except (ValueError, TypeError):
         return None
@@ -85,11 +85,11 @@ for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid
     data_dict[forsyid] = {
         'name': mappings['name'].get(forsyid, 'Unknown'),
         'idrift': mappings['idrift'].get(forsyid),
-        'elkapacitet_MW': float(mappings['elkapacitet'].get(forsyid, 0) or 0),
-        'varmekapacitet_MW': float(mappings['varmekapacitet'].get(forsyid, 0) or 0),
-        'total_area_km2': float(aggregated_areas.get(forsyid, 0) or 0),
+        'elkapacitet_MW': mappings['elkapacitet'].get(forsyid, 0) or 0,
+        'varmekapacitet_MW': mappings['varmekapacitet'].get(forsyid, 0) or 0,
+        'total_area_km2': aggregated_areas.get(forsyid, 0) or 0,
         'production': {
-            str(year): {col.replace('_TJ', ''): float(val.iloc[0] if hasattr(val, 'iloc') else val or 0)
+            str(year): {col.replace('_TJ', ''): int(round(val.iloc[0] if hasattr(val, 'iloc') else val or 0))
                        for col, val in yearly_data[energy_columns].items()}
             for year, yearly_data in group.groupby('aar')
         }

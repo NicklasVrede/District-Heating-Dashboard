@@ -1,211 +1,338 @@
 import { graphConfig } from '../config/graphConfig.js';
+import { showToast } from './toast.js';
 
 const LEGEND_THRESHOLD_PERCENTAGE = 2;
 
 export function createTwoPlantComparison(data, validForsyids) {
-    const graphContainer = document.getElementById('graph-container');
-    
-    const layout = {
-        grid: {
-            rows: 2,
-            columns: 2,
-            pattern: 'independent',
-            roworder: 'top to bottom',
-            rowheight: [0.6, 0.4]
-        },
-        height: 600,
-        autosize: true,
-        showlegend: true,
-        legend: {
-            orientation: 'v',
-            x: 1.1,
-            y: 0.5,
-            traceorder: 'grouped'
-        },
-        margin: {
-            t: 30,
-            b: 100,
-            l: 80,
-            r: 150
-        },
-        hovermode: 'x unified',
-        hoverlabel: {
-            namelength: -1
-        },
-        plot_bgcolor: 'white',
-        paper_bgcolor: 'white',
-        width: graphContainer.clientWidth * 0.95,
-        autosize: false
-    };
-
-    const traces = [];
-    
-    // Create production traces for both plants
-    validForsyids.forEach((forsyid, index) => {
-        const paddedForsyid = forsyid.toString().padStart(8, '0');
-        const plantData = data[paddedForsyid];
-        const years = Object.keys(plantData.production).sort();
-        
-        // Add total trace for hover info
-        traces.push({
-            x: years,
-            y: years.map(() => 0),
-            type: 'scatter',
-            mode: 'lines',
-            name: ' ',
-            hovertemplate: 'Total: %{customdata:,.0f} TJ<extra></extra>',
-            customdata: years.map(year => 
-                Object.values(plantData.production[year]).reduce((sum, val) => sum + (val || 0), 0)
-            ),
-            showlegend: false,
-            visible: true,
-            yaxis: `y${index + 1}`,
-            xaxis: `x${index + 1}`,
-            line: {
-                width: 0,
-                color: 'rgba(0,0,0,0)'
-            }
-        });
-
-        // Add title for each plant
-        layout[`xaxis${index + 1}`] = {
-            title: 'Time (Year)',
-            domain: index === 0 ? [0, 0.45] : [0.55, 1],
-            row: 1,
-            column: index + 1,
-            dtick: 1,
-            range: [2021, 2023],
-            showgrid: true,
-            gridwidth: 1,
-            gridcolor: '#E4E4E4'
-        };
-        layout[`yaxis${index + 1}`] = {
-            title: 'Production (TJ)',
-            domain: [0.6, 1],
-            row: 1,
-            column: index + 1,
-            matches: 'y',
-            rangemode: 'tozero',
-            showgrid: true,
-            gridwidth: 1,
-            gridcolor: '#E4E4E4'
-        };
-        
-        // Add price axes
-        layout[`xaxis${index + 3}`] = {
-            title: 'Time (Year)',
-            domain: index === 0 ? [0, 0.45] : [0.55, 1],
-            row: 2,
-            column: index + 1,
-            range: [2019, 2024],
-            dtick: 1,
-            showgrid: true,
-            gridwidth: 1,
-            gridcolor: '#E4E4E4'
-        };
-        layout[`yaxis${index + 3}`] = {
-            title: 'Price (DKK)',
-            domain: [0, 0.4],
-            row: 2,
-            column: index + 1,
-            matches: 'y3',
-            rangemode: 'tozero',
-            showgrid: true,
-            gridwidth: 1,
-            gridcolor: '#E4E4E4'
-        };
-
-        // Add title annotation
-        layout.annotations = layout.annotations || [];
-        layout.annotations.push({
-            text: plantData.name,
-            showarrow: false,
-            x: index === 0 ? 0.225 : 0.775,
-            y: 1.1,
-            xref: 'paper',
-            yref: 'paper'
-        });
-
-        // Add production traces
-        graphConfig.attributes.forEach(attr => {
-            const mappedKeys = graphConfig.fuelTypes[attr];
-            const y = years.map(year => {
-                if (Array.isArray(mappedKeys)) {
-                    return mappedKeys.reduce((sum, key) => 
-                        sum + (plantData.production[year]?.[key] || 0), 0);
-                }
-                return plantData.production[year]?.[mappedKeys] || 0;
-            });
-
-            // Calculate the percentage contribution
-            const totalProduction = y.reduce((sum, val) => sum + val, 0);
-            const totalAllProduction = years.reduce((sum, year) => {
-                return sum + Object.values(plantData.production[year])
-                    .reduce((s, val) => s + (val || 0), 0);
-            }, 0);
-            const contributionPercentage = (totalProduction / totalAllProduction) * 100;
-            const meetsThreshold = contributionPercentage >= LEGEND_THRESHOLD_PERCENTAGE;
-
-            // Create hover text with percentage
-            const hoverText = years.map(year => {
-                const yearValue = y[years.indexOf(year)];
-                const yearTotal = Object.values(plantData.production[year])
-                    .reduce((sum, val) => sum + (val || 0), 0);
-                const yearPercentage = (yearValue / yearTotal) * 100;
-                return `%{y:,.0f} TJ (${attr} - ${yearPercentage.toFixed(1)}%)`; 
-            });
-
-            traces.push({
-                x: years,
-                y: y,
-                type: 'scatter',
-                mode: 'lines',
-                stackgroup: `plant${index + 1}`,
-                name: attr,
-                fill: 'tonexty',
-                line: { width: 0.5, color: graphConfig.colors[attr] },
-                fillcolor: graphConfig.colors[attr],
-                xaxis: `x${index + 1}`,
-                yaxis: `y${index + 1}`,
-                showlegend: index === 0 && meetsThreshold,
-                legendgroup: attr,
-                hoverinfo: meetsThreshold ? 'name+y' : 'skip',
-                hovertemplate: meetsThreshold ? hoverText : undefined,
-                hoveron: meetsThreshold ? 'points+fills' : 'skip'
-            });
-        });
-
-        // Add price traces
-        ['mwh_price', 'apartment_price', 'house_price'].forEach((priceType, priceIndex) => {
-            const priceColors = ['#FF4560', '#00E396', '#008FFB'];
-            const priceNames = ['MWh Price', 'Apartment Price', 'House Price'];
-            
-            // Define full range of years for prices
-            const fullYearRange = ['2019', '2020', '2021', '2022', '2023', '2024'];
-            
-            traces.push({
-                x: fullYearRange,
-                y: fullYearRange.map(year => plantData.prices[year]?.[priceType] || null),
-                type: 'scatter',
-                mode: 'lines+markers',
-                name: priceNames[priceIndex],
-                line: { color: priceColors[priceIndex], width: 2 },
-                xaxis: `x${index + 3}`,
-                yaxis: `y${index + 3}`,
-                showlegend: index === 0,
-                legendgroup: priceNames[priceIndex]
-            });
-        });
-    });
-
-    // Create and update the plot - simplified version without facts
-    function updatePlot() {
-        Plotly.react(graphContainer, traces, layout);
+    // Input validation
+    if (!data || !validForsyids || validForsyids.length !== 2) {
+        console.error('Invalid parameters for two plant comparison');
+        return;
     }
 
-    // Initial plot
-    updatePlot();
+    const graphContainer = document.getElementById('graph-container');
+    if (!graphContainer) {
+        console.error('Graph container not found');
+        return;
+    }
 
-    // Return empty cleanup function
-    return () => {};
+    // Store chart instances for cleanup
+    const charts = [];
+
+    // Clear existing content and create two-plant container
+    graphContainer.innerHTML = `
+        <div class="two-plant-container">
+            <div class="plant-column">
+                <h2 class="graph-title"></h2>
+                <div class="production-graph">
+                    <canvas id="productionChart1"></canvas>
+                </div>
+                <div class="price-graph">
+                    <canvas id="priceChart1"></canvas>
+                </div>
+                <div class="info-box"></div>
+            </div>
+            <div class="plant-column">
+                <h2 class="graph-title"></h2>
+                <div class="production-graph">
+                    <canvas id="productionChart2"></canvas>
+                </div>
+                <div class="price-graph">
+                    <canvas id="priceChart2"></canvas>
+                </div>
+                <div class="info-box"></div>
+            </div>
+        </div>
+    `;
+
+    // Create charts for both plants
+    validForsyids.forEach((forsyid, index) => {
+        const plantId = forsyid.toString().padStart(8, '0');
+        const plantData = data[plantId];
+
+        if (!plantData?.production) {
+            showToast(`No data available for plant ${index + 1}`);
+            return;
+        }
+
+        const column = graphContainer.querySelector(`.plant-column:nth-child(${index + 1})`);
+        
+        // Set plant title
+        const titleElement = column.querySelector('.graph-title');
+        titleElement.textContent = plantData.name || `Plant ${index + 1}`;
+
+        // Create and store chart instances
+        charts.push(createProductionChart(plantData, index + 1));
+        charts.push(createPriceChart(plantData, index + 1));
+
+        // Update info box
+        updateInfoBox(plantData, index + 1);
+    });
+
+    // Return cleanup function
+    return function cleanup() {
+        charts.forEach(chart => {
+            if (chart) {
+                chart.destroy();
+            }
+        });
+        graphContainer.innerHTML = '';
+    };
+}
+
+function createProductionChart(plantData, index) {
+    const ctx = document.getElementById(`productionChart${index}`).getContext('2d');
+    
+    const productionYears = Object.keys(plantData.production)
+        .filter(year => !isNaN(parseInt(year)))
+        .sort();
+
+    // Create datasets for each fuel type
+    const datasets = graphConfig.attributes.map(attr => {
+        const values = productionYears.map(year => {
+            const mappedKeys = graphConfig.fuelTypes[attr];
+            if (Array.isArray(mappedKeys)) {
+                return mappedKeys.reduce((sum, key) => 
+                    sum + (plantData.production[year]?.[key] || 0), 0);
+            }
+            return plantData.production[year]?.[mappedKeys] || 0;
+        });
+
+        // Calculate percentage contribution
+        const totalAttr = values.reduce((sum, val) => sum + val, 0);
+        const totalAll = productionYears.reduce((sum, year) => 
+            sum + Object.values(plantData.production[year]).reduce((s, val) => s + (val || 0), 0), 0);
+        const percentage = (totalAttr / totalAll) * 100;
+
+        return {
+            label: attr,
+            data: values,
+            backgroundColor: graphConfig.colors[attr],
+            borderColor: graphConfig.colors[attr],
+            fill: true,
+            hidden: percentage < LEGEND_THRESHOLD_PERCENTAGE
+        };
+    });
+
+    return new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: productionYears,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'nearest',
+                axis: 'x',
+                intersect: false
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    },
+                    grid: {
+                        color: '#E4E4E4'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Production (TJ)'
+                    },
+                    stacked: true,
+                    grid: {
+                        color: '#E4E4E4'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Production Distribution'
+                },
+                tooltip: {
+                    mode: 'index',
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const total = context.chart.data.datasets.reduce(
+                                (sum, dataset) => sum + (dataset.data[context.dataIndex] || 0), 
+                                0
+                            );
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `${context.dataset.label}: ${value.toFixed(0)} TJ (${percentage}%)`;
+                        },
+                        footer: function(tooltipItems) {
+                            const total = tooltipItems.reduce(
+                                (sum, item) => sum + item.raw, 
+                                0
+                            );
+                            return `Total: ${total.toFixed(0)} TJ`;
+                        }
+                    }
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x'
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x'
+                    }
+                },
+                legend: {
+                    position: 'right',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function createPriceChart(plantData, index) {
+    const ctx = document.getElementById(`priceChart${index}`).getContext('2d');
+    const years = ['2019', '2020', '2021', '2022', '2023', '2024'];
+    
+    const datasets = [
+        {
+            label: 'MWh Price',
+            data: years.map(year => plantData.prices?.[year]?.mwh_price || 0),
+            borderColor: '#FF6384',
+            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+            tension: 0.1,
+            fill: true
+        },
+        {
+            label: 'Apartment Price',
+            data: years.map(year => plantData.prices?.[year]?.apartment_price || 0),
+            borderColor: '#36A2EB',
+            backgroundColor: 'rgba(54, 162, 235, 0.1)',
+            tension: 0.1,
+            fill: true
+        },
+        {
+            label: 'House Price',
+            data: years.map(year => plantData.prices?.[year]?.house_price || 0),
+            borderColor: '#4BC0C0',
+            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+            tension: 0.1,
+            fill: true
+        }
+    ];
+
+    return new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            plugins: {
+                legend: {
+                    position: 'right',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Price Development'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const price = context.raw;
+                            return price === 0 ? 
+                                'No price data available' : 
+                                `Price: ${price.toFixed(0)} DKK`;
+                        }
+                    }
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x'
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    },
+                    grid: {
+                        color: '#E4E4E4'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Price (DKK)'
+                    },
+                    grid: {
+                        color: '#E4E4E4'
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function updateInfoBox(plantData, index) {
+    const infoBox = document.querySelector(`.plant-column:nth-child(${index}) .info-box`);
+    if (!infoBox) return;
+
+    const commissionDate = new Date(plantData.idrift).getFullYear();
+    
+    infoBox.innerHTML = `
+        <ul style="list-style: none; padding: 0;">
+            <li><strong>Commissioned:</strong> ${commissionDate}</li>
+            <li><strong>Electrical Capacity:</strong> ${plantData.elkapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
+            <li><strong>Heat Capacity:</strong> ${plantData.varmekapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
+            <li><strong>Total Area:</strong> ${plantData.total_area_km2?.toFixed(2) || 'N/A'} km²</li>
+        </ul>
+    `;
+    
+    infoBox.classList.add('visible');
 } 

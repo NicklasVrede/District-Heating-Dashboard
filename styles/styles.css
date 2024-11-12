@@ -49,39 +49,30 @@ body, html {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-#map {
-    position: absolute;
-    width: calc(50% - 4px);
-    height: calc(100vh - var(--top-bar-height));
-    left: 0;
-}
-
-#graph-container {
-    position: absolute;
-    right: 0;
-    width: calc(50% - 4px - 15px);
+.content {
+    position: relative;
+    width: 100%;
     height: calc(100vh - var(--top-bar-height));
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 15px;
-    box-sizing: border-box;
+    flex-direction: row;
+}
+
+#map {
+    flex: 1;
+    width: calc(50% - 4px);
+    height: 100%;
 }
 
 .js-plotly-plot {
     flex: 0.85; /* Takes 85% of the container height */
 }
 
-
 #divider {
-    position: absolute;
-    left: 50%;
     width: 8px;
-    height: calc(100vh - var(--top-bar-height));
+    height: 100%;
     background: #e0e0e0;
     cursor: col-resize;
     z-index: 10;
-    transform: translateX(-50%);
 }
 
 .mapboxgl-popup {

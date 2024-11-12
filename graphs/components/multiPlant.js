@@ -4,10 +4,19 @@ import { showToast } from './toast.js';
 export function createOrUpdatePlotlyGraph(data, selectedForsyids) {
     const graphContainer = document.getElementById('graph-container');
     
+    // Clear existing content
+    graphContainer.innerHTML = `
+        <h2 class="graph-title">Multiple Plants Comparison</h2>
+        <div class="production-graph">
+            <canvas id="productionChart"></canvas>
+        </div>
+        <div class="price-graph">
+            <canvas id="priceChart"></canvas>
+        </div>
+    `;
+
+    // Input validation
     if (!selectedForsyids || selectedForsyids.length === 0) {
-        if (graphContainer.data && graphContainer.data.length > 0) {
-            Plotly.purge(graphContainer);
-        }
         return;
     }
 
@@ -19,68 +28,178 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids) {
 
     if (validForsyids.length === 0) {
         showToast("No data available for the selected plant(s)");
-        Plotly.purge(graphContainer);
         return;
     }
 
-    // Create bar chart for 3+ plants
-    const years = ['2021', '2022', '2023'];
-    const traces = graphConfig.attributes.map(attr => {
-        const x = [];
-        const y = [];
-        const mappedKeys = graphConfig.fuelTypes[attr];
+    // Create production chart
+    createProductionChart(data, validForsyids);
+    
+    // Create price chart
+    createPriceChart(data, validForsyids);
 
-        validForsyids.forEach(forsyid => {
-            const paddedForsyid = forsyid.toString().padStart(8, '0');
-            const plantData = data[paddedForsyid];
-            
-            if (plantData) {
-                x.push(plantData.name);
-                
-                const totalValue = years.reduce((sum, year) => {
-                    if (Array.isArray(mappedKeys)) {
-                        return sum + mappedKeys.reduce((keySum, key) => 
-                            keySum + (plantData.production[year]?.[key] || 0), 0);
-                    } else if (mappedKeys) {
-                        return sum + (plantData.production[year]?.[mappedKeys] || 0);
-                    }
-                    return sum;
-                }, 0);
-                
-                const averageValue = totalValue / years.length;
-                y.push(averageValue);
-            }
-        });
+    return function cleanup() {
+        const charts = Chart.instances;
+        charts.forEach(chart => chart.destroy());
+    };
+}
 
+function createProductionChart(data, validForsyids) {
+    const ctx = document.getElementById('productionChart').getContext('2d');
+    const currentYear = '2023'; // Or make this configurable
+
+    const plantNames = [];
+    const datasets = graphConfig.attributes.map(attr => {
         return {
-            x: x,
-            y: y,
-            type: 'bar',
-            name: attr,
-            marker: { color: graphConfig.colors[attr] }
+            label: attr,
+            data: [],
+            backgroundColor: graphConfig.colors[attr],
         };
     });
 
-    const layout = {
-        title: 'Average Production by Plant',
-        xaxis: { 
-            title: 'Plants',
-            tickangle: -45
-        },
-        yaxis: { 
-            title: 'Average Production (TJ)',
-            rangemode: 'tozero'
-        },
-        barmode: 'stack',
-        showlegend: true,
-        legend: {
-            orientation: 'h',
-            y: -0.2
-        },
-        margin: {
-            b: 150
+    validForsyids.forEach(forsyid => {
+        const paddedForsyid = forsyid.toString().padStart(8, '0');
+        const plantData = data[paddedForsyid];
+        
+        if (plantData) {
+            plantNames.push(plantData.name);
+            
+            graphConfig.attributes.forEach((attr, index) => {
+                const mappedKeys = graphConfig.fuelTypes[attr];
+                let value = 0;
+
+                if (Array.isArray(mappedKeys)) {
+                    value = mappedKeys.reduce((sum, key) => 
+                        sum + (plantData.production[currentYear]?.[key] || 0), 0);
+                } else {
+                    value = plantData.production[currentYear]?.[mappedKeys] || 0;
+                }
+                
+                datasets[index].data.push(value);
+            });
         }
-    };
-    
-    Plotly.react(graphContainer, traces, layout);
+    });
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: plantNames,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true,
+                    title: {
+                        display: true,
+                        text: 'Plants'
+                    }
+                },
+                y: {
+                    stacked: true,
+                    title: {
+                        display: true,
+                        text: 'Production (TJ)'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: `Production Distribution (${currentYear})`
+                },
+                legend: {
+                    position: 'right',
+                    align: 'start'
+                }
+            }
+        }
+    });
+}
+
+function createPriceChart(data, validForsyids) {
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    const currentYear = '2023';
+
+    const plantNames = [];
+    const houseData = [];
+    const apartmentData = [];
+    const mwhData = [];
+
+    validForsyids.forEach(forsyid => {
+        const paddedForsyid = forsyid.toString().padStart(8, '0');
+        const plantData = data[paddedForsyid];
+        
+        if (plantData?.prices?.[currentYear]) {
+            plantNames.push(plantData.name);
+            houseData.push(plantData.prices[currentYear].house_price || 0);
+            apartmentData.push(plantData.prices[currentYear].apartment_price || 0);
+            mwhData.push(plantData.prices[currentYear].mwh_price || 0);
+        }
+    });
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: plantNames,
+            datasets: [
+                {
+                    label: 'House Price',
+                    data: houseData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                    order: 3  // Will be rendered first (back)
+                },
+                {
+                    label: 'Apartment Price',
+                    data: apartmentData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                    order: 2  // Will be rendered second (middle)
+                },
+                {
+                    label: 'MWh Price',
+                    data: mwhData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                    order: 1  // Will be rendered last (front)
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Plants'
+                    }
+                },
+                y: {
+                    stacked: false,  // Disable stacking
+                    title: {
+                        display: true,
+                        text: 'Price (DKK)'
+                    },
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: `Price Comparison (${currentYear})`
+                },
+                legend: {
+                    position: 'right',
+                    align: 'start'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.raw.toLocaleString()} DKK`;
+                        }
+                    }
+                }
+            }
+        }
+    });
 } 

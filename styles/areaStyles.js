@@ -31,8 +31,8 @@ export const gasAreaStyles = {
         type: 'fill',
         source: 'gas-areas',
         paint: {
-            'fill-color': '#00FF00',
-            'fill-opacity': 0.1
+            'fill-color': '#fcef38',
+            'fill-opacity': 0.7
         }
     },
     line: {
@@ -40,8 +40,8 @@ export const gasAreaStyles = {
         type: 'line',
         source: 'gas-areas',
         paint: {
-            'line-color': '#02ab02',
-            'line-width': 0.5
+            'line-color': '#6e6b17',
+            'line-width': 0.7
         }
     }
 };
