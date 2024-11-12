@@ -28,14 +28,13 @@
             <div class="dropdown-group">
                 <div class="focus-selector-container">
                     <label for="focus-selector">Data Focus:</label>
-                    <select id="focus-selector">
-                        <option value="price">None</option>
+                    <select id="focus-selector" onchange="changeFocus(this.value)">
+                        <option value="none">None</option>
                         <option value="price">Price</option>
                         <option value="production">Production</option>
-                        <option value="co2">CO2</option>
                     </select>
                 </div>
-                <div class="focus-selector-container" id="measure-container" style="display: none;">
+                <div class="focus-selector-container hidden" id="measure-container">
                     <label for="measure-selector">Measure:</label>
                     <select id="measure-selector">
                         <option value="kul">Kul</option>
@@ -110,9 +109,8 @@
 
     <!-- Focus and Measure Controls -->
     <script type="module">
-        import { changeFocus, applyFilters } from './utils/javascript/focusControls.js';
-        // Make functions available globally
-        window.focusControls = { changeFocus, applyFilters };
+        import { changeFocus } from './utils/javascript/focusControls.js';
+        window.changeFocus = changeFocus;
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>

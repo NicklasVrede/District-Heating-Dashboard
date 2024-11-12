@@ -68,7 +68,33 @@
     background-color: #f9f9f9;
 }
 
+/* Add styles for measure container */
+#measure-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    order: 2;
+}
+
+#measure-container.hidden {
+    max-width: 0;
+    opacity: 0;
+    margin-right: 0;
+}
+
+#measure-container.visible {
+    max-width: 300px;
+    opacity: 1;
+    margin-right: 8px;
+}
+
+/* Update existing containers with order */
 .focus-selector-container {
+    order: 1;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -354,10 +380,12 @@
 }
 
 .select-group {
+    order: 3;
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: nowrap;
+    transition: transform 0.3s ease;
 }
 
 
@@ -384,7 +412,7 @@
 }
 
 #select-dropdown {
-    margin-right: 8px;
+    margin-right: 0;
 }
 
 /* For mobile responsiveness */
@@ -419,4 +447,18 @@
         margin: 0 auto;
         flex-wrap: nowrap;
     }
+}
+
+/* Ensure measure selector matches other dropdowns */
+#measure-selector {
+    padding: 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: Arial;
+    height: 28px;
+    width: 120px;
+    text-indent: 8px;
 }

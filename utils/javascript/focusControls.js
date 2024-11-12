@@ -1,15 +1,17 @@
 export function changeFocus(value) {
     const measureContainer = document.getElementById('measure-container');
     
-    // Show/hide measure dropdown based on production selection
     if (value === 'production') {
-        measureContainer.style.display = 'flex';
+        measureContainer.classList.remove('hidden');
+        measureContainer.classList.add('visible');
     } else {
-        measureContainer.style.display = 'none';
-    }
-
-    // Reset measure selector to first option when hiding
-    if (value !== 'production') {
+        measureContainer.classList.remove('visible');
+        measureContainer.classList.add('hidden');
+        
+        // Reset measure selector to first option when hiding
         document.getElementById('measure-selector').value = 'kul';
     }
-} 
+}
+
+// Make the function available globally
+window.changeFocus = changeFocus; 
