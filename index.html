@@ -69,21 +69,26 @@
         <div id="map"></div>
         <div id="divider"></div>
         <div id="graph-container">
-            <div class="two-plant-container">
-                <div class="plant-column">
-                    <!-- Plant 1 graphs and info -->
-                    <h2 class="graph-title">Plant 1</h2>
-                    <div class="production-graph">...</div>
-                    <div class="price-graph">...</div>
-                    <div class="info-box">...</div>
+            <div class="graph-header">
+                <h2 class="graph-title">Multiple Plants Comparison</h2>
+                <div class="year-slider-container hidden" id="year-slider-container">
+                    <label for="year-slider">Year:</label>
+                    <input 
+                        type="range" 
+                        id="year-slider" 
+                        min="2019" 
+                        max="2024" 
+                        value="2023"
+                        step="1"
+                    >
+                    <span id="year-label">2023</span>
                 </div>
-                <div class="plant-column">
-                    <!-- Plant 2 graphs and info -->
-                    <h2 class="graph-title">Plant 2</h2>
-                    <div class="production-graph">...</div>
-                    <div class="price-graph">...</div>
-                    <div class="info-box">...</div>
-                </div>
+            </div>
+            <div class="production-graph">
+                <canvas id="productionChart"></canvas>
+            </div>
+            <div class="price-graph">
+                <canvas id="priceChart"></canvas>
             </div>
         </div>
     </div>

@@ -113,3 +113,84 @@
     color: #333;
     box-sizing: border-box;
 }
+
+.graph-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 16px;
+}
+
+.graph-title {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.year-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: opacity 0.3s ease;
+    margin-left: 20px;
+}
+
+.year-slider-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.year-slider-container.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.year-slider-container label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    min-width: 40px;
+    margin-right: 4px;
+}
+
+#year-slider {
+    width: 150px;
+    -webkit-appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: #d3d3d3;
+    outline: none;
+    margin: 0 8px;
+}
+
+#year-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+}
+
+#year-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: 0;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: pointer;
+}
+
+#year-label {
+    min-width: 45px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    background: #f5f5f5;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-align: center;
+}

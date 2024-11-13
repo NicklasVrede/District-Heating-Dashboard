@@ -7,6 +7,11 @@ let areaTooltip = null;
 
 // Helper function to format fuel type
 function formatFuelType(fuel) {
+    // Handle undefined or null fuel types
+    if (!fuel) {
+        return 'Not specified';
+    }
+
     // Dictionary for specific replacements
     const replacements = {
         'traepiller': 'Træpiller',
@@ -42,8 +47,10 @@ export function addPlantEventListeners(map) {
         const features = map.queryRenderedFeatures(e.point, { layers: ['plants'] });
         if (features.length) {
             const feature = features[0];
-            highlightArea(map, feature.properties.forsyid);
-            highlightPlant(map, feature.properties.forsyid);
+            const properties = feature.properties || {};
+            
+            highlightArea(map, properties.forsyid);
+            highlightPlant(map, properties.forsyid);
             plantTooltip.innerHTML = `
                 <div class="mapboxgl-popup-content tooltip-content">
                     <h3 class="tooltip-title">${feature.properties.name}</h3>

@@ -84,12 +84,14 @@
     max-width: 0;
     opacity: 0;
     margin-right: 0;
+    visibility: hidden;
 }
 
 #measure-container.visible {
     max-width: 300px;
     opacity: 1;
     margin-right: 8px;
+    visibility: visible;
 }
 
 /* Update existing containers with order */

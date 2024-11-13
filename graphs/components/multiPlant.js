@@ -4,9 +4,23 @@ import { showToast } from './toast.js';
 export function createOrUpdatePlotlyGraph(data, selectedForsyids) {
     const graphContainer = document.getElementById('graph-container');
     
-    // Clear existing content
+    // Clear existing content while preserving the header
     graphContainer.innerHTML = `
-        <h2 class="graph-title">Multiple Plants Comparison</h2>
+        <div class="graph-header">
+            <h2 class="graph-title">Multiple Plants Comparison</h2>
+            <div class="year-slider-container" id="year-slider-container">
+                <label for="year-slider">Year:</label>
+                <input 
+                    type="range" 
+                    id="year-slider" 
+                    min="2019" 
+                    max="2024" 
+                    value="2023"
+                    step="1"
+                >
+                <span id="year-label">2023</span>
+            </div>
+        </div>
         <div class="production-graph">
             <canvas id="productionChart"></canvas>
         </div>
@@ -14,6 +28,11 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids) {
             <canvas id="priceChart"></canvas>
         </div>
     `;
+
+    // Re-add event listener since we recreated the element
+    document.getElementById('year-slider').addEventListener('input', function(e) {
+        document.getElementById('year-label').textContent = e.target.value;
+    });
 
     // Input validation
     if (!selectedForsyids || selectedForsyids.length === 0) {

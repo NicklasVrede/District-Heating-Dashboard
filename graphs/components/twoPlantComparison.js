@@ -45,7 +45,69 @@ export function createTwoPlantComparison(data, validForsyids) {
         </div>
     `;
 
-    // Create charts for both plants
+    // Calculate max values across both plants before creating charts
+    const maxValues = {
+        production: {},
+        prices: {
+            mwh_price: 0,
+            apartment_price: 0,
+            house_price: 0
+        }
+    };
+
+    // Calculate max production values for each fuel type
+    validForsyids.forEach(forsyid => {
+        const plantId = forsyid.toString().padStart(8, '0');
+        const plantData = data[plantId];
+        
+        if (plantData?.production) {
+            Object.keys(plantData.production).forEach(year => {
+                Object.entries(plantData.production[year]).forEach(([key, value]) => {
+                    maxValues.production[key] = Math.max(
+                        maxValues.production[key] || 0,
+                        value || 0
+                    );
+                });
+            });
+        }
+
+        if (plantData?.prices) {
+            Object.values(plantData.prices).forEach(yearPrices => {
+                maxValues.prices.mwh_price = Math.max(
+                    maxValues.prices.mwh_price,
+                    yearPrices.mwh_price || 0
+                );
+                maxValues.prices.apartment_price = Math.max(
+                    maxValues.prices.apartment_price,
+                    yearPrices.apartment_price || 0
+                );
+                maxValues.prices.house_price = Math.max(
+                    maxValues.prices.house_price,
+                    yearPrices.house_price || 0
+                );
+            });
+        }
+    });
+
+    // Calculate max production value across both plants
+    let maxProductionValue = 0;
+    validForsyids.forEach(forsyid => {
+        const plantId = forsyid.toString().padStart(8, '0');
+        const plantData = data[plantId];
+        
+        if (plantData?.production) {
+            Object.keys(plantData.production).forEach(year => {
+                const yearTotal = Object.values(plantData.production[year])
+                    .reduce((sum, val) => sum + (val || 0), 0);
+                maxProductionValue = Math.max(maxProductionValue, yearTotal);
+            });
+        }
+    });
+
+    // Round up to nearest thousand
+    const roundedMaxProduction = Math.ceil(maxProductionValue / 1000) * 1000;
+
+    // Create charts for both plants with shared max values
     validForsyids.forEach((forsyid, index) => {
         const plantId = forsyid.toString().padStart(8, '0');
         const plantData = data[plantId];
@@ -61,11 +123,10 @@ export function createTwoPlantComparison(data, validForsyids) {
         const titleElement = column.querySelector('.graph-title');
         titleElement.textContent = plantData.name || `Plant ${index + 1}`;
 
-        // Create and store chart instances
-        charts.push(createProductionChart(plantData, index + 1));
-        charts.push(createPriceChart(plantData, index + 1));
+        // Create and store chart instances with shared max values
+        charts.push(createProductionChart(plantData, index + 1, roundedMaxProduction));
+        charts.push(createPriceChart(plantData, index + 1, maxValues.prices));
 
-        // Update info box
         updateInfoBox(plantData, index + 1);
     });
 
@@ -80,7 +141,7 @@ export function createTwoPlantComparison(data, validForsyids) {
     };
 }
 
-function createProductionChart(plantData, index) {
+function createProductionChart(plantData, index, maxValue) {
     const ctx = document.getElementById(`productionChart${index}`).getContext('2d');
     
     const productionYears = Object.keys(plantData.production)
@@ -114,6 +175,14 @@ function createProductionChart(plantData, index) {
         };
     });
 
+    // Calculate the maximum stacked value for each year
+    const maxStackedValue = productionYears.map(year => {
+        return Object.values(plantData.production[year]).reduce((sum, val) => sum + (val || 0), 0);
+    }).reduce((max, val) => Math.max(max, val), 0);
+
+    // Round up to nearest thousand
+    const roundedMax = Math.ceil(maxStackedValue / 1000) * 1000;
+
     return new Chart(ctx, {
         type: 'line',
         data: {
@@ -146,7 +215,9 @@ function createProductionChart(plantData, index) {
                     stacked: true,
                     grid: {
                         color: '#E4E4E4'
-                    }
+                    },
+                    beginAtZero: true,
+                    max: maxValue // Use the shared rounded max value
                 }
             },
             plugins: {
@@ -207,7 +278,7 @@ function createProductionChart(plantData, index) {
     });
 }
 
-function createPriceChart(plantData, index) {
+function createPriceChart(plantData, index, maxValues) {
     const ctx = document.getElementById(`priceChart${index}`).getContext('2d');
     const years = ['2019', '2020', '2021', '2022', '2023', '2024'];
     
@@ -237,6 +308,15 @@ function createPriceChart(plantData, index) {
             fill: true
         }
     ];
+
+    const maxPrice = Math.max(
+        maxValues.mwh_price,
+        maxValues.apartment_price,
+        maxValues.house_price
+    );
+    
+    // Round up to nearest thousand
+    const roundedMaxPrice = Math.ceil(maxPrice / 1000) * 1000;
 
     return new Chart(ctx, {
         type: 'line',
@@ -312,7 +392,8 @@ function createPriceChart(plantData, index) {
                     grid: {
                         color: '#E4E4E4'
                     },
-                    beginAtZero: true
+                    beginAtZero: true,
+                    max: roundedMaxPrice
                 }
             }
         }

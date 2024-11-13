@@ -5,23 +5,46 @@ import { addPlantEventListeners, addAreaEventListeners } from './eventListeners.
 
 export function loadPlants(map) {
     fetch('data/plants.geojson')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(geojson => {
-            console.log('Plant data:', geojson); // Debugging: Log the plant data
-
             // Add the GeoJSON source to the map
             map.addSource('plants', {
                 type: 'geojson',
                 data: geojson
             });
 
-            // Add a layer to visualize the plants with custom styles
+            // Add base plant layer
             map.addLayer(plantStyles);
+
+            // Add price visualization layer (hidden by default)
+            map.addLayer({
+                id: 'plants-price',
+                type: 'circle',
+                source: 'plants',
+                layout: {
+                    'visibility': 'none'
+                },
+                paint: {
+                    'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['get', 'current_price'],
+                        0, 8,     // min size
+                        1500, 25  // max size for highest prices
+                    ],
+                    'circle-color': [
+                        'interpolate',
+                        ['linear'],
+                        ['get', 'current_price'],
+                        0, '#00ff00',      // green for low prices
+                        750, '#ffff00',    // yellow for medium prices
+                        1500, '#ff0000'    // red for high prices
+                    ],
+                    'circle-opacity': 0.8,
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#000000'
+                }
+            });
 
             // Add a layer for highlighted plants
             map.addLayer({

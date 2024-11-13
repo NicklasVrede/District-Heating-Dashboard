@@ -1,8 +1,15 @@
-import { map } from '../../main.js'; // Assuming map is exported from main.js
+import { getMapInstance } from './mapInstance.js';
+import { selectionSet } from '../../main.js';
 
 const OPENCAGE_API_KEY = 'e1337f0db4d14aeb8a69f6439fc005fc'; // Replace with your OpenCage API key
 
 export function searchAddress() {
+    const map = getMapInstance();
+    if (!map) {
+        console.error('Map not initialized');
+        return;
+    }
+    
     const address = document.getElementById('address').value;
     if (!address) {
         alert('Please enter an address.');

@@ -71,6 +71,17 @@ export function createSinglePlantGraph(data, forsyid, focus) {
         .filter(year => !isNaN(parseInt(year)))
         .sort();
 
+    // Calculate max production value
+    let maxProductionValue = 0;
+    productionYears.forEach(year => {
+        const yearTotal = Object.values(plantData.production[year])
+            .reduce((sum, val) => sum + (val || 0), 0);
+        maxProductionValue = Math.max(maxProductionValue, yearTotal);
+    });
+
+    // Round up to nearest hundred
+    const roundedMaxProduction = Math.ceil(maxProductionValue / 100) * 100;
+
     // Create datasets for each fuel type
     const datasets = graphConfig.attributes.map(attr => {
         const values = productionYears.map(year => {
@@ -148,7 +159,10 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                     stacked: true,
                     grid: {
                         color: '#E4E4E4'
-                    }
+                    },
+                    beginAtZero: true,
+                    min: 0,
+                    max: roundedMaxProduction
                 }
             },
             plugins: {
