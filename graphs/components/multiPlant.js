@@ -12,7 +12,9 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none'
     
     const graphContainer = document.getElementById('graph-container');
     
-    // Set default year and ranges based on focus
+    // Only create the structure if we have valid data to show
+    if (!selectedForsyids?.length) return;
+
     const yearRanges = {
         production: { defaultYear: '2023', minYear: '2021', maxYear: '2023' },
         price: { defaultYear: '2024', minYear: '2019', maxYear: '2024' },
@@ -20,8 +22,8 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none'
     };
     
     const { defaultYear, minYear, maxYear } = yearRanges[focus] || yearRanges.none;
-    
-    // Clear existing content while preserving the header
+
+    // Create the structure only when needed
     graphContainer.innerHTML = `
         <div class="graph-header">
             <h2 class="graph-title">Multiple Plants Comparison</h2>
