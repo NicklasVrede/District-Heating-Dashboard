@@ -3,11 +3,15 @@ import { createOrUpdatePlotlyGraph } from './components/multiPlant.js';
 import { createTwoPlantComparison } from './components/twoPlantComparison.js';
 import { selectionSet } from '../main.js';
 import { loadData, getCachedData } from '../utils/javascript/dataManager.js';
+import { appState } from '../utils/javascript/state/AppState.js';
 
 let currentCleanup = null;
 
 // Function to determine which graph to display
-function navigateGraphs(data, selectedForsyids, focus) {
+function navigateGraphs(data, selectedForsyids) {
+    // Use focus from appState
+    const focus = appState.focus;
+
     // Clean up previous visualization if exists
     if (currentCleanup) {
         currentCleanup();
@@ -46,11 +50,11 @@ function navigateGraphs(data, selectedForsyids, focus) {
 }
 
 // Function to update the graph   //Apply default!
-export async function updateGraph(focus = 'none') {
+export async function updateGraph() {
     try {
         const data = await loadData();
         const selectedForsyids = Array.from(selectionSet);
-        navigateGraphs(data, selectedForsyids, focus);
+        navigateGraphs(data, selectedForsyids);
     } catch (error) {
         console.error('Error updating graph:', error);
         const graphContainer = document.getElementById('graph-container');

@@ -2,6 +2,7 @@ import { getMapInstance } from '../mapInstance.js';
 import { PriceFocus } from './PriceFocus.js';
 import { ProductionFocus } from './ProductionFocus.js';
 import { DefaultFocus } from './DefaultFocus.js';
+import { appState } from '../state/AppState.js';
 
 class FocusManager {
     constructor() {
@@ -40,6 +41,7 @@ class FocusManager {
         } catch (error) {
             console.error('Error changing focus:', error);
             this.focuses.none.apply();
+            appState.focus = 'none';
         }
     }
 }

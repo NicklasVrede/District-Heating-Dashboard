@@ -12,6 +12,7 @@ import { toggleGasAreas } from './utils/javascript/toggleGasAreas.js';
 import { initDivider } from './utils/javascript/divider.js';
 import { FocusManager } from './utils/javascript/focusLayers/FocusManager.js';
 import { updateGraph } from './graphs/graphManager.js';
+import { appState } from './utils/javascript/state/AppState.js';
 
 // Initialize Mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0MnFzYWFyZ3pveWJ1In0.V9qwBfsH4plxE_fz89kuYg';
@@ -39,6 +40,9 @@ function changeFocus(value) {
         return;
     }
 
+    // Update the global focus state
+    appState.focus = value;
+
     // First, hide measure container by default
     measureContainer.classList.remove('visible');
     measureContainer.classList.add('hidden');
@@ -57,7 +61,7 @@ function changeFocus(value) {
 
     // Apply the focus change and update graphs
     focusManager.changeFocus(value);
-    updateGraph(value);
+    updateGraph();
 }
 
 // Expose functions to global scope
