@@ -3638,38 +3638,6 @@
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 745,
-                "apartment_price": 15041,
-                "house_price": 20072
-            },
-            "2020": {
-                "mwh_price": 745,
-                "apartment_price": 15041,
-                "house_price": 19653
-            },
-            "2021": {
-                "mwh_price": 744,
-                "apartment_price": 15298,
-                "house_price": 19906
-            },
-            "2022": {
-                "mwh_price": 744,
-                "apartment_price": 15298,
-                "house_price": 19906
-            },
-            "2023": {
-                "mwh_price": 744,
-                "apartment_price": 15298,
-                "house_price": 19906
-            },
-            "2024": {
-                "mwh_price": 813,
-                "apartment_price": 16710,
-                "house_price": 21738
-            }
         }
     },
     "14898018": {
@@ -17871,6 +17839,38 @@
                 "vandkraft": 0,
                 "elektricitet": 40,
                 "omgivelsesvarme": 88
+            }
+        },
+        "prices": {
+            "2019": {
+                "mwh_price": 458,
+                "apartment_price": 9152,
+                "house_price": 11765
+            },
+            "2020": {
+                "mwh_price": 458,
+                "apartment_price": 9152,
+                "house_price": 11765
+            },
+            "2021": {
+                "mwh_price": 411,
+                "apartment_price": 8458,
+                "house_price": 10928
+            },
+            "2022": {
+                "mwh_price": 441,
+                "apartment_price": 8903,
+                "house_price": 11465
+            },
+            "2023": {
+                "mwh_price": 570,
+                "apartment_price": 10990,
+                "house_price": 14006
+            },
+            "2024": {
+                "mwh_price": 570,
+                "apartment_price": 10991,
+                "house_price": 14064
             }
         }
     },
