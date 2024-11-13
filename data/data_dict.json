@@ -143,6 +143,16 @@
             }
         },
         "prices": {
+            "2019": {
+                "mwh_price": 580,
+                "apartment_price": 10444,
+                "house_price": 12861
+            },
+            "2020": {
+                "mwh_price": 565,
+                "apartment_price": 10203,
+                "house_price": 12642
+            },
             "2021": {
                 "mwh_price": 650,
                 "apartment_price": 11490,
@@ -1423,7 +1433,7 @@
             },
             "2022": {
                 "mwh_price": 346,
-                "apartment_price": 835,
+                "apartment_price": 8350,
                 "house_price": 10637
             },
             "2023": {
@@ -1630,7 +1640,7 @@
                 "house_price": 14281
             },
             "2022": {
-                "mwh_price": 105,
+                "mwh_price": 1046,
                 "apartment_price": 17921,
                 "house_price": 22358
             },
@@ -1735,8 +1745,8 @@
             },
             "2022": {
                 "mwh_price": 550,
-                "apartment_price": 1125,
-                "house_price": 1433
+                "apartment_price": 11250,
+                "house_price": 14330
             },
             "2023": {
                 "mwh_price": 1094,
@@ -1943,7 +1953,7 @@
             },
             "2022": {
                 "mwh_price": 625,
-                "apartment_price": 135,
+                "apartment_price": 13500,
                 "house_price": 16813
             },
             "2023": {
@@ -2464,7 +2474,7 @@
             "2022": {
                 "mwh_price": 750,
                 "apartment_price": 13813,
-                "house_price": 171
+                "house_price": 17100
             },
             "2023": {
                 "mwh_price": 975,
@@ -3024,7 +3034,7 @@
             "2022": {
                 "mwh_price": 350,
                 "apartment_price": 7813,
-                "house_price": 1041
+                "house_price": 10410
             },
             "2023": {
                 "mwh_price": 425,
@@ -3231,7 +3241,7 @@
             },
             "2022": {
                 "mwh_price": 406,
-                "apartment_price": 824,
+                "apartment_price": 8240,
                 "house_price": 10634
             },
             "2023": {
@@ -3336,7 +3346,7 @@
             "2022": {
                 "mwh_price": 650,
                 "apartment_price": 14375,
-                "house_price": 1804
+                "house_price": 18040
             },
             "2023": {
                 "mwh_price": 688,
@@ -3440,7 +3450,7 @@
             "2022": {
                 "mwh_price": 450,
                 "apartment_price": 12375,
-                "house_price": 1597
+                "house_price": 15970
             },
             "2023": {
                 "mwh_price": 450,
@@ -3544,7 +3554,7 @@
             "2022": {
                 "mwh_price": 850,
                 "apartment_price": 15688,
-                "house_price": 1956
+                "house_price": 19560
             },
             "2023": {
                 "mwh_price": 938,
@@ -3630,6 +3640,16 @@
             }
         },
         "prices": {
+            "2019": {
+                "mwh_price": 745,
+                "apartment_price": 15041,
+                "house_price": 20072
+            },
+            "2020": {
+                "mwh_price": 745,
+                "apartment_price": 15041,
+                "house_price": 19653
+            },
             "2021": {
                 "mwh_price": 744,
                 "apartment_price": 15298,
@@ -3845,7 +3865,7 @@
             },
             "2022": {
                 "mwh_price": 531,
-                "apartment_price": 1075,
+                "apartment_price": 10750,
                 "house_price": 13978
             },
             "2023": {
@@ -4749,7 +4769,7 @@
             },
             "2022": {
                 "mwh_price": 716,
-                "apartment_price": 1831,
+                "apartment_price": 18310,
                 "house_price": 21503
             },
             "2023": {
@@ -4853,7 +4873,7 @@
             },
             "2022": {
                 "mwh_price": 425,
-                "apartment_price": 875,
+                "apartment_price": 8750,
                 "house_price": 11168
             },
             "2023": {
@@ -4957,7 +4977,7 @@
             },
             "2022": {
                 "mwh_price": 563,
-                "apartment_price": 120,
+                "apartment_price": 12000,
                 "house_price": 15669
             },
             "2023": {
@@ -5061,7 +5081,7 @@
             },
             "2022": {
                 "mwh_price": 563,
-                "apartment_price": 104,
+                "apartment_price": 10400,
                 "house_price": 12523
             },
             "2023": {
@@ -5165,7 +5185,7 @@
             },
             "2022": {
                 "mwh_price": 375,
-                "apartment_price": 95,
+                "apartment_price": 9500,
                 "house_price": 11488
             },
             "2023": {
@@ -5269,7 +5289,7 @@
             },
             "2022": {
                 "mwh_price": 550,
-                "apartment_price": 1136,
+                "apartment_price": 11360,
                 "house_price": 13924
             },
             "2023": {
@@ -5566,7 +5586,7 @@
         "prices": {
             "2019": {
                 "mwh_price": 500,
-                "apartment_price": null,
+                "apartment_price": 0,
                 "house_price": 16300
             },
             "2020": {
@@ -5686,7 +5706,7 @@
             "2022": {
                 "mwh_price": 250,
                 "apartment_price": 7188,
-                "house_price": 865
+                "house_price": 8650
             },
             "2023": {
                 "mwh_price": 0,
@@ -5790,7 +5810,7 @@
             "2022": {
                 "mwh_price": 665,
                 "apartment_price": 12663,
-                "house_price": 1618
+                "house_price": 16180
             },
             "2023": {
                 "mwh_price": 931,
@@ -5893,7 +5913,7 @@
             },
             "2022": {
                 "mwh_price": 456,
-                "apartment_price": 1125,
+                "apartment_price": 11250,
                 "house_price": 14383
             },
             "2023": {
@@ -6823,7 +6843,7 @@
                 "house_price": 16479
             },
             "2022": {
-                "mwh_price": 114,
+                "mwh_price": 1138,
                 "apartment_price": 21438,
                 "house_price": 24964
             },
@@ -7624,7 +7644,7 @@
             },
             "2022": {
                 "mwh_price": 520,
-                "apartment_price": 1055,
+                "apartment_price": 10550,
                 "house_price": 13262
             },
             "2023": {
@@ -7728,7 +7748,7 @@
             },
             "2022": {
                 "mwh_price": 500,
-                "apartment_price": 125,
+                "apartment_price": 12500,
                 "house_price": 15925
             },
             "2023": {
@@ -7832,8 +7852,8 @@
             },
             "2022": {
                 "mwh_price": 700,
-                "apartment_price": 1675,
-                "house_price": 1892
+                "apartment_price": 16750,
+                "house_price": 18920
             },
             "2023": {
                 "mwh_price": 1000,
@@ -8248,8 +8268,8 @@
             },
             "2022": {
                 "mwh_price": 600,
-                "apartment_price": 1625,
-                "house_price": 1941
+                "apartment_price": 16250,
+                "house_price": 19410
             },
             "2023": {
                 "mwh_price": 963,
@@ -8424,7 +8444,7 @@
             },
             "2022": {
                 "mwh_price": 650,
-                "apartment_price": 1425,
+                "apartment_price": 14250,
                 "house_price": 16265
             },
             "2023": {
@@ -8528,7 +8548,7 @@
             },
             "2022": {
                 "mwh_price": 820,
-                "apartment_price": 193,
+                "apartment_price": 19300,
                 "house_price": 21842
             },
             "2023": {
@@ -9016,8 +9036,8 @@
             },
             "2022": {
                 "mwh_price": 800,
-                "apartment_price": 1725,
-                "house_price": 2048
+                "apartment_price": 17250,
+                "house_price": 20480
             },
             "2023": {
                 "mwh_price": 863,
@@ -9100,6 +9120,13 @@
                 "vandkraft": 0,
                 "elektricitet": 3,
                 "omgivelsesvarme": 6
+            }
+        },
+        "prices": {
+            "2019": {
+                "mwh_price": 400,
+                "apartment_price": 10500,
+                "house_price": 11740
             }
         }
     },
@@ -9193,7 +9220,7 @@
             "2022": {
                 "mwh_price": 801,
                 "apartment_price": 14644,
-                "house_price": 1809
+                "house_price": 18090
             },
             "2023": {
                 "mwh_price": 1221,
@@ -9400,8 +9427,8 @@
             },
             "2022": {
                 "mwh_price": 700,
-                "apartment_price": 165,
-                "house_price": 1867
+                "apartment_price": 16500,
+                "house_price": 18670
             },
             "2023": {
                 "mwh_price": 700,
@@ -10106,6 +10133,16 @@
             }
         },
         "prices": {
+            "2019": {
+                "mwh_price": 400,
+                "apartment_price": 10900,
+                "house_price": 14065
+            },
+            "2020": {
+                "mwh_price": 650,
+                "apartment_price": 14650,
+                "house_price": 18590
+            },
             "2021": {
                 "mwh_price": 650,
                 "apartment_price": 14513,
@@ -10113,7 +10150,7 @@
             },
             "2022": {
                 "mwh_price": 525,
-                "apartment_price": 125,
+                "apartment_price": 12500,
                 "house_price": 16053
             },
             "2023": {
@@ -10997,7 +11034,7 @@
             },
             "2022": {
                 "mwh_price": 438,
-                "apartment_price": 105,
+                "apartment_price": 10500,
                 "house_price": 13369
             },
             "2023": {
@@ -11814,7 +11851,7 @@
             },
             "2022": {
                 "mwh_price": 563,
-                "apartment_price": 1385,
+                "apartment_price": 13850,
                 "house_price": 16501
             },
             "2023": {
@@ -11918,7 +11955,7 @@
             },
             "2022": {
                 "mwh_price": 625,
-                "apartment_price": 1625,
+                "apartment_price": 16250,
                 "house_price": 18188
             },
             "2023": {
@@ -12022,7 +12059,7 @@
             },
             "2022": {
                 "mwh_price": 613,
-                "apartment_price": 145,
+                "apartment_price": 14500,
                 "house_price": 18086
             },
             "2023": {
@@ -12126,7 +12163,7 @@
             },
             "2022": {
                 "mwh_price": 719,
-                "apartment_price": 1285,
+                "apartment_price": 12850,
                 "house_price": 16247
             },
             "2023": {
@@ -12231,7 +12268,7 @@
             "2022": {
                 "mwh_price": 750,
                 "apartment_price": 16875,
-                "house_price": 192
+                "house_price": 19200
             },
             "2023": {
                 "mwh_price": 1500,
@@ -12334,7 +12371,7 @@
             },
             "2022": {
                 "mwh_price": 690,
-                "apartment_price": 1285,
+                "apartment_price": 12850,
                 "house_price": 16364
             },
             "2023": {
@@ -12438,7 +12475,7 @@
             },
             "2022": {
                 "mwh_price": 525,
-                "apartment_price": 125,
+                "apartment_price": 12500,
                 "house_price": 14128
             },
             "2023": {
@@ -12541,7 +12578,7 @@
                 "house_price": 16131
             },
             "2022": {
-                "mwh_price": 106,
+                "mwh_price": 1063,
                 "apartment_price": 18594,
                 "house_price": 22919
             },
@@ -12647,7 +12684,7 @@
             "2022": {
                 "mwh_price": 475,
                 "apartment_price": 9094,
-                "house_price": 1201
+                "house_price": 12010
             },
             "2023": {
                 "mwh_price": 600,
@@ -13519,7 +13556,7 @@
             "2022": {
                 "mwh_price": 525,
                 "apartment_price": 10313,
-                "house_price": 1304
+                "house_price": 13040
             },
             "2023": {
                 "mwh_price": 525,
@@ -13798,7 +13835,7 @@
             },
             "2022": {
                 "mwh_price": 513,
-                "apartment_price": 995,
+                "apartment_price": 9950,
                 "house_price": 12914
             },
             "2023": {
@@ -14006,7 +14043,7 @@
             },
             "2022": {
                 "mwh_price": 406,
-                "apartment_price": 85,
+                "apartment_price": 8500,
                 "house_price": 11203
             },
             "2023": {
@@ -14111,7 +14148,7 @@
             "2022": {
                 "mwh_price": 326,
                 "apartment_price": 7956,
-                "house_price": 1048
+                "house_price": 10480
             },
             "2023": {
                 "mwh_price": 454,
@@ -15014,7 +15051,7 @@
             },
             "2022": {
                 "mwh_price": 525,
-                "apartment_price": 975,
+                "apartment_price": 9750,
                 "house_price": 12203
             },
             "2023": {
@@ -15492,7 +15529,7 @@
             },
             "2022": {
                 "mwh_price": 463,
-                "apartment_price": 925,
+                "apartment_price": 9250,
                 "house_price": 11921
             },
             "2023": {
@@ -15774,6 +15811,18 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
+            }
+        },
+        "prices": {
+            "2019": {
+                "mwh_price": 471,
+                "apartment_price": 8001,
+                "house_price": 9461
+            },
+            "2020": {
+                "mwh_price": 488,
+                "apartment_price": 9404,
+                "house_price": 11760
             }
         }
     },
@@ -16369,6 +16418,11 @@
             }
         },
         "prices": {
+            "2019": {
+                "mwh_price": 713,
+                "apartment_price": 12594,
+                "house_price": 15834
+            },
             "2020": {
                 "mwh_price": 713,
                 "apartment_price": 12594,
@@ -17909,7 +17963,7 @@
             },
             "2022": {
                 "mwh_price": 580,
-                "apartment_price": 1025,
+                "apartment_price": 10250,
                 "house_price": 12818
             },
             "2023": {
@@ -18523,8 +18577,8 @@
             },
             "2022": {
                 "mwh_price": 600,
-                "apartment_price": 1325,
-                "house_price": 1586
+                "apartment_price": 13250,
+                "house_price": 15860
             },
             "2023": {
                 "mwh_price": 900,
@@ -19218,7 +19272,7 @@
                 "house_price": 13594
             },
             "2022": {
-                "mwh_price": 123,
+                "mwh_price": 1234,
                 "apartment_price": 20475,
                 "house_price": 25743
             },
@@ -19708,7 +19762,7 @@
             "2022": {
                 "mwh_price": 590,
                 "apartment_price": 12361,
-                "house_price": 1489
+                "house_price": 14890
             },
             "2023": {
                 "mwh_price": 702,
@@ -19812,7 +19866,7 @@
             "2022": {
                 "mwh_price": 624,
                 "apartment_price": 11106,
-                "house_price": 1359
+                "house_price": 13590
             },
             "2023": {
                 "mwh_price": 688,
@@ -20476,7 +20530,7 @@
             "2022": {
                 "mwh_price": 400,
                 "apartment_price": 9225,
-                "house_price": 1173
+                "house_price": 11730
             },
             "2023": {
                 "mwh_price": 713,
@@ -20827,7 +20881,7 @@
             },
             "2022": {
                 "mwh_price": 913,
-                "apartment_price": 160,
+                "apartment_price": 16000,
                 "house_price": 20066
             },
             "2023": {
@@ -21034,7 +21088,7 @@
                 "house_price": 17928
             },
             "2022": {
-                "mwh_price": 16,
+                "mwh_price": 1620,
                 "apartment_price": 28488,
                 "house_price": 35847
             },
@@ -21616,7 +21670,7 @@
                 "house_price": 18974
             },
             "2022": {
-                "mwh_price": 1,
+                "mwh_price": 1000,
                 "apartment_price": 18563,
                 "house_price": 23725
             },
@@ -21826,7 +21880,7 @@
             "2022": {
                 "mwh_price": 300,
                 "apartment_price": 8125,
-                "house_price": 1043
+                "house_price": 10430
             },
             "2023": {
                 "mwh_price": 300,
@@ -21919,7 +21973,7 @@
             },
             "2022": {
                 "mwh_price": 451,
-                "apartment_price": 1156,
+                "apartment_price": 11560,
                 "house_price": 14745
             },
             "2023": {
@@ -22023,7 +22077,7 @@
             },
             "2022": {
                 "mwh_price": 530,
-                "apartment_price": 965,
+                "apartment_price": 9650,
                 "house_price": 12173
             },
             "2023": {
@@ -22425,7 +22479,7 @@
             "2022": {
                 "mwh_price": 500,
                 "apartment_price": 10625,
-                "house_price": 1355
+                "house_price": 13550
             },
             "2023": {
                 "mwh_price": 600,
@@ -22527,7 +22581,7 @@
                 "house_price": 11695
             },
             "2022": {
-                "mwh_price": 103,
+                "mwh_price": 1031,
                 "apartment_price": 17781,
                 "house_price": 22216
             },
@@ -22962,8 +23016,8 @@
                 "house_price": 14981
             },
             "2022": {
-                "mwh_price": 104,
-                "apartment_price": 1959,
+                "mwh_price": 1045,
+                "apartment_price": 19590,
                 "house_price": 25243
             },
             "2023": {
@@ -23380,7 +23434,7 @@
             "2022": {
                 "mwh_price": 520,
                 "apartment_price": 11019,
-                "house_price": 1365
+                "house_price": 13650
             },
             "2023": {
                 "mwh_price": 630,
@@ -23483,7 +23537,7 @@
             },
             "2022": {
                 "mwh_price": 435,
-                "apartment_price": 1003,
+                "apartment_price": 10030,
                 "house_price": 11379
             },
             "2023": {
@@ -23587,7 +23641,7 @@
             },
             "2022": {
                 "mwh_price": 625,
-                "apartment_price": 1325,
+                "apartment_price": 13250,
                 "house_price": 16563
             },
             "2023": {
@@ -24106,9 +24160,9 @@
                 "house_price": 13633
             },
             "2022": {
-                "mwh_price": 108,
+                "mwh_price": 1083,
                 "apartment_price": 18801,
-                "house_price": 2355
+                "house_price": 23550
             },
             "2023": {
                 "mwh_price": 1175,
@@ -24969,7 +25023,7 @@
             },
             "2022": {
                 "mwh_price": 735,
-                "apartment_price": 1292,
+                "apartment_price": 12920,
                 "house_price": 16131
             },
             "2023": {
@@ -26113,7 +26167,7 @@
             },
             "2022": {
                 "mwh_price": 470,
-                "apartment_price": 88,
+                "apartment_price": 8800,
                 "house_price": 11082
             },
             "2023": {
@@ -26376,6 +26430,16 @@
             }
         },
         "prices": {
+            "2019": {
+                "mwh_price": 678,
+                "apartment_price": 13954,
+                "house_price": 17138
+            },
+            "2020": {
+                "mwh_price": 645,
+                "apartment_price": 13300,
+                "house_price": 16300
+            },
             "2021": {
                 "mwh_price": 595,
                 "apartment_price": 12550,
@@ -26383,7 +26447,7 @@
             },
             "2022": {
                 "mwh_price": 595,
-                "apartment_price": 1255,
+                "apartment_price": 12550,
                 "house_price": 15395
             },
             "2023": {
@@ -26592,7 +26656,7 @@
             "2022": {
                 "mwh_price": 445,
                 "apartment_price": 8363,
-                "house_price": 1043
+                "house_price": 10430
             },
             "2023": {
                 "mwh_price": 864,
@@ -26695,7 +26759,7 @@
             },
             "2022": {
                 "mwh_price": 875,
-                "apartment_price": 180,
+                "apartment_price": 18000,
                 "house_price": 20713
             },
             "2023": {
@@ -27007,7 +27071,7 @@
             },
             "2022": {
                 "mwh_price": 575,
-                "apartment_price": 125,
+                "apartment_price": 12500,
                 "house_price": 15945
             },
             "2023": {
@@ -27869,7 +27933,7 @@
             },
             "2022": {
                 "mwh_price": 619,
-                "apartment_price": 1225,
+                "apartment_price": 12250,
                 "house_price": 15887
             },
             "2023": {
@@ -28461,7 +28525,7 @@
             },
             "2022": {
                 "mwh_price": 344,
-                "apartment_price": 80,
+                "apartment_price": 8000,
                 "house_price": 10647
             },
             "2023": {
@@ -28565,7 +28629,7 @@
             },
             "2022": {
                 "mwh_price": 344,
-                "apartment_price": 899,
+                "apartment_price": 8990,
                 "house_price": 10987
             },
             "2023": {
@@ -28669,7 +28733,7 @@
             },
             "2022": {
                 "mwh_price": 563,
-                "apartment_price": 115,
+                "apartment_price": 11500,
                 "house_price": 14619
             },
             "2023": {
@@ -28774,7 +28838,7 @@
             "2022": {
                 "mwh_price": 375,
                 "apartment_price": 7906,
-                "house_price": 101
+                "house_price": 10100
             },
             "2023": {
                 "mwh_price": 438,
@@ -29085,7 +29149,7 @@
             },
             "2022": {
                 "mwh_price": 746,
-                "apartment_price": 142,
+                "apartment_price": 14200,
                 "house_price": 18117
             },
             "2023": {
@@ -29502,7 +29566,7 @@
             "2022": {
                 "mwh_price": 375,
                 "apartment_price": 8906,
-                "house_price": 111
+                "house_price": 11100
             },
             "2023": {
                 "mwh_price": 375,
@@ -29917,7 +29981,7 @@
             },
             "2022": {
                 "mwh_price": 393,
-                "apartment_price": 795,
+                "apartment_price": 7950,
                 "house_price": 10679
             },
             "2023": {
@@ -30021,7 +30085,7 @@
             },
             "2022": {
                 "mwh_price": 775,
-                "apartment_price": 1485,
+                "apartment_price": 14850,
                 "house_price": 19068
             },
             "2023": {
@@ -30125,7 +30189,7 @@
             },
             "2022": {
                 "mwh_price": 438,
-                "apartment_price": 90,
+                "apartment_price": 9000,
                 "house_price": 12144
             },
             "2023": {

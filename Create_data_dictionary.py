@@ -46,11 +46,8 @@ def safe_float_convert(value, year=None, price_type=None):
     if pd.isna(value) or value == '-':
         return None
     try:
+        # Simply convert to float and round to integer, removing any scaling
         raw_value = float(str(value).replace('.', '').replace(',', '.'))
-        if price_type == 'mwh_price' and year == '2022':
-            raw_value *= 0.1
-        if price_type in ['apartment_price', 'house_price'] and year == '2019':
-            raw_value *= 0.1
         return int(round(raw_value))
     except (ValueError, TypeError):
         return None
@@ -70,10 +67,10 @@ for filename, year in price_files:
         df = pd.read_csv(f'data/prices/{filename}', sep=';', encoding='utf-8')
         price_dict = {}
         for _, row in df.iterrows():
-            price_dict[str(row['PNummer'])] = {
-                'mwh_price': safe_float_convert(row.get('MWhPrisInklMoms'), year, 'mwh_price'),
-                'apartment_price': safe_float_convert(row.get('SamletForbugerprisBeboelseslejlighedInklMoms'), year, 'apartment_price'),
-                'house_price': safe_float_convert(row.get('SamletForbugerprisEnfamilieshusInklMoms'), year, 'house_price')
+            price_dict[str(row.iloc[0])] = {
+                'mwh_price': safe_float_convert(row.iloc[3]),
+                'apartment_price': safe_float_convert(row.iloc[4]),
+                'house_price': safe_float_convert(row.iloc[5])
             }
         price_data[year] = price_dict
     except Exception as e:

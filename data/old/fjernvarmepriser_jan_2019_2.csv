@@ -48,10 +48,10 @@ PNummer;Fjernvarmeforsyning;Postnr.;MWhPrisInklMoms;SamletForbugerprisBeboelsesl
 1003010765;Ebeltoft Fjernvarmeværk;8400;386;8435;10697;-166;-1,53%;-163;-1,50%;
 1000827232;Egtved Varmeværk;6040;699;13263;17010;-475;-2,72%;4;26,80%;
 1029334184;Ejby Fjernvarme A.m.b.a.;5592;588;11500;14559;1;11,18%;4;41,90%;
-1003021791;Ejerf Mølleåparken v/adv Lone Refshammer***;1153;764;14339;0;0;0,00%;0;0%;*** Nogle fjernvarmeforsyninger indberetter ikke priser for standardlejligheder eller standardhuse, hvorfor nogle felter er tomme. Dette skyldes, at Forsyningstilsynet kun modtager indberetninger for de aftagerkategorier, som findes i forsyningernes kundegrundlag, og at flere forsyninger ikke har kunder med disse forhold. Gennemsnitlig, vægtet gennemsnitlig og median varmepris for standardlejligheder og standardhuse er alene beregnet for de varmeforsyninger, der har indberettet priser for denne boligtype. 
+1003021791;Ejerf Mølleåparken v/adv Lone Refshammer***;1153;764;14339;;0;0,00%;0;0%;*** Nogle fjernvarmeforsyninger indberetter ikke priser for standardlejligheder eller standardhuse, hvorfor nogle felter er tomme. Dette skyldes, at Forsyningstilsynet kun modtager indberetninger for de aftagerkategorier, som findes i forsyningernes kundegrundlag, og at flere forsyninger ikke har kunder med disse forhold. Gennemsnitlig, vægtet gennemsnitlig og median varmepris for standardlejligheder og standardhuse er alene beregnet for de varmeforsyninger, der har indberettet priser for denne boligtype. 
 1001365764;Ejsing Fjernvarmeforsyning A.m.b.a.;7830;738;16313;19349;0;0,00%;0;0%;
 1001347598;Ejstrupholm Varmeværk;7361;594;13406;15247;2;14,43%;4;35,10%;
-1003594076;Ellehavegaard Energy I/S;4800;469;0;14609;-2;-10,63%;-1;-8,20%;
+1003594076;Ellehavegaard Energy I/S;4800;469;;14609;-2;-10,63%;-1;-8,20%;
 1015110437;Engesvang-Moselund Kraftvarmeværk;7430;625;11531;14500;4;34,67%;8;120,30%;
 1010775228;Eniig Varme A/S;7400;471;8001;9461;-6;-37,25%;-5;-35,20%;
 1002004427;Farsø Fjernvarmeværk;9640;425;9406;11755;0;0,00%;0;0%;
@@ -200,7 +200,7 @@ PNummer;Fjernvarmeforsyning;Postnr.;MWhPrisInklMoms;SamletForbugerprisBeboelsesl
 1000187343;Maribo Varmeværk Amba**;4930;346;8350;10637;274;2,64%;-242;-2,20%;** Forsyningen er en fusion af to eller flere forsyninger. Der er for december 2015 og evt. december 2017 benyttet en med det budgetterede varmesalg vægtet gennemsnitspris for at beregne prisændringerne i forhold til priserne før fusionen.
 1001672864;Marstal Fjernvarme Amba;5960;700;14750;17370;-2;-8,30%;-500;-2,80%;
 1021057238;Mejlby Fjernvarmeværk AMBA;8981;638;15974;17950;-2;-8,55%;2;10,90%;
-1001066162;Mellerup Kraftvarme Amba;8930;500;0;16300;566;3,59%;2;16,10%;
+1001066162;Mellerup Kraftvarme Amba;8930;500;;16300;566;3,59%;2;16,10%;
 1011470390;Middelfart Fjernvarme**;5500;450;8750;11245;-2;-15,54%;129;1,20%;** Forsyningen er en fusion af to eller flere forsyninger. Der er for december 2015 og evt. december 2017 benyttet en med det budgetterede varmesalg vægtet gennemsnitspris for at beregne prisændringerne i forhold til priserne før fusionen.
 1001800657;Midtlangeland Fjernvarme;5900;520;11019;13650;-543;-3,83%;-543;-3,80%;
 1014977178;Morsø Varme - Dueholm Varmecentral;7900;563;10406;13594;0;0,00%;0;0%;
