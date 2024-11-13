@@ -1,9 +1,15 @@
+import { yearState } from './YearState.js';
+
 export class PriceFocus {
     constructor(map, measureContainer) {
         this.map = map;
         this.measureContainer = measureContainer;
         this.priceRankings = null; // Cache for rankings
-        this.lastUpdateYear = null; // Track when rankings were last calculated
+        
+        // Add listener for year changes
+        yearState.addListener((year) => {
+            this.updatePriceData();
+        });
     }
 
     apply() {
@@ -25,7 +31,8 @@ export class PriceFocus {
 
     updatePriceData() {
         try {
-            const currentYear = new Date().getFullYear();
+            // Use the shared year state instead of current year
+            const currentYear = yearState.year;
             const source = this.map.getSource('plants');
             
             if (!source) {

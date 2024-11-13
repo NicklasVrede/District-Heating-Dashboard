@@ -1,5 +1,6 @@
 import { graphConfig } from '../config/graphConfig.js';
 import { showToast } from './toast.js';
+import { yearState } from '../../utils/javascript/focusLayers/YearState.js';
 
 // Keep track of current charts
 let currentCharts = {
@@ -81,9 +82,15 @@ function setupYearSliderListener(data, validForsyids, focus) {
     const yearLabel = document.getElementById('year-label');
     
     if (yearSlider && yearLabel) {
+        // Set initial value from yearState
+        yearSlider.value = yearState.year;
+        yearLabel.textContent = yearState.year;
+
         yearSlider.addEventListener('input', (e) => {
             const selectedYear = e.target.value;
             yearLabel.textContent = selectedYear;
+            // Update the shared year state
+            yearState.year = selectedYear;
             
             const effectiveYear = getEffectiveYear(selectedYear, focus);
             createProductionChart(data, validForsyids, effectiveYear, focus);
