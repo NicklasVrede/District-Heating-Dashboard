@@ -1,6 +1,7 @@
 import { plantStyles } from '../../styles/plantStyles.js';
 import { areaStyles, gasAreaStyles } from '../../styles/areaStyles.js'; // Import gas area styles
 import { addPlantEventListeners, addAreaEventListeners } from './eventListeners.js';
+import { highlightStyles } from '../../styles/highlightStyles.js';
 
 
 export function loadPlants(map) {
@@ -54,26 +55,27 @@ export function loadPlants(map) {
                 paint: {
                     'circle-radius': 6,
                     'circle-color': '#B42222',
-                    'circle-stroke-width': 0,
-                    'circle-stroke-color': '#FF0000',
-                    'circle-blur': 0,
-                    'circle-opacity': 1
+                    'circle-stroke-width': highlightStyles.plantStrokeWidth,
+                    'circle-stroke-color': highlightStyles.plantStrokeColor,
+                    'circle-blur': highlightStyles.plantBlur,
+                    'circle-opacity': highlightStyles.plantOpacity
                 },
                 filter: ['==', ['get', 'forsyid'], '']
             });
 
-            // Add a layer for selected plants with a different style
+            // Update selected plants layer with just a red border
             map.addLayer({
                 id: 'selected-plants',
                 type: 'circle',
                 source: 'plants',
                 paint: {
-                    'circle-radius': 8, // Larger radius for selected plants
-                    'circle-color': '#FF0000', // Red color for selected plants
-                    'circle-stroke-width': 2,
-                    'circle-stroke-color': '#000000' // Black border for selected plants
+                    'circle-radius': highlightStyles.selectedPlant.radius,
+                    'circle-color': highlightStyles.selectedPlant.color,
+                    'circle-stroke-width': highlightStyles.selectedPlant.strokeWidth,
+                    'circle-stroke-color': highlightStyles.selectedPlant.strokeColor,
+                    'circle-stroke-opacity': highlightStyles.selectedPlant.strokeOpacity
                 },
-                filter: ['in', 'forsyid', ''] // Initial filter to include no plants
+                filter: ['in', 'forsyid', '']
             });
 
             // Add event listeners for plants
@@ -113,10 +115,10 @@ export function loadAreas(map) {
                 type: 'fill',
                 source: 'areas',
                 paint: {
-                    'fill-color': '#FF0000', // Red color for selected areas
-                    'fill-opacity': 0.5
+                    'fill-color': highlightStyles.selectedAreaFillColor,    // Use style from highlightStyles
+                    'fill-opacity': highlightStyles.selectedAreaOpacity     // Use style from highlightStyles
                 },
-                filter: ['in', 'forsyid', ''] // Initial filter to include no areas
+                filter: ['in', 'forsyid', '']
             });
 
             // Add event listeners for areas
