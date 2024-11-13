@@ -3,14 +3,14 @@ import { createOrUpdatePlotlyGraph } from './components/multiPlant.js';
 import { createTwoPlantComparison } from './components/twoPlantComparison.js';
 import { selectionSet } from '../main.js';
 import { loadData, getCachedData } from '../utils/javascript/dataManager.js';
-import { appState } from '../utils/javascript/state/AppState.js';
+import { focusState } from '../utils/javascript/focusLayers/FocusState.js';
 
 let currentCleanup = null;
 
 // Function to determine which graph to display
 function navigateGraphs(data, selectedForsyids) {
-    // Use focus from appState
-    const focus = appState.focus;
+    // Use focus from focusState
+    const focus = focusState.focus;
 
     // Clean up previous visualization if exists
     if (currentCleanup) {

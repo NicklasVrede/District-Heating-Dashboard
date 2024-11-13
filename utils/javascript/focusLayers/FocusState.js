@@ -1,4 +1,4 @@
-class AppState {
+class FocusStateClass {
     constructor() {
         this._focus = 'none';
         this._listeners = new Set();
@@ -26,4 +26,4 @@ class AppState {
     }
 }
 
-export const appState = new AppState(); 
+export const focusState = new FocusStateClass(); 

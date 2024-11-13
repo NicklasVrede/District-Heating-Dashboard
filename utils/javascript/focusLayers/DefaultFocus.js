@@ -1,4 +1,5 @@
 import { createOrUpdatePlotlyGraph } from '../../../graphs/components/multiPlant.js';
+import { selectionSet } from '../../../main.js';
 
 export class DefaultFocus {
     constructor(map, measureContainer) {
@@ -28,7 +29,7 @@ export class DefaultFocus {
         }
 
         const data = window.dataDict;
-        const selectedForsyids = Array.from(window.selectionSet);
+        const selectedForsyids = Array.from(selectionSet);
         
         if (data && selectedForsyids.length > 0) {
             console.log('DefaultFocus: Calling createOrUpdatePlotlyGraph with none focus');

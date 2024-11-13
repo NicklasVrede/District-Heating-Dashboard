@@ -12,7 +12,7 @@ import { toggleGasAreas } from './utils/javascript/toggleGasAreas.js';
 import { initDivider } from './utils/javascript/divider.js';
 import { FocusManager } from './utils/javascript/focusLayers/FocusManager.js';
 import { updateGraph } from './graphs/graphManager.js';
-import { appState } from './utils/javascript/state/AppState.js';
+import { focusState } from './utils/javascript/focusLayers/FocusState.js';
 
 // Initialize Mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0MnFzYWFyZ3pveWJ1In0.V9qwBfsH4plxE_fz89kuYg';
@@ -41,7 +41,7 @@ function changeFocus(value) {
     }
 
     // Update the global focus state
-    appState.focus = value;
+    focusState.focus = value;
 
     // First, hide measure container by default
     measureContainer.classList.remove('visible');
@@ -95,8 +95,3 @@ fetch('data/data_dict.json')
         window.dataDict = data;
     })
     .catch(error => console.error('Error loading data dictionary:', error));
-
-// Add event listener for year slider
-document.getElementById('year-slider').addEventListener('input', function(e) {
-    document.getElementById('year-label').textContent = e.target.value;
-});
