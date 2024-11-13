@@ -2,9 +2,7 @@ import { createSinglePlantGraph } from './components/singlePlant.js';
 import { createOrUpdatePlotlyGraph } from './components/multiPlant.js';
 import { createTwoPlantComparison } from './components/twoPlantComparison.js';
 import { selectionSet } from '../main.js';
-
-// Variable for data caching
-let cachedData = null;
+import { loadData, getCachedData } from '../utils/javascript/dataManager.js';
 
 let currentCleanup = null;
 
@@ -47,19 +45,15 @@ function navigateGraphs(data, selectedForsyids, focus) {
 }
 
 // Function to update the graph
-export function updateGraph(focus = 'production') {
-    if (cachedData) {
+export async function updateGraph(focus = 'production') {
+    try {
+        const data = await loadData();
         const selectedForsyids = Array.from(selectionSet);
-        navigateGraphs(cachedData, selectedForsyids, focus);
-    } else {
-        fetch('../data/data_dict.json')
-            .then(response => response.json())
-            .then(data => {
-                cachedData = data;
-                const selectedForsyids = Array.from(selectionSet);
-                navigateGraphs(cachedData, selectedForsyids, focus);
-            })
-            .catch(error => console.error('Error loading data:', error));
+        navigateGraphs(data, selectedForsyids, focus);
+    } catch (error) {
+        console.error('Error updating graph:', error);
+        const graphContainer = document.getElementById('graph-container');
+        graphContainer.innerHTML = '<p>Error loading data. Please try again later.</p>';
     }
 }
 
