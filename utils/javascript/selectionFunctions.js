@@ -1,10 +1,17 @@
 import { updateSelectedPlants } from './eventListeners.js';
 import { selectionSet } from '../../main.js';
 import { updateGraph } from './plotlyGraphs.js';
+import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 
 export function clearSelection(map) {
     selectionSet.clear();
     updateSelectedPlants(map);
+    updateSelectedPlantsWindow(selectionSet);
+
+    const graphContainer = document.getElementById('graph-container');
+    if (graphContainer) {
+        graphContainer.innerHTML = '';
+    }
 
     setTimeout(() => {
         updateGraph(selectionSet);
@@ -34,3 +41,28 @@ export function selectAll(map) {
         updateGraph(selectionSet);  
     });
 }
+
+function toggleSelection(map, forsyid, isCtrlPressed) {
+    if (isCtrlPressed) {
+        if (selectionSet.has(forsyid)) {
+            selectionSet.delete(forsyid);
+        }
+    } else {
+        if (!selectionSet.has(forsyid)) {
+            selectionSet.add(forsyid);
+        }
+    }
+    updateSelectedPlants(map);
+    updateSelectedPlantsWindow(selectionSet);
+
+    if (selectionSet.size === 0) {
+        const graphContainer = document.getElementById('graph-container');
+        if (graphContainer) {
+            graphContainer.innerHTML = '';
+        }
+    }
+    
+    updateGraph();
+}
+
+export { toggleSelection };

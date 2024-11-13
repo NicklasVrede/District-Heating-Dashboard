@@ -1,0 +1,76 @@
+.selected-plants-window {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 220px;
+    max-height: 400px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 2;
+    overflow-y: auto;
+    font-size: 12px;
+}
+
+.selected-plants-header {
+    padding: 8px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    font-size: 13px;
+}
+
+.selected-plants-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.selected-plant-item {
+    padding: 6px 8px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    cursor: pointer;
+}
+
+.selected-plant-item:last-child {
+    border-bottom: none;
+}
+
+.plant-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: space-between;
+    margin-right: 8px;
+}
+
+.delete-button {
+    color: #999;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    margin-left: 4px;
+}
+
+.delete-button:hover {
+    color: #ff0000;
+}
+
+.plant-price {
+    color: #666;
+    font-size: 0.9em;   
+}
+
+.selected-plant-item:hover {
+    background-color: #f8f9fa;
+} 

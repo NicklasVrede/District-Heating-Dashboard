@@ -20,9 +20,8 @@ function navigateGraphs(data, selectedForsyids) {
 
     const graphContainer = document.getElementById('graph-container');
     
-    // Only clear and return if there are no selections AND focus is not 'none'
-    if ((!selectedForsyids || selectedForsyids.length === 0) && focus !== 'none') {
-        console.debug('Waiting for plant selection...');
+    // Clear and return if there are no selections
+    if (!selectedForsyids || selectedForsyids.length === 0) {
         graphContainer.innerHTML = '';
         return;
     }

@@ -1,6 +1,7 @@
 import { highlightStyles } from '../../styles/highlightStyles.js';
 import { selectionSet } from '../../main.js';
 import { updateGraph } from './plotlyGraphs.js'; // Corrected import path
+import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 
 let isHoveringPlant = false;
 let areaTooltip = null;
@@ -181,7 +182,7 @@ export function addAreaEventListeners(map) {
     });
 }
 
-function highlightArea(map, forsyid) {
+export function highlightArea(map, forsyid) {
     map.setPaintProperty('areas', 'fill-color', [
         'case',
         ['==', ['get', 'forsyid'], forsyid],
@@ -196,14 +197,12 @@ function highlightArea(map, forsyid) {
     ]);
 }
 
-function resetAreaHighlight(map) {
-    // Reset the area highlight
-    map.setPaintProperty('areas', 'fill-color', highlightStyles.areaDefaultFillColor); // Reset to default color
-    map.setPaintProperty('areas-border', 'line-color', highlightStyles.areaDefaultBorderColor); // Reset to default color (blue)
+export function resetAreaHighlight(map) {
+    map.setPaintProperty('areas', 'fill-color', highlightStyles.areaDefaultFillColor);
+    map.setPaintProperty('areas-border', 'line-color', highlightStyles.areaDefaultBorderColor);
 }
 
-function highlightPlant(map, forsyid) {
-    // Highlight the plant with the given forsyid
+export function highlightPlant(map, forsyid) {
     map.setFilter('highlighted-plant', ['==', ['get', 'forsyid'], forsyid]);
     map.setPaintProperty('highlighted-plant', 'circle-stroke-width', highlightStyles.plantStrokeWidth);
     map.setPaintProperty('highlighted-plant', 'circle-stroke-color', highlightStyles.plantStrokeColor);
@@ -211,8 +210,7 @@ function highlightPlant(map, forsyid) {
     map.setPaintProperty('highlighted-plant', 'circle-opacity', highlightStyles.plantOpacity);
 }
 
-function removePlantHighlight(map) {
-    // Remove the plant highlight
+export function removePlantHighlight(map) {
     map.setFilter('highlighted-plant', ['==', ['get', 'forsyid'], '']);
     map.setPaintProperty('highlighted-plant', 'circle-stroke-width', highlightStyles.plantDefaultStrokeWidth);
     map.setPaintProperty('highlighted-plant', 'circle-blur', highlightStyles.plantDefaultBlur);
@@ -243,5 +241,15 @@ function toggleSelection(map, forsyid, isCtrlPressed) {
         }
     }
     updateSelectedPlants(map);
+    updateSelectedPlantsWindow(selectionSet);
+
+    // Clear graph if selection becomes empty
+    if (selectionSet.size === 0) {
+        const graphContainer = document.getElementById('graph-container');
+        if (graphContainer) {
+            graphContainer.innerHTML = '';
+        }
+    }
+    
     updateGraph(); // Update the graph whenever the selection changes
 }

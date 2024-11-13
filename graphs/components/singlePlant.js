@@ -6,7 +6,10 @@ const LEGEND_THRESHOLD_PERCENTAGE = 2;
 export function createSinglePlantGraph(data, forsyid, focus) {
     // Input validation
     if (!data || !forsyid) {
-        console.error('Missing required parameters');
+        const graphContainer = document.getElementById('graph-container');
+        if (graphContainer) {
+            graphContainer.innerHTML = '';
+        }
         return;
     }
 

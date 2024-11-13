@@ -13,7 +13,6 @@ export class PriceFocus {
     }
 
     apply() {
-        this.map.setLayoutProperty('plants', 'visibility', 'none');
         this.map.setLayoutProperty('plants-price', 'visibility', 'visible');
         this.updatePriceData();
         this.updateCircleSize();
@@ -31,7 +30,6 @@ export class PriceFocus {
 
     updatePriceData() {
         try {
-            // Use the shared year state instead of current year
             const currentYear = yearState.year;
             const source = this.map.getSource('plants');
             
@@ -51,11 +49,11 @@ export class PriceFocus {
                 this.updateRankings(currentYear, data.features);
             }
             
+            // Map features, setting undefined prices to null
             data.features = data.features.map(feature => {
                 const forsyid = feature.properties.forsyid;
                 const prices = window.dataDict?.[forsyid]?.prices?.[currentYear];
-                feature.properties.current_price = prices?.mwh_price || 0;
-                // Add ranking to feature properties
+                feature.properties.current_price = prices?.mwh_price ?? null;
                 feature.properties.price_rank = this.priceRankings?.[forsyid]?.rank || 0;
                 return feature;
             });
@@ -117,5 +115,50 @@ export class PriceFocus {
         return Object.entries(this.priceRankings)
             .filter(([_, data]) => data.rank <= rankThreshold)
             .map(([forsyid, _]) => forsyid);
+    }
+
+    updateCircleStyle() {
+        // Update circle color and opacity together in the case statement
+        this.map.setPaintProperty('plants-price', 'circle-color', [
+            'case',
+            ['==', ['get', 'current_price'], null],
+            'rgba(0, 0, 0, 0)',  // Completely transparent
+            [
+                'interpolate',
+                ['linear'],
+                ['get', 'current_price'],
+                VIZ_CONFIG.priceRange.min, VIZ_CONFIG.colors.low,
+                VIZ_CONFIG.priceRange.max, VIZ_CONFIG.colors.high
+            ]
+        ]);
+
+        // Set base opacity to 1 since we're handling transparency in the color
+        this.map.setPaintProperty('plants-price', 'circle-opacity', 1);
+
+        // Update circle radius to match default plant styling
+        this.map.setPaintProperty('plants-price', 'circle-radius', [
+            'case',
+            ['==', ['get', 'current_price'], null],
+            [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                5, 4,
+                10, 8,
+                15, 12,
+                20, 16
+            ],
+            [
+                'interpolate',
+                ['linear'],
+                ['get', 'current_price'],
+                VIZ_CONFIG.priceRange.min, VIZ_CONFIG.circle.minRadius,
+                VIZ_CONFIG.priceRange.max, VIZ_CONFIG.circle.maxRadius
+            ]
+        ]);
+
+        // Add stroke properties to match default plant styling
+        this.map.setPaintProperty('plants-price', 'circle-stroke-width', 2);
+        this.map.setPaintProperty('plants-price', 'circle-stroke-color', 'white');
     }
 } 
