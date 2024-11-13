@@ -33,42 +33,31 @@ const focusManager = new FocusManager(map);
 // Function to handle focus changes
 function changeFocus(value) {
     const measureContainer = document.getElementById('measure-container');
-    const yearSliderContainer = document.getElementById('year-slider-container');
-    const yearSlider = document.getElementById('year-slider');
-    const yearLabel = document.getElementById('year-label');
     
-    // Show/hide measure selector based on focus
+    if (!measureContainer) {
+        console.warn('Measure container not found');
+        return;
+    }
+
+    // First, hide measure container by default
+    measureContainer.classList.remove('visible');
+    measureContainer.classList.add('hidden');
+
+    // If no focus or none selected, just apply the focus change
+    if (!value || value === 'none') {
+        focusManager.changeFocus(value);
+        return;
+    }
+
+    // Show/hide containers based on focus
     if (value === 'production') {
         measureContainer.classList.remove('hidden');
         measureContainer.classList.add('visible');
-        // Set production years range and default value
-        yearSlider.min = "2021";
-        yearSlider.max = "2023";
-        yearSlider.value = "2023"; // Set default value for production
-        yearLabel.textContent = "2023"; // Update the label
-    } else if (value === 'price') {
-        measureContainer.classList.remove('visible');
-        measureContainer.classList.add('hidden');
-        // Set price years range and default value
-        yearSlider.min = "2019";
-        yearSlider.max = "2024";
-        yearSlider.value = "2024"; // Set default value for price
-        yearLabel.textContent = "2024"; // Update the label
-    } else {
-        measureContainer.classList.remove('visible');
-        measureContainer.classList.add('hidden');
-        yearSliderContainer.classList.remove('visible');
-        yearSliderContainer.classList.add('hidden');
     }
 
-    // Show year slider for both price and production focus
-    if (value === 'price' || value === 'production') {
-        yearSliderContainer.classList.remove('hidden');
-        yearSliderContainer.classList.add('visible');
-    }
-
-    // Apply the focus change
+    // Apply the focus change and update graphs
     focusManager.changeFocus(value);
+    updateGraph(value);
 }
 
 // Expose functions to global scope

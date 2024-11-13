@@ -12,7 +12,7 @@ class FocusManager {
 
     initialize() {
         const map = getMapInstance();
-        if (!map || !map.loaded()) {
+        if (!map?.loaded()) {
             setTimeout(() => this.initialize(), 100);
             return;
         }
@@ -26,26 +26,22 @@ class FocusManager {
         this.initialized = true;
     }
 
-    changeFocus(value) {
+    changeFocus(value = 'none') {
         if (!this.initialized) {
             console.warn('FocusManager not yet initialized');
             return;
         }
 
+        console.log('FocusManager changing focus to:', value);
+
         try {
-            this.focuses.none.apply();
-            
-            const focus = this.focuses[value];
-            if (focus) {
-                focus.apply();
-            }
+            const focus = this.focuses[value] || this.focuses.none;
+            focus.apply();
         } catch (error) {
             console.error('Error changing focus:', error);
+            this.focuses.none.apply();
         }
     }
 }
-
-const focusManager = new FocusManager();
-window.changeFocus = (value) => focusManager.changeFocus(value);
 
 export { FocusManager }; 

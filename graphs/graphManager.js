@@ -16,8 +16,9 @@ function navigateGraphs(data, selectedForsyids, focus) {
 
     const graphContainer = document.getElementById('graph-container');
     
-    if (!selectedForsyids || selectedForsyids.length === 0) {
-        console.error('No forsyid selected');
+    // Only clear and return if there are no selections AND focus is not 'none'
+    if ((!selectedForsyids || selectedForsyids.length === 0) && focus !== 'none') {
+        console.debug('Waiting for plant selection...');
         graphContainer.innerHTML = '';
         return;
     }
@@ -39,13 +40,13 @@ function navigateGraphs(data, selectedForsyids, focus) {
             currentCleanup = createTwoPlantComparison(data, selectedForsyids);
             break;
         default:
-            createOrUpdatePlotlyGraph(data, selectedForsyids);
+            currentCleanup = createOrUpdatePlotlyGraph(data, selectedForsyids, focus);
             break;
     }
 }
 
-// Function to update the graph
-export async function updateGraph(focus = 'production') {
+// Function to update the graph   //Apply default!
+export async function updateGraph(focus = 'none') {
     try {
         const data = await loadData();
         const selectedForsyids = Array.from(selectionSet);
