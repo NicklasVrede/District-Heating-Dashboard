@@ -109,6 +109,7 @@
     margin-top: auto;
     display: none;
     font-family: Arial, sans-serif;
+    font-size: 14px;
 }
 
 .info-box.visible {
@@ -124,12 +125,19 @@
 .info-box ul {
     margin: 0;
     padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 20px;
+    list-style: none;
 }
 
 .info-box ul li {
     margin-bottom: 4px;
     color: #666;
     font-family: Arial, sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .info-box ul li:last-child {
@@ -150,7 +158,7 @@
     padding: 10px;
     background-color: #f0f0f0;
     border-radius: 5px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #333;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
@@ -165,10 +173,16 @@
     margin-bottom: 16px;
 }
 
-.graph-title {
-    margin: 0;
-    font-size: 1.5em;
-    color: #333;
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
 }
 
 .year-slider-container {
@@ -177,6 +191,12 @@
     gap: 12px;
     transition: opacity 0.3s ease;
     margin-left: 20px;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.pulse-animation {
+    animation: pulse 2s 1 forwards;
 }
 
 .year-slider-container.hidden {

@@ -5,8 +5,11 @@ import { yearState } from '../../utils/javascript/focusLayers/YearState.js';
 // Keep track of current charts
 let currentCharts = {
     production: null,
+    totalProduction: null,
     price: null
 };
+
+const LEGEND_THRESHOLD_PERCENTAGE = 2;
 
 export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none') {
     console.log('Current focus:', focus);
@@ -24,11 +27,18 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none'
     
     const { defaultYear, minYear, maxYear } = yearRanges[focus] || yearRanges.none;
 
+    // Add a static counter to track if animation has played
+    if (!createOrUpdatePlotlyGraph.animationPlayed) {
+        createOrUpdatePlotlyGraph.animationPlayed = new Set();
+    }
+
     // Create the structure only when needed
     graphContainer.innerHTML = `
         <div class="graph-header">
             <h2 class="graph-title">Multiple Plants Comparison</h2>
-            <div class="year-slider-container" id="year-slider-container" style="display: ${focus === 'none' ? 'none' : 'block'}">
+            <div class="year-slider-container ${focus !== 'none' && !createOrUpdatePlotlyGraph.animationPlayed.has(focus) ? 'pulse-animation' : ''}" 
+                 id="year-slider-container" 
+                 style="display: ${focus === 'none' ? 'none' : 'block'}">
                 <label for="year-slider">Year:</label>
                 <input 
                     type="range" 
@@ -42,15 +52,27 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none'
             </div>
         </div>
         <div class="graphs-container">
-            <div class="production-graph">
-                <canvas id="productionChart"></canvas>
-            </div>
-            <div class="total-production-graph">
-                <canvas id="totalProductionChart"></canvas>
-            </div>
-            <div class="price-graph">
-                <canvas id="priceChart"></canvas>
-            </div>
+            ${focus === 'price' ? `
+                <div class="price-graph">
+                    <canvas id="priceChart"></canvas>
+                </div>
+                <div class="production-graph">
+                    <canvas id="productionChart"></canvas>
+                </div>
+                <div class="total-production-graph">
+                    <canvas id="totalProductionChart"></canvas>
+                </div>
+            ` : `
+                <div class="production-graph">
+                    <canvas id="productionChart"></canvas>
+                </div>
+                <div class="total-production-graph">
+                    <canvas id="totalProductionChart"></canvas>
+                </div>
+                <div class="price-graph">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            `}
         </div>
     `;
 
@@ -75,7 +97,13 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none'
     // Create initial charts
     const effectiveYear = getEffectiveYear(defaultYear, focus);
     createProductionChart(data, validForsyids, effectiveYear, focus);
+    createTotalProductionChart(data, validForsyids);
     createPriceChart(data, validForsyids, defaultYear, focus);
+
+    // Mark this focus type as having played the animation
+    if (focus !== 'none') {
+        createOrUpdatePlotlyGraph.animationPlayed.add(focus);
+    }
 
     return () => cleanupCharts();
 }
@@ -115,32 +143,31 @@ function cleanupCharts() {
             chart.destroy();
         }
     });
-    currentCharts = { production: null, price: null };
+    currentCharts = { production: null, totalProduction: null, price: null };
 }
 
 function createProductionChart(data, validForsyids, currentYear, focus) {
     console.log('Creating production chart with focus:', focus);
-    // Clamp production year between 2021 and 2023
     const effectiveYear = Math.min(Math.max(currentYear, '2021'), '2023');
     
     const canvas = document.getElementById('productionChart');
     
-    // Destroy existing chart if it exists
     if (currentCharts.production) {
         currentCharts.production.destroy();
     }
 
     const ctx = canvas.getContext('2d');
-
     const plantNames = [];
-    const datasets = graphConfig.attributes.map(attr => {
-        return {
-            label: attr,
-            data: [],
-            backgroundColor: graphConfig.colors[attr],
-        };
-    });
+    const datasets = graphConfig.attributes.map(attr => ({
+        label: attr,
+        data: [],
+        backgroundColor: graphConfig.colors[attr],
+        borderColor: graphConfig.colors[attr],
+        borderWidth: 1,
+        fill: true
+    }));
 
+    // Calculate percentages for each plant
     validForsyids.forEach(forsyid => {
         const paddedForsyid = forsyid.toString().padStart(8, '0');
         const plantData = data[paddedForsyid];
@@ -148,20 +175,33 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
         if (plantData) {
             plantNames.push(plantData.name);
             
+            // Calculate total production for this plant in the current year
+            const yearTotal = Object.values(plantData.production[effectiveYear] || {})
+                .reduce((sum, val) => sum + (val || 0), 0);
+            
+            // Calculate percentage for each attribute
             graphConfig.attributes.forEach((attr, index) => {
                 const mappedKeys = graphConfig.fuelTypes[attr];
-                let value = 0;
+                let attrValue = 0;
 
                 if (Array.isArray(mappedKeys)) {
-                    value = mappedKeys.reduce((sum, key) => 
+                    attrValue = mappedKeys.reduce((sum, key) => 
                         sum + (plantData.production[effectiveYear]?.[key] || 0), 0);
                 } else {
-                    value = plantData.production[effectiveYear]?.[mappedKeys] || 0;
+                    attrValue = plantData.production[effectiveYear]?.[mappedKeys] || 0;
                 }
                 
-                datasets[index].data.push(value);
+                // Convert to percentage
+                const percentage = yearTotal > 0 ? (attrValue / yearTotal) * 100 : 0;
+                datasets[index].data.push(percentage);
             });
         }
+    });
+
+    // Hide datasets with low overall percentage
+    datasets.forEach(dataset => {
+        const avgPercentage = dataset.data.reduce((sum, val) => sum + val, 0) / dataset.data.length;
+        dataset.hidden = avgPercentage < LEGEND_THRESHOLD_PERCENTAGE;
     });
 
     // Create title with note if year was clamped
@@ -174,7 +214,6 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
         }
     }
 
-    // Create new chart
     currentCharts.production = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -188,15 +227,21 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                 x: {
                     stacked: true,
                     title: {
-                        display: true,
-                        text: 'Plants'
+                        display: false
                     }
                 },
                 y: {
                     stacked: true,
                     title: {
                         display: true,
-                        text: 'Production (TJ)'
+                        text: 'Production Share (%)'
+                    },
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
                     }
                 }
             },
@@ -206,8 +251,25 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                     text: titleText
                 },
                 legend: {
-                    position: 'right',
+                    position: 'left',
                     align: 'start'
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            return tooltipItems[0].label;
+                        },
+                        label: function(context) {
+                            const value = context.raw;
+                            if (value === 0) return null;
+                            return `${context.dataset.label}: ${value.toFixed(1)}%`;
+                        },
+                        footer: function(tooltipItems) {
+                            return null;
+                        }
+                    }
                 }
             }
         }
@@ -274,12 +336,11 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             scales: {
                 x: {
                     title: {
-                        display: true,
-                        text: 'Plants'
+                        display: false
                     }
                 },
                 y: {
-                    stacked: false,  // Disable stacking
+                    stacked: false,
                     title: {
                         display: true,
                         text: 'Price (DKK)'
@@ -293,13 +354,99 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     text: `Price Comparison (${currentYear})`
                 },
                 legend: {
-                    position: 'right',
+                    position: 'left',
                     align: 'start'
                 },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
                             return `${context.dataset.label}: ${context.raw.toLocaleString()} DKK`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function createTotalProductionChart(data, validForsyids) {
+    const canvas = document.getElementById('totalProductionChart');
+    
+    // Destroy existing chart if it exists
+    if (currentCharts.totalProduction) {
+        currentCharts.totalProduction.destroy();
+    }
+
+    const ctx = canvas.getContext('2d');
+    const plantNames = [];
+    const plantTotals = [];
+
+    // Calculate total production for each plant
+    validForsyids.forEach(forsyid => {
+        const paddedForsyid = forsyid.toString().padStart(8, '0');
+        const plantData = data[paddedForsyid];
+        
+        if (plantData?.production) {
+            plantNames.push(plantData.name);
+            
+            // Sum up all years and fuels for this plant (data is already in TJ)
+            const total = Object.values(plantData.production)
+                .reduce((yearSum, yearData) => {
+                    return yearSum + Object.values(yearData)
+                        .reduce((fuelSum, val) => fuelSum + (val || 0), 0);
+                }, 0);
+            
+            plantTotals.push(total); // No conversion needed, data is already in TJ
+        }
+    });
+
+    // Create new chart
+    currentCharts.totalProduction = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: plantNames,
+            datasets: [{
+                label: 'Total Production',
+                data: plantTotals,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title: {
+                        display: false
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Total Production (TJ)'
+                    },
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return `${value.toLocaleString()} TJ`;
+                        }
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: false
+                },
+                legend: {
+                    position: 'left',
+                    align: 'start'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.raw.toFixed(1)} TJ`;
                         }
                     }
                 }

@@ -18,6 +18,15 @@
 }
 
 /* Reuse existing graph box styles but with adjusted heights */
+.plant-column .production-graph,
+.plant-column .total-production-graph,
+.plant-column .price-graph {
+    background: white;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    overflow: hidden;
+}
+
 .plant-column .production-graph {
     height: 300px;
 }
@@ -28,6 +37,19 @@
 
 .plant-column .price-graph {
     height: 200px;
+}
+
+/* Add padding to the canvas elements instead of containers */
+.plant-column .production-graph canvas,
+.plant-column .total-production-graph canvas,
+.plant-column .price-graph canvas {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: calc(100% - 20px) !important;
+    height: calc(100% - 20px) !important;
 }
 
 /* Adjust info box for side-by-side layout */

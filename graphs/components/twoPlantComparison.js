@@ -132,6 +132,7 @@ export function createTwoPlantComparison(data, validForsyids) {
         // Create and store chart instances with shared max values
         charts.push(createProductionChart(plantData, index + 1, roundedMaxProduction));
         charts.push(createPriceChart(plantData, index + 1, maxValues.prices));
+        charts.push(createTotalProductionChart(plantData, index + 1, roundedMaxProduction));
 
         updateInfoBox(plantData, index + 1);
     });
@@ -154,22 +155,38 @@ function createProductionChart(plantData, index, maxValue) {
         .filter(year => !isNaN(parseInt(year)))
         .sort();
 
-    // Create datasets for each fuel type
+    // Create datasets for each fuel type with percentage values
     const datasets = graphConfig.attributes.map(attr => {
         const values = productionYears.map(year => {
+            // Get the value for this attribute
+            let attrValue = 0;
             const mappedKeys = graphConfig.fuelTypes[attr];
             if (Array.isArray(mappedKeys)) {
-                return mappedKeys.reduce((sum, key) => 
+                attrValue = mappedKeys.reduce((sum, key) => 
                     sum + (plantData.production[year]?.[key] || 0), 0);
+            } else {
+                attrValue = plantData.production[year]?.[mappedKeys] || 0;
             }
-            return plantData.production[year]?.[mappedKeys] || 0;
+
+            // Calculate total production for this year
+            const yearTotal = Object.values(plantData.production[year])
+                .reduce((sum, val) => sum + (val || 0), 0);
+
+            // Return percentage
+            return yearTotal > 0 ? (attrValue / yearTotal) * 100 : 0;
         });
 
-        // Calculate percentage contribution
+        // Check if the attribute has any non-zero values
+        const hasProduction = values.some(val => val > 0);
+        
+        // If there's no production at all, return null to filter it out
+        if (!hasProduction) {
+            return null;
+        }
+
+        // Calculate overall percentage for legend visibility
         const totalAttr = values.reduce((sum, val) => sum + val, 0);
-        const totalAll = productionYears.reduce((sum, year) => 
-            sum + Object.values(plantData.production[year]).reduce((s, val) => s + (val || 0), 0), 0);
-        const percentage = (totalAttr / totalAll) * 100;
+        const percentage = totalAttr / values.length; // Average percentage
 
         return {
             label: attr,
@@ -179,15 +196,7 @@ function createProductionChart(plantData, index, maxValue) {
             fill: true,
             hidden: percentage < LEGEND_THRESHOLD_PERCENTAGE
         };
-    });
-
-    // Calculate the maximum stacked value for each year
-    const maxStackedValue = productionYears.map(year => {
-        return Object.values(plantData.production[year]).reduce((sum, val) => sum + (val || 0), 0);
-    }).reduce((max, val) => Math.max(max, val), 0);
-
-    // Round up to nearest thousand
-    const roundedMax = Math.ceil(maxStackedValue / 1000) * 1000;
+    }).filter(dataset => dataset !== null);  // Remove null datasets
 
     return new Chart(ctx, {
         type: 'line',
@@ -216,14 +225,19 @@ function createProductionChart(plantData, index, maxValue) {
                 y: {
                     title: {
                         display: true,
-                        text: 'Production (TJ)'
+                        text: 'Production Share (%)'
                     },
                     stacked: true,
                     grid: {
                         color: '#E4E4E4'
                     },
                     beginAtZero: true,
-                    max: maxValue // Use the shared rounded max value
+                    max: 100, // Set max to 100%
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
                 }
             },
             plugins: {
@@ -235,20 +249,7 @@ function createProductionChart(plantData, index, maxValue) {
                     mode: 'index',
                     callbacks: {
                         label: function(context) {
-                            const value = context.raw;
-                            const total = context.chart.data.datasets.reduce(
-                                (sum, dataset) => sum + (dataset.data[context.dataIndex] || 0), 
-                                0
-                            );
-                            const percentage = ((value / total) * 100).toFixed(1);
-                            return `${context.dataset.label}: ${value.toFixed(0)} TJ (${percentage}%)`;
-                        },
-                        footer: function(tooltipItems) {
-                            const total = tooltipItems.reduce(
-                                (sum, item) => sum + item.raw, 
-                                0
-                            );
-                            return `Total: ${total.toFixed(0)} TJ`;
+                            return `${context.dataset.label}: ${context.raw.toFixed(1)}%`;
                         }
                     }
                 },
@@ -268,7 +269,7 @@ function createProductionChart(plantData, index, maxValue) {
                     }
                 },
                 legend: {
-                    position: 'right',
+                    position: 'left',
                     align: 'start',
                     labels: {
                         boxWidth: 12,
@@ -277,7 +278,65 @@ function createProductionChart(plantData, index, maxValue) {
                         font: {
                             size: 11
                         }
-                    }
+                    },
+                    onClick: (function() {
+                        let clickTimeout = null;
+                        let clickCount = 0;
+
+                        return function(e, legendItem, legend) {
+                            clickCount++;
+                            
+                            if (clickCount === 1) {
+                                clickTimeout = setTimeout(() => {
+                                    // Single click behavior
+                                    const index = legendItem.datasetIndex;
+                                    const chart = legend.chart;
+                                    const meta = chart.getDatasetMeta(index);
+                                    meta.hidden = !meta.hidden;
+                                    chart.update();
+                                    
+                                    clickCount = 0;
+                                }, 250);
+                            } else if (clickCount === 2) {
+                                clearTimeout(clickTimeout);
+                                // Double click behavior
+                                const chart = legend.chart;
+                                const datasets = chart.data.datasets;
+                                const clickedLabel = legendItem.text;
+                                
+                                // If all others are already hidden, show all (reset)
+                                const allOthersHidden = datasets.every((dataset, i) => 
+                                    i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
+                                
+                                // Update current chart
+                                datasets.forEach((dataset, i) => {
+                                    const meta = chart.getDatasetMeta(i);
+                                    meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
+                                });
+                                chart.update();
+
+                                // Find and update the other production chart
+                                const otherChartId = `productionChart${index === 1 ? 2 : 1}`;
+                                const otherChart = Chart.getChart(otherChartId);
+                                
+                                if (otherChart) {
+                                    const otherDatasets = otherChart.data.datasets;
+                                    otherDatasets.forEach((dataset, i) => {
+                                        if (dataset.label === clickedLabel) {
+                                            const meta = otherChart.getDatasetMeta(i);
+                                            meta.hidden = !allOthersHidden && (dataset.label !== clickedLabel);
+                                        } else {
+                                            const meta = otherChart.getDatasetMeta(i);
+                                            meta.hidden = !allOthersHidden;
+                                        }
+                                    });
+                                    otherChart.update();
+                                }
+                                
+                                clickCount = 0;
+                            }
+                        };
+                    })()
                 }
             }
         }
@@ -406,6 +465,84 @@ function createPriceChart(plantData, index, maxValues) {
     });
 }
 
+function createTotalProductionChart(plantData, index, maxValue) {
+    const ctx = document.getElementById(`totalProductionChart${index}`).getContext('2d');
+    
+    const productionYears = Object.keys(plantData.production)
+        .filter(year => !isNaN(parseInt(year)))
+        .sort();
+
+    // Calculate total production for each year by summing all fuel types
+    const yearlyTotals = productionYears.map(year => {
+        const yearData = plantData.production[year];
+        const totalMWh = Object.entries(yearData).reduce((sum, [fuelType, value]) => {
+            // Sum up all fuel types
+            return sum + (value || 0);
+        }, 0);
+        
+        return totalMWh; // No conversion needed
+    });
+
+    return new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: productionYears,
+            datasets: [{
+                label: 'Total Production',
+                data: yearlyTotals,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: false
+                },
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `Total: ${context.raw.toFixed(1)} TJ`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 10
+                        }
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        font: {
+                            size: 10
+                        },
+                        callback: function(value) {
+                            return `${value.toLocaleString()} TJ`;
+                        }
+                    },
+                    grid: {
+                        color: '#E4E4E4'
+                    }
+                }
+            }
+        }
+    });
+}
+
 function updateInfoBox(plantData, index) {
     const infoBox = document.querySelector(`.plant-column:nth-child(${index}) .info-box`);
     if (!infoBox) return;
@@ -415,7 +552,7 @@ function updateInfoBox(plantData, index) {
     infoBox.innerHTML = `
         <ul style="list-style: none; padding: 0;">
             <li><strong>Commissioned:</strong> ${commissionDate}</li>
-            <li><strong>Electrical Capacity:</strong> ${plantData.elkapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
+            <li><strong>Power Capacity:</strong> ${plantData.elkapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
             <li><strong>Heat Capacity:</strong> ${plantData.varmekapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
             <li><strong>Total Area:</strong> ${plantData.total_area_km2?.toFixed(2) || 'N/A'} km²</li>
         </ul>

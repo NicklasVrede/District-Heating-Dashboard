@@ -96,8 +96,15 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             return plantData.production[year]?.[mappedKeys] || 0;
         });
 
-        // Calculate percentage contribution
+        // Calculate total production for this attribute
         const totalAttr = values.reduce((sum, val) => sum + val, 0);
+        
+        // If total is 0, this attribute is not present at all
+        if (totalAttr === 0) {
+            return null;  // Will be filtered out
+        }
+
+        // Calculate percentage contribution for remaining threshold check
         const totalAll = productionYears.reduce((sum, year) => 
             sum + Object.values(plantData.production[year]).reduce((s, val) => s + (val || 0), 0), 0);
         const percentage = (totalAttr / totalAll) * 100;
@@ -110,7 +117,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             fill: true,
             hidden: percentage < LEGEND_THRESHOLD_PERCENTAGE
         };
-    });
+    }).filter(dataset => dataset !== null);  // Remove null datasets
 
     // Store initial data for reset functionality
     const initialData = {
@@ -210,7 +217,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                     }
                 },
                 legend: {
-                    position: 'right',
+                    position: 'left',
                     align: 'start',
                     labels: {
                         boxWidth: 12,
@@ -219,7 +226,45 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                         font: {
                             size: 11
                         }
-                    }
+                    },
+                    onClick: (function() {
+                        let clickTimeout = null;
+                        let clickCount = 0;
+
+                        return function(e, legendItem, legend) {
+                            clickCount++;
+                            
+                            if (clickCount === 1) {
+                                clickTimeout = setTimeout(() => {
+                                    // Single click behavior
+                                    const index = legendItem.datasetIndex;
+                                    const chart = legend.chart;
+                                    const meta = chart.getDatasetMeta(index);
+                                    meta.hidden = !meta.hidden;
+                                    chart.update();
+                                    
+                                    clickCount = 0;
+                                }, 250); // Adjust this delay as needed
+                            } else if (clickCount === 2) {
+                                clearTimeout(clickTimeout);
+                                // Double click behavior
+                                const chart = legend.chart;
+                                const datasets = chart.data.datasets;
+                                
+                                // If all others are already hidden, show all (reset)
+                                const allOthersHidden = datasets.every((dataset, i) => 
+                                    i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
+                                
+                                datasets.forEach((dataset, i) => {
+                                    const meta = chart.getDatasetMeta(i);
+                                    meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
+                                });
+                                
+                                chart.update();
+                                clickCount = 0;
+                            }
+                        };
+                    })()
                 }
             }
         }
@@ -309,7 +354,7 @@ function createPieChart(originalChart, yearData, year, initialData) {
                     }
                 },
                 legend: {
-                    position: 'right',
+                    position: 'left',
                     labels: {
                         generateLabels: function(chart) {
                             const data = chart.data;
@@ -405,7 +450,7 @@ function createPriceChart(plantData, container) {
             },
             plugins: {
                 legend: {
-                    position: 'right',
+                    position: 'left',
                     align: 'start',
                     labels: {
                         boxWidth: 12,
