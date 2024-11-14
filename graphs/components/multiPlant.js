@@ -125,7 +125,7 @@ function setupYearSliderListener(data, validForsyids, focus) {
             
             const effectiveYear = getEffectiveYear(selectedYear, focus);
             createProductionChart(data, validForsyids, effectiveYear, focus);
-            createTotalProductionChart(data, validForsyids);
+            createTotalProductionChart(data, validForsyids, selectedYear);
             createPriceChart(data, validForsyids, selectedYear, focus);
         });
     }
@@ -488,10 +488,10 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
     });
 }
 
-function createTotalProductionChart(data, validForsyids) {
+function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
+    const effectiveYear = Math.min(Math.max(currentYear, '2021'), '2023');
     const canvas = document.getElementById('totalProductionChart');
     
-    // Destroy existing chart if it exists
     if (currentCharts.totalProduction) {
         currentCharts.totalProduction.destroy();
     }
@@ -500,24 +500,31 @@ function createTotalProductionChart(data, validForsyids) {
     const plantNames = [];
     const plantTotals = [];
 
-    // Calculate total production for each plant
+    // Calculate total production for each plant for the current year only
     validForsyids.forEach(forsyid => {
         const paddedForsyid = forsyid.toString().padStart(8, '0');
         const plantData = data[paddedForsyid];
         
-        if (plantData?.production) {
+        if (plantData?.production?.[effectiveYear]) {
             plantNames.push(plantData.name.split(' ')[0]);
             
-            // Sum up all years and fuels for this plant (data is already in TJ)
-            const total = Object.values(plantData.production)
-                .reduce((yearSum, yearData) => {
-                    return yearSum + Object.values(yearData)
-                        .reduce((fuelSum, val) => fuelSum + (val || 0), 0);
-                }, 0);
+            // Sum up all fuels for this plant in the current year
+            const total = Object.values(plantData.production[effectiveYear])
+                .reduce((sum, val) => sum + (val || 0), 0);
             
-            plantTotals.push(total); // No conversion needed, data is already in TJ
+            plantTotals.push(total);
         }
     });
+
+    // Create title with note if year was clamped
+    let titleText = `Total Production (${effectiveYear})`;
+    if (currentYear !== effectiveYear) {
+        if (currentYear > '2023') {
+            titleText = `Total Production (2023) - Latest Available Data`;
+        } else if (currentYear < '2021') {
+            titleText = `Total Production (2021) - Earliest Available Data`;
+        }
+    }
 
     // Create new chart
     currentCharts.totalProduction = new Chart(ctx, {
@@ -556,7 +563,8 @@ function createTotalProductionChart(data, validForsyids) {
             },
             plugins: {
                 title: {
-                    display: false
+                    display: true,
+                    text: titleText
                 },
                 legend: {
                     position: 'left',
