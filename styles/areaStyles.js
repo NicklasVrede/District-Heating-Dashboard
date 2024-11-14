@@ -8,8 +8,8 @@ export const areaStyles = {
         source: 'areas',
         layout: {},
         paint: {
-            'fill-color': '#9b94ff',
-            'fill-opacity': 0.2 
+            'fill-color': '#0000ff',
+            'fill-opacity': 0.2
         }
     },
     line: {
@@ -20,7 +20,7 @@ export const areaStyles = {
         paint: {
             'line-color': '#0000ff',
             'line-width': 1,
-            'line-opacity': 0.5
+            'line-opacity': 0.1
         }
     }
 };

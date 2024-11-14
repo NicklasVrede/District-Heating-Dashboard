@@ -9,7 +9,7 @@ export const plantStyles = {
             ['zoom'],
         // Set different radius for different zoom levels
         // Zoom level, radius
-            5, 4,
+            5, 2,
             10, 8,
             15, 12,
             20, 16 

@@ -2,6 +2,7 @@ import { highlightStyles } from '../../styles/highlightStyles.js';
 import { selectionSet } from '../../main.js';
 import { updateGraph } from './plotlyGraphs.js'; // Corrected import path
 import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
+import { areaStyles } from '../../styles/areaStyles.js';
 
 let isHoveringPlant = false;
 let areaTooltip = null;
@@ -186,20 +187,22 @@ export function highlightArea(map, forsyid) {
     map.setPaintProperty('areas', 'fill-color', [
         'case',
         ['==', ['get', 'forsyid'], forsyid],
-        highlightStyles.areaFillColor,
-        highlightStyles.areaDefaultFillColor
+        highlightStyles.areaFillColor,          // Use the correct property name
+        areaStyles.fill.paint['fill-color']     // Keep default color for others
     ]);
+    
     map.setPaintProperty('areas-border', 'line-color', [
         'case',
         ['==', ['get', 'forsyid'], forsyid],
-        highlightStyles.areaBorderColor,
-        highlightStyles.areaDefaultBorderColor
+        highlightStyles.areaBorderColor,        // Use the correct property name
+        areaStyles.line.paint['line-color']     // Keep default color for others
     ]);
 }
 
 export function resetAreaHighlight(map) {
-    map.setPaintProperty('areas', 'fill-color', highlightStyles.areaDefaultFillColor);
-    map.setPaintProperty('areas-border', 'line-color', highlightStyles.areaDefaultBorderColor);
+    // Reset to default styles from areaStyles.js
+    map.setPaintProperty('areas', 'fill-color', areaStyles.fill.paint['fill-color']);
+    map.setPaintProperty('areas-border', 'line-color', areaStyles.line.paint['line-color']);
 }
 
 export function highlightPlant(map, forsyid) {
