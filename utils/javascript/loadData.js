@@ -25,6 +25,7 @@ export function loadPlants(map) {
                 layout: {
                     'visibility': 'none'
                 },
+                filter: ['!=', ['get', 'current_price'], null],
                 paint: {
                     'circle-radius': [
                         'interpolate',

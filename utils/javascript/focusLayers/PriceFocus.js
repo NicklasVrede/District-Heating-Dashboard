@@ -49,11 +49,10 @@ export class PriceFocus {
                 this.updateRankings(currentYear, data.features);
             }
             
-            // Map features, setting undefined prices to null
+            // Map features with prices
             data.features = data.features.map(feature => {
                 const forsyid = feature.properties.forsyid;
-                const prices = window.dataDict?.[forsyid]?.prices?.[currentYear];
-                feature.properties.current_price = prices?.mwh_price ?? null;
+                feature.properties.current_price = window.dataDict?.[forsyid]?.prices?.[currentYear]?.mwh_price ?? null;
                 feature.properties.price_rank = this.priceRankings?.[forsyid]?.rank || 0;
                 return feature;
             });
