@@ -169,12 +169,12 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
     }));
 
     // Calculate percentages for each plant
-    validForsyids.forEach(forsyid => {
+    validForsyids.forEach((forsyid, plantIndex) => {
         const paddedForsyid = forsyid.toString().padStart(8, '0');
         const plantData = data[paddedForsyid];
         
         if (plantData) {
-            plantNames.push(plantData.name);
+            plantNames.push(plantData.name.split(' ')[0]);
             
             // Calculate total production for this plant in the current year
             const yearTotal = Object.values(plantData.production[effectiveYear] || {})
@@ -192,17 +192,16 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                     attrValue = plantData.production[effectiveYear]?.[mappedKeys] || 0;
                 }
                 
-                // Convert to percentage
+                // Convert to percentage and only add if above threshold
                 const percentage = yearTotal > 0 ? (attrValue / yearTotal) * 100 : 0;
-                datasets[index].data.push(percentage);
+                datasets[index].data[plantIndex] = percentage < LEGEND_THRESHOLD_PERCENTAGE ? 0 : percentage;
             });
         }
     });
 
-    // Hide datasets with low overall percentage
-    datasets.forEach(dataset => {
-        const avgPercentage = dataset.data.reduce((sum, val) => sum + val, 0) / dataset.data.length;
-        dataset.hidden = avgPercentage < LEGEND_THRESHOLD_PERCENTAGE;
+    // Filter out datasets that have no data (all zeros)
+    const nonEmptyDatasets = datasets.filter(dataset => {
+        return dataset.data.some(value => value > 0);
     });
 
     // Create title with note if year was clamped
@@ -215,11 +214,12 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
         }
     }
 
+    // Create new chart with filtered datasets
     currentCharts.production = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: plantNames,
-            datasets: datasets
+            datasets: nonEmptyDatasets
         },
         options: {
             responsive: true,
@@ -382,7 +382,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         const plantData = data[paddedForsyid];
         
         if (plantData?.prices?.[currentYear]) {
-            plantNames.push(plantData.name);
+            plantNames.push(plantData.name.split(' ')[0]);
             houseData.push(plantData.prices[currentYear].house_price || 0);
             apartmentData.push(plantData.prices[currentYear].apartment_price || 0);
             mwhData.push(plantData.prices[currentYear].mwh_price || 0);
@@ -506,7 +506,7 @@ function createTotalProductionChart(data, validForsyids) {
         const plantData = data[paddedForsyid];
         
         if (plantData?.production) {
-            plantNames.push(plantData.name);
+            plantNames.push(plantData.name.split(' ')[0]);
             
             // Sum up all years and fuels for this plant (data is already in TJ)
             const total = Object.values(plantData.production)
