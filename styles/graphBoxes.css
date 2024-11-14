@@ -21,6 +21,14 @@
     font-family: Arial, sans-serif;
 }
 
+.graphs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    overflow: hidden;
+}
+
 .production-graph {
     -webkit-order: 0;
     order: 0;
@@ -45,13 +53,33 @@
     height: 100% !important;
 }
 
-.price-graph {
+.total-production-graph {
     -webkit-order: 1;
     order: 1;
     -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 100px;
+    height: 100px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    overflow: hidden;
+    padding: 3px;
+}
+
+.total-production-graph canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.price-graph {
+    -webkit-order: 2;
+    order: 2;
+    -webkit-flex: 2 1 auto;
     flex: 2 1 auto;
-    -webkit-align-self: auto;
-    align-self: auto;
     min-height: 200px;
     height: 200px;
     background: white;
@@ -70,14 +98,14 @@
 }
 
 .info-box {
-    -webkit-order: 2;
-    order: 2;
+    -webkit-order: 3;
+    order: 3;
     -webkit-flex: 0 0 auto;
     flex: 0 0 auto;
     min-height: fit-content;
     background: white;
     border: 1px solid #e0e0e0;
-    padding: 15px;
+    padding: 4px 15px;
     margin-top: auto;
     display: none;
     font-family: Arial, sans-serif;
@@ -93,10 +121,19 @@
     font-family: Arial, sans-serif;
 }
 
+.info-box ul {
+    margin: 0;
+    padding: 0;
+}
+
 .info-box ul li {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     color: #666;
     font-family: Arial, sans-serif;
+}
+
+.info-box ul li:last-child {
+    margin-bottom: 0;
 }
 
 .info-box ul li strong {

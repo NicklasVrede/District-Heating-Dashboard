@@ -32,7 +32,7 @@
             </div>
             <div class="dropdown-group">
                 <div class="focus-selector-container">
-                    <label for="focus-selector">Data Focus:</label>
+                    <label for="focus-selector">Data View:</label>
                     <select id="focus-selector" onchange="changeFocus(this.value)">
                         <option value="none">None</option>
                         <option value="overview">Overview</option>
@@ -43,7 +43,7 @@
                 <div class="focus-selector-container hidden" id="measure-container">
                     <label for="measure-selector">Measure:</label>
                     <select id="measure-selector">
-                        <option value="kul">All</option>
+                        <option value="all">All</option>
                         <option value="kul">Kul</option>
                         <option value="olie">Olie</option>
                         <option value="flis">Flis</option>
@@ -52,6 +52,7 @@
                 <div class="select-group">
                     <label>Select:</label>
                     <select id="select-dropdown">
+                        <option value="none">None</option>
                         <option value="none">All</option>
                         <option value="top5">Top 5</option>
                         <option value="top10">Top 10</option>

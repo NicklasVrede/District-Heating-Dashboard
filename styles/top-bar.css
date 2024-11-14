@@ -79,7 +79,7 @@
 .dropdown-group {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     padding: 3px 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -109,7 +109,6 @@
 #measure-container.visible {
     max-width: 300px;
     opacity: 1;
-    margin-right: 8px;
     visibility: visible;
 }
 

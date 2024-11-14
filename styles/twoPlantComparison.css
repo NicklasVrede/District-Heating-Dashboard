@@ -19,11 +19,15 @@
 
 /* Reuse existing graph box styles but with adjusted heights */
 .plant-column .production-graph {
-    height: 350px;
+    height: 300px;
+}
+
+.plant-column .total-production-graph {
+    height: 100px;
 }
 
 .plant-column .price-graph {
-    height: 250px;
+    height: 200px;
 }
 
 /* Adjust info box for side-by-side layout */

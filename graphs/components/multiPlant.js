@@ -45,6 +45,9 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none'
             <div class="production-graph">
                 <canvas id="productionChart"></canvas>
             </div>
+            <div class="total-production-graph">
+                <canvas id="totalProductionChart"></canvas>
+            </div>
             <div class="price-graph">
                 <canvas id="priceChart"></canvas>
             </div>

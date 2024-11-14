@@ -27,6 +27,9 @@ export function createTwoPlantComparison(data, validForsyids) {
                 <div class="production-graph">
                     <canvas id="productionChart1"></canvas>
                 </div>
+                <div class="total-production-graph">
+                    <canvas id="totalProductionChart1"></canvas>
+                </div>
                 <div class="price-graph">
                     <canvas id="priceChart1"></canvas>
                 </div>
@@ -36,6 +39,9 @@ export function createTwoPlantComparison(data, validForsyids) {
                 <h2 class="graph-title"></h2>
                 <div class="production-graph">
                     <canvas id="productionChart2"></canvas>
+                </div>
+                <div class="total-production-graph">
+                    <canvas id="totalProductionChart2"></canvas>
                 </div>
                 <div class="price-graph">
                     <canvas id="priceChart2"></canvas>
