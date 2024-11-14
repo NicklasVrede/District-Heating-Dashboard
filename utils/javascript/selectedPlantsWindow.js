@@ -28,7 +28,13 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
     // Clear current list
     list.innerHTML = '';
 
-    // Get the plants source
+    // First, update the header of the window (not the list items)
+    windowEl.querySelector('.selected-plants-header').innerHTML = `
+        <span>Selected Plants</span>
+        <button id="window-clear-button" title="Clear Selection">×</button>
+    `;
+
+    // Get plants data and create list items
     const source = map.getSource('plants');
     if (!source || !source._data) {
         console.warn('Plants source not found or data not loaded');
@@ -81,7 +87,6 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
         
         // Add hover handlers for highlighting
         li.addEventListener('mouseenter', () => {
-            const map = window.map;
             if (map) {
                 highlightArea(map, plant.forsyid);
                 highlightPlant(map, plant.forsyid);
@@ -89,7 +94,6 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
         });
 
         li.addEventListener('mouseleave', () => {
-            const map = window.map;
             if (map) {
                 resetAreaHighlight(map);
                 removePlantHighlight(map);
@@ -98,14 +102,16 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
 
         // Add click handler for delete button
         const deleteButton = li.querySelector('.delete-button');
-        deleteButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const forsyid = e.target.dataset.forsyid;
-            selectionSet.delete(forsyid);
-            updateSelectedPlants(map);
-            updateSelectedPlantsWindow(selectionSet);
-            updateGraph();
-        });
+        if (deleteButton) {
+            deleteButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const forsyid = e.target.dataset.forsyid;
+                selectionSet.delete(forsyid);
+                updateSelectedPlants(map);
+                updateSelectedPlantsWindow(selectionSet);
+                updateGraph();
+            });
+        }
 
         // Add click handler for the list item
         li.addEventListener('click', (e) => {
@@ -120,4 +126,21 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
         
         list.appendChild(li);
     });
+
+    // Add the click handler for the clear button
+    const clearButton = windowEl.querySelector('#window-clear-button');
+    if (clearButton) {
+        clearButton.addEventListener('click', () => {
+            selectionSet.clear();
+            updateSelectedPlants(map);
+            updateSelectedPlantsWindow(selectionSet);
+            const graphContainer = document.getElementById('graph-container');
+            if (graphContainer) {
+                graphContainer.innerHTML = '';
+            }
+            setTimeout(() => {
+                updateGraph(selectionSet);
+            }, 100);
+        });
+    }
 } 

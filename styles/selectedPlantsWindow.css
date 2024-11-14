@@ -22,6 +22,9 @@
     top: 0;
     z-index: 3;
     font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .selected-plants-list {
@@ -73,4 +76,26 @@
 
 .selected-plant-item:hover {
     background-color: #f8f9fa;
+}
+
+#window-clear-button {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    transition: all 0.2s ease;
+}
+
+#window-clear-button:hover {
+    background-color: #ff4d4d;
+    color: white;
 } 
