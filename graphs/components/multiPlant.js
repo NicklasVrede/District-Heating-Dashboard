@@ -125,6 +125,7 @@ function setupYearSliderListener(data, validForsyids, focus) {
             
             const effectiveYear = getEffectiveYear(selectedYear, focus);
             createProductionChart(data, validForsyids, effectiveYear, focus);
+            createTotalProductionChart(data, validForsyids);
             createPriceChart(data, validForsyids, selectedYear, focus);
         });
     }
@@ -252,7 +253,46 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                 },
                 legend: {
                     position: 'left',
-                    align: 'start'
+                    align: 'start',
+                    onClick: (function() {
+                        let clickTimeout = null;
+                        let clickCount = 0;
+
+                        return function(e, legendItem, legend) {
+                            clickCount++;
+                            
+                            if (clickCount === 1) {
+                                clickTimeout = setTimeout(() => {
+                                    // Single click - default toggle behavior
+                                    const index = legendItem.datasetIndex;
+                                    const chart = legend.chart;
+                                    const meta = chart.getDatasetMeta(index);
+                                    meta.hidden = !meta.hidden;
+                                    chart.update();
+                                    
+                                    clickCount = 0;
+                                }, 250);
+                            } else if (clickCount === 2) {
+                                clearTimeout(clickTimeout);
+                                // Double click - show only this dataset
+                                const chart = legend.chart;
+                                const datasets = chart.data.datasets;
+                                
+                                // Check if all others are already hidden
+                                const allOthersHidden = datasets.every((dataset, i) => 
+                                    i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
+                                
+                                datasets.forEach((dataset, i) => {
+                                    const meta = chart.getDatasetMeta(i);
+                                    // If all others are hidden, show all. Otherwise, show only the clicked one
+                                    meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
+                                });
+                                
+                                chart.update();
+                                clickCount = 0;
+                            }
+                        };
+                    })()
                 },
                 tooltip: {
                     mode: 'index',
@@ -271,7 +311,52 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                         }
                     }
                 }
-            }
+            },
+            animation: false,
+            transitions: {
+                active: {
+                    animation: false
+                }
+            },
+            onClick: (function() {
+                let clickTimeout = null;
+                let clickCount = 0;
+
+                return function(e, elements, chart) {
+                    if (!elements || !elements.length) return;
+                    
+                    clickCount++;
+                    const element = elements[0];
+                    const datasetIndex = element.datasetIndex;
+                    
+                    if (clickCount === 1) {
+                        clickTimeout = setTimeout(() => {
+                            // Single click - toggle visibility
+                            const meta = chart.getDatasetMeta(datasetIndex);
+                            meta.hidden = !meta.hidden;
+                            chart.update();
+                            
+                            clickCount = 0;
+                        }, 250);
+                    } else if (clickCount === 2) {
+                        clearTimeout(clickTimeout);
+                        // Double click - show only this dataset
+                        const datasets = chart.data.datasets;
+                        
+                        // Check if all others are already hidden
+                        const allOthersHidden = datasets.every((dataset, i) => 
+                            i === datasetIndex || chart.getDatasetMeta(i).hidden);
+                        
+                        datasets.forEach((dataset, i) => {
+                            const meta = chart.getDatasetMeta(i);
+                            meta.hidden = !allOthersHidden && (i !== datasetIndex);
+                        });
+                        
+                        chart.update();
+                        clickCount = 0;
+                    }
+                };
+            })()
         }
     });
 }
@@ -303,6 +388,27 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             mwhData.push(plantData.prices[currentYear].mwh_price || 0);
         }
     });
+
+    // Calculate max price across all years
+    let maxPrice = 0;
+    validForsyids.forEach(forsyid => {
+        const paddedForsyid = forsyid.toString().padStart(8, '0');
+        const plantData = data[paddedForsyid];
+        
+        if (plantData?.prices) {
+            Object.values(plantData.prices).forEach(yearData => {
+                maxPrice = Math.max(
+                    maxPrice,
+                    yearData.house_price || 0,
+                    yearData.apartment_price || 0,
+                    yearData.mwh_price || 0
+                );
+            });
+        }
+    });
+
+    // Round up to the nearest 5000
+    maxPrice = Math.ceil(maxPrice / 5000) * 5000;
 
     // Create new chart
     currentCharts.price = new Chart(ctx, {
@@ -345,7 +451,14 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                         display: true,
                         text: 'Price (DKK)'
                     },
-                    beginAtZero: true
+                    beginAtZero: true,
+                    min: 0,
+                    max: maxPrice,
+                    ticks: {
+                        callback: function(value) {
+                            return value.toLocaleString() + ' DKK';
+                        }
+                    }
                 }
             },
             plugins: {
@@ -363,6 +476,12 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                             return `${context.dataset.label}: ${context.raw.toLocaleString()} DKK`;
                         }
                     }
+                }
+            },
+            animation: false,
+            transitions: {
+                active: {
+                    animation: false
                 }
             }
         }
@@ -449,6 +568,12 @@ function createTotalProductionChart(data, validForsyids) {
                             return `${context.dataset.label}: ${context.raw.toFixed(1)} TJ`;
                         }
                     }
+                }
+            },
+            animation: false,
+            transitions: {
+                active: {
+                    animation: false
                 }
             }
         }
