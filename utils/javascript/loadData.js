@@ -2,6 +2,7 @@ import { plantStyles } from '../../styles/plantStyles.js';
 import { areaStyles, gasAreaStyles } from '../../styles/areaStyles.js'; // Import gas area styles
 import { addPlantEventListeners, addAreaEventListeners } from './eventListeners.js';
 import { highlightStyles } from '../../styles/highlightStyles.js';
+import { graphConfig } from '../../graphs/config/graphConfig.js';
 
 
 export function loadPlants(map) {
@@ -25,6 +26,7 @@ export function loadPlants(map) {
                 layout: {
                     'visibility': 'none'
                 },
+                // filter on defined prices
                 filter: ['!=', ['get', 'current_price'], null],
                 paint: {
                     'circle-radius': [
@@ -45,6 +47,44 @@ export function loadPlants(map) {
                     'circle-opacity': 0.8,
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#000000'
+                }
+            });
+
+            // Add production visualization layer (hidden by default)
+            map.addLayer({
+                id: 'plants-production',
+                type: 'circle',
+                source: 'plants',
+                layout: {
+                    'visibility': 'none'
+                },
+                // filter on defined fuels
+                filter: ['!=', ['get', 'main_fuel'], 'unknown'],
+                paint: {
+                    'circle-radius': [
+                        'case',
+                        ['has', 'size'], ['get', 'size'],
+                        7  // default size
+                    ],
+                    'circle-color': [
+                        'match',
+                        ['get', 'main_fuel'],
+                        'halm', graphConfig.colors['Halm'],
+                        'skovflis', graphConfig.colors['Skovflis'],
+                        'naturgas', graphConfig.colors['Gas'],
+                        'affald', graphConfig.colors['Affald'],
+                        'kul', graphConfig.colors['Kul'],
+                        'elektricitet', graphConfig.colors['Elektricitet'],
+                        'traepiller', graphConfig.colors['Træpiller'],
+                        'trae- og biomasseaffald', graphConfig.colors['Træaffald'],
+                        'omgivelsesvarme', graphConfig.colors['Varmepumper'],
+                        'braendselsfrit', graphConfig.colors['Varmepumper'],
+                        'biogas', graphConfig.colors['Biogas'],
+                        '#888888'  // default color for unknown fuel types
+                    ],
+                    'circle-opacity': 0.8,
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff'
                 }
             });
 

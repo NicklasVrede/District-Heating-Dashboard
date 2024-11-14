@@ -8,6 +8,7 @@ class FocusManager {
     constructor() {
         this.measureContainer = document.getElementById('measure-container');
         this.initialized = false;
+        this.currentFocus = null;
         this.initialize();
     }
 
@@ -25,6 +26,7 @@ class FocusManager {
             none: new DefaultFocus(this.mapboxMap, this.measureContainer)
         };
         this.initialized = true;
+        this.currentFocus = this.focuses.none;
     }
 
     changeFocus(value = 'none') {
@@ -33,14 +35,25 @@ class FocusManager {
             return;
         }
 
-        console.log('FocusManager changing focus to:', value);
+        console.log('FocusManager changing focus from', this.currentFocus?.constructor.name, 'to:', value);
 
         try {
-            const focus = this.focuses[value] || this.focuses.none;
-            focus.apply();
+            // Remove current focus
+            if (this.currentFocus) {
+                console.log('Removing current focus:', this.currentFocus.constructor.name);
+                this.currentFocus.remove();
+            }
+
+            // Apply new focus
+            const newFocus = this.focuses[value] || this.focuses.none;
+            console.log('Applying new focus:', newFocus.constructor.name);
+            newFocus.apply();
+            this.currentFocus = newFocus;
+            focusState.focus = value;
         } catch (error) {
             console.error('Error changing focus:', error);
             this.focuses.none.apply();
+            this.currentFocus = this.focuses.none;
             focusState.focus = 'none';
         }
     }

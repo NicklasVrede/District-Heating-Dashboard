@@ -12,7 +12,21 @@ export class PriceFocus {
         });
     }
 
+    remove() {
+        console.log('Removing price focus');
+        this.measureContainer.classList.add('hidden');
+        
+        // Hide the price layer
+        if (this.map.getLayer('plants-price')) {
+            console.log('Setting plants-price visibility to none');
+            this.map.setLayoutProperty('plants-price', 'visibility', 'none');
+        }
+    }
+
     apply() {
+        console.log('Applying price focus');
+        this.measureContainer.classList.remove('hidden');
+        
         this.map.setLayoutProperty('plants-price', 'visibility', 'visible');
         this.updatePriceData();
         this.updateCircleSize();

@@ -36,4 +36,8 @@ export class DefaultFocus {
             createOrUpdatePlotlyGraph(data, selectedForsyids, 'none');
         }
     }
+
+    remove() {
+        //unused
+    }
 } 
