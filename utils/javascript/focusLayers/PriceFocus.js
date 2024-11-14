@@ -23,8 +23,8 @@ export class PriceFocus {
             'interpolate',
             ['linear'],
             ['get', 'current_price'],
-            0, 6,
-            1000, 8
+            0, 4, // 0 price, 6 radius
+            2000, 6 // 1000 price, 8 radius
         ]);
     }
 

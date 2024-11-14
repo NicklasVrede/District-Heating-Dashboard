@@ -14,7 +14,7 @@ export const highlightStyles = {
 
     // Selection styles
     selectedPlant: {
-        radius: 9,
+        radius: 7,
         color: 'rgba(0, 0, 0, 0)',
         strokeWidth: 2,
         strokeColor: '#FF0000',
