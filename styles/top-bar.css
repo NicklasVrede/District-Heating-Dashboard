@@ -28,28 +28,46 @@
     flex: 1;
     min-width: 300px;
     max-width: 500px;
+    height: 43.33px;
 }
 
 #address {
     flex: 1;
-    padding: 8px 12px;
-    font-size: 1em;
+    padding: 0 12px;
+    font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px 0 0 4px;
     box-sizing: border-box;
     min-width: 250px;
+    height: 100%;
 }
 
 #search-button {
-    padding: 0.5vh 1vw;
-    font-size: 1em;
+    width: 100%;
+    height: 100%;
     border: 1px solid #ccc;
     border-left: none;
     border-radius: 0 4px 4px 0;
-    background-color: #007bff;
-    color: white;
+    background-color: white;
     cursor: pointer;
-    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+#search-button:hover {
+    background-color: #f5f5f5;
+}
+
+#search-button svg {
+    fill: #666;
+    width: 24px;
+    height: 24px;
+}
+
+#search-button:hover svg {
+    fill: #333;
 }
 
 .autocomplete-item.active {
@@ -62,10 +80,11 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
+    padding: 3px 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f9f9f9;
+    height: 36px;
 }
 
 /* Add styles for measure container */
@@ -138,29 +157,6 @@
     flex-wrap: wrap;
 }
 
-#overview-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#overview-button:hover {
-    background-color: #0056b3;
-}
-
-#overview-button:active {
-    background-color: #004080;
-}
-
-#overview-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
-}
 
 #graph-style-dropdown {
     margin-left: 10px;
@@ -171,44 +167,6 @@
     cursor: pointer;
 }
 
-/* Action Buttons - Common Styles */
-.buttons-container button,
-#apply-filters,
-#overview-button,
-#clear-button {
-    height: 32px;
-    padding: 0 16px;
-    border-radius: 4px;
-    border: none;
-    font-size: 16px;
-    font-family: Arial;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-}
-
-/* Apply Button Specific Styles */
-#apply-filters {
-    background-color: #007bff;
-    color: white;
-}
-
-#apply-filters:hover {
-    background-color: #0056b3;
-}
-
-#apply-filters:active {
-    background-color: #004080;
-}
-
-#apply-filters:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
-}
 
 
 @media screen and (max-width: 830px) {
@@ -257,26 +215,6 @@
     }
 }
 
-/* For very small screens */
-@media screen and (max-width: 480px) {
-    .buttons-container {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .buttons-container button,
-    #apply-filters,
-    #overview-button,
-    #clear-button {
-        width: 100%;
-        margin: 4px 0;
-    }
-
-    .toggle-frame {
-        width: 100%;
-        justify-content: space-between;
-    }
-}
 
 /* Add new class for the focus selector group */
 .focus-group {
@@ -370,12 +308,6 @@
 @media screen and (max-width: 830px) {
     .top-bar {
         gap: 12px;
-    }
-
-    .search-container {
-        width: 100%;
-        max-width: none;
-        margin-bottom: 8px;
     }
     
     .dropdown-group {
