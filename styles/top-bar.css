@@ -257,7 +257,7 @@
 
 .select-group {
     order: 3;
-    display: flex;
+    display: none;
     align-items: center;
     gap: 8px;
     flex-wrap: nowrap;

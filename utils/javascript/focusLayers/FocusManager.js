@@ -45,6 +45,16 @@ class FocusManager {
                 value = 'none'; // Reset to none after triggering overview
             }
 
+            // Show/hide select group based on focus
+            const selectGroup = document.querySelector('.select-group');
+            if (selectGroup) {
+                if (value === 'price' || value === 'production') {
+                    selectGroup.style.display = 'flex';
+                } else {
+                    selectGroup.style.display = 'none';
+                }
+            }
+
             // Remove current focus
             if (this.currentFocus) {
                 console.log('Removing current focus:', this.currentFocus.constructor.name);
