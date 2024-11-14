@@ -3,6 +3,7 @@ import { PriceFocus } from './PriceFocus.js';
 import { ProductionFocus } from './ProductionFocus.js';
 import { DefaultFocus } from './DefaultFocus.js';
 import { focusState } from './FocusState.js';
+import { selectAll } from '../selectionFunctions.js';
 
 class FocusManager {
     constructor() {
@@ -38,6 +39,12 @@ class FocusManager {
         console.log('FocusManager changing focus from', this.currentFocus?.constructor.name, 'to:', value);
 
         try {
+            // Handle overview separately
+            if (value === 'overview') {
+                selectAll(this.mapboxMap);
+                value = 'none'; // Reset to none after triggering overview
+            }
+
             // Remove current focus
             if (this.currentFocus) {
                 console.log('Removing current focus:', this.currentFocus.constructor.name);
