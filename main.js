@@ -96,11 +96,13 @@ fetch('data/data_dict.json')
     })
     .catch(error => console.error('Error loading data dictionary:', error));
 
-// Add this to your existing functions
+// Update the resetCamera function
 function resetCamera() {
     map.flyTo({
         center: [10.0, 56.0],
         zoom: 6.5,
+        pitch: 0,
+        bearing: 0,
         essential: true
     });
 }
