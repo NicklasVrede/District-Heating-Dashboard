@@ -25,6 +25,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: Arial, sans-serif;
 }
 
 .selected-plants-list {
@@ -98,4 +99,17 @@
 #window-clear-button:hover {
     background-color: #ff4d4d;
     color: white;
-} 
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.plant-count {
+    color: #666;
+    font-size: 12px;
+    font-weight: normal;
+}
+ 

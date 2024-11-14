@@ -30,7 +30,10 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
 
     // First, update the header of the window (not the list items)
     windowEl.querySelector('.selected-plants-header').innerHTML = `
-        <span>Selected Plants</span>
+        <div class="header-content">
+            <span>Selected Plants</span>
+            <span class="plant-count">(${selectedForsyids.size})</span>
+        </div>
         <button id="window-clear-button" title="Clear Selection">×</button>
     `;
 
