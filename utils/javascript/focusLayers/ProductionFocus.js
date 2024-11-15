@@ -8,20 +8,18 @@ export class ProductionFocus {
         
         // Create a mapping of fuel types to colors from graphConfig
         this.fuelColors = {};
-        // Map the lowercase fuel types to their colors from graphConfig
-        this.fuelColors = {
-            'halm': graphConfig.colors['Halm'],
-            'skovflis': graphConfig.colors['Skovflis'],
-            'naturgas': graphConfig.colors['Gas'],
-            'affald': graphConfig.colors['Affald'],
-            'kul': graphConfig.colors['Kul'],
-            'elektricitet': graphConfig.colors['Elektricitet'],
-            'traepiller': graphConfig.colors['Træpiller'],
-            'trae- og biomasseaffald': graphConfig.colors['Træaffald'],
-            'omgivelsesvarme': graphConfig.colors['Varmepumper'],
-            'braendselsfrit': graphConfig.colors['Varmepumper'],
-            'biogas': graphConfig.colors['Biogas']
-        };
+        
+        // Map all fuel types to their respective category colors
+        Object.entries(graphConfig.fuelTypes).forEach(([category, fuelTypes]) => {
+            const color = graphConfig.colors[category];
+            if (Array.isArray(fuelTypes)) {
+                fuelTypes.forEach(fuelType => {
+                    this.fuelColors[fuelType] = color;
+                });
+            } else {
+                this.fuelColors[fuelTypes] = color;
+            }
+        });
         
         // Precalculate main fuels for all years
         this.initializeProductionData();
@@ -68,21 +66,40 @@ export class ProductionFocus {
     }
 
     calculateProductionStats(yearData) {
-        let totalProduction = 0;
-        let mainFuel = null;
-        let maxProduction = 0;
-
+        // Group production by categories
+        const categoryProduction = {};
+        
         Object.entries(yearData).forEach(([fuel, amount]) => {
-            const productionAmount = amount || 0;
-            totalProduction += productionAmount;
-            
-            if (productionAmount > maxProduction) {
-                maxProduction = productionAmount;
-                mainFuel = fuel;
+            // Find which category this fuel belongs to
+            for (const [category, fuelTypes] of Object.entries(graphConfig.fuelTypes)) {
+                if ((Array.isArray(fuelTypes) && fuelTypes.includes(fuel)) || fuelTypes === fuel) {
+                    categoryProduction[category] = (categoryProduction[category] || 0) + (amount || 0);
+                    break;
+                }
             }
         });
-
-        return { mainFuel, totalProduction };
+        
+        // Find the main category
+        let mainCategory = null;
+        let maxProduction = 0;
+        let totalProduction = 0;
+        
+        Object.entries(categoryProduction).forEach(([category, amount]) => {
+            totalProduction += amount;
+            if (amount > maxProduction) {
+                maxProduction = amount;
+                mainCategory = category;
+            }
+        });
+        
+        // Return the main fuel type from the category
+        const mainFuel = Object.entries(graphConfig.fuelTypes)
+            .find(([category]) => category === mainCategory)?.[1];
+        
+        return {
+            mainFuel: Array.isArray(mainFuel) ? mainFuel[0] : mainFuel,
+            totalProduction
+        };
     }
 
     updateProductionData(year) {
@@ -90,24 +107,26 @@ export class ProductionFocus {
         
         console.log('Updating production data for year:', effectiveYear);
         
-        // Update circle color based on flat properties
-        this.map.setPaintProperty('plants-production', 'circle-color', [
-            'match',
-            ['get', `mainFuel_${effectiveYear}`],
-            'halm', this.fuelColors['halm'],
-            'skovflis', this.fuelColors['skovflis'],
-            'naturgas', this.fuelColors['naturgas'],
-            'affald', this.fuelColors['affald'],
-            'kul', this.fuelColors['kul'],
-            'elektricitet', this.fuelColors['elektricitet'],
-            'traepiller', this.fuelColors['traepiller'],
-            'trae- og biomasseaffald', this.fuelColors['trae- og biomasseaffald'],
-            'omgivelsesvarme', this.fuelColors['omgivelsesvarme'],
-            'braendselsfrit', this.fuelColors['braendselsfrit'],
-            'biogas', this.fuelColors['biogas'],
-            '#888888'
-        ]);
-
+        // Create the match expression for all fuel types
+        const matchExpression = ['match', ['get', `mainFuel_${effectiveYear}`]];
+        
+        // Add all fuel types from the new category structure
+        Object.entries(graphConfig.fuelTypes).forEach(([category, fuelTypes]) => {
+            if (Array.isArray(fuelTypes)) {
+                fuelTypes.forEach(fuel => {
+                    matchExpression.push(fuel, graphConfig.colors[category]);
+                });
+            } else {
+                matchExpression.push(fuelTypes, graphConfig.colors[category]);
+            }
+        });
+        
+        // Add default color
+        matchExpression.push('#888888');
+        
+        // Set the paint property with the new match expression
+        this.map.setPaintProperty('plants-production', 'circle-color', matchExpression);
+        
         // Circle radius with significant zoom scaling
         this.map.setPaintProperty('plants-production', 'circle-radius', [
             'interpolate',
