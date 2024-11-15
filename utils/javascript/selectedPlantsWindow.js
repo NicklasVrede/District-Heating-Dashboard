@@ -5,10 +5,16 @@ import { updateSelectedPlants } from './eventListeners.js';
 import { updateGraph } from './plotlyGraphs.js';
 import { highlightArea, resetAreaHighlight, highlightPlant, removePlantHighlight } from './eventListeners.js';
 
-// Initialize focus listener
+// Initialize focus and year listeners
 focusState.addListener(() => {
-    // Update the selection window when focus changes
     if (selectionSet.size > 0) {
+        updateSelectedPlantsWindow(selectionSet);
+    }
+});
+
+// Add year state listener
+yearState.addListener(() => {
+    if (selectionSet.size > 0 && focusState.focus === 'price') {
         updateSelectedPlantsWindow(selectionSet);
     }
 });
