@@ -5,11 +5,10 @@ export class ProductionFocus {
     constructor(map, measureContainer) {
         this.map = map;
         this.measureContainer = measureContainer;
+        this.legend = null;
         
-        // Create a mapping of fuel types to colors from graphConfig
+        // Create a mapping of fuel types to colors from graphConfig (fallback)
         this.fuelColors = {};
-        
-        // Map all fuel types to their respective category colors
         Object.entries(graphConfig.fuelTypes).forEach(([category, fuelTypes]) => {
             const color = graphConfig.colors[category];
             if (Array.isArray(fuelTypes)) {
@@ -21,13 +20,43 @@ export class ProductionFocus {
             }
         });
         
-        // Precalculate main fuels for all years
-        this.initializeProductionData();
-        
-        // Add listener for year changes
-        yearState.addListener((year) => {
-            this.updateProductionData(year);
+        // Load icons before initializing
+        this.loadIcons().then(() => {
+            this.initializeProductionData();
+            
+            // Add listener for year changes after icons are loaded
+            yearState.addListener((year) => {
+                this.updateProductionData(year);
+            });
         });
+        
+        this.createLegend();
+    }
+
+    async loadIcons() {
+        try {
+            const iconPromises = Object.keys(graphConfig.fuelTypes).map(category => {
+                return new Promise((resolve, reject) => {
+                    const image = new Image();
+                    image.onload = () => {
+                        // Convert category name to kebab-case for file naming
+                        const iconId = `icon-${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}`;
+                        this.map.addImage(iconId, image);
+                        resolve();
+                    };  
+                    image.onerror = () => {
+                        console.warn(`Failed to load icon for ${category}, will use color fallback`);
+                        resolve(); // Resolve anyway to continue loading
+                    };
+                    // Adjust path to match your icon filenames
+                    image.src = `/assets/icons/${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}.png`;
+                });
+            });
+            
+            await Promise.all(iconPromises);
+        } catch (error) {
+            console.error('Error loading icons:', error);
+        }
     }
 
     initializeProductionData() {
@@ -105,63 +134,149 @@ export class ProductionFocus {
     updateProductionData(year) {
         const effectiveYear = Math.min(Math.max(year, '2021'), '2023');
         
-        console.log('Updating production data for year:', effectiveYear);
-        
-        // Create the match expression for all fuel types
-        const matchExpression = ['match', ['get', `mainFuel_${effectiveYear}`]];
-        
-        // Add all fuel types from the new category structure
-        Object.entries(graphConfig.fuelTypes).forEach(([category, fuelTypes]) => {
-            if (Array.isArray(fuelTypes)) {
-                fuelTypes.forEach(fuel => {
-                    matchExpression.push(fuel, graphConfig.colors[category]);
-                });
-            } else {
-                matchExpression.push(fuelTypes, graphConfig.colors[category]);
-            }
-        });
-        
-        // Add default color
-        matchExpression.push('#888888');
-        
-        // Set the paint property with the new match expression
-        this.map.setPaintProperty('plants-production', 'circle-color', matchExpression);
-        
-        // Circle radius with significant zoom scaling
-        this.map.setPaintProperty('plants-production', 'circle-radius', [
-            'interpolate',
-            ['linear'],
-            ['zoom'],
-            5, [  // At zoom level 5 (far out)
-                'interpolate',
-                ['linear'],
-                ['get', `totalProduction_${effectiveYear}`],
-                0, 5,
-                100000, 15
-            ],
-            10, [  // At zoom level 10 (medium)
-                'interpolate',
-                ['linear'],
-                ['get', `totalProduction_${effectiveYear}`],
-                0, 10,
-                100000, 30
-            ],
-            15, [  // At zoom level 15 (close)
-                'interpolate',
-                ['linear'],
-                ['get', `totalProduction_${effectiveYear}`],
-                0, 20,
-                100000, 60
-            ]
-        ]);
+        // Check if icons are loaded
+        const hasIcons = Object.keys(graphConfig.fuelTypes).some(category => 
+            this.map.hasImage(`icon-${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}`)
+        );
 
-        this.map.setPaintProperty('plants-production', 'circle-stroke-width', 2);
-        this.map.setPaintProperty('plants-production', 'circle-stroke-color', 'white');
+        if (hasIcons) {
+            // Convert to symbol layer if not already
+            if (this.map.getLayer('plants-production').type !== 'symbol') {
+                this.map.removeLayer('plants-production');
+                this.map.addLayer({
+                    'id': 'plants-production',
+                    'type': 'symbol',
+                    'source': 'plants',
+                    'layout': {
+                        'icon-allow-overlap': true,
+                        'icon-ignore-placement': true,
+                        'icon-size': [
+                            'interpolate',
+                            ['linear'],
+                            ['zoom'],
+                            5, 0.25,
+                            10, 0.75,
+                            15, 1  
+                        ]
+                    }
+                });
+            }
+
+            // Use icons
+            this.map.setLayoutProperty('plants-production', 'icon-image', [
+                'match',
+                ['get', `mainFuel_${effectiveYear}`],
+                ...Object.entries(graphConfig.fuelTypes).flatMap(([category, fuelTypes]) => {
+                    const iconId = `icon-${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}`;
+                    if (Array.isArray(fuelTypes)) {
+                        return fuelTypes.flatMap(fuel => [fuel, iconId]);
+                    }
+                    return [fuelTypes, iconId];
+                }),
+                'icon-default' // fallback icon
+            ]);
+        } else {
+            // Fallback to colored circles
+            if (this.map.getLayer('plants-production').type !== 'circle') {
+                this.map.removeLayer('plants-production');
+                this.map.addLayer({
+                    'id': 'plants-production',
+                    'type': 'circle',
+                    'source': 'plants'
+                });
+            }
+
+            // Use original color-based styling
+            const matchExpression = ['match', ['get', `mainFuel_${effectiveYear}`]];
+            Object.entries(graphConfig.fuelTypes).forEach(([category, fuelTypes]) => {
+                if (Array.isArray(fuelTypes)) {
+                    fuelTypes.forEach(fuel => {
+                        matchExpression.push(fuel, graphConfig.colors[category]);
+                    });
+                } else {
+                    matchExpression.push(fuelTypes, graphConfig.colors[category]);
+                }
+            });
+            matchExpression.push('#888888'); // default color
+
+            this.map.setPaintProperty('plants-production', 'circle-color', matchExpression);
+            
+            // Original circle radius logic
+            this.map.setPaintProperty('plants-production', 'circle-radius', [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                5, [
+                    'interpolate',
+                    ['linear'],
+                    ['get', `totalProduction_${effectiveYear}`],
+                    0, 5,
+                    100000, 15
+                ],
+                15, [
+                    'interpolate',
+                    ['linear'],
+                    ['get', `totalProduction_${effectiveYear}`],
+                    0, 20,
+                    100000, 60
+                ]
+            ]);
+        }
+    }
+
+    createLegend() {
+        if (!this.legend) {
+            this.legend = document.createElement('div');
+            this.legend.className = 'map-legend production-legend';
+            this.legend.style.display = 'none';
+            this.map.getContainer().appendChild(this.legend);
+        }
+    }
+
+    updateLegend() {
+        if (!this.legend) return;
+
+        // Check if icons are loaded
+        const hasIcons = Object.keys(graphConfig.fuelTypes).some(category => 
+            this.map.hasImage(`icon-${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}`)
+        );
+
+        this.legend.innerHTML = `
+            <div class="legend-title">Production Types</div>
+            <div class="legend-items">
+                ${Object.entries(graphConfig.fuelTypes).map(([category, _]) => {
+                    const iconId = category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-');
+                    if (hasIcons) {
+                        return `
+                            <div class="legend-item">
+                                <img 
+                                    src="/assets/icons/${iconId}.png" 
+                                    class="legend-icon" 
+                                    alt="${category}"
+                                />
+                                <span class="legend-label">${category}</span>
+                            </div>
+                        `;
+                    } else {
+                        return `
+                            <div class="legend-item">
+                                <div 
+                                    class="legend-color" 
+                                    style="background-color: ${graphConfig.colors[category]}"
+                                ></div>
+                                <span class="legend-label">${category}</span>
+                            </div>
+                        `;
+                    }
+                }).join('')}
+            </div>
+        `;
     }
 
     apply() {
         console.log('Applying production focus');
         this.measureContainer.classList.remove('hidden');
+        this.legend.style.display = 'block';  // Show legend
         
         if (this.map.getLayer('plants-price')) {
             this.map.setLayoutProperty('plants-price', 'visibility', 'none');
@@ -169,10 +284,12 @@ export class ProductionFocus {
         
         this.map.setLayoutProperty('plants-production', 'visibility', 'visible');
         this.updateProductionData(yearState.year);
+        this.updateLegend();  // Update legend
     }
 
     remove() {
         this.measureContainer.classList.add('hidden');
+        this.legend.style.display = 'none';  // Hide legend
         this.map.setLayoutProperty('plants-production', 'visibility', 'none');
     }
 } 
