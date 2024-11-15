@@ -2,6 +2,7 @@ import { graphConfig } from '../config/graphConfig.js';
 import { showToast } from './toast.js';
 import { yearState } from '../../utils/javascript/focusLayers/YearState.js';
 import { priceTypeColors } from '../../utils/javascript/focusLayers/colors.js';
+import { legendTooltips, tooltipStyle } from '../config/tooltipConfig.js';
 
 // Keep track of current charts
 let currentCharts = {
@@ -11,6 +12,8 @@ let currentCharts = {
 };
 
 const LEGEND_THRESHOLD_PERCENTAGE = 2;
+
+Chart.register(ChartDataLabels);
 
 export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none') {
     console.log('Current focus:', focus);
@@ -256,62 +259,118 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                 legend: {
                     position: 'left',
                     align: 'start',
-                    onClick: (function() {
-                        let clickTimeout = null;
-                        let clickCount = 0;
-
-                        return function(e, legendItem, legend) {
-                            clickCount++;
-                            
-                            if (clickCount === 1) {
-                                clickTimeout = setTimeout(() => {
-                                    // Single click - default toggle behavior
-                                    const index = legendItem.datasetIndex;
-                                    const chart = legend.chart;
-                                    const meta = chart.getDatasetMeta(index);
-                                    meta.hidden = !meta.hidden;
-                                    chart.update();
-                                    
-                                    clickCount = 0;
-                                }, 250);
-                            } else if (clickCount === 2) {
-                                clearTimeout(clickTimeout);
-                                // Double click - show only this dataset
-                                const chart = legend.chart;
-                                const datasets = chart.data.datasets;
-                                
-                                // Check if all others are already hidden
-                                const allOthersHidden = datasets.every((dataset, i) => 
-                                    i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
-                                
-                                datasets.forEach((dataset, i) => {
-                                    const meta = chart.getDatasetMeta(i);
-                                    // If all others are hidden, show all. Otherwise, show only the clicked one
-                                    meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
-                                });
-                                
-                                chart.update();
-                                clickCount = 0;
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    },
+                    onHover: function(event, legendItem, legend) {
+                        const tooltip = legendTooltips.production[legendItem.text];
+                        if (tooltip) {
+                            let tooltipEl = document.getElementById('chart-tooltip');
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chart-tooltip';
+                                tooltipEl.style.cssText = tooltipStyle;
+                                document.body.appendChild(tooltipEl);
                             }
-                        };
-                    })()
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
-                        title: function(tooltipItems) {
-                            return tooltipItems[0].label;
-                        },
-                        label: function(context) {
-                            const value = context.raw;
-                            if (value === 0) return null;
-                            return `${context.dataset.label}: ${value.toFixed(1)}%`;
-                        },
-                        footer: function(tooltipItems) {
-                            return null;
+                            
+                            const mouseX = event.native.clientX;
+                            const mouseY = event.native.clientY;
+                            
+                            tooltipEl.innerHTML = tooltip;
+                            tooltipEl.style.left = (mouseX + 10) + 'px';
+                            tooltipEl.style.top = (mouseY + 10) + 'px';
+                            tooltipEl.style.display = 'block';
+                        }
+                    },
+                    onLeave: function() {
+                        const tooltipEl = document.getElementById('chart-tooltip');
+                        if (tooltipEl) {
+                            tooltipEl.style.display = 'none';
                         }
                     }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            return tooltipItems[0].label; // Plant name
+                        },
+                        label: function(context) {
+                            // Get all datasets for this plant
+                            const allDatasets = context.chart.data.datasets;
+                            let tooltipLines = [];
+                            
+                            allDatasets.forEach(dataset => {
+                                const value = dataset.data[context.dataIndex];
+                                if (value > 0) { // Only show non-zero values
+                                    // Create colored box using HTML
+                                    const colorBox = `<span style="display:inline-block; width:10px; height:10px; margin-right:5px; background-color:${dataset.backgroundColor}"></span>`;
+                                    // Bold the line if it matches the hovered dataset
+                                    const isHovered = dataset.label === context.dataset.label;
+                                    const labelText = isHovered ? 
+                                        `<strong>${dataset.label}: ${value.toFixed(1)}%</strong>` : 
+                                        `${dataset.label}: ${value.toFixed(1)}%`;
+                                    tooltipLines.push(`${colorBox}${labelText}`);
+                                }
+                            });
+                            
+                            return tooltipLines;
+                        }
+                    },
+                    enabled: false, // Disable default tooltip
+                    external: function(context) {
+                        // Get tooltip element
+                        let tooltipEl = document.getElementById('chart-tooltip');
+                        
+                        if (!tooltipEl) {
+                            tooltipEl = document.createElement('div');
+                            tooltipEl.id = 'chart-tooltip';
+                            tooltipEl.style.cssText = tooltipStyle;
+                            document.body.appendChild(tooltipEl);
+                        }
+
+                        // Hide if no tooltip
+                        const tooltipModel = context.tooltip;
+                        if (tooltipModel.opacity === 0) {
+                            tooltipEl.style.display = 'none';
+                            return;
+                        }
+
+                        // Set Text
+                        if (tooltipModel.body) {
+                            const titleLines = tooltipModel.title || [];
+                            const bodyLines = tooltipModel.body.map(b => b.lines).flat();
+
+                            let innerHtml = `<div style="font-weight: bold; margin-bottom: 5px;">${titleLines[0]}</div>`;
+                            innerHtml += bodyLines.join('<br>');
+
+                            tooltipEl.innerHTML = innerHtml;
+                        }
+
+                        const position = context.chart.canvas.getBoundingClientRect();
+                        tooltipEl.style.display = 'block';
+                        tooltipEl.style.left = position.left + context.tooltip.caretX + 10 + 'px';
+                        tooltipEl.style.top = position.top + context.tooltip.caretY + 'px';
+                    }
+                },
+                datalabels: {
+                    display: true,
+                    color: 'white',
+                    font: {
+                        weight: 'bold',
+                        size: 11
+                    },
+                    formatter: function(value, context) {
+                        if (value < 12) return '';
+                        return `${context.dataset.label}\n${value.toFixed(1)}%`;
+                    },
+                    align: 'center',
+                    anchor: 'center',
+                    rotation: 0
                 }
             },
             animation: false,
@@ -359,7 +418,8 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                     }
                 };
             })()
-        }
+        },
+        plugins: [ChartDataLabels]
     });
 }
 
@@ -470,7 +530,41 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                 },
                 legend: {
                     position: 'left',
-                    align: 'start'
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    },
+                    onHover: function(event, legendItem, legend) {
+                        const tooltip = legendTooltips.prices[legendItem.text];
+                        if (tooltip) {
+                            let tooltipEl = document.getElementById('chart-tooltip');
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chart-tooltip';
+                                tooltipEl.style.cssText = tooltipStyle;
+                                document.body.appendChild(tooltipEl);
+                            }
+                            
+                            const mouseX = event.native.clientX;
+                            const mouseY = event.native.clientY;
+                            
+                            tooltipEl.innerHTML = tooltip;
+                            tooltipEl.style.left = (mouseX + 10) + 'px';
+                            tooltipEl.style.top = (mouseY + 10) + 'px';
+                            tooltipEl.style.display = 'block';
+                        }
+                    },
+                    onLeave: function() {
+                        const tooltipEl = document.getElementById('chart-tooltip');
+                        if (tooltipEl) {
+                            tooltipEl.style.display = 'none';
+                        }
+                    }
                 },
                 tooltip: {
                     callbacks: {
@@ -570,7 +664,39 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
                 },
                 legend: {
                     position: 'left',
-                    align: 'start'
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    },
+                    onHover: function(event, legendItem, legend) {
+                        const tooltip = "Total energy production in terajoules (TJ)";
+                        let tooltipEl = document.getElementById('chart-tooltip');
+                        if (!tooltipEl) {
+                            tooltipEl = document.createElement('div');
+                            tooltipEl.id = 'chart-tooltip';
+                            tooltipEl.style.cssText = tooltipStyle;
+                            document.body.appendChild(tooltipEl);
+                        }
+                        
+                        const mouseX = event.native.clientX;
+                        const mouseY = event.native.clientY;
+                        
+                        tooltipEl.innerHTML = tooltip;
+                        tooltipEl.style.left = (mouseX + 10) + 'px';
+                        tooltipEl.style.top = (mouseY + 10) + 'px';
+                        tooltipEl.style.display = 'block';
+                    },
+                    onLeave: function() {
+                        const tooltipEl = document.getElementById('chart-tooltip');
+                        if (tooltipEl) {
+                            tooltipEl.style.display = 'none';
+                        }
+                    }
                 },
                 tooltip: {
                     callbacks: {

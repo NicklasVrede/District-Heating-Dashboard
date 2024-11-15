@@ -1,5 +1,6 @@
 import { graphConfig } from '../config/graphConfig.js';
 import { showToast } from './toast.js';
+import { legendTooltips, tooltipStyle } from '../config/tooltipConfig.js';
 
 const LEGEND_THRESHOLD_PERCENTAGE = 2;
 
@@ -280,6 +281,34 @@ function createProductionChart(plantData, index, maxValue) {
                             size: 11
                         }
                     },
+                    onHover: function(event, legendItem, legend) {
+                        const tooltip = legendTooltips.production[legendItem.text];
+                        if (tooltip) {
+                            // Create or get tooltip element
+                            let tooltipEl = document.getElementById('chart-tooltip');
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chart-tooltip';
+                                tooltipEl.style.cssText = tooltipStyle;
+                                document.body.appendChild(tooltipEl);
+                            }
+                            
+                            // Get mouse position from the event
+                            const mouseX = event.native.clientX;
+                            const mouseY = event.native.clientY;
+                            
+                            tooltipEl.innerHTML = tooltip;
+                            tooltipEl.style.left = (mouseX + 10) + 'px';
+                            tooltipEl.style.top = (mouseY + 10) + 'px';
+                            tooltipEl.style.display = 'block';
+                        }
+                    },
+                    onLeave: function() {
+                        const tooltipEl = document.getElementById('chart-tooltip');
+                        if (tooltipEl) {
+                            tooltipEl.style.display = 'none';
+                        }
+                    },
                     onClick: (function() {
                         let clickTimeout = null;
                         let clickCount = 0;
@@ -338,6 +367,9 @@ function createProductionChart(plantData, index, maxValue) {
                             }
                         };
                     })()
+                },
+                datalabels: {
+                    display: false
                 }
             }
         }
@@ -407,6 +439,34 @@ function createPriceChart(plantData, index, maxValues) {
                         padding: 8,
                         font: {
                             size: 11
+                        }
+                    },
+                    onHover: function(event, legendItem, legend) {
+                        const tooltip = legendTooltips.prices[legendItem.text];
+                        if (tooltip) {
+                            // Create or get tooltip element
+                            let tooltipEl = document.getElementById('chart-tooltip');
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chart-tooltip';
+                                tooltipEl.style.cssText = tooltipStyle;
+                                document.body.appendChild(tooltipEl);
+                            }
+                            
+                            // Get mouse position from the event
+                            const mouseX = event.native.clientX;
+                            const mouseY = event.native.clientY;
+                            
+                            tooltipEl.innerHTML = tooltip;
+                            tooltipEl.style.left = (mouseX + 10) + 'px';
+                            tooltipEl.style.top = (mouseY + 10) + 'px';
+                            tooltipEl.style.display = 'block';
+                        }
+                    },
+                    onLeave: function() {
+                        const tooltipEl = document.getElementById('chart-tooltip');
+                        if (tooltipEl) {
+                            tooltipEl.style.display = 'none';
                         }
                     }
                 },
