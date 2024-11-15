@@ -162,8 +162,6 @@ export function loadGasAreas(map) {
             return response.json();
         })
         .then(geojson => {
-            console.log('Gas area data:', geojson); // Debugging: Log the gas area data
-
             // Add the GeoJSON source to the map
             map.addSource('gas-areas', {
                 type: 'geojson',

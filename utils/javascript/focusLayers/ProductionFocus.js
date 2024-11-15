@@ -66,31 +66,35 @@ export class ProductionFocus {
         const data = source._data;
         if (!data || !data.features) return;
 
-        console.log('Initializing production data');
-
-        // Update features with precalculated data for all years
         data.features = data.features.map(feature => {
             const forsyid = feature.properties.forsyid;
             const plantData = window.dataDict?.[forsyid]?.production;
             
             if (plantData) {
-                // Store data directly in properties without nesting
                 for (let year = 2021; year <= 2023; year++) {
                     const yearData = plantData[year.toString()];
                     if (yearData) {
-                        const { mainFuel, totalProduction } = this.calculateProductionStats(yearData);
-                        // Store as flat properties with year suffix
+                        feature.properties[`totalProduction_${year}`] = 
+                            Object.values(yearData).reduce((sum, val) => sum + (val || 0), 0);
+                        
+                        // Find main fuel type
+                        let maxProduction = 0;
+                        let mainFuel = 'unknown';
+                        
+                        Object.entries(yearData).forEach(([fuel, amount]) => {
+                            if (amount > maxProduction) {
+                                maxProduction = amount;
+                                mainFuel = fuel;
+                            }
+                        });
+                        
                         feature.properties[`mainFuel_${year}`] = mainFuel;
-                        feature.properties[`totalProduction_${year}`] = totalProduction;
                     }
                 }
             }
             return feature;
         });
 
-        // Debug log to check data
-        console.log('Sample feature:', data.features[0]?.properties);
-        
         source.setData(data);
     }
 
