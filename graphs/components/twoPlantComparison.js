@@ -155,28 +155,29 @@ function createProductionChart(plantData, index, maxValue) {
         .filter(year => !isNaN(parseInt(year)))
         .sort();
 
-    // Create datasets for each fuel type with percentage values
-    const datasets = graphConfig.attributes.map(attr => {
+    // Create datasets for each category using the new fuelTypes mapping
+    const datasets = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
         const values = productionYears.map(year => {
-            // Get the value for this attribute
-            let attrValue = 0;
-            const mappedKeys = graphConfig.fuelTypes[attr];
-            if (Array.isArray(mappedKeys)) {
-                attrValue = mappedKeys.reduce((sum, key) => 
-                    sum + (plantData.production[year]?.[key] || 0), 0);
-            } else {
-                attrValue = plantData.production[year]?.[mappedKeys] || 0;
-            }
-
-            // Calculate total production for this year
+            // Get the total production for this year
             const yearTotal = Object.values(plantData.production[year])
                 .reduce((sum, val) => sum + (val || 0), 0);
 
+            // Calculate the sum for this category
+            let categoryValue = 0;
+            if (Array.isArray(fuelTypes)) {
+                // Sum up all fuel types in this category
+                categoryValue = fuelTypes.reduce((sum, fuelType) => 
+                    sum + (plantData.production[year]?.[fuelType] || 0), 0);
+            } else {
+                // Single fuel type
+                categoryValue = plantData.production[year]?.[fuelTypes] || 0;
+            }
+
             // Return percentage
-            return yearTotal > 0 ? (attrValue / yearTotal) * 100 : 0;
+            return yearTotal > 0 ? (categoryValue / yearTotal) * 100 : 0;
         });
 
-        // Check if the attribute has any non-zero values
+        // Check if the category has any non-zero values
         const hasProduction = values.some(val => val > 0);
         
         // If there's no production at all, return null to filter it out
@@ -185,16 +186,16 @@ function createProductionChart(plantData, index, maxValue) {
         }
 
         // Calculate overall percentage for legend visibility
-        const totalAttr = values.reduce((sum, val) => sum + val, 0);
-        const percentage = totalAttr / values.length; // Average percentage
+        const totalPercentage = values.reduce((sum, val) => sum + val, 0);
+        const averagePercentage = totalPercentage / values.length;
 
         return {
-            label: attr,
+            label: category,
             data: values,
-            backgroundColor: graphConfig.colors[attr],
-            borderColor: graphConfig.colors[attr],
+            backgroundColor: graphConfig.colors[category],
+            borderColor: graphConfig.colors[category],
             fill: true,
-            hidden: percentage < LEGEND_THRESHOLD_PERCENTAGE
+            hidden: averagePercentage < LEGEND_THRESHOLD_PERCENTAGE
         };
     }).filter(dataset => dataset !== null);  // Remove null datasets
 

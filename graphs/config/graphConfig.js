@@ -1,19 +1,17 @@
 export const graphConfig = {
     // Colors for each attribute
     colors: {
-        'Kul': 'black',
-        'Olie': 'brown',
-        'Gas': 'gray',
-        'Affald': 'lightgreen',
-        'Biogas': 'lime',
-        'Skovflis': 'green',
-        'Halm': 'yellow',
-        'Træaffald': 'darkorange',
-        'Træpiller': 'peru',
-        'Biobrændsler (bioolie)': 'olive',
-        'Solvarme': 'gold',
-        'Varmepumper': 'purple',
-        'Elektricitet': 'blue'
+        'Kul': '#000000',
+        'Olie': '#8B4513',
+        'Gas': '#808080',
+        'Affald': '#90EE90',
+        'Affald, bio': '#228B22',
+        'Biogas & Bioolie': '#32CD32',
+        'Træ-biomasse': '#8B4513',
+        'Halm': '#FFD700',
+        'Brændselsfrit': '#9370DB',
+        'Solvarme': '#FFA500',
+        'El': '#0000FF'
     },
 
     // List of attributes for the graphs
@@ -36,17 +34,15 @@ export const graphConfig = {
     // Fuel type mappings
     fuelTypes: {
         'Kul': 'kul',
-        'Olie': ['fuelolie', 'spildolie', 'gasolie'],
+        'Olie': ['fuelolie', 'gasolie'],
         'Gas': ['naturgas', 'lpg', 'raffinaderigas'],
         'Affald': 'affald',
-        'Biogas': 'biogas',
-        'Skovflis': 'skovflis',
+        'Affald, bio': ['spildolie', 'trae- og biomasseaffald'],
+        'Biogas & Bioolie': ['biogas', 'bio-olie'],
+        'Træ-biomasse': ['skovflis', 'traepiller'],
         'Halm': 'halm',
-        'Træaffald': 'trae- og biomasseaffald',
-        'Træpiller': 'traepiller',
-        'Biobrændsler (bioolie)': 'bio-olie',
-        'Varmepumper': ['omgivelsesvarme', 'braendselsfrit'],
+        'Brændselsfrit': ['omgivelsesvarme', 'braendselsfrit', 'vandkraft'],
         'Solvarme': 'solenergi',
-        'Elektricitet': 'elektricitet'
+        'El': ['elektricitet']
     }
 }; 

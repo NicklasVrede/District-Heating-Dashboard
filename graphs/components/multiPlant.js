@@ -160,11 +160,11 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
 
     const ctx = canvas.getContext('2d');
     const plantNames = [];
-    const datasets = graphConfig.attributes.map(attr => ({
-        label: attr,
+    const datasets = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => ({
+        label: category,
         data: [],
-        backgroundColor: graphConfig.colors[attr],
-        borderColor: graphConfig.colors[attr],
+        backgroundColor: graphConfig.colors[category],
+        borderColor: graphConfig.colors[category],
         borderWidth: 1,
         fill: true
     }));
@@ -181,20 +181,21 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
             const yearTotal = Object.values(plantData.production[effectiveYear] || {})
                 .reduce((sum, val) => sum + (val || 0), 0);
             
-            // Calculate percentage for each attribute
-            graphConfig.attributes.forEach((attr, index) => {
-                const mappedKeys = graphConfig.fuelTypes[attr];
-                let attrValue = 0;
+            // Calculate percentage for each category using fuelTypes mapping
+            Object.entries(graphConfig.fuelTypes).forEach(([category, fuelTypes], index) => {
+                let categoryValue = 0;
 
-                if (Array.isArray(mappedKeys)) {
-                    attrValue = mappedKeys.reduce((sum, key) => 
-                        sum + (plantData.production[effectiveYear]?.[key] || 0), 0);
+                if (Array.isArray(fuelTypes)) {
+                    // Sum up all fuel types in this category
+                    categoryValue = fuelTypes.reduce((sum, fuelType) => 
+                        sum + (plantData.production[effectiveYear]?.[fuelType] || 0), 0);
                 } else {
-                    attrValue = plantData.production[effectiveYear]?.[mappedKeys] || 0;
+                    // Single fuel type
+                    categoryValue = plantData.production[effectiveYear]?.[fuelTypes] || 0;
                 }
                 
                 // Convert to percentage and only add if above threshold
-                const percentage = yearTotal > 0 ? (attrValue / yearTotal) * 100 : 0;
+                const percentage = yearTotal > 0 ? (categoryValue / yearTotal) * 100 : 0;
                 datasets[index].data[plantIndex] = percentage < LEGEND_THRESHOLD_PERCENTAGE ? 0 : percentage;
             });
         }

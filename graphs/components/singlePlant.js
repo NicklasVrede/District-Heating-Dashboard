@@ -86,34 +86,36 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     const roundedMaxProduction = Math.ceil(maxProductionValue / 100) * 100;
 
     // Create datasets for each fuel type
-    const datasets = graphConfig.attributes.map(attr => {
+    const datasets = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
         const values = productionYears.map(year => {
-            const mappedKeys = graphConfig.fuelTypes[attr];
-            if (Array.isArray(mappedKeys)) {
-                return mappedKeys.reduce((sum, key) => 
-                    sum + (plantData.production[year]?.[key] || 0), 0);
+            if (Array.isArray(fuelTypes)) {
+                // Sum up all fuel types in this category
+                return fuelTypes.reduce((sum, fuelType) => 
+                    sum + (plantData.production[year]?.[fuelType] || 0), 0);
+            } else {
+                // Single fuel type
+                return plantData.production[year]?.[fuelTypes] || 0;
             }
-            return plantData.production[year]?.[mappedKeys] || 0;
         });
 
-        // Calculate total production for this attribute
-        const totalAttr = values.reduce((sum, val) => sum + val, 0);
+        // Calculate total production for this category
+        const totalCategory = values.reduce((sum, val) => sum + val, 0);
         
-        // If total is 0, this attribute is not present at all
-        if (totalAttr === 0) {
+        // If total is 0, this category is not present at all
+        if (totalCategory === 0) {
             return null;  // Will be filtered out
         }
 
-        // Calculate percentage contribution for remaining threshold check
+        // Calculate percentage contribution for threshold check
         const totalAll = productionYears.reduce((sum, year) => 
             sum + Object.values(plantData.production[year]).reduce((s, val) => s + (val || 0), 0), 0);
-        const percentage = (totalAttr / totalAll) * 100;
+        const percentage = (totalCategory / totalAll) * 100;
 
         return {
-            label: attr,
+            label: category,
             data: values,
-            backgroundColor: graphConfig.colors[attr],
-            borderColor: graphConfig.colors[attr],
+            backgroundColor: graphConfig.colors[category],
+            borderColor: graphConfig.colors[category],
             fill: true,
             hidden: percentage < LEGEND_THRESHOLD_PERCENTAGE
         };
@@ -296,21 +298,20 @@ function createPieChart(originalChart, yearData, year, initialData) {
     container.appendChild(resetBtn);
 
     // Prepare pie data
-    const pieData = graphConfig.attributes.map(attr => {
-        const mappedKeys = graphConfig.fuelTypes[attr];
+    const pieData = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
         let value;
         
-        if (Array.isArray(mappedKeys)) {
-            value = mappedKeys.reduce((sum, key) => 
-                sum + (yearData[key] || 0), 0);
+        if (Array.isArray(fuelTypes)) {
+            value = fuelTypes.reduce((sum, fuelType) => 
+                sum + (yearData[fuelType] || 0), 0);
         } else {
-            value = yearData[mappedKeys] || 0;
+            value = yearData[fuelTypes] || 0;
         }
 
         return {
-            label: attr,
+            label: category,
             value: value,
-            color: graphConfig.colors[attr]
+            color: graphConfig.colors[category]
         };
     }).filter(item => item.value > 0);
 
