@@ -1,6 +1,7 @@
 import { graphConfig } from '../config/graphConfig.js';
 import { showToast } from './toast.js';
 import { yearState } from '../../utils/javascript/focusLayers/YearState.js';
+import { priceTypeColors } from '../../utils/javascript/focusLayers/colors.js';
 
 // Keep track of current charts
 let currentCharts = {

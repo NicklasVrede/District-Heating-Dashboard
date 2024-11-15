@@ -1,0 +1,36 @@
+.map-legend {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    background: white;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.price-legend .legend-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.price-legend .legend-scale {
+    width: 200px;
+}
+
+.price-legend .legend-gradient {
+    height: 10px;
+    border-radius: 2px;
+    margin: 5px 0;
+}
+
+.price-legend .legend-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #666;
+}
+
+.price-legend .legend-label {
+    padding: 2px 0;
+}

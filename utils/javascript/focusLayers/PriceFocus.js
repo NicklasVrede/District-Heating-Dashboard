@@ -1,45 +1,79 @@
 import { yearState } from './YearState.js';
+import { priceColors } from './colors.js';
 
 export class PriceFocus {
     constructor(map, measureContainer) {
         this.map = map;
         this.measureContainer = measureContainer;
-        this.priceRankings = null; // Cache for rankings
+        this.priceRankings = null;
+        this.priceRanges = {}; // Cache for price ranges by year
+        this.legend = null;
         
-        // Add listener for year changes
         yearState.addListener((year) => {
             this.updatePriceData();
         });
+        
+        this.createLegend();
     }
 
-    remove() {
-        console.log('Removing price focus');
-        this.measureContainer.classList.add('hidden');
-        
-        // Hide the price layer
-        if (this.map.getLayer('plants-price')) {
-            console.log('Setting plants-price visibility to none');
-            this.map.setLayoutProperty('plants-price', 'visibility', 'none');
+    createLegend() {
+        // Create legend container if it doesn't exist
+        if (!this.legend) {
+            this.legend = document.createElement('div');
+            this.legend.className = 'map-legend price-legend';
+            this.legend.style.display = 'none';
+            this.map.getContainer().appendChild(this.legend);
         }
     }
 
-    apply() {
-        console.log('Applying price focus');
-        this.measureContainer.classList.remove('hidden');
+    updateLegend(priceRange) {
+        if (!this.legend) return;
+
+        // Format price values
+        const minPrice = Math.round(priceRange.min);
+        const maxPrice = Math.round(priceRange.max);
         
-        this.map.setLayoutProperty('plants-price', 'visibility', 'visible');
-        this.updatePriceData();
-        this.updateCircleSize();
+        this.legend.innerHTML = `
+            <div class="legend-title">Price per MWh</div>
+            <div class="legend-scale">
+                <div class="legend-labels">
+                    <div class="legend-label">${minPrice} kr</div>
+                    <div class="legend-label">${maxPrice} kr</div>
+                </div>
+                <div class="legend-gradient"></div>
+            </div>
+        `;
+
+        // Add gradient background to the scale
+        const gradientElement = this.legend.querySelector('.legend-gradient');
+        gradientElement.style.background = `linear-gradient(to right, 
+            ${priceColors.min}, 
+            ${priceColors.mid}, 
+            ${priceColors.max}
+        )`;
     }
 
-    updateCircleSize() {
-        this.map.setPaintProperty('plants-price', 'circle-radius', [
-            'interpolate',
-            ['linear'],
-            ['get', 'current_price'],
-            0, 4, // 0 price, 6 radius
-            2000, 6 // 1000 price, 8 radius
-        ]);
+    calculatePriceRange(year, features) {
+        let minPrice = Infinity;
+        let maxPrice = -Infinity;
+
+        features.forEach(feature => {
+            const forsyid = feature.properties.forsyid;
+            const price = window.dataDict?.[forsyid]?.prices?.[year]?.mwh_price;
+            
+            if (price && price > 0) { // Ignore zero or null prices
+                minPrice = Math.min(minPrice, price);
+                maxPrice = Math.max(maxPrice, price);
+            }
+        });
+
+        // Cache the range for this year
+        this.priceRanges[year] = {
+            min: minPrice === Infinity ? 0 : minPrice,
+            max: maxPrice === -Infinity ? 2000 : maxPrice // fallback max
+        };
+
+        return this.priceRanges[year];
     }
 
     updatePriceData() {
@@ -58,6 +92,11 @@ export class PriceFocus {
                 return;
             }
             
+            // Calculate price range for current year if not cached
+            if (!this.priceRanges[currentYear]) {
+                this.calculatePriceRange(currentYear, data.features);
+            }
+            
             // Update rankings if needed
             if (this.lastUpdateYear !== currentYear) {
                 this.updateRankings(currentYear, data.features);
@@ -72,9 +111,64 @@ export class PriceFocus {
             });
             
             source.setData(data);
+            this.updateCircleStyle(currentYear);
         } catch (error) {
             console.error('Error updating price data:', error);
         }
+    }
+
+    updateCircleStyle(year) {
+        const priceRange = this.priceRanges[year];
+        
+        // Update circle color with dynamic range
+        this.map.setPaintProperty('plants-price', 'circle-color', [
+            'case',
+            ['==', ['get', 'current_price'], null],
+            priceColors.null,
+            [
+                'interpolate',
+                ['linear'],
+                ['get', 'current_price'],
+                priceRange.min, priceColors.min,
+                (priceRange.min + priceRange.max) / 2, priceColors.mid,  // Add midpoint
+                priceRange.max, priceColors.max
+            ]
+        ]);
+
+        // Update circle size and stroke
+        this.map.setPaintProperty('plants-price', 'circle-radius', [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            5, 4, 
+            10, 12,
+            15, 20   
+        ]);
+
+        this.map.setPaintProperty('plants-price', 'circle-stroke-width', 2);
+        this.map.setPaintProperty('plants-price', 'circle-stroke-color', 'white');
+
+        // Update the legend
+        this.updateLegend(priceRange);
+    }
+
+    remove() {
+        console.log('Removing price focus');
+        this.measureContainer.classList.add('hidden');
+        this.legend.style.display = 'none';
+        
+        if (this.map.getLayer('plants-price')) {
+            this.map.setLayoutProperty('plants-price', 'visibility', 'none');
+        }
+    }
+
+    apply() {
+        console.log('Applying price focus');
+        this.measureContainer.classList.remove('hidden');
+        this.legend.style.display = 'block';
+        
+        this.map.setLayoutProperty('plants-price', 'visibility', 'visible');
+        this.updatePriceData();
     }
 
     updateRankings(year, features) {
@@ -128,50 +222,5 @@ export class PriceFocus {
         return Object.entries(this.priceRankings)
             .filter(([_, data]) => data.rank <= rankThreshold)
             .map(([forsyid, _]) => forsyid);
-    }
-
-    updateCircleStyle() {
-        // Update circle color and opacity together in the case statement
-        this.map.setPaintProperty('plants-price', 'circle-color', [
-            'case',
-            ['==', ['get', 'current_price'], null],
-            'rgba(0, 0, 0, 0)',  // Completely transparent
-            [
-                'interpolate',
-                ['linear'],
-                ['get', 'current_price'],
-                VIZ_CONFIG.priceRange.min, VIZ_CONFIG.colors.low,
-                VIZ_CONFIG.priceRange.max, VIZ_CONFIG.colors.high
-            ]
-        ]);
-
-        // Set base opacity to 1 since we're handling transparency in the color
-        this.map.setPaintProperty('plants-price', 'circle-opacity', 1);
-
-        // Update circle radius to match default plant styling
-        this.map.setPaintProperty('plants-price', 'circle-radius', [
-            'case',
-            ['==', ['get', 'current_price'], null],
-            [
-                'interpolate',
-                ['linear'],
-                ['zoom'],
-                5, 4,
-                10, 8,
-                15, 12,
-                20, 16
-            ],
-            [
-                'interpolate',
-                ['linear'],
-                ['get', 'current_price'],
-                VIZ_CONFIG.priceRange.min, VIZ_CONFIG.circle.minRadius,
-                VIZ_CONFIG.priceRange.max, VIZ_CONFIG.circle.maxRadius
-            ]
-        ]);
-
-        // Add stroke properties to match default plant styling
-        this.map.setPaintProperty('plants-price', 'circle-stroke-width', 2);
-        this.map.setPaintProperty('plants-price', 'circle-stroke-color', 'white');
     }
 } 

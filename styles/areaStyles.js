@@ -9,7 +9,7 @@ export const areaStyles = {
         layout: {},
         paint: {
             'fill-color': '#0000ff',
-            'fill-opacity': 0.2
+            'fill-opacity': 0.1
         }
     },
     line: {
