@@ -83,7 +83,18 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none'
     // Input validation
     if (!selectedForsyids?.length) return;
 
-    const validForsyids = selectedForsyids.filter(forsyid => {
+    // Sort forsyids by price if price focus is active
+    let sortedForsyids = [...selectedForsyids];
+    if (focus === 'price') {
+        sortedForsyids.sort((a, b) => {
+            const priceA = data[a.toString().padStart(8, '0')]?.prices?.[defaultYear]?.mwh_price || 0;
+            const priceB = data[b.toString().padStart(8, '0')]?.prices?.[defaultYear]?.mwh_price || 0;
+            return priceB - priceA; // Sort descending (highest price first)
+        });
+    }
+
+    // Replace selectedForsyids with sortedForsyids in subsequent function calls
+    const validForsyids = sortedForsyids.filter(forsyid => {
         const paddedForsyid = forsyid.toString().padStart(8, '0');
         return data[paddedForsyid]?.production && Object.keys(data[paddedForsyid].production).length > 0;
     });

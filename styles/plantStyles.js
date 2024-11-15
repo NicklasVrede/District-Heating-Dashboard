@@ -14,9 +14,9 @@ export const plantStyles = {
             15, 12,
             20, 16 
         ],
-        'circle-color': '#4d4c4c',
+        'circle-color': '#ffffff',
         'circle-stroke-width': 2,
-        'circle-stroke-color': 'white',
-        'circle-opacity': 0.7
+        'circle-stroke-color': '#808080',
+        'circle-opacity': 1
     }
 };
