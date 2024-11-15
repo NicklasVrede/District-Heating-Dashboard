@@ -58,6 +58,10 @@ export function loadPlants(map) {
                 layout: {
                     'visibility': 'none'
                 },
+                filter: [
+                    'all',
+                    ['!=', ['get', 'main_fuel'], 'unknown'],
+                ],
                 paint: {
                     'circle-color': '#888888',  // Default color, will be updated by ProductionFocus
                     'circle-radius': 5,         // Default size, will be updated by ProductionFocus

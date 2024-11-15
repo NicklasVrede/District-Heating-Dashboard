@@ -33,6 +33,10 @@ export class PriceFocus {
         const minPrice = Math.round(priceRange.min);
         const maxPrice = Math.round(priceRange.max);
         
+        // Store previous values for comparison
+        const previousLabels = Array.from(this.legend.querySelectorAll('.legend-label'))
+            .map(label => label.textContent);
+        
         this.legend.innerHTML = `
             <div class="legend-title">Price per MWh</div>
             <div class="legend-scale">
@@ -51,6 +55,20 @@ export class PriceFocus {
             ${priceColors.mid}, 
             ${priceColors.max}
         )`;
+
+        // Animate changed values
+        const newLabels = Array.from(this.legend.querySelectorAll('.legend-label'))
+            .map(label => label.textContent);
+        
+        newLabels.forEach((newLabel, index) => {
+            if (newLabel !== previousLabels[index]) {
+                const label = this.legend.querySelectorAll('.legend-label')[index];
+                label.classList.add('pop');
+                setTimeout(() => {
+                    label.classList.remove('pop');
+                }, 200);
+            }
+        });
     }
 
     calculatePriceRange(year, features) {

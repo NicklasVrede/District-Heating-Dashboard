@@ -33,4 +33,9 @@
 
 .price-legend .legend-label {
     padding: 2px 0;
+    transition: transform 0.2s ease-out;
+}
+
+.price-legend .legend-label.pop {
+    transform: scale(1.2);
 }
