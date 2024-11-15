@@ -246,7 +246,7 @@ export class ProductionFocus {
         );
 
         this.legend.innerHTML = `
-            <div class="legend-title">Production Types</div>
+            <div class="legend-title">Main Fuel</div>
             <div class="legend-items">
                 ${Object.entries(graphConfig.fuelTypes).map(([category, _]) => {
                     const iconId = category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-');
@@ -295,5 +295,172 @@ export class ProductionFocus {
         this.measureContainer.classList.add('hidden');
         this.legend.style.display = 'none';  // Hide legend
         this.map.setLayoutProperty('plants-production', 'visibility', 'none');
+    }
+
+    getTopNByProduction(n, measureType) {
+        console.log(`Getting top ${n} plants for ${measureType}`);
+        const plants = this.getPlantData();
+        const ranked = this.rankPlantsByProduction(plants, measureType);
+        const result = ranked.slice(0, n).map(plant => plant.id);
+        console.log('Selected plants:', result);
+        return result;
+    }
+
+    getBottomNByProduction(n, measureType) {
+        console.log(`Getting bottom ${n} plants for ${measureType}`);
+        const plants = this.getPlantData();
+        const ranked = this.rankPlantsByProduction(plants, measureType);
+        const result = ranked.slice(-n).map(plant => plant.id);
+        console.log('Selected plants:', result);
+        return result;
+    }
+
+    rankPlantsByProduction(plants, measureType) {
+        console.log('Ranking plants for measure:', measureType);
+        
+        if (!Array.isArray(plants)) {
+            console.warn('Plants data is not an array:', plants);
+            return [];
+        }
+
+        const year = '2023';
+        const fuelTypes = this.getFuelTypesForMeasure(measureType);
+        console.log('Using fuel types for ranking:', fuelTypes);
+
+        // Debug: Log a sample of the data structure
+        if (plants.length > 0) {
+            console.log('Sample plant data structure:', {
+                id: plants[0].id,
+                name: plants[0].name,
+                production: plants[0].production?.[year]
+            });
+        }
+
+        const filteredPlants = plants.filter(plant => {
+            if (!plant.production || !plant.production[year]) {
+                console.log(`Plant ${plant.id} - No production data for ${year}`);
+                return false;
+            }
+
+            const totalProduction = fuelTypes.reduce((sum, fuelType) => {
+                const value = plant.production[year][fuelType];
+                if (value && value > 0) {
+                    console.log(`Plant ${plant.id} - ${plant.name} - ${fuelType}: ${value}`);
+                }
+                return sum + (value || 0);
+            }, 0);
+
+            if (totalProduction > 0) {
+                plant.totalProduction = totalProduction;
+                console.log(`Plant ${plant.id} - ${plant.name} - Total ${measureType} production: ${totalProduction}`);
+                return true;
+            }
+            return false;
+        });
+
+        console.log(`Found ${filteredPlants.length} plants with ${measureType} production in ${year}`);
+
+        const sortedPlants = filteredPlants.sort((a, b) => {
+            return b.totalProduction - a.totalProduction;
+        });
+
+        // Log the top results
+        if (sortedPlants.length > 0) {
+            console.log('Top plants by production:');
+            sortedPlants.slice(0, 5).forEach(plant => {
+                console.log(`${plant.name}: ${plant.totalProduction}`);
+            });
+        } else {
+            console.log('No plants found with production data');
+        }
+
+        return sortedPlants;
+    }
+
+    getPlantData() {
+        const dataDict = window.dataDict;
+        console.log('Raw dataDict:', dataDict);
+        
+        if (!dataDict) {
+            console.warn('No plant data available');
+            return [];
+        }
+
+        const plantsArray = Object.entries(dataDict).map(([id, plant]) => ({
+            id,
+            ...plant
+        }));
+        
+        console.log('Converted plants array:', plantsArray);
+        return plantsArray;
+    }
+
+    getFuelTypesForMeasure(measureType) {
+        const fuelTypes = {
+            'gas': ['naturgas', 'lpg', 'raffinaderigas'],
+            'olie': ['fuelolie', 'gasolie', 'spildolie'],
+            'bioaffald': ['spildolie', 'trae- og biomasseaffald'],
+            'biomasse': ['skovflis', 'traepiller'],
+            'biogas': ['biogas', 'bio-olie'],
+            'el': ['elektricitet'],
+            'solvarme': ['solenergi'],
+            'braendselsfrit': ['braendselsfrit', 'omgivelsesvarme', 'vandkraft']
+        };
+
+        const types = fuelTypes[measureType] || [measureType];
+        console.log(`Measure type: ${measureType} -> Fuel types:`, types);
+        return types;
+    }
+
+    getAllByProduction(measureType) {
+        console.log(`Getting all plants with ${measureType} production`);
+        const plants = this.getPlantData();
+        const year = '2023';
+        
+        if (measureType === 'all') {
+            // For 'all', we want to get plants with any production
+            const filteredPlants = plants.filter(plant => {
+                if (!plant.production || !plant.production[year]) {
+                    return false;
+                }
+
+                // Check if plant has any non-zero production value
+                const hasProduction = Object.values(plant.production[year]).some(value => value > 0);
+                
+                if (hasProduction) {
+                    console.log(`Including plant ${plant.id} - ${plant.name}`);
+                }
+                
+                return hasProduction;
+            });
+
+            console.log(`Found ${filteredPlants.length} total plants with any production`);
+            return filteredPlants.map(plant => plant.id);
+        }
+
+        // For specific measure types
+        const fuelTypes = this.getFuelTypesForMeasure(measureType);
+        console.log('Using fuel types:', fuelTypes);
+
+        const filteredPlants = plants.filter(plant => {
+            if (!plant.production || !plant.production[year]) return false;
+
+            const totalProduction = fuelTypes.reduce((sum, fuelType) => {
+                const value = plant.production[year][fuelType];
+                if (value && value > 0) {
+                    console.log(`Plant ${plant.id} - ${fuelType}: ${value}`);
+                }
+                return sum + (value || 0);
+            }, 0);
+
+            if (totalProduction > 0) {
+                console.log(`Including plant ${plant.id} - ${plant.name} - Total ${measureType}: ${totalProduction}`);
+                return true;
+            }
+            return false;
+        });
+
+        console.log(`Found ${filteredPlants.length} total plants with ${measureType} production`);
+        return filteredPlants.map(plant => plant.id);
     }
 } 

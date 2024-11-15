@@ -16,6 +16,7 @@ class FocusManager {
         this.currentFocus = null;
         this.initialize();
         this.initializeSelectDropdown();
+        this.initializeMeasureDropdown();
     }
 
     initialize() {
@@ -37,29 +38,31 @@ class FocusManager {
 
     initializeSelectDropdown() {
         const selectDropdown = document.getElementById('select-dropdown');
-        console.log('Initializing select dropdown:', selectDropdown);
         
         if (selectDropdown) {
             selectDropdown.addEventListener('change', (e) => {
-                console.log('=== Select Dropdown Event ===');
-                console.log('Selected value:', e.target.value);
-                console.log('Current focus state:', focusState.focus);
-                console.log('Current focus instance:', this.currentFocus?.constructor.name);
-                
                 if (focusState.focus === 'price') {
                     if (this.currentFocus instanceof PriceFocus) {
-                        console.log('Conditions met, handling price selection');
                         this.handlePriceSelection(e.target.value);
-                    } else {
-                        console.warn('Focus state is price but currentFocus is not PriceFocus');
                     }
-                } else {
-                    console.log('Not in price focus mode, ignoring selection');
+                } else if (focusState.focus === 'production') {
+                    if (this.currentFocus instanceof ProductionFocus) {
+                        this.handleProductionSelection(e.target.value);
+                    }
                 }
             });
-            console.log('Event listener attached to select dropdown');
-        } else {
-            console.warn('Select dropdown element not found');
+        }
+    }
+
+    initializeMeasureDropdown() {
+        const measureSelector = document.getElementById('measure-selector');
+        if (measureSelector) {
+            measureSelector.addEventListener('change', () => {
+                const selectValue = document.getElementById('select-dropdown').value;
+                if (selectValue !== 'none') {
+                    this.handleProductionSelection(selectValue);
+                }
+            });
         }
     }
 
@@ -76,27 +79,21 @@ class FocusManager {
         let selectedIds = [];
         switch (value) {
             case 'top5':
-                console.log('Getting top 5');
                 selectedIds = this.currentFocus.getTopNByPrice(5);
                 break;
             case 'top10':
-                console.log('Getting top 10');
                 selectedIds = this.currentFocus.getTopNByPrice(10);
                 break;
             case 'bottom5':
-                console.log('Getting bottom 5');
                 selectedIds = this.currentFocus.getBottomNByPrice(5);
                 break;
             case 'bottom10':
-                console.log('Getting bottom 10');
                 selectedIds = this.currentFocus.getBottomNByPrice(10);
                 break;
             case 'all':
-                console.log('Getting all plants');
-                selectedIds = Object.keys(this.currentFocus.priceRankings || {});
+            // Trigger overview when its implemented.
                 break;
             case 'none':
-                console.log('Clearing all selections');
                 selectionSet.clear();
                 updateSelectedPlants(this.mapboxMap);
                 updateSelectedPlantsWindow(selectionSet);
@@ -104,7 +101,6 @@ class FocusManager {
                 return;
         }
 
-        console.log('Selected IDs:', selectedIds);
 
         if (selectedIds.length > 0) {
             // Clear existing selections
@@ -119,6 +115,59 @@ class FocusManager {
             updateSelectedPlants(this.mapboxMap);
             updateSelectedPlantsWindow(selectionSet);
             updateGraph();
+        }
+    }
+
+    handleProductionSelection(value) {
+        console.log('=== Production Selection Details ===');
+        console.log('Selection type:', value);
+        
+        if (!this.currentFocus || !(this.currentFocus instanceof ProductionFocus)) {
+            console.warn('Invalid focus state for production selection');
+            return;
+        }
+
+        const measureType = document.getElementById('measure-selector').value;
+        console.log('Measure type:', measureType);
+        
+        let selectedIds = [];
+
+        switch (value) {
+            case 'top5':
+                selectedIds = this.currentFocus.getTopNByProduction(5, measureType);
+                break;
+            case 'top10':
+                selectedIds = this.currentFocus.getTopNByProduction(10, measureType);
+                break;
+            case 'bottom5':
+                selectedIds = this.currentFocus.getBottomNByProduction(5, measureType);
+                break;
+            case 'bottom10':
+                selectedIds = this.currentFocus.getBottomNByProduction(10, measureType);
+                break;
+            case 'all':
+                selectedIds = this.currentFocus.getAllByProduction(measureType);
+                break;
+            case 'none':
+                console.log('Clearing all selections');
+                selectionSet.clear();
+                updateSelectedPlants(this.mapboxMap);
+                updateSelectedPlantsWindow(selectionSet);
+                updateGraph();
+                return;
+        }
+
+        console.log('Selected plant IDs:', selectedIds);
+        console.log('Number of selections:', selectedIds.length);
+
+        if (selectedIds.length > 0) {
+            selectionSet.clear();
+            selectedIds.forEach(id => selectionSet.add(id));
+            updateSelectedPlants(this.mapboxMap);
+            updateSelectedPlantsWindow(selectionSet);
+            updateGraph();
+        } else {
+            console.warn('No plants found matching the selection criteria');
         }
     }
 
