@@ -18,10 +18,8 @@ Avedøre Fjernvarme,14250905,1000707406,"Rebslagerporten 125 i Avedøre, 2650 Hv
 Bækmarksbro Varmeværk,18318636,1001479025,"Bækmarksbrovej 4, 7660 Bækmarksbro, Denmark",56.420839,8.303668
 Bælum Varmeværk,58113719,1002074934,"Grønnegade 4, 9574 Bælum, Denmark",56.831927,10.115259
 Bedsted Fjernvarme,18962519,1001507375,"Balsbyvej 3, 7755 Bedsted Thy, Denmark",56.809897,8.4045
-Billund Varmeværk,37251518,1001753730,"Møllevej 9, 7190 Billund, Denmark",55.855785,9.000627
 Billund Varmeværk,37251518,1001753730,"Møllevej 49, 7190 Billund, Denmark",55.723482,9.100292
-Bindslev Fjernvarme,39678810,1001785816,"Skolegade 3, 9881 Bindslev, Denmark",57.476686,10.197503
-Bindslev Fjernvarme,39678810,1001785816,"Skolegade 5, 9881 Bindslev",57.542863,10.199172
+Bindslev Fjernvarme,39678810,1001785816,"Skolegade 3, 9881 Bindslev, Denmark",57.5429381,10.1994075
 Blåhøj Energiselskab,19231097,1003733569,"Sdr. Ommevej 38, 7330 Brande, Denmark",55.866259,9.0123
 Bogense Forsyningsselskab,64831712,1002196453,"Fynsvej 5, 5400 Bogense, Denmark",55.552441,10.087939
 Borup Varmeværk,14898018,1000825228,"Bækgårdsvej 62, 4140 Borup, Denmark",55.486066,11.969748
@@ -150,7 +148,7 @@ Næstved Fjernvarme,69995713,1003173770,"Maglemølle 62, 4700 Næstved, Denmark"
 Nibe Varmeværk,68726018,1002279450,"Hobrovej 46, 9240 Nibe, Denmark",56.976617,9.654545
 Nimtofte Og Omegns Fjernvarmeforsyning,30406443,1013275528,"Frederikslundvej 1, 8550 Ryomgård, Denmark",56.390979,10.508577
 Nordby Fjernvarme,16934690,1001187876,"Bavnebjerg 44, 6720 Fanø, Denmark",55.442686,8.392428
-Nørre Alslev Fjernvarmeværk,60094411,1011034191,"Peter L. Jensensvej 4, 4840 Nørre Alslev, Denmark",54.8978,11.8841
+Nørre Alslev Fjernvarmeværk,60094411,1002107538,"Peter L. Jensensvej 4, 4840 Nørre Alslev, Denmark",54.8978,11.8841
 Nørre Nebel Fjernvarme,11324312,1000217829,"Præstbølvej 9, 6830 Nørre-Nebel, Denmark",55.777908,8.311371
 Nørre Snede Varmeværk,19998347,1001626454,"Horsensvej 19, 8766 Nørre-Snede, Denmark",55.963785,9.396752
 Nysted Varmeværk,27695949,1010517636,"Egevænget 1, 4880 Nysted, Denmark",54.671036,11.732493
@@ -207,7 +205,7 @@ Svendborg Fjernvarme,22113410,1003007911,"Bagergade 40A, 5700 Svendborg, Denmark
 Sydfalster Varmeværk,17360698,1001272907,"Håndværkervænget 16, 4873 Væggerløse, Denmark",54.71772,11.926582
 Sydlangeland Fjernvarme,17048244,1001211691,"Østerskovvej 2B, 5932 Humble, Denmark",54.796988,10.714755
 Tarm Varmeværk,40893113,1001802909,"Skolegade 23, 6880 Tarm, Denmark",55.905235,8.524065
-Tårnby Forsyning,44185865,1029482833,"Gemmas Alle 39, 2770 Kastrup, Denmark",55.627935,12.614395
+Tårnby Forsyning,32667740,1029482833,"Gemmas Alle 39, 2770 Kastrup, Denmark",55.627935,12.614395
 Terndrup Fjernvarme,15608943,1000949978,"Industriparken 30, 9575 Terndrup, Denmark",56.80511,10.061693
 Thisted Varmeforsyning,30992512,1003030685,"Ringvej 26, 7700 Thisted, Denmark",56.963491,8.703588
 Thorsager Fjernvarmeværk,12575130,1000409687,"Nørregade 26, 8410 Rønde, Denmark",56.347366,10.46092
@@ -220,9 +218,7 @@ Tistrup Varmeværk,10877814,1000146519,"Kastanievej 1, 6862 Tistrup, Denmark",55
 Toftlund Fjernvarme,63690619,1002175112,"Østerdalen 3, 6520 Toftlund, Denmark",55.194115,9.071286
 Tommerup Bys Fjernvarmeforsyning,18292610,1001473623,"Stadionvænget 6, 5690 Tommerup, Denmark",55.322957,10.20294
 Tørring Kraftvarmeværk,28709714,1003023952,"Bygade 5A, 7160 Tørring, Denmark",55.858938,9.484923
-Tørring Kraftvarmeværk,28709714,1003023952,"Bygade 5A, 7160 Tørring, Denmark",55.858938,9.484923
 Tranbjerg Varmeværk,33016719,1001698824,"Jegstrupvænget 630, 8310 Tranbjerg J, Denmark",56.090338,10.130029
-Trefor Varme,17010131,1001203809,"Kokbjerg 30, 6000 Kolding, Denmark",55.535168,9.485974
 Trefor Varme,17010131,1001203809,"Kokbjerg 30, 6000 Kolding, Denmark",55.535168,9.485974
 Troldhede Kraftvarmeværk,38073117,1001762685,"Aakjærsvej 24B, 6920 Videbæk, Denmark",55.992674,8.742304
 Trustrup-Lyngby Varmeværk,20095806,1004131281,"Tværvej 11, 8570 Trustrup, Denmark",56.352715,10.778948
@@ -230,9 +226,8 @@ Tversted Kraftvarmeværk,17590286,1001318826,"Løgtenvej 16, 9881 Bindslev, Denm
 Uldum Varmeværk,16500313,1001109525,"Industrisvinget 9, 7171 Uldum, Denmark",55.851921,9.588792
 Ulfborg Fjernvarme,13231028,1000525111,"Sportsvej 2, 6990 Ulfborg, Denmark",56.280501,8.32227
 Ulsted Varmeværk,34916810,1001726931,"Teglgårdsvej 10, 9370 Hals, Denmark",57.078482,10.250914
-Vallensbæk Fjernvarme Nord,51718011,1001973692,"Horsbred 201, 2625 Vallensbæk, Denmark",55.649775,12.357183
-Vallensbæk Fjernvarme Nord,51718011,1001973692,"Horsbred 201, 2625 Vallensbæk",55.649775,12.357183
-Vallensbæk Fjernvarme Syd,25009215,1003018651,"Delta Park 11, 2665 Vallensbæk Strand, Denmark",55.627079,12.386817
+Vallensbæk Fjernvarme Nord,69330428,1001973692,"Horsbred 201, 2625 Vallensbæk",55.649775,12.357183
+Vallensbæk Fjernvarme Syd,69330428,1003018651,"Delta Park 11, 2665 Vallensbæk Strand, Denmark",55.627079,12.386817
 Vamdrup Fjernvarme,55946817,1002041931,"Nygade 6, 6580 Vamdrup",55.4274787,9.2800979
 Vejby-Tisvilde Fjernvarme,19746933,1003962006,"Møngevej 9B, 3210 Vejby, Denmark",56.067987,12.148756
 Vejle Fjernvarme,67932218,1002261339,"Langelinie 60, 7100 Vejle, Denmark",55.710266,9.542296
@@ -256,8 +251,6 @@ Assentoft Forsyning,43649361,1028771394,"Vandværksvej 34, 8960 Randers",56.4381
 Din Forsyning A/S,00000006,1015733949,"Ulvsundvej 1, 6715 Esbjerg N",55.511826,8.496007
 Rårup Fællesvarme,43513109,1028668275,"Kirketoften 3, 7130 Juelsminde, Denmark",55.774577,9.925531
 Daugård Fællesvarme,41228784,1025646718,"Strandvejen 39 8721 Daugård, Denmark",55.707337,9.698194
-Trefor Varme,17010131,1001203809,"Kokbjerg 30, 6000 Kolding, Denmark",55.535168,9.485974
-Trefor Varme,17010131,1001203809,"Kokbjerg 30, 6000 Kolding, Denmark",55.535168,9.485974
 Ffv Varme Faaborg,26721059,1003311702,"Værkmestervej 1, 5600 Faaborg, Denmark",55.109816,10.238977
 Nfs Varme,29826641,1012866492,"Gasværksvej 2, 5800 Nyborg",55.311297,10.784
 Nordals Fjernvarme,36941650,1020529128,"2RJ7+QG, 6430 Nordborg",55.0573,9.7408
@@ -270,15 +263,14 @@ Brønderslev Forsyning,31157439,1016879652,"Virksomhedsvej 20, 9700 Brønderslev
 Brøns Fjernvarme,19445933,1003817963,"Hovedvejen 8D, 6780 Skærbæk, Denmark",55.195972,8.728464
 Christiansfeld Fjernvarme,63234214,1002166965,"Ravnhavevej 2, 6070 Christiansfeld, Denmark",55.364098,9.489832
 Dronninglund Fjernvarme,12233418,1000353842,"Tidselbak Alle 18, 9330 Dronninglund, Denmark",57.163302,10.289065
-E.On Ørslev-Terslev Kraftvarmeanlæg,25215680,,"Terslev Skolevej 23, 4690 Haslev, Denmark",55.372476,11.971803
-Frifelt/Roager Kraftvarme,00000014,,"Voddervej 2, 6780 Skærbæk, Denmark",55.221699,8.833248
+E.On Ørslev-Terslev Kraftvarmeanlæg,25215680,1025580230,"Terslev Skolevej 23, 4690 Haslev, Denmark",55.372476,11.971803
+Frifelt/Roager Kraftvarmeværk,00000014,1003817999,"Voddervej 2, 6780 Skærbæk, Denmark",55.221699,8.833248
 Frøstrup Fjernvarmeværk,15213140,1000881784,"Håndværkervej 11, 7741 Frøstrup, Denmark",57.091045,8.981636
 Fuglebjerg Fjernvarme,29580715,1008759150,"Sandvedvej 31A, 4250 Fuglebjerg, Denmark",55.300166,11.540305
 Gjerlev Varmeværk,14492984,1000753087,"Mercurvej 12, 8983 Gjerlev J, Denmark",56.591621,10.135073
 Glostrup Forsyning,33043309,1016140941,"Ørnebjergvej 7, 2600 Glostrup, Denmark",55.662531,12.406208
 Guldborgsund Forsyning,00000002,1015628495,"Gaabensevej 116, 4800 Nykøbing F, Denmark",54.782681,11.867523
-Hillerød Forsyning,31592488,1014558647,"Ægirsvej 4, 3400 Hillerød, Denmark",55.931563,12.272992
-Hjallerup Fjernvarme,34681228,1001723737,"Gravensgade 18, 9320 Hjallerup, Denmark",57.167376,10.147864
+Hillerød Forsyning,31592488,1014558531,"Ægirsvej 4, 3400 Hillerød, Denmark",55.931563,12.272992
 Hjallerup Fjernvarme,34681228,1001723737,"Gravensgade 18, 9320 Hjallerup, Denmark",57.167376,10.147864
 Hofor,26089263,1004416316,"Ørestads Boulevard 35, 2300 København S, Denmark",55.639857,12.584221
 Højslev Nr.Søby Fjernvarmeværk,18849518,1001505761,"Søbyvej 48A, 7840 Højslev, Denmark",56.544007,9.109697
@@ -318,7 +310,7 @@ Tommerup St. Varmeforsyning,76326118,1002487500,"Bannervej 22, 5690 Tommerup, De
 Tønder Fjernvarme,00000015,1001745454,"Østergade 83, 6270 Tønder, Denmark",54.939461,8.874159
 Tranum Kraftvarmeværk,49965613,1001940135,"Uglevej 1, 9460 Brovst, Denmark",57.132945,9.463501
 Vildbjerg Tekniske Værker,37683310,1026120469,"Pugdalvej, 7480 Vildbjerg, Denmark",56.1975609,8.7917278
-Øt Havndal Fjernvarme,44336553,,"Laursensvej 4, 8970 Havndal, Denmark",56.648725,10.191229
+Øt Havndal Fjernvarme,44336553,1001121158,"Laursensvej 4, 8970 Havndal, Denmark",56.648725,10.191229
 Ballen/Brundby Fjernvarme,27827853,1010705653,"Ballenvej 51, 8305 Samsø, Denmark",55.815022,10.636025
 Balling-Rødding Varmeværk,27173012,1001609247,"Anlægsvej 4, 7860 Spøttrup, Denmark",56.614623,8.880794
 Bøvling Varmeværk,18683814,,"Marievej 3, 7650 Bøvlingbjerg, Denmark",56.43522,8.20265
@@ -331,33 +323,33 @@ Halvrimmen-Arentsminde Kraftvarmeværk,16374172,1001088346,"Lyngvej 16, 9460 Bro
 Hovedgaard Fjernvarmeværk,22724118,,"Frydsvej 18, 8732 Hovedgård, Denmark",55.951366,9.959753
 Jyderup Varme A/S,33033125,,"Lyngvej 6, 4450 Jyderup, Danmark",55.660009,11.405157
 Langå Varmeværk,31223717,1001672967,"Borgergade 6, 8870 Langå, Denmark",56.391849,9.896098
-Lillerød Varmecentral,60183112,,"Solvang 27, 3450 Allerød, Denmark",55.881576,12.34948
+Lillerød Varmecentral,60183112,1003276017,"Solvang 27, 3450 Allerød, Denmark",55.881576,12.34948
 Mølholm Varmeværk,44424010,1001852238,"Mølholm Landevej 14, 7100 Vejle, Denmark",55.690163,9.553467
 Norfors,14748539,1008756097,"Savsvinget 2, 2970 Hørsholm, Denmark",55.901089,12.492612
 Nyborg Forsyning,29826641,1012866492,"Gasværksvej 2, 5800 Nyborg, Denmark",55.311297,10.784
 Oksbøl Varmeværk,12787111,1000445617,"Industrivej 10, 6840 Oksbøl, Denmark",55.622195,8.289493
 Ollerup-Vester Skerninge-Ulbølle Fjernvarme,36678259,,"Svendborgvej 85, 5762 Skerninge, Denmark",55.071871,10.488985
 Øster Hornum Varmeværk,15278390,1000894624,"Tingager 11, 9530 Støvring, Denmark",56.931868,9.762721
-Øster Toreby Varmeværk,17689800,,"Agrovej 3, 4800 Nykøbing F, Denmark",54.758,11.825915
-Østervraa Varmeværk,20245417,,"Industrivej 3, 9750 Øster-Vrå, Denmark",57.3417,10.2401
+Øster Toreby Varmeværk,17689800,1001339596,"Agrovej 3, 4800 Nykøbing F, Denmark",54.758,11.825915
+Østervraa Varmeværk,20245417,1001521893,"Industrivej 3, 9750 Øster-Vrå, Denmark",57.3417,10.2401
 Outrup Varmeværk,11325319,1000217945,"Centrum 2, 6855 Outrup, Denmark",55.720531,8.344088
 Ramsing-Lem-Lihme Kraftvarmeværk,17038281,1001210129,"Hasselvej 8, 7860 Spøttrup, Denmark",56.591628,8.79162
-Refa Horbelev Fjernvarme,33756488,,"Søndre Vej 1, 4871 Horbelev",54.818588,12.053318
+Refa Horbelev Fjernvarme,33756488,1000077067,"Søndre Vej 1, 4871 Horbelev",54.818588,12.053318
 Rundhøj Fjernvarme,39901811,1001930294,"Holmevej 202, 8270 Højbjerg, Denmark",56.118092,10.176919
-Sandved Tornemark Kraftvarmeværk,20137193,,"Brandholtvej 6A, 4262 Sandved, Denmark",55.255489,11.522774
-Sdr. Felding Varmeværk,13363919,,"Bjergevej 33, 7280 Sønder-Felding, Denmark",55.931538,8.781223
+Sandved Tornemark Kraftvarmeværk,20137193,1004149664,"Brandholtvej 6A, 4262 Sandved, Denmark",55.255489,11.522774
+Sdr. Felding Varmeværk,13363919,1000550228,"Bjergevej 33, 7280 Sønder-Felding, Denmark",55.931538,8.781223
 Sdr. Herreds Kraftvarmeværker,16964638,1001193577,"Næssundvej 327, 7960 Karby, Denmark",56.743378,8.602843
 Skovsgård Varmeværk,61668713,,"Poststræde 28, 9460 Brovst, Denmark",57.087998,9.492925
-Snertinge-Særslev-Føllenslev Energiselskab,18503379,,"Kirkemosevej 17, 4591 Føllenslev, Denmark",55.723388,11.37496
-Taars Varmeværk,64463411,,"Damhusvej 27, 9830 Tårs, Denmark",57.38961,10.116951
+Snertinge-Særslev-Føllenslev Energiselskab,18503379,1003462631,"Kirkemosevej 17, 4591 Føllenslev, Denmark",55.723388,11.37496
+Taars Varmeværk,64463411,1002190406,"Damhusvej 27, 9830 Tårs, Denmark",57.38961,10.116951
 Værløse Varmeværk,10866111,1000295548,"Klostergårdsvej 59, 3500 Værløse, Denmark",55.786677,12.372544
 Værum - Ørum Kraftvarmeværk,18476339,1003453013,"c/o Borgergade 6, 8870 Langå, Denmark",56.3903,9.8949
 Veddum Skelund Visborg Kraftvarmeværk,18718685,1003535075,"Pejtervej 14, 9560 Hadsund, Denmark",56.772908,10.174197
 Vestforbrænding,10866111,1003387416,"Ejby Mosevej 219, 2600 Glostrup, Denmark",55.70648,12.422202
-Fredrikshavn Varme,30173929,,"Knivholtvej 15, 9900 Frederikshavn, Denmark",57.448786,10.492459
+Frederikshavn Varme,30173929,,"Knivholtvej 15, 9900 Frederikshavn, Denmark",57.448786,10.492459
 Ørnhøj Grønbjerg Kraftvarmeværk,15320796,1000902719," ""Kjærs Vej 13",56.200982,8.567841
-Refa Kettinge Forsyning,34094187,1021239077,"Fuglegårdsvej 10, 4892 Kettinge, Denmark",54.698441,11.711996
-Refa Stubbekøbing Fjernvarme,32555063,,"Sivmosevej 2, 4850 Stubbekøbing, Denmark",54.885686,12.029553
+Refa Kettinge Forsyning,34094187,1017369365,"Fuglegårdsvej 10, 4892 Kettinge, Denmark",54.698441,11.711996
+Refa Stubbekøbing Fjernvarme,32555063,1015609768,"Sivmosevej 2, 4850 Stubbekøbing, Denmark",54.885686,12.029553
 Aabenraa-Rødekro Fjernvarme,36152710,1001742157,"Egelund 60, 6200 Aabenraa, Denmark",55.074371,9.380878
 Lolland Varme,00000016,1014453659,"Stavangervej 13, 4900 Nakskov",54.82613,11.15952
 Nykøbing Sj. Varmeværk,46917928,1001888952,"Billesvej 10, 4500 Nykøbing Sjælland",55.924993,11.669362
@@ -368,10 +360,8 @@ Ellehavegaard Energy,18886499,1027307554,"Ellehavegårdsvej 2, 4800 Nykøbing F"
 Struer Energi Fjernvarme,26203333,1008632274,"Jyllandsgade 1, 7600 Struer",56.490679,8.601625
 Hjortsvang Fællesvarme,43703560,1028955371,"Vesterbyvej 12, 7160 Tørring",55.885996,9.496903
 Manna-Thise Kraftvarmeværk,17737147,1001349371,"Lagunen 6, 9700 Brønderslev, Denmark",57.285168,9.812831
-Manna-Thise Kraftvarmeværk,17737147,1001349371,"Jens Thise Vej 50, 9700 Brønderslev",57.293665,9.804473
 Onsbjerg Varmeværk,26325471,1008780737,"Selsinggaarde 2, 8305 Samsø",55.832769,10.56017
 Hvidbjerg Fjernvarme,24557413,1001573152,"Håndværkervej 2, 7790 Thyholm, Denmark",56.648284,8.538707
-Hvidbjerg Fjernvarme,24557413,1001573152,"Håndværkervej 2, 7790 Thyholm",56.648284,8.538707
 Vissenbjerg Fjernvarme,27185614,1001609466,"Nyvej 9, 5492 Vissenbjerg",55.387278,10.128458
 Assens Fjernvarme Fyn,61877215,1024700972,"Stejlebjergvej 4, 5610 Assens",55.257055,9.910147
 Assens Fjernvarme Mariager,27837417,1001620419,"Fabriksvej 5, 9550 Mariager",56.68061,10.067165
@@ -384,11 +374,10 @@ Grindsted El- Og Varmeværk,00000011,1006516498,"Tårnvej 24, 7200 Grindsted",55
 Ådum Kraftvarmeværk,18515830,1003467062,"Skolegade 23, 6880 Tarm",55.905235,8.524065
 Spentrup Varmeværk,43687670,1028843727,"Blichersvej 1, 8981 Spentrup",56.538436,10.036772
 E.On Varme Danmark,25215680,1007868916,"Løgismose 1, 3600 Frederikssund",55.843528747558594,12.06087589263916
-Haarby Kraft-Varme,21829617,1001539310,"Toftevej 5, 5683 Haarby",55.224114,10.122801
+Haarby Kraft-Varme,25387910,1001582757,"Toftevej 5, 5683 Haarby",55.224114,10.122801
 Bioenergi Vest,33154607,1016309164,"Vestkystvej 2, 6950 Ringkøbing",56.119999,8.1194324
 Varde Varmeforsyning,32078737,1015145109,"Gl Kærvej 15, 6800 Varde",55.618941,8.457332
 Videbæk Varm,33258445,1016419539,"Godthaabsvej 3, 6920 Videbæk",56.091913,8.631093
-Verdo Varme Herning,25809807,1010775228,"Agerskellet 7, 8920 Randers NV, Denmark",56.490765,10.02027
 Verdo Varme Herning,25809807,1010775228,"Miljøvej 6, 7400 Herning",56.121734,9.006449
 K/S Difko Lxv,24251020,1006449559,"Halmvænget, 3730 Nexø, Denmark",55.0607111,15.1171258
 Ulstrup Kraftvarmeværk,13109710,1000501518,"Fredensvej 6, 8860 Ulstrup",56.389301,9.793236
@@ -398,12 +387,9 @@ Spøttrup Fjernvarmeværk,18676710,1001503484,"Kærgårdsvej 2, 7860 Spøttrup",
 Cobra Varme,43596713,1028775098,"Egebakken 49, 6818 Årre",55.531122,8.655565
 Helle Energi,43597469,1028775144,"Byparken 25, 6800 Varde",55.622273,8.598331
 Vejen Varmeværk,57301414,1002060351,"Gørtlervej 4, 6600 Vejen, Denmark",55.463965,9.147176
-Vejen Varmeværk,57301414,1002060351,"Gørtlervej 4, 6600 Vejen",55.463965,9.147176
 Vesløs Fjernvarme,17638181,1001329153,"Møllebakvej 4, 7742 Vesløs",57.039543,8.980619
-Tvis Trekantområdets Varmetrans,13348545,1003336089,"Tonne Kjærsvej 11, 7000 Fredericia",55.544373,9.704368
 Nørre Aaby Kraftvarmeværk,16838314,1011470390,"Grønnegade 7, 5580 Nørre Aaby",55.460814,9.875414
 Sorø Fjernvarme,00000017,1023151355,"Kragelundsvej 12, 4180 Sorø, Denmark",55.461283,11.573434
-Sorø Fjernvarme,00000017,1023151355,"Kragelundsvej 12, 4180 Sorø",55.461283,11.573434
 Vestegnens Kraftvarmeselskab,69330428,1020097708,"Roskildevej 175, 2620 Albertslund",55.661266,12.341921
 Ejby Fjernvarmecentral,38226215,1008718500,"Algade 6, 5500 Middelfart",55.5063,9.727933
 Kredsløb,00000004,1025109704,"Karen Blixens Boulevard 7, 8220 Brabrand",56.161632,10.134176
@@ -417,20 +403,21 @@ Nrgi Lokalvarme,21430277,,"Dusager 22, 8200 Aarhus N",56.195992,10.183406
 Grundejerf Rønneholtparken,49001312,1001924751,"Ligustervangen 81, 3450 Allerød",55.872105,12.332781
 Thyregod Fællesvarme,43538365,1028720404,"Skovlunden 101, 7323 Give",55.902313,9.261431
 Gråsten Fjernvarme,00000019,1012754848,"Sønderborg Landevej 3, 6300 Gråsten",54.931628,9.607015
-Augustenborg Fjernvarme,00000019,1002096146,"Sundkrogsgade 5, 2100 København Ø",55.709956,12.591113
+Augustenborg Fjernvarme,00000019,1002096146,"Industrivej 6, 6440 Augustenborg",54.950336,9.888401
 Hornsyld Klimavarme,00000013,1026925246,"Søndergade 44, 8783 Hornsyld",55.757205,9.842654
 Gedser Fjernvarme,32394817,1020390588,"Smedevej 6, 4874 Gedser",54.578006,11.934482
 Rejsby Kraftvarmeværk,19500438,1003843766,"Rejsby Landevej 12B, 6780 Skærbæk",55.235028,8.725414
 Skibby Fjernvarme,44473860,1030002225,"Sikavej 15, 4050 Skibby",55.7448,11.967022
-FORS Varme Holbæk,33032838,1016575948,"Tåstrup Møllevej 5, 4300 Holbæk, Denmark",55.703953,11.708399
-Forsyning Helsingør Service,25165160,1015712852,"Energivej 25, 3000 Helsingør",56.020943,12.55678
+FORS Varme Holbæk,33032838,1033033125,"Tåstrup Møllevej 5, 4300 Holbæk, Denmark",55.703953,11.708399
 Meløse - St. Lyngby Energiselskab,20276991,1004214940,"Skolevej 7B, 3320 Skævinge",55.936371,12.151458
 Aale Fjernvarme,43587854,1028775063,"Aale Bygade 28A, 7160 Tørring",55.887043,9.564467
 Lynge-Uggeløse Fjernvarme,44166879,1029530951,"Nøglegårdsvænge 37, 3540 Lynge",55.837425,12.287609
 Ry Varmeværk,22950312,1001553645,"Bakkelyvej  3, 8680 Ry, Denmark",56.08341,9.78656
-Ry Varmeværk,22950312,1001553645,"Bakkelyvej 3, 8680 Ry",56.08341,9.78656
 Bjæverskov Fjernvarme,43384414,1028409911,"Nyvej 22, 4632 Bjæverskov",55.459578,12.026435
 Fors Varme Roskilde,00000008,1015965963,"Betonvej 12, 4000 Roskilde",55.645789,12.125577
 Nørre Broby Varmeværk,29214824,1001426710,"Stationsvej 14, 5672 Broby",55.250831,10.226505
 Vester Hjermitslev Varmeværk,13096414,1000499081,"Ths. P. Hejlesvej 3, V. Hjermitslev, 9700 Brønderslev",57.285288,9.75914
 Fors Varme Merløse,33033079,1016112662,"Tåstrupvej 11, 4370 Store Merløse",55.550259,11.704542
+Hellebæk fjernvarme,10000685,1000002030,"Omgangen 1,3140 Ålsgårde",56.080148,12.519723
+Tranebjerg Fjernvarmeværk,21430277,1025483363,"Industrivej 10, 8305 Samsø",55.834855,10.599898
+Rye Kraftvarmeværk,18807483,1003568649,"Hjarsbækvej 7, 8680 Ry",56.070192,9.692476

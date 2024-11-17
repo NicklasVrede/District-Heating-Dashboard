@@ -1,4 +1,4 @@
-PNummer;Fjernvarmeforsyning;Postnr.;MWhPrisInklMoms;SamletForbugerprisBeboelseslejlighedInklMoms;SamletForbugerprisEnfamilieshusInklMoms;NominelPrisaendring_SidenDecember2016;ProcentvisPrisaendring_SidenDecember2016;NominelPrisaendring_SidenJanuar2019;ProcentvisPrisaendring_SidenJanuar2019;Bemærkninger
+½PNummer;Fjernvarmeforsyning;Postnr.;MWhPrisInklMoms;SamletForbugerprisBeboelseslejlighedInklMoms;SamletForbugerprisEnfamilieshusInklMoms;NominelPrisaendring_SidenDecember2016;ProcentvisPrisaendring_SidenDecember2016;NominelPrisaendring_SidenJanuar2019;ProcentvisPrisaendring_SidenJanuar2019;Bemærkninger
 1001516452;Agersted Varmeværk;9330;775;14125;17903;7828.0;77,70%;8122.0;83,00%;
 1003267160;Albertslund Varmeværk;2620;525;9768;12574;-576.0;-4,40%;-3416.0;-21,40%;
 1001414567;Allingåbro Varmeværk;8961;475;10750;13910;679.0;5,10%;679.0;5,10%;
@@ -236,8 +236,8 @@ PNummer;Fjernvarmeforsyning;Postnr.;MWhPrisInklMoms;SamletForbugerprisBeboelsesl
 1001210129;Ramsing-Lem-Lihme Kraftvarmeværk;7860;619;15844;18949;3019.0;18,90%;1188.0;6,70%;
 1002992225;Rask Mølle Varmeværk;8763;613;12281;15761;0.0;0,00%;0.0;0,00%;
 1020390588;REFA Gedser Fjernvarme A/S;4874;586;13286;17213;0.0;0,00%;0.0;0,00%;
-1020390588;REFA Horbelev Fjernvarme A/S;4871;543;14116;18962;-88.0;-0,50%;0.0;0,00%;
-1020390588;REFA Kettinge Forsyning ApS;4892;727;14366;18746;0.0;0,00%;0.0;0,00%;
+1000077067;REFA Horbelev Fjernvarme A/S;4871;543;14116;18962;-88.0;-0,50%;0.0;0,00%;
+1017369365;REFA Kettinge Forsyning ApS;4892;727;14366;18746;0.0;0,00%;0.0;0,00%;
 1015609768;REFA, Stubbekøbing Fjernvarme A/S;4800;417;11044;14934;-1577.0;-9,60%;0.0;0,00%;
 1003843766;Rejsby Kraftvarme;6780;550;13563;16955;-4144.0;-19,60%;0.0;0,00%;
 1002058838;Ribe Fjernvarme Amba;6760;438;10250;12263;0.0;0,00%;-566.0;-4,40%;
