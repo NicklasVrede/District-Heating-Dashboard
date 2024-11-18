@@ -20,6 +20,9 @@ export function createSinglePlantGraph(data, forsyid, focus) {
         return;
     }
 
+    // Add class for single plant styling
+    graphContainer.classList.add('single-plant');
+
     const plantId = forsyid.toString().padStart(8, '0');
     const plantData = data[plantId];
     
@@ -29,35 +32,26 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     }
 
     // Clear and setup graph containers
-    let titleElement = document.querySelector('.graph-title');
-    let productionGraph = document.querySelector('.production-graph');
-    let priceGraph = document.querySelector('.price-graph');
-    let infoBox = document.querySelector('.info-box');
+    graphContainer.innerHTML = `
+        <div class="graphs-wrapper">
+            <h2 class="graph-title"></h2>
+            <div class="graphs-container">
+                <div class="production-graph">
+                    <canvas id="productionChart"></canvas>
+                </div>
+                <div class="price-graph">
+                    <canvas id="priceChart"></canvas>
+                </div>
+                <div class="info-box"></div>
+            </div>
+        </div>
+    `;
 
-    // Create containers if they don't exist
-    if (!titleElement) {
-        titleElement = document.createElement('h2');
-        titleElement.className = 'graph-title';
-        graphContainer.insertBefore(titleElement, graphContainer.firstChild);
-    }
-
-    if (!productionGraph) {
-        productionGraph = document.createElement('div');
-        productionGraph.className = 'production-graph';
-        graphContainer.appendChild(productionGraph);
-    }
-
-    if (!priceGraph) {
-        priceGraph = document.createElement('div');
-        priceGraph.className = 'price-graph';
-        graphContainer.appendChild(priceGraph);
-    }
-
-    if (!infoBox) {
-        infoBox = document.createElement('div');
-        infoBox.className = 'info-box';
-        graphContainer.appendChild(infoBox);
-    }
+    // Get references to the elements
+    const titleElement = graphContainer.querySelector('.graph-title');
+    const productionGraph = graphContainer.querySelector('.production-graph');
+    const priceGraph = graphContainer.querySelector('.price-graph');
+    const infoBox = graphContainer.querySelector('.info-box');
 
     // Set the title
     titleElement.textContent = plantData.name || 'Selected Plant';
@@ -312,7 +306,11 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     // Update info box with plant facts
     updateInfoBox(plantData);
 
-    return chart;
+    // Return cleanup function
+    return function cleanup() {
+        graphContainer.classList.remove('single-plant');
+        // ... any other cleanup code ...
+    };
 }
 
 function createPieChart(originalChart, yearData, year, initialData) {

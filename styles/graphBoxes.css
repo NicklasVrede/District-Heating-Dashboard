@@ -22,6 +22,15 @@
     font-family: Arial, sans-serif;
 }
 
+.graphs-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
 .graphs-container {
     display: flex;
     flex-direction: column;
@@ -34,12 +43,12 @@
 .production-graph {
     -webkit-order: 0;
     order: 0;
-    -webkit-flex: 3 1 auto;
-    flex: 3 1 auto;
+    -webkit-flex: 2.5 1 auto;
+    flex: 2.5 1 auto;
     -webkit-align-self: auto;
     align-self: auto;
-    min-height: 300px;
-    height: 300px;
+    min-height: 200px;
+    height: 200px;
     background: white;
     border: 1px solid #e0e0e0;
     position: relative;
