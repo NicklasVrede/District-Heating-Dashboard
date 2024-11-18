@@ -1,6 +1,6 @@
-const apiKey = 'e1337f0db4d14aeb8a69f6439fc005fc'; // Replace with your OpenCage API key
+const apiKey = 'e1337f0db4d14aeb8a69f6439fc005fc';
 
-let currentFocus = -1;  // Add this at the top of your file
+let currentFocus = -1;
 
 // Function to fetch address suggestions
 function autocompleteAddress() {
@@ -10,7 +10,7 @@ function autocompleteAddress() {
 
     if (!query) {
         list.innerHTML = '';
-        currentFocus = -1;  // Reset focus when query is empty
+        currentFocus = -1;
         return;
     }
 

@@ -48,8 +48,8 @@ export class ProductionFocus {
                         console.warn(`Failed to load icon for ${category}, will use color fallback`);
                         resolve(); // Resolve anyway to continue loading
                     };
-                    // Adjust path to match your icon filenames
-                    image.src = `/assets/icons/${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}.png`;
+                    
+                    image.src = `./assets/icons/${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}.png`;
                 });
             });
             
@@ -254,7 +254,7 @@ export class ProductionFocus {
                         return `
                             <div class="legend-item">
                                 <img 
-                                    src="/assets/icons/${iconId}.png" 
+                                    src="./assets/icons/${iconId}.png" 
                                     class="legend-icon" 
                                     alt="${category}"
                                 />

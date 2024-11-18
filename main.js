@@ -70,7 +70,6 @@ window.toggleGasAreas = () => toggleGasAreas(map);
 window.clearSelection = () => clearSelection(map);
 window.selectAll = () => selectAll(map);
 window.changeFocus = changeFocus;
-
 // Wait for map to load before making it globally available
 map.on('load', () => {
     window.map = map;
@@ -109,3 +108,4 @@ function resetCamera() {
 
 // Add to your window exports
 window.resetCamera = resetCamera;
+
