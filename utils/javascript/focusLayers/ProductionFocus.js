@@ -7,6 +7,7 @@ export class ProductionFocus {
         this.map = map;
         this.measureContainer = measureContainer;
         this.legend = null;
+        this.isActive = false;
         
         // Create a mapping of fuel types to colors from graphConfig (fallback)
         this.fuelColors = {};
@@ -27,7 +28,9 @@ export class ProductionFocus {
             
             // Add listener for year changes after icons are loaded
             yearState.addListener((year) => {
-                this.updateProductionData(year);
+                if (this.isActive) {
+                    this.updateProductionData(year);
+                }
             });
         });
         
@@ -311,8 +314,9 @@ export class ProductionFocus {
 
     apply() {
         console.log('Applying production focus');
+        this.isActive = true;
         this.measureContainer.classList.remove('hidden');
-        this.legend.style.display = 'block';  // Show legend
+        this.legend.style.display = 'block';
         
         if (this.map.getLayer('plants-price')) {
             this.map.setLayoutProperty('plants-price', 'visibility', 'none');
@@ -320,13 +324,14 @@ export class ProductionFocus {
         
         this.map.setLayoutProperty('plants-production', 'visibility', 'visible');
         this.updateProductionData(yearState.year);
-        this.updateLegend();  // Update legend
+        this.updateLegend();
     }
 
     remove() {
+        this.isActive = false;
         this.measureContainer.classList.add('hidden');
         this.legend.style.display = 'none';
-        this.tooltip.style.display = 'none';  // Hide tooltip
+        this.tooltip.style.display = 'none';
         this.map.setLayoutProperty('plants-production', 'visibility', 'none');
     }
 
