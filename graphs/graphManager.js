@@ -4,6 +4,7 @@ import { createTwoPlantComparison } from './components/twoPlantComparison.js';
 import { selectionSet } from '../main.js';
 import { loadData, getCachedData } from '../utils/javascript/dataManager.js';
 import { focusState } from '../utils/javascript/focusLayers/FocusState.js';
+import { createOverviewPlants } from './components/overviewPlants.js';
 
 let currentCleanup = null;
 
@@ -32,6 +33,11 @@ function navigateGraphs(data, selectedForsyids) {
         if (existingFactsDiv) {
             existingFactsDiv.remove();
         }
+    }
+
+    // Try to create overview display for large selections
+    if (selectedForsyids.length > 10 && createOverviewPlants(data, selectedForsyids)) {
+        return;
     }
 
     // Route to appropriate visualization based on selection count
