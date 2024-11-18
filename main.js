@@ -89,7 +89,7 @@ map.scrollZoom.setWheelZoomRate(1);
 initDivider(map);
 
 // After your map initialization
-fetch('data/data_dict.json')
+fetch('./data/data_dict.json')
     .then(response => response.json())
     .then(data => {
         window.dataDict = data;
