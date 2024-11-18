@@ -1,3 +1,7 @@
+const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? '.'
+    : '/Visualisering';
+
 let cachedData = null;
 
 export async function loadData() {
@@ -6,7 +10,7 @@ export async function loadData() {
     }
 
     try {
-        const response = await fetch('./data/data_dict.json');
+        const response = await fetch(`${BASE_URL}/data/data_dict.json`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

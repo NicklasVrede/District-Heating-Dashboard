@@ -17,7 +17,8 @@
     box-sizing: border-box;
     gap: 10px;
     background: white;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     font-family: Arial, sans-serif;
 }
 
@@ -26,7 +27,8 @@
     flex-direction: column;
     gap: 10px;
     flex: 1;
-    overflow: hidden;
+    overflow: visible;
+    min-height: min-content;
 }
 
 .production-graph {
@@ -41,7 +43,7 @@
     background: white;
     border: 1px solid #e0e0e0;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     padding: 3px;
 }
 
@@ -63,7 +65,7 @@
     background: white;
     border: 1px solid #e0e0e0;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     padding: 3px;
 }
 
@@ -86,7 +88,7 @@
     border: 1px solid #e0e0e0;
     padding: 3px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .price-graph canvas {
@@ -257,4 +259,22 @@
     border-radius: 4px;
     text-align: center;
     font-family: Arial, sans-serif;
+}
+
+#graph-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+#graph-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#graph-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#graph-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
