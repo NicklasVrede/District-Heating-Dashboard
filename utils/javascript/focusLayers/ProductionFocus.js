@@ -1,5 +1,6 @@
 import { yearState } from './YearState.js';
 import { graphConfig } from '../../../graphs/config/graphConfig.js';
+import { tooltipStyle, legendTooltips } from '../../../graphs/config/tooltipConfig.js';
 
 export class ProductionFocus {
     constructor(map, measureContainer) {
@@ -48,8 +49,8 @@ export class ProductionFocus {
                         console.warn(`Failed to load icon for ${category}, will use color fallback`);
                         resolve(); // Resolve anyway to continue loading
                     };
-                    // Adjust path to match your icon filenames
-                    image.src = `/assets/icons/${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}.png`;
+                    
+                    image.src = `./assets/icons/${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}.png`;
                 });
             });
             
@@ -234,27 +235,41 @@ export class ProductionFocus {
             this.legend.className = 'map-legend production-legend';
             this.legend.style.display = 'none';
             this.map.getContainer().appendChild(this.legend);
+            
+            // Create tooltip element
+            this.tooltip = document.createElement('div');
+            this.tooltip.style.cssText = tooltipStyle;
+            this.tooltip.style.display = 'none';
+            document.body.appendChild(this.tooltip);
         }
     }
 
     updateLegend() {
         if (!this.legend) return;
 
-        // Check if icons are loaded
         const hasIcons = Object.keys(graphConfig.fuelTypes).some(category => 
             this.map.hasImage(`icon-${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}`)
         );
+
+        // Updated helper function to explicitly list first column items
+        const isFirstColumnCategory = (category) => {
+            const firstColumnCategories = ['Kul', 'Olie', 'Gas', 'Affald', 'Halm', 'El'];
+            return firstColumnCategories.includes(category);
+        };
 
         this.legend.innerHTML = `
             <div class="legend-title">Main Fuel</div>
             <div class="legend-items">
                 ${Object.entries(graphConfig.fuelTypes).map(([category, _]) => {
                     const iconId = category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-');
+                    const tooltip = legendTooltips.production[category] || '';
+                    const isFirstColumn = isFirstColumnCategory(category);
+                    
                     if (hasIcons) {
                         return `
-                            <div class="legend-item">
+                            <div class="legend-item" data-tooltip="${tooltip}" data-short="${isFirstColumn}">
                                 <img 
-                                    src="/assets/icons/${iconId}.png" 
+                                    src="./assets/icons/${iconId}.png" 
                                     class="legend-icon" 
                                     alt="${category}"
                                 />
@@ -263,7 +278,7 @@ export class ProductionFocus {
                         `;
                     } else {
                         return `
-                            <div class="legend-item">
+                            <div class="legend-item" data-tooltip="${tooltip}" data-short="${isFirstColumn}">
                                 <div 
                                     class="legend-color" 
                                     style="background-color: ${graphConfig.colors[category]}"
@@ -275,6 +290,23 @@ export class ProductionFocus {
                 }).join('')}
             </div>
         `;
+
+        // Add event listeners for tooltips
+        this.legend.querySelectorAll('.legend-item').forEach(item => {
+            item.addEventListener('mousemove', (e) => {
+                const tooltip = item.getAttribute('data-tooltip');
+                if (tooltip) {
+                    this.tooltip.textContent = tooltip;
+                    this.tooltip.style.display = 'block';
+                    this.tooltip.style.left = `${e.pageX + 10}px`;
+                    this.tooltip.style.top = `${e.pageY + 10}px`;
+                }
+            });
+
+            item.addEventListener('mouseleave', () => {
+                this.tooltip.style.display = 'none';
+            });
+        });
     }
 
     apply() {
@@ -293,7 +325,8 @@ export class ProductionFocus {
 
     remove() {
         this.measureContainer.classList.add('hidden');
-        this.legend.style.display = 'none';  // Hide legend
+        this.legend.style.display = 'none';
+        this.tooltip.style.display = 'none';  // Hide tooltip
         this.map.setLayoutProperty('plants-production', 'visibility', 'none');
     }
 

@@ -16,14 +16,9 @@ energy_columns = [
     'solenergi_TJ', 'vandkraft_TJ', 'elektricitet_TJ', 'omgivelsesvarme_TJ'
 ]
 
-# Load plant names from plants.csv
-plants_df = pd.read_csv('data/plants.csv', encoding='utf-8')
-plants_df['forsyid'] = plants_df['forsyid'].astype(str).str.zfill(8)
-plant_names = plants_df.set_index('forsyid')['name'].to_dict()
-
 # Create basic mappings (convert Series to native Python types)
 mappings = {
-    'name': plant_names,  # Use names from plants.csv instead of production data
+    'name': data_df.groupby('forsyid')['plant_name'].first().to_dict(),
     'idrift': data_df.groupby('forsyid')['idriftdato'].first().to_dict(),
     'elkapacitet': data_df.groupby('forsyid')['elkapacitet_MW'].first().to_dict(),
     'varmekapacitet': data_df.groupby('forsyid')['varmekapacitet_MW'].first().to_dict()
@@ -90,7 +85,6 @@ for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid
         'elkapacitet_MW': mappings['elkapacitet'].get(forsyid, 0) or 0,
         'varmekapacitet_MW': mappings['varmekapacitet'].get(forsyid, 0) or 0,
         'total_area_km2': aggregated_areas.get(forsyid, 0) or 0,
-        'CVRP': forsyid_to_cvrp.get(forsyid),
         'production': {
             str(year): {col.replace('_TJ', ''): int(round(val.iloc[0] if hasattr(val, 'iloc') else val or 0))
                        for col, val in yearly_data[energy_columns].items()}
@@ -110,5 +104,3 @@ for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid
 # Save the data
 with open('data/data_dict.json', 'w', encoding='utf-8') as f:
     json.dump(data_dict, f, indent=4, ensure_ascii=False)
-
-print("Data dictionary created successfully.")
