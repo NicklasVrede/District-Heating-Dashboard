@@ -280,6 +280,38 @@
                 "elektricitet": 223,
                 "omgivelsesvarme": 0
             }
+        },
+        "prices": {
+            "2019": {
+                "mwh_price": 461,
+                "apartment_price": 9666,
+                "house_price": 12195
+            },
+            "2020": {
+                "mwh_price": 461,
+                "apartment_price": 9666,
+                "house_price": 12195
+            },
+            "2021": {
+                "mwh_price": 489,
+                "apartment_price": 10111,
+                "house_price": 12746
+            },
+            "2022": {
+                "mwh_price": 570,
+                "apartment_price": 10820,
+                "house_price": 13357
+            },
+            "2023": {
+                "mwh_price": 684,
+                "apartment_price": 12526,
+                "house_price": 14646
+            },
+            "2024": {
+                "mwh_price": 800,
+                "apartment_price": 14270,
+                "house_price": 17520
+            }
         }
     },
     "00000006": {
