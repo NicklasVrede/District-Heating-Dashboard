@@ -6,7 +6,7 @@ export async function loadData() {
     }
 
     try {
-        const response = await fetch('/data/data_dict.json');
+        const response = await fetch('./data/data_dict.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
