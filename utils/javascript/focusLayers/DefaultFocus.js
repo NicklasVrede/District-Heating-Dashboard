@@ -1,5 +1,6 @@
 import { createOrUpdatePlotlyGraph } from '../../../graphs/components/multiPlant.js';
 import { selectionSet } from '../../../main.js';
+import { yearState } from './YearState.js';
 
 export class DefaultFocus {
     constructor(map, measureContainer) {
@@ -22,15 +23,11 @@ export class DefaultFocus {
             this.measureContainer.classList.add('hidden');
         }
 
-        // Hide year slider container
-        const yearSliderContainer = document.getElementById('year-slider-container');
-        if (yearSliderContainer) {
-            yearSliderContainer.style.display = 'none';
-        }
+        // Only hide year slider if less than 3 plants are selected
+        const selectedForsyids = Array.from(selectionSet);
+        yearState.visible = selectedForsyids.length >= 3;
 
         const data = window.dataDict;
-        const selectedForsyids = Array.from(selectionSet);
-        
         if (data && selectedForsyids.length > 0) {
             console.log('DefaultFocus: Calling createOrUpdatePlotlyGraph with none focus');
             createOrUpdatePlotlyGraph(data, selectedForsyids, 'none');

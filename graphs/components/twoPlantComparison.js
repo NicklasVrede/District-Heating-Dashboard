@@ -2,7 +2,7 @@ import { graphConfig } from '../config/graphConfig.js';
 import { showToast } from './toast.js';
 import { legendTooltips, tooltipStyle } from '../config/tooltipConfig.js';
 
-const LEGEND_THRESHOLD_PERCENTAGE = 2;
+const LEGEND_THRESHOLD_PERCENTAGE = 0;
 
 export function createTwoPlantComparison(data, validForsyids) {
     // Input validation
@@ -432,6 +432,9 @@ function createPriceChart(plantData, index, maxValues) {
                 intersect: false,
             },
             plugins: {
+                datalabels: {
+                    display: false
+                },
                 legend: {
                     position: 'right',
                     align: 'start',

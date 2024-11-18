@@ -3,6 +3,8 @@ import { selectionSet } from '../../main.js';
 import { updateGraph } from './plotlyGraphs.js'; // Corrected import path
 import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 import { areaStyles } from '../../styles/areaStyles.js';
+import { focusState } from './focusLayers/FocusState.js';
+import { yearState } from './focusLayers/YearState.js';
 
 let isHoveringPlant = false;
 let areaTooltip = null;
@@ -229,6 +231,10 @@ export function updateSelectedPlants(map) {
     });
     map.setFilter('selected-plants', filters);
     map.setFilter('selected-areas', filters);
+
+    // Update year slider visibility based on selection count
+    const hasMoreThanTwoSelections = selectionSet.size > 2;
+    yearState.visible = hasMoreThanTwoSelections || ['price', 'production'].includes(focusState.focus);
 }
 
 function toggleSelection(map, forsyid, isCtrlPressed) {

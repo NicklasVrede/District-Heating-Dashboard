@@ -8,6 +8,7 @@ import { selectionSet } from '../../../main.js';
 import { updateSelectedPlants } from '../eventListeners.js';
 import { updateSelectedPlantsWindow } from '../selectedPlantsWindow.js';
 import { updateGraph } from '../plotlyGraphs.js';
+import { yearState } from './YearState.js';
 
 class FocusManager {
     constructor() {
@@ -189,12 +190,12 @@ class FocusManager {
             // Show/hide select group based on focus
             const selectGroup = document.querySelector('.select-group');
             if (selectGroup) {
-                if (value === 'price' || value === 'production') {
-                    selectGroup.style.display = 'flex';
-                } else {
-                    selectGroup.style.display = 'none';
-                }
+                selectGroup.style.display = (value === 'price' || value === 'production') ? 'flex' : 'none';
             }
+
+            // Update year slider visibility based on focus and selection count
+            const hasThreeOrMoreSelections = selectionSet.size >= 3;
+            yearState.visible = hasThreeOrMoreSelections || value === 'price' || value === 'production';
 
             // Remove current focus
             if (this.currentFocus) {
@@ -213,6 +214,7 @@ class FocusManager {
             this.focuses.none.apply();
             this.currentFocus = this.focuses.none;
             focusState.focus = 'none';
+            yearState.visible = selectionSet.size >= 3;
         }
     }
 }

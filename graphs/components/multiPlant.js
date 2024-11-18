@@ -11,7 +11,7 @@ let currentCharts = {
     price: null
 };
 
-const LEGEND_THRESHOLD_PERCENTAGE = 2;
+const LEGEND_THRESHOLD_PERCENTAGE = 0;
 
 Chart.register(ChartDataLabels);
 
@@ -40,20 +40,6 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none'
     graphContainer.innerHTML = `
         <div class="graph-header">
             <h2 class="graph-title">Multiple Plants Comparison</h2>
-            <div class="year-slider-container ${focus !== 'none' && !createOrUpdatePlotlyGraph.animationPlayed.has(focus) ? 'pulse-animation' : ''}" 
-                 id="year-slider-container" 
-                 style="display: ${focus === 'none' ? 'none' : 'block'}">
-                <label for="year-slider">Year:</label>
-                <input 
-                    type="range" 
-                    id="year-slider" 
-                    min="${minYear}" 
-                    max="${maxYear}" 
-                    value="${defaultYear}"
-                    step="1"
-                >
-                <span id="year-label">${defaultYear}</span>
-            </div>
         </div>
         <div class="graphs-container">
             ${focus === 'price' ? `
@@ -245,13 +231,15 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                     stacked: true,
                     title: {
                         display: false
+                    },
+                    ticks: {
+                        display: false
                     }
                 },
                 y: {
                     stacked: true,
                     title: {
-                        display: true,
-                        text: 'Production Share (%)'
+                        display: false
                     },
                     beginAtZero: true,
                     max: 100,
@@ -278,6 +266,44 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                             size: 11
                         }
                     },
+                    onClick: (function() {
+                        let clickTimeout = null;
+                        let clickCount = 0;
+
+                        return function(e, legendItem, legend) {
+                            clickCount++;
+                            
+                            if (clickCount === 1) {
+                                clickTimeout = setTimeout(() => {
+                                    // Single click - toggle visibility
+                                    const index = legendItem.datasetIndex;
+                                    const chart = legend.chart;
+                                    const meta = chart.getDatasetMeta(index);
+                                    meta.hidden = !meta.hidden;
+                                    chart.update();
+                                    
+                                    clickCount = 0;
+                                }, 250);
+                            } else if (clickCount === 2) {
+                                clearTimeout(clickTimeout);
+                                // Double click - show only this dataset
+                                const chart = legend.chart;
+                                const datasets = chart.data.datasets;
+                                
+                                // Check if all others are already hidden
+                                const allOthersHidden = datasets.every((dataset, i) => 
+                                    i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
+                                
+                                datasets.forEach((dataset, i) => {
+                                    const meta = chart.getDatasetMeta(i);
+                                    meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
+                                });
+                                
+                                chart.update();
+                                clickCount = 0;
+                            }
+                        };
+                    })(),
                     onHover: function(event, legendItem, legend) {
                         const tooltip = legendTooltips.production[legendItem.text];
                         if (tooltip) {
@@ -369,19 +395,7 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                     }
                 },
                 datalabels: {
-                    display: true,
-                    color: 'white',
-                    font: {
-                        weight: 'bold',
-                        size: 11
-                    },
-                    formatter: function(value, context) {
-                        if (value < 12) return '';
-                        return `${context.dataset.label}\n${value.toFixed(1)}%`;
-                    },
-                    align: 'center',
-                    anchor: 'center',
-                    rotation: 0
+                    display: false
                 },
                 zoom: {
                     pan: {
@@ -533,13 +547,15 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                 x: {
                     title: {
                         display: false
+                    },
+                    ticks: {
+                        display: false
                     }
                 },
                 y: {
                     stacked: false,
                     title: {
-                        display: true,
-                        text: 'Price (DKK)'
+                        display: false
                     },
                     beginAtZero: true,
                     min: 0,
@@ -567,32 +583,44 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                             size: 11
                         }
                     },
-                    onHover: function(event, legendItem, legend) {
-                        const tooltip = legendTooltips.prices[legendItem.text];
-                        if (tooltip) {
-                            let tooltipEl = document.getElementById('chart-tooltip');
-                            if (!tooltipEl) {
-                                tooltipEl = document.createElement('div');
-                                tooltipEl.id = 'chart-tooltip';
-                                tooltipEl.style.cssText = tooltipStyle;
-                                document.body.appendChild(tooltipEl);
+                    onClick: (function() {
+                        let clickTimeout = null;
+                        let clickCount = 0;
+
+                        return function(e, legendItem, legend) {
+                            clickCount++;
+                            
+                            if (clickCount === 1) {
+                                clickTimeout = setTimeout(() => {
+                                    // Single click behavior
+                                    const index = legendItem.datasetIndex;
+                                    const chart = legend.chart;
+                                    const meta = chart.getDatasetMeta(index);
+                                    meta.hidden = !meta.hidden;
+                                    chart.update();
+                                    
+                                    clickCount = 0;
+                                }, 250);
+                            } else if (clickCount === 2) {
+                                clearTimeout(clickTimeout);
+                                // Double click behavior
+                                const chart = legend.chart;
+                                const datasets = chart.data.datasets;
+                                
+                                // If all others are already hidden, show all (reset)
+                                const allOthersHidden = datasets.every((dataset, i) => 
+                                    i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
+                                
+                                datasets.forEach((dataset, i) => {
+                                    const meta = chart.getDatasetMeta(i);
+                                    meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
+                                });
+                                
+                                chart.update();
+                                clickCount = 0;
                             }
-                            
-                            const mouseX = event.native.clientX;
-                            const mouseY = event.native.clientY;
-                            
-                            tooltipEl.innerHTML = tooltip;
-                            tooltipEl.style.left = (mouseX + 10) + 'px';
-                            tooltipEl.style.top = (mouseY + 10) + 'px';
-                            tooltipEl.style.display = 'block';
-                        }
-                    },
-                    onLeave: function() {
-                        const tooltipEl = document.getElementById('chart-tooltip');
-                        if (tooltipEl) {
-                            tooltipEl.style.display = 'none';
-                        }
-                    }
+                        };
+                    })()
                 },
                 tooltip: {
                     callbacks: {
@@ -617,6 +645,9 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                         },
                         mode: 'x'
                     }
+                },
+                datalabels: {
+                    display: false
                 }
             },
             animation: false,
@@ -624,7 +655,46 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                 active: {
                     animation: false
                 }
-            }
+            },
+            onClick: (function() {
+                let clickTimeout = null;
+                let clickCount = 0;
+
+                return function(e, elements, chart) {
+                    if (!elements || !elements.length) return;
+                    
+                    clickCount++;
+                    const element = elements[0];
+                    const datasetIndex = element.datasetIndex;
+                    
+                    if (clickCount === 1) {
+                        clickTimeout = setTimeout(() => {
+                            // Single click behavior
+                            const meta = chart.getDatasetMeta(datasetIndex);
+                            meta.hidden = !meta.hidden;
+                            chart.update();
+                            
+                            clickCount = 0;
+                        }, 250);
+                    } else if (clickCount === 2) {
+                        clearTimeout(clickTimeout);
+                        // Double click behavior
+                        const datasets = chart.data.datasets;
+                        
+                        // Check if all others are already hidden
+                        const allOthersHidden = datasets.every((dataset, i) => 
+                            i === datasetIndex || chart.getDatasetMeta(i).hidden);
+                        
+                        datasets.forEach((dataset, i) => {
+                            const meta = chart.getDatasetMeta(i);
+                            meta.hidden = !allOthersHidden && (i !== datasetIndex);
+                        });
+                        
+                        chart.update();
+                        clickCount = 0;
+                    }
+                };
+            })()
         }
     });
 }
