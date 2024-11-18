@@ -56,4 +56,5 @@ plant_gdf = plant_gdf.merge(aggregated_areas, on='forsyid', how='left')
 # Save the updated plant GeoDataFrame to a new GeoJSON file
 plant_gdf.to_file('data/plants_with_area_and_fuel.geojson', driver='GeoJSON')
 
-print('Data updated successfully.')
+# Print the updated plant GeoDataFrame
+print(plant_gdf)
