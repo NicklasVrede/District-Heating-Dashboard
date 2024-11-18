@@ -1,13 +1,14 @@
 import { yearState } from './YearState.js';
 import { graphConfig } from '../../../graphs/config/graphConfig.js';
 import { tooltipStyle, legendTooltips } from '../../../graphs/config/tooltipConfig.js';
+import { ProductionLegend } from './ProductionLegend.js';
 
 export class ProductionFocus {
     constructor(map, measureContainer) {
         this.map = map;
         this.measureContainer = measureContainer;
-        this.legend = null;
         this.isActive = false;
+        this.legend = new ProductionLegend(map);
         
         // Create a mapping of fuel types to colors from graphConfig (fallback)
         this.fuelColors = {};
@@ -33,8 +34,6 @@ export class ProductionFocus {
                 }
             });
         });
-        
-        this.createLegend();
     }
 
     async loadIcons() {
@@ -142,6 +141,29 @@ export class ProductionFocus {
     updateProductionData(year) {
         const effectiveYear = Math.min(Math.max(year, '2021'), '2023');
         
+        // Calculate main fuel for current year
+        const source = this.map.getSource('plants');
+        if (!source) return;
+
+        const data = source._data;
+        if (!data || !data.features) return;
+
+        // Update features with current year's main fuel
+        data.features = data.features.map(feature => {
+            const forsyid = feature.properties.forsyid;
+            const plantData = window.dataDict?.[forsyid]?.production;
+            
+            if (plantData && plantData[effectiveYear]) {
+                const yearData = plantData[effectiveYear];
+                const { mainFuel } = this.calculateProductionStats(yearData);
+                feature.properties[`currentMainFuel`] = mainFuel;
+            }
+            return feature;
+        });
+
+        // Update the source with new data
+        source.setData(data);
+        
         // Check if icons are loaded
         const hasIcons = Object.keys(graphConfig.fuelTypes).some(category => 
             this.map.hasImage(`icon-${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}`)
@@ -170,10 +192,10 @@ export class ProductionFocus {
                 });
             }
 
-            // Use icons
+            // Use icons with current main fuel
             this.map.setLayoutProperty('plants-production', 'icon-image', [
                 'match',
-                ['get', `mainFuel_${effectiveYear}`],
+                ['get', 'currentMainFuel'],  // Changed from mainFuel_2023 to currentMainFuel
                 ...Object.entries(graphConfig.fuelTypes).flatMap(([category, fuelTypes]) => {
                     const iconId = `icon-${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}`;
                     if (Array.isArray(fuelTypes)) {
@@ -184,7 +206,7 @@ export class ProductionFocus {
                 'icon-default' // fallback icon
             ]);
         } else {
-            // Fallback to colored circles
+            // Fallback to colored circles with current main fuel
             if (this.map.getLayer('plants-production').type !== 'circle') {
                 this.map.removeLayer('plants-production');
                 this.map.addLayer({
@@ -194,8 +216,7 @@ export class ProductionFocus {
                 });
             }
 
-            // Use original color-based styling
-            const matchExpression = ['match', ['get', `mainFuel_${effectiveYear}`]];
+            const matchExpression = ['match', ['get', 'currentMainFuel']];  // Changed from mainFuel_2023
             Object.entries(graphConfig.fuelTypes).forEach(([category, fuelTypes]) => {
                 if (Array.isArray(fuelTypes)) {
                     fuelTypes.forEach(fuel => {
@@ -209,7 +230,7 @@ export class ProductionFocus {
 
             this.map.setPaintProperty('plants-production', 'circle-color', matchExpression);
             
-            // Original circle radius logic
+            // Update circle radius logic
             this.map.setPaintProperty('plants-production', 'circle-radius', [
                 'interpolate',
                 ['linear'],
@@ -232,91 +253,11 @@ export class ProductionFocus {
         }
     }
 
-    createLegend() {
-        if (!this.legend) {
-            this.legend = document.createElement('div');
-            this.legend.className = 'map-legend production-legend';
-            this.legend.style.display = 'none';
-            this.map.getContainer().appendChild(this.legend);
-            
-            // Create tooltip element
-            this.tooltip = document.createElement('div');
-            this.tooltip.style.cssText = tooltipStyle;
-            this.tooltip.style.display = 'none';
-            document.body.appendChild(this.tooltip);
-        }
-    }
-
-    updateLegend() {
-        if (!this.legend) return;
-
-        const hasIcons = Object.keys(graphConfig.fuelTypes).some(category => 
-            this.map.hasImage(`icon-${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}`)
-        );
-
-        // Updated helper function to explicitly list first column items
-        const isFirstColumnCategory = (category) => {
-            const firstColumnCategories = ['Kul', 'Olie', 'Gas', 'Affald', 'Halm', 'El'];
-            return firstColumnCategories.includes(category);
-        };
-
-        this.legend.innerHTML = `
-            <div class="legend-title">Main Fuel</div>
-            <div class="legend-items">
-                ${Object.entries(graphConfig.fuelTypes).map(([category, _]) => {
-                    const iconId = category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-');
-                    const tooltip = legendTooltips.production[category] || '';
-                    const isFirstColumn = isFirstColumnCategory(category);
-                    
-                    if (hasIcons) {
-                        return `
-                            <div class="legend-item" data-tooltip="${tooltip}" data-short="${isFirstColumn}">
-                                <img 
-                                    src="./assets/icons/${iconId}.png" 
-                                    class="legend-icon" 
-                                    alt="${category}"
-                                />
-                                <span class="legend-label">${category}</span>
-                            </div>
-                        `;
-                    } else {
-                        return `
-                            <div class="legend-item" data-tooltip="${tooltip}" data-short="${isFirstColumn}">
-                                <div 
-                                    class="legend-color" 
-                                    style="background-color: ${graphConfig.colors[category]}"
-                                ></div>
-                                <span class="legend-label">${category}</span>
-                            </div>
-                        `;
-                    }
-                }).join('')}
-            </div>
-        `;
-
-        // Add event listeners for tooltips
-        this.legend.querySelectorAll('.legend-item').forEach(item => {
-            item.addEventListener('mousemove', (e) => {
-                const tooltip = item.getAttribute('data-tooltip');
-                if (tooltip) {
-                    this.tooltip.textContent = tooltip;
-                    this.tooltip.style.display = 'block';
-                    this.tooltip.style.left = `${e.pageX + 10}px`;
-                    this.tooltip.style.top = `${e.pageY + 10}px`;
-                }
-            });
-
-            item.addEventListener('mouseleave', () => {
-                this.tooltip.style.display = 'none';
-            });
-        });
-    }
-
     apply() {
         console.log('Applying production focus');
         this.isActive = true;
         this.measureContainer.classList.remove('hidden');
-        this.legend.style.display = 'block';
+        this.legend.show();
         
         if (this.map.getLayer('plants-price')) {
             this.map.setLayoutProperty('plants-price', 'visibility', 'none');
@@ -324,14 +265,13 @@ export class ProductionFocus {
         
         this.map.setLayoutProperty('plants-production', 'visibility', 'visible');
         this.updateProductionData(yearState.year);
-        this.updateLegend();
+        this.legend.updateLegend();
     }
 
     remove() {
         this.isActive = false;
         this.measureContainer.classList.add('hidden');
-        this.legend.style.display = 'none';
-        this.tooltip.style.display = 'none';
+        this.legend.hide();
         this.map.setLayoutProperty('plants-production', 'visibility', 'none');
     }
 

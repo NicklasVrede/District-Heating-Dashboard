@@ -101,3 +101,11 @@
 .production-legend .legend-item[data-short="true"] {
     grid-column: 1;
 }
+
+.production-legend .legend-item.hidden {
+    opacity: 0.5;
+}
+
+.production-legend .legend-item.hidden .legend-label {
+    text-decoration: line-through;
+}
