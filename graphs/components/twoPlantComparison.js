@@ -258,11 +258,13 @@ function createProductionChart(plantData, index, maxValue) {
                 zoom: {
                     pan: {
                         enabled: true,
-                        mode: 'x'
+                        mode: 'x',
+                        modifierKey: 'ctrl'
                     },
                     zoom: {
                         wheel: {
-                            enabled: true
+                            enabled: true,
+                            modifierKey: 'ctrl'
                         },
                         pinch: {
                             enabled: true
@@ -487,11 +489,13 @@ function createPriceChart(plantData, index, maxValues) {
                 zoom: {
                     pan: {
                         enabled: true,
-                        mode: 'x'
+                        mode: 'x',
+                        modifierKey: 'ctrl'
                     },
                     zoom: {
                         wheel: {
-                            enabled: true
+                            enabled: true,
+                            modifierKey: 'ctrl'
                         },
                         pinch: {
                             enabled: true
@@ -571,6 +575,23 @@ function createTotalProductionChart(plantData, index, maxValue) {
                         label: function(context) {
                             return `Total: ${context.raw.toFixed(1)} TJ`;
                         }
+                    }
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x',
+                        modifierKey: 'ctrl'
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                            modifierKey: 'ctrl'
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x'
                     }
                 }
             },

@@ -382,6 +382,23 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                     align: 'center',
                     anchor: 'center',
                     rotation: 0
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x',
+                        modifierKey: 'ctrl'  // Only pan when ctrl is pressed
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                            modifierKey: 'ctrl'  // Only zoom when ctrl is pressed
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x'
+                    }
                 }
             },
             animation: false,
@@ -583,6 +600,23 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                             return `${context.dataset.label}: ${context.raw.toLocaleString()} DKK`;
                         }
                     }
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x',
+                        modifierKey: 'ctrl'  // Only pan when ctrl is pressed
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                            modifierKey: 'ctrl'  // Only zoom when ctrl is pressed
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x'
+                    }
                 }
             },
             animation: false,
@@ -714,6 +748,23 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
                         label: function(context) {
                             return `${context.dataset.label}: ${context.raw.toFixed(1)} TJ`;
                         }
+                    }
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x',
+                        modifierKey: 'ctrl'  // Only pan when ctrl is pressed
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                            modifierKey: 'ctrl'  // Only zoom when ctrl is pressed
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x'
                     }
                 }
             },

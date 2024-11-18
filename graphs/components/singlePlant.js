@@ -207,11 +207,13 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                 zoom: {
                     pan: {
                         enabled: true,
-                        mode: 'x'
+                        mode: 'x',
+                        modifierKey: 'ctrl'
                     },
                     zoom: {
                         wheel: {
-                            enabled: true
+                            enabled: true,
+                            modifierKey: 'ctrl'
                         },
                         pinch: {
                             enabled: true
@@ -545,11 +547,13 @@ function createPriceChart(plantData, container) {
                 zoom: {
                     pan: {
                         enabled: true,
-                        mode: 'x'
+                        mode: 'x',
+                        modifierKey: 'ctrl'
                     },
                     zoom: {
                         wheel: {
-                            enabled: true
+                            enabled: true,
+                            modifierKey: 'ctrl'
                         },
                         pinch: {
                             enabled: true
