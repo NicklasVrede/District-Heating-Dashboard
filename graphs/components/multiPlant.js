@@ -524,19 +524,19 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     label: 'House Price',
                     data: houseData,
                     backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                    order: 3  // Will be rendered first (back)
+                    order: 3
                 },
                 {
-                    label: 'Apartment Price',
+                    label: 'Apartment Price (Yearly)',
                     data: apartmentData,
                     backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                    order: 2  // Will be rendered second (middle)
+                    order: 2
                 },
                 {
-                    label: 'MWh Price',
+                    label: 'MWh Price (Yearly)',
                     data: mwhData,
                     backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                    order: 1  // Will be rendered last (front)
+                    order: 1
                 }
             ]
         },

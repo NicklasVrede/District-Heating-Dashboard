@@ -1,4 +1,5 @@
 import { graphConfig } from '../config/graphConfig.js';
+import { legendTooltips, tooltipStyle } from '../config/tooltipConfig.js';
 
 export function createOverviewPlants(data, selectedForsyids) {
     // Only handle if we have more than 10 plants
@@ -14,9 +15,6 @@ export function createOverviewPlants(data, selectedForsyids) {
                 <div class="production-graph">
                     <canvas id="fuelDistributionChart"></canvas>
                 </div>
-                <div class="total-production-graph">
-                    <canvas id="capacityDistributionChart"></canvas>
-                </div>
                 <div class="price-graph">
                     <canvas id="priceDistributionChart"></canvas>
                 </div>
@@ -25,7 +23,6 @@ export function createOverviewPlants(data, selectedForsyids) {
     `;
 
     createFuelDistributionChart(data, selectedForsyids);
-    createCapacityDistributionChart(data, selectedForsyids);
     createPriceDistributionChart(data, selectedForsyids);
 
     return true;
@@ -193,7 +190,33 @@ function createFuelDistributionChart(data, selectedForsyids) {
                                 clickCount = 0;
                             }
                         };
-                    })()
+                    })(),
+                    onHover: function(event, legendItem, legend) {
+                        const tooltip = legendTooltips.production[legendItem.text];
+                        if (tooltip) {
+                            let tooltipEl = document.getElementById('chart-tooltip');
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chart-tooltip';
+                                tooltipEl.style.cssText = tooltipStyle;
+                                document.body.appendChild(tooltipEl);
+                            }
+                            
+                            const mouseX = event.native.clientX;
+                            const mouseY = event.native.clientY;
+                            
+                            tooltipEl.innerHTML = tooltip;
+                            tooltipEl.style.left = (mouseX + 10) + 'px';
+                            tooltipEl.style.top = (mouseY + 10) + 'px';
+                            tooltipEl.style.display = 'block';
+                        }
+                    },
+                    onLeave: function() {
+                        const tooltipEl = document.getElementById('chart-tooltip');
+                        if (tooltipEl) {
+                            tooltipEl.style.display = 'none';
+                        }
+                    }
                 }
             },
             scales: {
@@ -392,151 +415,144 @@ function createAggregatedPieChart(originalChart, aggregatedProduction, year, ini
     return newChart;
 }
 
-function createCapacityDistributionChart(data, selectedForsyids) {
-    const ctx = document.getElementById('capacityDistributionChart').getContext('2d');
-    const capacityRanges = {
-        'Small (0-50 MW)': [0, 50],
-        'Medium (50-200 MW)': [50, 200],
-        'Large (200+ MW)': [200, Infinity]
-    };
-    const capacityCounts = Object.fromEntries(
-        Object.keys(capacityRanges).map(range => [range, 0])
-    );
-
-    selectedForsyids.forEach(forsyid => {
-        const plantData = data[forsyid.toString().padStart(8, '0')];
-        if (!plantData) return;
-
-        const totalCapacity = (plantData.elkapacitet_MW || 0) +
-            (plantData.varmekapacitet_MW || 0);
-        
-        Object.entries(capacityRanges).forEach(([range, [min, max]]) => {
-            if (totalCapacity >= min && totalCapacity < max) {
-                capacityCounts[range]++;
-            }
-        });
-    });
-
-    // Convert to percentages
-    const datasets = [{
-        data: Object.values(capacityCounts).map(count => (count / selectedForsyids.length) * 100),
-        backgroundColor: Object.keys(capacityCounts).map(range => graphConfig.colors[range]),
-        borderWidth: 1
-    }];
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: Object.keys(capacityCounts),
-            datasets: datasets
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Capacity Distribution'
-                },
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const value = context.raw;
-                            const count = capacityCounts[context.label];
-                            return `${count} plants (${value.toFixed(1)}%)`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Percentage of Plants'
-                    },
-                    ticks: {
-                        callback: value => value + '%'
-                    }
-                }
-            }
-        }
-    });
-}
-
 function createPriceDistributionChart(data, selectedForsyids) {
     const ctx = document.getElementById('priceDistributionChart').getContext('2d');
-    const priceCounts = {};
-    let totalPlants = 0;
+    
+    // Define years we want to show
+    const years = ['2019', '2020', '2021', '2022', '2023', '2024'];
+    
+    // Initialize aggregated price data
+    const aggregatedPrices = {
+        mwh_price: years.map(() => 0),
+        apartment_price: years.map(() => 0),
+        house_price: years.map(() => 0)
+    };
+    
+    // Count plants with price data for averaging
+    const plantCounts = {
+        mwh_price: years.map(() => 0),
+        apartment_price: years.map(() => 0),
+        house_price: years.map(() => 0)
+    };
 
-    // Count plants using each price type
+    // Aggregate price data
     selectedForsyids.forEach(forsyid => {
         const plantData = data[forsyid.toString().padStart(8, '0')];
-        if (!plantData?.price?.['2023']) return;
+        if (!plantData?.prices) return;
 
-        Object.entries(graphConfig.priceTypes).forEach(([category, priceTypes]) => {
-            if (Array.isArray(priceTypes)) {
-                const hasAnyPrice = priceTypes.some(price => 
-                    plantData.price['2023'][price] > 0
-                );
-                if (hasAnyPrice) {
-                    priceCounts[category] = (priceCounts[category] || 0) + 1;
-                }
-            } else {
-                if (plantData.price['2023'][priceTypes] > 0) {
-                    priceCounts[category] = (priceCounts[category] || 0) + 1;
-                }
+        years.forEach((year, index) => {
+            if (plantData.prices[year]) {
+                ['mwh_price', 'apartment_price', 'house_price'].forEach(priceType => {
+                    const price = plantData.prices[year][priceType];
+                    if (price && price > 0) {
+                        aggregatedPrices[priceType][index] += price;
+                        plantCounts[priceType][index]++;
+                    }
+                });
             }
         });
-        totalPlants++;
     });
 
-    // Convert to percentages
-    const datasets = [{
-        data: Object.values(priceCounts).map(count => (count / totalPlants) * 100),
-        backgroundColor: Object.keys(priceCounts).map(category => graphConfig.colors[category]),
-        borderWidth: 1
-    }];
+    // Calculate averages
+    Object.keys(aggregatedPrices).forEach(priceType => {
+        aggregatedPrices[priceType] = aggregatedPrices[priceType].map((sum, index) => 
+            plantCounts[priceType][index] > 0 ? sum / plantCounts[priceType][index] : 0
+        );
+    });
+
+    // Create datasets
+    const datasets = [
+        {
+            label: 'Average MWh Price',
+            data: aggregatedPrices.mwh_price,
+            borderColor: '#FF6384',
+            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+            tension: 0.1,
+            fill: true
+        },
+        {
+            label: 'Average Apartment Price (Yearly)',
+            data: aggregatedPrices.apartment_price,
+            borderColor: '#36A2EB',
+            backgroundColor: 'rgba(54, 162, 235, 0.1)',
+            tension: 0.1,
+            fill: true
+        },
+        {
+            label: 'Average House Price (Yearly)',
+            data: aggregatedPrices.house_price,
+            borderColor: '#4BC0C0',
+            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+            tension: 0.1,
+            fill: true
+        }
+    ];
 
     new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
-            labels: Object.keys(priceCounts),
+            labels: years,
             datasets: datasets
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
             plugins: {
+                legend: {
+                    position: 'left',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                datalabels: {
+                    display: false
+                },
                 title: {
                     display: true,
-                    text: 'Price Distribution'
-                },
-                legend: {
-                    display: false
+                    text: 'Average Price Development'
                 },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            const value = context.raw;
-                            const count = priceCounts[context.label];
-                            return `${count} plants (${value.toFixed(1)}%)`;
+                            const price = context.raw;
+                            const label = context.dataset.label;
+                            return price === 0 ? 
+                                'No price data available' : 
+                                label.includes('Price') ? 
+                                    `${label}: ${price.toFixed(0)} DKK` : 
+                                    `Price: ${price.toFixed(0)} DKK`;
                         }
                     }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Percentage of Plants'
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year'
+                        },
+                        grid: {
+                            color: '#E4E4E4'
+                        }
                     },
-                    ticks: {
-                        callback: value => value + '%'
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Price (DKK)'
+                        },
+                        grid: {
+                            color: '#E4E4E4'
+                        },
+                        beginAtZero: true
                     }
                 }
             }

@@ -1,6 +1,7 @@
 import { graphConfig } from '../../../graphs/config/graphConfig.js';
 import { tooltipStyle, legendTooltips } from '../../../graphs/config/tooltipConfig.js';
 
+
 export class ProductionLegend {
     constructor(map) {
         this.map = map;
@@ -83,6 +84,18 @@ export class ProductionLegend {
                     this.showOnlyCategory(category);
                     clickCount = 0;
                 }
+            });
+
+            item.addEventListener('mouseover', () => {
+                const tooltipText = item.dataset.tooltip;
+                this.tooltip.innerHTML = tooltipText;
+                this.tooltip.style.display = 'block';
+                this.tooltip.style.left = `${event.pageX + 5}px`;
+                this.tooltip.style.top = `${event.pageY + 5}px`;
+            });
+
+            item.addEventListener('mouseout', () => {
+                this.tooltip.style.display = 'none';
             });
         });
     }

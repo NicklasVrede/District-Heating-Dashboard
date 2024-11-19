@@ -389,6 +389,9 @@ function createPieChart(originalChart, yearData, year, initialData) {
                         }
                     }
                 },
+                datalabels: {
+                    display: false
+                },
                 legend: {
                     position: 'left',
                     labels: {
@@ -454,7 +457,7 @@ function createPriceChart(plantData, container) {
             fill: true
         },
         {
-            label: 'Apartment Price',
+            label: 'Apartment Price (per year)',
             data: years.map(year => plantData.prices?.[year]?.apartment_price || 0),
             borderColor: '#36A2EB',
             backgroundColor: 'rgba(54, 162, 235, 0.1)',
@@ -462,7 +465,7 @@ function createPriceChart(plantData, container) {
             fill: true
         },
         {
-            label: 'House Price',
+            label: 'House Price (per year)',
             data: years.map(year => plantData.prices?.[year]?.house_price || 0),
             borderColor: '#4BC0C0',
             backgroundColor: 'rgba(75, 192, 192, 0.1)',
@@ -499,9 +502,10 @@ function createPriceChart(plantData, container) {
                     callbacks: {
                         label: function(context) {
                             const price = context.raw;
+                            const label = context.dataset.label;
                             return price === 0 ? 
                                 'No price data available' : 
-                                `Price: ${price.toFixed(0)} DKK`;
+                                `${label}: ${price.toFixed(0)} DKK`;
                         }
                     }
                 },

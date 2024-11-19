@@ -92,7 +92,7 @@ class FocusManager {
                 selectedIds = this.currentFocus.getBottomNByPrice(10);
                 break;
             case 'all':
-            // Trigger overview when its implemented.
+                selectAll(this.mapboxMap);
                 break;
             case 'none':
                 selectionSet.clear();

@@ -126,7 +126,6 @@ function handleKeyDown(e) {
 
 // Ensure the toast container exists
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Adding toast container'); // Debugging statement
     const toastContainer = document.createElement('div');
     toastContainer.id = 'toast-container';
     toastContainer.className = 'toast-container';

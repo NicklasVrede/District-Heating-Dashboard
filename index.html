@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="./styles/selectedPlantsWindow.css">
     <link rel="stylesheet" href="./styles/focusLegends.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.0/mapbox-gl-draw.css" type="text/css">
 
 </head>
 <body>
@@ -90,14 +91,16 @@
         <div id="map">
             <div class="map-controls">
                 <label class="map-toggle-frame" onclick="toggleGasAreas(map)">
-                    <span id="toggle-gas-areas-label">Gas Areas</span>
+                    <span id="toggle-gas-areas-label">Gas Supply</span>
                     <input type="checkbox" id="toggle-gas-areas">
                 </label>
                 <button class="reset-camera-button" onclick="resetCamera()">
                     <span>Reset View</span>
-                    <svg viewBox="0 0 24 24" width="16" height="16">
-                        <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
-                    </svg>
+                    <img src="assets/icons/resetcamera.png" alt="Reset Camera Icon" width="16" height="16">
+                </button>
+                <button class="lasso-select-button" onclick="toggleLassoSelect()">
+                    <span>Lasso Select</span>
+                    <img src="assets/icons/lasso.png" alt="Lasso Icon" width="16" height="16">
                 </button>
             </div>
             <div id="selected-plants-window" class="selected-plants-window" style="display: none;">
@@ -121,6 +124,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.0/mapbox-gl-draw.js"></script>
 
     <!-- Application Scripts -->
     <script src="./utils/javascript/autocomplete.js" defer></script>

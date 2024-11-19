@@ -392,7 +392,7 @@ function createPriceChart(plantData, index, maxValues) {
             fill: true
         },
         {
-            label: 'Apartment Price',
+            label: 'Apartment Price (Yearly)',
             data: years.map(year => plantData.prices?.[year]?.apartment_price || 0),
             borderColor: '#36A2EB',
             backgroundColor: 'rgba(54, 162, 235, 0.1)',
@@ -400,7 +400,7 @@ function createPriceChart(plantData, index, maxValues) {
             fill: true
         },
         {
-            label: 'House Price',
+            label: 'House Price (Yearly)',
             data: years.map(year => plantData.prices?.[year]?.house_price || 0),
             borderColor: '#4BC0C0',
             backgroundColor: 'rgba(75, 192, 192, 0.1)',
@@ -483,9 +483,12 @@ function createPriceChart(plantData, index, maxValues) {
                     callbacks: {
                         label: function(context) {
                             const price = context.raw;
+                            const label = context.dataset.label;
                             return price === 0 ? 
                                 'No price data available' : 
-                                `Price: ${price.toFixed(0)} DKK`;
+                                label.includes('Price') ? 
+                                    `${label}: ${price.toFixed(0)} DKK` : 
+                                    `Price: ${price.toFixed(0)} DKK`;
                         }
                     }
                 },

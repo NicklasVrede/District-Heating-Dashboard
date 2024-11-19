@@ -119,20 +119,15 @@ export function loadAreas(map) {
             return response.json();
         })
         .then(geojson => {
-            console.log('Area data:', geojson); // Debugging: Log the area data
-
             // Add the GeoJSON source to the map
             map.addSource('areas', {
                 type: 'geojson',
                 data: geojson
             });
-
             // Add a layer to visualize the areas with custom styles
             map.addLayer(areaStyles.fill);
-
             // Add a border to the areas with custom styles
             map.addLayer(areaStyles.line);
-
             // Add a layer for selected areas with a different style
             map.addLayer({
                 id: 'selected-areas',
@@ -144,7 +139,6 @@ export function loadAreas(map) {
                 },
                 filter: ['in', 'forsyid', '']
             });
-
             // Add event listeners for areas
             addAreaEventListeners(map);
         })

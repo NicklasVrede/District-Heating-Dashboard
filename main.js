@@ -13,6 +13,7 @@ import { initDivider } from './utils/javascript/divider.js';
 import { FocusManager } from './utils/javascript/focusLayers/FocusManager.js';
 import { updateGraph } from './graphs/graphManager.js';
 import { focusState } from './utils/javascript/focusLayers/FocusState.js';
+import { initializeLasso, toggleLassoSelect } from './utils/javascript/lassoSelect.js';
 
 // Initialize Mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0MnFzYWFyZ3pveWJ1In0.V9qwBfsH4plxE_fz89kuYg';
@@ -78,6 +79,7 @@ map.on('load', () => {
     loadPlants(map);
     loadAreas(map);
     loadGasAreas(map);
+    initializeLasso(map);
 });
 
 // Configure map settings
@@ -108,4 +110,4 @@ function resetCamera() {
 
 // Add to your window exports
 window.resetCamera = resetCamera;
-
+window.toggleLassoSelect = toggleLassoSelect;

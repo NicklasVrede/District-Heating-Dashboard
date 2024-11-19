@@ -2,16 +2,16 @@ export const graphConfig = {
     // Colors for each attribute
     colors: {
         'Kul': '#000000',
-        'Olie': '#8B4513',
-        'Gas': '#808080',
-        'Affald': '#90EE90',
+        'Olie': '#A349A4',
+        'Gas': '#ED1C24',
+        'Affald': '#7F7F7F',
         'Bioaffald': '#228B22',
-        'Biogas & Bioolie': '#32CD32',
-        'Træ-biomasse': '#8B4513',
-        'Halm': '#FFD700',
-        'Brændselsfrit': '#9370DB',
-        'Solvarme': '#FFA500',
-        'El': '#0000FF'
+        'Biogas & Bioolie': '#B5E61D',
+        'Træ-biomasse': '#904414',
+        'Halm': '#ff7c24',
+        'Brændselsfrit': '#0ca8ec',
+        'Solvarme': '#fff404',
+        'El': '#0804fc'
     },
 
     // List of attributes for the graphs

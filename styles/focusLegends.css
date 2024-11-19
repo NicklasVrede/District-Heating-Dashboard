@@ -68,10 +68,10 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    cursor: help;
+    cursor: pointer;
     padding: 2px 4px;
     border-radius: 3px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
     min-height: 20px;
 }
 
@@ -95,7 +95,8 @@
 }
 
 .production-legend .legend-item:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
 }
 
 .production-legend .legend-item[data-short="true"] {

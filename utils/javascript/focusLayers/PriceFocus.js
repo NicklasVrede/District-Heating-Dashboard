@@ -197,9 +197,9 @@ export class PriceFocus {
                 const price = window.dataDict?.[forsyid]?.prices?.[year]?.mwh_price || 0;
                 return { forsyid, price };
             })
-            .filter(item => item.price > 0) // Only rank plants with prices
-            .sort((a, b) => b.price - a.price); // Sort by price descending
-
+            .filter(item => item.price > 0)
+            .sort((a, b) => b.price - a.price);
+            
         // Create rankings object
         this.priceRankings = {};
         priceData.forEach((item, index) => {

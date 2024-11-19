@@ -159,16 +159,15 @@ body, html {
 
 /* Add new styles for the map toggle */
 .map-toggle-frame {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
     display: flex;
     align-items: center;
-    padding: 6px 10px;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    gap: 6px;
     cursor: pointer;
     font-size: 12px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
 }
 
 .map-toggle-frame:hover {
@@ -183,10 +182,10 @@ body, html {
 }
 
 #toggle-gas-areas {
-    width: 14px;
-    height: 14px;
-    cursor: pointer;
-    accent-color: #666;
+    display: flex;
+    align-items: right;
+    margin-left: 10px;
+    padding: 0;
 }
 
 .map-controls {
@@ -201,17 +200,13 @@ body, html {
 
 .reset-camera-button {
     display: flex;
-    align-items: center;
-    padding: 6px 10px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: white;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    padding: 6px 12px;
+    align-items: center;
     cursor: pointer;
     font-size: 12px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-    width: 100px;
-    justify-content: space-between;
 }
 
 .reset-camera-button:hover {
@@ -225,8 +220,38 @@ body, html {
     font-size: 12px;
 }
 
-.reset-camera-button svg {
-    fill: #666;
+.reset-camera-button img {
     margin-left: auto;
+}
+
+.lasso-select-button {
+    display: flex;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    color: #666;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.lasso-select-button img {
+    margin-left: auto;
+}
+
+.lasso-select-button.active {
+    background: #e0e0e0;
+    border-color: #999;
+}
+
+.lasso-select-button:hover {
+    background: #f0f0f0;
+}
+
+.toggle-active {
+    background-color: #faec579f;
 }
 
