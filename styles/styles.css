@@ -255,3 +255,28 @@ body, html {
     background-color: #faec579f;
 }
 
+.toggle-municipalities-button {
+    width: 100%;
+    display: flex;
+    gap: 6px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    color: #666;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.toggle-municipalities-button:hover {
+    background: #f0f0f0;
+}
+
+.municipalities-active {
+    background-color: #007bff; /* Change background color when active */
+    color: white; /* Change text color when active */
+    border-color: #0056b3; /* Darker border color when active */
+}

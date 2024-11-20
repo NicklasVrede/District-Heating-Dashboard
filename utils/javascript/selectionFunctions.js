@@ -6,7 +6,7 @@ import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 export function clearSelection(map) {
     selectionSet.clear();
     updateSelectedPlants(map);
-    updateSelectedPlantsWindow(selectionSet);
+    updateSelectedPlantsWindow();
 
     const graphContainer = document.getElementById('graph-container');
     if (graphContainer) {
@@ -53,7 +53,7 @@ function toggleSelection(map, forsyid, isCtrlPressed) {
         }
     }
     updateSelectedPlants(map);
-    updateSelectedPlantsWindow(selectionSet);
+    updateSelectedPlantsWindow();
 
     if (selectionSet.size === 0) {
         const graphContainer = document.getElementById('graph-container');

@@ -19,8 +19,38 @@ export const areaStyles = {
         layout: {},
         paint: {
             'line-color': '#0000ff',
-            'line-width': 1,
+            'line-width': 0.6,
             'line-opacity': 0.1
+        }
+    },
+    municipalitiesFill: {
+        id: 'municipalities-fill',
+        type: 'fill',
+        source: 'municipalities',
+        layout: {},
+        paint: {
+            'fill-color': '#ADD8E6',
+            'fill-opacity': 0.5
+        }
+    },
+    municipalitiesLine: {
+        id: 'municipalities-line',
+        type: 'line',
+        source: 'municipalities',
+        layout: {},
+        paint: {
+            'line-color': '#FFFFFF',
+            'line-width': 1
+        }
+    },
+    highlightedMunicipalitiesFill: {
+        id: 'highlighted-municipalities-fill',
+        type: 'fill',
+        source: 'municipalities',
+        layout: {},
+        paint: {
+            'fill-color': '#FF0000',
+            'fill-opacity': 0.7
         }
     }
 };

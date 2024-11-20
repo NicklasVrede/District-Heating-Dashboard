@@ -1,8 +1,9 @@
 import { plantStyles } from '../../styles/plantStyles.js';
 import { areaStyles, gasAreaStyles } from '../../styles/areaStyles.js'; // Import gas area styles
-import { addPlantEventListeners, addAreaEventListeners } from './eventListeners.js';
+import { addPlantEventListeners, addAreaEventListeners, addMunicipalityEventListeners } from './eventListeners.js';
 import { highlightStyles } from '../../styles/highlightStyles.js';
 import { graphConfig } from '../../graphs/config/graphConfig.js';
+import { createMunicipalityTooltip } from './municipalityTooltip.js'; // Update import
 
 
 export function loadPlants(map) {
@@ -124,21 +125,25 @@ export function loadAreas(map) {
                 type: 'geojson',
                 data: geojson
             });
+
             // Add a layer to visualize the areas with custom styles
             map.addLayer(areaStyles.fill);
+
             // Add a border to the areas with custom styles
             map.addLayer(areaStyles.line);
+
             // Add a layer for selected areas with a different style
             map.addLayer({
                 id: 'selected-areas',
                 type: 'fill',
                 source: 'areas',
                 paint: {
-                    'fill-color': highlightStyles.selectedAreaFillColor,    // Use style from highlightStyles
-                    'fill-opacity': highlightStyles.selectedAreaOpacity     // Use style from highlightStyles
+                    'fill-color': highlightStyles.selectedAreaFillColor,
+                    'fill-opacity': highlightStyles.selectedAreaOpacity
                 },
                 filter: ['in', 'forsyid', '']
             });
+
             // Add event listeners for areas
             addAreaEventListeners(map);
         })
@@ -162,23 +167,100 @@ export function loadGasAreas(map) {
                 data: geojson
             });
 
-            // hidden by default
+            // Add the fill layer for gas areas
             map.addLayer({
-                ...gasAreaStyles.fill,
+                id: 'gas-areas-fill',
+                type: 'fill', // Ensure type is defined
+                source: 'gas-areas',
                 layout: {
                     'visibility': 'none' // Hide the fill layer by default
+                },
+                paint: {
+                    'fill-color': gasAreaStyles.fill.paint['fill-color'],
+                    'fill-opacity': gasAreaStyles.fill.paint['fill-opacity']
                 }
             });
 
             // Add a border to the gas areas with custom styles, hidden by default
             map.addLayer({
-                ...gasAreaStyles.line,
+                id: 'gas-areas-line',
+                type: 'line', // Ensure type is defined
+                source: 'gas-areas',
                 layout: {
                     'visibility': 'none' // Hide the line layer by default
+                },
+                paint: {
+                    'line-color': gasAreaStyles.line.paint['line-color'],
+                    'line-width': gasAreaStyles.line.paint['line-width']
                 }
             });
         })
         .catch(error => {
             console.error('Error fetching gas area data:', error);
+        });
+}
+
+export function loadMunicipalities(map) {
+    fetch('maps/municipalities_with_forsyid.geojson')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(geojson => {
+            // Add the GeoJSON source to the map
+            map.addSource('municipalities', {
+                type: 'geojson',
+                data: geojson
+            });
+
+            // Add a fill layer for the municipalities
+            map.addLayer({
+                id: 'municipalities-fill',
+                type: 'fill',
+                source: 'municipalities',
+                layout: {
+                    visibility: 'none' // Ensure visibility is set to visible
+                },
+                paint: {
+                    'fill-color': areaStyles.municipalitiesFill.paint['fill-color'],
+                    'fill-opacity': areaStyles.municipalitiesFill.paint['fill-opacity']
+                }
+            });
+
+            // Add a line layer for the municipalities
+            map.addLayer({
+                id: 'municipalities-line',
+                type: 'line',
+                source: 'municipalities',
+                layout: {
+                    visibility: 'none' // Ensure visibility is set to visible
+                },
+                paint: {
+                    'line-color': areaStyles.municipalitiesLine.paint['line-color'],
+                    'line-width': areaStyles.municipalitiesLine.paint['line-width']
+                }
+            });
+
+            // Add a highlighted layer for municipalities using highlightStyles
+            map.addLayer({
+                id: 'selected-municipalities-fill',
+                type: 'fill',
+                source: 'municipalities',
+                layout: {
+                    visibility: 'none' // Initially hidden
+                },
+                paint: {
+                    'fill-color': highlightStyles.selectedMunicipalitiesFill.paint['fill-color'], // Use highlightStyles
+                    'fill-opacity': highlightStyles.selectedMunicipalitiesFill.paint['fill-opacity'] // Use highlightStyles
+                }
+            });
+
+            // Add event listeners for municipalities
+            addMunicipalityEventListeners(map);
+        })
+        .catch(error => {
+            console.error('Error fetching municipality data:', error);
         });
 }

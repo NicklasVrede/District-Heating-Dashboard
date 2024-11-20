@@ -9,6 +9,7 @@ import { updateSelectedPlants } from '../eventListeners.js';
 import { updateSelectedPlantsWindow } from '../selectedPlantsWindow.js';
 import { updateGraph } from '../plotlyGraphs.js';
 import { yearState } from './YearState.js';
+import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 
 class FocusManager {
     constructor() {
@@ -176,6 +177,12 @@ class FocusManager {
         if (!this.initialized) {
             console.warn('FocusManager not yet initialized');
             return;
+        }
+
+        // Check if municipalities are visible
+        if (municipalitiesVisible) {
+            console.log('Municipalities are visible, no action taken.');
+            return; // Do nothing if municipalities are visible
         }
 
         console.log('FocusManager changing focus from', this.currentFocus?.constructor.name, 'to:', value);

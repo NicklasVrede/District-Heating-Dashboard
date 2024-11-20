@@ -21,5 +21,15 @@ export const highlightStyles = {
         strokeOpacity: 1
     },
     selectedAreaFillColor: '#FF0000',
-    selectedAreaOpacity: 0.2
+    selectedAreaOpacity: 0.2,
+    selectedMunicipalitiesFill: {
+        id: 'highlighted-municipalities-fill',
+        type: 'fill',
+        source: 'municipalities',
+        layout: {},
+        paint: {
+            'fill-color': '#0000cc',
+            'fill-opacity': 0.7
+        }
+    }
 };

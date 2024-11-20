@@ -4,7 +4,7 @@ import { plantStyles } from './styles/plantStyles.js';
 import { setMapInstance } from './utils/javascript/mapInstance.js';
 
 // Import utility functions
-import { loadPlants, loadAreas, loadGasAreas } from './utils/javascript/loadData.js';
+import { loadPlants, loadAreas, loadGasAreas, loadMunicipalities } from './utils/javascript/loadData.js';
 import { searchAddress } from './utils/javascript/addressLookup.js';
 import { updateSelectedPlants } from './utils/javascript/eventListeners.js';
 import { clearSelection, selectAll } from './utils/javascript/selectionFunctions.js';
@@ -14,6 +14,7 @@ import { FocusManager } from './utils/javascript/focusLayers/FocusManager.js';
 import { updateGraph } from './graphs/graphManager.js';
 import { focusState } from './utils/javascript/focusLayers/FocusState.js';
 import { initializeLasso, toggleLassoSelect } from './utils/javascript/lassoSelect.js';
+import { toggleMunicipalities } from './utils/javascript/municipalitiesFunctions.js';
 
 // Initialize Mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0MnFzYWFyZ3pveWJ1In0.V9qwBfsH4plxE_fz89kuYg';
@@ -71,6 +72,7 @@ window.toggleGasAreas = () => toggleGasAreas(map);
 window.clearSelection = () => clearSelection(map);
 window.selectAll = () => selectAll(map);
 window.changeFocus = changeFocus;
+
 // Wait for map to load before making it globally available
 map.on('load', () => {
     window.map = map;
@@ -79,6 +81,7 @@ map.on('load', () => {
     loadPlants(map);
     loadAreas(map);
     loadGasAreas(map);
+    loadMunicipalities(map);
     initializeLasso(map);
 });
 
@@ -111,3 +114,6 @@ function resetCamera() {
 // Add to your window exports
 window.resetCamera = resetCamera;
 window.toggleLassoSelect = toggleLassoSelect;
+
+// Expose the toggleMunicipalities function to the global scope
+window.toggleMunicipalities = (button) => toggleMunicipalities(map, button);

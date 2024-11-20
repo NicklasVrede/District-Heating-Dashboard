@@ -1,25 +1,27 @@
 import { focusState } from './focusLayers/FocusState.js';
 import { yearState } from './focusLayers/YearState.js';
 import { selectionSet } from '../../main.js';
-import { updateSelectedPlants } from './eventListeners.js';
+import { updateSelectedMunicipalities, updateSelectedPlants } from './eventListeners.js';
 import { updateGraph } from './plotlyGraphs.js';
 import { highlightArea, resetAreaHighlight, highlightPlant, removePlantHighlight } from './eventListeners.js';
+
+
 
 // Initialize focus and year listeners
 focusState.addListener(() => {
     if (selectionSet.size > 0) {
-        updateSelectedPlantsWindow(selectionSet);
+        updateSelectedPlantsWindow();
     }
 });
 
 // Add year state listener
 yearState.addListener(() => {
     if (selectionSet.size > 0 && focusState.focus === 'price') {
-        updateSelectedPlantsWindow(selectionSet);
+        updateSelectedPlantsWindow();
     }
 });
 
-export function updateSelectedPlantsWindow(selectedForsyids) {
+export function updateSelectedPlantsWindow() {
     const windowEl = document.getElementById('selected-plants-window');
     const list = document.getElementById('selected-plants-list');
     const map = window.map;
@@ -27,9 +29,9 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
     if (!windowEl || !list || !map) return;
 
     // Show/hide window based on selection
-    windowEl.style.display = selectedForsyids.size > 0 ? 'block' : 'none';
+    windowEl.style.display = selectionSet.size > 0 ? 'block' : 'none';
     
-    if (selectedForsyids.size === 0) return;
+    if (selectionSet.size === 0) return;
 
     // Clear current list
     list.innerHTML = '';
@@ -38,7 +40,7 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
     windowEl.querySelector('.selected-plants-header').innerHTML = `
         <div class="header-content">
             <span>Selected Plants</span>
-            <span class="plant-count">(${selectedForsyids.size})</span>
+            <span class="plant-count">(${selectionSet.size})</span>
         </div>
         <button id="window-clear-button" title="Clear Selection">×</button>
     `;
@@ -51,22 +53,48 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
     }
 
     // Get plants data from map source
-    const plants = Array.from(selectedForsyids)
+    const plants = Array.from(selectionSet)
         .map(forsyid => {
-            const feature = source._data.features.find(f => 
+            // First, check in the plants layer
+            const plantFeature = source._data.features.find(f => 
                 f.properties.forsyid === forsyid
             );
 
-            if (!feature) {
-                console.warn(`No feature found for forsyid: ${forsyid}`);
-                return null;
+            // Debugging log for plant features
+            console.log('Searching for plant feature with forsyid:', forsyid);
+            console.log('Available plant features:', source._data.features.map(f => f.properties.forsyid));
+
+            if (!plantFeature) {
+                // If not found in plants, check in municipalities
+                const municipalityFeature = map.queryRenderedFeatures({ layers: ['municipalities-fill'] }).find(f => 
+                    f.properties.lau_1 === forsyid // Assuming lau_1 is the property to match
+                );
+
+                // Debugging log for municipality features
+                console.log('Searching for municipality feature with forsyid:', forsyid);
+                console.log('Available municipalities:', map.queryRenderedFeatures({ layers: ['municipalities-fill'] }).map(f => f.properties.lau_1));
+
+                if (!municipalityFeature) {
+                    console.warn(`No feature found for forsyid: ${forsyid} in both plants and municipalities.`);
+                    return null;
+                }
+
+                // If found in municipalities, use its properties
+                const currentPrice = window.dataDict?.[forsyid]?.prices?.[yearState.year]?.mwh_price || 0;
+
+                return {
+                    forsyid,
+                    name: municipalityFeature.properties.name || 'Unknown Municipality', // Adjusted for municipality
+                    price: currentPrice
+                };
             }
 
+            // If found in plants, use its properties
             const currentPrice = window.dataDict?.[forsyid]?.prices?.[yearState.year]?.mwh_price || 0;
 
             return {
                 forsyid,
-                name: feature.properties.name || 'Unknown Plant',
+                name: plantFeature.properties.name || 'Unknown Plant',
                 price: currentPrice
             };
         })
@@ -117,6 +145,7 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
                 const forsyid = e.target.dataset.forsyid;
                 selectionSet.delete(forsyid);
                 updateSelectedPlants(map);
+                updateSelectedMunicipalities(map);
                 updateSelectedPlantsWindow(selectionSet);
                 updateGraph();
             });
@@ -128,6 +157,7 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
                 const forsyid = plant.forsyid;
                 selectionSet.delete(forsyid);
                 updateSelectedPlants(map);
+                updateSelectedMunicipalities(map);
                 updateSelectedPlantsWindow(selectionSet);
                 updateGraph();
             }
@@ -142,7 +172,8 @@ export function updateSelectedPlantsWindow(selectedForsyids) {
         clearButton.addEventListener('click', () => {
             selectionSet.clear();
             updateSelectedPlants(map);
-            updateSelectedPlantsWindow(selectionSet);
+            updateSelectedMunicipalities(map);
+            updateSelectedPlantsWindow();
             const graphContainer = document.getElementById('graph-container');
             if (graphContainer) {
                 graphContainer.innerHTML = '';

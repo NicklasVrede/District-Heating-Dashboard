@@ -85,7 +85,7 @@ for filename, year in price_files:
 data_dict = {}
 for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid'):
     data_dict[forsyid] = {
-        'name': mappings['name'].get(forsyid, 'Unknown'),
+        'name': mappings['name'].get(forsyid, data_df.loc[data_df['forsyid'] == forsyid, 'fv_net_navn'].iloc[0] if not data_df.loc[data_df['forsyid'] == forsyid, 'fv_net_navn'].empty else 'Unknown'),
         'idrift': mappings['idrift'].get(forsyid),
         'elkapacitet_MW': mappings['elkapacitet'].get(forsyid, 0) or 0,
         'varmekapacitet_MW': mappings['varmekapacitet'].get(forsyid, 0) or 0,
