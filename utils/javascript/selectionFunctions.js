@@ -2,6 +2,7 @@ import { updateSelectedPlants, updateSelectedMunicipalities } from './eventListe
 import { selectionSet } from '../../main.js';
 import { updateGraph } from './plotlyGraphs.js';
 import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
+import { municipalitiesVisible } from './municipalitiesFunctions.js';
 
 export function clearSelection(map) {
     selectionSet.clear();
@@ -32,32 +33,33 @@ export function selectAll(map) {
 
         if (municipalitiesVisible) {
             // Select all municipalities
-            const municipalitySource = map.getSource('municipalities');
-            if (municipalitySource && municipalitySource._data) {
-                municipalitySource._data.features.forEach(feature => {
-                    if (feature.properties.lau_1) {
-                        selectionSet.add(feature.properties.lau_1);
-                    }
-                });
-            }
+            const features = map.queryRenderedFeatures({
+                layers: ['municipalities-fill']
+            });
+            
+            features.forEach(feature => {
+                if (feature.properties.lau_1) {
+                    selectionSet.add(feature.properties.lau_1);
+                }
+            });
             updateSelectedMunicipalities(map);
         } else {
-            // Select all plants and areas
-            const plantFeatures = map.querySourceFeatures('plants');
-            plantFeatures.forEach(feature => {
-                selectionSet.add(feature.properties.forsyid);
+            // Select all plants
+            const features = map.queryRenderedFeatures({
+                layers: ['plants']
             });
-
-            const areaFeatures = map.querySourceFeatures('areas');
-            areaFeatures.forEach(feature => {
-                selectionSet.add(feature.properties.forsyid);
+            
+            features.forEach(feature => {
+                if (feature.properties.forsyid) {
+                    selectionSet.add(feature.properties.forsyid);
+                }
             });
             updateSelectedPlants(map);
         }
 
         // Update the selection window and graph
         updateSelectedPlantsWindow();
-        updateGraph(selectionSet);  
+        updateGraph(selectionSet);
     });
 }
 

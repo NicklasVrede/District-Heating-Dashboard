@@ -179,7 +179,11 @@ class FocusManager {
             return;
         }
 
-        
+        // Prevent production focus when municipalities are visible
+        if (value === 'production' && municipalitiesVisible) {
+            console.warn('Production focus is not available while municipalities are visible');
+            value = 'none';
+        }
 
         console.log('FocusManager changing focus from', this.currentFocus?.constructor.name, 'to:', value);
 
