@@ -353,12 +353,14 @@ export function updateSelectedMunicipalities(map) {
     selectionSet.forEach(forsyid => {
         filters.push(forsyid);
     });
-    map.setFilter('selected-municipalities-fill', filters);
+    //map.setFilter('selected-municipalities-fill', filters);
+    map.setFilter('municipalities-selected-line', filters);
 
     // Update visibility of selected municipalities
     const municipalitiesVisibility = selectionSet.size > 0 ? 'visible' : 'none';
-    map.setLayoutProperty('selected-municipalities-fill', 'visibility', municipalitiesVisibility);
-
+    //map.setLayoutProperty('selected-municipalities-fill', 'visibility', municipalitiesVisibility);
+    map.setLayoutProperty('municipalities-selected-line', 'visibility', municipalitiesVisibility);
+    
     // Update year slider visibility based on selection count
     const hasMoreThanTwoSelections = selectionSet.size > 2;
     yearState.visible = hasMoreThanTwoSelections || ['price', 'production'].includes(focusState.focus);

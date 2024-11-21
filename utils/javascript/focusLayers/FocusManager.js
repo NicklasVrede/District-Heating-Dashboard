@@ -179,11 +179,7 @@ class FocusManager {
             return;
         }
 
-        // Check if municipalities are visible
-        if (municipalitiesVisible) {
-            console.log('Municipalities are visible, no action taken.');
-            return; // Do nothing if municipalities are visible
-        }
+        
 
         console.log('FocusManager changing focus from', this.currentFocus?.constructor.name, 'to:', value);
 

@@ -255,6 +255,31 @@ export function loadMunicipalities(map) {
                     'fill-color': highlightStyles.selectedMunicipalitiesFill.paint['fill-color'], // Use highlightStyles
                     'fill-opacity': highlightStyles.selectedMunicipalitiesFill.paint['fill-opacity'] // Use highlightStyles
                 }
+
+            });
+            map.addLayer({
+                id: 'municipalities-selected-line',
+                type: 'line',
+                source: 'municipalities',
+                layout: {
+                    visibility: 'none' // Ensure visibility is set to visible
+                },
+                paint: {
+                    'line-color': highlightStyles.selectedMunicipalitiesLine.paint['line-color'],
+                    'line-width': highlightStyles.selectedMunicipalitiesLine.paint['line-width']
+                }
+            });
+            map.addLayer({
+                id: 'municipalities-price',
+                type: 'fill',
+                source: 'municipalities',
+                layout: {
+                    visibility: 'none' // Ensure visibility is set to visible
+                },
+                paint: {
+                    'fill-color': '#00ff00',
+                    'fill-opacity': 0.5
+                }
             });
 
             // Add event listeners for municipalities

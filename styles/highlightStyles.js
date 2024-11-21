@@ -31,5 +31,13 @@ export const highlightStyles = {
             'fill-color': '#0000cc',
             'fill-opacity': 0.7
         }
+    },
+    selectedMunicipalitiesLine: {
+        id: 'highlighted-municipalities-line',
+        type: 'line',
+        paint: {
+            'line-color': '#0000cc',
+            'line-width': 2
+        }
     }
 };

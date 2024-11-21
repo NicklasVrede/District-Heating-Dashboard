@@ -1,5 +1,7 @@
 import { yearState } from './YearState.js';
 import { priceColors } from './colors.js';
+import { municipalitiesVisible } from '../municipalitiesFunctions.js';
+
 
 export class PriceFocus {
     constructor(map, measureContainer) {
@@ -76,7 +78,7 @@ export class PriceFocus {
         let maxPrice = -Infinity;
 
         features.forEach(feature => {
-            const forsyid = feature.properties.forsyid;
+            const forsyid = feature.properties.forsyid || 'lau_!';
             const price = window.dataDict?.[forsyid]?.prices?.[year]?.mwh_price;
             
             if (price && price > 0) { // Ignore zero or null prices
@@ -97,10 +99,10 @@ export class PriceFocus {
     updatePriceData() {
         try {
             const currentYear = yearState.year;
-            const source = this.map.getSource('plants');
+            const source = municipalitiesVisible ? this.map.getSource('municipalities') : this.map.getSource('plants');
             
             if (!source) {
-                console.error('Plants source not found');
+                console.error(`${municipalitiesVisible ? 'Municipalities' : 'Plants'} source not found`);
                 return;
             }
 
@@ -122,7 +124,7 @@ export class PriceFocus {
             
             // Map features with prices
             data.features = data.features.map(feature => {
-                const forsyid = feature.properties.forsyid;
+                const forsyid = feature.properties.forsyid || 'lau_!';
                 feature.properties.current_price = window.dataDict?.[forsyid]?.prices?.[currentYear]?.mwh_price ?? null;
                 feature.properties.price_rank = this.priceRankings?.[forsyid]?.rank || 0;
                 return feature;
@@ -175,17 +177,29 @@ export class PriceFocus {
         this.measureContainer.classList.add('hidden');
         this.legend.style.display = 'none';
         
+        if (!municipalitiesVisible) {
         if (this.map.getLayer('plants-price')) {
             this.map.setLayoutProperty('plants-price', 'visibility', 'none');
+        }
+        }
+        else {
+            this.map.setLayoutProperty('municipalities-price', 'visibility', 'none');
         }
     }
 
     apply() {
-        console.log('Applying price focus');
         this.measureContainer.classList.remove('hidden');
         this.legend.style.display = 'block';
-        
-        this.map.setLayoutProperty('plants-price', 'visibility', 'visible');
+        if (!municipalitiesVisible) {
+            console.log('Applying price focus');
+            this.map.setLayoutProperty('plants-price', 'visibility', 'visible');
+            
+        }
+        else {
+            console.log('Price focus appling for municipalities');
+            this.map.setLayoutProperty('municipalities', 'visibility', 'none');
+            this.map.setLayoutProperty('municipalities-price', 'visibility', 'visible');
+        }
         this.updatePriceData();
     }
 
@@ -193,7 +207,7 @@ export class PriceFocus {
         // Create array of price data
         const priceData = features
             .map(feature => {
-                const forsyid = feature.properties.forsyid;
+                const forsyid = feature.properties.forsyid || 'lau_!';
                 const price = window.dataDict?.[forsyid]?.prices?.[year]?.mwh_price || 0;
                 return { forsyid, price };
             })

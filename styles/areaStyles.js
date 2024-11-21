@@ -29,8 +29,8 @@ export const areaStyles = {
         source: 'municipalities',
         layout: {},
         paint: {
-            'fill-color': '#ADD8E6',
-            'fill-opacity': 0.5
+            'fill-color': '#FFFFFF',
+            'fill-opacity': 0
         }
     },
     municipalitiesLine: {
@@ -39,8 +39,8 @@ export const areaStyles = {
         source: 'municipalities',
         layout: {},
         paint: {
-            'line-color': '#FFFFFF',
-            'line-width': 1
+            'line-color': '#0000ff',
+            'line-width': 0.2
         }
     },
     highlightedMunicipalitiesFill: {
