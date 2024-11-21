@@ -60,20 +60,14 @@ export function updateSelectedPlantsWindow() {
                 f.properties.forsyid === forsyid
             );
 
-            // Debugging log for plant features
-            console.log('Searching for plant feature with forsyid:', forsyid);
-            console.log('Available plant features:', source._data.features.map(f => f.properties.forsyid));
-
+            
             if (!plantFeature) {
                 // If not found in plants, check in municipalities
                 const municipalityFeature = map.queryRenderedFeatures({ layers: ['municipalities-fill'] }).find(f => 
                     f.properties.lau_1 === forsyid // Assuming lau_1 is the property to match
                 );
 
-                // Debugging log for municipality features
-                console.log('Searching for municipality feature with forsyid:', forsyid);
-                console.log('Available municipalities:', map.queryRenderedFeatures({ layers: ['municipalities-fill'] }).map(f => f.properties.lau_1));
-
+                
                 if (!municipalityFeature) {
                     console.warn(`No feature found for forsyid: ${forsyid} in both plants and municipalities.`);
                     return null;

@@ -21,15 +21,27 @@ export function toggleMunicipalities(map, button) {
     map.setLayoutProperty('areas', 'visibility', otherLayersVisibility);
 
     // Set plants visibility
-    map.setLayoutProperty('plants', 'visibility', otherLayersVisibility); // Assuming 'plants' is the ID for the plants layer
+    map.setLayoutProperty('plants', 'visibility', otherLayersVisibility);
+
+    // Explicitly hide price layers
+    if (map.getLayer('plants-price')) {
+        map.setLayoutProperty('plants-price', 'visibility', 'none');
+    }
+    if (map.getLayer('municipalities-price')) {
+        map.setLayoutProperty('municipalities-price', 'visibility', 'none');
+    }
 
     // Clear all selections when toggling municipalities
-    
-    clearSelection(map); 
+    selectionSet.clear();
     updateSelectedPlantsWindow();
-    updateSelectedPlants(map);
     updateSelectedMunicipalities(map);
-    
+    updateSelectedPlants(map);
+
+    // Clear the graph
+    const graphContainer = document.getElementById('graph-container');
+    if (graphContainer) {
+        graphContainer.innerHTML = '';
+    }
 
     // Update button style
     button.classList.toggle('municipalities-active', municipalitiesVisible);

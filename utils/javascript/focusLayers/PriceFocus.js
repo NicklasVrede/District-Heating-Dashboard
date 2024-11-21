@@ -10,6 +10,8 @@ export class PriceFocus {
         this.priceRankings = null;
         this.priceRanges = {}; // Cache for price ranges by year
         this.legend = null;
+        this.lastViewType = null;
+        this.lastYear = null;
         
         yearState.addListener((year) => {
             this.updatePriceData();
@@ -78,8 +80,12 @@ export class PriceFocus {
         let maxPrice = -Infinity;
 
         features.forEach(feature => {
-            const forsyid = feature.properties.forsyid || 'lau_!';
-            const price = window.dataDict?.[forsyid]?.prices?.[year]?.mwh_price;
+            // Use lau_1 for municipalities, forsyid for plants
+            const id = municipalitiesVisible ? 
+                feature.properties.lau_1 : 
+                feature.properties.forsyid || 'lau_!';
+            
+            const price = window.dataDict?.[id]?.prices?.[year]?.mwh_price;
             
             if (price && price > 0) { // Ignore zero or null prices
                 minPrice = Math.min(minPrice, price);
@@ -111,20 +117,24 @@ export class PriceFocus {
                 console.error('Invalid source data structure');
                 return;
             }
-            
-            // Calculate price range for current year if not cached
-            if (!this.priceRanges[currentYear]) {
+
+            // Force recalculation of price ranges for municipalities
+            if (municipalitiesVisible) {
+                this.priceRanges = {}; // Clear cache for municipalities view
+                this.calculatePriceRange(currentYear, data.features);
+            } else if (!this.priceRanges[currentYear] || this.lastViewType !== municipalitiesVisible) {
                 this.calculatePriceRange(currentYear, data.features);
             }
             
-            // Update rankings if needed
-            if (this.lastUpdateYear !== currentYear) {
-                this.updateRankings(currentYear, data.features);
-            }
+            // Track the view type
+            this.lastViewType = municipalitiesVisible;
             
             // Map features with prices
             data.features = data.features.map(feature => {
-                const forsyid = feature.properties.forsyid || 'lau_!';
+                const forsyid = municipalitiesVisible ? 
+                    feature.properties.lau_1 : // Use lau_1 for municipalities
+                    feature.properties.forsyid || 'lau_!';
+                
                 feature.properties.current_price = window.dataDict?.[forsyid]?.prices?.[currentYear]?.mwh_price ?? null;
                 feature.properties.price_rank = this.priceRankings?.[forsyid]?.rank || 0;
                 return feature;
@@ -140,35 +150,53 @@ export class PriceFocus {
     updateCircleStyle(year) {
         const priceRange = this.priceRanges[year];
         
-        // Update circle color with dynamic range
-        this.map.setPaintProperty('plants-price', 'circle-color', [
-            'case',
-            ['==', ['get', 'current_price'], null],
-            priceColors.null,
-            [
+        if (!municipalitiesVisible) {
+            // Update circle color with dynamic range
+            this.map.setPaintProperty('plants-price', 'circle-color', [
+                'case',
+                ['==', ['get', 'current_price'], null],
+                priceColors.null,
+                [
+                    'interpolate',
+                    ['linear'],
+                    ['get', 'current_price'],
+                    priceRange.min, priceColors.min,
+                    (priceRange.min + priceRange.max) / 2, priceColors.mid,
+                    priceRange.max, priceColors.max
+                ]
+            ]);
+
+            // Update circle size and stroke
+            this.map.setPaintProperty('plants-price', 'circle-radius', [
                 'interpolate',
                 ['linear'],
-                ['get', 'current_price'],
-                priceRange.min, priceColors.min,
-                (priceRange.min + priceRange.max) / 2, priceColors.mid,  // Add midpoint
-                priceRange.max, priceColors.max
-            ]
-        ]);
+                ['zoom'],
+                5, 4, 
+                10, 12,
+                15, 20   
+            ]);
 
-        // Update circle size and stroke
-        this.map.setPaintProperty('plants-price', 'circle-radius', [
-            'interpolate',
-            ['linear'],
-            ['zoom'],
-            5, 4, 
-            10, 12,
-            15, 20   
-        ]);
+            this.map.setPaintProperty('plants-price', 'circle-stroke-width', 2);
+            this.map.setPaintProperty('plants-price', 'circle-stroke-color', 'white');
+        }
+        else {
+            // Update fill color for municipalities with the same price logic
+            this.map.setPaintProperty('municipalities-price', 'fill-color', [
+                'case',
+                ['==', ['get', 'current_price'], null],
+                priceColors.null,
+                [
+                    'interpolate',
+                    ['linear'],
+                    ['get', 'current_price'],
+                    priceRange.min, priceColors.min,
+                    (priceRange.min + priceRange.max) / 2, priceColors.mid,
+                    priceRange.max, priceColors.max
+                ]
+            ]);
+        }
 
-        this.map.setPaintProperty('plants-price', 'circle-stroke-width', 2);
-        this.map.setPaintProperty('plants-price', 'circle-stroke-color', 'white');
-
-        // Update the legend
+        // Always update the legend, regardless of view type
         this.updateLegend(priceRange);
     }
 
@@ -178,12 +206,13 @@ export class PriceFocus {
         this.legend.style.display = 'none';
         
         if (!municipalitiesVisible) {
-        if (this.map.getLayer('plants-price')) {
-            this.map.setLayoutProperty('plants-price', 'visibility', 'none');
-        }
-        }
-        else {
-            this.map.setLayoutProperty('municipalities-price', 'visibility', 'none');
+            if (this.map.getLayer('plants-price')) {
+                this.map.setLayoutProperty('plants-price', 'visibility', 'none');
+            }
+        } else {
+            if (this.map.getLayer('municipalities-price')) {
+                this.map.setLayoutProperty('municipalities-price', 'visibility', 'none');
+            }
         }
     }
 
@@ -191,14 +220,15 @@ export class PriceFocus {
         this.measureContainer.classList.remove('hidden');
         this.legend.style.display = 'block';
         if (!municipalitiesVisible) {
-            console.log('Applying price focus');
-            this.map.setLayoutProperty('plants-price', 'visibility', 'visible');
-            
-        }
-        else {
-            console.log('Price focus appling for municipalities');
-            this.map.setLayoutProperty('municipalities', 'visibility', 'none');
-            this.map.setLayoutProperty('municipalities-price', 'visibility', 'visible');
+            if (this.map.getLayer('plants-price')) {
+                console.log('Applying price focus');
+                this.map.setLayoutProperty('plants-price', 'visibility', 'visible');
+            }
+        } else {
+            if (this.map.getLayer('municipalities-price')) {
+                console.log('Price focus applying for municipalities');
+                this.map.setLayoutProperty('municipalities-price', 'visibility', 'visible');
+            }
         }
         this.updatePriceData();
     }

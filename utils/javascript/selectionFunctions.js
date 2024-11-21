@@ -1,4 +1,4 @@
-import { updateSelectedPlants } from './eventListeners.js';
+import { updateSelectedPlants, updateSelectedMunicipalities } from './eventListeners.js';
 import { selectionSet } from '../../main.js';
 import { updateGraph } from './plotlyGraphs.js';
 import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
@@ -27,17 +27,36 @@ export function selectAll(map) {
     });
 
     map.once('moveend', () => {
-        const plantFeatures = map.querySourceFeatures('plants');
-        plantFeatures.forEach(feature => {
-            selectionSet.add(feature.properties.forsyid);
-        });
+        // Clear existing selection
+        selectionSet.clear();
 
-        const areaFeatures = map.querySourceFeatures('areas');
-        areaFeatures.forEach(feature => {
-            selectionSet.add(feature.properties.forsyid);
-        });
+        if (municipalitiesVisible) {
+            // Select all municipalities
+            const municipalitySource = map.getSource('municipalities');
+            if (municipalitySource && municipalitySource._data) {
+                municipalitySource._data.features.forEach(feature => {
+                    if (feature.properties.lau_1) {
+                        selectionSet.add(feature.properties.lau_1);
+                    }
+                });
+            }
+            updateSelectedMunicipalities(map);
+        } else {
+            // Select all plants and areas
+            const plantFeatures = map.querySourceFeatures('plants');
+            plantFeatures.forEach(feature => {
+                selectionSet.add(feature.properties.forsyid);
+            });
 
-        updateSelectedPlants(map);
+            const areaFeatures = map.querySourceFeatures('areas');
+            areaFeatures.forEach(feature => {
+                selectionSet.add(feature.properties.forsyid);
+            });
+            updateSelectedPlants(map);
+        }
+
+        // Update the selection window and graph
+        updateSelectedPlantsWindow();
         updateGraph(selectionSet);  
     });
 }

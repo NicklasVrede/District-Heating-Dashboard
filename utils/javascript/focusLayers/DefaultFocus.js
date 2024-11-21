@@ -1,6 +1,7 @@
 import { createOrUpdatePlotlyGraph } from '../../../graphs/components/multiPlant.js';
 import { selectionSet } from '../../../main.js';
 import { yearState } from './YearState.js';
+import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 
 export class DefaultFocus {
     constructor(map, measureContainer) {
@@ -13,7 +14,10 @@ export class DefaultFocus {
         
         // Reset to default visualization state
         if (this.map) {
-            this.map.setLayoutProperty('plants', 'visibility', 'visible');
+            // Only show plants layer if municipalities are not visible
+            if (!municipalitiesVisible) {
+                this.map.setLayoutProperty('plants', 'visibility', 'visible');
+            }
             this.map.setLayoutProperty('plants-price', 'visibility', 'none');
         }
         
