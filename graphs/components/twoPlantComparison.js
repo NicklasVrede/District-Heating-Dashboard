@@ -547,11 +547,9 @@ function createTotalProductionChart(plantData, index, maxValue) {
     const yearlyTotals = productionYears.map(year => {
         const yearData = plantData.production[year];
         const totalMWh = Object.entries(yearData).reduce((sum, [fuelType, value]) => {
-            // Sum up all fuel types
             return sum + (value || 0);
         }, 0);
-        
-        return totalMWh; // No conversion needed
+        return totalMWh;
     });
 
     return new Chart(ctx, {
@@ -614,6 +612,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                 },
                 y: {
                     beginAtZero: true,
+                    max: maxValue,
                     ticks: {
                         font: {
                             size: 10
