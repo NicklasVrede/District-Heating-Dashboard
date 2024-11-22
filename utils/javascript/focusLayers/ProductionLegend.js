@@ -1,5 +1,6 @@
 import { graphConfig } from '../../../graphs/config/graphConfig.js';
 import { tooltipStyle, legendTooltips } from '../../../graphs/config/tooltipConfig.js';
+import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 
 
 export class ProductionLegend {
@@ -101,9 +102,9 @@ export class ProductionLegend {
     }
 
     toggleCategoryVisibility(category) {
-        const productionLayer = this.map.getLayer('plants-production');
-        const basePlantsLayer = this.map.getLayer('plants');
-        if (!productionLayer || !basePlantsLayer) return;
+        const layerId = municipalitiesVisible ? 'municipalities-production' : 'plants-production';
+        const layer = this.map.getLayer(layerId);
+        if (!layer) return;
 
         const legendItem = this.legend.querySelector(`[data-category="${category}"]`);
         const isHidden = this.hiddenCategories.has(category);
@@ -120,9 +121,9 @@ export class ProductionLegend {
     }
 
     showOnlyCategory(category) {
-        const productionLayer = this.map.getLayer('plants-production');
-        const basePlantsLayer = this.map.getLayer('plants');
-        if (!productionLayer || !basePlantsLayer) return;
+        const layerId = municipalitiesVisible ? 'municipalities-production' : 'plants-production';
+        const layer = this.map.getLayer(layerId);
+        if (!layer) return;
 
         const otherCategoriesHidden = Object.keys(graphConfig.fuelTypes)
             .every(cat => cat === category || this.hiddenCategories.has(cat));
@@ -153,9 +154,10 @@ export class ProductionLegend {
     }
 
     updateMapFilters() {
+        const layerId = municipalitiesVisible ? 'municipalities-production' : 'plants-production';
+        
         if (this.hiddenCategories.size === 0) {
-            this.map.setFilter('plants-production', ['all']);
-            this.map.setFilter('plants', ['all']);
+            this.map.setFilter(layerId, ['all']);
             return;
         }
 
@@ -166,8 +168,7 @@ export class ProductionLegend {
                 : [['!=', 'currentMainFuel', fuelTypes]];
         });
 
-        this.map.setFilter('plants-production', ['all', ...filterConditions]);
-        this.map.setFilter('plants', ['all', ...filterConditions]);
+        this.map.setFilter(layerId, ['all', ...filterConditions]);
     }
 
     show() {
@@ -180,8 +181,8 @@ export class ProductionLegend {
     hide() {
         if (this.legend) {
             this.legend.style.display = 'none';
-            this.map.setFilter('plants-production', ['all']);
-            this.map.setFilter('plants', ['all']);
+            const layerId = municipalitiesVisible ? 'municipalities-production' : 'plants-production';
+            this.map.setFilter(layerId, ['all']);
         }
     }
 

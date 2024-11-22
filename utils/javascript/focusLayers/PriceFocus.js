@@ -9,7 +9,7 @@ export class PriceFocus {
         this.map = map;
         this.measureContainer = measureContainer;
         this.priceRankings = null;
-        this.priceRanges = {}; // Cache for price ranges by year
+        this.priceRanges = {};
         this.legend = null;
         this.lastViewType = null;
         this.lastYear = null;

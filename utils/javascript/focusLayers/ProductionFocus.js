@@ -3,7 +3,9 @@ import { graphConfig } from '../../../graphs/config/graphConfig.js';
 import { tooltipStyle, legendTooltips } from '../../../graphs/config/tooltipConfig.js';
 import { ProductionLegend } from './ProductionLegend.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
-import { allPlantIds, allMunicipalityIds } from '../../../main.js';
+import { allPlantIds, allMunicipalityIds, selectionSet } from '../../../main.js';
+import { updateSelectedMunicipalities, updateSelectedPlants } from '../eventListeners.js';
+
 
 export class ProductionFocus {
     constructor(map, measureContainer) {
@@ -143,8 +145,8 @@ export class ProductionFocus {
     updateProductionData(year) {
         const effectiveYear = Math.min(Math.max(year, '2021'), '2023');
         
-        // Calculate main fuel for current year
-        const source = this.map.getSource('plants');
+        // Get the correct source based on view type
+        const source = this.map.getSource(municipalitiesVisible ? 'municipality-centroids' : 'plants');
         if (!source) return;
 
         const data = source._data;
@@ -152,8 +154,12 @@ export class ProductionFocus {
 
         // Update features with current year's main fuel
         data.features = data.features.map(feature => {
-            const forsyid = feature.properties.forsyid;
-            const plantData = window.dataDict?.[forsyid]?.production;
+            // Use the correct ID field based on view type
+            const id = municipalitiesVisible ? 
+                feature.properties.lau_1.padStart(8, '0') : 
+                feature.properties.forsyid.padStart(8, '0');
+            
+            const plantData = window.dataDict?.[id]?.production;
             
             if (plantData && plantData[effectiveYear]) {
                 const yearData = plantData[effectiveYear];
@@ -171,14 +177,17 @@ export class ProductionFocus {
             this.map.hasImage(`icon-${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}`)
         );
 
+        // Get the correct layer ID based on view type
+        const layerId = municipalitiesVisible ? 'municipalities-production' : 'plants-production';
+
         if (hasIcons) {
             // Convert to symbol layer if not already
-            if (this.map.getLayer('plants-production').type !== 'symbol') {
-                this.map.removeLayer('plants-production');
+            if (this.map.getLayer(layerId).type !== 'symbol') {
+                this.map.removeLayer(layerId);
                 this.map.addLayer({
-                    'id': 'plants-production',
+                    'id': layerId,
                     'type': 'symbol',
-                    'source': 'plants',
+                    'source': municipalitiesVisible ? 'municipality-centroids' : 'plants',
                     'layout': {
                         'icon-allow-overlap': true,
                         'icon-ignore-placement': true,
@@ -186,18 +195,18 @@ export class ProductionFocus {
                             'interpolate',
                             ['linear'],
                             ['zoom'],
-                            5, 0.25,
-                            10, 0.75,
-                            15, 1  
+                            5, 0.375,
+                            10, 1.125,
+                            15, 1.5
                         ]
                     }
                 });
             }
 
             // Use icons with current main fuel
-            this.map.setLayoutProperty('plants-production', 'icon-image', [
+            this.map.setLayoutProperty(layerId, 'icon-image', [
                 'match',
-                ['get', 'currentMainFuel'],  // Changed from mainFuel_2023 to currentMainFuel
+                ['get', 'currentMainFuel'],
                 ...Object.entries(graphConfig.fuelTypes).flatMap(([category, fuelTypes]) => {
                     const iconId = `icon-${category.toLowerCase().replace(/ & /g, '-').replace(/[, ]/g, '-')}`;
                     if (Array.isArray(fuelTypes)) {
@@ -208,17 +217,17 @@ export class ProductionFocus {
                 'icon-default' // fallback icon
             ]);
         } else {
-            // Fallback to colored circles with current main fuel
-            if (this.map.getLayer('plants-production').type !== 'circle') {
-                this.map.removeLayer('plants-production');
+            // Fallback to colored circles
+            if (this.map.getLayer(layerId).type !== 'circle') {
+                this.map.removeLayer(layerId);
                 this.map.addLayer({
-                    'id': 'plants-production',
+                    'id': layerId,
                     'type': 'circle',
-                    'source': 'plants'
+                    'source': municipalitiesVisible ? 'municipality-centroids' : 'plants'
                 });
             }
 
-            const matchExpression = ['match', ['get', 'currentMainFuel']];  // Changed from mainFuel_2023
+            const matchExpression = ['match', ['get', 'currentMainFuel']];
             Object.entries(graphConfig.fuelTypes).forEach(([category, fuelTypes]) => {
                 if (Array.isArray(fuelTypes)) {
                     fuelTypes.forEach(fuel => {
@@ -230,10 +239,10 @@ export class ProductionFocus {
             });
             matchExpression.push('#888888'); // default color
 
-            this.map.setPaintProperty('plants-production', 'circle-color', matchExpression);
+            this.map.setPaintProperty(layerId, 'circle-color', matchExpression);
             
             // Update circle radius logic
-            this.map.setPaintProperty('plants-production', 'circle-radius', [
+            this.map.setPaintProperty(layerId, 'circle-radius', [
                 'interpolate',
                 ['linear'],
                 ['zoom'],
@@ -261,11 +270,17 @@ export class ProductionFocus {
         this.measureContainer.classList.remove('hidden');
         this.legend.show();
         
-        if (this.map.getLayer('plants-price')) {
-            this.map.setLayoutProperty('plants-price', 'visibility', 'none');
+        const layerId = municipalitiesVisible ? 'municipalities-production' : 'plants-production';
+        
+        // Hide the other layer type
+        if (municipalitiesVisible) {
+            this.map.setLayoutProperty('plants-production', 'visibility', 'none');
+        } else {
+            this.map.setLayoutProperty('municipalities-production', 'visibility', 'none');
         }
         
-        this.map.setLayoutProperty('plants-production', 'visibility', 'visible');
+        // Show the current layer
+        this.map.setLayoutProperty(layerId, 'visibility', 'visible');
         this.updateProductionData(yearState.year);
         this.legend.updateLegend();
     }
@@ -274,7 +289,10 @@ export class ProductionFocus {
         this.isActive = false;
         this.measureContainer.classList.add('hidden');
         this.legend.hide();
+        
+        // Hide both layer types
         this.map.setLayoutProperty('plants-production', 'visibility', 'none');
+        this.map.setLayoutProperty('municipalities-production', 'visibility', 'none');
     }
 
     getPlantData() {
@@ -359,6 +377,18 @@ export class ProductionFocus {
         
         const result = ranked.slice(0, n).map(entity => entity.id.padStart(8, '0'));
         console.log('Final selected IDs:', result);
+        
+        // First, update the selection set
+        selectionSet.clear();
+        result.forEach(id => selectionSet.add(id));
+        
+        // Then update the map selections based on view type
+        if (municipalitiesVisible) {
+            updateSelectedMunicipalities(this.map);
+        } else {
+            updateSelectedPlants(this.map);
+        }
+        
         return result;
     }
 
@@ -380,6 +410,18 @@ export class ProductionFocus {
         
         const result = ranked.slice(-n).map(entity => entity.id.padStart(8, '0'));
         console.log('Final selected IDs:', result);
+        
+        // First, update the selection set
+        selectionSet.clear();
+        result.forEach(id => selectionSet.add(id));
+        
+        // Then update the map selections based on view type
+        if (municipalitiesVisible) {
+            updateSelectedMunicipalities(this.map);
+        } else {
+            updateSelectedPlants(this.map);
+        }
+        
         return result;
     }
 
@@ -407,7 +449,6 @@ export class ProductionFocus {
         
         if (measureType === 'all') {
             const filteredEntities = entities.filter(entity => {
-                // Ensure we're using padded ID for lookup
                 const paddedId = entity.id.padStart(8, '0');
                 if (!entity.production || !entity.production[year]) {
                     return false;
@@ -423,7 +464,20 @@ export class ProductionFocus {
             });
 
             console.log(`Found ${filteredEntities.length} total entities with any production`);
-            return filteredEntities.map(entity => entity.id.padStart(8, '0'));
+            const result = filteredEntities.map(entity => entity.id.padStart(8, '0'));
+            
+            // First, update the selection set
+            selectionSet.clear();
+            result.forEach(id => selectionSet.add(id));
+            
+            // Then update the map selections based on view type
+            if (municipalitiesVisible) {
+                updateSelectedMunicipalities(this.map);
+            } else {
+                updateSelectedPlants(this.map);
+            }
+            
+            return result;
         }
 
         // For specific measure types

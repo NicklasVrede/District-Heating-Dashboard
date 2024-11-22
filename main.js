@@ -4,7 +4,7 @@ import { plantStyles } from './styles/plantStyles.js';
 import { setMapInstance } from './utils/javascript/mapInstance.js';
 
 // Import utility functions
-import { loadPlants, loadAreas, loadGasAreas, loadMunicipalities } from './utils/javascript/loadData.js';
+import { loadPlants, loadAreas, loadGasAreas, loadMunicipalities, loadMunicipalityCentroids } from './utils/javascript/loadData.js';
 import { searchAddress } from './utils/javascript/addressLookup.js';
 import { updateSelectedPlants } from './utils/javascript/eventListeners.js';
 import { clearSelection, selectAll } from './utils/javascript/selectionFunctions.js';
@@ -106,6 +106,7 @@ map.on('load', () => {
     loadAreas(map);
     loadGasAreas(map);
     loadMunicipalities(map);
+    loadMunicipalityCentroids(map);
     initializeLasso(map);
 });
 

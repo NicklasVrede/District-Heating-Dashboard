@@ -13,6 +13,7 @@ import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 import { updateSelectedMunicipalities } from '../eventListeners.js';
 import { showToast } from '../../../graphs/components/toast.js';
 
+
 class FocusManager {
     constructor() {
         this.measureContainer = document.getElementById('measure-container');
@@ -207,13 +208,7 @@ class FocusManager {
             return;
         }
 
-        // Prevent production focus when municipalities are visible
-        if (value === 'production' && municipalitiesVisible) {
-            console.warn('Production focus is not available while municipalities are visible');
-            value = 'none';
-        }
-
-        console.log('FocusManager changing focus from', this.currentFocus?.constructor.name, 'to:', value);
+        console.log(`FocusManager changing focus from ${this.currentFocus?.constructor.name} to: ${value} (municipalities: ${municipalitiesVisible})`);
 
         try {
             // Handle overview separately

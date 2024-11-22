@@ -289,3 +289,38 @@ export function loadMunicipalities(map) {
             console.error('Error fetching municipality data:', error);
         });
 }
+
+export function loadMunicipalityCentroids(map) {
+    fetch('maps/municipality_centroids.geojson')
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return response.json();
+        })
+        .then(geojson => {
+            // Add the centroids source
+            map.addSource('municipality-centroids', {
+                type: 'geojson',
+                data: geojson
+            });
+
+            // Add the production visualization layer for centroids
+            map.addLayer({
+                id: 'municipalities-production',
+                type: 'circle',
+                source: 'municipality-centroids',
+                layout: {
+                    'visibility': 'none'
+                },
+                paint: {
+                    'circle-color': '#888888',  // Default color, will be updated by ProductionFocus
+                    'circle-radius': 5,         // Default size, will be updated by ProductionFocus
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': 'white',
+                    'circle-opacity': 0.8
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error loading municipality centroids:', error);
+        });
+}
