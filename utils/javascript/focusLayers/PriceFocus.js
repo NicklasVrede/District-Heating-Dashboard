@@ -1,6 +1,7 @@
 import { yearState } from './YearState.js';
 import { priceColors } from './colors.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
+import { allPlantIds, allMunicipalityIds } from '../../../main.js';
 
 
 export class PriceFocus {
@@ -105,7 +106,9 @@ export class PriceFocus {
     updatePriceData() {
         try {
             const currentYear = yearState.year;
-            const source = municipalitiesVisible ? this.map.getSource('municipalities') : this.map.getSource('plants');
+            const source = municipalitiesVisible ? 
+                this.map.getSource('municipalities') : 
+                this.map.getSource('plants');
             
             if (!source) {
                 console.error(`${municipalitiesVisible ? 'Municipalities' : 'Plants'} source not found`);
@@ -118,12 +121,14 @@ export class PriceFocus {
                 return;
             }
 
-            // Force recalculation of price ranges for municipalities
+            // Calculate price ranges and update rankings
             if (municipalitiesVisible) {
                 this.priceRanges = {}; // Clear cache for municipalities view
                 this.calculatePriceRange(currentYear, data.features);
+                this.updateRankings(currentYear, data.features);
             } else if (!this.priceRanges[currentYear] || this.lastViewType !== municipalitiesVisible) {
                 this.calculatePriceRange(currentYear, data.features);
+                this.updateRankings(currentYear, data.features);
             }
             
             // Track the view type
@@ -131,12 +136,13 @@ export class PriceFocus {
             
             // Map features with prices
             data.features = data.features.map(feature => {
-                const forsyid = municipalitiesVisible ? 
-                    feature.properties.lau_1 : // Use lau_1 for municipalities
-                    feature.properties.forsyid || 'lau_!';
+                const id = municipalitiesVisible ? 
+                    feature.properties.lau_1 : 
+                    feature.properties.forsyid;
                 
-                feature.properties.current_price = window.dataDict?.[forsyid]?.prices?.[currentYear]?.mwh_price ?? null;
-                feature.properties.price_rank = this.priceRankings?.[forsyid]?.rank || 0;
+                const priceData = window.dataDict?.[id]?.prices?.[currentYear]?.mwh_price ?? null;
+                feature.properties.current_price = priceData;
+                feature.properties.price_rank = this.priceRankings?.[id]?.rank || 0;
                 return feature;
             });
             
@@ -233,13 +239,17 @@ export class PriceFocus {
         this.updatePriceData();
     }
 
-    updateRankings(year, features) {
-        // Create array of price data
-        const priceData = features
-            .map(feature => {
-                const forsyid = feature.properties.forsyid || 'lau_!';
-                const price = window.dataDict?.[forsyid]?.prices?.[year]?.mwh_price || 0;
-                return { forsyid, price };
+    updateRankings(year) {
+        // Get the appropriate set of IDs based on current view
+        const relevantIds = municipalitiesVisible ? 
+            Array.from(allMunicipalityIds) : 
+            Array.from(allPlantIds);
+        
+        // Create array of price data for relevant IDs only
+        const priceData = relevantIds
+            .map(id => {
+                const price = window.dataDict?.[id]?.prices?.[year]?.mwh_price || 0;
+                return { id, price };
             })
             .filter(item => item.price > 0)
             .sort((a, b) => b.price - a.price);
@@ -247,7 +257,7 @@ export class PriceFocus {
         // Create rankings object
         this.priceRankings = {};
         priceData.forEach((item, index) => {
-            this.priceRankings[item.forsyid] = {
+            this.priceRankings[item.id] = {
                 rank: index + 1,
                 price: item.price,
                 total: priceData.length
@@ -255,24 +265,46 @@ export class PriceFocus {
         });
 
         this.lastUpdateYear = year;
+        console.log(`Updated ${municipalitiesVisible ? 'municipality' : 'plant'} rankings:`, 
+            this.priceRankings);
     }
 
     // Helper methods for selections
     getTopNByPrice(n) {
-        if (!this.priceRankings) return [];
+        console.log('Getting top', n, 'by price from', 
+            municipalitiesVisible ? 'municipalities' : 'plants');
+        
+        if (!this.priceRankings) {
+            console.warn('No price rankings available');
+            return [];
+        }
+        
+        // Filter rankings to only include relevant type
+        const relevantIds = municipalitiesVisible ? allMunicipalityIds : allPlantIds;
         
         return Object.entries(this.priceRankings)
+            .filter(([id, _]) => relevantIds.has(id))  // Only include IDs from the correct set
             .filter(([_, data]) => data.rank <= n)
-            .map(([forsyid, _]) => forsyid);
+            .map(([id, _]) => id);
     }
 
     getBottomNByPrice(n) {
-        if (!this.priceRankings) return [];
+        console.log('Getting bottom', n, 'by price from', 
+            municipalitiesVisible ? 'municipalities' : 'plants');
         
+        if (!this.priceRankings) {
+            console.warn('No price rankings available');
+            return [];
+        }
+        
+        // Filter rankings to only include relevant type
+        const relevantIds = municipalitiesVisible ? allMunicipalityIds : allPlantIds;
         const totalRanked = Object.values(this.priceRankings)[0]?.total || 0;
+        
         return Object.entries(this.priceRankings)
+            .filter(([id, _]) => relevantIds.has(id))  // Only include IDs from the correct set
             .filter(([_, data]) => data.rank > totalRanked - n)
-            .map(([forsyid, _]) => forsyid);
+            .map(([id, _]) => id);
     }
 
     getPricePercentile(percentile) {

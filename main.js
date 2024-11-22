@@ -22,6 +22,30 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0M
 // Export selection set
 export const selectionSet = new Set();
 
+// Create reference sets for all plants and municipalities
+export const allPlantIds = new Set();
+export const allMunicipalityIds = new Set();
+
+// Initialize the reference sets when data_dict is loaded
+function initializeIdSets() {
+    if (!window.dataDict) return;
+    
+    // Clear existing sets
+    allPlantIds.clear();
+    allMunicipalityIds.clear();
+    
+    // Populate sets based on type in data_dict
+    Object.entries(window.dataDict).forEach(([id, data]) => {
+        if (data.type === 'plant') {
+            allPlantIds.add(id);
+        } else if (data.type === 'municipality') {
+            allMunicipalityIds.add(id);
+        }
+    });
+    
+    console.log(`Initialized with ${allPlantIds.size} plants and ${allMunicipalityIds.size} municipalities`);
+}
+
 // Initialize map
 const map = new mapboxgl.Map({
     container: 'map',
@@ -97,6 +121,7 @@ fetch('./data/data_dict.json')
     .then(response => response.json())
     .then(data => {
         window.dataDict = data;
+        initializeIdSets(); // Initialize our reference sets
     })
     .catch(error => console.error('Error loading data dictionary:', error));
 
