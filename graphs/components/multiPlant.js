@@ -521,7 +521,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             labels: plantNames,
             datasets: [
                 {
-                    label: 'House Price',
+                    label: 'House Price (Yearly)',
                     data: houseData,
                     backgroundColor: 'rgba(255, 99, 132, 0.7)',
                     order: 3
@@ -533,7 +533,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     order: 2
                 },
                 {
-                    label: 'MWh Price (Yearly)',
+                    label: 'MWh Price',
                     data: mwhData,
                     backgroundColor: 'rgba(75, 192, 192, 0.7)',
                     order: 1
