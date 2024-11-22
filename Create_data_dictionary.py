@@ -81,15 +81,21 @@ for filename, year in price_files:
     except Exception as e:
         print(f"Error processing {filename}: {e}")
 
+# Load municipalities from GeoJSON to get valid municipality IDs
+municipalities_gdf = gpd.read_file('maps/municipalities.geojson')
+valid_municipality_ids = set(municipalities_gdf['lau_1'].astype(str).str.zfill(8))
+
 # Create final data dictionary
 data_dict = {}
 for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid'):
-    # Determine if this is a municipality or plant
-    # Assuming municipalities have 3-digit forsyid codes
-    is_municipality = len(str(forsyid).strip('0')) <= 3
+    # Pad forsyid to 8 digits for consistent comparison
+    padded_forsyid = str(forsyid).zfill(8)
     
-    data_dict[forsyid] = {
-        'type': 'municipality' if is_municipality else 'plant',  # Set type based on forsyid pattern
+    # Check if this is a municipality by looking it up in the valid municipality IDs
+    is_municipality = padded_forsyid in valid_municipality_ids
+    
+    data_dict[padded_forsyid] = {
+        'type': 'municipality' if is_municipality else 'plant',
         'name': mappings['name'].get(forsyid, data_df.loc[data_df['forsyid'] == forsyid, 'fv_net_navn'].iloc[0] if not data_df.loc[data_df['forsyid'] == forsyid, 'fv_net_navn'].empty else 'Unknown'),
         'idrift': mappings['idrift'].get(forsyid),
         'elkapacitet_MW': mappings['elkapacitet'].get(forsyid, 0) or 0,

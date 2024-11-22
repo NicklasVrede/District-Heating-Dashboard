@@ -11,6 +11,7 @@ import { updateGraph } from '../plotlyGraphs.js';
 import { yearState } from './YearState.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 import { updateSelectedMunicipalities } from '../eventListeners.js';
+import { showToast } from '../../../graphs/components/toast.js';
 
 class FocusManager {
     constructor() {
@@ -80,18 +81,23 @@ class FocusManager {
         }
 
         let selectedIds = [];
+        let requestedCount = 0;
 
         switch (value) {
             case 'top5':
+                requestedCount = 5;
                 selectedIds = this.currentFocus.getTopNByPrice(5);
                 break;
             case 'top10':
+                requestedCount = 10;
                 selectedIds = this.currentFocus.getTopNByPrice(10);
                 break;
             case 'bottom5':
+                requestedCount = 5;
                 selectedIds = this.currentFocus.getBottomNByPrice(5);
                 break;
             case 'bottom10':
+                requestedCount = 10;
                 selectedIds = this.currentFocus.getBottomNByPrice(10);
                 break;
             case 'all':
@@ -111,6 +117,12 @@ class FocusManager {
         console.log('Number of selections:', selectedIds.length);
 
         if (selectedIds.length > 0) {
+            // Show toast if fewer items returned than requested
+            if (requestedCount > 0 && selectedIds.length < requestedCount) {
+                const entityType = municipalitiesVisible ? 'municipalities' : 'plants';
+                showToast(`Only ${selectedIds.length} ${entityType} found with price data (requested ${requestedCount})`);
+            }
+
             selectionSet.clear();
             selectedIds.forEach(id => selectionSet.add(id));
             
@@ -123,7 +135,7 @@ class FocusManager {
             updateSelectedPlantsWindow();
             updateGraph();
         } else {
-            console.warn('No items found matching the selection criteria');
+            showToast('No items found matching the selection criteria');
         }
     }
 
@@ -136,22 +148,25 @@ class FocusManager {
             return;
         }
 
-        const measureType = document.getElementById('measure-selector').value;
-        console.log('Measure type:', measureType);
-        
         let selectedIds = [];
+        let requestedCount = 0;
+        const measureType = document.getElementById('measure-selector').value;
 
         switch (value) {
             case 'top5':
+                requestedCount = 5;
                 selectedIds = this.currentFocus.getTopNByProduction(5, measureType);
                 break;
             case 'top10':
+                requestedCount = 10;
                 selectedIds = this.currentFocus.getTopNByProduction(10, measureType);
                 break;
             case 'bottom5':
+                requestedCount = 5;
                 selectedIds = this.currentFocus.getBottomNByProduction(5, measureType);
                 break;
             case 'bottom10':
+                requestedCount = 10;
                 selectedIds = this.currentFocus.getBottomNByProduction(10, measureType);
                 break;
             case 'all':
@@ -170,13 +185,19 @@ class FocusManager {
         console.log('Number of selections:', selectedIds.length);
 
         if (selectedIds.length > 0) {
+            // Show toast if fewer items returned than requested
+            if (requestedCount > 0 && selectedIds.length < requestedCount) {
+                const entityType = municipalitiesVisible ? 'municipalities' : 'plants';
+                showToast(`Only ${selectedIds.length} ${entityType} found with ${measureType} production data (requested ${requestedCount})`);
+            }
+
             selectionSet.clear();
             selectedIds.forEach(id => selectionSet.add(id));
             updateSelectedPlants(this.mapboxMap);
             updateSelectedPlantsWindow(selectionSet);
             updateGraph();
         } else {
-            console.warn('No plants found matching the selection criteria');
+            showToast(`No ${municipalitiesVisible ? 'municipalities' : 'plants'} found with ${measureType} production data`);
         }
     }
 

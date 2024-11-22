@@ -286,12 +286,14 @@ export class ProductionFocus {
             return [];
         }
 
-        // Filter based on current view type
-        const relevantIds = municipalitiesVisible ? allMunicipalityIds : allPlantIds;
+        // Filter based on current view type and ensure IDs are padded
+        const relevantIds = municipalitiesVisible ? 
+            Array.from(allMunicipalityIds).map(id => id.padStart(8, '0')) : 
+            Array.from(allPlantIds).map(id => id.padStart(8, '0'));
         
-        const entitiesArray = Array.from(relevantIds).map(id => ({
+        const entitiesArray = relevantIds.map(id => ({
             id,
-            ...dataDict[id]
+            ...dataDict[id.padStart(8, '0')] // Ensure lookup uses padded ID
         }));
         
         console.log(`Converted ${municipalitiesVisible ? 'municipalities' : 'plants'} array:`, entitiesArray);
@@ -311,22 +313,24 @@ export class ProductionFocus {
         console.log('Using fuel types for ranking:', fuelTypes);
 
         const filteredEntities = entities.filter(entity => {
+            // Ensure we're using padded ID for lookup
+            const paddedId = entity.id.padStart(8, '0');
             if (!entity.production || !entity.production[year]) {
-                console.log(`Entity ${entity.id} - No production data for ${year}`);
+                console.log(`Entity ${paddedId} - No production data for ${year}`);
                 return false;
             }
 
             const totalProduction = fuelTypes.reduce((sum, fuelType) => {
                 const value = entity.production[year][fuelType];
                 if (value && value > 0) {
-                    console.log(`Entity ${entity.id} - ${entity.name} - ${fuelType}: ${value}`);
+                    console.log(`Entity ${paddedId} - ${entity.name} - ${fuelType}: ${value}`);
                 }
                 return sum + (value || 0);
             }, 0);
 
             if (totalProduction > 0) {
                 entity.totalProduction = totalProduction;
-                console.log(`Entity ${entity.id} - ${entity.name} - Total ${measureType} production: ${totalProduction}`);
+                console.log(`Entity ${paddedId} - ${entity.name} - Total ${measureType} production: ${totalProduction}`);
                 return true;
             }
             return false;
@@ -338,20 +342,44 @@ export class ProductionFocus {
     }
 
     getTopNByProduction(n, measureType) {
-        console.log(`Getting top ${n} ${municipalitiesVisible ? 'municipalities' : 'plants'} for ${measureType}`);
+        console.log(`=== Getting top ${n} ${municipalitiesVisible ? 'municipalities' : 'plants'} for ${measureType} ===`);
         const entities = this.getPlantData();
+        console.log('All available entities:', entities.map(e => ({
+            id: e.id,
+            name: e.name,
+            type: e.type
+        })));
+        
         const ranked = this.rankPlantsByProduction(entities, measureType);
-        const result = ranked.slice(0, n).map(entity => entity.id);
-        console.log('Selected entities:', result);
+        console.log('Ranked entities:', ranked.map(e => ({
+            id: e.id,
+            name: e.name,
+            production: e.totalProduction
+        })));
+        
+        const result = ranked.slice(0, n).map(entity => entity.id.padStart(8, '0'));
+        console.log('Final selected IDs:', result);
         return result;
     }
 
     getBottomNByProduction(n, measureType) {
-        console.log(`Getting bottom ${n} ${municipalitiesVisible ? 'municipalities' : 'plants'} for ${measureType}`);
+        console.log(`=== Getting bottom ${n} ${municipalitiesVisible ? 'municipalities' : 'plants'} for ${measureType} ===`);
         const entities = this.getPlantData();
+        console.log('All available entities:', entities.map(e => ({
+            id: e.id,
+            name: e.name,
+            type: e.type
+        })));
+        
         const ranked = this.rankPlantsByProduction(entities, measureType);
-        const result = ranked.slice(-n).map(entity => entity.id);
-        console.log('Selected entities:', result);
+        console.log('Ranked entities:', ranked.map(e => ({
+            id: e.id,
+            name: e.name,
+            production: e.totalProduction
+        })));
+        
+        const result = ranked.slice(-n).map(entity => entity.id.padStart(8, '0'));
+        console.log('Final selected IDs:', result);
         return result;
     }
 
@@ -378,8 +406,9 @@ export class ProductionFocus {
         const year = '2023';
         
         if (measureType === 'all') {
-            // For 'all', we want to get entities with any production
             const filteredEntities = entities.filter(entity => {
+                // Ensure we're using padded ID for lookup
+                const paddedId = entity.id.padStart(8, '0');
                 if (!entity.production || !entity.production[year]) {
                     return false;
                 }
@@ -387,14 +416,14 @@ export class ProductionFocus {
                 const hasProduction = Object.values(entity.production[year]).some(value => value > 0);
                 
                 if (hasProduction) {
-                    console.log(`Including entity ${entity.id} - ${entity.name}`);
+                    console.log(`Including entity ${paddedId} - ${entity.name}`);
                 }
                 
                 return hasProduction;
             });
 
             console.log(`Found ${filteredEntities.length} total entities with any production`);
-            return filteredEntities.map(entity => entity.id);
+            return filteredEntities.map(entity => entity.id.padStart(8, '0'));
         }
 
         // For specific measure types

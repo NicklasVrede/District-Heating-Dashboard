@@ -83,8 +83,8 @@ export class PriceFocus {
         features.forEach(feature => {
             // Use lau_1 for municipalities, forsyid for plants
             const id = municipalitiesVisible ? 
-                feature.properties.lau_1 : 
-                feature.properties.forsyid || 'lau_!';
+                feature.properties.lau_1.padStart(8, '0') : // Pad municipality IDs
+                feature.properties.forsyid.padStart(8, '0'); // Pad plant IDs
             
             const price = window.dataDict?.[id]?.prices?.[year]?.mwh_price;
             
@@ -248,8 +248,8 @@ export class PriceFocus {
     updateRankings(year) {
         // Get the appropriate set of IDs based on current view
         const relevantIds = municipalitiesVisible ? 
-            Array.from(allMunicipalityIds) : 
-            Array.from(allPlantIds);
+            Array.from(allMunicipalityIds).map(id => id.padStart(8, '0')) : 
+            Array.from(allPlantIds).map(id => id.padStart(8, '0'));
         
         // Create array of price data for relevant IDs only
         const priceData = relevantIds
@@ -286,7 +286,9 @@ export class PriceFocus {
         }
         
         // Filter rankings to only include relevant type
-        const relevantIds = municipalitiesVisible ? allMunicipalityIds : allPlantIds;
+        const relevantIds = municipalitiesVisible ? 
+            new Set(Array.from(allMunicipalityIds).map(id => id.padStart(8, '0'))) : 
+            new Set(Array.from(allPlantIds).map(id => id.padStart(8, '0')));
         
         return Object.entries(this.priceRankings)
             .filter(([id, _]) => relevantIds.has(id))  // Only include IDs from the correct set
@@ -304,7 +306,10 @@ export class PriceFocus {
         }
         
         // Filter rankings to only include relevant type
-        const relevantIds = municipalitiesVisible ? allMunicipalityIds : allPlantIds;
+        const relevantIds = municipalitiesVisible ? 
+            new Set(Array.from(allMunicipalityIds).map(id => id.padStart(8, '0'))) : 
+            new Set(Array.from(allPlantIds).map(id => id.padStart(8, '0')));
+        
         const totalRanked = Object.values(this.priceRankings)[0]?.total || 0;
         
         return Object.entries(this.priceRankings)

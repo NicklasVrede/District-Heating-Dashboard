@@ -1,6 +1,6 @@
 {
     "00000002": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Guldborgsund Forsyning",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 24.7,
@@ -106,7 +106,7 @@
         }
     },
     "00000004": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Kredsløb",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 0,
@@ -212,7 +212,7 @@
         }
     },
     "00000005": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Aalborg Forsyning",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 1.3,
@@ -318,7 +318,7 @@
         }
     },
     "00000006": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Din Forsyning A/S",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 418.95,
@@ -424,7 +424,7 @@
         }
     },
     "00000008": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Fors Varme Roskilde",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 33.41,
@@ -530,7 +530,7 @@
         }
     },
     "00000009": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Fjernvarme Fyn",
         "idrift": "1971-01-01",
         "elkapacitet_MW": 506.416,
@@ -636,7 +636,7 @@
         }
     },
     "00000010": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Gauerslund Fjernvarme",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 0,
@@ -710,7 +710,7 @@
         }
     },
     "00000011": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Grindsted El- Og Varmeværk",
         "idrift": "1980-09-01",
         "elkapacitet_MW": 22.5,
@@ -784,7 +784,7 @@
         }
     },
     "00000012": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Fjernvarme Horsens",
         "idrift": "1963-04-01",
         "elkapacitet_MW": 34.13,
@@ -890,7 +890,7 @@
         }
     },
     "00000014": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Frifelt/Roager Kraftvarmeværk",
         "idrift": "1997-01-01",
         "elkapacitet_MW": 1.85,
@@ -996,7 +996,7 @@
         }
     },
     "00000015": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Tønder Fjernvarme",
         "idrift": "1989-06-01",
         "elkapacitet_MW": 13.8,
@@ -1102,7 +1102,7 @@
         }
     },
     "00000016": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Lolland Varme",
         "idrift": "1966-08-01",
         "elkapacitet_MW": 0,
@@ -1208,7 +1208,7 @@
         }
     },
     "00000017": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Sorø Fjernvarme",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 8.65,
@@ -1314,7 +1314,7 @@
         }
     },
     "00000018": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Sønderborg Fjernvarme",
         "idrift": "1963-01-01",
         "elkapacitet_MW": 58.0,
@@ -1420,7 +1420,7 @@
         }
     },
     "00000019": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Augustenborg Fjernvarme",
         "idrift": "1984-10-01",
         "elkapacitet_MW": 3.8,
@@ -1582,38 +1582,6 @@
                 "elektricitet": 23,
                 "omgivelsesvarme": 30
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 675,
-                "apartment_price": 12367,
-                "house_price": 15275
-            },
-            "2020": {
-                "mwh_price": 662,
-                "apartment_price": 12120,
-                "house_price": 14970
-            },
-            "2021": {
-                "mwh_price": 655,
-                "apartment_price": 11999,
-                "house_price": 14820
-            },
-            "2022": {
-                "mwh_price": 610,
-                "apartment_price": 11546,
-                "house_price": 14307
-            },
-            "2023": {
-                "mwh_price": 653,
-                "apartment_price": 12354,
-                "house_price": 15309
-            },
-            "2024": {
-                "mwh_price": 741,
-                "apartment_price": 14010,
-                "house_price": 17360
-            }
         }
     },
     "00000147": {
@@ -1687,38 +1655,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 591,
-                "apartment_price": 10602,
-                "house_price": 13707
-            },
-            "2020": {
-                "mwh_price": 601,
-                "apartment_price": 10748,
-                "house_price": 13883
-            },
-            "2021": {
-                "mwh_price": 565,
-                "apartment_price": 10206,
-                "house_price": 13228
-            },
-            "2022": {
-                "mwh_price": 571,
-                "apartment_price": 10292,
-                "house_price": 13333
-            },
-            "2023": {
-                "mwh_price": 713,
-                "apartment_price": 12527,
-                "house_price": 16079
-            },
-            "2024": {
-                "mwh_price": 795,
-                "apartment_price": 13754,
-                "house_price": 17559
             }
         }
     },
@@ -1794,38 +1730,6 @@
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 458,
-                "apartment_price": 9014,
-                "house_price": 11681
-            },
-            "2020": {
-                "mwh_price": 445,
-                "apartment_price": 8779,
-                "house_price": 11373
-            },
-            "2021": {
-                "mwh_price": 445,
-                "apartment_price": 8779,
-                "house_price": 11373
-            },
-            "2022": {
-                "mwh_price": 410,
-                "apartment_price": 8254,
-                "house_price": 10740
-            },
-            "2023": {
-                "mwh_price": 445,
-                "apartment_price": 8779,
-                "house_price": 11371
-            },
-            "2024": {
-                "mwh_price": 485,
-                "apartment_price": 9569,
-                "house_price": 12422
-            }
         }
     },
     "00000157": {
@@ -1899,38 +1803,6 @@
                 "vandkraft": 0,
                 "elektricitet": 250,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 289,
-                "apartment_price": 11789,
-                "house_price": 14018
-            },
-            "2020": {
-                "mwh_price": 267,
-                "apartment_price": 11653,
-                "house_price": 13855
-            },
-            "2021": {
-                "mwh_price": 279,
-                "apartment_price": 11323,
-                "house_price": 13456
-            },
-            "2022": {
-                "mwh_price": 291,
-                "apartment_price": 11322,
-                "house_price": 13456
-            },
-            "2023": {
-                "mwh_price": 516,
-                "apartment_price": 13658,
-                "house_price": 16270
-            },
-            "2024": {
-                "mwh_price": 476,
-                "apartment_price": 14642,
-                "house_price": 17446
             }
         }
     },
@@ -2006,38 +1878,6 @@
                 "elektricitet": 2,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 332,
-                "apartment_price": 8194,
-                "house_price": 10168
-            },
-            "2020": {
-                "mwh_price": 330,
-                "apartment_price": 8266,
-                "house_price": 10297
-            },
-            "2021": {
-                "mwh_price": 304,
-                "apartment_price": 7946,
-                "house_price": 9954
-            },
-            "2022": {
-                "mwh_price": 329,
-                "apartment_price": 8594,
-                "house_price": 10745
-            },
-            "2023": {
-                "mwh_price": 347,
-                "apartment_price": 12064,
-                "house_price": 16592
-            },
-            "2024": {
-                "mwh_price": 388,
-                "apartment_price": 13180,
-                "house_price": 18190
-            }
         }
     },
     "00000165": {
@@ -2111,38 +1951,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 700,
-                "apartment_price": 12552,
-                "house_price": 15990
-            },
-            "2020": {
-                "mwh_price": 525,
-                "apartment_price": 9768,
-                "house_price": 12574
-            },
-            "2021": {
-                "mwh_price": 762,
-                "apartment_price": 12323,
-                "house_price": 15175
-            },
-            "2022": {
-                "mwh_price": 619,
-                "apartment_price": 11732,
-                "house_price": 14880
-            },
-            "2023": {
-                "mwh_price": 695,
-                "apartment_price": 12820,
-                "house_price": 16110
-            },
-            "2024": {
-                "mwh_price": 728,
-                "apartment_price": 13801,
-                "house_price": 17494
             }
         }
     },
@@ -2218,38 +2026,6 @@
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 360,
-                "apartment_price": 11139,
-                "house_price": 13273
-            },
-            "2020": {
-                "mwh_price": 369,
-                "apartment_price": 11406,
-                "house_price": 13593
-            },
-            "2021": {
-                "mwh_price": 356,
-                "apartment_price": 11724,
-                "house_price": 13972
-            },
-            "2022": {
-                "mwh_price": 370,
-                "apartment_price": 11364,
-                "house_price": 13544
-            },
-            "2023": {
-                "mwh_price": 387,
-                "apartment_price": 12427,
-                "house_price": 14819
-            },
-            "2024": {
-                "mwh_price": 438,
-                "apartment_price": 14335,
-                "house_price": 17112
-            }
         }
     },
     "00000169": {
@@ -2323,38 +2099,6 @@
                 "vandkraft": 0,
                 "elektricitet": 16,
                 "omgivelsesvarme": 20
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 585,
-                "apartment_price": 11384,
-                "house_price": 14234
-            },
-            "2020": {
-                "mwh_price": 585,
-                "apartment_price": 11725,
-                "house_price": 15093
-            },
-            "2021": {
-                "mwh_price": 527,
-                "apartment_price": 11035,
-                "house_price": 14332
-            },
-            "2022": {
-                "mwh_price": 527,
-                "apartment_price": 11035,
-                "house_price": 14332
-            },
-            "2023": {
-                "mwh_price": 569,
-                "apartment_price": 11918,
-                "house_price": 15480
-            },
-            "2024": {
-                "mwh_price": 592,
-                "apartment_price": 12401,
-                "house_price": 16117
             }
         }
     },
@@ -2430,38 +2174,6 @@
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 400,
-                "apartment_price": 11225,
-                "house_price": 13426
-            },
-            "2020": {
-                "mwh_price": 340,
-                "apartment_price": 10925,
-                "house_price": 11979
-            },
-            "2021": {
-                "mwh_price": 308,
-                "apartment_price": 10251,
-                "house_price": 13021
-            },
-            "2022": {
-                "mwh_price": 325,
-                "apartment_price": 10195,
-                "house_price": 12924
-            },
-            "2023": {
-                "mwh_price": 323,
-                "apartment_price": null,
-                "house_price": 13595
-            },
-            "2024": {
-                "mwh_price": 384,
-                "apartment_price": 15036,
-                "house_price": 14583
-            }
         }
     },
     "00000185": {
@@ -2535,28 +2247,6 @@
                 "vandkraft": 0,
                 "elektricitet": 13,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2021": {
-                "mwh_price": 311,
-                "apartment_price": 10538,
-                "house_price": 12519
-            },
-            "2022": {
-                "mwh_price": 335,
-                "apartment_price": 10779,
-                "house_price": 12809
-            },
-            "2023": {
-                "mwh_price": 527,
-                "apartment_price": 15008,
-                "house_price": 17909
-            },
-            "2024": {
-                "mwh_price": 490,
-                "apartment_price": 13128,
-                "house_price": 15639
             }
         }
     },
@@ -2632,38 +2322,6 @@
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 456,
-                "apartment_price": 9902,
-                "house_price": 12377
-            },
-            "2020": {
-                "mwh_price": 464,
-                "apartment_price": 10065,
-                "house_price": 12954
-            },
-            "2021": {
-                "mwh_price": 433,
-                "apartment_price": 9914,
-                "house_price": 12342
-            },
-            "2022": {
-                "mwh_price": 488,
-                "apartment_price": 10766,
-                "house_price": 13382
-            },
-            "2023": {
-                "mwh_price": 1096,
-                "apartment_price": 20018,
-                "house_price": 24584
-            },
-            "2024": {
-                "mwh_price": 782,
-                "apartment_price": 15312,
-                "house_price": 18908
-            }
         }
     },
     "00000201": {
@@ -2737,33 +2395,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2020": {
-                "mwh_price": 600,
-                "apartment_price": 10617,
-                "house_price": 13660
-            },
-            "2021": {
-                "mwh_price": 600,
-                "apartment_price": 10617,
-                "house_price": 13660
-            },
-            "2022": {
-                "mwh_price": 600,
-                "apartment_price": 10617,
-                "house_price": 13660
-            },
-            "2023": {
-                "mwh_price": 1867,
-                "apartment_price": 32098,
-                "house_price": 40703
-            },
-            "2024": {
-                "mwh_price": 1626,
-                "apartment_price": 26009,
-                "house_price": 32233
             }
         }
     },
@@ -2839,38 +2470,6 @@
                 "elektricitet": 3,
                 "omgivelsesvarme": 5
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 580,
-                "apartment_price": 12528,
-                "house_price": 16073
-            },
-            "2020": {
-                "mwh_price": 560,
-                "apartment_price": 12383,
-                "house_price": 15976
-            },
-            "2021": {
-                "mwh_price": 560,
-                "apartment_price": 12382,
-                "house_price": 15976
-            },
-            "2022": {
-                "mwh_price": 519,
-                "apartment_price": 11478,
-                "house_price": 14761
-            },
-            "2023": {
-                "mwh_price": 524,
-                "apartment_price": 11562,
-                "house_price": 14724
-            },
-            "2024": {
-                "mwh_price": 580,
-                "apartment_price": 12568,
-                "house_price": 16023
-            }
         }
     },
     "00000219": {
@@ -2944,38 +2543,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 450,
-                "apartment_price": 13004,
-                "house_price": 16240
-            },
-            "2020": {
-                "mwh_price": 450,
-                "apartment_price": 13004,
-                "house_price": 16240
-            },
-            "2021": {
-                "mwh_price": 450,
-                "apartment_price": 10494,
-                "house_price": 11889
-            },
-            "2022": {
-                "mwh_price": 450,
-                "apartment_price": 10494,
-                "house_price": 11889
-            },
-            "2023": {
-                "mwh_price": 1113,
-                "apartment_price": 20432,
-                "house_price": 23880
-            },
-            "2024": {
-                "mwh_price": 725,
-                "apartment_price": 14619,
-                "house_price": 16867
             }
         }
     },
@@ -3051,38 +2618,6 @@
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 745,
-                "apartment_price": 15041,
-                "house_price": 20072
-            },
-            "2020": {
-                "mwh_price": 745,
-                "apartment_price": 15041,
-                "house_price": 19653
-            },
-            "2021": {
-                "mwh_price": 744,
-                "apartment_price": 15298,
-                "house_price": 19906
-            },
-            "2022": {
-                "mwh_price": 744,
-                "apartment_price": 15298,
-                "house_price": 19906
-            },
-            "2023": {
-                "mwh_price": 744,
-                "apartment_price": 15298,
-                "house_price": 19906
-            },
-            "2024": {
-                "mwh_price": 813,
-                "apartment_price": 16710,
-                "house_price": 21738
-            }
         }
     },
     "00000230": {
@@ -3157,8 +2692,7 @@
                 "elektricitet": 121,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {}
+        }
     },
     "00000240": {
         "type": "municipality",
@@ -3231,38 +2765,6 @@
                 "vandkraft": 0,
                 "elektricitet": 72,
                 "omgivelsesvarme": 55
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 586,
-                "apartment_price": 12258,
-                "house_price": 15907
-            },
-            "2020": {
-                "mwh_price": 606,
-                "apartment_price": 12746,
-                "house_price": 16594
-            },
-            "2021": {
-                "mwh_price": 586,
-                "apartment_price": 12446,
-                "house_price": 16232
-            },
-            "2022": {
-                "mwh_price": 1081,
-                "apartment_price": 19871,
-                "house_price": 25192
-            },
-            "2023": {
-                "mwh_price": 1284,
-                "apartment_price": 23060,
-                "house_price": 29086
-            },
-            "2024": {
-                "mwh_price": 581,
-                "apartment_price": 12288,
-                "house_price": 16046
             }
         }
     },
@@ -3338,38 +2840,6 @@
                 "elektricitet": 2,
                 "omgivelsesvarme": 9
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 480,
-                "apartment_price": 11126,
-                "house_price": 12847
-            },
-            "2020": {
-                "mwh_price": 480,
-                "apartment_price": 11126,
-                "house_price": 12847
-            },
-            "2021": {
-                "mwh_price": 454,
-                "apartment_price": 10750,
-                "house_price": 12394
-            },
-            "2022": {
-                "mwh_price": 630,
-                "apartment_price": 13626,
-                "house_price": 15812
-            },
-            "2023": {
-                "mwh_price": 1136,
-                "apartment_price": 27125,
-                "house_price": 26371
-            },
-            "2024": {
-                "mwh_price": 806,
-                "apartment_price": 17188,
-                "house_price": 20375
-            }
         }
     },
     "00000253": {
@@ -3443,38 +2913,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 558,
-                "apartment_price": 10695,
-                "house_price": 13747
-            },
-            "2020": {
-                "mwh_price": 562,
-                "apartment_price": 10764,
-                "house_price": 13900
-            },
-            "2021": {
-                "mwh_price": 543,
-                "apartment_price": 10369,
-                "house_price": 13289
-            },
-            "2022": {
-                "mwh_price": 554,
-                "apartment_price": 10266,
-                "house_price": 13258
-            },
-            "2023": {
-                "mwh_price": 566,
-                "apartment_price": 10457,
-                "house_price": 13493
-            },
-            "2024": {
-                "mwh_price": 585,
-                "apartment_price": 10778,
-                "house_price": 13652
             }
         }
     },
@@ -3550,38 +2988,6 @@
                 "elektricitet": 3,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 506,
-                "apartment_price": 9548,
-                "house_price": 12551
-            },
-            "2020": {
-                "mwh_price": 506,
-                "apartment_price": 9848,
-                "house_price": 13071
-            },
-            "2021": {
-                "mwh_price": 488,
-                "apartment_price": 9863,
-                "house_price": 13024
-            },
-            "2022": {
-                "mwh_price": 542,
-                "apartment_price": 11022,
-                "house_price": 14250
-            },
-            "2023": {
-                "mwh_price": 558,
-                "apartment_price": 12426,
-                "house_price": 16188
-            },
-            "2024": {
-                "mwh_price": 578,
-                "apartment_price": 11835,
-                "house_price": 15324
-            }
         }
     },
     "00000260": {
@@ -3655,38 +3061,6 @@
                 "vandkraft": 0,
                 "elektricitet": 14,
                 "omgivelsesvarme": 25
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 591,
-                "apartment_price": 11705,
-                "house_price": 15205
-            },
-            "2020": {
-                "mwh_price": 624,
-                "apartment_price": 12143,
-                "house_price": 15616
-            },
-            "2021": {
-                "mwh_price": 565,
-                "apartment_price": 11268,
-                "house_price": 14560
-            },
-            "2022": {
-                "mwh_price": 619,
-                "apartment_price": 12120,
-                "house_price": 15601
-            },
-            "2023": {
-                "mwh_price": 1108,
-                "apartment_price": 19464,
-                "house_price": 24462
-            },
-            "2024": {
-                "mwh_price": 992,
-                "apartment_price": 17714,
-                "house_price": 22350
             }
         }
     },
@@ -3762,38 +3136,6 @@
                 "elektricitet": 3,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 610,
-                "apartment_price": 12332,
-                "house_price": 14952
-            },
-            "2020": {
-                "mwh_price": 572,
-                "apartment_price": 11254,
-                "house_price": 14404
-            },
-            "2021": {
-                "mwh_price": 526,
-                "apartment_price": 10816,
-                "house_price": 13956
-            },
-            "2022": {
-                "mwh_price": 533,
-                "apartment_price": 10752,
-                "house_price": 13778
-            },
-            "2023": {
-                "mwh_price": 558,
-                "apartment_price": 11193,
-                "house_price": 14422
-            },
-            "2024": {
-                "mwh_price": 620,
-                "apartment_price": 12151,
-                "house_price": 14940
-            }
         }
     },
     "00000269": {
@@ -3867,38 +3209,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 550,
-                "apartment_price": 11581,
-                "house_price": 15396
-            },
-            "2020": {
-                "mwh_price": 550,
-                "apartment_price": 11588,
-                "house_price": 15402
-            },
-            "2021": {
-                "mwh_price": 500,
-                "apartment_price": 10656,
-                "house_price": 14316
-            },
-            "2022": {
-                "mwh_price": 500,
-                "apartment_price": 10656,
-                "house_price": 14316
-            },
-            "2023": {
-                "mwh_price": 550,
-                "apartment_price": 11406,
-                "house_price": 15221
-            },
-            "2024": {
-                "mwh_price": 606,
-                "apartment_price": 12250,
-                "house_price": 16239
             }
         }
     },
@@ -3974,38 +3284,6 @@
                 "elektricitet": 98,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 632,
-                "apartment_price": 13172,
-                "house_price": 16470
-            },
-            "2020": {
-                "mwh_price": 614,
-                "apartment_price": 12905,
-                "house_price": 16148
-            },
-            "2021": {
-                "mwh_price": 583,
-                "apartment_price": 12444,
-                "house_price": 15582
-            },
-            "2022": {
-                "mwh_price": 583,
-                "apartment_price": 12506,
-                "house_price": 15644
-            },
-            "2023": {
-                "mwh_price": 954,
-                "apartment_price": 16924,
-                "house_price": 21419
-            },
-            "2024": {
-                "mwh_price": 1088,
-                "apartment_price": 19512,
-                "house_price": 24728
-            }
         }
     },
     "00000306": {
@@ -4079,38 +3357,6 @@
                 "vandkraft": 0,
                 "elektricitet": 113,
                 "omgivelsesvarme": 72
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 561,
-                "apartment_price": 11606,
-                "house_price": 14927
-            },
-            "2020": {
-                "mwh_price": 561,
-                "apartment_price": 11672,
-                "house_price": 15041
-            },
-            "2021": {
-                "mwh_price": 561,
-                "apartment_price": 11672,
-                "house_price": 15041
-            },
-            "2022": {
-                "mwh_price": 625,
-                "apartment_price": 12656,
-                "house_price": 16244
-            },
-            "2023": {
-                "mwh_price": 900,
-                "apartment_price": 16781,
-                "house_price": 21221
-            },
-            "2024": {
-                "mwh_price": 900,
-                "apartment_price": 17063,
-                "house_price": 21709
             }
         }
     },
@@ -4186,38 +3432,6 @@
                 "elektricitet": 6,
                 "omgivelsesvarme": 12
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 599,
-                "apartment_price": 12714,
-                "house_price": 16898
-            },
-            "2020": {
-                "mwh_price": 606,
-                "apartment_price": 12828,
-                "house_price": 17076
-            },
-            "2021": {
-                "mwh_price": 604,
-                "apartment_price": 12800,
-                "house_price": 17014
-            },
-            "2022": {
-                "mwh_price": 604,
-                "apartment_price": 12800,
-                "house_price": 17014
-            },
-            "2023": {
-                "mwh_price": 1099,
-                "apartment_price": 20244,
-                "house_price": 25976
-            },
-            "2024": {
-                "mwh_price": 809,
-                "apartment_price": 15934,
-                "house_price": 20794
-            }
         }
     },
     "00000320": {
@@ -4291,38 +3505,6 @@
                 "vandkraft": 0,
                 "elektricitet": 76,
                 "omgivelsesvarme": 1
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 510,
-                "apartment_price": 10468,
-                "house_price": 13660
-            },
-            "2020": {
-                "mwh_price": 524,
-                "apartment_price": 10870,
-                "house_price": 14251
-            },
-            "2021": {
-                "mwh_price": 556,
-                "apartment_price": 11146,
-                "house_price": 14473
-            },
-            "2022": {
-                "mwh_price": 533,
-                "apartment_price": 10598,
-                "house_price": 13707
-            },
-            "2023": {
-                "mwh_price": 660,
-                "apartment_price": 11344,
-                "house_price": 14367
-            },
-            "2024": {
-                "mwh_price": 674,
-                "apartment_price": 13008,
-                "house_price": 16759
             }
         }
     },
@@ -4398,38 +3580,6 @@
                 "elektricitet": 160,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 684,
-                "apartment_price": 15014,
-                "house_price": 18456
-            },
-            "2020": {
-                "mwh_price": 656,
-                "apartment_price": 15015,
-                "house_price": 18643
-            },
-            "2021": {
-                "mwh_price": 649,
-                "apartment_price": 14751,
-                "house_price": 18472
-            },
-            "2022": {
-                "mwh_price": 646,
-                "apartment_price": 14644,
-                "house_price": 18319
-            },
-            "2023": {
-                "mwh_price": 713,
-                "apartment_price": 15654,
-                "house_price": 19536
-            },
-            "2024": {
-                "mwh_price": 737,
-                "apartment_price": 16285,
-                "house_price": 20342
-            }
         }
     },
     "00000329": {
@@ -4503,38 +3653,6 @@
                 "vandkraft": 0,
                 "elektricitet": 40,
                 "omgivelsesvarme": 88
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 458,
-                "apartment_price": 9152,
-                "house_price": 11765
-            },
-            "2020": {
-                "mwh_price": 458,
-                "apartment_price": 9152,
-                "house_price": 11765
-            },
-            "2021": {
-                "mwh_price": 411,
-                "apartment_price": 8458,
-                "house_price": 10928
-            },
-            "2022": {
-                "mwh_price": 441,
-                "apartment_price": 8903,
-                "house_price": 11465
-            },
-            "2023": {
-                "mwh_price": 570,
-                "apartment_price": 10990,
-                "house_price": 14006
-            },
-            "2024": {
-                "mwh_price": 570,
-                "apartment_price": 10991,
-                "house_price": 14064
             }
         }
     },
@@ -4610,38 +3728,6 @@
                 "elektricitet": 1,
                 "omgivelsesvarme": 1
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 488,
-                "apartment_price": 10379,
-                "house_price": 13722
-            },
-            "2020": {
-                "mwh_price": 706,
-                "apartment_price": 13660,
-                "house_price": 17681
-            },
-            "2021": {
-                "mwh_price": 552,
-                "apartment_price": 11335,
-                "house_price": 14876
-            },
-            "2022": {
-                "mwh_price": 496,
-                "apartment_price": 10510,
-                "house_price": 13880
-            },
-            "2023": {
-                "mwh_price": 518,
-                "apartment_price": 10876,
-                "house_price": 14346
-            },
-            "2024": {
-                "mwh_price": 668,
-                "apartment_price": 13374,
-                "house_price": 17380
-            }
         }
     },
     "00000340": {
@@ -4715,38 +3801,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 525,
-                "apartment_price": 8691,
-                "house_price": 10918
-            },
-            "2020": {
-                "mwh_price": 799,
-                "apartment_price": 12735,
-                "house_price": 15765
-            },
-            "2021": {
-                "mwh_price": 799,
-                "apartment_price": 12735,
-                "house_price": 15764
-            },
-            "2022": {
-                "mwh_price": 510,
-                "apartment_price": 9806,
-                "house_price": 12969
-            },
-            "2023": {
-                "mwh_price": 1051,
-                "apartment_price": 18581,
-                "house_price": 23903
-            },
-            "2024": {
-                "mwh_price": 956,
-                "apartment_price": 17063,
-                "house_price": 22021
             }
         }
     },
@@ -4822,38 +3876,6 @@
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 676,
-                "apartment_price": 12039,
-                "house_price": 15068
-            },
-            "2020": {
-                "mwh_price": 676,
-                "apartment_price": 12039,
-                "house_price": 15068
-            },
-            "2021": {
-                "mwh_price": 676,
-                "apartment_price": 12039,
-                "house_price": 15068
-            },
-            "2022": {
-                "mwh_price": 735,
-                "apartment_price": 12920,
-                "house_price": 16131
-            },
-            "2023": {
-                "mwh_price": 998,
-                "apartment_price": 16858,
-                "house_price": 20882
-            },
-            "2024": {
-                "mwh_price": 913,
-                "apartment_price": 15583,
-                "house_price": 19344
-            }
         }
     },
     "00000360": {
@@ -4927,38 +3949,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 389,
-                "apartment_price": 8880,
-                "house_price": 11480
-            },
-            "2020": {
-                "mwh_price": 377,
-                "apartment_price": 9093,
-                "house_price": 11847
-            },
-            "2021": {
-                "mwh_price": 381,
-                "apartment_price": 9288,
-                "house_price": 12147
-            },
-            "2022": {
-                "mwh_price": 387,
-                "apartment_price": 9500,
-                "house_price": 12503
-            },
-            "2023": {
-                "mwh_price": 443,
-                "apartment_price": 11229,
-                "house_price": 14659
-            },
-            "2024": {
-                "mwh_price": 466,
-                "apartment_price": 10568,
-                "house_price": 13554
             }
         }
     },
@@ -5034,38 +4024,6 @@
                 "elektricitet": 9,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 526,
-                "apartment_price": 11721,
-                "house_price": 14798
-            },
-            "2020": {
-                "mwh_price": 496,
-                "apartment_price": 10996,
-                "house_price": 14239
-            },
-            "2021": {
-                "mwh_price": 514,
-                "apartment_price": 11141,
-                "house_price": 14350
-            },
-            "2022": {
-                "mwh_price": 551,
-                "apartment_price": 11836,
-                "house_price": 15247
-            },
-            "2023": {
-                "mwh_price": 724,
-                "apartment_price": 14544,
-                "house_price": 18435
-            },
-            "2024": {
-                "mwh_price": 712,
-                "apartment_price": 14354,
-                "house_price": 18376
-            }
         }
     },
     "00000376": {
@@ -5139,38 +4097,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 518,
-                "apartment_price": 11829,
-                "house_price": 15633
-            },
-            "2020": {
-                "mwh_price": 521,
-                "apartment_price": 11902,
-                "house_price": 15696
-            },
-            "2021": {
-                "mwh_price": 479,
-                "apartment_price": 11058,
-                "house_price": 14534
-            },
-            "2022": {
-                "mwh_price": 489,
-                "apartment_price": 10072,
-                "house_price": 14564
-            },
-            "2023": {
-                "mwh_price": 491,
-                "apartment_price": 11035,
-                "house_price": 14251
-            },
-            "2024": {
-                "mwh_price": 501,
-                "apartment_price": 11590,
-                "house_price": 14986
             }
         }
     },
@@ -5246,38 +4172,6 @@
                 "elektricitet": 24,
                 "omgivelsesvarme": 36
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 634,
-                "apartment_price": 12375,
-                "house_price": 15977
-            },
-            "2020": {
-                "mwh_price": 604,
-                "apartment_price": 11845,
-                "house_price": 15295
-            },
-            "2021": {
-                "mwh_price": 604,
-                "apartment_price": 11947,
-                "house_price": 15435
-            },
-            "2022": {
-                "mwh_price": 622,
-                "apartment_price": 12168,
-                "house_price": 15675
-            },
-            "2023": {
-                "mwh_price": 770,
-                "apartment_price": 15312,
-                "house_price": 19448
-            },
-            "2024": {
-                "mwh_price": 801,
-                "apartment_price": 15663,
-                "house_price": 19827
-            }
         }
     },
     "00000400": {
@@ -5351,38 +4245,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 588,
-                "apartment_price": 13412,
-                "house_price": 16378
-            },
-            "2020": {
-                "mwh_price": 588,
-                "apartment_price": 13312,
-                "house_price": 16278
-            },
-            "2021": {
-                "mwh_price": 766,
-                "apartment_price": 15672,
-                "house_price": 19190
-            },
-            "2022": {
-                "mwh_price": 645,
-                "apartment_price": 13846,
-                "house_price": 16986
-            },
-            "2023": {
-                "mwh_price": 701,
-                "apartment_price": 14690,
-                "house_price": 18004
-            },
-            "2024": {
-                "mwh_price": 760,
-                "apartment_price": 16160,
-                "house_price": 20048
             }
         }
     },
@@ -5458,38 +4320,6 @@
                 "elektricitet": 0,
                 "omgivelsesvarme": 1
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 538,
-                "apartment_price": 10542,
-                "house_price": 13445
-            },
-            "2020": {
-                "mwh_price": 554,
-                "apartment_price": 10792,
-                "house_price": 13747
-            },
-            "2021": {
-                "mwh_price": 614,
-                "apartment_price": 12097,
-                "house_price": 15684
-            },
-            "2022": {
-                "mwh_price": 620,
-                "apartment_price": 12191,
-                "house_price": 15797
-            },
-            "2023": {
-                "mwh_price": 856,
-                "apartment_price": 15795,
-                "house_price": 20184
-            },
-            "2024": {
-                "mwh_price": 936,
-                "apartment_price": 15969,
-                "house_price": 19850
-            }
         }
     },
     "00000420": {
@@ -5563,38 +4393,6 @@
                 "vandkraft": 0,
                 "elektricitet": 76,
                 "omgivelsesvarme": 78
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 466,
-                "apartment_price": 10040,
-                "house_price": 13021
-            },
-            "2020": {
-                "mwh_price": 495,
-                "apartment_price": 9834,
-                "house_price": 12672
-            },
-            "2021": {
-                "mwh_price": 468,
-                "apartment_price": 9750,
-                "house_price": 12619
-            },
-            "2022": {
-                "mwh_price": 446,
-                "apartment_price": 9377,
-                "house_price": 12144
-            },
-            "2023": {
-                "mwh_price": 651,
-                "apartment_price": 12739,
-                "house_price": 16179
-            },
-            "2024": {
-                "mwh_price": 684,
-                "apartment_price": 13223,
-                "house_price": 16812
             }
         }
     },
@@ -5670,38 +4468,6 @@
                 "elektricitet": 53,
                 "omgivelsesvarme": 94
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 577,
-                "apartment_price": 10885,
-                "house_price": 13880
-            },
-            "2020": {
-                "mwh_price": 577,
-                "apartment_price": 10885,
-                "house_price": 13880
-            },
-            "2021": {
-                "mwh_price": 506,
-                "apartment_price": 9822,
-                "house_price": 12598
-            },
-            "2022": {
-                "mwh_price": 521,
-                "apartment_price": 9885,
-                "house_price": 12592
-            },
-            "2023": {
-                "mwh_price": 852,
-                "apartment_price": 14912,
-                "house_price": 18688
-            },
-            "2024": {
-                "mwh_price": 761,
-                "apartment_price": 13449,
-                "house_price": 16873
-            }
         }
     },
     "00000440": {
@@ -5775,38 +4541,6 @@
                 "vandkraft": 0,
                 "elektricitet": 2,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 601,
-                "apartment_price": 11390,
-                "house_price": 14462
-            },
-            "2020": {
-                "mwh_price": 561,
-                "apartment_price": 10790,
-                "house_price": 13738
-            },
-            "2021": {
-                "mwh_price": 400,
-                "apartment_price": 9093,
-                "house_price": 12049
-            },
-            "2022": {
-                "mwh_price": 400,
-                "apartment_price": 9991,
-                "house_price": 12774
-            },
-            "2023": {
-                "mwh_price": 500,
-                "apartment_price": 11968,
-                "house_price": 15144
-            },
-            "2024": {
-                "mwh_price": 525,
-                "apartment_price": 12441,
-                "house_price": 15715
             }
         }
     },
@@ -5882,38 +4616,6 @@
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 560,
-                "apartment_price": 9950,
-                "house_price": 12456
-            },
-            "2020": {
-                "mwh_price": 560,
-                "apartment_price": 9950,
-                "house_price": 12456
-            },
-            "2021": {
-                "mwh_price": 560,
-                "apartment_price": 9950,
-                "house_price": 12456
-            },
-            "2022": {
-                "mwh_price": 580,
-                "apartment_price": 10250,
-                "house_price": 12818
-            },
-            "2023": {
-                "mwh_price": 660,
-                "apartment_price": 11725,
-                "house_price": 14651
-            },
-            "2024": {
-                "mwh_price": 660,
-                "apartment_price": 11725,
-                "house_price": 14651
-            }
         }
     },
     "00000461": {
@@ -5987,38 +4689,6 @@
                 "vandkraft": 0,
                 "elektricitet": 852,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 470,
-                "apartment_price": 8313,
-                "house_price": 10457
-            },
-            "2020": {
-                "mwh_price": 493,
-                "apartment_price": 8650,
-                "house_price": 10864
-            },
-            "2021": {
-                "mwh_price": 493,
-                "apartment_price": 8650,
-                "house_price": 10864
-            },
-            "2022": {
-                "mwh_price": 485,
-                "apartment_price": 8538,
-                "house_price": 10729
-            },
-            "2023": {
-                "mwh_price": 485,
-                "apartment_price": 8538,
-                "house_price": 10729
-            },
-            "2024": {
-                "mwh_price": 593,
-                "apartment_price": 10150,
-                "house_price": 12674
             }
         }
     },
@@ -6094,38 +4764,6 @@
                 "elektricitet": 130,
                 "omgivelsesvarme": 130
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 498,
-                "apartment_price": 10129,
-                "house_price": 12994
-            },
-            "2020": {
-                "mwh_price": 535,
-                "apartment_price": 10642,
-                "house_price": 13596
-            },
-            "2021": {
-                "mwh_price": 465,
-                "apartment_price": 9713,
-                "house_price": 12536
-            },
-            "2022": {
-                "mwh_price": 535,
-                "apartment_price": 10769,
-                "house_price": 13811
-            },
-            "2023": {
-                "mwh_price": 770,
-                "apartment_price": 14289,
-                "house_price": 18111
-            },
-            "2024": {
-                "mwh_price": 772,
-                "apartment_price": 14351,
-                "house_price": 18149
-            }
         }
     },
     "00000480": {
@@ -6199,38 +4837,6 @@
                 "vandkraft": 0,
                 "elektricitet": 15,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 338,
-                "apartment_price": 7344,
-                "house_price": 9421
-            },
-            "2020": {
-                "mwh_price": 338,
-                "apartment_price": 7344,
-                "house_price": 9421
-            },
-            "2021": {
-                "mwh_price": 338,
-                "apartment_price": 7344,
-                "house_price": 9421
-            },
-            "2022": {
-                "mwh_price": 375,
-                "apartment_price": 7906,
-                "house_price": 10100
-            },
-            "2023": {
-                "mwh_price": 438,
-                "apartment_price": 8844,
-                "house_price": 11231
-            },
-            "2024": {
-                "mwh_price": 500,
-                "apartment_price": 9781,
-                "house_price": 12363
             }
         }
     },
@@ -6306,38 +4912,6 @@
                 "elektricitet": 20,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 543,
-                "apartment_price": 11838,
-                "house_price": 14947
-            },
-            "2020": {
-                "mwh_price": 543,
-                "apartment_price": 11650,
-                "house_price": 14626
-            },
-            "2021": {
-                "mwh_price": 538,
-                "apartment_price": 10329,
-                "house_price": 12796
-            },
-            "2022": {
-                "mwh_price": 518,
-                "apartment_price": 10933,
-                "house_price": 13702
-            },
-            "2023": {
-                "mwh_price": 598,
-                "apartment_price": 12169,
-                "house_price": 15185
-            },
-            "2024": {
-                "mwh_price": 618,
-                "apartment_price": 11569,
-                "house_price": 14189
-            }
         }
     },
     "00000492": {
@@ -6411,38 +4985,6 @@
                 "vandkraft": 0,
                 "elektricitet": 3,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 684,
-                "apartment_price": 15929,
-                "house_price": 18200
-            },
-            "2020": {
-                "mwh_price": 718,
-                "apartment_price": 16429,
-                "house_price": 18903
-            },
-            "2021": {
-                "mwh_price": 718,
-                "apartment_price": 16213,
-                "house_price": 18595
-            },
-            "2022": {
-                "mwh_price": 613,
-                "apartment_price": 14658,
-                "house_price": 16810
-            },
-            "2023": {
-                "mwh_price": 871,
-                "apartment_price": 18759,
-                "house_price": 21617
-            },
-            "2024": {
-                "mwh_price": 846,
-                "apartment_price": 18551,
-                "house_price": 21331
             }
         }
     },
@@ -6518,38 +5060,6 @@
                 "elektricitet": 62,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 626,
-                "apartment_price": 11637,
-                "house_price": 14860
-            },
-            "2020": {
-                "mwh_price": 634,
-                "apartment_price": 11762,
-                "house_price": 15011
-            },
-            "2021": {
-                "mwh_price": 618,
-                "apartment_price": 11512,
-                "house_price": 14710
-            },
-            "2022": {
-                "mwh_price": 730,
-                "apartment_price": 13350,
-                "house_price": 17006
-            },
-            "2023": {
-                "mwh_price": 911,
-                "apartment_price": 15187,
-                "house_price": 18740
-            },
-            "2024": {
-                "mwh_price": 713,
-                "apartment_price": 13156,
-                "house_price": 16783
-            }
         }
     },
     "00000530": {
@@ -6623,38 +5133,6 @@
                 "vandkraft": 0,
                 "elektricitet": 123,
                 "omgivelsesvarme": 10
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 350,
-                "apartment_price": 8967,
-                "house_price": 11290
-            },
-            "2020": {
-                "mwh_price": 387,
-                "apartment_price": 9278,
-                "house_price": 11717
-            },
-            "2021": {
-                "mwh_price": 322,
-                "apartment_price": 7408,
-                "house_price": 9448
-            },
-            "2022": {
-                "mwh_price": 388,
-                "apartment_price": 9250,
-                "house_price": 11660
-            },
-            "2023": {
-                "mwh_price": 443,
-                "apartment_price": 9316,
-                "house_price": 11802
-            },
-            "2024": {
-                "mwh_price": 543,
-                "apartment_price": 11816,
-                "house_price": 14889
             }
         }
     },
@@ -6730,38 +5208,6 @@
                 "elektricitet": 57,
                 "omgivelsesvarme": 43
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 486,
-                "apartment_price": 10423,
-                "house_price": 13342
-            },
-            "2020": {
-                "mwh_price": 486,
-                "apartment_price": 10499,
-                "house_price": 13472
-            },
-            "2021": {
-                "mwh_price": 443,
-                "apartment_price": 10058,
-                "house_price": 12920
-            },
-            "2022": {
-                "mwh_price": 470,
-                "apartment_price": 10502,
-                "house_price": 13510
-            },
-            "2023": {
-                "mwh_price": 751,
-                "apartment_price": 14712,
-                "house_price": 18590
-            },
-            "2024": {
-                "mwh_price": 673,
-                "apartment_price": 13540,
-                "house_price": 17175
-            }
         }
     },
     "00000550": {
@@ -6835,38 +5281,6 @@
                 "vandkraft": 0,
                 "elektricitet": 185,
                 "omgivelsesvarme": 72
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 621,
-                "apartment_price": 13094,
-                "house_price": 16362
-            },
-            "2020": {
-                "mwh_price": 601,
-                "apartment_price": 12759,
-                "house_price": 15941
-            },
-            "2021": {
-                "mwh_price": 577,
-                "apartment_price": 12438,
-                "house_price": 15568
-            },
-            "2022": {
-                "mwh_price": 590,
-                "apartment_price": 12561,
-                "house_price": 15834
-            },
-            "2023": {
-                "mwh_price": 845,
-                "apartment_price": 16298,
-                "house_price": 20735
-            },
-            "2024": {
-                "mwh_price": 728,
-                "apartment_price": 14958,
-                "house_price": 18864
             }
         }
     },
@@ -6942,38 +5356,6 @@
                 "elektricitet": 552,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 478,
-                "apartment_price": 9762,
-                "house_price": 12438
-            },
-            "2020": {
-                "mwh_price": 473,
-                "apartment_price": 9710,
-                "house_price": 12362
-            },
-            "2021": {
-                "mwh_price": 463,
-                "apartment_price": 9514,
-                "house_price": 12110
-            },
-            "2022": {
-                "mwh_price": 510,
-                "apartment_price": 10252,
-                "house_price": 13029
-            },
-            "2023": {
-                "mwh_price": 722,
-                "apartment_price": 13576,
-                "house_price": 17062
-            },
-            "2024": {
-                "mwh_price": 696,
-                "apartment_price": 13340,
-                "house_price": 16583
-            }
         }
     },
     "00000563": {
@@ -7047,38 +5429,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 788,
-                "apartment_price": 16063,
-                "house_price": 18504
-            },
-            "2020": {
-                "mwh_price": 833,
-                "apartment_price": 16238,
-                "house_price": 18818
-            },
-            "2021": {
-                "mwh_price": 850,
-                "apartment_price": 16507,
-                "house_price": 19143
-            },
-            "2022": {
-                "mwh_price": 864,
-                "apartment_price": 16709,
-                "house_price": 19387
-            },
-            "2023": {
-                "mwh_price": 1071,
-                "apartment_price": 20315,
-                "house_price": 23635
-            },
-            "2024": {
-                "mwh_price": 1269,
-                "apartment_price": 23281,
-                "house_price": 27214
             }
         }
     },
@@ -7154,38 +5504,6 @@
                 "elektricitet": 99,
                 "omgivelsesvarme": 27
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 490,
-                "apartment_price": 11516,
-                "house_price": 14499
-            },
-            "2020": {
-                "mwh_price": 512,
-                "apartment_price": 11921,
-                "house_price": 15027
-            },
-            "2021": {
-                "mwh_price": 505,
-                "apartment_price": 11898,
-                "house_price": 15014
-            },
-            "2022": {
-                "mwh_price": 586,
-                "apartment_price": 12995,
-                "house_price": 16320
-            },
-            "2023": {
-                "mwh_price": 873,
-                "apartment_price": 17681,
-                "house_price": 21979
-            },
-            "2024": {
-                "mwh_price": 756,
-                "apartment_price": 15690,
-                "house_price": 19541
-            }
         }
     },
     "00000575": {
@@ -7259,38 +5577,6 @@
                 "vandkraft": 0,
                 "elektricitet": 70,
                 "omgivelsesvarme": 24
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 547,
-                "apartment_price": 10633,
-                "house_price": 13514
-            },
-            "2020": {
-                "mwh_price": 528,
-                "apartment_price": 10422,
-                "house_price": 13296
-            },
-            "2021": {
-                "mwh_price": 475,
-                "apartment_price": 9555,
-                "house_price": 12213
-            },
-            "2022": {
-                "mwh_price": 552,
-                "apartment_price": 10708,
-                "house_price": 13605
-            },
-            "2023": {
-                "mwh_price": 773,
-                "apartment_price": 14027,
-                "house_price": 17610
-            },
-            "2024": {
-                "mwh_price": 688,
-                "apartment_price": 12801,
-                "house_price": 16155
             }
         }
     },
@@ -7366,38 +5652,6 @@
                 "elektricitet": 3,
                 "omgivelsesvarme": 4
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 485,
-                "apartment_price": 10282,
-                "house_price": 12858
-            },
-            "2020": {
-                "mwh_price": 528,
-                "apartment_price": 10942,
-                "house_price": 13664
-            },
-            "2021": {
-                "mwh_price": 510,
-                "apartment_price": 10607,
-                "house_price": 13246
-            },
-            "2022": {
-                "mwh_price": 465,
-                "apartment_price": 9905,
-                "house_price": 12404
-            },
-            "2023": {
-                "mwh_price": 528,
-                "apartment_price": 11271,
-                "house_price": 13967
-            },
-            "2024": {
-                "mwh_price": 591,
-                "apartment_price": 12140,
-                "house_price": 15031
-            }
         }
     },
     "00000607": {
@@ -7471,38 +5725,6 @@
                 "vandkraft": 0,
                 "elektricitet": 35,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 306,
-                "apartment_price": 7090,
-                "house_price": 9414
-            },
-            "2020": {
-                "mwh_price": 297,
-                "apartment_price": 6955,
-                "house_price": 9251
-            },
-            "2021": {
-                "mwh_price": 261,
-                "apartment_price": 6415,
-                "house_price": 8599
-            },
-            "2022": {
-                "mwh_price": 270,
-                "apartment_price": 6550,
-                "house_price": 8762
-            },
-            "2023": {
-                "mwh_price": 410,
-                "apartment_price": 9018,
-                "house_price": 11937
-            },
-            "2024": {
-                "mwh_price": 378,
-                "apartment_price": 8639,
-                "house_price": 11529
             }
         }
     },
@@ -7578,38 +5800,6 @@
                 "elektricitet": 142,
                 "omgivelsesvarme": 44
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 474,
-                "apartment_price": 9601,
-                "house_price": 12364
-            },
-            "2020": {
-                "mwh_price": 419,
-                "apartment_price": 8632,
-                "house_price": 11149
-            },
-            "2021": {
-                "mwh_price": 410,
-                "apartment_price": 8699,
-                "house_price": 11298
-            },
-            "2022": {
-                "mwh_price": 438,
-                "apartment_price": 9195,
-                "house_price": 11922
-            },
-            "2023": {
-                "mwh_price": 562,
-                "apartment_price": 11209,
-                "house_price": 14393
-            },
-            "2024": {
-                "mwh_price": 522,
-                "apartment_price": 10699,
-                "house_price": 13844
-            }
         }
     },
     "00000621": {
@@ -7683,38 +5873,6 @@
                 "vandkraft": 5,
                 "elektricitet": 20,
                 "omgivelsesvarme": 4
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 632,
-                "apartment_price": 12479,
-                "house_price": 15284
-            },
-            "2020": {
-                "mwh_price": 583,
-                "apartment_price": 11748,
-                "house_price": 14402
-            },
-            "2021": {
-                "mwh_price": 520,
-                "apartment_price": 10811,
-                "house_price": 13270
-            },
-            "2022": {
-                "mwh_price": 563,
-                "apartment_price": 11448,
-                "house_price": 14040
-            },
-            "2023": {
-                "mwh_price": 877,
-                "apartment_price": 16162,
-                "house_price": 19728
-            },
-            "2024": {
-                "mwh_price": 752,
-                "apartment_price": 14287,
-                "house_price": 17465
             }
         }
     },
@@ -7790,38 +5948,6 @@
                 "elektricitet": 70,
                 "omgivelsesvarme": 21
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 555,
-                "apartment_price": 10319,
-                "house_price": 13675
-            },
-            "2020": {
-                "mwh_price": 552,
-                "apartment_price": 10613,
-                "house_price": 13613
-            },
-            "2021": {
-                "mwh_price": 531,
-                "apartment_price": 10166,
-                "house_price": 13063
-            },
-            "2022": {
-                "mwh_price": 500,
-                "apartment_price": 9786,
-                "house_price": 12586
-            },
-            "2023": {
-                "mwh_price": 633,
-                "apartment_price": 11852,
-                "house_price": 15107
-            },
-            "2024": {
-                "mwh_price": 692,
-                "apartment_price": 12784,
-                "house_price": 16255
-            }
         }
     },
     "00000657": {
@@ -7895,38 +6021,6 @@
                 "vandkraft": 0,
                 "elektricitet": 126,
                 "omgivelsesvarme": 87
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 494,
-                "apartment_price": 10607,
-                "house_price": 13609
-            },
-            "2020": {
-                "mwh_price": 525,
-                "apartment_price": 11177,
-                "house_price": 14350
-            },
-            "2021": {
-                "mwh_price": 484,
-                "apartment_price": 10605,
-                "house_price": 13680
-            },
-            "2022": {
-                "mwh_price": 493,
-                "apartment_price": 10732,
-                "house_price": 13769
-            },
-            "2023": {
-                "mwh_price": 773,
-                "apartment_price": 15397,
-                "house_price": 19641
-            },
-            "2024": {
-                "mwh_price": 637,
-                "apartment_price": 13514,
-                "house_price": 17338
             }
         }
     },
@@ -8002,38 +6096,6 @@
                 "elektricitet": 21,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 488,
-                "apartment_price": 10753,
-                "house_price": 13778
-            },
-            "2020": {
-                "mwh_price": 508,
-                "apartment_price": 11048,
-                "house_price": 14073
-            },
-            "2021": {
-                "mwh_price": 514,
-                "apartment_price": 11087,
-                "house_price": 14128
-            },
-            "2022": {
-                "mwh_price": 528,
-                "apartment_price": 11290,
-                "house_price": 14374
-            },
-            "2023": {
-                "mwh_price": 573,
-                "apartment_price": 12494,
-                "house_price": 15900
-            },
-            "2024": {
-                "mwh_price": 632,
-                "apartment_price": 13030,
-                "house_price": 16499
-            }
         }
     },
     "00000665": {
@@ -8107,38 +6169,6 @@
                 "vandkraft": 0,
                 "elektricitet": 69,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 368,
-                "apartment_price": 8670,
-                "house_price": 11092
-            },
-            "2020": {
-                "mwh_price": 401,
-                "apartment_price": 9347,
-                "house_price": 11928
-            },
-            "2021": {
-                "mwh_price": 388,
-                "apartment_price": 9160,
-                "house_price": 11701
-            },
-            "2022": {
-                "mwh_price": 386,
-                "apartment_price": 9278,
-                "house_price": 11881
-            },
-            "2023": {
-                "mwh_price": 463,
-                "apartment_price": 10825,
-                "house_price": 13902
-            },
-            "2024": {
-                "mwh_price": 408,
-                "apartment_price": 9725,
-                "house_price": 12693
             }
         }
     },
@@ -8214,38 +6244,6 @@
                 "elektricitet": 12,
                 "omgivelsesvarme": 16
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 495,
-                "apartment_price": 9922,
-                "house_price": 12801
-            },
-            "2020": {
-                "mwh_price": 460,
-                "apartment_price": 9388,
-                "house_price": 12031
-            },
-            "2021": {
-                "mwh_price": 497,
-                "apartment_price": 9950,
-                "house_price": 12834
-            },
-            "2022": {
-                "mwh_price": 512,
-                "apartment_price": 10175,
-                "house_price": 13106
-            },
-            "2023": {
-                "mwh_price": 605,
-                "apartment_price": 11562,
-                "house_price": 14780
-            },
-            "2024": {
-                "mwh_price": 605,
-                "apartment_price": 11562,
-                "house_price": 14780
-            }
         }
     },
     "00000706": {
@@ -8319,38 +6317,6 @@
                 "vandkraft": 0,
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 562,
-                "apartment_price": 10980,
-                "house_price": 13554
-            },
-            "2020": {
-                "mwh_price": 557,
-                "apartment_price": 11588,
-                "house_price": 14479
-            },
-            "2021": {
-                "mwh_price": 564,
-                "apartment_price": 12423,
-                "house_price": 15758
-            },
-            "2022": {
-                "mwh_price": 552,
-                "apartment_price": 12081,
-                "house_price": 15254
-            },
-            "2023": {
-                "mwh_price": 634,
-                "apartment_price": 13311,
-                "house_price": 16695
-            },
-            "2024": {
-                "mwh_price": 661,
-                "apartment_price": 13899,
-                "house_price": 17422
             }
         }
     },
@@ -8426,38 +6392,6 @@
                 "elektricitet": 20,
                 "omgivelsesvarme": 47
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 500,
-                "apartment_price": 10566,
-                "house_price": 13608
-            },
-            "2020": {
-                "mwh_price": 506,
-                "apartment_price": 10622,
-                "house_price": 13656
-            },
-            "2021": {
-                "mwh_price": 498,
-                "apartment_price": 11210,
-                "house_price": 14220
-            },
-            "2022": {
-                "mwh_price": 495,
-                "apartment_price": 10579,
-                "house_price": 13579
-            },
-            "2023": {
-                "mwh_price": 590,
-                "apartment_price": 12237,
-                "house_price": 15611
-            },
-            "2024": {
-                "mwh_price": 617,
-                "apartment_price": 12171,
-                "house_price": 15386
-            }
         }
     },
     "00000710": {
@@ -8531,38 +6465,6 @@
                 "vandkraft": 0,
                 "elektricitet": 40,
                 "omgivelsesvarme": 5
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 483,
-                "apartment_price": 10041,
-                "house_price": 12404
-            },
-            "2020": {
-                "mwh_price": 442,
-                "apartment_price": 9997,
-                "house_price": 11984
-            },
-            "2021": {
-                "mwh_price": 429,
-                "apartment_price": 9474,
-                "house_price": 11767
-            },
-            "2022": {
-                "mwh_price": 518,
-                "apartment_price": 11160,
-                "house_price": 13811
-            },
-            "2023": {
-                "mwh_price": 927,
-                "apartment_price": 17184,
-                "house_price": 21342
-            },
-            "2024": {
-                "mwh_price": 662,
-                "apartment_price": 13477,
-                "house_price": 16909
             }
         }
     },
@@ -8638,38 +6540,6 @@
                 "elektricitet": 15,
                 "omgivelsesvarme": 24
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 584,
-                "apartment_price": 13764,
-                "house_price": 16581
-            },
-            "2020": {
-                "mwh_price": 600,
-                "apartment_price": 13779,
-                "house_price": 17119
-            },
-            "2021": {
-                "mwh_price": 632,
-                "apartment_price": 14856,
-                "house_price": 18414
-            },
-            "2022": {
-                "mwh_price": 582,
-                "apartment_price": 14106,
-                "house_price": 17508
-            },
-            "2023": {
-                "mwh_price": 644,
-                "apartment_price": 14969,
-                "house_price": 18564
-            },
-            "2024": {
-                "mwh_price": 682,
-                "apartment_price": 14688,
-                "house_price": 19087
-            }
         }
     },
     "00000730": {
@@ -8743,38 +6613,6 @@
                 "vandkraft": 0,
                 "elektricitet": 64,
                 "omgivelsesvarme": 33
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 555,
-                "apartment_price": 10736,
-                "house_price": 15547
-            },
-            "2020": {
-                "mwh_price": 579,
-                "apartment_price": 10785,
-                "house_price": 15980
-            },
-            "2021": {
-                "mwh_price": 515,
-                "apartment_price": 9934,
-                "house_price": 14588
-            },
-            "2022": {
-                "mwh_price": 549,
-                "apartment_price": 11051,
-                "house_price": 15983
-            },
-            "2023": {
-                "mwh_price": 697,
-                "apartment_price": 15596,
-                "house_price": 19266
-            },
-            "2024": {
-                "mwh_price": 698,
-                "apartment_price": 15990,
-                "house_price": 19862
             }
         }
     },
@@ -8850,38 +6688,6 @@
                 "elektricitet": 343,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 561,
-                "apartment_price": 11454,
-                "house_price": 13868
-            },
-            "2020": {
-                "mwh_price": 569,
-                "apartment_price": 11567,
-                "house_price": 14004
-            },
-            "2021": {
-                "mwh_price": 515,
-                "apartment_price": 10682,
-                "house_price": 13024
-            },
-            "2022": {
-                "mwh_price": 728,
-                "apartment_price": 13722,
-                "house_price": 16726
-            },
-            "2023": {
-                "mwh_price": 955,
-                "apartment_price": 17122,
-                "house_price": 20829
-            },
-            "2024": {
-                "mwh_price": 800,
-                "apartment_price": 15020,
-                "house_price": 18245
-            }
         }
     },
     "00000741": {
@@ -8955,38 +6761,6 @@
                 "vandkraft": 0,
                 "elektricitet": 1,
                 "omgivelsesvarme": 1
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 752,
-                "apartment_price": 15483,
-                "house_price": 17812
-            },
-            "2020": {
-                "mwh_price": 752,
-                "apartment_price": 15483,
-                "house_price": 17812
-            },
-            "2021": {
-                "mwh_price": 766,
-                "apartment_price": 15030,
-                "house_price": 17792
-            },
-            "2022": {
-                "mwh_price": 743,
-                "apartment_price": 14950,
-                "house_price": 17641
-            },
-            "2023": {
-                "mwh_price": 815,
-                "apartment_price": 15457,
-                "house_price": 17985
-            },
-            "2024": {
-                "mwh_price": 875,
-                "apartment_price": 16945,
-                "house_price": 20082
             }
         }
     },
@@ -9062,38 +6836,6 @@
                 "elektricitet": 64,
                 "omgivelsesvarme": 94
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 383,
-                "apartment_price": 9657,
-                "house_price": 12536
-            },
-            "2020": {
-                "mwh_price": 390,
-                "apartment_price": 9432,
-                "house_price": 12197
-            },
-            "2021": {
-                "mwh_price": 344,
-                "apartment_price": 8888,
-                "house_price": 11510
-            },
-            "2022": {
-                "mwh_price": 354,
-                "apartment_price": 9038,
-                "house_price": 11691
-            },
-            "2023": {
-                "mwh_price": 483,
-                "apartment_price": 13521,
-                "house_price": 17319
-            },
-            "2024": {
-                "mwh_price": 484,
-                "apartment_price": 11252,
-                "house_price": 14314
-            }
         }
     },
     "00000751": {
@@ -9167,38 +6909,6 @@
                 "vandkraft": 0,
                 "elektricitet": 2491,
                 "omgivelsesvarme": 2
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 566,
-                "apartment_price": 10490,
-                "house_price": 13218
-            },
-            "2020": {
-                "mwh_price": 563,
-                "apartment_price": 10451,
-                "house_price": 13194
-            },
-            "2021": {
-                "mwh_price": 658,
-                "apartment_price": 11883,
-                "house_price": 14938
-            },
-            "2022": {
-                "mwh_price": 600,
-                "apartment_price": 11104,
-                "house_price": 14026
-            },
-            "2023": {
-                "mwh_price": 612,
-                "apartment_price": 11125,
-                "house_price": 13946
-            },
-            "2024": {
-                "mwh_price": 793,
-                "apartment_price": 14106,
-                "house_price": 17678
             }
         }
     },
@@ -9274,38 +6984,6 @@
                 "elektricitet": 150,
                 "omgivelsesvarme": 42
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 424,
-                "apartment_price": 10081,
-                "house_price": 11807
-            },
-            "2020": {
-                "mwh_price": 446,
-                "apartment_price": 10513,
-                "house_price": 12377
-            },
-            "2021": {
-                "mwh_price": 410,
-                "apartment_price": 9782,
-                "house_price": 11680
-            },
-            "2022": {
-                "mwh_price": 531,
-                "apartment_price": 11536,
-                "house_price": 13699
-            },
-            "2023": {
-                "mwh_price": 696,
-                "apartment_price": 14109,
-                "house_price": 16798
-            },
-            "2024": {
-                "mwh_price": 617,
-                "apartment_price": 12974,
-                "house_price": 15516
-            }
         }
     },
     "00000760": {
@@ -9379,38 +7057,6 @@
                 "vandkraft": 0,
                 "elektricitet": 338,
                 "omgivelsesvarme": 196
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 483,
-                "apartment_price": 10159,
-                "house_price": 12556
-            },
-            "2020": {
-                "mwh_price": 454,
-                "apartment_price": 9380,
-                "house_price": 11769
-            },
-            "2021": {
-                "mwh_price": 417,
-                "apartment_price": 8852,
-                "house_price": 11142
-            },
-            "2022": {
-                "mwh_price": 547,
-                "apartment_price": 10807,
-                "house_price": 13501
-            },
-            "2023": {
-                "mwh_price": 768,
-                "apartment_price": 15219,
-                "house_price": 18179
-            },
-            "2024": {
-                "mwh_price": 674,
-                "apartment_price": 12599,
-                "house_price": 15647
             }
         }
     },
@@ -9486,38 +7132,6 @@
                 "elektricitet": 66,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 595,
-                "apartment_price": 11922,
-                "house_price": 15445
-            },
-            "2020": {
-                "mwh_price": 579,
-                "apartment_price": 11528,
-                "house_price": 14890
-            },
-            "2021": {
-                "mwh_price": 545,
-                "apartment_price": 11053,
-                "house_price": 14318
-            },
-            "2022": {
-                "mwh_price": 563,
-                "apartment_price": 11246,
-                "house_price": 14545
-            },
-            "2023": {
-                "mwh_price": 800,
-                "apartment_price": 15632,
-                "house_price": 19350
-            },
-            "2024": {
-                "mwh_price": 780,
-                "apartment_price": 16241,
-                "house_price": 20812
-            }
         }
     },
     "00000773": {
@@ -9591,38 +7205,6 @@
                 "vandkraft": 0,
                 "elektricitet": 54,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 550,
-                "apartment_price": 12125,
-                "house_price": 14550
-            },
-            "2020": {
-                "mwh_price": 574,
-                "apartment_price": 13600,
-                "house_price": 16102
-            },
-            "2021": {
-                "mwh_price": 574,
-                "apartment_price": 13500,
-                "house_price": 16102
-            },
-            "2022": {
-                "mwh_price": 910,
-                "apartment_price": 18534,
-                "house_price": 22177
-            },
-            "2023": {
-                "mwh_price": 1200,
-                "apartment_price": 22384,
-                "house_price": 27702
-            },
-            "2024": {
-                "mwh_price": 1018,
-                "apartment_price": 19397,
-                "house_price": 23373
             }
         }
     },
@@ -9698,38 +7280,6 @@
                 "elektricitet": 165,
                 "omgivelsesvarme": 11
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 512,
-                "apartment_price": 11283,
-                "house_price": 14084
-            },
-            "2020": {
-                "mwh_price": 541,
-                "apartment_price": 11794,
-                "house_price": 14845
-            },
-            "2021": {
-                "mwh_price": 519,
-                "apartment_price": 11317,
-                "house_price": 14418
-            },
-            "2022": {
-                "mwh_price": 639,
-                "apartment_price": 13406,
-                "house_price": 17044
-            },
-            "2023": {
-                "mwh_price": 808,
-                "apartment_price": 16297,
-                "house_price": 20659
-            },
-            "2024": {
-                "mwh_price": 750,
-                "apartment_price": 15504,
-                "house_price": 19564
-            }
         }
     },
     "00000787": {
@@ -9803,38 +7353,6 @@
                 "vandkraft": 0,
                 "elektricitet": 70,
                 "omgivelsesvarme": 18
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 457,
-                "apartment_price": 11211,
-                "house_price": 13696
-            },
-            "2020": {
-                "mwh_price": 493,
-                "apartment_price": 11956,
-                "house_price": 14694
-            },
-            "2021": {
-                "mwh_price": 442,
-                "apartment_price": 10990,
-                "house_price": 13573
-            },
-            "2022": {
-                "mwh_price": 437,
-                "apartment_price": 10838,
-                "house_price": 13367
-            },
-            "2023": {
-                "mwh_price": 572,
-                "apartment_price": 13016,
-                "house_price": 16024
-            },
-            "2024": {
-                "mwh_price": 562,
-                "apartment_price": 12878,
-                "house_price": 15870
             }
         }
     },
@@ -9910,38 +7428,6 @@
                 "elektricitet": 241,
                 "omgivelsesvarme": 260
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 522,
-                "apartment_price": 10957,
-                "house_price": 13779
-            },
-            "2020": {
-                "mwh_price": 546,
-                "apartment_price": 10558,
-                "house_price": 14324
-            },
-            "2021": {
-                "mwh_price": 516,
-                "apartment_price": 11078,
-                "house_price": 13967
-            },
-            "2022": {
-                "mwh_price": 603,
-                "apartment_price": 12423,
-                "house_price": 15580
-            },
-            "2023": {
-                "mwh_price": 975,
-                "apartment_price": 18063,
-                "house_price": 22459
-            },
-            "2024": {
-                "mwh_price": 778,
-                "apartment_price": 14990,
-                "house_price": 18773
-            }
         }
     },
     "00000810": {
@@ -10015,38 +7501,6 @@
                 "vandkraft": 0,
                 "elektricitet": 53,
                 "omgivelsesvarme": 41
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 564,
-                "apartment_price": 12035,
-                "house_price": 14577
-            },
-            "2020": {
-                "mwh_price": 669,
-                "apartment_price": 13537,
-                "house_price": 16560
-            },
-            "2021": {
-                "mwh_price": 614,
-                "apartment_price": 12641,
-                "house_price": 15467
-            },
-            "2022": {
-                "mwh_price": 721,
-                "apartment_price": 14249,
-                "house_price": 17402
-            },
-            "2023": {
-                "mwh_price": 903,
-                "apartment_price": 17405,
-                "house_price": 21281
-            },
-            "2024": {
-                "mwh_price": 820,
-                "apartment_price": 16255,
-                "house_price": 19865
             }
         }
     },
@@ -10122,38 +7576,6 @@
                 "elektricitet": 274,
                 "omgivelsesvarme": 308
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 511,
-                "apartment_price": 11453,
-                "house_price": 14138
-            },
-            "2020": {
-                "mwh_price": 571,
-                "apartment_price": 12480,
-                "house_price": 15386
-            },
-            "2021": {
-                "mwh_price": 531,
-                "apartment_price": 11871,
-                "house_price": 14650
-            },
-            "2022": {
-                "mwh_price": 633,
-                "apartment_price": 13328,
-                "house_price": 16425
-            },
-            "2023": {
-                "mwh_price": 784,
-                "apartment_price": 15781,
-                "house_price": 19406
-            },
-            "2024": {
-                "mwh_price": 717,
-                "apartment_price": 14800,
-                "house_price": 18242
-            }
         }
     },
     "00000820": {
@@ -10227,38 +7649,6 @@
                 "vandkraft": 0,
                 "elektricitet": 1,
                 "omgivelsesvarme": 0
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 448,
-                "apartment_price": 10163,
-                "house_price": 12582
-            },
-            "2020": {
-                "mwh_price": 440,
-                "apartment_price": 10016,
-                "house_price": 12409
-            },
-            "2021": {
-                "mwh_price": 439,
-                "apartment_price": 9989,
-                "house_price": 12389
-            },
-            "2022": {
-                "mwh_price": 477,
-                "apartment_price": 10591,
-                "house_price": 13106
-            },
-            "2023": {
-                "mwh_price": 533,
-                "apartment_price": 11493,
-                "house_price": 14159
-            },
-            "2024": {
-                "mwh_price": 554,
-                "apartment_price": 11931,
-                "house_price": 14696
             }
         }
     },
@@ -10334,38 +7724,6 @@
                 "elektricitet": 0,
                 "omgivelsesvarme": 0
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 625,
-                "apartment_price": 13788,
-                "house_price": 17060
-            },
-            "2020": {
-                "mwh_price": 625,
-                "apartment_price": 12750,
-                "house_price": 15719
-            },
-            "2021": {
-                "mwh_price": 625,
-                "apartment_price": 12969,
-                "house_price": 16006
-            },
-            "2022": {
-                "mwh_price": 500,
-                "apartment_price": 11094,
-                "house_price": 13744
-            },
-            "2023": {
-                "mwh_price": 480,
-                "apartment_price": 10794,
-                "house_price": 13382
-            },
-            "2024": {
-                "mwh_price": 500,
-                "apartment_price": 11094,
-                "house_price": 13744
-            }
         }
     },
     "00000840": {
@@ -10439,38 +7797,6 @@
                 "vandkraft": 0,
                 "elektricitet": 67,
                 "omgivelsesvarme": 75
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 493,
-                "apartment_price": 11515,
-                "house_price": 14182
-            },
-            "2020": {
-                "mwh_price": 504,
-                "apartment_price": 11943,
-                "house_price": 14835
-            },
-            "2021": {
-                "mwh_price": 501,
-                "apartment_price": 11982,
-                "house_price": 14864
-            },
-            "2022": {
-                "mwh_price": 611,
-                "apartment_price": 13628,
-                "house_price": 16851
-            },
-            "2023": {
-                "mwh_price": 756,
-                "apartment_price": 15809,
-                "house_price": 19483
-            },
-            "2024": {
-                "mwh_price": 686,
-                "apartment_price": 14851,
-                "house_price": 18305
             }
         }
     },
@@ -10546,38 +7872,6 @@
                 "elektricitet": 4,
                 "omgivelsesvarme": 4
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 440,
-                "apartment_price": 11305,
-                "house_price": 13476
-            },
-            "2020": {
-                "mwh_price": 458,
-                "apartment_price": 11393,
-                "house_price": 13523
-            },
-            "2021": {
-                "mwh_price": 470,
-                "apartment_price": 12157,
-                "house_price": 14263
-            },
-            "2022": {
-                "mwh_price": 549,
-                "apartment_price": 13192,
-                "house_price": 15709
-            },
-            "2023": {
-                "mwh_price": 682,
-                "apartment_price": 15215,
-                "house_price": 18134
-            },
-            "2024": {
-                "mwh_price": 687,
-                "apartment_price": 15624,
-                "house_price": 18588
-            }
         }
     },
     "00000849": {
@@ -10651,38 +7945,6 @@
                 "vandkraft": 0,
                 "elektricitet": 106,
                 "omgivelsesvarme": 37
-            }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 524,
-                "apartment_price": 11710,
-                "house_price": 14483
-            },
-            "2020": {
-                "mwh_price": 567,
-                "apartment_price": 12575,
-                "house_price": 15551
-            },
-            "2021": {
-                "mwh_price": 549,
-                "apartment_price": 12473,
-                "house_price": 15380
-            },
-            "2022": {
-                "mwh_price": 536,
-                "apartment_price": 12300,
-                "house_price": 15182
-            },
-            "2023": {
-                "mwh_price": 783,
-                "apartment_price": 16172,
-                "house_price": 19860
-            },
-            "2024": {
-                "mwh_price": 773,
-                "apartment_price": 15724,
-                "house_price": 19185
             }
         }
     },
@@ -10758,38 +8020,6 @@
                 "elektricitet": 282,
                 "omgivelsesvarme": 15
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 470,
-                "apartment_price": 10583,
-                "house_price": 13577
-            },
-            "2020": {
-                "mwh_price": 517,
-                "apartment_price": 11374,
-                "house_price": 14220
-            },
-            "2021": {
-                "mwh_price": 514,
-                "apartment_price": 10950,
-                "house_price": 13919
-            },
-            "2022": {
-                "mwh_price": 565,
-                "apartment_price": 12035,
-                "house_price": 14991
-            },
-            "2023": {
-                "mwh_price": 624,
-                "apartment_price": 12497,
-                "house_price": 15635
-            },
-            "2024": {
-                "mwh_price": 612,
-                "apartment_price": 12392,
-                "house_price": 15651
-            }
         }
     },
     "00000860": {
@@ -10864,42 +8094,10 @@
                 "elektricitet": 61,
                 "omgivelsesvarme": 25
             }
-        },
-        "prices": {
-            "2019": {
-                "mwh_price": 567,
-                "apartment_price": 12449,
-                "house_price": 15367
-            },
-            "2020": {
-                "mwh_price": 583,
-                "apartment_price": 12898,
-                "house_price": 15882
-            },
-            "2021": {
-                "mwh_price": 553,
-                "apartment_price": 12475,
-                "house_price": 15389
-            },
-            "2022": {
-                "mwh_price": 570,
-                "apartment_price": 12785,
-                "house_price": 15764
-            },
-            "2023": {
-                "mwh_price": 688,
-                "apartment_price": 14680,
-                "house_price": 18102
-            },
-            "2024": {
-                "mwh_price": 688,
-                "apartment_price": 14811,
-                "house_price": 18246
-            }
         }
     },
     "00009870": {
-        "type": "municipality",
+        "type": "plant",
         "name": "Sindal Fjernvarme (inkl. Bindslev fra 2021)",
         "idrift": "1993-01-01",
         "elkapacitet_MW": 6.778,
