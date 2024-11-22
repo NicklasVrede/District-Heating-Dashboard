@@ -166,29 +166,17 @@ function createProductionChart(plantData, index, maxValue) {
             // Calculate the sum for this category
             let categoryValue = 0;
             if (Array.isArray(fuelTypes)) {
-                // Sum up all fuel types in this category
                 categoryValue = fuelTypes.reduce((sum, fuelType) => 
                     sum + (plantData.production[year]?.[fuelType] || 0), 0);
             } else {
-                // Single fuel type
                 categoryValue = plantData.production[year]?.[fuelTypes] || 0;
             }
 
-            // Return percentage
             return yearTotal > 0 ? (categoryValue / yearTotal) * 100 : 0;
         });
 
-        // Check if the category has any non-zero values
         const hasProduction = values.some(val => val > 0);
-        
-        // If there's no production at all, return null to filter it out
-        if (!hasProduction) {
-            return null;
-        }
-
-        // Calculate overall percentage for legend visibility
-        const totalPercentage = values.reduce((sum, val) => sum + val, 0);
-        const averagePercentage = totalPercentage / values.length;
+        if (!hasProduction) return null;
 
         return {
             label: category,
@@ -196,9 +184,9 @@ function createProductionChart(plantData, index, maxValue) {
             backgroundColor: graphConfig.colors[category],
             borderColor: graphConfig.colors[category],
             fill: true,
-            hidden: averagePercentage < LEGEND_THRESHOLD_PERCENTAGE
+            borderWidth: 1
         };
-    }).filter(dataset => dataset !== null);  // Remove null datasets
+    }).filter(dataset => dataset !== null);
 
     return new Chart(ctx, {
         type: 'line',
@@ -214,38 +202,49 @@ function createProductionChart(plantData, index, maxValue) {
                 axis: 'x',
                 intersect: false
             },
+            onClick: function(event, elements) {
+                if (elements.length > 0) {
+                    const clickIndex = elements[0].index;
+                    const year = productionYears[clickIndex];
+                    createPieChart(this, plantData.production[year], year, {
+                        data: plantData,
+                        index: index,
+                        maxValue: maxValue
+                    });
+                }
+            },
             scales: {
                 x: {
-                    title: {
-                        display: true,
-                        text: 'Year'
-                    },
+                    stacked: true,
                     grid: {
-                        color: '#E4E4E4'
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 10
+                        }
                     }
                 },
                 y: {
-                    title: {
-                        display: true,
-                        text: 'Production Share (%)'
-                    },
                     stacked: true,
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        font: {
+                            size: 10
+                        },
+                        callback: function(value) {
+                            return `${value}%`;
+                        }
+                    },
                     grid: {
                         color: '#E4E4E4'
-                    },
-                    beginAtZero: true,
-                    max: 100, // Set max to 100%
-                    ticks: {
-                        callback: function(value) {
-                            return value + '%';
-                        }
                     }
                 }
             },
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Production Distribution'
+                datalabels: {
+                    display: false
                 },
                 tooltip: {
                     mode: 'index',
@@ -254,128 +253,103 @@ function createProductionChart(plantData, index, maxValue) {
                             return `${context.dataset.label}: ${context.raw.toFixed(1)}%`;
                         }
                     }
-                },
-                zoom: {
-                    pan: {
-                        enabled: true,
-                        mode: 'x',
-                        modifierKey: 'ctrl'
-                    },
-                    zoom: {
-                        wheel: {
-                            enabled: true,
-                            modifierKey: 'ctrl'
-                        },
-                        pinch: {
-                            enabled: true
-                        },
-                        mode: 'x'
-                    }
-                },
-                legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    },
-                    onHover: function(event, legendItem, legend) {
-                        const tooltip = legendTooltips.production[legendItem.text];
-                        if (tooltip) {
-                            // Create or get tooltip element
-                            let tooltipEl = document.getElementById('chart-tooltip');
-                            if (!tooltipEl) {
-                                tooltipEl = document.createElement('div');
-                                tooltipEl.id = 'chart-tooltip';
-                                tooltipEl.style.cssText = tooltipStyle;
-                                document.body.appendChild(tooltipEl);
-                            }
-                            
-                            // Get mouse position from the event
-                            const mouseX = event.native.clientX;
-                            const mouseY = event.native.clientY;
-                            
-                            tooltipEl.innerHTML = tooltip;
-                            tooltipEl.style.left = (mouseX + 10) + 'px';
-                            tooltipEl.style.top = (mouseY + 10) + 'px';
-                            tooltipEl.style.display = 'block';
-                        }
-                    },
-                    onLeave: function() {
-                        const tooltipEl = document.getElementById('chart-tooltip');
-                        if (tooltipEl) {
-                            tooltipEl.style.display = 'none';
-                        }
-                    },
-                    onClick: (function() {
-                        let clickTimeout = null;
-                        let clickCount = 0;
-
-                        return function(e, legendItem, legend) {
-                            clickCount++;
-                            
-                            if (clickCount === 1) {
-                                clickTimeout = setTimeout(() => {
-                                    // Single click behavior
-                                    const index = legendItem.datasetIndex;
-                                    const chart = legend.chart;
-                                    const meta = chart.getDatasetMeta(index);
-                                    meta.hidden = !meta.hidden;
-                                    chart.update();
-                                    
-                                    clickCount = 0;
-                                }, 250);
-                            } else if (clickCount === 2) {
-                                clearTimeout(clickTimeout);
-                                // Double click behavior
-                                const chart = legend.chart;
-                                const datasets = chart.data.datasets;
-                                const clickedLabel = legendItem.text;
-                                
-                                // If all others are already hidden, show all (reset)
-                                const allOthersHidden = datasets.every((dataset, i) => 
-                                    i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
-                                
-                                // Update current chart
-                                datasets.forEach((dataset, i) => {
-                                    const meta = chart.getDatasetMeta(i);
-                                    meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
-                                });
-                                chart.update();
-
-                                // Find and update the other production chart
-                                const otherChartId = `productionChart${index === 1 ? 2 : 1}`;
-                                const otherChart = Chart.getChart(otherChartId);
-                                
-                                if (otherChart) {
-                                    const otherDatasets = otherChart.data.datasets;
-                                    otherDatasets.forEach((dataset, i) => {
-                                        if (dataset.label === clickedLabel) {
-                                            const meta = otherChart.getDatasetMeta(i);
-                                            meta.hidden = !allOthersHidden && (dataset.label !== clickedLabel);
-                                        } else {
-                                            const meta = otherChart.getDatasetMeta(i);
-                                            meta.hidden = !allOthersHidden;
-                                        }
-                                    });
-                                    otherChart.update();
-                                }
-                                
-                                clickCount = 0;
-                            }
-                        };
-                    })()
-                },
-                datalabels: {
-                    display: false
                 }
             }
         }
     });
+}
+
+function createPieChart(originalChart, yearData, year, initialData) {
+    if (!yearData) return;
+
+    const total = Object.values(yearData).reduce((sum, val) => sum + (val || 0), 0);
+    if (total === 0) return;
+
+    const pieData = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
+        let value;
+        if (Array.isArray(fuelTypes)) {
+            value = fuelTypes.reduce((sum, fuel) => sum + (yearData[fuel] || 0), 0);
+        } else {
+            value = yearData[fuelTypes] || 0;
+        }
+        return {
+            category,
+            value,
+            color: graphConfig.colors[category]
+        };
+    }).filter(item => item.value > 0);
+
+    pieData.sort((a, b) => b.value - a.value);
+
+    const canvas = document.createElement('canvas');
+    canvas.id = `pieChart${initialData.index}`;
+    
+    const resetBtn = document.createElement('button');
+    resetBtn.textContent = 'Back to Timeline';
+    resetBtn.style.cssText = `
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 8px 16px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        z-index: 10;
+    `;
+
+    const container = originalChart.canvas.parentElement;
+    container.style.position = 'relative';
+    
+    // Store the original canvas ID before clearing
+    const originalCanvasId = originalChart.canvas.id;
+    
+    container.innerHTML = '';
+    container.appendChild(resetBtn);
+    container.appendChild(canvas);
+
+    const newChart = new Chart(canvas, {
+        type: 'pie',
+        data: {
+            labels: pieData.map(d => d.category),
+            datasets: [{
+                data: pieData.map(d => d.value),
+                backgroundColor: pieData.map(d => d.color)
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: `Production Distribution ${year}`
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `${context.label}: ${value.toFixed(0)} TJ (${percentage}%)`;
+                        }
+                    }
+                },
+                legend: {
+                    position: 'left'
+                }
+            }
+        }
+    });
+
+    resetBtn.onclick = () => {
+        // Recreate the original canvas with the correct ID
+        container.innerHTML = `<canvas id="${originalCanvasId}"></canvas>`;
+        
+        // Recreate the production chart
+        createProductionChart(initialData.data, initialData.index, initialData.maxValue);
+    };
+
+    return newChart;
 }
 
 function createPriceChart(plantData, index, maxValues) {
