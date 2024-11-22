@@ -2,6 +2,8 @@ import { yearState } from './YearState.js';
 import { graphConfig } from '../../../graphs/config/graphConfig.js';
 import { tooltipStyle, legendTooltips } from '../../../graphs/config/tooltipConfig.js';
 import { ProductionLegend } from './ProductionLegend.js';
+import { municipalitiesVisible } from '../municipalitiesFunctions.js';
+import { allPlantIds, allMunicipalityIds } from '../../../main.js';
 
 export class ProductionFocus {
     constructor(map, measureContainer) {
@@ -275,29 +277,32 @@ export class ProductionFocus {
         this.map.setLayoutProperty('plants-production', 'visibility', 'none');
     }
 
-    getTopNByProduction(n, measureType) {
-        console.log(`Getting top ${n} plants for ${measureType}`);
-        const plants = this.getPlantData();
-        const ranked = this.rankPlantsByProduction(plants, measureType);
-        const result = ranked.slice(0, n).map(plant => plant.id);
-        console.log('Selected plants:', result);
-        return result;
-    }
-
-    getBottomNByProduction(n, measureType) {
-        console.log(`Getting bottom ${n} plants for ${measureType}`);
-        const plants = this.getPlantData();
-        const ranked = this.rankPlantsByProduction(plants, measureType);
-        const result = ranked.slice(-n).map(plant => plant.id);
-        console.log('Selected plants:', result);
-        return result;
-    }
-
-    rankPlantsByProduction(plants, measureType) {
-        console.log('Ranking plants for measure:', measureType);
+    getPlantData() {
+        const dataDict = window.dataDict;
+        console.log('Raw dataDict:', dataDict);
         
-        if (!Array.isArray(plants)) {
-            console.warn('Plants data is not an array:', plants);
+        if (!dataDict) {
+            console.warn('No data available');
+            return [];
+        }
+
+        // Filter based on current view type
+        const relevantIds = municipalitiesVisible ? allMunicipalityIds : allPlantIds;
+        
+        const entitiesArray = Array.from(relevantIds).map(id => ({
+            id,
+            ...dataDict[id]
+        }));
+        
+        console.log(`Converted ${municipalitiesVisible ? 'municipalities' : 'plants'} array:`, entitiesArray);
+        return entitiesArray;
+    }
+
+    rankPlantsByProduction(entities, measureType) {
+        console.log('Ranking entities for measure:', measureType);
+        
+        if (!Array.isArray(entities)) {
+            console.warn('Entities data is not an array:', entities);
             return [];
         }
 
@@ -305,72 +310,49 @@ export class ProductionFocus {
         const fuelTypes = this.getFuelTypesForMeasure(measureType);
         console.log('Using fuel types for ranking:', fuelTypes);
 
-        // Debug: Log a sample of the data structure
-        if (plants.length > 0) {
-            console.log('Sample plant data structure:', {
-                id: plants[0].id,
-                name: plants[0].name,
-                production: plants[0].production?.[year]
-            });
-        }
-
-        const filteredPlants = plants.filter(plant => {
-            if (!plant.production || !plant.production[year]) {
-                console.log(`Plant ${plant.id} - No production data for ${year}`);
+        const filteredEntities = entities.filter(entity => {
+            if (!entity.production || !entity.production[year]) {
+                console.log(`Entity ${entity.id} - No production data for ${year}`);
                 return false;
             }
 
             const totalProduction = fuelTypes.reduce((sum, fuelType) => {
-                const value = plant.production[year][fuelType];
+                const value = entity.production[year][fuelType];
                 if (value && value > 0) {
-                    console.log(`Plant ${plant.id} - ${plant.name} - ${fuelType}: ${value}`);
+                    console.log(`Entity ${entity.id} - ${entity.name} - ${fuelType}: ${value}`);
                 }
                 return sum + (value || 0);
             }, 0);
 
             if (totalProduction > 0) {
-                plant.totalProduction = totalProduction;
-                console.log(`Plant ${plant.id} - ${plant.name} - Total ${measureType} production: ${totalProduction}`);
+                entity.totalProduction = totalProduction;
+                console.log(`Entity ${entity.id} - ${entity.name} - Total ${measureType} production: ${totalProduction}`);
                 return true;
             }
             return false;
         });
 
-        console.log(`Found ${filteredPlants.length} plants with ${measureType} production in ${year}`);
+        console.log(`Found ${filteredEntities.length} entities with ${measureType} production in ${year}`);
 
-        const sortedPlants = filteredPlants.sort((a, b) => {
-            return b.totalProduction - a.totalProduction;
-        });
-
-        // Log the top results
-        if (sortedPlants.length > 0) {
-            console.log('Top plants by production:');
-            sortedPlants.slice(0, 5).forEach(plant => {
-                console.log(`${plant.name}: ${plant.totalProduction}`);
-            });
-        } else {
-            console.log('No plants found with production data');
-        }
-
-        return sortedPlants;
+        return filteredEntities.sort((a, b) => b.totalProduction - a.totalProduction);
     }
 
-    getPlantData() {
-        const dataDict = window.dataDict;
-        console.log('Raw dataDict:', dataDict);
-        
-        if (!dataDict) {
-            console.warn('No plant data available');
-            return [];
-        }
+    getTopNByProduction(n, measureType) {
+        console.log(`Getting top ${n} ${municipalitiesVisible ? 'municipalities' : 'plants'} for ${measureType}`);
+        const entities = this.getPlantData();
+        const ranked = this.rankPlantsByProduction(entities, measureType);
+        const result = ranked.slice(0, n).map(entity => entity.id);
+        console.log('Selected entities:', result);
+        return result;
+    }
 
-        const plantsArray = Object.entries(dataDict).map(([id, plant]) => ({
-            id,
-            ...plant
-        }));
-        
-        console.log('Converted plants array:', plantsArray);
-        return plantsArray;
+    getBottomNByProduction(n, measureType) {
+        console.log(`Getting bottom ${n} ${municipalitiesVisible ? 'municipalities' : 'plants'} for ${measureType}`);
+        const entities = this.getPlantData();
+        const ranked = this.rankPlantsByProduction(entities, measureType);
+        const result = ranked.slice(-n).map(entity => entity.id);
+        console.log('Selected entities:', result);
+        return result;
     }
 
     getFuelTypesForMeasure(measureType) {
@@ -391,54 +373,53 @@ export class ProductionFocus {
     }
 
     getAllByProduction(measureType) {
-        console.log(`Getting all plants with ${measureType} production`);
-        const plants = this.getPlantData();
+        console.log(`Getting all ${municipalitiesVisible ? 'municipalities' : 'plants'} with ${measureType} production`);
+        const entities = this.getPlantData();
         const year = '2023';
         
         if (measureType === 'all') {
-            // For 'all', we want to get plants with any production
-            const filteredPlants = plants.filter(plant => {
-                if (!plant.production || !plant.production[year]) {
+            // For 'all', we want to get entities with any production
+            const filteredEntities = entities.filter(entity => {
+                if (!entity.production || !entity.production[year]) {
                     return false;
                 }
 
-                // Check if plant has any non-zero production value
-                const hasProduction = Object.values(plant.production[year]).some(value => value > 0);
+                const hasProduction = Object.values(entity.production[year]).some(value => value > 0);
                 
                 if (hasProduction) {
-                    console.log(`Including plant ${plant.id} - ${plant.name}`);
+                    console.log(`Including entity ${entity.id} - ${entity.name}`);
                 }
                 
                 return hasProduction;
             });
 
-            console.log(`Found ${filteredPlants.length} total plants with any production`);
-            return filteredPlants.map(plant => plant.id);
+            console.log(`Found ${filteredEntities.length} total entities with any production`);
+            return filteredEntities.map(entity => entity.id);
         }
 
         // For specific measure types
         const fuelTypes = this.getFuelTypesForMeasure(measureType);
         console.log('Using fuel types:', fuelTypes);
 
-        const filteredPlants = plants.filter(plant => {
-            if (!plant.production || !plant.production[year]) return false;
+        const filteredEntities = entities.filter(entity => {
+            if (!entity.production || !entity.production[year]) return false;
 
             const totalProduction = fuelTypes.reduce((sum, fuelType) => {
-                const value = plant.production[year][fuelType];
+                const value = entity.production[year][fuelType];
                 if (value && value > 0) {
-                    console.log(`Plant ${plant.id} - ${fuelType}: ${value}`);
+                    console.log(`Entity ${entity.id} - ${fuelType}: ${value}`);
                 }
                 return sum + (value || 0);
             }, 0);
 
             if (totalProduction > 0) {
-                console.log(`Including plant ${plant.id} - ${plant.name} - Total ${measureType}: ${totalProduction}`);
+                console.log(`Including entity ${entity.id} - ${entity.name} - Total ${measureType}: ${totalProduction}`);
                 return true;
             }
             return false;
         });
 
-        console.log(`Found ${filteredPlants.length} total plants with ${measureType} production`);
-        return filteredPlants.map(plant => plant.id);
+        console.log(`Found ${filteredEntities.length} total entities with ${measureType} production`);
+        return filteredEntities.map(entity => entity.id);
     }
 } 
