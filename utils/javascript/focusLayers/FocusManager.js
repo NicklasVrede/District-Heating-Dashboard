@@ -10,6 +10,7 @@ import { updateSelectedPlantsWindow } from '../selectedPlantsWindow.js';
 import { updateGraph } from '../plotlyGraphs.js';
 import { yearState } from './YearState.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
+import { updateSelectedMunicipalities } from '../eventListeners.js';
 
 class FocusManager {
     constructor() {
@@ -79,6 +80,7 @@ class FocusManager {
         }
 
         let selectedIds = [];
+
         switch (value) {
             case 'top5':
                 selectedIds = this.currentFocus.getTopNByPrice(5);
@@ -93,30 +95,35 @@ class FocusManager {
                 selectedIds = this.currentFocus.getBottomNByPrice(10);
                 break;
             case 'all':
-                selectAll(this.mapboxMap);
+                selectedIds = this.currentFocus.getAllByPrice();
                 break;
             case 'none':
+                console.log('Clearing all selections');
                 selectionSet.clear();
                 updateSelectedPlants(this.mapboxMap);
-                updateSelectedPlantsWindow(selectionSet);
+                updateSelectedMunicipalities(this.mapboxMap);
+                updateSelectedPlantsWindow();
                 updateGraph();
                 return;
         }
 
+        console.log('Selected IDs:', selectedIds);
+        console.log('Number of selections:', selectedIds.length);
 
         if (selectedIds.length > 0) {
-            // Clear existing selections
             selectionSet.clear();
+            selectedIds.forEach(id => selectionSet.add(id));
             
-            // Add new selections
-            selectedIds.forEach(id => {
-                selectionSet.add(id);
-            });
-
-            // Update UI and graph
-            updateSelectedPlants(this.mapboxMap);
-            updateSelectedPlantsWindow(selectionSet);
+            if (municipalitiesVisible) {
+                updateSelectedMunicipalities(this.mapboxMap);
+            } else {
+                updateSelectedPlants(this.mapboxMap);
+            }
+            
+            updateSelectedPlantsWindow();
             updateGraph();
+        } else {
+            console.warn('No items found matching the selection criteria');
         }
     }
 

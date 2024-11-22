@@ -148,6 +148,12 @@ export class PriceFocus {
             
             source.setData(data);
             this.updateCircleStyle(currentYear);
+            
+            // Update graph if there are selections
+            if (selectionSet.size > 0) {
+                updateGraph(selectionSet);
+            }
+            
         } catch (error) {
             console.error('Error updating price data:', error);
         }
@@ -316,5 +322,22 @@ export class PriceFocus {
         return Object.entries(this.priceRankings)
             .filter(([_, data]) => data.rank <= rankThreshold)
             .map(([forsyid, _]) => forsyid);
+    }
+
+    getAllByPrice() {
+        console.log('Getting all by price from', 
+            municipalitiesVisible ? 'municipalities' : 'plants');
+        
+        if (!this.priceRankings) {
+            console.warn('No price rankings available');
+            return [];
+        }
+        
+        // Filter rankings to only include relevant type
+        const relevantIds = municipalitiesVisible ? allMunicipalityIds : allPlantIds;
+        
+        return Object.entries(this.priceRankings)
+            .filter(([id, _]) => relevantIds.has(id))  // Only include IDs from the correct set
+            .map(([id, _]) => id);
     }
 } 

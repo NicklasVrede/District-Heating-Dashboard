@@ -347,21 +347,24 @@ function toggleMunicipalitySelection(forsyid, isCtrlPressed) {
 }
 
 export function updateSelectedMunicipalities(map) {
-    // Initialise an array with keywords for mapbox filter
+    // Initialize filters for both fill and line layers
     const filters = ['in', 'lau_1'];
-    // Add all selected forsyids to the array
-    selectionSet.forEach(forsyid => {
-        filters.push(forsyid);
-    });
-    //map.setFilter('selected-municipalities-fill', filters);
-    map.setFilter('municipalities-selected-line', filters);
+    selectionSet.forEach(id => filters.push(id));
 
-    // Update visibility of selected municipalities
-    const municipalitiesVisibility = selectionSet.size > 0 ? 'visible' : 'none';
-    //map.setLayoutProperty('selected-municipalities-fill', 'visibility', municipalitiesVisibility);
-    map.setLayoutProperty('municipalities-selected-line', 'visibility', municipalitiesVisibility);
-    
-    // Update year slider visibility based on selection count
-    const hasMoreThanTwoSelections = selectionSet.size > 2;
-    yearState.visible = hasMoreThanTwoSelections || ['price', 'production'].includes(focusState.focus);
+    // Update both fill and line filters
+    map.setFilter('municipalities-selected-line', filters);
+    map.setFilter('municipalities-fill', ['any', 
+        ['in', ['get', 'lau_1'], ''], // Default empty filter
+        ['in', ['get', 'lau_1'], ...Array.from(selectionSet)] // Selected municipalities
+    ]);
+
+    // Set visibility based on selection
+    const hasSelections = selectionSet.size > 0;
+    map.setLayoutProperty('municipalities-selected-line', 'visibility', 
+        hasSelections ? 'visible' : 'none');
+
+    // Update year slider visibility
+    const hasThreeOrMoreSelections = selectionSet.size >= 3;
+    yearState.visible = hasThreeOrMoreSelections || 
+        ['price', 'production'].includes(focusState.focus);
 }
