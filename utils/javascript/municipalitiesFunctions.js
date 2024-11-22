@@ -23,6 +23,14 @@ export function toggleMunicipalities(map, button) {
     // Set plants visibility
     map.setLayoutProperty('plants', 'visibility', otherLayersVisibility);
 
+    // hide production layers
+    if (map.getLayer('plants-production')) {
+        map.setLayoutProperty('plants-production', 'visibility', 'none');
+    }
+    if (map.getLayer('municipalities-production')) {
+        map.setLayoutProperty('municipalities-production', 'visibility', 'none');
+    }
+
     // Explicitly hide price layers
     if (map.getLayer('plants-price')) {
         map.setLayoutProperty('plants-price', 'visibility', 'none');

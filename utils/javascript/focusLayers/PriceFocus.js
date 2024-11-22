@@ -149,11 +149,6 @@ export class PriceFocus {
             source.setData(data);
             this.updateCircleStyle(currentYear);
             
-            // Update graph if there are selections
-            if (selectionSet.size > 0) {
-                updateGraph(selectionSet);
-            }
-            
         } catch (error) {
             console.error('Error updating price data:', error);
         }
