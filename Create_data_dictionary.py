@@ -84,7 +84,12 @@ for filename, year in price_files:
 # Create final data dictionary
 data_dict = {}
 for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid'):
+    # Determine if this is a municipality or plant
+    # Assuming municipalities have 3-digit forsyid codes
+    is_municipality = len(str(forsyid).strip('0')) <= 3
+    
     data_dict[forsyid] = {
+        'type': 'municipality' if is_municipality else 'plant',  # Set type based on forsyid pattern
         'name': mappings['name'].get(forsyid, data_df.loc[data_df['forsyid'] == forsyid, 'fv_net_navn'].iloc[0] if not data_df.loc[data_df['forsyid'] == forsyid, 'fv_net_navn'].empty else 'Unknown'),
         'idrift': mappings['idrift'].get(forsyid),
         'elkapacitet_MW': mappings['elkapacitet'].get(forsyid, 0) or 0,

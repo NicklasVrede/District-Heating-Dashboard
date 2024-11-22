@@ -1,5 +1,6 @@
 {
     "00000002": {
+        "type": "municipality",
         "name": "Guldborgsund Forsyning",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 24.7,
@@ -105,6 +106,7 @@
         }
     },
     "00000004": {
+        "type": "municipality",
         "name": "Kredsløb",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 0,
@@ -210,6 +212,7 @@
         }
     },
     "00000005": {
+        "type": "municipality",
         "name": "Aalborg Forsyning",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 1.3,
@@ -315,6 +318,7 @@
         }
     },
     "00000006": {
+        "type": "municipality",
         "name": "Din Forsyning A/S",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 418.95,
@@ -420,6 +424,7 @@
         }
     },
     "00000008": {
+        "type": "municipality",
         "name": "Fors Varme Roskilde",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 33.41,
@@ -525,6 +530,7 @@
         }
     },
     "00000009": {
+        "type": "municipality",
         "name": "Fjernvarme Fyn",
         "idrift": "1971-01-01",
         "elkapacitet_MW": 506.416,
@@ -630,6 +636,7 @@
         }
     },
     "00000010": {
+        "type": "municipality",
         "name": "Gauerslund Fjernvarme",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 0,
@@ -703,6 +710,7 @@
         }
     },
     "00000011": {
+        "type": "municipality",
         "name": "Grindsted El- Og Varmeværk",
         "idrift": "1980-09-01",
         "elkapacitet_MW": 22.5,
@@ -776,6 +784,7 @@
         }
     },
     "00000012": {
+        "type": "municipality",
         "name": "Fjernvarme Horsens",
         "idrift": "1963-04-01",
         "elkapacitet_MW": 34.13,
@@ -881,6 +890,7 @@
         }
     },
     "00000014": {
+        "type": "municipality",
         "name": "Frifelt/Roager Kraftvarmeværk",
         "idrift": "1997-01-01",
         "elkapacitet_MW": 1.85,
@@ -986,6 +996,7 @@
         }
     },
     "00000015": {
+        "type": "municipality",
         "name": "Tønder Fjernvarme",
         "idrift": "1989-06-01",
         "elkapacitet_MW": 13.8,
@@ -1091,6 +1102,7 @@
         }
     },
     "00000016": {
+        "type": "municipality",
         "name": "Lolland Varme",
         "idrift": "1966-08-01",
         "elkapacitet_MW": 0,
@@ -1196,6 +1208,7 @@
         }
     },
     "00000017": {
+        "type": "municipality",
         "name": "Sorø Fjernvarme",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 8.65,
@@ -1301,6 +1314,7 @@
         }
     },
     "00000018": {
+        "type": "municipality",
         "name": "Sønderborg Fjernvarme",
         "idrift": "1963-01-01",
         "elkapacitet_MW": 58.0,
@@ -1406,6 +1420,7 @@
         }
     },
     "00000019": {
+        "type": "municipality",
         "name": "Augustenborg Fjernvarme",
         "idrift": "1984-10-01",
         "elkapacitet_MW": 3.8,
@@ -1496,6 +1511,7 @@
         }
     },
     "00000101": {
+        "type": "municipality",
         "name": "København",
         "idrift": "1971-01-01",
         "elkapacitet_MW": 420.3,
@@ -1601,6 +1617,7 @@
         }
     },
     "00000147": {
+        "type": "municipality",
         "name": "Frederiksberg",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 0,
@@ -1706,6 +1723,7 @@
         }
     },
     "00000153": {
+        "type": "municipality",
         "name": "Brøndby",
         "idrift": "1966-01-01",
         "elkapacitet_MW": 0,
@@ -1811,6 +1829,7 @@
         }
     },
     "00000157": {
+        "type": "municipality",
         "name": "Gentofte",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 0,
@@ -1916,6 +1935,7 @@
         }
     },
     "00000161": {
+        "type": "municipality",
         "name": "Glostrup",
         "idrift": "1972-01-01",
         "elkapacitet_MW": 50.919,
@@ -2021,6 +2041,7 @@
         }
     },
     "00000165": {
+        "type": "municipality",
         "name": "Albertslund",
         "idrift": "1966-01-01",
         "elkapacitet_MW": 0,
@@ -2126,6 +2147,7 @@
         }
     },
     "00000167": {
+        "type": "municipality",
         "name": "Hvidovre",
         "idrift": "1971-07-01",
         "elkapacitet_MW": 806.66,
@@ -2231,6 +2253,7 @@
         }
     },
     "00000169": {
+        "type": "municipality",
         "name": "Høje-Taastrup",
         "idrift": "1992-04-21",
         "elkapacitet_MW": 1.52,
@@ -2336,6 +2359,7 @@
         }
     },
     "00000183": {
+        "type": "municipality",
         "name": "Ishøj",
         "idrift": "1982-11-01",
         "elkapacitet_MW": 0,
@@ -2441,6 +2465,7 @@
         }
     },
     "00000185": {
+        "type": "municipality",
         "name": "Tårnby",
         "idrift": "2000-05-22",
         "elkapacitet_MW": 0.92,
@@ -2536,6 +2561,7 @@
         }
     },
     "00000190": {
+        "type": "municipality",
         "name": "Furesø",
         "idrift": "1971-01-01",
         "elkapacitet_MW": 0.063,
@@ -2641,6 +2667,7 @@
         }
     },
     "00000201": {
+        "type": "municipality",
         "name": "Allerød",
         "idrift": "1970-01-01",
         "elkapacitet_MW": 3.22,
@@ -2741,6 +2768,7 @@
         }
     },
     "00000217": {
+        "type": "municipality",
         "name": "Helsingør",
         "idrift": "1964-12-15",
         "elkapacitet_MW": 72.61,
@@ -2846,6 +2874,7 @@
         }
     },
     "00000219": {
+        "type": "municipality",
         "name": "Hillerød",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 82.12,
@@ -2951,6 +2980,7 @@
         }
     },
     "00000223": {
+        "type": "municipality",
         "name": "Hørsholm",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 18.87,
@@ -3056,6 +3086,7 @@
         }
     },
     "00000230": {
+        "type": "municipality",
         "name": "Rudersdal",
         "idrift": "1966-06-01",
         "elkapacitet_MW": 39.84,
@@ -3130,6 +3161,7 @@
         "prices": {}
     },
     "00000240": {
+        "type": "municipality",
         "name": "Egedal",
         "idrift": "1995-10-06",
         "elkapacitet_MW": 13.325,
@@ -3235,6 +3267,7 @@
         }
     },
     "00000250": {
+        "type": "municipality",
         "name": "Frederikssund",
         "idrift": "1973-01-01",
         "elkapacitet_MW": 672.68,
@@ -3340,6 +3373,7 @@
         }
     },
     "00000253": {
+        "type": "municipality",
         "name": "Greve",
         "idrift": "1972-01-01",
         "elkapacitet_MW": 0,
@@ -3445,6 +3479,7 @@
         }
     },
     "00000259": {
+        "type": "municipality",
         "name": "Køge",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 42.708,
@@ -3550,6 +3585,7 @@
         }
     },
     "00000260": {
+        "type": "municipality",
         "name": "Halsnæs",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 1.06,
@@ -3655,6 +3691,7 @@
         }
     },
     "00000265": {
+        "type": "municipality",
         "name": "Roskilde",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 33.41,
@@ -3760,6 +3797,7 @@
         }
     },
     "00000269": {
+        "type": "municipality",
         "name": "Solrød",
         "idrift": "1991-02-01",
         "elkapacitet_MW": 3.5740000000000003,
@@ -3865,6 +3903,7 @@
         }
     },
     "00000270": {
+        "type": "municipality",
         "name": "Gribskov",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 17.3,
@@ -3970,6 +4009,7 @@
         }
     },
     "00000306": {
+        "type": "municipality",
         "name": "Odsherred",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 12.78,
@@ -4075,6 +4115,7 @@
         }
     },
     "00000316": {
+        "type": "municipality",
         "name": "Holbæk",
         "idrift": "1978-10-01",
         "elkapacitet_MW": 8.75,
@@ -4180,6 +4221,7 @@
         }
     },
     "00000320": {
+        "type": "municipality",
         "name": "Faxe",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 17.46,
@@ -4285,6 +4327,7 @@
         }
     },
     "00000326": {
+        "type": "municipality",
         "name": "Kalundborg",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 1078.983,
@@ -4390,6 +4433,7 @@
         }
     },
     "00000329": {
+        "type": "municipality",
         "name": "Ringsted",
         "idrift": "1966-01-01",
         "elkapacitet_MW": 11.0,
@@ -4495,6 +4539,7 @@
         }
     },
     "00000330": {
+        "type": "municipality",
         "name": "Slagelse",
         "idrift": "1963-01-01",
         "elkapacitet_MW": 23.124,
@@ -4600,12 +4645,13 @@
         }
     },
     "00000340": {
+        "type": "municipality",
         "name": "Sorø",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 9.83,
         "varmekapacitet_MW": 47.32,
         "total_area_km2": 0,
-        "CVRP": "1023151355",
+        "CVRP": null,
         "production": {
             "2021": {
                 "kul": 0,
@@ -4705,6 +4751,7 @@
         }
     },
     "00000350": {
+        "type": "municipality",
         "name": "Lejre",
         "idrift": "1995-12-01",
         "elkapacitet_MW": 3.075,
@@ -4810,6 +4857,7 @@
         }
     },
     "00000360": {
+        "type": "municipality",
         "name": "Lolland",
         "idrift": "1965-09-01",
         "elkapacitet_MW": 11.5,
@@ -4915,6 +4963,7 @@
         }
     },
     "00000370": {
+        "type": "municipality",
         "name": "Næstved",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 53.58,
@@ -5020,6 +5069,7 @@
         }
     },
     "00000376": {
+        "type": "municipality",
         "name": "Guldborgsund",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 27.403,
@@ -5125,6 +5175,7 @@
         }
     },
     "00000390": {
+        "type": "municipality",
         "name": "Vordingborg",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 99.42,
@@ -5230,6 +5281,7 @@
         }
     },
     "00000400": {
+        "type": "municipality",
         "name": "Bornholm",
         "idrift": "1972-01-01",
         "elkapacitet_MW": 102.068,
@@ -5335,6 +5387,7 @@
         }
     },
     "00000410": {
+        "type": "municipality",
         "name": "Middelfart",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 10.61,
@@ -5440,6 +5493,7 @@
         }
     },
     "00000420": {
+        "type": "municipality",
         "name": "Assens",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 35.48,
@@ -5545,6 +5599,7 @@
         }
     },
     "00000430": {
+        "type": "municipality",
         "name": "Faaborg-Midtfyn",
         "idrift": "1985-01-01",
         "elkapacitet_MW": 18.65,
@@ -5650,6 +5705,7 @@
         }
     },
     "00000440": {
+        "type": "municipality",
         "name": "Kerteminde",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 5.83,
@@ -5755,6 +5811,7 @@
         }
     },
     "00000450": {
+        "type": "municipality",
         "name": "Nyborg",
         "idrift": "1965-10-01",
         "elkapacitet_MW": 21.902,
@@ -5860,6 +5917,7 @@
         }
     },
     "00000461": {
+        "type": "municipality",
         "name": "Odense",
         "idrift": "1971-01-01",
         "elkapacitet_MW": 506.416,
@@ -5965,6 +6023,7 @@
         }
     },
     "00000479": {
+        "type": "municipality",
         "name": "Svendborg",
         "idrift": "1985-01-01",
         "elkapacitet_MW": 24.1,
@@ -6070,6 +6129,7 @@
         }
     },
     "00000480": {
+        "type": "municipality",
         "name": "Nordfyns",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 5.78,
@@ -6175,6 +6235,7 @@
         }
     },
     "00000482": {
+        "type": "municipality",
         "name": "Langeland",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 0,
@@ -6280,6 +6341,7 @@
         }
     },
     "00000492": {
+        "type": "municipality",
         "name": "Ærø",
         "idrift": "1963-01-01",
         "elkapacitet_MW": 0.75,
@@ -6385,6 +6447,7 @@
         }
     },
     "00000510": {
+        "type": "municipality",
         "name": "Haderslev",
         "idrift": "1911-01-01",
         "elkapacitet_MW": 26.75,
@@ -6490,6 +6553,7 @@
         }
     },
     "00000530": {
+        "type": "municipality",
         "name": "Billund",
         "idrift": "1972-06-01",
         "elkapacitet_MW": 38.33,
@@ -6595,6 +6659,7 @@
         }
     },
     "00000540": {
+        "type": "municipality",
         "name": "Sønderborg",
         "idrift": "1955-01-01",
         "elkapacitet_MW": 82.46300000000001,
@@ -6700,6 +6765,7 @@
         }
     },
     "00000550": {
+        "type": "municipality",
         "name": "Tønder",
         "idrift": "1988-01-11",
         "elkapacitet_MW": 77.17,
@@ -6805,6 +6871,7 @@
         }
     },
     "00000561": {
+        "type": "municipality",
         "name": "Esbjerg",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 445.44,
@@ -6910,6 +6977,7 @@
         }
     },
     "00000563": {
+        "type": "municipality",
         "name": "Fanø",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 0,
@@ -7015,6 +7083,7 @@
         }
     },
     "00000573": {
+        "type": "municipality",
         "name": "Varde",
         "idrift": "1964-08-19",
         "elkapacitet_MW": 16.71,
@@ -7120,6 +7189,7 @@
         }
     },
     "00000575": {
+        "type": "municipality",
         "name": "Vejen",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 9.96,
@@ -7225,6 +7295,7 @@
         }
     },
     "00000580": {
+        "type": "municipality",
         "name": "Aabenraa",
         "idrift": "1983-12-01",
         "elkapacitet_MW": 4.19,
@@ -7330,6 +7401,7 @@
         }
     },
     "00000607": {
+        "type": "municipality",
         "name": "Fredericia",
         "idrift": "1978-01-01",
         "elkapacitet_MW": 505.642,
@@ -7435,6 +7507,7 @@
         }
     },
     "00000615": {
+        "type": "municipality",
         "name": "Horsens",
         "idrift": "1924-01-01",
         "elkapacitet_MW": 42.41,
@@ -7540,6 +7613,7 @@
         }
     },
     "00000621": {
+        "type": "municipality",
         "name": "Kolding",
         "idrift": "1920-01-01",
         "elkapacitet_MW": 10.737,
@@ -7645,6 +7719,7 @@
         }
     },
     "00000630": {
+        "type": "municipality",
         "name": "Vejle",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 17.418,
@@ -7750,6 +7825,7 @@
         }
     },
     "00000657": {
+        "type": "municipality",
         "name": "Herning",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 15.731,
@@ -7855,6 +7931,7 @@
         }
     },
     "00000661": {
+        "type": "municipality",
         "name": "Holstebro",
         "idrift": "1963-01-01",
         "elkapacitet_MW": 45.517,
@@ -7960,6 +8037,7 @@
         }
     },
     "00000665": {
+        "type": "municipality",
         "name": "Lemvig",
         "idrift": "1977-06-01",
         "elkapacitet_MW": 26.04,
@@ -8065,6 +8143,7 @@
         }
     },
     "00000671": {
+        "type": "municipality",
         "name": "Struer",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 3.38,
@@ -8170,6 +8249,7 @@
         }
     },
     "00000706": {
+        "type": "municipality",
         "name": "Syddjurs",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 0.725,
@@ -8275,6 +8355,7 @@
         }
     },
     "00000707": {
+        "type": "municipality",
         "name": "Norddjurs",
         "idrift": "1978-06-30",
         "elkapacitet_MW": 24.5,
@@ -8380,6 +8461,7 @@
         }
     },
     "00000710": {
+        "type": "municipality",
         "name": "Favrskov",
         "idrift": "1957-09-01",
         "elkapacitet_MW": 19.58,
@@ -8485,6 +8567,7 @@
         }
     },
     "00000727": {
+        "type": "municipality",
         "name": "Odder",
         "idrift": "1968-01-01",
         "elkapacitet_MW": 7.15,
@@ -8590,6 +8673,7 @@
         }
     },
     "00000730": {
+        "type": "municipality",
         "name": "Randers",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 61.580000000000005,
@@ -8695,6 +8779,7 @@
         }
     },
     "00000740": {
+        "type": "municipality",
         "name": "Silkeborg",
         "idrift": "1962-01-01",
         "elkapacitet_MW": 114.1,
@@ -8800,6 +8885,7 @@
         }
     },
     "00000741": {
+        "type": "municipality",
         "name": "Samsø",
         "idrift": "2000-01-01",
         "elkapacitet_MW": 0.04,
@@ -8905,6 +8991,7 @@
         }
     },
     "00000746": {
+        "type": "municipality",
         "name": "Skanderborg",
         "idrift": "1954-01-01",
         "elkapacitet_MW": 10.12,
@@ -9010,6 +9097,7 @@
         }
     },
     "00000751": {
+        "type": "municipality",
         "name": "Århus",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 796.866,
@@ -9115,6 +9203,7 @@
         }
     },
     "00000756": {
+        "type": "municipality",
         "name": "Ikast-Brande",
         "idrift": "1922-01-01",
         "elkapacitet_MW": 157.572,
@@ -9220,6 +9309,7 @@
         }
     },
     "00000760": {
+        "type": "municipality",
         "name": "Ringkøbing-Skjern",
         "idrift": "1979-01-01",
         "elkapacitet_MW": 53.73,
@@ -9325,6 +9415,7 @@
         }
     },
     "00000766": {
+        "type": "municipality",
         "name": "Hedensted",
         "idrift": "1956-10-01",
         "elkapacitet_MW": 12.7,
@@ -9430,6 +9521,7 @@
         }
     },
     "00000773": {
+        "type": "municipality",
         "name": "Morsø",
         "idrift": "1970-01-01",
         "elkapacitet_MW": 10.298,
@@ -9535,6 +9627,7 @@
         }
     },
     "00000779": {
+        "type": "municipality",
         "name": "Skive",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 26.897,
@@ -9640,6 +9733,7 @@
         }
     },
     "00000787": {
+        "type": "municipality",
         "name": "Thisted",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 27.172,
@@ -9745,6 +9839,7 @@
         }
     },
     "00000791": {
+        "type": "municipality",
         "name": "Viborg",
         "idrift": "1900-09-01",
         "elkapacitet_MW": 105.276,
@@ -9850,6 +9945,7 @@
         }
     },
     "00000810": {
+        "type": "municipality",
         "name": "Brønderslev-Dronninglund",
         "idrift": "1959-10-01",
         "elkapacitet_MW": 43.29,
@@ -9955,6 +10051,7 @@
         }
     },
     "00000813": {
+        "type": "municipality",
         "name": "Frederikshavn",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 40.49,
@@ -10060,6 +10157,7 @@
         }
     },
     "00000820": {
+        "type": "municipality",
         "name": "Vesthimmerland",
         "idrift": "1955-09-01",
         "elkapacitet_MW": 26.421,
@@ -10165,6 +10263,7 @@
         }
     },
     "00000825": {
+        "type": "municipality",
         "name": "Læsø",
         "idrift": "2006-07-28",
         "elkapacitet_MW": 0,
@@ -10270,6 +10369,7 @@
         }
     },
     "00000840": {
+        "type": "municipality",
         "name": "Rebild",
         "idrift": "1973-01-01",
         "elkapacitet_MW": 12.32,
@@ -10375,6 +10475,7 @@
         }
     },
     "00000846": {
+        "type": "municipality",
         "name": "Mariagerfjord",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 40.92,
@@ -10480,6 +10581,7 @@
         }
     },
     "00000849": {
+        "type": "municipality",
         "name": "Jammerbugt",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 16.32,
@@ -10585,6 +10687,7 @@
         }
     },
     "00000851": {
+        "type": "municipality",
         "name": "Aalborg",
         "idrift": "1982-01-01",
         "elkapacitet_MW": 433.469,
@@ -10690,6 +10793,7 @@
         }
     },
     "00000860": {
+        "type": "municipality",
         "name": "Hjørring",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 93.573,
@@ -10795,6 +10899,7 @@
         }
     },
     "00009870": {
+        "type": "municipality",
         "name": "Sindal Fjernvarme (inkl. Bindslev fra 2021)",
         "idrift": "1993-01-01",
         "elkapacitet_MW": 6.778,
@@ -10868,6 +10973,7 @@
         }
     },
     "10000685": {
+        "type": "plant",
         "name": "Hellebæk fjernvarme",
         "idrift": "1995-11-01",
         "elkapacitet_MW": 0.3299999999999999,
@@ -10941,6 +11047,7 @@
         }
     },
     "10411912": {
+        "type": "plant",
         "name": "Hinnerup Fjernvarme",
         "idrift": "1980-01-01",
         "elkapacitet_MW": 7.42,
@@ -11046,6 +11153,7 @@
         }
     },
     "10663210": {
+        "type": "plant",
         "name": "Farum Fjernvarme",
         "idrift": "1971-01-01",
         "elkapacitet_MW": 0.063,
@@ -11151,6 +11259,7 @@
         }
     },
     "10866111": {
+        "type": "plant",
         "name": "Vestforbrænding",
         "idrift": "1985-01-01",
         "elkapacitet_MW": 10.669,
@@ -11256,6 +11365,7 @@
         }
     },
     "10877814": {
+        "type": "plant",
         "name": "Tistrup Varmeværk",
         "idrift": "1964-08-19",
         "elkapacitet_MW": 2.1,
@@ -11361,6 +11471,7 @@
         }
     },
     "11135617": {
+        "type": "plant",
         "name": "Maribo Varmeværk",
         "idrift": "1982-01-01",
         "elkapacitet_MW": 11.5,
@@ -11466,6 +11577,7 @@
         }
     },
     "11271715": {
+        "type": "plant",
         "name": "Ans Kraftvarmeværk",
         "idrift": "1987-10-01",
         "elkapacitet_MW": 2.5,
@@ -11571,6 +11683,7 @@
         }
     },
     "11278612": {
+        "type": "plant",
         "name": "Skals Kraftvarmeværk",
         "idrift": "2012-01-01",
         "elkapacitet_MW": 1.499,
@@ -11676,6 +11789,7 @@
         }
     },
     "11304028": {
+        "type": "plant",
         "name": "Als Fjernvarme",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 0,
@@ -11781,6 +11895,7 @@
         }
     },
     "11324312": {
+        "type": "plant",
         "name": "Nørre Nebel Fjernvarme",
         "idrift": "2015-12-18",
         "elkapacitet_MW": 0.21,
@@ -11886,6 +12001,7 @@
         }
     },
     "11325319": {
+        "type": "plant",
         "name": "Outrup Varmeværk",
         "idrift": "1968-01-01",
         "elkapacitet_MW": 1.0,
@@ -11991,6 +12107,7 @@
         }
     },
     "11931316": {
+        "type": "plant",
         "name": "Ishøj Varmeværk",
         "idrift": "1982-11-01",
         "elkapacitet_MW": 0,
@@ -12096,6 +12213,7 @@
         }
     },
     "12233418": {
+        "type": "plant",
         "name": "Dronninglund Fjernvarme",
         "idrift": "1974-01-01",
         "elkapacitet_MW": 3.4,
@@ -12201,6 +12319,7 @@
         }
     },
     "12575130": {
+        "type": "plant",
         "name": "Thorsager Fjernvarmeværk",
         "idrift": "1989-11-01",
         "elkapacitet_MW": 0,
@@ -12306,6 +12425,7 @@
         }
     },
     "12762038": {
+        "type": "plant",
         "name": "Løjt Kirkeby Fjernvarmeselskab",
         "idrift": "1989-10-17",
         "elkapacitet_MW": 0,
@@ -12411,6 +12531,7 @@
         }
     },
     "12787111": {
+        "type": "plant",
         "name": "Oksbøl Varmeværk",
         "idrift": "1994-12-01",
         "elkapacitet_MW": 5.5,
@@ -12516,6 +12637,7 @@
         }
     },
     "12868014": {
+        "type": "plant",
         "name": "Ørum Varmeværk",
         "idrift": "1993-10-01",
         "elkapacitet_MW": 0,
@@ -12621,6 +12743,7 @@
         }
     },
     "13057117": {
+        "type": "plant",
         "name": "Høje Taastrup Fjernvarme",
         "idrift": "1992-04-21",
         "elkapacitet_MW": 1.52,
@@ -12726,6 +12849,7 @@
         }
     },
     "13148228": {
+        "type": "plant",
         "name": "Gelsted Fjernvarme",
         "idrift": "1971-01-01",
         "elkapacitet_MW": 1.0,
@@ -12831,6 +12955,7 @@
         }
     },
     "13231028": {
+        "type": "plant",
         "name": "Ulfborg Fjernvarme",
         "idrift": "2013-01-16",
         "elkapacitet_MW": 0,
@@ -12936,6 +13061,7 @@
         }
     },
     "13363919": {
+        "type": "plant",
         "name": "Sdr. Felding Varmeværk",
         "idrift": "1999-08-26",
         "elkapacitet_MW": 0,
@@ -13031,6 +13157,7 @@
         }
     },
     "13551472": {
+        "type": "plant",
         "name": "Brørup Fjernvarme",
         "idrift": "1984-01-01",
         "elkapacitet_MW": 3.84,
@@ -13136,6 +13263,7 @@
         }
     },
     "14250905": {
+        "type": "plant",
         "name": "Avedøre Fjernvarme",
         "idrift": "1973-01-01",
         "elkapacitet_MW": 805.6,
@@ -13241,6 +13369,7 @@
         }
     },
     "14324100": {
+        "type": "plant",
         "name": "Mou Kraftvarme",
         "idrift": "1991-01-01",
         "elkapacitet_MW": 2.0,
@@ -13346,6 +13475,7 @@
         }
     },
     "14411313": {
+        "type": "plant",
         "name": "Aalestrup-Nørager Energi",
         "idrift": "1988-01-01",
         "elkapacitet_MW": 3.131,
@@ -13451,6 +13581,7 @@
         }
     },
     "14454918": {
+        "type": "plant",
         "name": "Skovlund Varmeværk",
         "idrift": "1997-10-05",
         "elkapacitet_MW": 1.84,
@@ -13556,6 +13687,7 @@
         }
     },
     "14492984": {
+        "type": "plant",
         "name": "Gjerlev Varmeværk",
         "idrift": "1990-01-01",
         "elkapacitet_MW": 0,
@@ -13661,6 +13793,7 @@
         }
     },
     "14528601": {
+        "type": "plant",
         "name": "Tim Kraftvarmeværk",
         "idrift": "1991-01-01",
         "elkapacitet_MW": 2.0,
@@ -13766,6 +13899,7 @@
         }
     },
     "14748539": {
+        "type": "plant",
         "name": "Norfors",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 1.06,
@@ -13839,6 +13973,7 @@
         }
     },
     "14898018": {
+        "type": "plant",
         "name": "Borup Varmeværk",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 0,
@@ -13944,6 +14079,7 @@
         }
     },
     "14909516": {
+        "type": "plant",
         "name": "Egtved Varmeværk",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 3.73,
@@ -14049,6 +14185,7 @@
         }
     },
     "14926402": {
+        "type": "plant",
         "name": "Hvidebæk Fjernvarmeforsyning",
         "idrift": "1991-09-01",
         "elkapacitet_MW": 0,
@@ -14154,6 +14291,7 @@
         }
     },
     "14928375": {
+        "type": "plant",
         "name": "Energi Vegger",
         "idrift": "1990-01-01",
         "elkapacitet_MW": 1.27,
@@ -14259,6 +14397,7 @@
         }
     },
     "15213140": {
+        "type": "plant",
         "name": "Frøstrup Fjernvarmeværk",
         "idrift": "1992-01-01",
         "elkapacitet_MW": 0,
@@ -14364,6 +14503,7 @@
         }
     },
     "15215674": {
+        "type": "plant",
         "name": "Østerild Fjernvarme",
         "idrift": "1991-07-01",
         "elkapacitet_MW": 0,
@@ -14437,6 +14577,7 @@
         }
     },
     "15234784": {
+        "type": "plant",
         "name": "Ulbjerg Kraftvarme",
         "idrift": "1991-10-15",
         "elkapacitet_MW": 0.74,
@@ -14542,6 +14683,7 @@
         }
     },
     "15278390": {
+        "type": "plant",
         "name": "Øster Hornum Varmeværk",
         "idrift": "1991-10-01",
         "elkapacitet_MW": 0,
@@ -14647,6 +14789,7 @@
         }
     },
     "15296275": {
+        "type": "plant",
         "name": "Sønderholm Kraftvarmeværk",
         "idrift": "1991-01-01",
         "elkapacitet_MW": 1.01,
@@ -14752,6 +14895,7 @@
         }
     },
     "15320796": {
+        "type": "plant",
         "name": "Ørnhøj Grønbjerg Kraftvarmeværk",
         "idrift": "1992-01-01",
         "elkapacitet_MW": 2.0,
@@ -14857,6 +15001,7 @@
         }
     },
     "15427078": {
+        "type": "plant",
         "name": "Svebølle-Viskinge Fjernvarmeselskab",
         "idrift": "1992-09-03",
         "elkapacitet_MW": 0.103,
@@ -14962,6 +15107,7 @@
         }
     },
     "15567317": {
+        "type": "plant",
         "name": "Østbirk Varmeværk",
         "idrift": "2005-11-01",
         "elkapacitet_MW": 0,
@@ -15067,6 +15213,7 @@
         }
     },
     "15608943": {
+        "type": "plant",
         "name": "Terndrup Fjernvarme",
         "idrift": "2012-01-01",
         "elkapacitet_MW": 0,
@@ -15172,6 +15319,7 @@
         }
     },
     "15763515": {
+        "type": "plant",
         "name": "Lem Varmeværk",
         "idrift": "1993-05-01",
         "elkapacitet_MW": 3.84,
@@ -15277,6 +15425,7 @@
         }
     },
     "15978538": {
+        "type": "plant",
         "name": "Hejnsvig Varmeværk",
         "idrift": "1992-01-01",
         "elkapacitet_MW": 2.08,
@@ -15382,6 +15531,7 @@
         }
     },
     "16001910": {
+        "type": "plant",
         "name": "Jerslev Varmeværk",
         "idrift": "1959-10-01",
         "elkapacitet_MW": 3.69,
@@ -15487,6 +15637,7 @@
         }
     },
     "16016438": {
+        "type": "plant",
         "name": "Harboøre Varmeværk",
         "idrift": "1992-01-01",
         "elkapacitet_MW": 1.0,
@@ -15592,6 +15743,7 @@
         }
     },
     "16091308": {
+        "type": "plant",
         "name": "Laurbjerg Kraftvarmeværk",
         "idrift": "1993-01-01",
         "elkapacitet_MW": 4.2,
@@ -15697,6 +15849,7 @@
         }
     },
     "16256234": {
+        "type": "plant",
         "name": "Mellerup Kraftvarmeværk",
         "idrift": "1993-01-01",
         "elkapacitet_MW": 1.33,
@@ -15802,6 +15955,7 @@
         }
     },
     "16263443": {
+        "type": "plant",
         "name": "Filskov Energiselskab",
         "idrift": "1992-10-01",
         "elkapacitet_MW": 1.72,
@@ -15907,6 +16061,7 @@
         }
     },
     "16276111": {
+        "type": "plant",
         "name": "Støvring Kraftvarmeværk",
         "idrift": "1973-01-01",
         "elkapacitet_MW": 9.12,
@@ -16012,6 +16167,7 @@
         }
     },
     "16374172": {
+        "type": "plant",
         "name": "Halvrimmen-Arentsminde Kraftvarmeværk",
         "idrift": "1993-01-01",
         "elkapacitet_MW": 1.32,
@@ -16117,6 +16273,7 @@
         }
     },
     "16408530": {
+        "type": "plant",
         "name": "Hashøj Kraftvarmeforsyning",
         "idrift": "1992-06-01",
         "elkapacitet_MW": 4.154,
@@ -16222,6 +16379,7 @@
         }
     },
     "16500313": {
+        "type": "plant",
         "name": "Uldum Varmeværk",
         "idrift": "1956-10-01",
         "elkapacitet_MW": 1.5,
@@ -16322,6 +16480,7 @@
         }
     },
     "16566179": {
+        "type": "plant",
         "name": "Havndal Fjernvarme",
         "idrift": "1993-08-15",
         "elkapacitet_MW": 0,
@@ -16427,6 +16586,7 @@
         }
     },
     "16783013": {
+        "type": "plant",
         "name": "Rødbyhavn Fjernvarme",
         "idrift": "1965-09-01",
         "elkapacitet_MW": 0,
@@ -16532,6 +16692,7 @@
         }
     },
     "16838314": {
+        "type": "plant",
         "name": "Nørre Aaby Kraftvarmeværk",
         "idrift": "1983-01-01",
         "elkapacitet_MW": 2.87,
@@ -16637,6 +16798,7 @@
         }
     },
     "16859818": {
+        "type": "plant",
         "name": "Karup Varmeværk",
         "idrift": "1993-01-01",
         "elkapacitet_MW": 4.5,
@@ -16742,6 +16904,7 @@
         }
     },
     "16888079": {
+        "type": "plant",
         "name": "Thyborøn Fjernvarme",
         "idrift": "1993-12-01",
         "elkapacitet_MW": 0,
@@ -16847,6 +17010,7 @@
         }
     },
     "16893773": {
+        "type": "plant",
         "name": "Hvalpsund Kraftvarme",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 1.5,
@@ -16952,6 +17116,7 @@
         }
     },
     "16920274": {
+        "type": "plant",
         "name": "Voerså Kraftvarmeværk",
         "idrift": "1993-01-01",
         "elkapacitet_MW": 0.92,
@@ -17057,6 +17222,7 @@
         }
     },
     "16934690": {
+        "type": "plant",
         "name": "Nordby Fjernvarme",
         "idrift": "2002-05-01",
         "elkapacitet_MW": 0,
@@ -17162,6 +17328,7 @@
         }
     },
     "16946834": {
+        "type": "plant",
         "name": "Kloster Kraftvarmeværk Amba",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 1.32,
@@ -17235,6 +17402,7 @@
         }
     },
     "16954748": {
+        "type": "plant",
         "name": "Lohals Varmeforsyning",
         "idrift": "1993-10-01",
         "elkapacitet_MW": 0,
@@ -17340,6 +17508,7 @@
         }
     },
     "16964638": {
+        "type": "plant",
         "name": "Sdr. Herreds Kraftvarmeværker",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 0.66,
@@ -17445,6 +17614,7 @@
         }
     },
     "17000888": {
+        "type": "plant",
         "name": "Jetsmark Energiværk",
         "idrift": "1991-11-01",
         "elkapacitet_MW": 8.440000000000001,
@@ -17550,6 +17720,7 @@
         }
     },
     "17010131": {
+        "type": "plant",
         "name": "Trefor Varme",
         "idrift": "1920-01-01",
         "elkapacitet_MW": 7.677,
@@ -17655,6 +17826,7 @@
         }
     },
     "17025686": {
+        "type": "plant",
         "name": "Blenstrup Kraftvarmeværk",
         "idrift": "1992-10-01",
         "elkapacitet_MW": 0.8,
@@ -17760,6 +17932,7 @@
         }
     },
     "17038281": {
+        "type": "plant",
         "name": "Ramsing-Lem-Lihme Kraftvarmeværk",
         "idrift": "1993-08-01",
         "elkapacitet_MW": 2.69,
@@ -17865,6 +18038,7 @@
         }
     },
     "17048244": {
+        "type": "plant",
         "name": "Sydlangeland Fjernvarme",
         "idrift": "1994-04-01",
         "elkapacitet_MW": 0,
@@ -17970,6 +18144,7 @@
         }
     },
     "17063340": {
+        "type": "plant",
         "name": "Gjøl Private Kraftvarmeværk",
         "idrift": "1993-12-23",
         "elkapacitet_MW": 1.48,
@@ -18075,6 +18250,7 @@
         }
     },
     "17144847": {
+        "type": "plant",
         "name": "Lendum Kraftvarmeværk",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 1.36,
@@ -18180,6 +18356,7 @@
         }
     },
     "17256319": {
+        "type": "plant",
         "name": "Gudenådalens Energiselskab",
         "idrift": "1987-01-01",
         "elkapacitet_MW": 16.16,
@@ -18285,6 +18462,7 @@
         }
     },
     "17349317": {
+        "type": "plant",
         "name": "Jelling Varmeværk",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 6.911,
@@ -18390,6 +18568,7 @@
         }
     },
     "17360698": {
+        "type": "plant",
         "name": "Sydfalster Varmeværk",
         "idrift": "1988-08-01",
         "elkapacitet_MW": 0,
@@ -18495,6 +18674,7 @@
         }
     },
     "17590286": {
+        "type": "plant",
         "name": "Tversted Kraftvarmeværk",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 1.82,
@@ -18600,6 +18780,7 @@
         }
     },
     "17629085": {
+        "type": "plant",
         "name": "Oue Kraftvarmeværk",
         "idrift": "1993-10-01",
         "elkapacitet_MW": 0.92,
@@ -18705,6 +18886,7 @@
         }
     },
     "17638181": {
+        "type": "plant",
         "name": "Vesløs Fjernvarme",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 0,
@@ -18810,6 +18992,7 @@
         }
     },
     "17689800": {
+        "type": "plant",
         "name": "Øster Toreby Varmeværk",
         "idrift": "1988-01-01",
         "elkapacitet_MW": 0,
@@ -18905,6 +19088,7 @@
         }
     },
     "17727915": {
+        "type": "plant",
         "name": "Ejstrupholm Varmeværk",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 3.64,
@@ -19010,6 +19194,7 @@
         }
     },
     "17737147": {
+        "type": "plant",
         "name": "Manna-Thise Kraftvarmeværk",
         "idrift": "1994-10-01",
         "elkapacitet_MW": 0.92,
@@ -19115,6 +19300,7 @@
         }
     },
     "17737244": {
+        "type": "plant",
         "name": "Gassum/Hvidsten Kraftvarmeværk",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 1.3,
@@ -19188,6 +19374,7 @@
         }
     },
     "17750909": {
+        "type": "plant",
         "name": "Astrup Kraftvarmeværk",
         "idrift": "1994-11-01",
         "elkapacitet_MW": 1.0,
@@ -19293,6 +19480,7 @@
         }
     },
     "17761889": {
+        "type": "plant",
         "name": "Haderup Kraftvarmeværk",
         "idrift": "1993-03-01",
         "elkapacitet_MW": 1.32,
@@ -19398,6 +19586,7 @@
         }
     },
     "17779710": {
+        "type": "plant",
         "name": "Aabybro Fjernvarme",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 0,
@@ -19503,6 +19692,7 @@
         }
     },
     "17816845": {
+        "type": "plant",
         "name": "Ejsing Fjernvarmeforsyning",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 2.0,
@@ -19608,6 +19798,7 @@
         }
     },
     "17828843": {
+        "type": "plant",
         "name": "Ravnkilde Kraftvarmeværk",
         "idrift": "1994-10-01",
         "elkapacitet_MW": 0.92,
@@ -19688,6 +19879,7 @@
         }
     },
     "17885278": {
+        "type": "plant",
         "name": "Feldborg Kraftvarmeværk",
         "idrift": "1994-08-06",
         "elkapacitet_MW": 1.32,
@@ -19793,6 +19985,7 @@
         }
     },
     "17926195": {
+        "type": "plant",
         "name": "Rostrup Kraftvarmeværk",
         "idrift": "2012-01-01",
         "elkapacitet_MW": 0.83,
@@ -19898,6 +20091,7 @@
         }
     },
     "17932640": {
+        "type": "plant",
         "name": "Hallund Kraftvarmeværk",
         "idrift": "1994-12-01",
         "elkapacitet_MW": 0.66,
@@ -20003,6 +20197,7 @@
         }
     },
     "18021080": {
+        "type": "plant",
         "name": "Vorupør Kraftvarmeværk",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 1.472,
@@ -20108,6 +20303,7 @@
         }
     },
     "18027410": {
+        "type": "plant",
         "name": "Allingåbro Varmeværk",
         "idrift": "2002-10-01",
         "elkapacitet_MW": 0,
@@ -20213,6 +20409,7 @@
         }
     },
     "18155141": {
+        "type": "plant",
         "name": "Jægerspris Kraftvarme",
         "idrift": "1995-09-01",
         "elkapacitet_MW": 5.76,
@@ -20318,6 +20515,7 @@
         }
     },
     "18211912": {
+        "type": "plant",
         "name": "Rødkærsbro Fjernvarmeværk",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 5.7,
@@ -20423,6 +20621,7 @@
         }
     },
     "18292610": {
+        "type": "plant",
         "name": "Tommerup Bys Fjernvarmeforsyning",
         "idrift": "1984-05-01",
         "elkapacitet_MW": 0.85,
@@ -20528,6 +20727,7 @@
         }
     },
     "18318636": {
+        "type": "plant",
         "name": "Bækmarksbro Varmeværk",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 0,
@@ -20628,6 +20828,7 @@
         }
     },
     "18429772": {
+        "type": "plant",
         "name": "Genner-Hellevad-Hovslund",
         "idrift": "1995-09-01",
         "elkapacitet_MW": 0.92,
@@ -20733,6 +20934,7 @@
         }
     },
     "18440342": {
+        "type": "plant",
         "name": "Hundslund-Oldrup Kraftvarmeværk",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 0.92,
@@ -20838,6 +21040,7 @@
         }
     },
     "18468840": {
+        "type": "plant",
         "name": "Gylling-Ørting-Falling Kraftvarmeværk",
         "idrift": "1995-09-01",
         "elkapacitet_MW": 3.04,
@@ -20923,6 +21126,7 @@
         }
     },
     "18474492": {
+        "type": "plant",
         "name": "Fur Kraftvarmeværk Amba",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 1.0,
@@ -21028,6 +21232,7 @@
         }
     },
     "18476339": {
+        "type": "plant",
         "name": "Værum - Ørum Kraftvarmeværk",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 1.5,
@@ -21133,6 +21338,7 @@
         }
     },
     "18496607": {
+        "type": "plant",
         "name": "Skørping Varmeværk",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 0,
@@ -21238,6 +21444,7 @@
         }
     },
     "18503379": {
+        "type": "plant",
         "name": "Snertinge-Særslev-Føllenslev Energiselskab",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 0.84,
@@ -21343,6 +21550,7 @@
         }
     },
     "18552310": {
+        "type": "plant",
         "name": "Frederiks Varmeværk",
         "idrift": "1986-06-11",
         "elkapacitet_MW": 3.82,
@@ -21448,6 +21656,7 @@
         }
     },
     "18653087": {
+        "type": "plant",
         "name": "Boulstrup-Hou Kraftvarmeværk",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 0.9,
@@ -21553,6 +21762,7 @@
         }
     },
     "18676710": {
+        "type": "plant",
         "name": "Spøttrup Fjernvarmeværk",
         "idrift": "2001-06-17",
         "elkapacitet_MW": 0.85,
@@ -21626,6 +21836,7 @@
         }
     },
     "18683814": {
+        "type": "plant",
         "name": "Bøvling Varmeværk",
         "idrift": "1991-09-01",
         "elkapacitet_MW": 0,
@@ -21699,6 +21910,7 @@
         }
     },
     "18693518": {
+        "type": "plant",
         "name": "Sig Varmeværk",
         "idrift": "1986-10-01",
         "elkapacitet_MW": 1.36,
@@ -21804,6 +22016,7 @@
         }
     },
     "18791013": {
+        "type": "plant",
         "name": "Løgstrup Varmeværk",
         "idrift": "1997-10-10",
         "elkapacitet_MW": 3.34,
@@ -21909,6 +22122,7 @@
         }
     },
     "18807483": {
+        "type": "plant",
         "name": "Rye Kraftvarmeværk",
         "idrift": "1996-02-12",
         "elkapacitet_MW": 1.7,
@@ -22014,6 +22228,7 @@
         }
     },
     "18849518": {
+        "type": "plant",
         "name": "Højslev Nr.Søby Fjernvarmeværk",
         "idrift": "1973-01-01",
         "elkapacitet_MW": 0,
@@ -22119,6 +22334,7 @@
         }
     },
     "18886499": {
+        "type": "plant",
         "name": "Ellehavegaard Energy",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 0,
@@ -22209,6 +22425,7 @@
         }
     },
     "18962519": {
+        "type": "plant",
         "name": "Bedsted Fjernvarme",
         "idrift": "1963-01-01",
         "elkapacitet_MW": 0,
@@ -22314,6 +22531,7 @@
         }
     },
     "18968614": {
+        "type": "plant",
         "name": "Holte Fjernvarme",
         "idrift": "1966-06-01",
         "elkapacitet_MW": 38.5,
@@ -22387,6 +22605,7 @@
         }
     },
     "19153908": {
+        "type": "plant",
         "name": "Skuldelev Energiselskab",
         "idrift": "1996-06-30",
         "elkapacitet_MW": 0.92,
@@ -22492,6 +22711,7 @@
         }
     },
     "19201414": {
+        "type": "plant",
         "name": "Løgstør Fjernvarmeværk",
         "idrift": "1975-01-01",
         "elkapacitet_MW": 9.33,
@@ -22597,6 +22817,7 @@
         }
     },
     "19231097": {
+        "type": "plant",
         "name": "Blåhøj Energiselskab",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 1.802,
@@ -22702,6 +22923,7 @@
         }
     },
     "19445933": {
+        "type": "plant",
         "name": "Brøns Fjernvarme",
         "idrift": "1997-01-01",
         "elkapacitet_MW": 0.93,
@@ -22807,6 +23029,7 @@
         }
     },
     "19470695": {
+        "type": "plant",
         "name": "Thorshøj Kraftvarmeværk",
         "idrift": "1993-01-01",
         "elkapacitet_MW": 0,
@@ -22912,6 +23135,7 @@
         }
     },
     "19493288": {
+        "type": "plant",
         "name": "Øster Hurup Kraftvarmeværk",
         "idrift": "1997-04-01",
         "elkapacitet_MW": 1.47,
@@ -23017,6 +23241,7 @@
         }
     },
     "19500438": {
+        "type": "plant",
         "name": "Rejsby Kraftvarmeværk",
         "idrift": "1997-01-20",
         "elkapacitet_MW": 0.92,
@@ -23122,6 +23347,7 @@
         }
     },
     "19739112": {
+        "type": "plant",
         "name": "Sakskøbing Fjernvarmeselskab",
         "idrift": "1991-01-01",
         "elkapacitet_MW": 0,
@@ -23227,6 +23453,7 @@
         }
     },
     "19746933": {
+        "type": "plant",
         "name": "Vejby-Tisvilde Fjernvarme",
         "idrift": "1997-11-01",
         "elkapacitet_MW": 3.0,
@@ -23332,6 +23559,7 @@
         }
     },
     "19774015": {
+        "type": "plant",
         "name": "Agersted Varmeværk",
         "idrift": "1988-01-01",
         "elkapacitet_MW": 1.41,
@@ -23437,6 +23665,7 @@
         }
     },
     "19998347": {
+        "type": "plant",
         "name": "Nørre Snede Varmeværk",
         "idrift": "1986-06-01",
         "elkapacitet_MW": 3.64,
@@ -23542,6 +23771,7 @@
         }
     },
     "20023317": {
+        "type": "plant",
         "name": "Flauenskjold Varmeværk",
         "idrift": "1993-01-01",
         "elkapacitet_MW": 0.73,
@@ -23647,6 +23877,7 @@
         }
     },
     "20049928": {
+        "type": "plant",
         "name": "Gørding Varmeværk",
         "idrift": "1971-01-01",
         "elkapacitet_MW": 0,
@@ -23752,6 +23983,7 @@
         }
     },
     "20066873": {
+        "type": "plant",
         "name": "Løkkensvejens Kraftvarmeværk",
         "idrift": "1997-08-01",
         "elkapacitet_MW": 2.68,
@@ -23857,6 +24089,7 @@
         }
     },
     "20095806": {
+        "type": "plant",
         "name": "Trustrup-Lyngby Varmeværk",
         "idrift": "2000-01-01",
         "elkapacitet_MW": 0,
@@ -23962,6 +24195,7 @@
         }
     },
     "20137193": {
+        "type": "plant",
         "name": "Sandved Tornemark Kraftvarmeværk",
         "idrift": "1997-01-01",
         "elkapacitet_MW": 0.74,
@@ -24067,6 +24301,7 @@
         }
     },
     "20237848": {
+        "type": "plant",
         "name": "Søndbjerg Fjernvarme",
         "idrift": "1998-03-01",
         "elkapacitet_MW": 0,
@@ -24172,6 +24407,7 @@
         }
     },
     "20745533": {
+        "type": "plant",
         "name": "Hemmet Varmeværk",
         "idrift": "1999-01-01",
         "elkapacitet_MW": 0,
@@ -24277,6 +24513,7 @@
         }
     },
     "20928719": {
+        "type": "plant",
         "name": "Saltum Fjernvarmeværk",
         "idrift": "1988-09-21",
         "elkapacitet_MW": 1.22,
@@ -24382,6 +24619,7 @@
         }
     },
     "21430277": {
+        "type": "plant",
         "name": "Tranebjerg Fjernvarmeværk",
         "idrift": "2000-01-01",
         "elkapacitet_MW": 0,
@@ -24477,6 +24715,7 @@
         }
     },
     "21445711": {
+        "type": "plant",
         "name": "Smørum Kraftvarme",
         "idrift": "1995-10-06",
         "elkapacitet_MW": 11.4,
@@ -24582,6 +24821,7 @@
         }
     },
     "22113410": {
+        "type": "plant",
         "name": "Svendborg Fjernvarme",
         "idrift": "1985-01-01",
         "elkapacitet_MW": 21.0,
@@ -24687,6 +24927,7 @@
         }
     },
     "22340417": {
+        "type": "plant",
         "name": "Fjernvarmecentralen Avedøre Holme",
         "idrift": "1987-08-01",
         "elkapacitet_MW": 0,
@@ -24760,6 +25001,7 @@
         }
     },
     "22662910": {
+        "type": "plant",
         "name": "Hals Fjernvarme",
         "idrift": "1992-01-01",
         "elkapacitet_MW": 0,
@@ -24865,6 +25107,7 @@
         }
     },
     "22703714": {
+        "type": "plant",
         "name": "Ebeltoft Fjernvarmeværk",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 0,
@@ -24970,6 +25213,7 @@
         }
     },
     "22724118": {
+        "type": "plant",
         "name": "Hovedgaard Fjernvarmeværk",
         "idrift": "1989-08-01",
         "elkapacitet_MW": 0,
@@ -25043,6 +25287,7 @@
         }
     },
     "22725513": {
+        "type": "plant",
         "name": "Padborg Fjernvarme",
         "idrift": "1993-11-01",
         "elkapacitet_MW": 0.66,
@@ -25148,6 +25393,7 @@
         }
     },
     "22831615": {
+        "type": "plant",
         "name": "Løgten-Skødstrup Fjernvarme",
         "idrift": "1968-01-01",
         "elkapacitet_MW": 732.7,
@@ -25253,6 +25499,7 @@
         }
     },
     "22883313": {
+        "type": "plant",
         "name": "Thorsø Fjernvarmeværk",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 2.1,
@@ -25358,6 +25605,7 @@
         }
     },
     "22927213": {
+        "type": "plant",
         "name": "Bredebro Varmeværk",
         "idrift": "1994-08-01",
         "elkapacitet_MW": 2.8,
@@ -25463,6 +25711,7 @@
         }
     },
     "22950312": {
+        "type": "plant",
         "name": "Ry Varmeværk",
         "idrift": "2003-01-01",
         "elkapacitet_MW": 0,
@@ -25568,6 +25817,7 @@
         }
     },
     "23011514": {
+        "type": "plant",
         "name": "Hanstholm Varmeværk",
         "idrift": "1982-01-01",
         "elkapacitet_MW": 5.2,
@@ -25673,6 +25923,7 @@
         }
     },
     "23067919": {
+        "type": "plant",
         "name": "Hammershøj Fjernvarmeværk",
         "idrift": "1986-10-01",
         "elkapacitet_MW": 2.0,
@@ -25778,6 +26029,7 @@
         }
     },
     "23104113": {
+        "type": "plant",
         "name": "Solrød Fjernvarme",
         "idrift": "1991-02-01",
         "elkapacitet_MW": 0.527,
@@ -25883,6 +26135,7 @@
         }
     },
     "23220113": {
+        "type": "plant",
         "name": "Klejtrup Kraftvarmeværk",
         "idrift": "1988-01-01",
         "elkapacitet_MW": 1.13,
@@ -25988,6 +26241,7 @@
         }
     },
     "23234114": {
+        "type": "plant",
         "name": "Mørkøv Varmeværk",
         "idrift": "1988-12-20",
         "elkapacitet_MW": 2.05,
@@ -26093,6 +26347,7 @@
         }
     },
     "23913615": {
+        "type": "plant",
         "name": "Kværndrup Fjernvarme",
         "idrift": "2005-12-01",
         "elkapacitet_MW": 0,
@@ -26198,6 +26453,7 @@
         }
     },
     "24251020": {
+        "type": "plant",
         "name": "K/S Difko Lxv",
         "idrift": "1989-04-01",
         "elkapacitet_MW": 0,
@@ -26271,6 +26527,7 @@
         }
     },
     "24513718": {
+        "type": "plant",
         "name": "Ærøskøbing Fjernvarme",
         "idrift": "1963-01-01",
         "elkapacitet_MW": 0,
@@ -26376,6 +26633,7 @@
         }
     },
     "24557413": {
+        "type": "plant",
         "name": "Hvidbjerg Fjernvarme",
         "idrift": "2004-10-01",
         "elkapacitet_MW": 0,
@@ -26481,6 +26739,7 @@
         }
     },
     "24591328": {
+        "type": "plant",
         "name": "Rødby Varmeværk",
         "idrift": "2003-01-01",
         "elkapacitet_MW": 0,
@@ -26586,6 +26845,7 @@
         }
     },
     "24989712": {
+        "type": "plant",
         "name": "Sdr. Omme Varmeværk",
         "idrift": "2011-06-07",
         "elkapacitet_MW": 0,
@@ -26691,6 +26951,7 @@
         }
     },
     "25161513": {
+        "type": "plant",
         "name": "Energi Ikast Varme",
         "idrift": "1981-07-01",
         "elkapacitet_MW": 3.06,
@@ -26786,6 +27047,7 @@
         }
     },
     "25215680": {
+        "type": "plant",
         "name": "E.On Varme Danmark",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 10.8,
@@ -26859,6 +27121,7 @@
         }
     },
     "25387910": {
+        "type": "plant",
         "name": "Haarby Kraft-Varme",
         "idrift": "1985-01-01",
         "elkapacitet_MW": 6.96,
@@ -26964,6 +27227,7 @@
         }
     },
     "25452283": {
+        "type": "plant",
         "name": "Rise Fjernvarme",
         "idrift": "2000-01-01",
         "elkapacitet_MW": 0,
@@ -27069,6 +27333,7 @@
         }
     },
     "25473914": {
+        "type": "plant",
         "name": "Auning Varmeværk",
         "idrift": "1978-06-30",
         "elkapacitet_MW": 0,
@@ -27174,6 +27439,7 @@
         }
     },
     "25482026": {
+        "type": "plant",
         "name": "Verdo Varme",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 52.0,
@@ -27269,6 +27535,7 @@
         }
     },
     "25809807": {
+        "type": "plant",
         "name": "Verdo Varme Herning",
         "idrift": "1992-01-01",
         "elkapacitet_MW": 0,
@@ -27354,6 +27621,7 @@
         }
     },
     "26089263": {
+        "type": "plant",
         "name": "Hofor",
         "idrift": "1971-01-01",
         "elkapacitet_MW": 420.3,
@@ -27459,6 +27727,7 @@
         }
     },
     "26203562": {
+        "type": "plant",
         "name": "Struer Energi",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 0,
@@ -27564,6 +27833,7 @@
         }
     },
     "26325471": {
+        "type": "plant",
         "name": "Onsbjerg Varmeværk",
         "idrift": "2002-02-01",
         "elkapacitet_MW": 0,
@@ -27669,6 +27939,7 @@
         }
     },
     "26364817": {
+        "type": "plant",
         "name": "Ørsted Fjernvarmeværk",
         "idrift": "2007-10-09",
         "elkapacitet_MW": 0,
@@ -27774,6 +28045,7 @@
         }
     },
     "26385849": {
+        "type": "plant",
         "name": "0",
         "idrift": "1993-01-01",
         "elkapacitet_MW": 6.33,
@@ -27847,6 +28119,7 @@
         }
     },
     "26704065": {
+        "type": "plant",
         "name": "Vestforsyning Varme",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 0,
@@ -27952,6 +28225,7 @@
         }
     },
     "26721059": {
+        "type": "plant",
         "name": "Ffv Varme Faaborg",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 7.5,
@@ -28057,6 +28331,7 @@
         }
     },
     "26832217": {
+        "type": "plant",
         "name": "Skårup Fjernvarme",
         "idrift": "1985-06-01",
         "elkapacitet_MW": 1.4,
@@ -28162,6 +28437,7 @@
         }
     },
     "27173012": {
+        "type": "plant",
         "name": "Balling-Rødding Varmeværk",
         "idrift": "2019-06-20",
         "elkapacitet_MW": 0,
@@ -28267,6 +28543,7 @@
         }
     },
     "27185614": {
+        "type": "plant",
         "name": "Vissenbjerg Fjernvarme",
         "idrift": "1986-08-01",
         "elkapacitet_MW": 3.06,
@@ -28340,6 +28617,7 @@
         }
     },
     "27360912": {
+        "type": "plant",
         "name": "Vemb Varmeværk",
         "idrift": "2012-01-01",
         "elkapacitet_MW": 0,
@@ -28445,6 +28723,7 @@
         }
     },
     "27695949": {
+        "type": "plant",
         "name": "Nysted Varmeværk",
         "idrift": "1988-10-01",
         "elkapacitet_MW": 2.7030000000000003,
@@ -28550,6 +28829,7 @@
         }
     },
     "27736904": {
+        "type": "plant",
         "name": "Sk Forsyning",
         "idrift": "1970-01-01",
         "elkapacitet_MW": 6.300000000000001,
@@ -28655,6 +28935,7 @@
         }
     },
     "27827853": {
+        "type": "plant",
         "name": "Ballen/Brundby Fjernvarme",
         "idrift": "2004-04-01",
         "elkapacitet_MW": 0,
@@ -28760,6 +29041,7 @@
         }
     },
     "27837417": {
+        "type": "plant",
         "name": "Assens Fjernvarme Mariager",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 0,
@@ -28865,6 +29147,7 @@
         }
     },
     "28032617": {
+        "type": "plant",
         "name": "Vojens Fjernvarme",
         "idrift": "1984-10-01",
         "elkapacitet_MW": 9.01,
@@ -28970,6 +29253,7 @@
         }
     },
     "28500769": {
+        "type": "plant",
         "name": "Frederiksberg Forsyning",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 0,
@@ -29075,6 +29359,7 @@
         }
     },
     "28621027": {
+        "type": "plant",
         "name": "Middelfart Fjernvarme",
         "idrift": "1984-01-01",
         "elkapacitet_MW": 0.04,
@@ -29180,6 +29465,7 @@
         }
     },
     "28672330": {
+        "type": "plant",
         "name": "Køge Fjernvarme",
         "idrift": "1985-01-01",
         "elkapacitet_MW": 33.353,
@@ -29270,6 +29556,7 @@
         }
     },
     "28709714": {
+        "type": "plant",
         "name": "Tørring Kraftvarmeværk",
         "idrift": "2003-10-15",
         "elkapacitet_MW": 5.1,
@@ -29375,6 +29662,7 @@
         }
     },
     "29096716": {
+        "type": "plant",
         "name": "Høng Varmeværk",
         "idrift": "1982-01-01",
         "elkapacitet_MW": 0,
@@ -29480,6 +29768,7 @@
         }
     },
     "29124655": {
+        "type": "plant",
         "name": "Odder Forsyningsselskab",
         "idrift": "1968-01-01",
         "elkapacitet_MW": 0.03,
@@ -29553,6 +29842,7 @@
         }
     },
     "29189668": {
+        "type": "plant",
         "name": "Mejlby Fjernvarme",
         "idrift": "1969-01-01",
         "elkapacitet_MW": 0.66,
@@ -29658,6 +29948,7 @@
         }
     },
     "29214824": {
+        "type": "plant",
         "name": "Nørre Broby Varmeværk",
         "idrift": "1992-09-01",
         "elkapacitet_MW": 2.12,
@@ -29731,6 +30022,7 @@
         }
     },
     "29346909": {
+        "type": "plant",
         "name": "Havneby Varmeværk",
         "idrift": "2006-11-01",
         "elkapacitet_MW": 0,
@@ -29836,6 +30128,7 @@
         }
     },
     "29580715": {
+        "type": "plant",
         "name": "Fuglebjerg Fjernvarme",
         "idrift": "2001-10-06",
         "elkapacitet_MW": 0,
@@ -29941,6 +30234,7 @@
         }
     },
     "29777373": {
+        "type": "plant",
         "name": "Ringsted Forsyning",
         "idrift": "1966-01-01",
         "elkapacitet_MW": 11.0,
@@ -30046,6 +30340,7 @@
         }
     },
     "29826641": {
+        "type": "plant",
         "name": "Nyborg Forsyning",
         "idrift": "1965-10-01",
         "elkapacitet_MW": 21.9,
@@ -30151,6 +30446,7 @@
         }
     },
     "30173929": {
+        "type": "plant",
         "name": "Frederikshavn Varme",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 2.78,
@@ -30224,6 +30520,7 @@
         }
     },
     "30406443": {
+        "type": "plant",
         "name": "Nimtofte Og Omegns Fjernvarmeforsyning",
         "idrift": "2008-01-01",
         "elkapacitet_MW": 0.375,
@@ -30319,6 +30616,7 @@
         }
     },
     "30692446": {
+        "type": "plant",
         "name": "Vordingborg Fjernvarme",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 79.98,
@@ -30424,6 +30722,7 @@
         }
     },
     "30990714": {
+        "type": "plant",
         "name": "Skærbæk Fjernvarme",
         "idrift": "1988-01-11",
         "elkapacitet_MW": 4.05,
@@ -30529,6 +30828,7 @@
         }
     },
     "30992512": {
+        "type": "plant",
         "name": "Thisted Varmeforsyning",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 6.15,
@@ -30634,6 +30934,7 @@
         }
     },
     "31157439": {
+        "type": "plant",
         "name": "Brønderslev Forsyning",
         "idrift": "1971-09-01",
         "elkapacitet_MW": 28.24,
@@ -30739,6 +31040,7 @@
         }
     },
     "31220319": {
+        "type": "plant",
         "name": "Marstal Fjernvarme",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 0.75,
@@ -30844,6 +31146,7 @@
         }
     },
     "31220912": {
+        "type": "plant",
         "name": "Vinderup Varmeværk",
         "idrift": "1983-12-01",
         "elkapacitet_MW": 9.44,
@@ -30949,6 +31252,7 @@
         }
     },
     "31223717": {
+        "type": "plant",
         "name": "Langå Varmeværk",
         "idrift": "1991-06-01",
         "elkapacitet_MW": 2.95,
@@ -31054,6 +31358,7 @@
         }
     },
     "31582148": {
+        "type": "plant",
         "name": "Bornholms Energi & Forsyning",
         "idrift": "1985-01-01",
         "elkapacitet_MW": 2.968,
@@ -31159,6 +31464,7 @@
         }
     },
     "31592488": {
+        "type": "plant",
         "name": "Hillerød Forsyning",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 82.12,
@@ -31264,6 +31570,7 @@
         }
     },
     "31774985": {
+        "type": "plant",
         "name": "Kalundborg Varmeforsyning",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 1078.0,
@@ -31369,6 +31676,7 @@
         }
     },
     "31877733": {
+        "type": "plant",
         "name": "Silkeborg Forsyning",
         "idrift": "1962-01-01",
         "elkapacitet_MW": 110.8,
@@ -31474,6 +31782,7 @@
         }
     },
     "31895901": {
+        "type": "plant",
         "name": "Morsø Forsyning",
         "idrift": "1970-01-01",
         "elkapacitet_MW": 0,
@@ -31579,6 +31888,7 @@
         }
     },
     "32077404": {
+        "type": "plant",
         "name": "Kerteminde Forsyning",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 5.83,
@@ -31684,6 +31994,7 @@
         }
     },
     "32078737": {
+        "type": "plant",
         "name": "Varde Varmeforsyning",
         "idrift": "1980-11-27",
         "elkapacitet_MW": 0,
@@ -31757,6 +32068,7 @@
         }
     },
     "32394817": {
+        "type": "plant",
         "name": "Gedser Fjernvarme",
         "idrift": "2012-01-01",
         "elkapacitet_MW": 0,
@@ -31862,6 +32174,7 @@
         }
     },
     "32473660": {
+        "type": "plant",
         "name": "Halsnæs Forsyning",
         "idrift": "1998-12-01",
         "elkapacitet_MW": 1.06,
@@ -31967,6 +32280,7 @@
         }
     },
     "32476813": {
+        "type": "plant",
         "name": "Midtfyns Energi",
         "idrift": "1985-01-01",
         "elkapacitet_MW": 8.100000000000001,
@@ -32072,6 +32386,7 @@
         }
     },
     "32555063": {
+        "type": "plant",
         "name": "Refa Stubbekøbing Fjernvarme",
         "idrift": "2008-10-31",
         "elkapacitet_MW": 0,
@@ -32177,6 +32492,7 @@
         }
     },
     "32654193": {
+        "type": "plant",
         "name": "Forsyning Helsingør",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 72.28,
@@ -32282,6 +32598,7 @@
         }
     },
     "32667740": {
+        "type": "plant",
         "name": "Tårnbyforsyning Varme",
         "idrift": "2000-05-22",
         "elkapacitet_MW": 0.92,
@@ -32377,6 +32694,7 @@
         }
     },
     "32720315": {
+        "type": "plant",
         "name": "Hundested Varmeværk",
         "idrift": "1990-01-01",
         "elkapacitet_MW": 0,
@@ -32482,6 +32800,7 @@
         }
     },
     "32945880": {
+        "type": "plant",
         "name": "Rønne Varme",
         "idrift": "1972-01-01",
         "elkapacitet_MW": 99.1,
@@ -32587,6 +32906,7 @@
         }
     },
     "33016719": {
+        "type": "plant",
         "name": "Tranbjerg Varmeværk",
         "idrift": "1998-01-01",
         "elkapacitet_MW": 0,
@@ -32692,6 +33012,7 @@
         }
     },
     "33032838": {
+        "type": "plant",
         "name": "FORS Varme Holbæk",
         "idrift": "1984-09-01",
         "elkapacitet_MW": 0,
@@ -32777,6 +33098,7 @@
         }
     },
     "33033125": {
+        "type": "plant",
         "name": "Jyderup Varme A/S",
         "idrift": "1978-10-01",
         "elkapacitet_MW": 5.5,
@@ -32850,6 +33172,7 @@
         }
     },
     "33033575": {
+        "type": "plant",
         "name": "Halsnæs Varme",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 0,
@@ -32955,6 +33278,7 @@
         }
     },
     "33043309": {
+        "type": "plant",
         "name": "Glostrup Forsyning",
         "idrift": "1972-01-01",
         "elkapacitet_MW": 40.25,
@@ -33060,6 +33384,7 @@
         }
     },
     "33063784": {
+        "type": "plant",
         "name": "Læsø Forsyning",
         "idrift": "2006-07-28",
         "elkapacitet_MW": 0,
@@ -33165,6 +33490,7 @@
         }
     },
     "33171412": {
+        "type": "plant",
         "name": "Møldrup Fjernvarme",
         "idrift": "1987-01-01",
         "elkapacitet_MW": 1.8,
@@ -33270,6 +33596,7 @@
         }
     },
     "33258445": {
+        "type": "plant",
         "name": "Videbæk Varm",
         "idrift": "2018-01-01",
         "elkapacitet_MW": 3.0,
@@ -33375,6 +33702,7 @@
         }
     },
     "33258453": {
+        "type": "plant",
         "name": "Videbæk Energiforsyning",
         "idrift": "1987-04-01",
         "elkapacitet_MW": 18.388,
@@ -33480,6 +33808,7 @@
         }
     },
     "33269315": {
+        "type": "plant",
         "name": "Brøndby Fjernvarme",
         "idrift": "1966-01-01",
         "elkapacitet_MW": 0,
@@ -33585,6 +33914,7 @@
         }
     },
     "33507410": {
+        "type": "plant",
         "name": "Skagen Varmeværk",
         "idrift": "1988-11-12",
         "elkapacitet_MW": 20.66,
@@ -33690,6 +34020,7 @@
         }
     },
     "33756488": {
+        "type": "plant",
         "name": "Refa Horbelev Fjernvarme",
         "idrift": "2005-01-01",
         "elkapacitet_MW": 0,
@@ -33795,6 +34126,7 @@
         }
     },
     "33910134": {
+        "type": "plant",
         "name": "Kolind Fjernvarmeværk",
         "idrift": "2010-12-23",
         "elkapacitet_MW": 0,
@@ -33900,6 +34232,7 @@
         }
     },
     "33912773": {
+        "type": "plant",
         "name": "Greve  Fjernvarme",
         "idrift": "1972-01-01",
         "elkapacitet_MW": 0,
@@ -34005,6 +34338,7 @@
         }
     },
     "34203563": {
+        "type": "plant",
         "name": "Odsherred Forsyning",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 2.02,
@@ -34078,6 +34412,7 @@
         }
     },
     "34916810": {
+        "type": "plant",
         "name": "Ulsted Varmeværk",
         "idrift": "1982-01-01",
         "elkapacitet_MW": 0,
@@ -34183,6 +34518,7 @@
         }
     },
     "34937257": {
+        "type": "plant",
         "name": "Slagslunde Fjernvarme",
         "idrift": "1997-05-01",
         "elkapacitet_MW": 1.04,
@@ -34288,6 +34624,7 @@
         }
     },
     "34938717": {
+        "type": "plant",
         "name": "Bredsten-Balle Kraftvarmeværk",
         "idrift": "1998-04-01",
         "elkapacitet_MW": 0,
@@ -34393,6 +34730,7 @@
         }
     },
     "35410538": {
+        "type": "plant",
         "name": "Egedal Fjernvarme",
         "idrift": "2014-01-01",
         "elkapacitet_MW": 0.885,
@@ -34466,6 +34804,7 @@
         }
     },
     "35419314": {
+        "type": "plant",
         "name": "Føns Nærvarme",
         "idrift": "2015-10-15",
         "elkapacitet_MW": 0,
@@ -34561,6 +34900,7 @@
         }
     },
     "35478116": {
+        "type": "plant",
         "name": "Fredericia Fjernvarme",
         "idrift": "1978-01-01",
         "elkapacitet_MW": 505.642,
@@ -34666,6 +35006,7 @@
         }
     },
     "35580913": {
+        "type": "plant",
         "name": "Mørke Fjernvarme",
         "idrift": "2019-01-01",
         "elkapacitet_MW": 0,
@@ -34771,6 +35112,7 @@
         }
     },
     "35747028": {
+        "type": "plant",
         "name": "Ølgod Tekniske Værker",
         "idrift": "1992-01-01",
         "elkapacitet_MW": 3.74,
@@ -34876,6 +35218,7 @@
         }
     },
     "36152710": {
+        "type": "plant",
         "name": "Aabenraa-Rødekro Fjernvarme",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 1.87,
@@ -34981,6 +35324,7 @@
         }
     },
     "36294515": {
+        "type": "plant",
         "name": "Gram Fjernvarme",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 5.5,
@@ -35086,6 +35430,7 @@
         }
     },
     "36450819": {
+        "type": "plant",
         "name": "Malling Varmeværk",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 0,
@@ -35191,6 +35536,7 @@
         }
     },
     "36637919": {
+        "type": "plant",
         "name": "Holsted Varmeværk",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 3.0,
@@ -35296,6 +35642,7 @@
         }
     },
     "36892412": {
+        "type": "plant",
         "name": "Lemvig Varmeværk",
         "idrift": "1991-01-01",
         "elkapacitet_MW": 14.84,
@@ -35401,6 +35748,7 @@
         }
     },
     "36941650": {
+        "type": "plant",
         "name": "Nordals Fjernvarme",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 10.4,
@@ -35496,6 +35844,7 @@
         }
     },
     "37251518": {
+        "type": "plant",
         "name": "Billund Varmeværk",
         "idrift": "1972-06-01",
         "elkapacitet_MW": 10.6,
@@ -35601,6 +35950,7 @@
         }
     },
     "37325813": {
+        "type": "plant",
         "name": "Spjald Fjernvarme-Og Vandværk",
         "idrift": "1988-10-01",
         "elkapacitet_MW": 4.24,
@@ -35706,6 +36056,7 @@
         }
     },
     "37560219": {
+        "type": "plant",
         "name": "Ringkøbing Fjernvarmeværk",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 8.73,
@@ -35811,6 +36162,7 @@
         }
     },
     "37683310": {
+        "type": "plant",
         "name": "Vildbjerg Tekniske Værker",
         "idrift": "1994-11-01",
         "elkapacitet_MW": 7.28,
@@ -35901,6 +36253,7 @@
         }
     },
     "37809217": {
+        "type": "plant",
         "name": "Brovst Fjernvarme",
         "idrift": "1994-07-15",
         "elkapacitet_MW": 3.12,
@@ -36006,6 +36359,7 @@
         }
     },
     "37949019": {
+        "type": "plant",
         "name": "Skanderborg-Hørning Fjernvarme",
         "idrift": "1958-01-01",
         "elkapacitet_MW": 3.65,
@@ -36111,6 +36465,7 @@
         }
     },
     "38073117": {
+        "type": "plant",
         "name": "Troldhede Kraftvarmeværk",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 0.75,
@@ -36216,6 +36571,7 @@
         }
     },
     "38130498": {
+        "type": "plant",
         "name": "Egebjerg Nærvarme",
         "idrift": "2018-08-01",
         "elkapacitet_MW": 0,
@@ -36268,6 +36624,7 @@
         }
     },
     "38226215": {
+        "type": "plant",
         "name": "Ejby Fjernvarmecentral",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 6.7,
@@ -36341,6 +36698,7 @@
         }
     },
     "38664018": {
+        "type": "plant",
         "name": "Give Fjernvarme",
         "idrift": "2011-01-01",
         "elkapacitet_MW": 0,
@@ -36446,6 +36804,7 @@
         }
     },
     "38864114": {
+        "type": "plant",
         "name": "Gedsted Varmeværk",
         "idrift": "1988-10-24",
         "elkapacitet_MW": 1.72,
@@ -36551,6 +36910,7 @@
         }
     },
     "38929119": {
+        "type": "plant",
         "name": "Durup Fjernvarme",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 2.02,
@@ -36656,6 +37016,7 @@
         }
     },
     "39042010": {
+        "type": "plant",
         "name": "Aulum Fjernvarme",
         "idrift": "1965-09-01",
         "elkapacitet_MW": 5.1,
@@ -36761,6 +37122,7 @@
         }
     },
     "39272091": {
+        "type": "plant",
         "name": "Gentofte Gladsaxe Fjernvarme",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 0,
@@ -36866,6 +37228,7 @@
         }
     },
     "39325128": {
+        "type": "plant",
         "name": "Kibæk Varmeværk",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 0,
@@ -36971,6 +37334,7 @@
         }
     },
     "39678810": {
+        "type": "plant",
         "name": "Bindslev Fjernvarme",
         "idrift": "1990-01-01",
         "elkapacitet_MW": 0,
@@ -37076,6 +37440,7 @@
         }
     },
     "40402314": {
+        "type": "plant",
         "name": "Fensmark Fjernvarmeværk",
         "idrift": "1998-02-25",
         "elkapacitet_MW": 0,
@@ -37181,6 +37546,7 @@
         }
     },
     "40744517": {
+        "type": "plant",
         "name": "Midtlangeland Fjernvarme",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 0,
@@ -37286,6 +37652,7 @@
         }
     },
     "40893113": {
+        "type": "plant",
         "name": "Tarm Varmeværk",
         "idrift": "1979-01-01",
         "elkapacitet_MW": 0,
@@ -37391,6 +37758,7 @@
         }
     },
     "40920013": {
+        "type": "plant",
         "name": "Dybvad Varmeværk",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 0,
@@ -37496,6 +37864,7 @@
         }
     },
     "41160128": {
+        "type": "plant",
         "name": "Roslev Fjernvarmeselskab",
         "idrift": "1984-01-01",
         "elkapacitet_MW": 0,
@@ -37601,6 +37970,7 @@
         }
     },
     "41429615": {
+        "type": "plant",
         "name": "Hobro Varmeværk",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 0,
@@ -37706,6 +38076,7 @@
         }
     },
     "41524111": {
+        "type": "plant",
         "name": "Løsning Fjernvarme",
         "idrift": "1970-01-01",
         "elkapacitet_MW": 0,
@@ -37811,6 +38182,7 @@
         }
     },
     "41529911": {
+        "type": "plant",
         "name": "Hedensted Fjernvarme",
         "idrift": "2001-01-01",
         "elkapacitet_MW": 1.9,
@@ -37916,6 +38288,7 @@
         }
     },
     "41897597": {
+        "type": "plant",
         "name": "Viborg Varme",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 57.0,
@@ -38021,6 +38394,7 @@
         }
     },
     "42125814": {
+        "type": "plant",
         "name": "Lystrup Fjernvarme",
         "idrift": "1972-01-01",
         "elkapacitet_MW": 0,
@@ -38126,6 +38500,7 @@
         }
     },
     "42272612": {
+        "type": "plant",
         "name": "Hammel Fjernvarme",
         "idrift": "2002-01-01",
         "elkapacitet_MW": 0,
@@ -38231,6 +38606,7 @@
         }
     },
     "42615919": {
+        "type": "plant",
         "name": "Strandby Varmeværk",
         "idrift": "2000-01-01",
         "elkapacitet_MW": 3.66,
@@ -38336,6 +38712,7 @@
         }
     },
     "42742511": {
+        "type": "plant",
         "name": "Græsted Fjernvarme",
         "idrift": "1995-12-01",
         "elkapacitet_MW": 0,
@@ -38441,6 +38818,7 @@
         }
     },
     "42760218": {
+        "type": "plant",
         "name": "Helsinge Fjernvarme",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 14.3,
@@ -38546,6 +38924,7 @@
         }
     },
     "43384414": {
+        "type": "plant",
         "name": "Bjæverskov Fjernvarme",
         "idrift": "1997-01-01",
         "elkapacitet_MW": 6.215,
@@ -38619,6 +38998,7 @@
         }
     },
     "43597469": {
+        "type": "plant",
         "name": "Helle Energi",
         "idrift": "1995-09-01",
         "elkapacitet_MW": 0.92,
@@ -38692,6 +39072,7 @@
         }
     },
     "43727516": {
+        "type": "plant",
         "name": "Galten Varmeværk",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 0,
@@ -38797,6 +39178,7 @@
         }
     },
     "43774417": {
+        "type": "plant",
         "name": "Grenaa Varmeværk",
         "idrift": "1997-01-01",
         "elkapacitet_MW": 0,
@@ -38870,6 +39252,7 @@
         }
     },
     "43860259": {
+        "type": "plant",
         "name": "Energi Hurup",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 0,
@@ -38965,6 +39348,7 @@
         }
     },
     "44057212": {
+        "type": "plant",
         "name": "Hvalsø Kraftvarmeværk",
         "idrift": "1995-12-01",
         "elkapacitet_MW": 3.04,
@@ -39070,6 +39454,7 @@
         }
     },
     "44166879": {
+        "type": "plant",
         "name": "Lynge-Uggeløse Fjernvarme",
         "idrift": "2015-01-01",
         "elkapacitet_MW": 0.03,
@@ -39122,6 +39507,7 @@
         }
     },
     "44185865": {
+        "type": "plant",
         "name": "0",
         "idrift": "2008-11-17",
         "elkapacitet_MW": 0.03,
@@ -39174,6 +39560,7 @@
         }
     },
     "44336553": {
+        "type": "plant",
         "name": "Øt Havndal Fjernvarme",
         "idrift": "2012-12-01",
         "elkapacitet_MW": 0.82,
@@ -39279,6 +39666,7 @@
         }
     },
     "45194817": {
+        "type": "plant",
         "name": "Hirtshals Fjernvarme",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 9.0,
@@ -39384,6 +39772,7 @@
         }
     },
     "45602516": {
+        "type": "plant",
         "name": "Fjerritslev Fjernvarme",
         "idrift": "2004-10-01",
         "elkapacitet_MW": 0,
@@ -39489,6 +39878,7 @@
         }
     },
     "46076915": {
+        "type": "plant",
         "name": "Skjern Fjernvarme",
         "idrift": "2006-08-01",
         "elkapacitet_MW": 3.0,
@@ -39594,6 +39984,7 @@
         }
     },
     "46917928": {
+        "type": "plant",
         "name": "Nykøbing Sj. Varmeværk",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 6.16,
@@ -39699,6 +40090,7 @@
         }
     },
     "49965613": {
+        "type": "plant",
         "name": "Tranum Kraftvarmeværk",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 0.74,
@@ -39804,6 +40196,7 @@
         }
     },
     "51087119": {
+        "type": "plant",
         "name": "Kongerslev Fjernvarmeværk",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 1.94,
@@ -39909,6 +40302,7 @@
         }
     },
     "52443016": {
+        "type": "plant",
         "name": "Snedsted Fjernvarme",
         "idrift": "1988-12-01",
         "elkapacitet_MW": 4.06,
@@ -40014,6 +40408,7 @@
         }
     },
     "53464718": {
+        "type": "plant",
         "name": "Farsø Varmeværk",
         "idrift": "1985-08-01",
         "elkapacitet_MW": 0,
@@ -40119,6 +40514,7 @@
         }
     },
     "54121016": {
+        "type": "plant",
         "name": "Haslev Fjernvarme",
         "idrift": "1961-01-01",
         "elkapacitet_MW": 5.0,
@@ -40224,6 +40620,7 @@
         }
     },
     "54300514": {
+        "type": "plant",
         "name": "Asaa Fjernvarme",
         "idrift": "1988-01-01",
         "elkapacitet_MW": 2.92,
@@ -40329,6 +40726,7 @@
         }
     },
     "54442912": {
+        "type": "plant",
         "name": "Aars Fjernvarme",
         "idrift": "1955-09-01",
         "elkapacitet_MW": 7.45,
@@ -40434,6 +40832,7 @@
         }
     },
     "55946817": {
+        "type": "plant",
         "name": "Vamdrup Fjernvarme",
         "idrift": "1959-12-01",
         "elkapacitet_MW": 0,
@@ -40539,6 +40938,7 @@
         }
     },
     "56353712": {
+        "type": "plant",
         "name": "Stege Fjernvarme",
         "idrift": "1964-01-01",
         "elkapacitet_MW": 0,
@@ -40644,6 +41044,7 @@
         }
     },
     "57205628": {
+        "type": "plant",
         "name": "Ribe Fjernvarme",
         "idrift": "1987-09-01",
         "elkapacitet_MW": 10.93,
@@ -40749,6 +41150,7 @@
         }
     },
     "57301414": {
+        "type": "plant",
         "name": "Vejen Varmeværk",
         "idrift": "1992-01-01",
         "elkapacitet_MW": 0,
@@ -40854,6 +41256,7 @@
         }
     },
     "57494115": {
+        "type": "plant",
         "name": "Nykøbing Mors Fjernvarmeværk",
         "idrift": "1987-01-01",
         "elkapacitet_MW": 8.568,
@@ -40927,6 +41330,7 @@
         }
     },
     "57681268": {
+        "type": "plant",
         "name": "Hvidovre Fjernvarme",
         "idrift": "1971-07-01",
         "elkapacitet_MW": 1.06,
@@ -41000,6 +41404,7 @@
         }
     },
     "57762918": {
+        "type": "plant",
         "name": "Glyngøre Fjernvarmeværk",
         "idrift": "1996-01-23",
         "elkapacitet_MW": 0.9,
@@ -41105,6 +41510,7 @@
         }
     },
     "57858311": {
+        "type": "plant",
         "name": "Ryomgård Fjernvarme",
         "idrift": "2019-08-01",
         "elkapacitet_MW": 0,
@@ -41210,6 +41616,7 @@
         }
     },
     "57871628": {
+        "type": "plant",
         "name": "Mariager Fjernvarmeværk",
         "idrift": "1987-11-01",
         "elkapacitet_MW": 0,
@@ -41315,6 +41722,7 @@
         }
     },
     "58061212": {
+        "type": "plant",
         "name": "Haderslev Fjernvarme",
         "idrift": "1959-09-01",
         "elkapacitet_MW": 7.04,
@@ -41420,6 +41828,7 @@
         }
     },
     "58113719": {
+        "type": "plant",
         "name": "Bælum Varmeværk",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 1.48,
@@ -41525,6 +41934,7 @@
         }
     },
     "58176613": {
+        "type": "plant",
         "name": "Brande Fjernvarme",
         "idrift": "2010-09-30",
         "elkapacitet_MW": 0,
@@ -41630,6 +42040,7 @@
         }
     },
     "59162616": {
+        "type": "plant",
         "name": "Gilleleje Fjernvarme",
         "idrift": "1995-10-23",
         "elkapacitet_MW": 0,
@@ -41735,6 +42146,7 @@
         }
     },
     "59352318": {
+        "type": "plant",
         "name": "Broager Fjernvarmeselskab",
         "idrift": "1994-09-01",
         "elkapacitet_MW": 3.0,
@@ -41840,6 +42252,7 @@
         }
     },
     "59426915": {
+        "type": "plant",
         "name": "Sindal Varmeforsyning",
         "idrift": "1988-01-01",
         "elkapacitet_MW": 3.97,
@@ -41945,6 +42358,7 @@
         }
     },
     "60094411": {
+        "type": "plant",
         "name": "Nørre Alslev Fjernvarmeværk",
         "idrift": "2003-10-01",
         "elkapacitet_MW": 0,
@@ -42040,6 +42454,7 @@
         }
     },
     "60183112": {
+        "type": "plant",
         "name": "Lillerød Varmecentral",
         "idrift": "1970-01-01",
         "elkapacitet_MW": 3.19,
@@ -42140,6 +42555,7 @@
         }
     },
     "60247412": {
+        "type": "plant",
         "name": "Kjellerup Fjernvarme",
         "idrift": "1976-07-01",
         "elkapacitet_MW": 0,
@@ -42245,6 +42661,7 @@
         }
     },
     "60567719": {
+        "type": "plant",
         "name": "Hadsund Fjernvarme",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 2.95,
@@ -42350,6 +42767,7 @@
         }
     },
     "61668713": {
+        "type": "plant",
         "name": "Skovsgård Varmeværk",
         "idrift": "1997-01-01",
         "elkapacitet_MW": 0,
@@ -42423,6 +42841,7 @@
         }
     },
     "61877215": {
+        "type": "plant",
         "name": "Assens Fjernvarme Fyn",
         "idrift": "1994-11-01",
         "elkapacitet_MW": 0,
@@ -42518,6 +42937,7 @@
         }
     },
     "62082313": {
+        "type": "plant",
         "name": "Holeby Fjernvarme",
         "idrift": "2002-03-01",
         "elkapacitet_MW": 0,
@@ -42623,6 +43043,7 @@
         }
     },
     "62749814": {
+        "type": "plant",
         "name": "Ansager Varmeværk",
         "idrift": "1995-05-01",
         "elkapacitet_MW": 0,
@@ -42728,6 +43149,7 @@
         }
     },
     "63195111": {
+        "type": "plant",
         "name": "Vestervig Fjernvarme",
         "idrift": "1964-06-01",
         "elkapacitet_MW": 0,
@@ -42833,6 +43255,7 @@
         }
     },
     "63234214": {
+        "type": "plant",
         "name": "Christiansfeld Fjernvarme",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 3.06,
@@ -42938,6 +43361,7 @@
         }
     },
     "63446319": {
+        "type": "plant",
         "name": "Bramming Fjernvarme",
         "idrift": "1994-01-01",
         "elkapacitet_MW": 15.56,
@@ -43043,6 +43467,7 @@
         }
     },
     "63690619": {
+        "type": "plant",
         "name": "Toftlund Fjernvarme",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 5.5,
@@ -43148,6 +43573,7 @@
         }
     },
     "64235818": {
+        "type": "plant",
         "name": "Hornbæk Fjernvarme",
         "idrift": "1964-12-15",
         "elkapacitet_MW": 0,
@@ -43253,6 +43679,7 @@
         }
     },
     "64289713": {
+        "type": "plant",
         "name": "Stenstrup Fjernvarme",
         "idrift": "1994-09-01",
         "elkapacitet_MW": 1.0,
@@ -43358,6 +43785,7 @@
         }
     },
     "64429418": {
+        "type": "plant",
         "name": "Sæby Varmeværk",
         "idrift": "1988-01-01",
         "elkapacitet_MW": 12.0,
@@ -43463,6 +43891,7 @@
         }
     },
     "64463411": {
+        "type": "plant",
         "name": "Taars Varmeværk",
         "idrift": "1987-01-01",
         "elkapacitet_MW": 4.99,
@@ -43568,6 +43997,7 @@
         }
     },
     "64544616": {
+        "type": "plant",
         "name": "Hjørring Varmeforsyning",
         "idrift": "1960-01-01",
         "elkapacitet_MW": 65.40299999999999,
@@ -43673,6 +44103,7 @@
         }
     },
     "64728210": {
+        "type": "plant",
         "name": "Brædstrup Fjernvarme",
         "idrift": "1987-01-01",
         "elkapacitet_MW": 7.28,
@@ -43778,6 +44209,7 @@
         }
     },
     "64761919": {
+        "type": "plant",
         "name": "Løkken Varmeværk",
         "idrift": "1983-10-01",
         "elkapacitet_MW": 1.21,
@@ -43883,6 +44315,7 @@
         }
     },
     "64771728": {
+        "type": "plant",
         "name": "Vrå Varmeværk",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 0,
@@ -43988,6 +44421,7 @@
         }
     },
     "64831712": {
+        "type": "plant",
         "name": "Bogense Forsyningsselskab",
         "idrift": "1986-01-01",
         "elkapacitet_MW": 5.78,
@@ -44093,6 +44527,7 @@
         }
     },
     "66137112": {
+        "type": "plant",
         "name": "Albertslund Forsyning",
         "idrift": "1966-01-01",
         "elkapacitet_MW": 0,
@@ -44198,6 +44633,7 @@
         }
     },
     "66211118": {
+        "type": "plant",
         "name": "Løgumkloster Fjernvarme",
         "idrift": "1992-01-01",
         "elkapacitet_MW": 6.0,
@@ -44303,6 +44739,7 @@
         }
     },
     "67037111": {
+        "type": "plant",
         "name": "Rødding Fjernvarme",
         "idrift": "1990-01-01",
         "elkapacitet_MW": 3.12,
@@ -44408,6 +44845,7 @@
         }
     },
     "67247817": {
+        "type": "plant",
         "name": "Præstø Fjernvarme",
         "idrift": "1995-10-15",
         "elkapacitet_MW": 0,
@@ -44513,6 +44951,7 @@
         }
     },
     "67750411": {
+        "type": "plant",
         "name": "Hadsten Varmeværk",
         "idrift": "1988-01-01",
         "elkapacitet_MW": 0,
@@ -44618,6 +45057,7 @@
         }
     },
     "67932218": {
+        "type": "plant",
         "name": "Vejle Fjernvarme",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 0.887,
@@ -44723,6 +45163,7 @@
         }
     },
     "68326214": {
+        "type": "plant",
         "name": "Skive Fjernvarme",
         "idrift": "1965-01-01",
         "elkapacitet_MW": 18.4,
@@ -44828,6 +45269,7 @@
         }
     },
     "68726018": {
+        "type": "plant",
         "name": "Nibe Varmeværk",
         "idrift": "1989-01-01",
         "elkapacitet_MW": 5.683,
@@ -44933,6 +45375,7 @@
         }
     },
     "68738016": {
+        "type": "plant",
         "name": "Stoholm Fjernvarmeværk",
         "idrift": "2004-11-08",
         "elkapacitet_MW": 4.87,
@@ -45038,6 +45481,7 @@
         }
     },
     "69914128": {
+        "type": "plant",
         "name": "Hvide Sande Fjernvarme",
         "idrift": "1994-11-01",
         "elkapacitet_MW": 7.46,
@@ -45143,6 +45587,7 @@
         }
     },
     "69995713": {
+        "type": "plant",
         "name": "Næstved Fjernvarme",
         "idrift": "1995-01-01",
         "elkapacitet_MW": 12.89,
@@ -45248,6 +45693,7 @@
         }
     },
     "70555018": {
+        "type": "plant",
         "name": "Vivild Varmeværk",
         "idrift": "2004-11-01",
         "elkapacitet_MW": 0,
@@ -45353,6 +45799,7 @@
         }
     },
     "70831112": {
+        "type": "plant",
         "name": "Faxe Fjernvarmeselskab",
         "idrift": "1979-01-01",
         "elkapacitet_MW": 0.53,
@@ -45458,6 +45905,7 @@
         }
     },
     "70874814": {
+        "type": "plant",
         "name": "Arden Varmeværk",
         "idrift": "1998-01-05",
         "elkapacitet_MW": 2.76,
@@ -45563,6 +46011,7 @@
         }
     },
     "76326118": {
+        "type": "plant",
         "name": "Tommerup St. Varmeforsyning",
         "idrift": "1992-09-01",
         "elkapacitet_MW": 0,
@@ -45668,6 +46117,7 @@
         }
     },
     "89711215": {
+        "type": "plant",
         "name": "Rønde Fjernvarme",
         "idrift": "1996-01-01",
         "elkapacitet_MW": 0,
