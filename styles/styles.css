@@ -195,7 +195,7 @@ body, html {
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 8px;   
 }
 
 .reset-camera-button {
@@ -279,4 +279,86 @@ body, html {
     background-color: #007bff; /* Change background color when active */
     color: white; /* Change text color when active */
     border-color: #0056b3; /* Darker border color when active */
+}
+
+.map-control-dropdown {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 32px 6px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #666;
+    font-family: Arial;
+    width: 120px;
+    height: 30px;
+    background-image: url('../assets/icons/mapfocus.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 8px) center;
+    background-size: 16px 16px;
+}
+
+.map-control-dropdown:hover {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.map-focus-button {
+    position: relative;
+    display: flex;
+    background: #f8faff;
+    border: 1px solid #4a90e2;
+    border-radius: 4px;
+    padding: 6px 12px;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    color: #2c5282;
+    font-family: Arial;
+    width: 100%;
+    gap: 6px;
+}
+
+.map-focus-button:hover {
+    background-color: #f0f4ff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.map-focus-button img {
+    margin-left: auto;
+}
+
+/* Dropdown menu styles */
+.map-focus-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    display: none;
+    width: 100%;
+    z-index: 1000;
+}
+
+.map-focus-dropdown.show {
+    display: block;
+}
+
+.map-focus-option {
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #666;
+    font-family: Arial;
+}
+
+.map-focus-option:hover {
+    background-color: #f0f0f0;
+}
+
+.map-focus-option.active {
+    background-color: #007bff;
+    color: white;
 }

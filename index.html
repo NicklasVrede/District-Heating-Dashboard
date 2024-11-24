@@ -40,15 +40,6 @@
                 <div id="autocomplete-list" class="autocomplete-items"></div>
             </div>
             <div class="dropdown-group">
-                <div class="focus-selector-container">
-                    <label for="focus-selector">Data View:</label>
-                    <select id="focus-selector" onchange="changeFocus(this.value)">
-                        <option value="none">None</option>
-                        <option value="overview">Overview</option>
-                        <option value="price">Price (MWh)</option>
-                        <option value="production">Production</option>
-                    </select>
-                </div>
                 <div class="focus-selector-container hidden" id="measure-container">
                     <label for="measure-selector">Measure:</label>
                     <select id="measure-selector">
@@ -94,6 +85,10 @@
                     <span id="toggle-gas-areas-label">Gas Supply</span>
                     <input type="checkbox" id="toggle-gas-areas">
                 </label>
+                <button class="map-focus-button">
+                    <span>Map Focus</span>
+                    <img src="assets/icons/mapfocus.png" alt="Map Focus Icon" width="16" height="16">
+                </button>
                 <button class="reset-camera-button" onclick="resetCamera()">
                     <span>Reset View</span>
                     <img src="assets/icons/resetcamera.png" alt="Reset Camera Icon" width="16" height="16">

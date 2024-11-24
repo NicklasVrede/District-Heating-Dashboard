@@ -181,9 +181,18 @@ export class ProductionFocus {
         const layerId = municipalitiesVisible ? 'municipalities-production' : 'plants-production';
 
         if (hasIcons) {
-            // Convert to symbol layer if not already
+            // Add debug logging
+            console.log('Municipality view:', municipalitiesVisible);
+            
             if (this.map.getLayer(layerId).type !== 'symbol') {
                 this.map.removeLayer(layerId);
+                
+                const iconSizeConfig = municipalitiesVisible ? 
+                    [5, 0.375, 10, 1.125, 15, 1.5] : 
+                    [5, 0.3, 10, 0.6, 15, 0.85];
+                    
+                console.log('Using icon size config:', iconSizeConfig);
+                
                 this.map.addLayer({
                     'id': layerId,
                     'type': 'symbol',
@@ -195,12 +204,20 @@ export class ProductionFocus {
                             'interpolate',
                             ['linear'],
                             ['zoom'],
-                            5, 0.375,
-                            10, 1.125,
-                            15, 1.5
+                            ...iconSizeConfig
                         ]
                     }
                 });
+            } else {
+                // If layer exists, update its icon-size property
+                this.map.setLayoutProperty(layerId, 'icon-size', [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    ...(municipalitiesVisible ? 
+                        [5, 0.375, 10, 1.125, 15, 1.5] : 
+                        [5, 0.3, 10, 0.6, 15, 0.85])
+                ]);
             }
 
             // Use icons with current main fuel

@@ -108,6 +108,7 @@ map.on('load', () => {
     loadMunicipalities(map);
     loadMunicipalityCentroids(map);
     initializeLasso(map);
+    initMapFocusDropdown();
 });
 
 // Configure map settings
@@ -143,3 +144,52 @@ window.toggleLassoSelect = toggleLassoSelect;
 
 // Expose the toggleMunicipalities function to the global scope
 window.toggleMunicipalities = (button) => toggleMunicipalities(map, button);
+
+// Add this function to handle the dropdown
+function initMapFocusDropdown() {
+    const button = document.querySelector('.map-focus-button');
+    const dropdown = document.createElement('div');
+    dropdown.className = 'map-focus-dropdown';
+     
+    const options = [
+        { value: 'none', label: 'None' },
+        { value: 'overview', label: 'Overview' },
+        { value: 'price', label: 'Price (MWh)' },
+        { value: 'production', label: 'Production' }
+    ];
+    
+    options.forEach(option => {
+        const div = document.createElement('div');
+        div.className = 'map-focus-option';
+        div.textContent = option.label;
+        div.dataset.value = option.value;
+        
+        div.addEventListener('click', () => {
+            changeFocus(option.value);
+            dropdown.classList.remove('show');
+            // Update button text
+            button.querySelector('span').textContent = option.label;
+            // Update active state
+            dropdown.querySelectorAll('.map-focus-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.value === option.value);
+            });
+        });
+        
+        dropdown.appendChild(div);
+    });
+    
+    // Append dropdown to the button instead of its parent
+    button.appendChild(dropdown);
+
+    
+    // Toggle dropdown
+    button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+        dropdown.classList.remove('show');
+    });
+}
