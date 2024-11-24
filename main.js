@@ -15,7 +15,11 @@ import { updateGraph } from './graphs/graphManager.js';
 import { focusState } from './utils/javascript/focusLayers/FocusState.js';
 import { initializeLasso, toggleLassoSelect } from './utils/javascript/lassoSelect.js';
 import { toggleMunicipalities } from './utils/javascript/municipalitiesFunctions.js';
-import { initMapFocusDropdown } from './utils/javascript/mapFocusDropdown.js';
+import { initMapFocusDropdown, changeFocus } from './utils/javascript/mapFocusDropdown.js';
+import { allPlantIds, allMunicipalityIds, initializeIdSets } from './utils/javascript/idSets.js';
+
+// Export the sets so they're available to other modules that import from main.js
+export { allPlantIds, allMunicipalityIds };
 
 // Initialize Mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0MnFzYWFyZ3pveWJ1In0.V9qwBfsH4plxE_fz89kuYg';
@@ -23,29 +27,6 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0M
 // Export selection set
 export const selectionSet = new Set();
 
-// Create reference sets for all plants and municipalities
-export const allPlantIds = new Set();
-export const allMunicipalityIds = new Set();
-
-// Initialize the reference sets when data_dict is loaded
-function initializeIdSets() {
-    if (!window.dataDict) return;
-    
-    // Clear existing sets
-    allPlantIds.clear();
-    allMunicipalityIds.clear();
-    
-    // Populate sets based on type in data_dict
-    Object.entries(window.dataDict).forEach(([id, data]) => {
-        if (data.type === 'plant') {
-            allPlantIds.add(id);
-        } else if (data.type === 'municipality') {
-            allMunicipalityIds.add(id);
-        }
-    });
-    
-    console.log(`Initialized with ${allPlantIds.size} plants and ${allMunicipalityIds.size} municipalities`);
-}
 
 // Initialize map
 const map = new mapboxgl.Map({
@@ -58,38 +39,6 @@ const map = new mapboxgl.Map({
 // Initialize FocusManager
 const focusManager = new FocusManager(map);
 
-// Function to handle focus changes
-export function changeFocus(value) {
-    const measureContainer = document.getElementById('measure-container');
-    
-    if (!measureContainer) {
-        console.warn('Measure container not found');
-        return;
-    }
-
-    // Update the global focus state
-    focusState.focus = value;
-
-    // First, hide measure container by default
-    measureContainer.classList.remove('visible');
-    measureContainer.classList.add('hidden');
-
-    // If no focus or none selected, just apply the focus change
-    if (!value || value === 'none') {
-        focusManager.changeFocus(value);
-        return;
-    }
-
-    // Show/hide containers based on focus
-    if (value === 'production') {
-        measureContainer.classList.remove('hidden');
-        measureContainer.classList.add('visible');
-    }
-
-    // Apply the focus change and update graphs
-    focusManager.changeFocus(value);
-    updateGraph();
-}
 
 // Expose functions to global scope
 window.searchAddress = searchAddress;
@@ -109,7 +58,7 @@ map.on('load', () => {
     loadMunicipalities(map);
     loadMunicipalityCentroids(map);
     initializeLasso(map);
-    initMapFocusDropdown();
+    initMapFocusDropdown(focusManager);
 });
 
 // Configure map settings
@@ -124,7 +73,7 @@ fetch('./data/data_dict.json')
     .then(response => response.json())
     .then(data => {
         window.dataDict = data;
-        initializeIdSets(); // Initialize our reference sets
+        initializeIdSets(); // initialise plant and municipality id sets
     })
     .catch(error => console.error('Error loading data dictionary:', error));
 
