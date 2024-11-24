@@ -79,12 +79,31 @@
 .dropdown-group {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0;
     padding: 3px 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f9f9f9;
     height: 36px;
+    position: relative;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-group:has(.year-slider-container.visible),
+.dropdown-group:has(#measure-container.visible),
+.dropdown-group:has(.select-group[style*="display: flex"]) {
+    max-height: 36px;
+    opacity: 1;
+    padding: 3px 16px;
+    border: 1px solid #ccc;
+    margin: 0;
+    gap: 12px;
 }
 
 /* Add styles for measure container */
@@ -92,11 +111,12 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    order: 2;
     max-width: 0;
     opacity: 0;
     overflow: hidden;
-    transition: all 0.3s ease;
-    order: 2;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: translateX(-20px);
 }
 
 #measure-container.hidden {
@@ -110,6 +130,7 @@
     max-width: 300px;
     opacity: 1;
     visibility: visible;
+    transform: translateX(0);
 }
 
 /* Update existing containers with order */
@@ -256,13 +277,22 @@
 
 .select-group {
     order: 3;
-    display: none;
+    display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: nowrap;
-    transition: transform 0.3s ease;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: translateX(-20px);
 }
 
+.select-group[style*="display: flex"] {
+    max-width: 300px;
+    opacity: 1;
+    transform: translateX(0);
+}
 
 .select-group label {
     white-space: nowrap;
@@ -336,22 +366,25 @@
 .year-slider-container {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 0 8px;
+    gap: 8px;
+    padding: 0;
     background: none;
     height: 28px;
-    order: 2;
+    order: 1;
     max-width: 0;
     opacity: 0;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     visibility: hidden;
+    transform: translateX(-20px);
 }
 
 .year-slider-container.visible {
     max-width: 300px;
     opacity: 1;
     visibility: visible;
+    transform: translateX(0);
+    padding: 0;
 }
 
 .year-slider-container.hidden {
@@ -404,8 +437,25 @@
     font-weight: 600;
     color: #333;
     background: #f5f5f5;
-    padding: 2px 8px;
     border-radius: 4px;
     text-align: center;
     font-family: Arial;
+}
+
+/* For browsers that don't support :has, we can add a utility class */
+.dropdown-group.has-visible-content {
+    display: flex;
+}
+
+/* Add transition delays for staggered animation */
+.year-slider-container {
+    transition-delay: 0s;
+}
+
+#measure-container {
+    transition-delay: 0.05s;
+}
+
+.select-group {
+    transition-delay: 0.1s;
 }

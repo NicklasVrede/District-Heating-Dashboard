@@ -1,5 +1,5 @@
 :root {
-    --top-bar-height: 60px;  /* Define the top bar height as a variable */
+    --top-bar-height: 50px;  /* Update this to match our desired height */
 }
 
 body, html {
