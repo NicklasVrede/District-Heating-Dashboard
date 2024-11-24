@@ -284,6 +284,9 @@ export function loadMunicipalities(map) {
 
             // Add event listeners for municipalities
             addMunicipalityEventListeners(map);
+            
+            // Create the tooltip after layers are set up
+            createMunicipalityTooltip(map);
         })
         .catch(error => {
             console.error('Error fetching municipality data:', error);

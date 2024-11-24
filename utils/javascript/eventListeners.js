@@ -267,49 +267,13 @@ function toggleSelection(map, forsyid, isCtrlPressed) {
 }
 
 export function addMunicipalityEventListeners(map) {
-    // Create a tooltip for displaying municipality information
-    const municipalityTooltip = document.createElement('div');
-    municipalityTooltip.className = 'mapboxgl-popup mapboxgl-popup-anchor-top';
-    municipalityTooltip.style.position = 'absolute';
-    municipalityTooltip.style.pointerEvents = 'none';
-    municipalityTooltip.style.visibility = 'hidden';
-    document.body.appendChild(municipalityTooltip);
-
-    // Event listener for mouse entering a municipality
-    map.on('mouseenter', 'municipalities-fill', (e) => {
-        map.getCanvas().style.cursor = 'pointer';
-        const features = map.queryRenderedFeatures(e.point, { layers: ['municipalities-fill'] });
-        if (features.length) {
-            const feature = features[0];
-            municipalityTooltip.innerHTML = `
-                <div class="mapboxgl-popup-content">
-                    <h3>${feature.properties.label_dk}</h3>
-                    <p>Inhabitants: ${feature.properties.inhabitants || 'N/A'}</p>
-                </div>`;
-            municipalityTooltip.style.visibility = 'visible';
-            municipalityTooltip.style.left = `${e.originalEvent.pageX + 5}px`;
-            municipalityTooltip.style.top = `${e.originalEvent.pageY + 5}px`;
-        }
-    });
-
-    // Event listener for mouse moving within a municipality
-    map.on('mousemove', 'municipalities-fill', (e) => {
-        municipalityTooltip.style.left = `${e.originalEvent.pageX + 5}px`;
-        municipalityTooltip.style.top = `${e.originalEvent.pageY + 5}px`;
-    });
-
-    // Event listener for mouse leaving a municipality
-    map.on('mouseleave', 'municipalities-fill', () => {
-        municipalityTooltip.style.visibility = 'hidden';
-    });
-
     // Event listener for clicking on a municipality
     map.on('click', 'municipalities-fill', (e) => {
         const features = map.queryRenderedFeatures(e.point, { layers: ['municipalities-fill'] });
         if (features.length) {
             const feature = features[0];
             toggleMunicipalitySelection(feature.properties.lau_1, e.originalEvent.ctrlKey);
-        }                                               //lau_1 for municipalities
+        }
     });
 }
 
