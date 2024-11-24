@@ -321,6 +321,9 @@ function createPieChart(originalChart, yearData, year, initialData) {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
+                datalabels: {
+                    display: false
+                },
                 title: {
                     display: true,
                     text: `Production Distribution ${year}`
