@@ -377,6 +377,7 @@
     transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     visibility: hidden;
     transform: translateX(-20px);
+    pointer-events: none;
 }
 
 .year-slider-container.visible {
@@ -384,13 +385,15 @@
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
-    padding: 0;
+    pointer-events: auto;
 }
 
 .year-slider-container.hidden {
     max-width: 0;
     opacity: 0;
     visibility: hidden;
+    transform: translateX(-20px);
+    pointer-events: none;
 }
 
 .year-slider-container label {

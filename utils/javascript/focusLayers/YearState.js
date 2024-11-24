@@ -61,7 +61,6 @@ class YearStateClass {
     _updateVisibility() {
         const container = document.getElementById('year-slider-container');
         if (container) {
-            container.style.display = this._visible ? 'flex' : 'none';
             container.classList.toggle('visible', this._visible);
             container.classList.toggle('hidden', !this._visible);
         }
