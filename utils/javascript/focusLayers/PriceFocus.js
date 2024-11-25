@@ -266,8 +266,7 @@ export class PriceFocus {
         });
 
         this.lastUpdateYear = year;
-        console.log(`Updated ${municipalitiesVisible ? 'municipality' : 'plant'} rankings:`, 
-            this.priceRankings);
+        
     }
 
     // Helper methods for selections

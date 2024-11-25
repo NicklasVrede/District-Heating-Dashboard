@@ -114,11 +114,15 @@ function setupYearSliderListener(data, validForsyids, focus) {
     const yearLabel = document.getElementById('year-label');
     
     if (yearSlider && yearLabel) {
+        // Remove any existing event listeners
+        const newSlider = yearSlider.cloneNode(true);
+        yearSlider.parentNode.replaceChild(newSlider, yearSlider);
+
         // Set initial value from yearState
-        yearSlider.value = yearState.year;
+        newSlider.value = yearState.year;
         yearLabel.textContent = yearState.year;
 
-        yearSlider.addEventListener('input', (e) => {
+        newSlider.addEventListener('input', (e) => {
             const selectedYear = e.target.value;
             yearLabel.textContent = selectedYear;
             // Update the shared year state
