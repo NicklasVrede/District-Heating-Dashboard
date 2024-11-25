@@ -11,7 +11,7 @@ export function initMapFocusDropdown(mapFocusManager) {
     dropdown.className = 'map-focus-dropdown';
      
     const options = [
-        { value: 'none', label: 'None' },
+        { value: 'default', label: 'None' },
         { value: 'overview', label: 'Overview' },
         { value: 'price', label: 'Price (MWh)' },
         { value: 'production', label: 'Production' }
@@ -30,7 +30,7 @@ export function initMapFocusDropdown(mapFocusManager) {
         div.addEventListener('click', (e) => {
             e.stopPropagation();
             changeFocus(option.value);
-            button.querySelector('span').textContent = option.value === 'none' ? 'Map Focus' : option.label;
+            button.querySelector('span').textContent = option.value === 'default' ? 'Map Focus' : option.label;
             dropdown.querySelectorAll('.map-focus-option').forEach(opt => {
                 opt.classList.toggle('active', opt.dataset.value === option.value);
             });
@@ -58,26 +58,21 @@ export function changeFocus(value) {
         return;
     }
 
-    // Update the global focus state
-    focusState.focus = value;
+    focusState.changeFocus(value);
 
-    // First, hide measure container by default
     measureContainer.classList.remove('visible');
     measureContainer.classList.add('hidden');
 
-    // If no focus or none selected, just apply the focus change
-    if (!value || value === 'none') {
+    if (!value || value === 'default') {
         focusManager.changeFocus(value);
         return;
     }
 
-    // Show/hide containers based on focus
     if (value === 'production') {
         measureContainer.classList.remove('hidden');
         measureContainer.classList.add('visible');
     }
 
-    // Apply the focus change and update graphs
     focusManager.changeFocus(value);
     updateGraph();
 } 

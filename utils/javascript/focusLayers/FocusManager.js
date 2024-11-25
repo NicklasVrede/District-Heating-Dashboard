@@ -35,10 +35,10 @@ class FocusManager {
         this.focuses = {
             price: new PriceFocus(this.mapboxMap, this.measureContainer),
             production: new ProductionFocus(this.mapboxMap, this.measureContainer),
-            none: new DefaultFocus(this.mapboxMap, this.measureContainer)
+            default: new DefaultFocus(this.mapboxMap, this.measureContainer)
         };
         this.initialized = true;
-        this.currentFocus = this.focuses.none;
+        this.currentFocus = this.focuses.default;
     }
 
     initializeSelectDropdown() {
@@ -202,7 +202,7 @@ class FocusManager {
         }
     }
 
-    changeFocus(value = 'none') {
+    changeFocus(value = 'default') {
         if (!this.initialized) {
             console.warn('FocusManager not yet initialized');
             return;
@@ -211,39 +211,34 @@ class FocusManager {
         console.log(`FocusManager changing focus from ${this.currentFocus?.constructor.name} to: ${value} (municipalities: ${municipalitiesVisible})`);
 
         try {
-            // Handle overview separately
             if (value === 'overview') {
                 selectAll(this.mapboxMap);
-                value = 'none'; // Reset to none after triggering overview
+                value = 'default';
             }
 
-            // Show/hide select group based on focus
             const selectGroup = document.querySelector('.select-group');
             if (selectGroup) {
                 selectGroup.style.display = (value === 'price' || value === 'production') ? 'flex' : 'none';
             }
 
-            // Update year slider visibility based on focus and selection count
             const hasThreeOrMoreSelections = selectionSet.size >= 3;
             yearState.visible = hasThreeOrMoreSelections || value === 'price' || value === 'production';
 
-            // Remove current focus
             if (this.currentFocus) {
                 console.log('Removing current focus:', this.currentFocus.constructor.name);
                 this.currentFocus.remove();
             }
 
-            // Apply new focus
-            const newFocus = this.focuses[value] || this.focuses.none;
+            const newFocus = this.focuses[value] || this.focuses.default;
             console.log('Applying new focus:', newFocus.constructor.name);
             newFocus.apply();
             this.currentFocus = newFocus;
-            focusState.focus = value;
+            focusState.changeFocus(value);
         } catch (error) {
             console.error('Error changing focus:', error);
-            this.focuses.none.apply();
-            this.currentFocus = this.focuses.none;
-            focusState.focus = 'none';
+            this.focuses.default.apply();
+            this.currentFocus = this.focuses.default;
+            focusState.changeFocus('default');
             yearState.visible = selectionSet.size >= 3;
         }
     }

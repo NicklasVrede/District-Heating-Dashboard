@@ -10,10 +10,8 @@ let currentCleanup = null;
 
 // Function to determine which graph to display
 function navigateGraphs(data, selectedForsyids) {
-    // Use focus from focusState
     const focus = focusState.focus;
 
-    // Clean up previous visualization if exists
     if (currentCleanup) {
         currentCleanup();
         currentCleanup = null;
@@ -21,13 +19,11 @@ function navigateGraphs(data, selectedForsyids) {
 
     const graphContainer = document.getElementById('graph-container');
     
-    // Clear and return if there are no selections
     if (!selectedForsyids || selectedForsyids.length === 0) {
         graphContainer.innerHTML = '';
         return;
     }
 
-    // Clean up plant facts for multiple plants
     if (selectedForsyids.length > 1) {
         const existingFactsDiv = document.getElementById('plant-facts');
         if (existingFactsDiv) {
@@ -35,12 +31,10 @@ function navigateGraphs(data, selectedForsyids) {
         }
     }
 
-    // Try to create overview display for large selections
     if (selectedForsyids.length > 10 && createOverviewPlants(data, selectedForsyids)) {
         return;
     }
 
-    // Route to appropriate visualization based on selection count
     switch (selectedForsyids.length) {
         case 1:
             createSinglePlantGraph(data, selectedForsyids[0], focus);
@@ -49,7 +43,12 @@ function navigateGraphs(data, selectedForsyids) {
             currentCleanup = createTwoPlantComparison(data, selectedForsyids);
             break;
         default:
-            currentCleanup = createOrUpdatePlotlyGraph(data, selectedForsyids, focus);
+            if (focus === 'default') {
+                console.log('Applying default graph behavior for focus: default');
+                createOrUpdatePlotlyGraph(data, selectedForsyids, 'default');
+            } else {
+                currentCleanup = createOrUpdatePlotlyGraph(data, selectedForsyids, focus);
+            }
             break;
     }
 }

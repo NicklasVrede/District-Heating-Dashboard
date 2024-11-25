@@ -10,31 +10,27 @@ export class DefaultFocus {
     }
 
     apply() {
-        console.log('DefaultFocus applying with focus: none');
+        console.log('DefaultFocus applying with focus: default');
         
-        // Reset to default visualization state
         if (this.map) {
-            // Only show plants layer if municipalities are not visible
             if (!municipalitiesVisible) {
                 this.map.setLayoutProperty('plants', 'visibility', 'visible');
             }
             this.map.setLayoutProperty('plants-price', 'visibility', 'none');
         }
         
-        // Hide measure container
         if (this.measureContainer) {
             this.measureContainer.classList.remove('visible');
             this.measureContainer.classList.add('hidden');
         }
 
-        // Only hide year slider if less than 3 plants are selected
         const selectedForsyids = Array.from(selectionSet);
         yearState.visible = selectedForsyids.length >= 3;
 
         const data = window.dataDict;
         if (data && selectedForsyids.length > 0) {
-            console.log('DefaultFocus: Calling createOrUpdatePlotlyGraph with none focus');
-            createOrUpdatePlotlyGraph(data, selectedForsyids, 'none');
+            console.log('DefaultFocus: Calling createOrUpdatePlotlyGraph with default focus');
+            createOrUpdatePlotlyGraph(data, selectedForsyids, 'default');
         }
     }
 

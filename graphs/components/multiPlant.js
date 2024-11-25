@@ -15,9 +15,15 @@ const LEGEND_THRESHOLD_PERCENTAGE = 0;
 
 Chart.register(ChartDataLabels);
 
-export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus = 'none') {
-    console.log('Current focus:', focus);
+export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
+    console.log(`Creating or updating graph with focus: ${focus}`);
     
+    // Reset any specific settings or data
+    if (focus === 'none') {
+        // Clear any previous settings or data specific to 'price' or 'production'
+        // Example: clear previous chart data, reset styles, etc.
+    }
+
     const graphContainer = document.getElementById('graph-container');
     
     // Only create the structure if we have valid data to show

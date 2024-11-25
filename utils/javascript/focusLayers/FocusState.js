@@ -1,6 +1,6 @@
 class FocusStateClass {
     constructor() {
-        this._focus = 'none';
+        this._focus = 'default';
         this._listeners = new Set();
     }
 
@@ -9,8 +9,10 @@ class FocusStateClass {
     }
 
     set focus(newFocus) {
-        this._focus = newFocus;
-        this._notifyListeners();
+        if (this._focus !== newFocus) {
+            this._focus = newFocus;
+            this._notifyListeners();
+        }
     }
 
     addListener(callback) {
@@ -23,6 +25,10 @@ class FocusStateClass {
 
     _notifyListeners() {
         this._listeners.forEach(callback => callback(this._focus));
+    }
+
+    changeFocus(newFocus) {
+        this.focus = newFocus;
     }
 }
 
