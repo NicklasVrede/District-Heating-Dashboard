@@ -195,7 +195,7 @@ body, html {
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;   
+    gap: 8px;
 }
 
 .reset-camera-button {
@@ -361,4 +361,25 @@ body, html {
 .map-focus-option.active {
     background-color: #007bff;
     color: white;
+}
+
+#tutorial-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+#tutorial-button:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }

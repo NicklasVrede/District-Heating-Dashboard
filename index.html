@@ -102,6 +102,10 @@
                     <img src="assets/icons/municipalities.png" alt="Toggle Municipalities Icon" width="16" height="16">
                 </button>
             </div>
+            <button id="tutorial-button" class="map-control-button" onclick="showTutorial()">
+                <span>Tutorial</span>
+                <img src="assets/icons/tutorial.png" alt="Tutorial Icon" width="16" height="16">
+            </button>
             <div id="selected-plants-window" class="selected-plants-window" style="display: none;">
                 <div class="selected-plants-header">Selected Plants</div>
                 <ul id="selected-plants-list" class="selected-plants-list"></ul>
@@ -130,10 +134,26 @@
     <script type="module" src="./utils/javascript/divider.js"></script>
     <script type="module" src="./main.js"></script>
     <script type="module" src="./utils/javascript/addressLookup.js"></script>
-    <script type="module" src="./utils/javascript/plotlyGraphs.js"></script> 
+    <script type="module" src="./utils/javascript/plotlyGraphs.js"></script>
+    <script src="./utils/javascript/tutorial.js" defer></script>
 
     <!-- Focus and Measure Controls -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorial-modal" class="tutorial-modal">
+        <div class="tutorial-content">
+            <span class="close-button" onclick="closeTutorial()">&times;</span>
+            <h2>Tutorial</h2>
+            <!-- Video Container -->
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/XCgYRpEJAww" 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
