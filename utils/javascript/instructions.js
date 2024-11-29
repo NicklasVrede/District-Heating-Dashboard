@@ -6,7 +6,8 @@ export function addInstructions() {
                 <h2 class="graph-title">Heating Plants of Denmark</h2>
                 <ul>
                     <li>
-                        <span>&larr; You can move the divider by clicking and dragging.</span>
+                        <img src="assets/icons/venstre.png" alt="venstre" width="16" height="16">
+                        <span>You can move the divider by clicking and dragging.</span>
                     </li>
                     <li>
                         <img src="assets/icons/lasso.png" alt="Select Icon" width="16" height="16">
