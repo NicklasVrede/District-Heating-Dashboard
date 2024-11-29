@@ -3,16 +3,15 @@ import { selectionSet } from '../../main.js';
 import { updateGraph } from './plotlyGraphs.js';
 import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 import { municipalitiesVisible } from './municipalitiesFunctions.js';
+import { addInstructions } from './instructions.js';
+import { clearGraph } from './clearGraph.js';
 
 export function clearSelection(map) {
     selectionSet.clear();
     updateSelectedPlants(map);
     updateSelectedPlantsWindow();
 
-    const graphContainer = document.getElementById('graph-container');
-    if (graphContainer) {
-        graphContainer.innerHTML = '';
-    }
+    clearGraph();
 
     setTimeout(() => {
         updateGraph(selectionSet);
@@ -81,6 +80,7 @@ function toggleSelection(map, forsyid, isCtrlPressed) {
         if (graphContainer) {
             graphContainer.innerHTML = '';
         }
+        addInstructions();
     }
     
     updateGraph();

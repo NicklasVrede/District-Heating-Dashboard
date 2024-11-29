@@ -5,6 +5,7 @@ import { selectionSet } from '../main.js';
 import { loadData, getCachedData } from '../utils/javascript/dataManager.js';
 import { focusState } from '../utils/javascript/focusLayers/FocusState.js';
 import { createOverviewPlants } from './components/overviewPlants.js';
+import { clearGraph } from '../utils/javascript/clearGraph.js';
 
 let currentCleanup = null;
 
@@ -17,10 +18,8 @@ function navigateGraphs(data, selectedForsyids) {
         currentCleanup = null;
     }
 
-    const graphContainer = document.getElementById('graph-container');
-    
     if (!selectedForsyids || selectedForsyids.length === 0) {
-        graphContainer.innerHTML = '';
+        clearGraph();
         return;
     }
 

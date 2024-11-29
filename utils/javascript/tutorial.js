@@ -1,7 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-    showTutorial(); // Open the modal by default when the page loads
-});
-
 function showTutorial() {
     const modal = document.getElementById('tutorial-modal');
     modal.style.display = 'flex';

@@ -3,6 +3,7 @@ import { selectionSet } from '../../main.js';
 import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 import { updateSelectedMunicipalities, updateSelectedPlants } from './eventListeners.js';
 import { changeFocus } from './mapFocusDropdown.js';
+import { clearGraph } from './clearGraph.js';
 
 export let municipalitiesVisible = false; // Track the visibility state
 
@@ -37,10 +38,7 @@ export function toggleMunicipalities(map, button) {
     updateSelectedMunicipalities(map);
     updateSelectedPlants(map);
 
-    const graphContainer = document.getElementById('graph-container');
-    if (graphContainer) {
-        graphContainer.innerHTML = '';
-    }
+    clearGraph();
 
     // Update button style
     button.classList.toggle('municipalities-active', municipalitiesVisible);

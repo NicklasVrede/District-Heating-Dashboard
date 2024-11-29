@@ -4,6 +4,7 @@ import { selectionSet } from '../../main.js';
 import { updateSelectedMunicipalities, updateSelectedPlants } from './eventListeners.js';
 import { updateGraph } from './plotlyGraphs.js';
 import { highlightArea, resetAreaHighlight, highlightPlant, removePlantHighlight } from './eventListeners.js';
+import { clearGraph } from './clearGraph.js';
 
 
 
@@ -168,10 +169,7 @@ export function updateSelectedPlantsWindow() {
             updateSelectedPlants(map);
             updateSelectedMunicipalities(map);
             updateSelectedPlantsWindow();
-            const graphContainer = document.getElementById('graph-container');
-            if (graphContainer) {
-                graphContainer.innerHTML = '';
-            }
+            clearGraph();
             setTimeout(() => {
                 updateGraph(selectionSet);
             }, 100);
