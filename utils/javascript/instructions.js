@@ -14,7 +14,7 @@ export function addInstructions() {
                     </li>
                     <li>
                         <img src="assets/icons/mapfocus.png" alt="Map Focus Icon" width="16" height="16">
-                        <span>Adjust the map focus for more detailed information.</span>
+                        <span>Adjust the map focus to gain additional information on the map.</span>
                     </li>
                     <li>
                         <img src="assets/icons/municipalities.png" alt="Municipalities Icon" width="16" height="16">
