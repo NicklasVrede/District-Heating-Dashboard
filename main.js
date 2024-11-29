@@ -18,6 +18,9 @@ import { toggleMunicipalities } from './utils/javascript/municipalitiesFunctions
 import { initMapFocusDropdown, changeFocus } from './utils/javascript/mapFocusDropdown.js';
 import { allPlantIds, allMunicipalityIds, initializeIdSets } from './utils/javascript/idSets.js';
 
+// Import the addInstructions function
+import { addInstructions } from './utils/javascript/instructions.js';
+
 // Export the sets so they're available to other modules that import from main.js
 export { allPlantIds, allMunicipalityIds };
 
@@ -59,6 +62,9 @@ map.on('load', () => {
     loadMunicipalityCentroids(map);
     initializeLasso(map);
     initMapFocusDropdown(focusManager);
+
+    // Add instructions to the graph container
+    addInstructions();
 });
 
 // Configure map settings

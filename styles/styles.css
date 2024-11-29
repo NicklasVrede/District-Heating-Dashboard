@@ -28,18 +28,6 @@ body, html {
     box-sizing: border-box;
 }
 
-#search-button {
-    padding: 0.5vh 1vw;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-left: none;
-    border-radius: 0 4px 4px 0;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    box-sizing: border-box;
-}
-
 .custom-marker {
     width: 20px;
     height: 20px;
@@ -382,4 +370,30 @@ body, html {
 #tutorial-button:hover {
     background-color: #e0e0e0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#graph-container .instructions {
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+#graph-container .instructions ul {
+    list-style: none;
+    padding: 0;
+}
+
+#graph-container .instructions li {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#graph-container .instructions li img {
+    margin-right: 12px;
+}
+
+#graph-container .instructions li span {
+    margin-left: 8px;
 }
