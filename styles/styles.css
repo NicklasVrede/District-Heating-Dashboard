@@ -159,8 +159,7 @@ body, html {
 }
 
 .map-toggle-frame:hover {
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    background: #faec573a;
 }
 
 #toggle-gas-areas-label {
@@ -198,8 +197,7 @@ body, html {
 }
 
 .reset-camera-button:hover {
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    background: #f0f0f0;
 }
 
 .reset-camera-button span {
@@ -295,7 +293,7 @@ body, html {
     position: relative;
     display: flex;
     background: #f8faff;
-    border: 1px solid #4a90e2;
+    border: 1.5px solid #4a90e2;
     border-radius: 4px;
     padding: 6px 12px;
     align-items: center;
@@ -308,8 +306,7 @@ body, html {
 }
 
 .map-focus-button:hover {
-    background-color: #f0f4ff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background: #4a91e209;
 }
 
 .map-focus-button img {
@@ -351,26 +348,6 @@ body, html {
     color: white;
 }
 
-#tutorial-button {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 6px 12px;
-    cursor: pointer;
-    font-size: 14px;
-    color: #333;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-}
-
-#tutorial-button:hover {
-    background-color: #e0e0e0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
 
 #graph-container .instructions {
     padding: 10px;
@@ -392,10 +369,7 @@ body, html {
     align-items: center;
 }
 
-#graph-container .instructions li img {
-    margin-right: 12px;
-}
 
 #graph-container .instructions li span {
-    margin-left: 8px;
+    margin-left: 16px;
 }

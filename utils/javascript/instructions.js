@@ -4,7 +4,7 @@ export function addInstructions() {
         graphContainer.innerHTML = `
             <div class="instructions">
                 <h2 class="graph-title">Heating Plants of Denmark</h2>
-                <p>This tool helps users explore and analyze heating plants across Denmark, providing insights into energy sources, supply areas, pricing, and availability.</p>
+                <p style="margin-bottom: 60px;">This tool enables exploring and analyzing heating plants across Denmark, providing insights into energy sources, supply areas, pricing, and availability.</p>
                 <ul>
                     <li>
                         <img src="assets/icons/venstre.png" alt="venstre" width="16" height="16">
@@ -26,9 +26,13 @@ export function addInstructions() {
                         <img src="assets/icons/check.png" alt="check box" width="16" height="16">
                         <span>Toggle gas supply areas on the map.</span>
                     </li>
-                    <li>
+                    <li style="display: flex; align-items: center;">
                         <img src="assets/icons/tutorial.png" alt="Tutorial Icon" width="16" height="16">
-                        <span>Want a guided tour? <button class="tutorial-button" onclick="showTutorial()">Start Tutorial</button></span>
+                        <span>Want a guided tour?</span>
+                        <button class="tutorial-button" onclick="showTutorial()" style="margin-left: 10px;">
+                            Tutorial
+                            <img src="assets/icons/tutorial.png" class="tutorial-button-icon" alt="Tutorial Icon" width="16" height="16">
+                        </button>
                     </li>
                 </ul>
             </div>

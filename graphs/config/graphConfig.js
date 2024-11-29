@@ -16,8 +16,8 @@ export const graphConfig = {
 
     // List of attributes for the graphs
     attributes: [
-        'Kul',
-        'Olie', 
+        'Coal',
+        'Oli', 
         'Gas', 
         'Affald',
         'Biogas',
