@@ -529,6 +529,10 @@ function createTotalProductionChart(plantData, index, maxValue) {
         return totalMWh;
     });
 
+    // Calculate max production and round up to the nearest 100
+    const maxProduction = Math.max(...yearlyTotals);
+    const roundedMaxProduction = Math.ceil(maxProduction / 100) * 100;
+
     return new Chart(ctx, {
         type: 'bar',
         data: {
@@ -589,8 +593,9 @@ function createTotalProductionChart(plantData, index, maxValue) {
                 },
                 y: {
                     beginAtZero: true,
-                    max: maxValue,
+                    max: roundedMaxProduction, // Use the rounded max production
                     ticks: {
+                        stepSize: 100, // Ensure step size is set to 100
                         font: {
                             size: 10
                         },

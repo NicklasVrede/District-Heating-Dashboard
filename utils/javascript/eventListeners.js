@@ -97,10 +97,12 @@ export function addPlantEventListeners(map) {
 
     // Event listener for clicking on a plant
     map.on('click', 'plants', (e) => {
+        const isCtrlPressed = e.originalEvent.ctrlKey;
+        const isMetaPressed = e.originalEvent.metaKey; // Command key on Mac
         const features = map.queryRenderedFeatures(e.point, { layers: ['plants'] });
         if (features.length) {
             const feature = features[0];
-            toggleSelection(map, feature.properties.forsyid, e.originalEvent.ctrlKey);
+            toggleSelection(map, feature.properties.forsyid, isCtrlPressed, isMetaPressed);
         }
     });
 }
@@ -177,10 +179,12 @@ export function addAreaEventListeners(map) {
 
     // Event listener for clicking on an area
     map.on('click', 'areas', (e) => {
+        const isCtrlPressed = e.originalEvent.ctrlKey;
+        const isMetaPressed = e.originalEvent.metaKey; // Command key on Mac
         const features = map.queryRenderedFeatures(e.point, { layers: ['areas'] });
         if (features.length) {
             const feature = features[0];
-            toggleSelection(map, feature.properties.forsyid, e.originalEvent.ctrlKey);
+            toggleSelection(map, feature.properties.forsyid, isCtrlPressed, isMetaPressed);
         }
     });
 }
@@ -237,14 +241,12 @@ export function updateSelectedPlants(map) {
     yearState.visible = hasMoreThanTwoSelections || ['price', 'production'].includes(focusState.focus);
 }
 
-function toggleSelection(map, forsyid, isCtrlPressed) {
-    if (isCtrlPressed) {
-        // Remove from selection if Ctrl key is pressed
+function toggleSelection(map, forsyid, isCtrlPressed, isMetaPressed) {
+    if (isCtrlPressed || isMetaPressed) {
         if (selectionSet.has(forsyid)) {
             selectionSet.delete(forsyid);
         }
     } else {
-        // Add to selection if Ctrl key is not pressed
         if (!selectionSet.has(forsyid)) {
             selectionSet.add(forsyid);
         }
@@ -252,10 +254,6 @@ function toggleSelection(map, forsyid, isCtrlPressed) {
     updateSelectedPlants(map);
     updateSelectedPlantsWindow(selectionSet);
 
-    // Print the updated selection set
-    console.log('Updated selectionSet:', Array.from(selectionSet));
-
-    // Clear graph if selection becomes empty
     if (selectionSet.size === 0) {
         const graphContainer = document.getElementById('graph-container');
         if (graphContainer) {
@@ -263,7 +261,7 @@ function toggleSelection(map, forsyid, isCtrlPressed) {
         }
     }
     
-    updateGraph(); // Update the graph whenever the selection changes
+    updateGraph();
 }
 
 export function addMunicipalityEventListeners(map) {

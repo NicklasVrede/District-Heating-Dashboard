@@ -12,7 +12,7 @@ export function addInstructions() {
                     </li>
                     <li>
                         <img src="assets/icons/lasso.png" alt="Select Icon" width="16" height="16">
-                        <span>Select plants to view details. Use Ctrl + click to deselect.</span>
+                        <span>Select plants to view details. Use Ctrl (⌘ on Mac) + click to deselect.</span>
                     </li>
                     <li>
                         <img src="assets/icons/mapfocus.png" alt="Map Focus Icon" width="16" height="16">

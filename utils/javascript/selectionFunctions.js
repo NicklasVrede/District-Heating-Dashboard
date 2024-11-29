@@ -62,8 +62,8 @@ export function selectAll(map) {
     });
 }
 
-function toggleSelection(map, forsyid, isCtrlPressed) {
-    if (isCtrlPressed) {
+function toggleSelection(map, forsyid, isCtrlPressed, isMetaPressed) {
+    if (isCtrlPressed || isMetaPressed) {
         if (selectionSet.has(forsyid)) {
             selectionSet.delete(forsyid);
         }

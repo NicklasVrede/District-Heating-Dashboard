@@ -148,7 +148,7 @@ export function updateSelectedPlantsWindow() {
 
         // Add click handler for the list item
         li.addEventListener('click', (e) => {
-            if (e.ctrlKey) {
+            if (e.ctrlKey || e.metaKey) {
                 const forsyid = plant.forsyid;
                 selectionSet.delete(forsyid);
                 updateSelectedPlants(map);
