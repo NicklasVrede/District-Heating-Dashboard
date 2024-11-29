@@ -4,7 +4,7 @@ export function addInstructions() {
         graphContainer.innerHTML = `
             <div class="instructions">
                 <h2 class="graph-title">Heating Plants of Denmark</h2>
-                <p style="line-height: 1.6;">This tool helps users explore and analyze heating plants across Denmark, providing insights into energy sources, supply areas, pricing and availability.</p>
+                <p>This tool helps users explore and analyze heating plants across Denmark, providing insights into energy sources, supply areas, pricing, and availability.</p>
                 <ul>
                     <li>
                         <img src="assets/icons/venstre.png" alt="venstre" width="16" height="16">
