@@ -20,8 +20,8 @@ export function clearSelection(map) {
 
 export function selectAll(map) {
     map.fitBounds([
-        [7.5, 54.5],
-        [13.0, 57.75]
+        [7.0, 54.0],
+        [17.0, 58.0]
     ], {
         padding: 20
     });
