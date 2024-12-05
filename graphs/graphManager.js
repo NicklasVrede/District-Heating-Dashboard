@@ -52,7 +52,7 @@ function navigateGraphs(data, selectedForsyids) {
     }
 }
 
-// Function to update the graph   //Apply default!
+// Function to update the graph
 export async function updateGraph() {
     try {
         const data = await loadData();

@@ -1,4 +1,4 @@
-import { createOrUpdatePlotlyGraph } from '../../../graphs/components/multiPlant.js';
+import { updateGraph } from '../../../graphs/graphManager.js';
 import { selectionSet } from '../../../main.js';
 import { yearState } from './YearState.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
@@ -30,7 +30,7 @@ export class DefaultFocus {
         const data = window.dataDict;
         if (data && selectedForsyids.length > 0) {
             console.log('DefaultFocus: Calling createOrUpdatePlotlyGraph with default focus');
-            createOrUpdatePlotlyGraph(data, selectedForsyids, 'default');
+            updateGraph();
         }
     }
 
