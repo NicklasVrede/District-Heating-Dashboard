@@ -44,9 +44,14 @@ function updateLoadingState(increment = true) {
     const loadingSpinner = document.getElementById('loading-spinner');
     if (loadingSpinner) {
         if (loadingCounter > 0) {
+            loadingSpinner.classList.remove('fade-out');
             loadingSpinner.style.display = 'flex';
         } else {
-            loadingSpinner.style.display = 'none';
+            loadingSpinner.classList.add('fade-out');
+            // Remove the element after the animation completes
+            setTimeout(() => {
+                loadingSpinner.style.display = 'none';
+            }, 500); // Match this to the CSS transition duration
         }
     }
 }

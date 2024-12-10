@@ -387,6 +387,14 @@ body, html {
     flex-direction: column;
     align-items: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+#loading-spinner.fade-out {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
 }
 
 .spinner {
