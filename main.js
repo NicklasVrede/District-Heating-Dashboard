@@ -30,9 +30,13 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0M
 // Export selection set
 export const selectionSet = new Set();
 
-// Add this near the top of the file after imports
+// Initialize loading spinner immediately
 let loadingCounter = 0;
-const totalLoadingTasks = 5; // Number of loading tasks (plants, areas, gas areas, municipalities, centroids)
+const totalLoadingTasks = 5;
+const loadingSpinner = document.getElementById('loading-spinner');
+if (loadingSpinner) {
+    loadingSpinner.style.display = 'flex';
+}
 
 function updateLoadingState(increment = true) {
     if (increment) {
@@ -41,20 +45,21 @@ function updateLoadingState(increment = true) {
         loadingCounter--;
     }
     
-    const loadingSpinner = document.getElementById('loading-spinner');
     if (loadingSpinner) {
         if (loadingCounter > 0) {
             loadingSpinner.classList.remove('fade-out');
             loadingSpinner.style.display = 'flex';
         } else {
             loadingSpinner.classList.add('fade-out');
-            // Remove the element after the animation completes
             setTimeout(() => {
                 loadingSpinner.style.display = 'none';
-            }, 500); // Match this to the CSS transition duration
+            }, 500);
         }
     }
 }
+
+// Show loading spinner immediately
+updateLoadingState();
 
 // Initialize map
 const map = new mapboxgl.Map({
@@ -86,7 +91,6 @@ map.on('load', () => {
     
     // Show loading spinner and record start time
     loadStartTime = Date.now();
-    updateLoadingState();
     
     Promise.all([
         loadPlants(map),
@@ -101,14 +105,20 @@ map.on('load', () => {
         
         // Use setTimeout to ensure minimum display time
         setTimeout(() => {
-            updateLoadingState(false);
+            // Decrement the counter for each loaded task
+            for (let i = 0; i < totalLoadingTasks; i++) {
+                updateLoadingState(false);
+            }
             initializeLasso(map);
             initMapFocusDropdown(focusManager);
             addInstructions();
         }, remainingTime);
     }).catch(error => {
         console.error('Error loading map data:', error);
-        updateLoadingState(false);
+        // Ensure loading spinner is hidden on error
+        for (let i = 0; i < totalLoadingTasks; i++) {
+            updateLoadingState(false);
+        }
     });
 });
 
