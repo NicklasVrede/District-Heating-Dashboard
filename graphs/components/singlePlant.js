@@ -77,8 +77,10 @@ export function createSinglePlantGraph(data, forsyid, focus) {
         maxProductionValue = Math.max(maxProductionValue, yearTotal);
     });
 
-    // Round up to nearest hundred
-    const roundedMaxProduction = Math.ceil(maxProductionValue / 100) * 100;
+    // Round up to nearest tenth if less than 100, otherwise nearest hundred
+    const roundedMaxProduction = maxProductionValue < 100 
+        ? Math.ceil(maxProductionValue / 10) * 10 
+        : Math.ceil(maxProductionValue / 100) * 100;
 
     // Create datasets for each fuel type
     const datasets = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
