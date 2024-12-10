@@ -76,7 +76,7 @@ window.selectAll = () => selectAll(map);
 window.changeFocus = changeFocus;
 
 // Add minimum display duration (in milliseconds)
-const MIN_LOADING_TIME = 2000; // 2 seconds
+const MIN_LOADING_TIME = 500; // 2 seconds
 let loadStartTime;
 
 // Wait for map to load before making it globally available
