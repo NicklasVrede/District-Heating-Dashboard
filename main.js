@@ -30,6 +30,26 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0M
 // Export selection set
 export const selectionSet = new Set();
 
+// Add this near the top of the file after imports
+let loadingCounter = 0;
+const totalLoadingTasks = 5; // Number of loading tasks (plants, areas, gas areas, municipalities, centroids)
+
+function updateLoadingState(increment = true) {
+    if (increment) {
+        loadingCounter++;
+    } else {
+        loadingCounter--;
+    }
+    
+    const loadingSpinner = document.getElementById('loading-spinner');
+    if (loadingSpinner) {
+        if (loadingCounter > 0) {
+            loadingSpinner.style.display = 'flex';
+        } else {
+            loadingSpinner.style.display = 'none';
+        }
+    }
+}
 
 // Initialize map
 const map = new mapboxgl.Map({
@@ -50,21 +70,41 @@ window.clearSelection = () => clearSelection(map);
 window.selectAll = () => selectAll(map);
 window.changeFocus = changeFocus;
 
+// Add minimum display duration (in milliseconds)
+const MIN_LOADING_TIME = 2000; // 2 seconds
+let loadStartTime;
+
 // Wait for map to load before making it globally available
 map.on('load', () => {
     window.map = map;
     setMapInstance(map);
-    // Load your data after map is ready
-    loadPlants(map);
-    loadAreas(map);
-    loadGasAreas(map);
-    loadMunicipalities(map);
-    loadMunicipalityCentroids(map);
-    initializeLasso(map);
-    initMapFocusDropdown(focusManager);
-
-    // Add instructions to the graph container
-    addInstructions();
+    
+    // Show loading spinner and record start time
+    loadStartTime = Date.now();
+    updateLoadingState();
+    
+    Promise.all([
+        loadPlants(map),
+        loadAreas(map),
+        loadGasAreas(map),
+        loadMunicipalities(map),
+        loadMunicipalityCentroids(map)
+    ]).then(() => {
+        // Calculate remaining time to meet minimum display duration
+        const elapsedTime = Date.now() - loadStartTime;
+        const remainingTime = Math.max(0, MIN_LOADING_TIME - elapsedTime);
+        
+        // Use setTimeout to ensure minimum display time
+        setTimeout(() => {
+            updateLoadingState(false);
+            initializeLasso(map);
+            initMapFocusDropdown(focusManager);
+            addInstructions();
+        }, remainingTime);
+    }).catch(error => {
+        console.error('Error loading map data:', error);
+        updateLoadingState(false);
+    });
 });
 
 // Configure map settings
