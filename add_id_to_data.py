@@ -2,7 +2,7 @@ import pandas as pd
 
 # Load the data
 plants_df = pd.read_csv('data/plants.csv')
-mapping_df = pd.read_csv('data/old/data_names_mapping.csv')
+mapping_df = pd.read_csv('data/data_names_mapping.csv')
 production_df = pd.read_csv('data/production_data.csv')
 
 # Clean the data

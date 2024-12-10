@@ -22,7 +22,8 @@ EXCLUDE_FROM_NET_MERGE = ['Hadsund By Fjernvarme',
                          'Hjørring Fjernvarme (inkl. Hirtshals Fjernvarme fra 2011)',
                          'Vester Hjermitslev Fjernvarme',
                          'Aabenrå - Rødekro - Hjordkær Fjernvarme',
-                         'Hillerød-Farum-Værløse']
+                         'Hillerød-Farum-Værløse',
+                         'Herning-Ikast Fjernvarme']
 
 def get_longest_valid_name(x):
     # Convert to string and filter out '0' and empty strings

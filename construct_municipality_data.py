@@ -3,7 +3,6 @@ import pandas as pd
 
 file_path = 'maps/municipalities_with_forsyid.geojson'
 data_path = 'data/production_data_with_forsyid.csv'
-output_path = 'data/aggregated_data.csv'  # New output file path
 
 # Load the GeoJSON file
 gdf = gpd.read_file(file_path)

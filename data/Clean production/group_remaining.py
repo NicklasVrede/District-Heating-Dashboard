@@ -4,6 +4,7 @@ import pandas as pd
 file_path = 'data/Clean production/production_remaining.csv'
 df = pd.read_csv(file_path)
 
+#Exclude by fv_net_navn:
 exlude_list = ['Hadsund By Fjernvarme', 
                         'Sindal Fjernvarme (inkl. Bindslev fra 2021)', 
                         'Århus Fjernvarme',
