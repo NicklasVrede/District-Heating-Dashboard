@@ -155,3 +155,22 @@ window.toggleLassoSelect = toggleLassoSelect;
 
 // Expose the toggleMunicipalities function to the global scope
 window.toggleMunicipalities = (button) => toggleMunicipalities(map, button);
+
+// Show disclaimer when page loads
+window.onload = function() {
+    const disclaimerShown = localStorage.getItem('disclaimerShown');
+    if (!disclaimerShown) {
+        showDisclaimer();
+    }
+};
+
+function showDisclaimer() {
+    const modal = document.getElementById('disclaimer-modal');
+    modal.style.display = 'block';
+}
+
+window.closeDisclaimer = function() {
+    const modal = document.getElementById('disclaimer-modal');
+    modal.style.display = 'none';
+    localStorage.setItem('disclaimerShown', 'true');
+};
