@@ -2,7 +2,7 @@ import geopandas as gpd
 import pandas as pd
 
 file_path = 'maps/municipalities_with_forsyid.geojson'
-data_path = 'data/production_data_with_forsyid.csv'
+data_path = 'data/production_data.csv'
 
 # Load the GeoJSON file
 gdf = gpd.read_file(file_path)
@@ -10,16 +10,16 @@ gdf = gpd.read_file(file_path)
 # Load the production data
 production_data = pd.read_csv(data_path, header=0)  # Use the first row as header
 
-# Define the column names for the production data
+# Define the column names for the production data in the correct order
 production_data.columns = [
     'fv_net_navn', 'forsyid', 'aar', 'vaerk_kommune', 'kvoteaktivitet', 'DB07', 'NR117', 
     'indfyretkapacitet_MW', 'elkapacitet_MW', 'varmekapacitet_MW', 'brutto_TJ', 'varmeprod_TJ', 
-    'varmelev_TJ', 'elprod_TJ', 'ellev_TJ', 'andel_varmelev', 'andel_el', 'andel_process', 
+    'varmelev_TJ', 'elprod_TJ', 'ellev_TJ', 'andel_varmelev', 'andel_el', 'andel_process',
     'kul_TJ', 'fuelolie_TJ', 'spildolie_TJ', 'gasolie_TJ', 'raffinaderigas_TJ', 'lpg_TJ', 
     'naturgas_TJ', 'affald_TJ', 'biogas_TJ', 'halm_TJ', 'skovflis_TJ', 'trae- og biomasseaffald_TJ', 
     'traepiller_TJ', 'bio-olie_TJ', 'braendselsfrit_TJ', 'solenergi_TJ', 'vandkraft_TJ', 
     'elektricitet_TJ', 'omgivelsesvarme_TJ', 'vaerk_id', 'vrkanl_ny', 'vaerk_navn', 
-    'vaerk_postnr', 'vaerk_postdistrikt', 'fv_net', 'selskab_id', 'cvr', 'selskab_navn', 
+    'vaerk_postnr', 'vaerk_postdistrikt', 'fv_net', 'selskab_id', 'cvr', 'selskab_navn',
     'vrktypeid', 'vrktypenavn', 'anlaeg_navn', 'anlaegstype_navn', 'aktoer', 'idriftdato', 
     'skrotdato'
 ]
