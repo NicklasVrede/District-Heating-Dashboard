@@ -14,7 +14,18 @@ export class PriceFocus {
         this.lastViewType = null;
         this.lastYear = null;
         
+        // Add min/max year constants
+        this.MIN_PRICE_YEAR = '2019';
+        this.MAX_PRICE_YEAR = '2024';
+        
         yearState.addListener((year) => {
+            // Check if year is within valid range
+            if (year < this.MIN_PRICE_YEAR) {
+                console.log('No price before 2019 (yet)');
+                // Optionally show a message to the user
+                this.showNoDataMessage();
+                return;
+            }
             this.updatePriceData();
         });
         
@@ -106,6 +117,13 @@ export class PriceFocus {
     updatePriceData() {
         try {
             const currentYear = yearState.year;
+            
+            // Check if year is within valid range
+            if (currentYear < this.MIN_PRICE_YEAR) {
+                this.showNoDataMessage();
+                return;
+            }
+
             const source = municipalitiesVisible ? 
                 this.map.getSource('municipalities') : 
                 this.map.getSource('plants');
@@ -338,5 +356,30 @@ export class PriceFocus {
         return Object.entries(this.priceRankings)
             .filter(([id, _]) => relevantIds.has(id))  // Only include IDs from the correct set
             .map(([id, _]) => id);
+    }
+
+    showNoDataMessage() {
+        // Clear any existing price data visualization
+        if (!municipalitiesVisible) {
+            if (this.map.getLayer('plants-price')) {
+                this.map.setPaintProperty('plants-price', 'circle-color', priceColors.null);
+            }
+        } else {
+            if (this.map.getLayer('municipalities-price')) {
+                this.map.setPaintProperty('municipalities-price', 'fill-color', priceColors.null);
+            }
+        }
+
+        // Update legend to show "No data available"
+        if (this.legend) {
+            this.legend.innerHTML = `
+                <div class="legend-title">Price per MWh</div>
+                <div class="legend-scale">
+                    <div class="legend-labels">
+                        <div class="legend-label">No price data before 2019 (yet)</div>
+                    </div>
+                </div>
+            `;
+        }
     }
 } 
