@@ -3,6 +3,7 @@ import { showToast } from './toast.js';
 import { yearState } from '../../utils/javascript/focusLayers/YearState.js';
 import { priceTypeColors } from '../../utils/javascript/focusLayers/colors.js';
 import { legendTooltips, tooltipStyle } from '../config/tooltipConfig.js';
+import { municipalitiesVisible } from '../../utils/javascript/municipalitiesFunctions.js';
 
 // Keep track of current charts
 let currentCharts = {
@@ -45,7 +46,7 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
     // Create the structure only when needed
     graphContainer.innerHTML = `
         <div class="graph-header">
-            <h2 class="graph-title">Multiple Plants Comparison</h2>
+            <h2 class="graph-title">${municipalitiesVisible ? 'Multiple Municipalities Comparison' : 'Multiple Plants Comparison'}</h2>
         </div>
         <div class="graphs-container">
             ${focus === 'price' ? `

@@ -5,6 +5,7 @@ import { updateSelectedMunicipalities, updateSelectedPlants } from './eventListe
 import { updateGraph } from './plotlyGraphs.js';
 import { highlightArea, resetAreaHighlight, highlightPlant, removePlantHighlight } from './eventListeners.js';
 import { clearGraph } from './clearGraph.js';
+import { municipalitiesVisible } from './municipalitiesFunctions.js';
 
 
 
@@ -40,7 +41,7 @@ export function updateSelectedPlantsWindow() {
     // First, update the header of the window (not the list items)
     windowEl.querySelector('.selected-plants-header').innerHTML = `
         <div class="header-content">
-            <span>Selected Plants</span>
+            <span>${municipalitiesVisible ? 'Selected Municipalities' : 'Selected Plants'}</span>
             <span class="plant-count">(${selectionSet.size})</span>
         </div>
         <button id="window-clear-button" title="Clear Selection">×</button>
