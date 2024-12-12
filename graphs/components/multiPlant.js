@@ -31,7 +31,7 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
     if (!selectedForsyids?.length) return;
 
     const yearRanges = {
-        production: { defaultYear: '2023', minYear: '2021', maxYear: '2023' },
+        production: { defaultYear: '2023', minYear: '2000', maxYear: '2023' },
         price: { defaultYear: '2024', minYear: '2019', maxYear: '2024' },
         none: { defaultYear: '2024', minYear: '2019', maxYear: '2024' }
     };
@@ -145,7 +145,7 @@ function setupYearSliderListener(data, validForsyids, focus) {
 
 function getEffectiveYear(year, focus) {
     if (focus === 'production') {
-        return Math.min(Math.max(year, '2021'), '2023');
+        return Math.min(Math.max(year, '2000'), '2023');
     }
     return year;
 }
@@ -161,7 +161,7 @@ function cleanupCharts() {
 
 function createProductionChart(data, validForsyids, currentYear, focus) {
     console.log('Creating production chart with focus:', focus);
-    const effectiveYear = Math.min(Math.max(currentYear, '2021'), '2023');
+    const effectiveYear = Math.min(Math.max(currentYear, '2000'), '2023');
     
     const canvas = document.getElementById('productionChart');
     
@@ -222,8 +222,8 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
     if (currentYear !== effectiveYear) {
         if (currentYear > '2023') {
             titleText = `Production Distribution (2023) - Latest Available Data`;
-        } else if (currentYear < '2021') {
-            titleText = `Production Distribution (2021) - Earliest Available Data`;
+        } else if (currentYear < '2000') {
+            titleText = `Production Distribution (2000) - Earliest Available Data`;
         }
     }
 
@@ -477,10 +477,10 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
 }
 
 function createPriceChart(data, validForsyids, currentYear, focus) {
-    console.log('Creating price chart with focus:', focus);
+    const effectiveYear = Math.min(Math.max(currentYear, '2019'), '2024');
+    
     const canvas = document.getElementById('priceChart');
     
-    // Destroy existing chart if it exists
     if (currentCharts.price) {
         currentCharts.price.destroy();
     }
@@ -496,11 +496,11 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         const paddedForsyid = forsyid.toString().padStart(8, '0');
         const plantData = data[paddedForsyid];
         
-        if (plantData?.prices?.[currentYear]) {
+        if (plantData?.prices?.[effectiveYear]) {
             plantNames.push(plantData.name.split(' ')[0]);
-            houseData.push(plantData.prices[currentYear].house_price || 0);
-            apartmentData.push(plantData.prices[currentYear].apartment_price || 0);
-            mwhData.push(plantData.prices[currentYear].mwh_price || 0);
+            houseData.push(plantData.prices[effectiveYear].house_price || 0);
+            apartmentData.push(plantData.prices[effectiveYear].apartment_price || 0);
+            mwhData.push(plantData.prices[effectiveYear].mwh_price || 0);
         }
     });
 
@@ -525,6 +525,16 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
     // Round up to the nearest 5000
     maxPrice = Math.ceil(maxPrice / 5000) * 5000;
 
+    // Create title with note if year was clamped
+    let titleText = `Price Comparison (${effectiveYear})`;
+    if (currentYear !== effectiveYear) {
+        if (currentYear > '2024') {
+            titleText = `Price Comparison (2024) - Latest Available Data`;
+        } else if (currentYear < '2019') {
+            titleText = `Price Comparison (2019) - Earliest Available Data`;
+        }
+    }
+
     // Create new chart
     currentCharts.price = new Chart(ctx, {
         type: 'bar',
@@ -536,7 +546,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     data: houseData,
                     backgroundColor: 'rgba(255, 99, 132, 0.7)',
                     order: 3
-                },
+                },  
                 {
                     label: 'Apartment Price (Yearly)',
                     data: apartmentData,
@@ -581,7 +591,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             plugins: {
                 title: {
                     display: true,
-                    text: `Price Comparison (${currentYear})`
+                    text: titleText
                 },
                 legend: {
                     position: 'left',
@@ -711,7 +721,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
 }
 
 function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
-    const effectiveYear = Math.min(Math.max(currentYear, '2021'), '2023');
+    const effectiveYear = Math.min(Math.max(currentYear, '2000'), '2023');
     const canvas = document.getElementById('totalProductionChart');
     
     if (currentCharts.totalProduction) {
@@ -743,8 +753,8 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
     if (currentYear !== effectiveYear) {
         if (currentYear > '2023') {
             titleText = `Total Production (2023) - Latest Available Data`;
-        } else if (currentYear < '2021') {
-            titleText = `Total Production (2021) - Earliest Available Data`;
+        } else if (currentYear < '2000') {
+            titleText = `Total Production (2000) - Earliest Available Data`;
         }
     }
 

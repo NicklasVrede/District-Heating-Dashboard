@@ -78,7 +78,7 @@ export class ProductionFocus {
             const plantData = window.dataDict?.[forsyid]?.production;
             
             if (plantData) {
-                for (let year = 2021; year <= 2023; year++) {
+                for (let year = 2000; year <= 2023; year++) {
                     const yearData = plantData[year.toString()];
                     if (yearData) {
                         feature.properties[`totalProduction_${year}`] = 
@@ -143,7 +143,7 @@ export class ProductionFocus {
     }
 
     updateProductionData(year) {
-        const effectiveYear = Math.min(Math.max(year, '2021'), '2023');
+        const effectiveYear = Math.min(Math.max(year, '2000'), '2023');
         
         // Get the correct source based on view type
         const source = this.map.getSource(municipalitiesVisible ? 'municipality-centroids' : 'plants');
