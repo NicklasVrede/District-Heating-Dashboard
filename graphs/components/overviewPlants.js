@@ -1,5 +1,6 @@
 import { graphConfig } from '../config/graphConfig.js';
 import { legendTooltips, tooltipStyle } from '../config/tooltipConfig.js';
+import { municipalitiesVisible } from '../../utils/javascript/municipalitiesFunctions.js';
 
 export function createOverviewPlants(data, selectedForsyids) {
     // Only handle if we have more than 10 plants
@@ -10,7 +11,7 @@ export function createOverviewPlants(data, selectedForsyids) {
     // Create the structure
     graphContainer.innerHTML = `
         <div class="graphs-wrapper">
-            <h2 class="graph-title">Overview of ${selectedForsyids.length} Plants</h2>
+            <h2 class="graph-title">Overview of ${selectedForsyids.length} ${municipalitiesVisible ? 'Municipalities' : 'Plants'}</h2>
             <div class="graphs-container">
                 <div class="production-graph">
                     <canvas id="fuelDistributionChart"></canvas>
