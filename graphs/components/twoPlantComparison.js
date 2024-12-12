@@ -558,7 +558,11 @@ function createTotalProductionChart(plantData, index, maxValue) {
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return `Total: ${context.raw.toFixed(1)} TJ`;
+                            const value = context.raw;
+                            if (value >= 1000) {
+                                return `Total: ${(value / 1000).toFixed(1)}k TJ`;
+                            }
+                            return `Total: ${value.toFixed(1)} TJ`;
                         }
                     }
                 },
@@ -578,6 +582,21 @@ function createTotalProductionChart(plantData, index, maxValue) {
                         },
                         mode: 'x'
                     }
+                },
+                datalabels: {
+                    display: true,
+                    formatter: function(value) {
+                        if (value >= 1000) {
+                            return `${Math.round(value / 1000)}k`;
+                        }
+                        return Math.round(value);
+                    },
+                    font: {
+                        size: 10
+                    },
+                    offset: -20,
+                    align: 'end',
+                    anchor: 'end'
                 }
             },
             scales: {
