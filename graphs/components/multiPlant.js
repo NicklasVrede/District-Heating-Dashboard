@@ -38,6 +38,9 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
     
     const { defaultYear, minYear, maxYear } = yearRanges[focus] || yearRanges.none;
 
+    // Use yearState.year instead of defaultYear for initial creation
+    const initialYear = yearState.year || defaultYear;
+
     // Add a static counter to track if animation has played
     if (!createOrUpdatePlotlyGraph.animationPlayed) {
         createOrUpdatePlotlyGraph.animationPlayed = new Set();
@@ -102,11 +105,11 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
         setupYearSliderListener(data, validForsyids, focus);
     }
 
-    // Create initial charts
-    const effectiveYear = getEffectiveYear(defaultYear, focus);
+    // Create initial charts with yearState.year
+    const effectiveYear = getEffectiveYear(initialYear, focus);
     createProductionChart(data, validForsyids, effectiveYear, focus);
     createTotalProductionChart(data, validForsyids);
-    createPriceChart(data, validForsyids, defaultYear, focus);
+    createPriceChart(data, validForsyids, initialYear, focus);
 
     // Mark this focus type as having played the animation
     if (focus !== 'none') {
