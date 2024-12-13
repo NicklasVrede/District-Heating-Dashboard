@@ -30,13 +30,10 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0M
 // Export selection set
 export const selectionSet = new Set();
 
-// Initialize loading spinner immediately
+// Initialize loading spinner after disclaimer check
 let loadingCounter = 0;
 const totalLoadingTasks = 5;
 const loadingSpinner = document.getElementById('loading-spinner');
-if (loadingSpinner) {
-    loadingSpinner.style.display = 'flex';
-}
 
 function updateLoadingState(increment = true) {
     if (increment) {
@@ -157,12 +154,12 @@ window.toggleLassoSelect = toggleLassoSelect;
 window.toggleMunicipalities = (button) => toggleMunicipalities(map, button);
 
 // Show disclaimer when page loads
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', () => {
     const disclaimerShown = localStorage.getItem('disclaimerShown');
     if (!disclaimerShown) {
         showDisclaimer();
     }
-};
+});
 
 function showDisclaimer() {
     const modal = document.getElementById('disclaimer-modal');

@@ -379,7 +379,7 @@ body, html {
     top: 50%;
     left: calc(25% + 4px); 
     transform: translate(-50%, -50%);
-    z-index: 9999;
+    z-index: 1000;
     background: rgba(255, 255, 255, 0.95);
     padding: 30px 40px;
     border-radius: 12px;
@@ -421,7 +421,7 @@ body, html {
 .disclaimer-modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1001;
     left: 0;
     top: 0;
     width: 100%;
