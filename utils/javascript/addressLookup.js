@@ -1,7 +1,7 @@
 import { getMapInstance } from './mapInstance.js';
 import { selectionSet } from '../../main.js';
 
-const OPENCAGE_API_KEY = 'e1337f0db4d14aeb8a69f6439fc005fc'; // Replace with your OpenCage API key
+const OPENCAGE_API_KEY = 'e1337f0db4d14aeb8a69f6439fc005fc';
 
 export function searchAddress() {
     const map = getMapInstance();
@@ -16,7 +16,7 @@ export function searchAddress() {
         return;
     }
 
-    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}&key=${OPENCAGE_API_KEY}`;
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}&countrycode=dk&key=${OPENCAGE_API_KEY}`;
     
     fetch(url)
         .then(response => {
