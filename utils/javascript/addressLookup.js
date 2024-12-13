@@ -113,9 +113,16 @@ function findSupplyPlant(forsyid) {
 }
 
 function updateMapHighlights(forsyid, isWithinArea) {
-    const filterValue = isWithinArea ? forsyid : '';
-    map.setFilter('highlighted-area', ['==', 'forsyid', filterValue]);
-    map.setFilter('highlighted-plant', ['==', 'forsyid', filterValue]);
+    const map = getMapInstance();
+    if (!map) return;
+
+    // Only set filters for layers that exist
+    if (map.getLayer('selected-areas')) {
+        map.setFilter('selected-areas', ['==', 'forsyid', isWithinArea ? forsyid : '']);
+    }
+    if (map.getLayer('selected-plants')) {
+        map.setFilter('selected-plants', ['==', 'forsyid', isWithinArea ? forsyid : '']);
+    }
 }
 
 function createPopupContent(address, supplyPlant) {

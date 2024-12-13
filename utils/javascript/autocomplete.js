@@ -2,17 +2,37 @@ const apiKey = 'e1337f0db4d14aeb8a69f6439fc005fc';
 
 let currentFocus = -1;
 
+// Add rate limiting variables
+let lastRequestTime = 0;
+const MIN_REQUEST_INTERVAL = 1000; // Minimum 1 second between requests
+
+// Add debounce function at the top
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
 // Function to fetch address suggestions
 function autocompleteAddress() {
     const input = document.getElementById('address');
     const list = document.getElementById('autocomplete-list');
     const query = input.value;
 
-    if (!query) {
+    if (!query || query.length < 3) {
         list.innerHTML = '';
         currentFocus = -1;
         return;
     }
+
+    // Check if enough time has passed since last request
+    const now = Date.now();
+    if (now - lastRequestTime < MIN_REQUEST_INTERVAL) {
+        return;
+    }
+    lastRequestTime = now;
 
     fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(query)}&key=${apiKey}&limit=5&countrycode=dk`)
         .then(response => response.json())
@@ -134,13 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const addressInput = document.getElementById('address');
     addressInput.setAttribute('autocomplete', 'off');
 
-    // Add keyboard event listeners
-    addressInput.addEventListener('keydown', handleKeyDown);
+    // Create debounced version of autocompleteAddress
+    const debouncedAutocomplete = debounce(autocompleteAddress, 300);
 
-    // Add enter key listener
+    // Use the debounced version for input events
+    addressInput.addEventListener('input', debouncedAutocomplete);
+    addressInput.addEventListener('keydown', handleKeyDown);
     addressInput.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent form submission if within a form
+            event.preventDefault();
             searchAddress();
         }
     });
