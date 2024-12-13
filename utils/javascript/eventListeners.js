@@ -1,10 +1,11 @@
 import { highlightStyles } from '../../styles/highlightStyles.js';
 import { selectionSet } from '../../main.js';
-import { updateGraph } from './plotlyGraphs.js'; // Corrected import path
+import { updateGraph } from './plotlyGraphs.js';
 import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 import { areaStyles } from '../../styles/areaStyles.js';
 import { focusState } from './focusLayers/FocusState.js';
 import { yearState } from './focusLayers/YearState.js';
+import { modifySelection } from './selectionFunctions.js';
 
 let isHoveringPlant = false;
 let areaTooltip = null;
@@ -97,12 +98,13 @@ export function addPlantEventListeners(map) {
 
     // Event listener for clicking on a plant
     map.on('click', 'plants', (e) => {
+        e.preventDefault();
         const isCtrlPressed = e.originalEvent.ctrlKey;
-        const isMetaPressed = e.originalEvent.metaKey; // Command key on Mac
+        const isMetaPressed = e.originalEvent.metaKey;
         const features = map.queryRenderedFeatures(e.point, { layers: ['plants'] });
         if (features.length) {
             const feature = features[0];
-            toggleSelection(map, feature.properties.forsyid, isCtrlPressed, isMetaPressed);
+            modifySelection(map, feature.properties.forsyid, isCtrlPressed || isMetaPressed ? 'remove' : 'add');
         }
     });
 }
@@ -179,12 +181,14 @@ export function addAreaEventListeners(map) {
 
     // Event listener for clicking on an area
     map.on('click', 'areas', (e) => {
-        const isCtrlPressed = e.originalEvent.ctrlKey;
-        const isMetaPressed = e.originalEvent.metaKey; // Command key on Mac
-        const features = map.queryRenderedFeatures(e.point, { layers: ['areas'] });
-        if (features.length) {
-            const feature = features[0];
-            toggleSelection(map, feature.properties.forsyid, isCtrlPressed, isMetaPressed);
+        if (!isHoveringPlant) {
+            const isCtrlPressed = e.originalEvent.ctrlKey;
+            const isMetaPressed = e.originalEvent.metaKey;
+            const features = map.queryRenderedFeatures(e.point, { layers: ['areas'] });
+            if (features.length) {
+                const feature = features[0];
+                modifySelection(map, feature.properties.forsyid, isCtrlPressed || isMetaPressed ? 'remove' : 'add');
+            }
         }
     });
 }
@@ -227,12 +231,16 @@ export function removePlantHighlight(map) {
 }
 
 export function updateSelectedPlants(map) {
+    console.log('Updating selected plants:', Array.from(selectionSet));  // Debug
+    
     // Initialise an array with keywords for mapbox filter
     const filters = ['in', 'forsyid'];
     // Add all selected forsyids to the array
     selectionSet.forEach(forsyid => {
         filters.push(forsyid);
     });
+    console.log('Applied filters:', filters);  // Debug
+    
     map.setFilter('selected-plants', filters);
     map.setFilter('selected-areas', filters);
 
@@ -242,70 +250,35 @@ export function updateSelectedPlants(map) {
 }
 
 function toggleSelection(map, forsyid, isCtrlPressed, isMetaPressed) {
-    if (isCtrlPressed || isMetaPressed) {
-        if (selectionSet.has(forsyid)) {
-            selectionSet.delete(forsyid);
-        }
-    } else {
-        if (!selectionSet.has(forsyid)) {
-            selectionSet.add(forsyid);
-        }
-    }
-    updateSelectedPlants(map);
-    updateSelectedPlantsWindow(selectionSet);
-
-    if (selectionSet.size === 0) {
-        const graphContainer = document.getElementById('graph-container');
-        if (graphContainer) {
-            graphContainer.innerHTML = '';
-        }
-    }
+    console.log('Toggle Selection called:', {  // Debug
+        forsyid,
+        isCtrlPressed,
+        isMetaPressed,
+        currentSelection: Array.from(selectionSet)
+    });
     
-    updateGraph();
+    if (isCtrlPressed || isMetaPressed) {
+        modifySelection(map, forsyid, 'remove');
+    } else {
+        modifySelection(map, forsyid, 'toggle');
+    }
 }
 
 export function addMunicipalityEventListeners(map) {
     // Event listener for clicking on a municipality
     map.on('click', 'municipalities-fill', (e) => {
+        const isCtrlPressed = e.originalEvent.ctrlKey;
+        const isMetaPressed = e.originalEvent.metaKey;
         const features = map.queryRenderedFeatures(e.point, { layers: ['municipalities-fill'] });
         if (features.length) {
             const feature = features[0];
-            toggleMunicipalitySelection(feature.properties.lau_1, e.originalEvent.ctrlKey);
+            modifySelection(map, feature.properties.lau_1, isCtrlPressed || isMetaPressed ? 'remove' : 'add');
         }
     });
 }
 
 function toggleMunicipalitySelection(forsyid, isCtrlPressed) {
-    if (isCtrlPressed) {
-        // Remove from selection if Ctrl key is pressed
-        if (selectionSet.has(forsyid)) {
-            selectionSet.delete(forsyid);
-        }
-    } else {
-        // Add to selection if Ctrl key is not pressed
-        if (!selectionSet.has(forsyid)) {
-            selectionSet.add(forsyid);
-        }
-    }
-    
-    // Update the selected municipalities on the map
-    updateSelectedMunicipalities(map); // Ensure this is called
-
-    // Print the updated selection set
-    console.log('Updated selectionSet:', Array.from(selectionSet));
-
-    // Update the selected plants window
-    updateSelectedPlantsWindow(selectionSet);
-
-    // Clear graph if selection becomes empty
-    if (selectionSet.size === 0) {
-        const graphContainer = document.getElementById('graph-container');
-        if (graphContainer) {
-            graphContainer.innerHTML = '';
-        }
-    }
-    
-    updateGraph(); // Update the graph whenever the selection changes
+    modifySelection(map, forsyid, isCtrlPressed ? 'remove' : 'add');
 }
 
 export function updateSelectedMunicipalities(map) {

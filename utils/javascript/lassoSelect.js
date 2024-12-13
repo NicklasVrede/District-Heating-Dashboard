@@ -2,6 +2,7 @@ import { selectionSet } from '../../main.js';
 import { updateSelectedPlants } from './eventListeners.js';
 import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 import { updateGraph } from '../../graphs/graphManager.js';
+import { modifySelection } from './selectionFunctions.js';
 
 let draw;
 let isLassoActive = false;
@@ -56,7 +57,7 @@ function handleLassoSelection(e) {
     
     // Add to selection set
     selectedFeatures.forEach(feature => {
-        selectionSet.add(feature.properties.forsyid);
+        modifySelection(map, feature.properties.forsyid, 'add');
     });
     
     // Update UI

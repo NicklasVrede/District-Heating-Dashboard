@@ -5,6 +5,8 @@ import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 import { municipalitiesVisible } from './municipalitiesFunctions.js';
 import { addInstructions } from './instructions.js';
 import { clearGraph } from './clearGraph.js';
+import { showToast } from '../../graphs/components/toast.js';
+import { getCachedData } from './dataManager.js';
 
 export function clearSelection(map) {
     selectionSet.clear();
@@ -62,28 +64,37 @@ export function selectAll(map) {
     });
 }
 
-function toggleSelection(map, forsyid, isCtrlPressed, isMetaPressed) {
-    if (isCtrlPressed || isMetaPressed) {
-        if (selectionSet.has(forsyid)) {
-            selectionSet.delete(forsyid);
-        }
-    } else {
-        if (!selectionSet.has(forsyid)) {
+export function modifySelection(map, forsyid, action = 'add') {
+    if (!['add', 'remove', 'toggle'].includes(action)) {
+        console.warn('Invalid selection action:', action);
+        return;
+    }
+
+    const isCurrentlySelected = selectionSet.has(forsyid);
+    let selectionChanged = false;
+
+    if ((action === 'add' || action === 'toggle') && !isCurrentlySelected) {
+        const plantData = getCachedData()?.[forsyid.toString().padStart(8, '0')];
+        
+        // Skip data validation for municipalities
+        if (municipalitiesVisible || (plantData && (
+            Object.values(plantData.production || {}).some(year => Object.values(year).some(v => v > 0)) ||
+            Object.values(plantData.prices || {}).some(year => year.mwh_price > 0)
+        ))) {
             selectionSet.add(forsyid);
+            selectionChanged = true;
+        } else {
+            showToast("No production or price data available");
         }
+    } else if (action === 'remove' && isCurrentlySelected) {
+        selectionSet.delete(forsyid);
+        selectionChanged = true;
     }
-    updateSelectedPlants(map);
-    updateSelectedPlantsWindow();
 
-    if (selectionSet.size === 0) {
-        const graphContainer = document.getElementById('graph-container');
-        if (graphContainer) {
-            graphContainer.innerHTML = '';
-        }
-        addInstructions();
+    if (selectionChanged) {
+        updateSelectedPlants(map);
+        updateSelectedMunicipalities(map);
+        updateSelectedPlantsWindow();
+        selectionSet.size === 0 ? clearGraph() : updateGraph();
     }
-    
-    updateGraph();
 }
-
-export { toggleSelection };

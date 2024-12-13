@@ -6,6 +6,7 @@ import { updateGraph } from './plotlyGraphs.js';
 import { highlightArea, resetAreaHighlight, highlightPlant, removePlantHighlight } from './eventListeners.js';
 import { clearGraph } from './clearGraph.js';
 import { municipalitiesVisible } from './municipalitiesFunctions.js';
+import { modifySelection } from './selectionFunctions.js';
 
 
 
@@ -139,11 +140,7 @@ export function updateSelectedPlantsWindow() {
             deleteButton.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const forsyid = e.target.dataset.forsyid;
-                selectionSet.delete(forsyid);
-                updateSelectedPlants(map);
-                updateSelectedMunicipalities(map);
-                updateSelectedPlantsWindow(selectionSet);
-                updateGraph();
+                modifySelection(map, forsyid, 'remove');
             });
         }
 
@@ -151,11 +148,7 @@ export function updateSelectedPlantsWindow() {
         li.addEventListener('click', (e) => {
             if (e.ctrlKey || e.metaKey) {
                 const forsyid = plant.forsyid;
-                selectionSet.delete(forsyid);
-                updateSelectedPlants(map);
-                updateSelectedMunicipalities(map);
-                updateSelectedPlantsWindow(selectionSet);
-                updateGraph();
+                modifySelection(map, forsyid, 'remove');
             }
         });
         

@@ -499,12 +499,11 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         const paddedForsyid = forsyid.toString().padStart(8, '0');
         const plantData = data[paddedForsyid];
         
-        if (plantData?.prices?.[effectiveYear]) {
-            plantNames.push(plantData.name.split(' ')[0]);
-            houseData.push(plantData.prices[effectiveYear].house_price || 0);
-            apartmentData.push(plantData.prices[effectiveYear].apartment_price || 0);
-            mwhData.push(plantData.prices[effectiveYear].mwh_price || 0);
-        }
+        // Always add the plant name and default to 0 for missing data
+        plantNames.push(plantData?.name?.split(' ')[0] || paddedForsyid);
+        houseData.push(plantData?.prices?.[effectiveYear]?.house_price || 0);
+        apartmentData.push(plantData?.prices?.[effectiveYear]?.apartment_price || 0);
+        mwhData.push(plantData?.prices?.[effectiveYear]?.mwh_price || 0);
     });
 
     // Calculate max price across all years
