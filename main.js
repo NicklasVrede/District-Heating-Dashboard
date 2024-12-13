@@ -62,8 +62,8 @@ updateLoadingState();
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v10',
-    center: [10.0, 56.0],
-    zoom: 6.5
+    center: [11, 56.0],
+    zoom: 6
 });
 
 // Initialize FocusManager
@@ -138,8 +138,8 @@ fetch('./data/data_dict.json')
 // Update the resetCamera function
 function resetCamera() {
     map.flyTo({
-        center: [10.0, 56.0],
-        zoom: 6.5,
+        center: [11, 56.0],
+        zoom: 6,
         pitch: 0,
         bearing: 0,
         essential: true
