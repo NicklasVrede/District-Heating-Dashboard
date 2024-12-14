@@ -25,6 +25,7 @@ export function initDivider(map) {
         }
     }
     
+    let resizeTimeout;
     function resize(e) {
         // Get the correct x position whether it's mouse or touch
         const x = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
@@ -32,12 +33,17 @@ export function initDivider(map) {
         const percentage = (x / windowWidth) * 100;
         
         if (percentage > 20 && percentage < 80) {
-            requestAnimationFrame(() => {
-                mapDiv.style.width = percentage + '%';
-                graphDiv.style.width = (100 - percentage) + '%';
-                graphDiv.style.left = percentage + '%';
-                divider.style.left = percentage + '%';
-                
+            // Update DOM immediately
+            mapDiv.style.width = percentage + '%';
+            graphDiv.style.width = (100 - percentage) + '%';
+            graphDiv.style.left = percentage + '%';
+            divider.style.left = percentage + '%';
+            
+            // Debounce expensive map resize
+            if (resizeTimeout) {
+                cancelAnimationFrame(resizeTimeout);
+            }
+            resizeTimeout = requestAnimationFrame(() => {
                 if (map) {
                     map.resize();
                 }
@@ -51,6 +57,11 @@ export function initDivider(map) {
         document.removeEventListener('mouseup', stopResize);
         document.removeEventListener('touchmove', resize);
         document.removeEventListener('touchend', stopResize);
+        
+        // Cancel any pending resize
+        if (resizeTimeout) {
+            cancelAnimationFrame(resizeTimeout);
+        }
         
         // Final map resize
         if (map) {
