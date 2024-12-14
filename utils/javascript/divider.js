@@ -10,7 +10,10 @@ export function initDivider(map) {
     divider.addEventListener('touchstart', startResize);
     
     function startResize(e) {
-        e.preventDefault();
+        // Only prevent default if the event is cancelable
+        if (e.cancelable) {
+            e.preventDefault();
+        }
         
         // Add appropriate event listeners based on event type
         if (e.type === 'mousedown') {
@@ -38,44 +41,20 @@ export function initDivider(map) {
                 if (map) {
                     map.resize();
                 }
-                
-                // More aggressive Plotly resize
-                const graphs = document.querySelectorAll('.js-plotly-plot');
-                graphs.forEach(graph => {
-                    if (graph) {
-                        Plotly.relayout(graph, {
-                            width: graphDiv.clientWidth * 0.95,  // 95% of container width
-                            'xaxis.autorange': true,
-                            'yaxis.autorange': true
-                        });
-                    }
-                });
             });
         }
     }
     
-    function stopResize(e) {
+    function stopResize() {
         // Remove both mouse and touch event listeners
         document.removeEventListener('mousemove', resize);
         document.removeEventListener('mouseup', stopResize);
         document.removeEventListener('touchmove', resize);
         document.removeEventListener('touchend', stopResize);
         
-        // Final resize for both map and graphs
-        setTimeout(() => {
-            if (map) {
-                map.resize();
-            }
-            const graphs = document.querySelectorAll('.js-plotly-plot');
-            graphs.forEach(graph => {
-                if (graph) {
-                    Plotly.relayout(graph, {
-                        width: graphDiv.clientWidth * 0.95,
-                        'xaxis.autorange': true,
-                        'yaxis.autorange': true
-                    });
-                }
-            });
-        }, 100);
+        // Final map resize
+        if (map) {
+            map.resize();
+        }
     }
 }
