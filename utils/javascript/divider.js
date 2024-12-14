@@ -3,14 +3,28 @@ export function initDivider(map) {
     const mapDiv = document.getElementById('map');
     const graphDiv = document.getElementById('graph-container');
     
-    divider.addEventListener('mousedown', function(e) {
+    // Mouse events
+    divider.addEventListener('mousedown', startResize);
+    
+    // Touch events
+    divider.addEventListener('touchstart', startResize);
+    
+    function startResize(e) {
         e.preventDefault();
-        document.addEventListener('mousemove', resize);
-        document.addEventListener('mouseup', stopResize);
-    });
+        
+        // Add appropriate event listeners based on event type
+        if (e.type === 'mousedown') {
+            document.addEventListener('mousemove', resize);
+            document.addEventListener('mouseup', stopResize);
+        } else if (e.type === 'touchstart') {
+            document.addEventListener('touchmove', resize);
+            document.addEventListener('touchend', stopResize);
+        }
+    }
     
     function resize(e) {
-        const x = e.clientX;
+        // Get the correct x position whether it's mouse or touch
+        const x = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
         const windowWidth = document.documentElement.clientWidth;
         const percentage = (x / windowWidth) * 100;
         
@@ -40,9 +54,12 @@ export function initDivider(map) {
         }
     }
     
-    function stopResize() {
+    function stopResize(e) {
+        // Remove both mouse and touch event listeners
         document.removeEventListener('mousemove', resize);
         document.removeEventListener('mouseup', stopResize);
+        document.removeEventListener('touchmove', resize);
+        document.removeEventListener('touchend', stopResize);
         
         // Final resize for both map and graphs
         setTimeout(() => {
