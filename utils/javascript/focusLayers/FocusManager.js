@@ -72,10 +72,6 @@ class FocusManager {
     }
 
     handlePriceSelection(value) {
-        console.log('=== Handle Price Selection ===');
-        console.log('Selection value:', value);
-        console.log('Price rankings available:', !!this.currentFocus?.priceRankings);
-        
         if (!this.currentFocus || !(this.currentFocus instanceof PriceFocus)) {
             console.warn('Invalid focus state for price selection');
             return;
@@ -105,7 +101,6 @@ class FocusManager {
                 selectedIds = this.currentFocus.getAllByPrice();
                 break;
             case 'none':
-                console.log('Clearing all selections');
                 selectionSet.clear();
                 updateSelectedPlants(this.mapboxMap);
                 updateSelectedMunicipalities(this.mapboxMap);
@@ -113,9 +108,6 @@ class FocusManager {
                 updateGraph();
                 return;
         }
-
-        console.log('Selected IDs:', selectedIds);
-        console.log('Number of selections:', selectedIds.length);
 
         if (selectedIds.length > 0) {
             // Show toast if fewer items returned than requested
@@ -141,9 +133,6 @@ class FocusManager {
     }
 
     handleProductionSelection(value) {
-        console.log('=== Production Selection Details ===');
-        console.log('Selection type:', value);
-        
         if (!this.currentFocus || !(this.currentFocus instanceof ProductionFocus)) {
             console.warn('Invalid focus state for production selection');
             return;
@@ -174,16 +163,12 @@ class FocusManager {
                 selectedIds = this.currentFocus.getAllByProduction(measureType);
                 break;
             case 'none':
-                console.log('Clearing all selections');
                 selectionSet.clear();
                 updateSelectedPlants(this.mapboxMap);
                 updateSelectedPlantsWindow(selectionSet);
                 updateGraph();
                 return;
         }
-
-        console.log('Selected plant IDs:', selectedIds);
-        console.log('Number of selections:', selectedIds.length);
 
         if (selectedIds.length > 0) {
             // Show toast if fewer items returned than requested
@@ -208,8 +193,6 @@ class FocusManager {
             return;
         }
 
-        console.log(`FocusManager changing focus from ${this.currentFocus?.constructor.name} to: ${value} (municipalities: ${municipalitiesVisible})`);
-
         try {
             if (value === 'overview') {
                 selectAll(this.mapboxMap);
@@ -225,17 +208,14 @@ class FocusManager {
             yearState.visible = hasThreeOrMoreSelections || value === 'price' || value === 'production';
 
             if (this.currentFocus) {
-                console.log('Removing current focus:', this.currentFocus.constructor.name);
                 this.currentFocus.remove();
             }
 
             const newFocus = this.focuses[value] || this.focuses.default;
-            console.log('Applying new focus:', newFocus.constructor.name);
             newFocus.apply();
             this.currentFocus = newFocus;
             focusState.changeFocus(value);
         } catch (error) {
-            console.error('Error changing focus:', error);
             this.focuses.default.apply();
             this.currentFocus = this.focuses.default;
             focusState.changeFocus('default');

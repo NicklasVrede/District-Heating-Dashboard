@@ -181,18 +181,13 @@ export class ProductionFocus {
         const layerId = municipalitiesVisible ? 'municipalities-production' : 'plants-production';
 
         if (hasIcons) {
-            // Add debug logging
-            console.log('Municipality view:', municipalitiesVisible);
-            
             if (this.map.getLayer(layerId).type !== 'symbol') {
                 this.map.removeLayer(layerId);
                 
                 const iconSizeConfig = municipalitiesVisible ? 
                     [5, 0.375, 10, 1.125, 15, 1.5] : 
                     [5, 0.3, 10, 0.6, 15, 0.85];
-                    
-                console.log('Using icon size config:', iconSizeConfig);
-                
+
                 this.map.addLayer({
                     'id': layerId,
                     'type': 'symbol',
@@ -282,7 +277,6 @@ export class ProductionFocus {
     }
 
     apply() {
-        console.log('Applying production focus');
         this.isActive = true;
         this.measureContainer.classList.remove('hidden');
         this.legend.show();
@@ -314,8 +308,7 @@ export class ProductionFocus {
 
     getPlantData() {
         const dataDict = window.dataDict;
-        console.log('Raw dataDict:', dataDict);
-        
+
         if (!dataDict) {
             console.warn('No data available');
             return [];
@@ -331,13 +324,11 @@ export class ProductionFocus {
             ...dataDict[id.padStart(8, '0')] // Ensure lookup uses padded ID
         }));
         
-        console.log(`Converted ${municipalitiesVisible ? 'municipalities' : 'plants'} array:`, entitiesArray);
         return entitiesArray;
     }
 
     rankPlantsByProduction(entities, measureType) {
-        console.log('Ranking entities for measure:', measureType);
-        
+
         if (!Array.isArray(entities)) {
             console.warn('Entities data is not an array:', entities);
             return [];
@@ -345,61 +336,37 @@ export class ProductionFocus {
 
         const year = '2023';
         const fuelTypes = this.getFuelTypesForMeasure(measureType);
-        console.log('Using fuel types for ranking:', fuelTypes);
 
         const filteredEntities = entities.filter(entity => {
             // Ensure we're using padded ID for lookup
             const paddedId = entity.id.padStart(8, '0');
             if (!entity.production || !entity.production[year]) {
-                console.log(`Entity ${paddedId} - No production data for ${year}`);
                 return false;
             }
 
             const totalProduction = fuelTypes.reduce((sum, fuelType) => {
                 const value = entity.production[year][fuelType];
-                if (value && value > 0) {
-                    console.log(`Entity ${paddedId} - ${entity.name} - ${fuelType}: ${value}`);
-                }
                 return sum + (value || 0);
             }, 0);
 
             if (totalProduction > 0) {
                 entity.totalProduction = totalProduction;
-                console.log(`Entity ${paddedId} - ${entity.name} - Total ${measureType} production: ${totalProduction}`);
                 return true;
             }
             return false;
         });
 
-        console.log(`Found ${filteredEntities.length} entities with ${measureType} production in ${year}`);
-
         return filteredEntities.sort((a, b) => b.totalProduction - a.totalProduction);
     }
 
     getTopNByProduction(n, measureType) {
-        console.log(`=== Getting top ${n} ${municipalitiesVisible ? 'municipalities' : 'plants'} for ${measureType} ===`);
         const entities = this.getPlantData();
-        console.log('All available entities:', entities.map(e => ({
-            id: e.id,
-            name: e.name,
-            type: e.type
-        })));
-        
         const ranked = this.rankPlantsByProduction(entities, measureType);
-        console.log('Ranked entities:', ranked.map(e => ({
-            id: e.id,
-            name: e.name,
-            production: e.totalProduction
-        })));
-        
         const result = ranked.slice(0, n).map(entity => entity.id.padStart(8, '0'));
-        console.log('Final selected IDs:', result);
         
-        // First, update the selection set
         selectionSet.clear();
         result.forEach(id => selectionSet.add(id));
         
-        // Then update the map selections based on view type
         if (municipalitiesVisible) {
             updateSelectedMunicipalities(this.map);
         } else {
@@ -410,29 +377,13 @@ export class ProductionFocus {
     }
 
     getBottomNByProduction(n, measureType) {
-        console.log(`=== Getting bottom ${n} ${municipalitiesVisible ? 'municipalities' : 'plants'} for ${measureType} ===`);
         const entities = this.getPlantData();
-        console.log('All available entities:', entities.map(e => ({
-            id: e.id,
-            name: e.name,
-            type: e.type
-        })));
-        
         const ranked = this.rankPlantsByProduction(entities, measureType);
-        console.log('Ranked entities:', ranked.map(e => ({
-            id: e.id,
-            name: e.name,
-            production: e.totalProduction
-        })));
-        
         const result = ranked.slice(-n).map(entity => entity.id.padStart(8, '0'));
-        console.log('Final selected IDs:', result);
-        
-        // First, update the selection set
+
         selectionSet.clear();
         result.forEach(id => selectionSet.add(id));
         
-        // Then update the map selections based on view type
         if (municipalitiesVisible) {
             updateSelectedMunicipalities(this.map);
         } else {
@@ -455,12 +406,10 @@ export class ProductionFocus {
         };
 
         const types = fuelTypes[measureType] || [measureType];
-        console.log(`Measure type: ${measureType} -> Fuel types:`, types);
         return types;
     }
 
     getAllByProduction(measureType) {
-        console.log(`Getting all ${municipalitiesVisible ? 'municipalities' : 'plants'} with ${measureType} production`);
         const entities = this.getPlantData();
         const year = '2023';
         
@@ -470,24 +419,14 @@ export class ProductionFocus {
                 if (!entity.production || !entity.production[year]) {
                     return false;
                 }
-
-                const hasProduction = Object.values(entity.production[year]).some(value => value > 0);
-                
-                if (hasProduction) {
-                    console.log(`Including entity ${paddedId} - ${entity.name}`);
-                }
-                
-                return hasProduction;
+                return Object.values(entity.production[year]).some(value => value > 0);
             });
 
-            console.log(`Found ${filteredEntities.length} total entities with any production`);
             const result = filteredEntities.map(entity => entity.id.padStart(8, '0'));
             
-            // First, update the selection set
             selectionSet.clear();
             result.forEach(id => selectionSet.add(id));
             
-            // Then update the map selections based on view type
             if (municipalitiesVisible) {
                 updateSelectedMunicipalities(this.map);
             } else {
@@ -497,29 +436,19 @@ export class ProductionFocus {
             return result;
         }
 
-        // For specific measure types
         const fuelTypes = this.getFuelTypesForMeasure(measureType);
-        console.log('Using fuel types:', fuelTypes);
 
         const filteredEntities = entities.filter(entity => {
             if (!entity.production || !entity.production[year]) return false;
 
             const totalProduction = fuelTypes.reduce((sum, fuelType) => {
                 const value = entity.production[year][fuelType];
-                if (value && value > 0) {
-                    console.log(`Entity ${entity.id} - ${fuelType}: ${value}`);
-                }
                 return sum + (value || 0);
             }, 0);
 
-            if (totalProduction > 0) {
-                console.log(`Including entity ${entity.id} - ${entity.name} - Total ${measureType}: ${totalProduction}`);
-                return true;
-            }
-            return false;
+            return totalProduction > 0;
         });
 
-        console.log(`Found ${filteredEntities.length} total entities with ${measureType} production`);
         return filteredEntities.map(entity => entity.id);
     }
 } 

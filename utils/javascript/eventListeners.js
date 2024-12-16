@@ -231,15 +231,12 @@ export function removePlantHighlight(map) {
 }
 
 export function updateSelectedPlants(map) {
-    console.log('Updating selected plants:', Array.from(selectionSet));  // Debug
-    
     // Initialise an array with keywords for mapbox filter
     const filters = ['in', 'forsyid'];
     // Add all selected forsyids to the array
     selectionSet.forEach(forsyid => {
         filters.push(forsyid);
     });
-    console.log('Applied filters:', filters);  // Debug
     
     map.setFilter('selected-plants', filters);
     map.setFilter('selected-areas', filters);
@@ -247,21 +244,6 @@ export function updateSelectedPlants(map) {
     // Update year slider visibility based on selection count
     const hasMoreThanTwoSelections = selectionSet.size > 2;
     yearState.visible = hasMoreThanTwoSelections || ['price', 'production'].includes(focusState.focus);
-}
-
-function toggleSelection(map, forsyid, isCtrlPressed, isMetaPressed) {
-    console.log('Toggle Selection called:', {  // Debug
-        forsyid,
-        isCtrlPressed,
-        isMetaPressed,
-        currentSelection: Array.from(selectionSet)
-    });
-    
-    if (isCtrlPressed || isMetaPressed) {
-        modifySelection(map, forsyid, 'remove');
-    } else {
-        modifySelection(map, forsyid, 'toggle');
-    }
 }
 
 export function addMunicipalityEventListeners(map) {
@@ -275,10 +257,6 @@ export function addMunicipalityEventListeners(map) {
             modifySelection(map, feature.properties.lau_1, isCtrlPressed || isMetaPressed ? 'remove' : 'add');
         }
     });
-}
-
-function toggleMunicipalitySelection(forsyid, isCtrlPressed) {
-    modifySelection(map, forsyid, isCtrlPressed ? 'remove' : 'add');
 }
 
 export function updateSelectedMunicipalities(map) {

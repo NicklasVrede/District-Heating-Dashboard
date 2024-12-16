@@ -3,7 +3,6 @@ import { priceColors } from './colors.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 import { allPlantIds, allMunicipalityIds } from '../../../main.js';
 
-
 export class PriceFocus {
     constructor(map, measureContainer) {
         this.map = map;
@@ -14,15 +13,11 @@ export class PriceFocus {
         this.lastViewType = null;
         this.lastYear = null;
         
-        // Add min/max year constants
         this.MIN_PRICE_YEAR = '2019';
         this.MAX_PRICE_YEAR = '2024';
         
         yearState.addListener((year) => {
-            // Check if year is within valid range
             if (year < this.MIN_PRICE_YEAR) {
-                console.log('No price before 2019 (yet)');
-                // Optionally show a message to the user
                 this.showNoDataMessage();
                 return;
             }
@@ -33,7 +28,6 @@ export class PriceFocus {
     }
 
     createLegend() {
-        // Create legend container if it doesn't exist
         if (!this.legend) {
             this.legend = document.createElement('div');
             this.legend.className = 'map-legend price-legend';
@@ -45,11 +39,9 @@ export class PriceFocus {
     updateLegend(priceRange) {
         if (!this.legend) return;
 
-        // Format price values
         const minPrice = Math.round(priceRange.min);
         const maxPrice = Math.round(priceRange.max);
         
-        // Store previous values for comparison
         const previousLabels = Array.from(this.legend.querySelectorAll('.legend-label'))
             .map(label => label.textContent);
         
@@ -64,7 +56,6 @@ export class PriceFocus {
             </div>
         `;
 
-        // Add gradient background to the scale
         const gradientElement = this.legend.querySelector('.legend-gradient');
         gradientElement.style.background = `linear-gradient(to right, 
             ${priceColors.min}, 
@@ -72,7 +63,6 @@ export class PriceFocus {
             ${priceColors.max}
         )`;
 
-        // Animate changed values
         const newLabels = Array.from(this.legend.querySelectorAll('.legend-label'))
             .map(label => label.textContent);
         
@@ -92,23 +82,21 @@ export class PriceFocus {
         let maxPrice = -Infinity;
 
         features.forEach(feature => {
-            // Use lau_1 for municipalities, forsyid for plants
             const id = municipalitiesVisible ? 
-                feature.properties.lau_1.padStart(8, '0') : // Pad municipality IDs
-                feature.properties.forsyid.padStart(8, '0'); // Pad plant IDs
+                feature.properties.lau_1.padStart(8, '0') : 
+                feature.properties.forsyid.padStart(8, '0');
             
             const price = window.dataDict?.[id]?.prices?.[year]?.mwh_price;
             
-            if (price && price > 0) { // Ignore zero or null prices
+            if (price && price > 0) {
                 minPrice = Math.min(minPrice, price);
                 maxPrice = Math.max(maxPrice, price);
             }
         });
 
-        // Cache the range for this year
         this.priceRanges[year] = {
             min: minPrice === Infinity ? 0 : minPrice,
-            max: maxPrice === -Infinity ? 2000 : maxPrice // fallback max
+            max: maxPrice === -Infinity ? 2000 : maxPrice
         };
 
         return this.priceRanges[year];
@@ -118,7 +106,6 @@ export class PriceFocus {
         try {
             const currentYear = yearState.year;
             
-            // Check if year is within valid range
             if (currentYear < this.MIN_PRICE_YEAR) {
                 this.showNoDataMessage();
                 return;
@@ -128,20 +115,13 @@ export class PriceFocus {
                 this.map.getSource('municipalities') : 
                 this.map.getSource('plants');
             
-            if (!source) {
-                console.error(`${municipalitiesVisible ? 'Municipalities' : 'Plants'} source not found`);
-                return;
-            }
+            if (!source) return;
 
             const data = source._data;
-            if (!data || !data.features) {
-                console.error('Invalid source data structure');
-                return;
-            }
+            if (!data || !data.features) return;
 
-            // Calculate price ranges and update rankings
             if (municipalitiesVisible) {
-                this.priceRanges = {}; // Clear cache for municipalities view
+                this.priceRanges = {};
                 this.calculatePriceRange(currentYear, data.features);
                 this.updateRankings(currentYear, data.features);
             } else if (!this.priceRanges[currentYear] || this.lastViewType !== municipalitiesVisible) {
@@ -149,10 +129,8 @@ export class PriceFocus {
                 this.updateRankings(currentYear, data.features);
             }
             
-            // Track the view type
             this.lastViewType = municipalitiesVisible;
             
-            // Map features with prices
             data.features = data.features.map(feature => {
                 const id = municipalitiesVisible ? 
                     feature.properties.lau_1 : 
@@ -176,7 +154,6 @@ export class PriceFocus {
         const priceRange = this.priceRanges[year];
         
         if (!municipalitiesVisible) {
-            // Update circle color with dynamic range
             this.map.setPaintProperty('plants-price', 'circle-color', [
                 'case',
                 ['==', ['get', 'current_price'], null],
@@ -191,7 +168,6 @@ export class PriceFocus {
                 ]
             ]);
 
-            // Update circle size and stroke
             this.map.setPaintProperty('plants-price', 'circle-radius', [
                 'interpolate',
                 ['linear'],
@@ -205,7 +181,6 @@ export class PriceFocus {
             this.map.setPaintProperty('plants-price', 'circle-stroke-color', 'white');
         }
         else {
-            // Update fill color for municipalities with the same price logic
             this.map.setPaintProperty('municipalities-price', 'fill-color', [
                 'case',
                 ['==', ['get', 'current_price'], null],
@@ -221,12 +196,10 @@ export class PriceFocus {
             ]);
         }
 
-        // Always update the legend, regardless of view type
         this.updateLegend(priceRange);
     }
 
     remove() {
-        console.log('Removing price focus');
         this.measureContainer.classList.add('hidden');
         this.legend.style.display = 'none';
         
@@ -246,12 +219,10 @@ export class PriceFocus {
         this.legend.style.display = 'block';
         if (!municipalitiesVisible) {
             if (this.map.getLayer('plants-price')) {
-                console.log('Applying price focus');
                 this.map.setLayoutProperty('plants-price', 'visibility', 'visible');
             }
         } else {
             if (this.map.getLayer('municipalities-price')) {
-                console.log('Price focus applying for municipalities');
                 this.map.setLayoutProperty('municipalities-price', 'visibility', 'visible');
             }
         }
@@ -259,12 +230,10 @@ export class PriceFocus {
     }
 
     updateRankings(year) {
-        // Get the appropriate set of IDs based on current view
         const relevantIds = municipalitiesVisible ? 
             Array.from(allMunicipalityIds).map(id => id.padStart(8, '0')) : 
             Array.from(allPlantIds).map(id => id.padStart(8, '0'));
         
-        // Create array of price data for relevant IDs only
         const priceData = relevantIds
             .map(id => {
                 const price = window.dataDict?.[id]?.prices?.[year]?.mwh_price || 0;
@@ -273,7 +242,6 @@ export class PriceFocus {
             .filter(item => item.price > 0)
             .sort((a, b) => b.price - a.price);
             
-        // Create rankings object
         this.priceRankings = {};
         priceData.forEach((item, index) => {
             this.priceRankings[item.id] = {
@@ -284,40 +252,24 @@ export class PriceFocus {
         });
 
         this.lastUpdateYear = year;
-        
     }
 
-    // Helper methods for selections
     getTopNByPrice(n) {
-        console.log('Getting top', n, 'by price from', 
-            municipalitiesVisible ? 'municipalities' : 'plants');
+        if (!this.priceRankings) return [];
         
-        if (!this.priceRankings) {
-            console.warn('No price rankings available');
-            return [];
-        }
-        
-        // Filter rankings to only include relevant type
         const relevantIds = municipalitiesVisible ? 
             new Set(Array.from(allMunicipalityIds).map(id => id.padStart(8, '0'))) : 
             new Set(Array.from(allPlantIds).map(id => id.padStart(8, '0')));
         
         return Object.entries(this.priceRankings)
-            .filter(([id, _]) => relevantIds.has(id))  // Only include IDs from the correct set
+            .filter(([id, _]) => relevantIds.has(id))
             .filter(([_, data]) => data.rank <= n)
             .map(([id, _]) => id);
     }
 
     getBottomNByPrice(n) {
-        console.log('Getting bottom', n, 'by price from', 
-            municipalitiesVisible ? 'municipalities' : 'plants');
+        if (!this.priceRankings) return [];
         
-        if (!this.priceRankings) {
-            console.warn('No price rankings available');
-            return [];
-        }
-        
-        // Filter rankings to only include relevant type
         const relevantIds = municipalitiesVisible ? 
             new Set(Array.from(allMunicipalityIds).map(id => id.padStart(8, '0'))) : 
             new Set(Array.from(allPlantIds).map(id => id.padStart(8, '0')));
@@ -325,7 +277,7 @@ export class PriceFocus {
         const totalRanked = Object.values(this.priceRankings)[0]?.total || 0;
         
         return Object.entries(this.priceRankings)
-            .filter(([id, _]) => relevantIds.has(id))  // Only include IDs from the correct set
+            .filter(([id, _]) => relevantIds.has(id))
             .filter(([_, data]) => data.rank > totalRanked - n)
             .map(([id, _]) => id);
     }
@@ -342,24 +294,16 @@ export class PriceFocus {
     }
 
     getAllByPrice() {
-        console.log('Getting all by price from', 
-            municipalitiesVisible ? 'municipalities' : 'plants');
+        if (!this.priceRankings) return [];
         
-        if (!this.priceRankings) {
-            console.warn('No price rankings available');
-            return [];
-        }
-        
-        // Filter rankings to only include relevant type
         const relevantIds = municipalitiesVisible ? allMunicipalityIds : allPlantIds;
         
         return Object.entries(this.priceRankings)
-            .filter(([id, _]) => relevantIds.has(id))  // Only include IDs from the correct set
+            .filter(([id, _]) => relevantIds.has(id))
             .map(([id, _]) => id);
     }
 
     showNoDataMessage() {
-        // Clear any existing price data visualization
         if (!municipalitiesVisible) {
             if (this.map.getLayer('plants-price')) {
                 this.map.setPaintProperty('plants-price', 'circle-color', priceColors.null);
@@ -370,7 +314,6 @@ export class PriceFocus {
             }
         }
 
-        // Update legend to show "No data available"
         if (this.legend) {
             this.legend.innerHTML = `
                 <div class="legend-title">Price per MWh</div>

@@ -17,6 +17,4 @@ export function initializeIdSets() {
             allMunicipalityIds.add(id);
         }
     });
-    
-    console.log(`Initialized with ${allPlantIds.size} plants and ${allMunicipalityIds.size} municipalities`);
 } 

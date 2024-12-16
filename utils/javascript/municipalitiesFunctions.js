@@ -5,11 +5,10 @@ import { updateSelectedMunicipalities, updateSelectedPlants } from './eventListe
 import { changeFocus } from './mapFocusDropdown.js';
 import { clearGraph } from './clearGraph.js';
 
-export let municipalitiesVisible = false; // Track the visibility state
+export let municipalitiesVisible = false;
 
 export function toggleMunicipalities(map, button) {
     municipalitiesVisible = !municipalitiesVisible;
-    console.log(`Toggling municipalities visibility: ${municipalitiesVisible}`);
     
     // Store current focus before toggling
     const currentFocus = focusState.focus;

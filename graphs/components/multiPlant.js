@@ -17,12 +17,8 @@ const LEGEND_THRESHOLD_PERCENTAGE = 0;
 Chart.register(ChartDataLabels);
 
 export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
-    console.log(`Creating or updating graph with focus: ${focus}`);
-    
     // Reset any specific settings or data
     if (focus === 'none') {
-        // Clear any previous settings or data specific to 'price' or 'production'
-        // Example: clear previous chart data, reset styles, etc.
     }
 
     const graphContainer = document.getElementById('graph-container');
@@ -163,7 +159,6 @@ function cleanupCharts() {
 }
 
 function createProductionChart(data, validForsyids, currentYear, focus) {
-    console.log('Creating production chart with focus:', focus);
     const effectiveYear = Math.min(Math.max(currentYear, '2000'), '2023');
     
     const canvas = document.getElementById('productionChart');

@@ -43,7 +43,6 @@ function navigateGraphs(data, selectedForsyids) {
             break;
         default:
             if (focus === 'default') {
-                console.log('Applying default graph behavior for focus: default');
                 createOrUpdatePlotlyGraph(data, selectedForsyids, 'default');
             } else {
                 currentCleanup = createOrUpdatePlotlyGraph(data, selectedForsyids, focus);
@@ -59,7 +58,6 @@ export async function updateGraph() {
         const selectedForsyids = Array.from(selectionSet);
         navigateGraphs(data, selectedForsyids);
     } catch (error) {
-        console.error('Error updating graph:', error);
         const graphContainer = document.getElementById('graph-container');
         graphContainer.innerHTML = '<p>Error loading data. Please try again later.</p>';
     }
