@@ -4,6 +4,8 @@ import { yearState } from '../../utils/javascript/focusLayers/YearState.js';
 import { priceTypeColors } from '../../utils/javascript/focusLayers/colors.js';
 import { legendTooltips, tooltipStyle } from '../config/tooltipConfig.js';
 import { municipalitiesVisible } from '../../utils/javascript/municipalitiesFunctions.js';
+import { highlightStyles } from '../../styles/highlightStyles.js';
+import { highlightPlant, removePlantHighlight, highlightArea, resetAreaHighlight } from '../../utils/javascript/eventListeners.js';
 
 // Keep track of current charts
 let currentCharts = {
@@ -156,6 +158,42 @@ function cleanupCharts() {
         }
     });
     currentCharts = { production: null, totalProduction: null, price: null };
+}
+
+function handleChartHover(forsyid, map, entering) {
+    if (!map) return;
+    
+    if (entering) {
+        // Highlight municipality border
+        map.setPaintProperty('municipalities-selected-line', 'line-color', [
+            'case',
+            ['==', ['get', 'lau_1'], forsyid],
+            highlightStyles.municipalityHover.lineColor,
+            highlightStyles.selectedMunicipalitiesLine.paint['line-color']
+        ]);
+        map.setPaintProperty('municipalities-selected-line', 'line-width', [
+            'case',
+            ['==', ['get', 'lau_1'], forsyid],
+            highlightStyles.municipalityHover.lineWidth,
+            highlightStyles.selectedMunicipalitiesLine.paint['line-width']
+        ]);
+        
+        // Highlight plant and area
+        highlightPlant(map, forsyid);
+        highlightArea(map, forsyid);
+    } else {
+        // Reset all highlights
+        map.setPaintProperty('municipalities-selected-line', 'line-color', 
+            highlightStyles.selectedMunicipalitiesLine.paint['line-color']
+        );
+        map.setPaintProperty('municipalities-selected-line', 'line-width',
+            highlightStyles.selectedMunicipalitiesLine.paint['line-width']
+        );
+        
+        // Reset plant and area highlights
+        removePlantHighlight(map);
+        resetAreaHighlight(map);
+    }
 }
 
 function createProductionChart(data, validForsyids, currentYear, focus) {
@@ -468,7 +506,15 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                         clickCount = 0;
                     }
                 };
-            })()
+            })(),
+            onHover: (event, elements) => {
+                if (elements && elements.length > 0) {
+                    const forsyid = validForsyids[elements[0].index];
+                    handleChartHover(forsyid, window.map, true);
+                } else {
+                    handleChartHover(null, window.map, false);
+                }
+            }
         },
         plugins: [ChartDataLabels]
     });
@@ -712,7 +758,15 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                         clickCount = 0;
                     }
                 };
-            })()
+            })(),
+            onHover: (event, elements) => {
+                if (elements && elements.length > 0) {
+                    const forsyid = validForsyids[elements[0].index];
+                    handleChartHover(forsyid, window.map, true);
+                } else {
+                    handleChartHover(null, window.map, false);
+                }
+            }
         }
     });
 }
@@ -860,6 +914,14 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
             transitions: {
                 active: {
                     animation: false
+                }
+            },
+            onHover: (event, elements) => {
+                if (elements && elements.length > 0) {
+                    const forsyid = validForsyids[elements[0].index];
+                    handleChartHover(forsyid, window.map, true);
+                } else {
+                    handleChartHover(null, window.map, false);
                 }
             }
         }

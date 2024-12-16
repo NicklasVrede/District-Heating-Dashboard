@@ -39,5 +39,11 @@ export const highlightStyles = {
             'line-color': '#0000cc',
             'line-width': 1.25
         }
+    },
+
+    // Municipality hover highlight styles
+    municipalityHover: {
+        lineColor: '#ff0000',
+        lineWidth: 3   
     }
 };

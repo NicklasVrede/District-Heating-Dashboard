@@ -128,14 +128,14 @@ export function updateSelectedPlantsWindow() {
                 map.setPaintProperty('municipalities-selected-line', 'line-color', [
                     'case',
                     ['==', ['get', 'lau_1'], plant.forsyid],
-                    '#ff0000',  // Red color for hovered municipality
-                    highlightStyles.selectedMunicipalitiesLine.paint['line-color']  // Keep original color for others
+                    highlightStyles.municipalityHover.lineColor,
+                    highlightStyles.selectedMunicipalitiesLine.paint['line-color']
                 ]);
                 map.setPaintProperty('municipalities-selected-line', 'line-width', [
                     'case',
                     ['==', ['get', 'lau_1'], plant.forsyid],
-                    3,  // Increased width for hovered municipality
-                    highlightStyles.selectedMunicipalitiesLine.paint['line-width']  // Original width (1.25) for others
+                    highlightStyles.municipalityHover.lineWidth,
+                    highlightStyles.selectedMunicipalitiesLine.paint['line-width']
                 ]);
             }
         });
