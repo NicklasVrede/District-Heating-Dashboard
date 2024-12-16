@@ -30,6 +30,7 @@ export function toggleMunicipalities(map, button) {
     const otherLayersVisibility = municipalitiesVisible ? 'none' : 'visible';
     map.setLayoutProperty('areas', 'visibility', otherLayersVisibility);
     map.setLayoutProperty('plants', 'visibility', otherLayersVisibility);
+    map.setLayoutProperty('areas-border', 'visibility', otherLayersVisibility);
 
     // Clear selections and graph
     selectionSet.clear();
