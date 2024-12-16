@@ -1,5 +1,5 @@
 export const highlightStyles = {
-    // Highlight styles (make more prominent)
+    // Highlight styles
     areaFillColor: '#FF0000',
     areaDefaultFillColor: '#888888',
     areaBorderColor: '#FF0000',
