@@ -37,7 +37,7 @@ export const highlightStyles = {
         type: 'line',
         paint: {
             'line-color': '#0000cc',
-            'line-width': 2
+            'line-width': 1.25
         }
     }
 };
