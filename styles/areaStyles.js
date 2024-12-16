@@ -39,7 +39,7 @@ export const areaStyles = {
         source: 'municipalities',
         layout: {},
         paint: {
-            'line-color': '#0000ff',
+            'line-color': '#000000',
             'line-width': 0.2
         }
     },
