@@ -7,6 +7,7 @@ import { highlightArea, resetAreaHighlight, highlightPlant, removePlantHighlight
 import { clearGraph } from './clearGraph.js';
 import { municipalitiesVisible } from './municipalitiesFunctions.js';
 import { modifySelection } from './selectionFunctions.js';
+import { highlightStyles } from '../../styles/highlightStyles.js';
 
 
 
@@ -124,6 +125,12 @@ export function updateSelectedPlantsWindow() {
             if (map) {
                 highlightArea(map, plant.forsyid);
                 highlightPlant(map, plant.forsyid);
+                map.setPaintProperty('municipalities-selected-line', 'line-color', [
+                    'case',
+                    ['==', ['get', 'lau_1'], plant.forsyid],
+                    '#ff0000',
+                    highlightStyles.selectedMunicipalitiesLine.paint['line-color']
+                ]);
             }
         });
 
@@ -131,6 +138,9 @@ export function updateSelectedPlantsWindow() {
             if (map) {
                 resetAreaHighlight(map);
                 removePlantHighlight(map);
+                map.setPaintProperty('municipalities-selected-line', 'line-color', 
+                    highlightStyles.selectedMunicipalitiesLine.paint['line-color']
+                );
             }
         });
 
