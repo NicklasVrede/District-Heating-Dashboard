@@ -109,6 +109,8 @@ map.on('load', () => {
             initializeLasso(map);
             initMapFocusDropdown(focusManager);
             addInstructions();
+            // Toggle municipalities on by default
+            toggleMunicipalities(map, document.querySelector('[onclick="toggleMunicipalities(this)"]'));
         }, remainingTime);
     }).catch(error => {
         console.error('Error loading map data:', error);
