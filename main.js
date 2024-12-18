@@ -86,9 +86,6 @@ map.on('load', () => {
     window.map = map;
     setMapInstance(map);
     
-    // Show loading spinner and record start time
-    loadStartTime = Date.now();
-    
     Promise.all([
         loadPlants(map),
         loadAreas(map),
@@ -98,22 +95,16 @@ map.on('load', () => {
     ]).then(() => {
         // Wait for the map to finish rendering all layers
         map.once('idle', () => {
-            // Calculate remaining time to meet minimum display duration
-            const elapsedTime = Date.now() - loadStartTime;
-            const remainingTime = Math.max(0, MIN_LOADING_TIME - elapsedTime);
+            // Hide loading spinner
+            for (let i = 0; i < totalLoadingTasks; i++) {
+                updateLoadingState(false);
+            }
             
-            // Use setTimeout to ensure minimum display time
-            setTimeout(() => {
-                // Decrement the counter for each loaded task
-                for (let i = 0; i < totalLoadingTasks; i++) {
-                    updateLoadingState(false);
-                }
-                initializeLasso(map);
-                initMapFocusDropdown(focusManager);
-                addInstructions();
-                // Toggle municipalities on by default
-                toggleMunicipalities(map, document.querySelector('[onclick="toggleMunicipalities(this)"]'));
-            }, remainingTime);
+            initializeLasso(map);
+            initMapFocusDropdown(focusManager);
+            addInstructions();
+            // Toggle municipalities on by default
+            toggleMunicipalities(map, document.querySelector('[onclick="toggleMunicipalities(this)"]'));
         });
     }).catch(error => {
         console.error('Error loading map data:', error);
