@@ -77,9 +77,6 @@ window.clearSelection = () => clearSelection(map);
 window.selectAll = () => selectAll(map);
 window.changeFocus = changeFocus;
 
-// Add minimum display duration (in milliseconds)
-const MIN_LOADING_TIME = 1000;
-let loadStartTime;
 
 // Wait for map to load before making it globally available
 map.on('load', () => {
@@ -93,16 +90,20 @@ map.on('load', () => {
         loadMunicipalities(map),
         loadMunicipalityCentroids(map)
     ]).then(() => {
-        // Wait for the map to finish rendering all layers
         map.once('idle', () => {
             // Hide loading spinner
             for (let i = 0; i < totalLoadingTasks; i++) {
                 updateLoadingState(false);
             }
             
+            // Initialize features
             initializeLasso(map);
             initMapFocusDropdown(focusManager);
             addInstructions();
+            
+            // Show controls by adding loaded class
+            document.querySelector('.map-controls').classList.add('loaded');
+            
             // Toggle municipalities on by default
             toggleMunicipalities(map, document.querySelector('[onclick="toggleMunicipalities(this)"]'));
         });
