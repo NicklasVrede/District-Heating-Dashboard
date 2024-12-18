@@ -7,7 +7,7 @@ import { createMunicipalityTooltip } from './municipalityTooltip.js'; // Update 
 
 
 export function loadPlants(map) {
-    fetch('data/plants.geojson')
+    return fetch('data/plants.geojson')
         .then(response => response.json())
         .then(geojson => {
             // Add the GeoJSON source to the map
@@ -105,14 +105,11 @@ export function loadPlants(map) {
 
             // Add event listeners for plants
             addPlantEventListeners(map);
-        })
-        .catch(error => {
-            console.error('Error fetching plant data:', error);
         });
 }
 
 export function loadAreas(map) {
-    fetch('maps/areas.geojson')
+    return fetch('maps/areas.geojson')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -146,14 +143,11 @@ export function loadAreas(map) {
 
             // Add event listeners for areas
             addAreaEventListeners(map);
-        })
-        .catch(error => {
-            console.error('Error fetching area data:', error);
         });
 }
 
 export function loadGasAreas(map) {
-    fetch('maps/gas_areas.geojson')
+    return fetch('maps/gas_areas.geojson')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -194,14 +188,11 @@ export function loadGasAreas(map) {
                     'line-width': gasAreaStyles.line.paint['line-width']
                 }
             });
-        })
-        .catch(error => {
-            console.error('Error fetching gas area data:', error);
         });
 }
 
 export function loadMunicipalities(map) {
-    fetch('maps/municipalities_with_forsyid.geojson')
+    return fetch('maps/municipalities_with_forsyid.geojson')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -289,14 +280,11 @@ export function loadMunicipalities(map) {
             
             // Create the tooltip after layers are set up
             createMunicipalityTooltip(map);
-        })
-        .catch(error => {
-            console.error('Error fetching municipality data:', error);
         });
 }
 
 export function loadMunicipalityCentroids(map) {
-    fetch('maps/municipality_centroids.geojson')
+    return fetch('maps/municipality_centroids.geojson')
         .then(response => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return response.json();
@@ -324,8 +312,5 @@ export function loadMunicipalityCentroids(map) {
                     'circle-opacity': 0.8
                 }
             });
-        })
-        .catch(error => {
-            console.error('Error loading municipality centroids:', error);
         });
 }
