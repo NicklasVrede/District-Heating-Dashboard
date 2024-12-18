@@ -6,7 +6,6 @@
     background-color: #f8f8f8;
     border-bottom: 1px solid #ccc;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
     position: relative;
@@ -14,21 +13,14 @@
     gap: 8px;
 }
 
-/* Left Section Layout */
-.left-section {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
 /* Search Container Styles */
 .search-container {
     display: flex;
     flex: 1;
-    min-width: 300px;
-    max-width: 500px;
+    min-width: 150px;
+    max-width: 400px;
     height: 43.33px;
+    position: relative;
 }
 
 #address {
@@ -38,12 +30,12 @@
     border: 1px solid #ccc;
     border-radius: 4px 0 0 4px;
     box-sizing: border-box;
-    min-width: 250px;
+    min-width: 200px;
     height: 100%;
 }
 
 #search-button {
-    width: 100%;
+    width: 36px;
     height: 100%;
     border: 1px solid #ccc;
     border-left: none;
@@ -62,8 +54,8 @@
 
 #search-button svg {
     fill: #666;
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
 }
 
 #search-button:hover svg {
@@ -189,51 +181,6 @@
 
 
 
-@media screen and (max-width: 830px) {
-    .top-bar {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 8px;
-    }
-
-    .left-section {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .search-container {
-        width: 100%;
-        max-width: none;
-        margin-bottom: 8px;
-    }
-
-    #address {
-        min-width: unset;
-    }
-
-    .dropdown-group {
-        flex-direction: row;
-        justify-content: center;
-        width: fit-content;
-        margin: 8px auto;
-        flex-wrap: nowrap;
-    }
-    
-    .focus-selector-container, 
-    .select-group {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    select {
-        min-width: 100px;
-    }
-    
-    #apply-filters {
-        margin-top: 8px;
-    }
-}
 
 
 /* Add new class for the focus selector group */
@@ -259,21 +206,6 @@
     white-space: nowrap;
 }
 
-/* Media queries for responsive design */
-@media screen and (max-width: 830px) {
-    .focus-group {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .focus-selector-container {
-        flex: 1;
-    }
-
-    #apply-filters {
-        margin-left: 8px;
-    }
-}
 
 .select-group {
     order: 3;
@@ -320,33 +252,8 @@
     margin-right: 0;
 }
 
-/* For mobile responsiveness */
-@media screen and (max-width: 830px) {
-    .select-group {
-        width: 100%;
-        justify-content: flex-start;
-    }
-    
-    .select-group select,
-    #select-dropdown {
-        padding: 4px 8px; /* Use fixed padding for mobile */
-    }
-}
 
 
-@media screen and (max-width: 830px) {
-    .top-bar {
-        gap: 12px;
-    }
-    
-    .dropdown-group {
-        flex-direction: row;
-        justify-content: center;
-        width: fit-content;
-        margin: 0 auto;
-        flex-wrap: nowrap;
-    }
-}
 
 /* Ensure measure selector matches other dropdowns */
 #measure-selector {

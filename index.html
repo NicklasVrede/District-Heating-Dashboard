@@ -29,50 +29,52 @@
 <body>
     <!-- Top Navigation Bar -->
     <div class="top-bar">
-        <div class="left-section">
-            <div class="search-container">
-                <input type="text" id="address" autocomplete="off" placeholder="Can i get heating? (Address)" oninput="autocompleteAddress()">
-                <button id="search-button" onclick="searchAddress()">
-                    <svg viewBox="0 0 24 24" width="20" height="20">
-                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    </svg>
-                </button>
-                <div id="autocomplete-list" class="autocomplete-items"></div>
+        <div class="search-container">
+            <input type="text" id="address" autocomplete="off" placeholder="Can i get heating? (Address)" oninput="autocompleteAddress()">
+            <button id="search-button" onclick="searchAddress()">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </button>
+            <div id="autocomplete-list" class="autocomplete-items"></div>
+        </div>
+        <div class="dropdown-group">
+            <div class="focus-selector-container hidden" id="measure-container">
+                <label for="measure-selector">Measure:</label>
+                <select id="measure-selector">
+                    <option value="all">All</option>
+                    <option value="kul">Kul</option>
+                    <option value="olie">Olie</option>
+                    <option value="gas">Gas</option>
+                    <option value="affald">Affald</option>
+                    <option value="bioaffald">Bioaffald</option>
+                    <option value="biogas">Biogas & Bioolie</option>
+                    <option value="biomasse">Træ-biomasse</option>
+                    <option value="halm">Halm</option>
+                    <option value="braendselsfrit">Brændselsfrit</option>
+                    <option value="solvarme">Solvarme</option>
+                    <option value="el">El</option>
+                </select>
             </div>
-            <div class="dropdown-group">
-                <div class="focus-selector-container hidden" id="measure-container">
-                    <label for="measure-selector">Measure:</label>
-                    <select id="measure-selector">
-                        <option value="all">All</option>
-                        <option value="kul">Kul</option>
-                        <option value="olie">Olie</option>
-                        <option value="gas">Gas</option>
-                        <option value="affald">Affald</option>
-                        <option value="bioaffald">Bioaffald</option>
-                        <option value="biogas">Biogas & Bioolie</option>
-                        <option value="biomasse">Træ-biomasse</option>
-                        <option value="halm">Halm</option>
-                        <option value="braendselsfrit">Brændselsfrit</option>
-                        <option value="solvarme">Solvarme</option>
-                        <option value="el">El</option>
-                    </select>
-                </div>
-                <div class="year-slider-container hidden" id="year-slider-container">
-                    <label for="year-slider">Year:</label>
-                    <input type="range" id="year-slider" min="2000" max="2024" value="2024" step="1">
+            <div class="year-slider-container hidden" id="year-slider-container">
+                <label for="year-slider">
+                    Year:
                     <span id="year-label">2024</span>
+                </label>
+                <div class="slider-row">
+                    <input type="range" id="year-slider" min="2000" max="2024" value="2024" step="1">
                 </div>
-                <div class="select-group">
-                    <label>Select:</label>
-                    <select id="select-dropdown">
-                        <option value="none">None</option>
-                        <option value="top5">Top 5</option>
-                        <option value="top10">Top 10</option>
-                        <option value="bottom5">Bottom 5</option>
-                        <option value="bottom10">Bottom 10</option>
-                        <option value="all">All</option>
-                    </select>
-                </div>
+            </div>
+            <div class="select-group">
+                <label>Select:</label>
+                <select id="select-dropdown">
+                    <option value="none">None</option>
+                    <option value="top5">Top 5</option>
+                    <option value="top10">Top 10</option>
+                    <option value="bottom5">Bottom 5</option>
+                    <option value="bottom10">Bottom 10</option>
+                    <option value="all">All</option>
+                </select>
             </div>
         </div>
         <button id="tutorial-button" class="tutorial-button" onclick="showTutorial()">
