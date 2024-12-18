@@ -17,8 +17,8 @@
 .search-container {
     display: flex;
     flex: 1;
-    min-width: 150px;
-    max-width: 400px;
+    min-width: 100px;
+    max-width: 300px;
     height: 43.33px;
     position: relative;
 }
@@ -30,7 +30,7 @@
     border: 1px solid #ccc;
     border-radius: 4px 0 0 4px;
     box-sizing: border-box;
-    min-width: 200px;
+    min-width: 100px;
     height: 100%;
 }
 
