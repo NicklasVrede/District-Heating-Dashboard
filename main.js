@@ -96,22 +96,25 @@ map.on('load', () => {
         loadMunicipalities(map),
         loadMunicipalityCentroids(map)
     ]).then(() => {
-        // Calculate remaining time to meet minimum display duration
-        const elapsedTime = Date.now() - loadStartTime;
-        const remainingTime = Math.max(0, MIN_LOADING_TIME - elapsedTime);
-        
-        // Use setTimeout to ensure minimum display time
-        setTimeout(() => {
-            // Decrement the counter for each loaded task
-            for (let i = 0; i < totalLoadingTasks; i++) {
-                updateLoadingState(false);
-            }
-            initializeLasso(map);
-            initMapFocusDropdown(focusManager);
-            addInstructions();
-            // Toggle municipalities on by default
-            toggleMunicipalities(map, document.querySelector('[onclick="toggleMunicipalities(this)"]'));
-        }, remainingTime);
+        // Wait for the map to finish rendering all layers
+        map.once('idle', () => {
+            // Calculate remaining time to meet minimum display duration
+            const elapsedTime = Date.now() - loadStartTime;
+            const remainingTime = Math.max(0, MIN_LOADING_TIME - elapsedTime);
+            
+            // Use setTimeout to ensure minimum display time
+            setTimeout(() => {
+                // Decrement the counter for each loaded task
+                for (let i = 0; i < totalLoadingTasks; i++) {
+                    updateLoadingState(false);
+                }
+                initializeLasso(map);
+                initMapFocusDropdown(focusManager);
+                addInstructions();
+                // Toggle municipalities on by default
+                toggleMunicipalities(map, document.querySelector('[onclick="toggleMunicipalities(this)"]'));
+            }, remainingTime);
+        });
     }).catch(error => {
         console.error('Error loading map data:', error);
         // Ensure loading spinner is hidden on error
