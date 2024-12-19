@@ -585,7 +585,12 @@ function createTotalProductionChart(plantData, index, maxValue) {
                             size: 10
                         },
                         maxRotation: 45,
-                        minRotation: 45
+                        minRotation: 45,
+                        autoSkip: false,
+                        callback: function(val, index) {
+                            const year = this.getLabelForValue(val);
+                            return parseInt(year) % 2 === 0 ? year : '';
+                        }
                     }
                 },
                 y: {
