@@ -36,7 +36,7 @@ def get_main_fuel_type(id_value):
 # Load the GeoJSON files
 plant_gdf = gpd.read_file('data/plants.geojson')
 areas_gdf = gpd.read_file('maps/areas.geojson')
-municipalities_gdf = gpd.read_file('maps/municipalities.geojson')
+municipalities_gdf = gpd.read_file('maps/municipalities_with_forsyid.geojson')
 
 # Add main fuel type to plants
 plant_gdf['main_fuel'] = plant_gdf['forsyid'].apply(get_main_fuel_type)
@@ -72,6 +72,6 @@ plant_gdf = plant_gdf.merge(aggregated_areas, on='forsyid', how='left')
 
 # Save the updated plant GeoDataFrame to a new GeoJSON file
 plant_gdf.to_file('data/plants.geojson', driver='GeoJSON')
-municipalities_gdf.to_file('maps/municipalities.geojson', driver='GeoJSON')
+municipalities_gdf.to_file('maps/municipalities_with_forsyid.geojson', driver='GeoJSON')
 
 print(f'Added main_fuel and area_size to plants.geojson and municipalities.geojson')

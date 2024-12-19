@@ -82,7 +82,7 @@ for filename, year in price_files:
         print(f"Error processing {filename}: {e}")
 
 # Load municipalities from GeoJSON to get valid municipality IDs
-municipalities_gdf = gpd.read_file('maps/municipalities.geojson')
+municipalities_gdf = gpd.read_file('maps/municipalities_with_forsyid.geojson')
 valid_municipality_ids = set(municipalities_gdf['lau_1'].astype(str).str.zfill(8))
 
 # Create final data dictionary

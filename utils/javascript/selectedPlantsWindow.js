@@ -82,7 +82,7 @@ export function updateSelectedPlantsWindow() {
 
                 return {
                     forsyid,
-                    name: municipalityFeature.properties.label_dk || 'Unknown Municipality',
+                    name: municipalityFeature.properties.name || 'Unknown Municipality',
                     price: currentPrice
                 };
             }

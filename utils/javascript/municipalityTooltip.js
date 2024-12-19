@@ -16,7 +16,7 @@ export function createMunicipalityTooltip(map) {
             if (hoveredMunicipalityId !== municipalityId) {
                 tooltip.innerHTML = `
                     <div class="mapboxgl-popup-content tooltip-content">
-                        <h3 class="tooltip-title">${feature.properties.label_dk}</h3>
+                        <h3 class="tooltip-title">${feature.properties.name}</h3>
                         <div class="tooltip-body">
                             <div class="tooltip-row">
                                 <span class="tooltip-label">Main fuel:</span>

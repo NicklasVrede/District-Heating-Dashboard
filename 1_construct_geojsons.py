@@ -116,7 +116,7 @@ def create_plants_geojson(plants):
     }
 
 def main():
-    municipalities = load_municipalities('maps/municipalities.geojson')
+    municipalities = load_municipalities('maps/municipalities_with_forsyid.geojson')
     plants = load_plants('data/plants.csv')
     
     # Create and save plants GeoJSON
