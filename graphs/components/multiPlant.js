@@ -540,15 +540,10 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         
         plantNames.push(plantData?.name?.split(' ')[0] || paddedForsyid);
         
-        // Get raw prices
-        const mwhPrice = plantData?.prices?.[currentYear]?.mwh_price || 0;
-        const rawApartmentPrice = plantData?.prices?.[currentYear]?.apartment_price || 0;
-        const rawHousePrice = plantData?.prices?.[currentYear]?.house_price || 0;
-        
-        // Calculate adjusted prices
-        mwhData.push(mwhPrice);
-        apartmentData.push(rawApartmentPrice - mwhPrice);
-        houseData.push(rawHousePrice - rawApartmentPrice);
+        // Get raw prices directly
+        mwhData.push(plantData?.prices?.[currentYear]?.mwh_price || 0);
+        apartmentData.push(plantData?.prices?.[currentYear]?.apartment_price || 0);
+        houseData.push(plantData?.prices?.[currentYear]?.house_price || 0);
     });
 
     currentCharts.price = new Chart(ctx, {
@@ -561,42 +556,21 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     data: mwhData,
                     backgroundColor: 'rgba(75, 192, 192, 0.7)',
                     borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    datalabels: {
-                        display: false
-                    }
+                    borderWidth: 1
                 },
                 {
                     label: 'Apartment Price (Yearly)',
                     data: apartmentData,
                     backgroundColor: 'rgba(54, 162, 235, 0.7)',
                     borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1,
-                    datalabels: {
-                        display: false
-                    }
+                    borderWidth: 1
                 },
                 {
                     label: 'House Price (Yearly)',
                     data: houseData,
                     backgroundColor: 'rgba(255, 99, 132, 0.7)',
                     borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1,
-                    datalabels: {
-                        display: true,
-                        align: 'center',
-                        anchor: 'center',
-                        formatter: function(value, context) {
-                            const index = context.dataIndex;
-                            const total = mwhData[index] + apartmentData[index] + houseData[index];
-                            return total > 0 ? `${total.toLocaleString()} DKK` : '';
-                        },
-                        color: '#666666',
-                        font: {
-                            size: 10,
-                            weight: 'bold'
-                        }
-                    }
+                    borderWidth: 1
                 }
             ]
         },
@@ -605,13 +579,13 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             maintainAspectRatio: false,
             scales: {
                 x: {
-                    stacked: true,
+                    stacked: false,
                     ticks: {
                         display: false
                     }
                 },
                 y: {
-                    stacked: true,
+                    stacked: false,
                     beginAtZero: true,
                     ticks: {
                         callback: function(value) {
@@ -646,21 +620,15 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                             return tooltipItems[0].label;
                         },
                         label: function(context) {
-                            const index = context.dataIndex;
-                            const mwhPrice = mwhData[index];
-                            const apartmentPrice = mwhData[index] + apartmentData[index];
-                            const housePrice = mwhData[index] + apartmentData[index] + houseData[index];
-                            
-                            return [
-                                `MWh Price: ${mwhPrice.toLocaleString()} DKK`,
-                                `Apartment Price: ${apartmentPrice.toLocaleString()} DKK`,
-                                `House Price: ${housePrice.toLocaleString()} DKK`
-                            ];
+                            return `${context.dataset.label}: ${context.raw.toLocaleString()} DKK`;
                         }
                     }
-                },
-                datalabels: {
-                    display: false  // Global default
+                }
+            },
+            animation: false,
+            transitions: {
+                active: {
+                    animation: false
                 }
             },
             onHover: (event, elements) => {
@@ -669,12 +637,6 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     handleChartHover(forsyid, window.map, true);
                 } else {
                     handleChartHover(null, window.map, false);
-                }
-            },
-            animation: false,
-            transitions: {
-                active: {
-                    animation: false
                 }
             }
         }
