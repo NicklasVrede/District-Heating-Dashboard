@@ -186,7 +186,8 @@ function createProductionChart(plantData, index, maxValue) {
             backgroundColor: graphConfig.colors[category],
             borderColor: graphConfig.colors[category],
             fill: true,
-            borderWidth: 1
+            borderWidth: 1,
+            pointRadius: 0
         };
     }).filter(dataset => dataset !== null);
 
@@ -253,6 +254,18 @@ function createProductionChart(plantData, index, maxValue) {
                     callbacks: {
                         label: function(context) {
                             return `${context.dataset.label}: ${context.raw.toFixed(1)}%`;
+                        }
+                    }
+                },
+                legend: {
+                    position: 'left',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
                         }
                     }
                 }
@@ -415,7 +428,7 @@ function createPriceChart(plantData, index, maxValues) {
                     display: false
                 },
                 legend: {
-                    position: 'right',
+                    position: 'left',
                     align: 'start',
                     labels: {
                         boxWidth: 12,
@@ -602,7 +615,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                 },
                 legend: {
                     display: true,
-                    position: 'right',
+                    position: 'left',
                     align: 'start',
                     labels: {
                         boxWidth: 12,

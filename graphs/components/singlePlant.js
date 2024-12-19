@@ -129,7 +129,8 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             backgroundColor: graphConfig.colors[category],
             borderColor: graphConfig.colors[category],
             fill: true,
-            hidden: percentage < LEGEND_THRESHOLD_PERCENTAGE
+            hidden: percentage < LEGEND_THRESHOLD_PERCENTAGE,
+            pointRadius: 0
         };
     }).filter(dataset => dataset !== null);  // Remove null datasets
 
