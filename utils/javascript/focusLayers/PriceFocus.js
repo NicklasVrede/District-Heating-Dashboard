@@ -121,13 +121,10 @@ export class PriceFocus {
             
             data.features = data.features.map(feature => {
                 const id = municipalitiesVisible ? 
-                    feature.properties.lau_1.padStart(8, '0') : 
-                    feature.properties.forsyid.padStart(8, '0');
+                    feature.properties.lau_1 : 
+                    feature.properties.forsyid;
                 
-                console.log('Looking up price for ID:', id, 'Year:', currentYear);
                 const priceData = window.dataDict?.[id]?.prices?.[currentYear]?.mwh_price ?? null;
-                console.log('Price data found:', priceData);
-                
                 feature.properties.current_price = priceData;
                 feature.properties.price_rank = this.priceRankings?.[id]?.rank || 0;
                 return feature;
@@ -172,30 +169,15 @@ export class PriceFocus {
             this.map.setPaintProperty('plants-price', 'circle-stroke-color', 'white');
         }
         else {
-            console.log('Price range:', priceRange);
-            console.log('Setting municipality colors with condition:', [
-                'case',
-                ['any',
-                    ['==', ['string', ['get', 'forsyids']], ''],
-                    ['all',
-                        ['!=', ['string', ['get', 'forsyids']], ''],
-                        ['==', ['get', 'current_price'], null]
-                    ]
-                ],
-                '#404040',  // grey color
-                [
-                    'interpolate',
-                    ['linear'],
-                    ['get', 'current_price'],
-                    priceRange.min, priceColors.min,
-                    (priceRange.min + priceRange.max) / 2, priceColors.mid,
-                    priceRange.max, priceColors.max
-                ]
-            ]);
-
             this.map.setPaintProperty('municipalities-price', 'fill-color', [
                 'case',
-                ['==', ['get', 'current_price'], null],  // Simplified condition
+                ['any',
+                    ['==', ['string', ['get', 'forsyids']], ''],  // No plants
+                    ['all',
+                        ['!=', ['string', ['get', 'forsyids']], ''],  // Has plants
+                        ['==', ['get', 'current_price'], null]  // But no price data
+                    ]
+                ],
                 '#404040',
                 [
                     'interpolate',
