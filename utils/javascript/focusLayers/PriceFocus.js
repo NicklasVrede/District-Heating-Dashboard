@@ -13,14 +13,7 @@ export class PriceFocus {
         this.lastViewType = null;
         this.lastYear = null;
         
-        this.MIN_PRICE_YEAR = '2019';
-        this.MAX_PRICE_YEAR = '2024';
-        
         yearState.addListener((year) => {
-            if (year < this.MIN_PRICE_YEAR) {
-                this.showNoDataMessage();
-                return;
-            }
             this.updatePriceData();
         });
         
@@ -106,11 +99,6 @@ export class PriceFocus {
         try {
             const currentYear = yearState.year;
             
-            if (currentYear < this.MIN_PRICE_YEAR) {
-                this.showNoDataMessage();
-                return;
-            }
-
             const source = municipalitiesVisible ? 
                 this.map.getSource('municipalities') : 
                 this.map.getSource('plants');
@@ -183,8 +171,14 @@ export class PriceFocus {
         else {
             this.map.setPaintProperty('municipalities-price', 'fill-color', [
                 'case',
-                ['==', ['get', 'current_price'], null],
-                priceColors.null,
+                ['any',
+                    ['==', ['string', ['get', 'forsyids']], ''],  // No plants
+                    ['all',
+                        ['!=', ['string', ['get', 'forsyids']], ''],  // Has plants
+                        ['==', ['get', 'current_price'], null]  // But no price data
+                    ]
+                ],
+                '#404040',
                 [
                     'interpolate',
                     ['linear'],

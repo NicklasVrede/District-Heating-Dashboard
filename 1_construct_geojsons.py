@@ -51,8 +51,7 @@ def collect_forsyids(plants_with_municipality, plants):
     return municipality_forsyids
 
 def create_municipality_geojson(municipalities, municipality_forsyids):
-    municipalities['forsyids'] = municipalities['lau_1'].map(lambda x: ', '.join(municipality_forsyids.get(x, [])))
-
+    municipalities['forsyids'] = municipalities['lau_1'].map(lambda x: ', '.join(municipality_forsyids.get(x, [])) or '')
 
     if 'label_dk' in municipalities.columns:
         municipalities['name'] = municipalities['label_dk']
