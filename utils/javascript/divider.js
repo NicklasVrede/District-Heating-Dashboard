@@ -3,6 +3,29 @@ export function initDivider(map) {
     const mapDiv = document.getElementById('map');
     const graphDiv = document.getElementById('graph-container');
     
+    // Set initial width based on screen size
+    function setInitialWidth() {
+        if (window.innerWidth >= 1200) {
+            const graphWidth = 600;
+            const percentage = ((window.innerWidth - graphWidth) / window.innerWidth) * 100;
+            
+            mapDiv.style.width = percentage + '%';
+            graphDiv.style.width = (100 - percentage) + '%';
+            graphDiv.style.left = percentage + '%';
+            divider.style.left = percentage + '%';
+            
+            if (map) {
+                map.resize();
+            }
+        }
+    }
+    
+    // Set initial width on load
+    setInitialWidth();
+    
+    // Update on window resize
+    window.addEventListener('resize', setInitialWidth);
+    
     // Mouse events
     divider.addEventListener('mousedown', startResize);
     
@@ -32,7 +55,10 @@ export function initDivider(map) {
         const windowWidth = document.documentElement.clientWidth;
         const percentage = (x / windowWidth) * 100;
         
-        if (percentage > 20 && percentage < 80) {
+        // Calculate minimum percentage for graph container (600px)
+        const minGraphPercentage = (600 / windowWidth) * 100;
+        
+        if (percentage > 20 && percentage < (100 - minGraphPercentage)) {
             // Update DOM immediately
             mapDiv.style.width = percentage + '%';
             graphDiv.style.width = (100 - percentage) + '%';
