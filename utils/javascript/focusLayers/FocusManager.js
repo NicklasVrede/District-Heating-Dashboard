@@ -204,6 +204,22 @@ class FocusManager {
                 selectGroup.style.display = (value === 'price' || value === 'production') ? 'flex' : 'none';
             }
 
+            // Update year slider range based on focus
+            const yearSlider = document.getElementById('year-slider');
+            if (yearSlider) {
+                if (value === 'price') {
+                    yearSlider.min = '2019';
+                    yearSlider.value = Math.max(2019, yearSlider.value);
+                } else {
+                    yearSlider.min = '2000';
+                }
+                // Update the year label to match any value changes
+                const yearLabel = document.getElementById('year-label');
+                if (yearLabel) {
+                    yearLabel.textContent = yearSlider.value;
+                }
+            }
+
             const hasThreeOrMoreSelections = selectionSet.size >= 3;
             yearState.visible = hasThreeOrMoreSelections || value === 'price' || value === 'production';
 
