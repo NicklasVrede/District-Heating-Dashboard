@@ -50,7 +50,7 @@ export function initDivider(map) {
     // Set initial width based on screen size
     function setInitialWidth() {
         if (window.innerWidth >= 1200) {
-            const graphWidth = 600;
+            const graphWidth = 700;
             const percentage = ((window.innerWidth - graphWidth) / window.innerWidth) * 100;
             
             addTransitions(); // Add transitions for smooth initial setup
