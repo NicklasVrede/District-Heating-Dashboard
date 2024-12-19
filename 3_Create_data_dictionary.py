@@ -13,7 +13,8 @@ energy_columns = [
     'kul_TJ', 'fuelolie_TJ', 'spildolie_TJ', 'gasolie_TJ', 'raffinaderigas_TJ',
     'lpg_TJ', 'naturgas_TJ', 'affald_TJ', 'biogas_TJ', 'halm_TJ', 'skovflis_TJ',
     'trae- og biomasseaffald_TJ', 'traepiller_TJ', 'bio-olie_TJ', 'braendselsfrit_TJ',
-    'solenergi_TJ', 'vandkraft_TJ', 'elektricitet_TJ', 'omgivelsesvarme_TJ'
+    'solenergi_TJ', 'vandkraft_TJ', 'elektricitet_TJ', 'omgivelsesvarme_TJ',
+    'varmeprod_TJ', 'elprod_TJ'
 ]
 
 # Load plant names from plants.csv
@@ -103,8 +104,10 @@ for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid
         'total_area_km2': aggregated_areas.get(forsyid, 0) or 0,
         'CVRP': forsyid_to_cvrp.get(forsyid),
         'production': {
-            str(year): {col.replace('_TJ', ''): int(round(val.iloc[0] if hasattr(val, 'iloc') else val or 0))
-                       for col, val in yearly_data[energy_columns].items()}
+            str(year): {
+                **{col.replace('_TJ', ''): int(round(val.iloc[0] if hasattr(val, 'iloc') else val or 0))
+                   for col, val in yearly_data[energy_columns].items()},
+            }
             for year, yearly_data in group.groupby('aar')
         }
     }

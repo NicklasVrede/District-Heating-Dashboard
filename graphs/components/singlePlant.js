@@ -72,8 +72,9 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     // Calculate max production value
     let maxProductionValue = 0;
     productionYears.forEach(year => {
-        const yearTotal = Object.values(plantData.production[year])
-            .reduce((sum, val) => sum + (val || 0), 0);
+        const yearTotal = Object.entries(plantData.production[year])
+            .filter(([key, _]) => key !== 'elprod' && key !== 'varmeprod')
+            .reduce((sum, [_, val]) => sum + (val || 0), 0);
         maxProductionValue = Math.max(maxProductionValue, yearTotal);
     });
 
@@ -85,14 +86,23 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     // Create datasets for each fuel type
     const datasets = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
         const values = productionYears.map(year => {
+            // Calculate total production for this year, excluding elprod and varmeprod
+            const yearData = plantData.production[year];
+            const yearTotal = Object.entries(yearData)
+                .filter(([key, _]) => key !== 'elprod' && key !== 'varmeprod')
+                .reduce((sum, [_, val]) => sum + (val || 0), 0);
+
+            let categoryValue = 0;
             if (Array.isArray(fuelTypes)) {
                 // Sum up all fuel types in this category
-                return fuelTypes.reduce((sum, fuelType) => 
+                categoryValue = fuelTypes.reduce((sum, fuelType) => 
                     sum + (plantData.production[year]?.[fuelType] || 0), 0);
             } else {
                 // Single fuel type
-                return plantData.production[year]?.[fuelTypes] || 0;
+                categoryValue = plantData.production[year]?.[fuelTypes] || 0;
             }
+
+            return categoryValue;
         });
 
         // Calculate total production for this category
@@ -104,8 +114,13 @@ export function createSinglePlantGraph(data, forsyid, focus) {
         }
 
         // Calculate percentage contribution for threshold check
-        const totalAll = productionYears.reduce((sum, year) => 
-            sum + Object.values(plantData.production[year]).reduce((s, val) => s + (val || 0), 0), 0);
+        const totalAll = productionYears.reduce((sum, year) => {
+            const yearData = plantData.production[year];
+            return sum + Object.entries(yearData)
+                .filter(([key, _]) => key !== 'elprod' && key !== 'varmeprod')
+                .reduce((s, [_, val]) => s + (val || 0), 0);
+        }, 0);
+        
         const percentage = (totalCategory / totalAll) * 100;
 
         return {

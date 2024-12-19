@@ -224,9 +224,10 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
         if (plantData) {
             plantNames.push(plantData.name.split(' ')[0]);
             
-            // Calculate total production for this plant in the current year
-            const yearTotal = Object.values(plantData.production[effectiveYear] || {})
-                .reduce((sum, val) => sum + (val || 0), 0);
+            // Calculate total production for this plant in the current year, excluding elprod and varmeprod
+            const yearTotal = Object.entries(plantData.production[effectiveYear] || {})
+                .filter(([key, _]) => key !== 'elprod' && key !== 'varmeprod')
+                .reduce((sum, [_, val]) => sum + (val || 0), 0);
             
             // Calculate percentage for each category using fuelTypes mapping
             Object.entries(graphConfig.fuelTypes).forEach(([category, fuelTypes], index) => {
@@ -521,8 +522,6 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
 }
 
 function createPriceChart(data, validForsyids, currentYear, focus) {
-    const effectiveYear = Math.min(Math.max(currentYear, '2019'), '2024');
-    
     const canvas = document.getElementById('priceChart');
     
     if (currentCharts.price) {
@@ -530,77 +529,74 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
     }
 
     const ctx = canvas.getContext('2d');
-
     const plantNames = [];
-    const houseData = [];
-    const apartmentData = [];
     const mwhData = [];
+    const apartmentData = [];
+    const houseData = [];
 
     validForsyids.forEach(forsyid => {
         const paddedForsyid = forsyid.toString().padStart(8, '0');
         const plantData = data[paddedForsyid];
         
-        // Always add the plant name and default to 0 for missing data
         plantNames.push(plantData?.name?.split(' ')[0] || paddedForsyid);
-        houseData.push(plantData?.prices?.[effectiveYear]?.house_price || 0);
-        apartmentData.push(plantData?.prices?.[effectiveYear]?.apartment_price || 0);
-        mwhData.push(plantData?.prices?.[effectiveYear]?.mwh_price || 0);
-    });
-
-    // Calculate max price across all years
-    let maxPrice = 0;
-    validForsyids.forEach(forsyid => {
-        const paddedForsyid = forsyid.toString().padStart(8, '0');
-        const plantData = data[paddedForsyid];
         
-        if (plantData?.prices) {
-            Object.values(plantData.prices).forEach(yearData => {
-                maxPrice = Math.max(
-                    maxPrice,
-                    yearData.house_price || 0,
-                    yearData.apartment_price || 0,
-                    yearData.mwh_price || 0
-                );
-            });
-        }
+        // Get raw prices
+        const mwhPrice = plantData?.prices?.[currentYear]?.mwh_price || 0;
+        const rawApartmentPrice = plantData?.prices?.[currentYear]?.apartment_price || 0;
+        const rawHousePrice = plantData?.prices?.[currentYear]?.house_price || 0;
+        
+        // Calculate adjusted prices
+        mwhData.push(mwhPrice);
+        apartmentData.push(rawApartmentPrice - mwhPrice);
+        houseData.push(rawHousePrice - rawApartmentPrice);
     });
 
-    // Round up to the nearest 5000
-    maxPrice = Math.ceil(maxPrice / 5000) * 5000;
-
-    // Create title with note if year was clamped
-    let titleText = `Price Comparison (${effectiveYear})`;
-    if (currentYear !== effectiveYear) {
-        if (currentYear > '2024') {
-            titleText = `Price Comparison (2024) - Latest Available Data`;
-        } else if (currentYear < '2019') {
-            titleText = `Price Comparison (2019) - Earliest Available Data`;
-        }
-    }
-
-    // Create new chart
     currentCharts.price = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: plantNames,
             datasets: [
                 {
-                    label: 'House Price (Yearly)',
-                    data: houseData,
-                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                    order: 3
-                },  
+                    label: 'MWh Price',
+                    data: mwhData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    datalabels: {
+                        display: false
+                    }
+                },
                 {
                     label: 'Apartment Price (Yearly)',
                     data: apartmentData,
                     backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                    order: 2
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    datalabels: {
+                        display: false
+                    }
                 },
                 {
-                    label: 'MWh Price',
-                    data: mwhData,
-                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                    order: 1
+                    label: 'House Price (Yearly)',
+                    data: houseData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    datalabels: {
+                        display: true,
+                        align: 'center',
+                        anchor: 'center',
+                        formatter: function(value, context) {
+                            const index = context.dataIndex;
+                            const total = mwhData[index] + apartmentData[index] + houseData[index];
+                            return total > 0 ? `${total.toLocaleString()} DKK` : '';
+                        },
+                        color: '#666666',
+                        font: {
+                            size: 10,
+                            weight: 'bold'
+                        }
+                    }
                 }
             ]
         },
@@ -609,24 +605,20 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             maintainAspectRatio: false,
             scales: {
                 x: {
-                    title: {
-                        display: false
-                    },
+                    stacked: true,
                     ticks: {
                         display: false
                     }
                 },
                 y: {
-                    stacked: false,
-                    title: {
-                        display: false
-                    },
+                    stacked: true,
                     beginAtZero: true,
-                    min: 0,
-                    max: maxPrice,
                     ticks: {
                         callback: function(value) {
-                            return value.toLocaleString() + ' DKK';
+                            if (value >= 1000) {
+                                return `${(value/1000).toFixed(1)}k DKK`;
+                            }
+                            return `${value.toLocaleString()} DKK`;
                         }
                     }
                 }
@@ -634,7 +626,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             plugins: {
                 title: {
                     display: true,
-                    text: titleText
+                    text: `Price Comparison (${currentYear})`
                 },
                 legend: {
                     position: 'left',
@@ -646,125 +638,43 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                         font: {
                             size: 11
                         }
-                    },
-                    onClick: (function() {
-                        let clickTimeout = null;
-                        let clickCount = 0;
-
-                        return function(e, legendItem, legend) {
-                            clickCount++;
-                            
-                            if (clickCount === 1) {
-                                clickTimeout = setTimeout(() => {
-                                    // Single click behavior
-                                    const index = legendItem.datasetIndex;
-                                    const chart = legend.chart;
-                                    const meta = chart.getDatasetMeta(index);
-                                    meta.hidden = !meta.hidden;
-                                    chart.update();
-                                    
-                                    clickCount = 0;
-                                }, 250);
-                            } else if (clickCount === 2) {
-                                clearTimeout(clickTimeout);
-                                // Double click behavior
-                                const chart = legend.chart;
-                                const datasets = chart.data.datasets;
-                                
-                                // If all others are already hidden, show all (reset)
-                                const allOthersHidden = datasets.every((dataset, i) => 
-                                    i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
-                                
-                                datasets.forEach((dataset, i) => {
-                                    const meta = chart.getDatasetMeta(i);
-                                    meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
-                                });
-                                
-                                chart.update();
-                                clickCount = 0;
-                            }
-                        };
-                    })()
+                    }
                 },
                 tooltip: {
                     callbacks: {
+                        title: function(tooltipItems) {
+                            return tooltipItems[0].label;
+                        },
                         label: function(context) {
-                            return `${context.dataset.label}: ${context.raw.toLocaleString()} DKK`;
+                            const index = context.dataIndex;
+                            const mwhPrice = mwhData[index];
+                            const apartmentPrice = mwhData[index] + apartmentData[index];
+                            const housePrice = mwhData[index] + apartmentData[index] + houseData[index];
+                            
+                            return [
+                                `MWh Price: ${mwhPrice.toLocaleString()} DKK`,
+                                `Apartment Price: ${apartmentPrice.toLocaleString()} DKK`,
+                                `House Price: ${housePrice.toLocaleString()} DKK`
+                            ];
                         }
                     }
                 },
-                zoom: {
-                    pan: {
-                        enabled: true,
-                        mode: 'x',
-                        modifierKey: 'ctrl'  // Only pan when ctrl is pressed
-                    },
-                    zoom: {
-                        wheel: {
-                            enabled: true,
-                            modifierKey: 'ctrl'  // Only zoom when ctrl is pressed
-                        },
-                        pinch: {
-                            enabled: true
-                        },
-                        mode: 'x'
-                    }
-                },
                 datalabels: {
-                    display: false
+                    display: false  // Global default
                 }
             },
-            animation: false,
-            transitions: {
-                active: {
-                    animation: false
-                }
-            },
-            onClick: (function() {
-                let clickTimeout = null;
-                let clickCount = 0;
-
-                return function(e, elements, chart) {
-                    if (!elements || !elements.length) return;
-                    
-                    clickCount++;
-                    const element = elements[0];
-                    const datasetIndex = element.datasetIndex;
-                    
-                    if (clickCount === 1) {
-                        clickTimeout = setTimeout(() => {
-                            // Single click behavior
-                            const meta = chart.getDatasetMeta(datasetIndex);
-                            meta.hidden = !meta.hidden;
-                            chart.update();
-                            
-                            clickCount = 0;
-                        }, 250);
-                    } else if (clickCount === 2) {
-                        clearTimeout(clickTimeout);
-                        // Double click behavior
-                        const datasets = chart.data.datasets;
-                        
-                        // Check if all others are already hidden
-                        const allOthersHidden = datasets.every((dataset, i) => 
-                            i === datasetIndex || chart.getDatasetMeta(i).hidden);
-                        
-                        datasets.forEach((dataset, i) => {
-                            const meta = chart.getDatasetMeta(i);
-                            meta.hidden = !allOthersHidden && (i !== datasetIndex);
-                        });
-                        
-                        chart.update();
-                        clickCount = 0;
-                    }
-                };
-            })(),
             onHover: (event, elements) => {
                 if (elements && elements.length > 0) {
                     const forsyid = validForsyids[elements[0].index];
                     handleChartHover(forsyid, window.map, true);
                 } else {
                     handleChartHover(null, window.map, false);
+                }
+            },
+            animation: false,
+            transitions: {
+                active: {
+                    animation: false
                 }
             }
         }
@@ -781,31 +691,28 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
 
     const ctx = canvas.getContext('2d');
     const plantNames = [];
-    const plantTotals = [];
+    const heatProduction = [];
+    const electricityProduction = [];
 
-    // Calculate total production for each plant for the current year only
+    // Get production data for each plant
     validForsyids.forEach(forsyid => {
         const paddedForsyid = forsyid.toString().padStart(8, '0');
         const plantData = data[paddedForsyid];
         
         if (plantData?.production?.[effectiveYear]) {
             plantNames.push(plantData.name.split(' ')[0]);
-            
-            // Sum up all fuels for this plant in the current year
-            const total = Object.values(plantData.production[effectiveYear])
-                .reduce((sum, val) => sum + (val || 0), 0);
-            
-            plantTotals.push(total);
+            heatProduction.push(plantData.production[effectiveYear].varmeprod || 0);
+            electricityProduction.push(plantData.production[effectiveYear].elprod || 0);
         }
     });
 
     // Create title with note if year was clamped
-    let titleText = `Total Production (${effectiveYear})`;
+    let titleText = `Heat and Electricity Production (${effectiveYear})`;
     if (currentYear !== effectiveYear) {
         if (currentYear > '2023') {
-            titleText = `Total Production (2023) - Latest Available Data`;
+            titleText = `Heat and Electricity Production (2023) - Latest Available Data`;
         } else if (currentYear < '2000') {
-            titleText = `Total Production (2000) - Earliest Available Data`;
+            titleText = `Heat and Electricity Production (2000) - Earliest Available Data`;
         }
     }
 
@@ -814,27 +721,49 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
         type: 'bar',
         data: {
             labels: plantNames,
-            datasets: [{
-                label: 'Total Production',
-                data: plantTotals,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
+            datasets: [
+                {
+                    label: 'Heat Production',
+                    data: heatProduction,
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    datalabels: {
+                        display: true,
+                        align: 'center',
+                        anchor: 'center',
+                        formatter: function(value) {
+                            return value > 0 ? value.toLocaleString() : '';
+                        }
+                    }
+                },
+                {
+                    label: 'Electricity Production',
+                    data: electricityProduction,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    datalabels: {
+                        display: false
+                    }
+                }
+            ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
                 x: {
+                    stacked: true,
                     title: {
                         display: false
                     }
                 },
                 y: {
+                    stacked: true,
                     title: {
                         display: true,
-                        text: 'Total Production (TJ)'
+                        text: 'Production (TJ)'
                     },
                     beginAtZero: true,
                     ticks: {
@@ -861,7 +790,11 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
                         }
                     },
                     onHover: function(event, legendItem, legend) {
-                        const tooltip = "Total energy production in terajoules (TJ)";
+                        const tooltips = {
+                            'Heat Production': 'Total heat production in terajoules (TJ)',
+                            'Electricity Production': 'Total electricity production in terajoules (TJ)'
+                        };
+                        const tooltip = tooltips[legendItem.text];
                         let tooltipEl = document.getElementById('chart-tooltip');
                         if (!tooltipEl) {
                             tooltipEl = document.createElement('div');
@@ -887,26 +820,20 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
                 },
                 tooltip: {
                     callbacks: {
+                        title: function(tooltipItems) {
+                            return tooltipItems[0].label; // Plant name
+                        },
                         label: function(context) {
-                            return `${context.dataset.label}: ${context.raw.toFixed(1)} TJ`;
+                            const plantIndex = context.dataIndex;
+                            const heatValue = context.chart.data.datasets[0].data[plantIndex];
+                            const electricityValue = context.chart.data.datasets[1].data[plantIndex];
+                            
+                            return [
+                                `Heat Production: ${heatValue.toLocaleString()} TJ`,
+                                `Electricity Production: ${electricityValue.toLocaleString()} TJ`,
+                                `Total: ${(heatValue + electricityValue).toLocaleString()} TJ`
+                            ];
                         }
-                    }
-                },
-                zoom: {
-                    pan: {
-                        enabled: true,
-                        mode: 'x',
-                        modifierKey: 'ctrl'  // Only pan when ctrl is pressed
-                    },
-                    zoom: {
-                        wheel: {
-                            enabled: true,
-                            modifierKey: 'ctrl'  // Only zoom when ctrl is pressed
-                        },
-                        pinch: {
-                            enabled: true
-                        },
-                        mode: 'x'
                     }
                 }
             },

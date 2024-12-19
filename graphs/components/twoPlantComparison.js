@@ -104,8 +104,8 @@ export function createTwoPlantComparison(data, validForsyids) {
         
         if (plantData?.production) {
             Object.keys(plantData.production).forEach(year => {
-                const yearTotal = Object.values(plantData.production[year])
-                    .reduce((sum, val) => sum + (val || 0), 0);
+                const yearTotal = (plantData.production[year]?.varmeprod || 0) + 
+                                (plantData.production[year]?.elprod || 0);
                 maxProductionValue = Math.max(maxProductionValue, yearTotal);
             });
         }
@@ -156,20 +156,22 @@ function createProductionChart(plantData, index, maxValue) {
         .filter(year => !isNaN(parseInt(year)))
         .sort();
 
-    // Create datasets for each category using the new fuelTypes mapping
+    // Create datasets for each category using the fuelTypes mapping
     const datasets = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
         const values = productionYears.map(year => {
-            // Get the total production for this year
-            const yearTotal = Object.values(plantData.production[year])
-                .reduce((sum, val) => sum + (val || 0), 0);
+            // Get the total production for this year, excluding elprod and varmeprod
+            const yearData = plantData.production[year];
+            const yearTotal = Object.entries(yearData)
+                .filter(([key, _]) => key !== 'elprod' && key !== 'varmeprod')
+                .reduce((sum, [_, val]) => sum + (val || 0), 0);
 
-            // Calculate the sum for this category
+            // Calculate the sum for this categorys
             let categoryValue = 0;
             if (Array.isArray(fuelTypes)) {
                 categoryValue = fuelTypes.reduce((sum, fuelType) => 
-                    sum + (plantData.production[year]?.[fuelType] || 0), 0);
+                    sum + (yearData?.[fuelType] || 0), 0);
             } else {
-                categoryValue = plantData.production[year]?.[fuelTypes] || 0;
+                categoryValue = yearData?.[fuelTypes] || 0;
             }
 
             return yearTotal > 0 ? (categoryValue / yearTotal) * 100 : 0;
@@ -520,93 +522,61 @@ function createTotalProductionChart(plantData, index, maxValue) {
         .filter(year => !isNaN(parseInt(year)))
         .sort();
 
-    // Calculate total production for each year by summing all fuel types
-    const yearlyTotals = productionYears.map(year => {
-        const yearData = plantData.production[year];
-        const totalMWh = Object.entries(yearData).reduce((sum, [fuelType, value]) => {
-            return sum + (value || 0);
-        }, 0);
-        return totalMWh;
-    });
+    // Create separate arrays for heat and electricity production
+    const heatProduction = productionYears.map(year => 
+        plantData.production[year]?.varmeprod || 0
+    );
+    
+    const electricityProduction = productionYears.map(year => 
+        plantData.production[year]?.elprod || 0
+    );
 
     return new Chart(ctx, {
         type: 'bar',
         data: {
             labels: productionYears,
-            datasets: [{
-                label: 'Total Production',
-                data: yearlyTotals,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
+            datasets: [
+                {
+                    label: 'Heat Production',
+                    data: heatProduction,
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    datalabels: {
+                        display: false
+                    }
+                },
+                {
+                    label: 'Electricity Production',
+                    data: electricityProduction,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    datalabels: {
+                        display: false
+                    }
+                }
+            ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: false
-                },
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const value = context.raw;
-                            if (value >= 1000) {
-                                return `Total: ${(value / 1000).toFixed(1)}k TJ`;
-                            }
-                            return `Total: ${value.toFixed(1)} TJ`;
-                        }
-                    }
-                },
-                zoom: {
-                    pan: {
-                        enabled: true,
-                        mode: 'x',
-                        modifierKey: 'ctrl'
-                    },
-                    zoom: {
-                        wheel: {
-                            enabled: true,
-                            modifierKey: 'ctrl'
-                        },
-                        pinch: {
-                            enabled: true
-                        },
-                        mode: 'x'
-                    }
-                },
-                datalabels: {
-                    display: true,
-                    formatter: function(value) {
-                        if (value >= 1000) {
-                            return `${Math.round(value / 1000)}k`;
-                        }
-                        return Math.round(value);
-                    },
-                    font: {
-                        size: 10
-                    },
-                    offset: -20,
-                    align: 'end',
-                    anchor: 'end'
-                }
-            },
             scales: {
                 x: {
+                    stacked: true,
                     grid: {
                         display: false
                     },
                     ticks: {
                         font: {
                             size: 10
-                        }
+                        },
+                        maxRotation: 45,
+                        minRotation: 45
                     }
                 },
                 y: {
+                    stacked: true,
                     beginAtZero: true,
                     max: maxValue,
                     ticks: {
@@ -616,7 +586,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                         },
                         callback: function(value) {
                             if (value >= 1000) {
-                                return `${(value / 1000).toFixed(1)}k TJ`;
+                                return `${(value/1000).toFixed(1)}k TJ`;
                             }
                             return `${value.toLocaleString()} TJ`;
                         }
@@ -624,6 +594,46 @@ function createTotalProductionChart(plantData, index, maxValue) {
                     grid: {
                         color: '#E4E4E4'
                     }
+                }
+            },
+            plugins: {
+                title: {
+                    display: false
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            return tooltipItems[0].label;
+                        },
+                        label: function(context) {
+                            const index = context.dataIndex;
+                            const heatValue = heatProduction[index];
+                            const electricityValue = electricityProduction[index];
+                            const total = heatValue + electricityValue;
+                            
+                            return [
+                                `Heat Production: ${heatValue.toLocaleString()} TJ`,
+                                `Electricity Production: ${electricityValue.toLocaleString()} TJ`,
+                                `Total: ${total.toLocaleString()} TJ`
+                            ];
+                        }
+                    }
+                },
+                datalabels: {
+                    display: false  // Global default
                 }
             }
         }
