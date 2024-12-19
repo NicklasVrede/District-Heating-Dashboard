@@ -59,6 +59,12 @@ export function initDivider(map) {
             graphDiv.style.width = (100 - percentage) + '%';
             graphDiv.style.left = percentage + '%';
             divider.style.left = percentage + '%';
+        } else {
+            // Set default widths for smaller screens (50-50 split)
+            mapDiv.style.width = '50%';
+            graphDiv.style.width = '50%';
+            graphDiv.style.left = '50%';
+            divider.style.left = '50%';
         }
     }
     
@@ -94,13 +100,12 @@ export function initDivider(map) {
     
     let resizeTimeout;
     function resize(e) {
-        // Get the correct x position whether it's mouse or touch
         const x = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
         const windowWidth = document.documentElement.clientWidth;
         const percentage = (x / windowWidth) * 100;
         
-        // Calculate minimum percentage for graph container (600px)
-        const minGraphPercentage = (600 / windowWidth) * 100;
+        // Use a fixed percentage minimum regardless of screen size
+        const minGraphPercentage = 20;  // Always allow graph to be as small as 20% of screen width
         
         if (percentage > 20 && percentage < (100 - minGraphPercentage)) {
             // Update DOM immediately
