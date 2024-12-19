@@ -3,20 +3,62 @@ export function initDivider(map) {
     const mapDiv = document.getElementById('map');
     const graphDiv = document.getElementById('graph-container');
     
+    let resizeRAF = null;
+    
+    // Add transition styles when not dragging
+    function addTransitions() {
+        mapDiv.style.transition = 'width 1s ease';
+        graphDiv.style.transition = 'width 1s ease, left 1s ease';
+        divider.style.transition = 'left 1s ease';
+        
+        // Continuously resize map during transition
+        let startTime = performance.now();
+        const duration = 1000;
+        
+        function animateResize(currentTime) {
+            const elapsed = currentTime - startTime;
+            if (elapsed < duration) {
+                if (map) {
+                    map.resize();
+                }
+                resizeRAF = requestAnimationFrame(animateResize);
+            } else {
+                if (map) {
+                    map.resize();
+                }
+                resizeRAF = null;
+            }
+        }
+        
+        if (resizeRAF) {
+            cancelAnimationFrame(resizeRAF);
+        }
+        resizeRAF = requestAnimationFrame(animateResize);
+    }
+
+    // Remove transitions while dragging
+    function removeTransitions() {
+        if (resizeRAF) {
+            cancelAnimationFrame(resizeRAF);
+            resizeRAF = null;
+        }
+        mapDiv.style.transition = 'none';
+        graphDiv.style.transition = 'none';
+        divider.style.transition = 'none';
+    }
+
     // Set initial width based on screen size
     function setInitialWidth() {
         if (window.innerWidth >= 1200) {
             const graphWidth = 600;
             const percentage = ((window.innerWidth - graphWidth) / window.innerWidth) * 100;
             
+            addTransitions(); // Add transitions for smooth initial setup
+            
             mapDiv.style.width = percentage + '%';
             graphDiv.style.width = (100 - percentage) + '%';
             graphDiv.style.left = percentage + '%';
             divider.style.left = percentage + '%';
-            
-            if (map) {
-                map.resize();
-            }
         }
     }
     
@@ -25,7 +67,7 @@ export function initDivider(map) {
     
     // Update on window resize
     window.addEventListener('resize', setInitialWidth);
-    
+        
     // Mouse events
     divider.addEventListener('mousedown', startResize);
     
@@ -46,6 +88,8 @@ export function initDivider(map) {
             document.addEventListener('touchmove', resize);
             document.addEventListener('touchend', stopResize);
         }
+        
+        removeTransitions(); // Remove transitions while dragging
     }
     
     let resizeTimeout;
@@ -93,5 +137,7 @@ export function initDivider(map) {
         if (map) {
             map.resize();
         }
+        
+        addTransitions(); // Re-add transitions after dragging
     }
 }
