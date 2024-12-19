@@ -579,13 +579,22 @@ function updateInfoBox(plantData) {
     // Format the commissioning date
     const commissionDate = new Date(plantData.idrift).getFullYear();
     
-    // Create the content without the title
+    // Get the latest year's production data
+    const productionYears = Object.keys(plantData.production || {})
+        .filter(year => !isNaN(parseInt(year)))
+        .sort((a, b) => b - a);  // Sort descending to get latest year first
+    
+    const latestYear = productionYears[0];
+    const latestProduction = plantData.production?.[latestYear] || {};
+    
     infoBox.innerHTML = `
         <ul style="list-style: none; padding: 0;">
             <li><strong>Commissioned:</strong> ${commissionDate}</li>
-            <li><strong>Electrical Capacity:</strong> ${plantData.elkapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
-            <li><strong>Heat Capacity:</strong> ${plantData.varmekapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
             <li><strong>Total Area:</strong> ${plantData.total_area_km2?.toFixed(2) || 'N/A'} km²</li>
+            <li><strong>Electrical Capacity:</strong> ${plantData.elkapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
+            <li><strong>Electricity Production (${latestYear}):</strong> ${latestProduction.elprod?.toFixed(1) || 'N/A'} TJ</li>
+            <li><strong>Heat Capacity:</strong> ${plantData.varmekapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
+            <li><strong>Heat Production (${latestYear}):</strong> ${latestProduction.varmeprod?.toFixed(1) || 'N/A'} TJ</li>
         </ul>
     `;
     
