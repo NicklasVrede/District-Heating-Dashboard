@@ -76,7 +76,7 @@ def create_municipality_geojson(municipalities, municipality_forsyids):
             'type': 'Feature',
             'geometry': row['geometry'].__geo_interface__,
             'properties': {
-                **row.drop('geometry').to_dict(),
+                'lau_1': row['lau_1'],
                 'forsyids': row['forsyids'],
                 'name': row['name']
             }

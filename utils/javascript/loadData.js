@@ -192,7 +192,7 @@ export function loadGasAreas(map) {
 }
 
 export function loadMunicipalities(map) {
-    return fetch('maps/municipalities.geojson')
+    return fetch('maps/municipalities_with_forsyid.geojson')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
