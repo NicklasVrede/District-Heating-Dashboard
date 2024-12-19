@@ -1,13 +1,9 @@
 export function createMunicipalityTooltip(map) {
     const tooltip = document.createElement('div');
-    tooltip.className = 'mapboxgl-tooltip';
+    tooltip.className = 'mapboxgl-popup mapboxgl-popup-anchor-top';
     tooltip.style.position = 'absolute';
-    tooltip.style.background = 'white';
-    tooltip.style.padding = '10px';
-    tooltip.style.borderRadius = '4px';
-    tooltip.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
-    tooltip.style.display = 'none';
-    tooltip.style.zIndex = '9999';
+    tooltip.style.pointerEvents = 'none';
+    tooltip.style.visibility = 'hidden';
     document.body.appendChild(tooltip);
 
     let hoveredMunicipalityId = null;
@@ -19,21 +15,29 @@ export function createMunicipalityTooltip(map) {
 
             if (hoveredMunicipalityId !== municipalityId) {
                 tooltip.innerHTML = `
-                    <strong>${feature.properties.label_dk}</strong><br>
-                    Inhabitants: <span id="inhabitants-placeholder">Placeholder</span><br>
-                    Energy Production: <span id="energy-production-placeholder">Placeholder</span>
-                `;
+                    <div class="mapboxgl-popup-content tooltip-content">
+                        <h3 class="tooltip-title">${feature.properties.label_dk}</h3>
+                        <div class="tooltip-body">
+                            <div class="tooltip-row">
+                                <span class="tooltip-label">Main fuel:</span>
+                                <span class="tooltip-value">${feature.properties.main_fuel || 'unknown'}</span>
+                            </div>
+                        </div>
+                        <div class="tooltip-footer">
+                            <em>Click to select, Ctrl+Click to deselect</em>
+                        </div>
+                    </div>`;
                 hoveredMunicipalityId = municipalityId;
             }
 
-            tooltip.style.display = 'block';
-            tooltip.style.left = `${e.point.x + 10}px`;
-            tooltip.style.top = `${e.point.y + 10}px`;
+            tooltip.style.visibility = 'visible';
+            tooltip.style.left = `${e.point.x + 5}px`;
+            tooltip.style.top = `${e.point.y + 5}px`;
         }
     });
 
     map.on('mouseleave', 'municipalities-fill', () => {
         hoveredMunicipalityId = null;
-        tooltip.style.display = 'none';
+        tooltip.style.visibility = 'hidden';
     });
 } 

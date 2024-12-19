@@ -1,7 +1,5 @@
 import { highlightStyles } from '../../styles/highlightStyles.js';
 import { selectionSet } from '../../main.js';
-import { updateGraph } from './plotlyGraphs.js';
-import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 import { areaStyles } from '../../styles/areaStyles.js';
 import { focusState } from './focusLayers/FocusState.js';
 import { yearState } from './focusLayers/YearState.js';
@@ -60,10 +58,6 @@ export function addPlantEventListeners(map) {
                 <div class="mapboxgl-popup-content tooltip-content">
                     <h3 class="tooltip-title">${feature.properties.name}</h3>
                     <div class="tooltip-body">
-                        <div class="tooltip-row">
-                            <span class="tooltip-label">ID:</span>
-                            <span class="tooltip-value">${feature.properties.forsyid}</span>
-                        </div>
                         <div class="tooltip-row">
                             <span class="tooltip-label">Main fuel:</span>
                             <span class="tooltip-value">${formatFuelType(feature.properties.main_fuel)}</span>
@@ -139,10 +133,6 @@ export function addAreaEventListeners(map) {
                     <div class="mapboxgl-popup-content tooltip-content">
                         <h3 class="tooltip-title">${feature.properties.forsytekst}</h3>
                         <div class="tooltip-body">
-                            <div class="tooltip-row">
-                                <span class="tooltip-label">ID:</span>
-                                <span class="tooltip-value">${feature.properties.forsyid}</span>
-                            </div>
                             <div class="tooltip-row">
                                 <span class="tooltip-label">Main fuel:</span>
                                 <span class="tooltip-value">${plantData ? formatFuelType(plantData.main_fuel) : 'unknown'}</span>
