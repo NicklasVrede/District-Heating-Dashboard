@@ -11,9 +11,6 @@ def get_main_fuel_type(id_value):
     # Convert to 8-digit string by padding with zeros
     id_str = str(id_value).zfill(8)
     
-    # Debug print
-    print(f"Looking up ID: {id_str} (original: {id_value})")
-    
     if id_str not in data_dict:
         print(f"ID {id_str} not found in data_dict")
         return "unknown"
@@ -21,9 +18,9 @@ def get_main_fuel_type(id_value):
     # Get 2023 production data
     try:
         prod_2023 = data_dict[id_str]['production']['2023']
-        # Remove non-fuel entries and print for debugging
-        fuel_data = {k: v for k, v in prod_2023.items() if v > 0}
-        print(f"Fuel data for {id_str}: {fuel_data}")
+        # Remove non-fuel entries and varmeprod/elprod
+        fuel_data = {k: v for k, v in prod_2023.items() 
+                    if v > 0 and k not in ['varmeprod', 'elprod']}
         
         if not fuel_data:
             return "none"

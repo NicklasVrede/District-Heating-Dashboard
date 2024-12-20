@@ -587,10 +587,15 @@ function updateInfoBox(plantData) {
     const latestYear = productionYears[0];
     const latestProduction = plantData.production?.[latestYear] || {};
     
+    // Choose between population or area based on data type
+    const areaOrPopulation = plantData.population ? 
+        `<li><strong>Population:</strong> ${plantData.population.toLocaleString('da-DK')}</li>` :
+        `<li><strong>Total Area:</strong> ${plantData.total_area_km2?.toFixed(2) || 'N/A'} km²</li>`;
+
     infoBox.innerHTML = `
         <ul style="list-style: none; padding: 0;">
             <li><strong>Commissioned:</strong> ${commissionDate}</li>
-            <li><strong>Total Area:</strong> ${plantData.total_area_km2?.toFixed(2) || 'N/A'} km²</li>
+            ${areaOrPopulation}
             <li><strong>Electrical Capacity:</strong> ${plantData.elkapacitet_MW?.toFixed(1) || 'N/A'} MW</li>
             <li><strong>Electricity Production (${latestYear}):</strong> ${latestProduction.elprod?.toFixed(1) || 'N/A'} TJ</li>
             <li><strong>Heat Capacity:</strong> ${plantData.varmekapacitet_MW?.toFixed(1) || 'N/A'} MW</li>

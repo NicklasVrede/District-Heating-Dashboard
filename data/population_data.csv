@@ -1,6 +1,4 @@
 OMRÅDE,KØN,ALDER,TID,INDHOLD
-Hele landet,I alt,Alder i alt,2024M01,5961249
-Region Hovedstaden,I alt,Alder i alt,2024M01,1911067
 København,I alt,Alder i alt,2024M01,659350
 Frederiksberg,I alt,Alder i alt,2024M01,104899
 Dragør,I alt,Alder i alt,2024M01,14569
@@ -31,7 +29,6 @@ Hørsholm,I alt,Alder i alt,2024M01,24811
 Rudersdal,I alt,Alder i alt,2024M01,57237
 Bornholm,I alt,Alder i alt,2024M01,39332
 Christiansø,I alt,Alder i alt,2024M01,91
-Region Sjælland,I alt,Alder i alt,2024M01,852953
 Greve,I alt,Alder i alt,2024M01,52157
 Køge,I alt,Alder i alt,2024M01,62848
 Lejre,I alt,Alder i alt,2024M01,29347
@@ -49,7 +46,6 @@ Slagelse,I alt,Alder i alt,2024M01,79923
 Sorø,I alt,Alder i alt,2024M01,30478
 Stevns,I alt,Alder i alt,2024M01,23649
 Vordingborg,I alt,Alder i alt,2024M01,45751
-Region Syddanmark,I alt,Alder i alt,2024M01,1238406
 Assens,I alt,Alder i alt,2024M01,40646
 Faaborg-Midtfyn,I alt,Alder i alt,2024M01,52291
 Kerteminde,I alt,Alder i alt,2024M01,23894
@@ -72,7 +68,6 @@ Varde,I alt,Alder i alt,2024M01,49798
 Vejen,I alt,Alder i alt,2024M01,42800
 Vejle,I alt,Alder i alt,2024M01,121696
 Aabenraa,I alt,Alder i alt,2024M01,58657
-Region Midtjylland,I alt,Alder i alt,2024M01,1365688
 Favrskov,I alt,Alder i alt,2024M01,49377
 Hedensted,I alt,Alder i alt,2024M01,47725
 Horsens,I alt,Alder i alt,2024M01,97392
@@ -92,7 +87,6 @@ Ringkøbing-Skjern,I alt,Alder i alt,2024M01,56218
 Skive,I alt,Alder i alt,2024M01,44739
 Struer,I alt,Alder i alt,2024M01,20594
 Viborg,I alt,Alder i alt,2024M01,97472
-Region Nordjylland,I alt,Alder i alt,2024M01,593135
 Brønderslev,I alt,Alder i alt,2024M01,36614
 Frederikshavn,I alt,Alder i alt,2024M01,58376
 Hjørring,I alt,Alder i alt,2024M01,63544

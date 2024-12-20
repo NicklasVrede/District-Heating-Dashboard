@@ -22,6 +22,10 @@ export function createMunicipalityTooltip(map) {
                                 <span class="tooltip-label">Main fuel:</span>
                                 <span class="tooltip-value">${feature.properties.main_fuel || 'unknown'}</span>
                             </div>
+                            <div class="tooltip-row">
+                                <span class="tooltip-label">Population:</span>
+                                <span class="tooltip-value">${feature.properties.population?.toLocaleString('da-DK') || 'N/A'}</span>
+                            </div>
                         </div>
                         <div class="tooltip-footer">
                             <em>Click to select, Ctrl+Click to deselect</em>

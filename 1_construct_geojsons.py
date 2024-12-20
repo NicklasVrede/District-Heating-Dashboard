@@ -50,7 +50,19 @@ def collect_forsyids(plants_with_municipality, plants):
             municipality_forsyids[municipality_id].append(forsyid)
     return municipality_forsyids
 
+def load_population_data(file_path):
+    population_dict = {}
+    with open(file_path, 'r', encoding='utf-8') as csvfile:
+        csv_reader = csv.DictReader(csvfile)
+        for row in csv_reader:
+            if row['TID'] == '2024M01':  # Only get 2024 data
+                population_dict[row['OMRÅDE']] = int(row['INDHOLD'])
+    return population_dict
+
 def create_municipality_geojson(municipalities, municipality_forsyids):
+    # Load population data
+    population_data = load_population_data('data/population_data.csv')
+    
     municipalities['forsyids'] = municipalities['lau_1'].map(lambda x: ', '.join(municipality_forsyids.get(x, [])) or '')
 
     if 'label_dk' in municipalities.columns:
@@ -59,7 +71,7 @@ def create_municipality_geojson(municipalities, municipality_forsyids):
         raise KeyError("'label_dk' column not found in municipalities GeoDataFrame.")
 
     municipalities['lau_1'] = municipalities['lau_1'].astype(str).str.zfill(8)
-
+    
     municipality_geojson = {
         'type': 'FeatureCollection',
         'crs': {
@@ -72,13 +84,17 @@ def create_municipality_geojson(municipalities, municipality_forsyids):
     }
 
     for _, row in municipalities.iterrows():
+        # Get population for this municipality
+        population = population_data.get(row['name'], 0)  # Default to 0 if not found
+        
         feature = {
             'type': 'Feature',
             'geometry': row['geometry'].__geo_interface__,
             'properties': {
                 'lau_1': row['lau_1'],
                 'forsyids': row['forsyids'],
-                'name': row['name']
+                'name': row['name'],
+                'population': population
             }
         }
         municipality_geojson['features'].append(feature)

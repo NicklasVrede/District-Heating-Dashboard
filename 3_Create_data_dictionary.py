@@ -2,6 +2,7 @@ import pandas as pd
 import json
 import os
 import geopandas as gpd
+import csv
 
 # Load and prepare production data
 data_df = pd.read_csv('data/production_data_with_forsyid.csv', encoding='utf-8')
@@ -86,6 +87,14 @@ for filename, year in price_files:
 municipalities_gdf = gpd.read_file('maps/municipalities_with_forsyid.geojson')
 valid_municipality_ids = set(municipalities_gdf['lau_1'].astype(str).str.zfill(8))
 
+# Load population data
+population_data = {}
+with open('data/population_data.csv', 'r', encoding='utf-8') as csvfile:
+    csv_reader = csv.DictReader(csvfile)
+    for row in csv_reader:
+        if row['TID'] == '2024M01':  # Only get 2024 data
+            population_data[row['OMRÅDE']] = int(row['INDHOLD'])
+
 # Create final data dictionary
 data_dict = {}
 for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid'):
@@ -95,13 +104,22 @@ for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid
     # Check if this is a municipality by looking it up in the valid municipality IDs
     is_municipality = padded_forsyid in valid_municipality_ids
     
+    # Get municipality name if it's a municipality
+    municipality_name = None
+    if is_municipality:
+        municipality_name = municipalities_gdf.loc[
+            municipalities_gdf['lau_1'].astype(str).str.zfill(8) == padded_forsyid, 
+            'name'
+        ].iloc[0] if not municipalities_gdf.empty else None
+
     data_dict[padded_forsyid] = {
         'type': 'municipality' if is_municipality else 'plant',
-        'name': mappings['name'].get(forsyid, data_df.loc[data_df['forsyid'] == forsyid, 'fv_net_navn'].iloc[0] if not data_df.loc[data_df['forsyid'] == forsyid, 'fv_net_navn'].empty else 'Unknown'),
-        'idrift': mappings['idrift'].get(forsyid),
+        'name': municipality_name if is_municipality else mappings['name'].get(forsyid, data_df.loc[data_df['forsyid'] == forsyid, 'fv_net_navn'].iloc[0] if not data_df.loc[data_df['forsyid'] == forsyid, 'fv_net_navn'].empty else 'Unknown'),
+        'idrift': None if is_municipality else mappings['idrift'].get(forsyid),
         'elkapacitet_MW': mappings['elkapacitet'].get(forsyid, 0) or 0,
         'varmekapacitet_MW': mappings['varmekapacitet'].get(forsyid, 0) or 0,
         'total_area_km2': aggregated_areas.get(forsyid, 0) or 0,
+        'population': population_data.get(municipality_name) if is_municipality else None,
         'CVRP': forsyid_to_cvrp.get(forsyid),
         'production': {
             str(year): {
