@@ -2,6 +2,7 @@ import { yearState } from './YearState.js';
 import { priceColors } from './colors.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 import { allPlantIds, allMunicipalityIds } from '../../../main.js';
+import { MainFuelManager } from './MainFuelManager.js';
 
 export class PriceFocus {
     constructor(map, measureContainer) {
@@ -12,6 +13,7 @@ export class PriceFocus {
         this.legend = null;
         this.lastViewType = null;
         this.lastYear = null;
+        this.mainFuelManager = MainFuelManager.getInstance(map);
         
         yearState.addListener((year) => {
             this.updatePriceData();

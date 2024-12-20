@@ -5,6 +5,7 @@ import { ProductionLegend } from './ProductionLegend.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 import { allPlantIds, allMunicipalityIds, selectionSet } from '../../../main.js';
 import { updateSelectedMunicipalities, updateSelectedPlants } from '../eventListeners.js';
+import { MainFuelManager } from './MainFuelManager.js';
 
 
 export class ProductionFocus {
@@ -13,6 +14,7 @@ export class ProductionFocus {
         this.measureContainer = measureContainer;
         this.isActive = false;
         this.legend = new ProductionLegend(map);
+        this.mainFuelManager = MainFuelManager.getInstance(map);
         
         // Create a mapping of fuel types to colors from graphConfig (fallback)
         this.fuelColors = {};
@@ -83,19 +85,6 @@ export class ProductionFocus {
                     if (yearData) {
                         feature.properties[`totalProduction_${year}`] = 
                             Object.values(yearData).reduce((sum, val) => sum + (val || 0), 0);
-                        
-                        // Find main fuel type
-                        let maxProduction = 0;
-                        let mainFuel = 'unknown';
-                        
-                        Object.entries(yearData).forEach(([fuel, amount]) => {
-                            if (amount > maxProduction) {
-                                maxProduction = amount;
-                                mainFuel = fuel;
-                            }
-                        });
-                        
-                        feature.properties[`mainFuel_${year}`] = mainFuel;
                     }
                 }
             }
@@ -105,72 +94,11 @@ export class ProductionFocus {
         source.setData(data);
     }
 
-    calculateProductionStats(yearData) {
-        // Group production by categories
-        const categoryProduction = {};
-        
-        Object.entries(yearData).forEach(([fuel, amount]) => {
-            // Find which category this fuel belongs to
-            for (const [category, fuelTypes] of Object.entries(graphConfig.fuelTypes)) {
-                if ((Array.isArray(fuelTypes) && fuelTypes.includes(fuel)) || fuelTypes === fuel) {
-                    categoryProduction[category] = (categoryProduction[category] || 0) + (amount || 0);
-                    break;
-                }
-            }
-        });
-        
-        // Find the main category
-        let mainCategory = null;
-        let maxProduction = 0;
-        let totalProduction = 0;
-        
-        Object.entries(categoryProduction).forEach(([category, amount]) => {
-            totalProduction += amount;
-            if (amount > maxProduction) {
-                maxProduction = amount;
-                mainCategory = category;
-            }
-        });
-        
-        // Return the main fuel type from the category
-        const mainFuel = Object.entries(graphConfig.fuelTypes)
-            .find(([category]) => category === mainCategory)?.[1];
-        
-        return {
-            mainFuel: Array.isArray(mainFuel) ? mainFuel[0] : mainFuel,
-            totalProduction
-        };
-    }
-
     updateProductionData(year) {
         const effectiveYear = Math.min(Math.max(year, '2000'), '2023');
         
-        // Get the correct source based on view type
-        const source = this.map.getSource(municipalitiesVisible ? 'municipality-centroids' : 'plants');
-        if (!source) return;
-
-        const data = source._data;
-        if (!data || !data.features) return;
-
-        // Update features with current year's main fuel
-        data.features = data.features.map(feature => {
-            // Use the correct ID field based on view type
-            const id = municipalitiesVisible ? 
-                feature.properties.lau_1.padStart(8, '0') : 
-                feature.properties.forsyid.padStart(8, '0');
-            
-            const plantData = window.dataDict?.[id]?.production;
-            
-            if (plantData && plantData[effectiveYear]) {
-                const yearData = plantData[effectiveYear];
-                const { mainFuel } = this.calculateProductionStats(yearData);
-                feature.properties[`currentMainFuel`] = mainFuel;
-            }
-            return feature;
-        });
-
-        // Update the source with new data
-        source.setData(data);
+        // Use MainFuelManager to update the main fuel data
+        this.mainFuelManager.updateMainFuel(year);
         
         // Check if icons are loaded
         const hasIcons = Object.keys(graphConfig.fuelTypes).some(category => 

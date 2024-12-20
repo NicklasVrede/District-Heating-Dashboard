@@ -589,7 +589,7 @@ function updateInfoBox(plantData) {
     
     // Choose between population or area based on data type
     const areaOrPopulation = plantData.population ? 
-        `<li><strong>Population:</strong> ${plantData.population.toLocaleString('da-DK')}</li>` :
+        `<li><strong>Population:</strong> ${plantData.population.toLocaleString('da-DK')} (2024)</li>` :
         `<li><strong>Total Area:</strong> ${plantData.total_area_km2?.toFixed(2) || 'N/A'} km²</li>`;
 
     infoBox.innerHTML = `

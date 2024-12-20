@@ -9,9 +9,12 @@ let isHoveringPlant = false;
 let areaTooltip = null;
 
 // Helper function to format fuel type
-function formatFuelType(fuel) {
+export function formatFuelType(fuel, properties) {
+    // Try currentMainFuel first, fall back to static main_fuel if not available
+    const fuelType = fuel || properties?.main_fuel;
+    
     // Handle undefined or null fuel types
-    if (!fuel) {
+    if (!fuelType) {
         return 'Not specified';
     }
 
@@ -23,12 +26,12 @@ function formatFuelType(fuel) {
     };
 
     // Check if the fuel is in our replacement dictionary
-    if (replacements[fuel]) {
-        return replacements[fuel];
+    if (replacements[fuelType]) {
+        return replacements[fuelType];
     }
 
     // If not in dictionary, just capitalize first letter
-    return fuel.charAt(0).toUpperCase() + fuel.slice(1);
+    return fuelType.charAt(0).toUpperCase() + fuelType.slice(1);
 }
 
 export function addPlantEventListeners(map) {
@@ -60,7 +63,7 @@ export function addPlantEventListeners(map) {
                     <div class="tooltip-body">
                         <div class="tooltip-row">
                             <span class="tooltip-label">Main fuel:</span>
-                            <span class="tooltip-value">${formatFuelType(feature.properties.main_fuel)}</span>
+                            <span class="tooltip-value">${formatFuelType(feature.properties.currentMainFuel, feature.properties)}</span>
                         </div>
                         <div class="tooltip-row">
                             <span class="tooltip-label">Supply area:</span>
@@ -135,7 +138,7 @@ export function addAreaEventListeners(map) {
                         <div class="tooltip-body">
                             <div class="tooltip-row">
                                 <span class="tooltip-label">Main fuel:</span>
-                                <span class="tooltip-value">${plantData ? formatFuelType(plantData.main_fuel) : 'unknown'}</span>
+                                <span class="tooltip-value">${plantData ? formatFuelType(plantData.currentMainFuel, plantData) : 'unknown'}</span>
                             </div>
                             <div class="tooltip-row">
                                 <span class="tooltip-label">Supply area:</span>

@@ -1,3 +1,5 @@
+import { formatFuelType } from './eventListeners.js';
+
 export function createMunicipalityTooltip(map) {
     const tooltip = document.createElement('div');
     tooltip.className = 'mapboxgl-popup mapboxgl-popup-anchor-top';
@@ -14,13 +16,19 @@ export function createMunicipalityTooltip(map) {
             const municipalityId = feature.properties.lau_1;
 
             if (hoveredMunicipalityId !== municipalityId) {
+                const centroidSource = map.getSource('municipality-centroids');
+                const centroidData = centroidSource._data;
+                const centroidFeature = centroidData.features.find(f => 
+                    f.properties.lau_1 === municipalityId
+                );
+
                 tooltip.innerHTML = `
                     <div class="mapboxgl-popup-content tooltip-content">
                         <h3 class="tooltip-title">${feature.properties.name}</h3>
                         <div class="tooltip-body">
                             <div class="tooltip-row">
                                 <span class="tooltip-label">Main fuel:</span>
-                                <span class="tooltip-value">${feature.properties.main_fuel || 'unknown'}</span>
+                                <span class="tooltip-value">${formatFuelType(centroidFeature?.properties?.currentMainFuel, feature.properties)}</span>
                             </div>
                             <div class="tooltip-row">
                                 <span class="tooltip-label">Population:</span>

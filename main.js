@@ -1,18 +1,13 @@
 // Import styles
-import { areaStyles } from './styles/areaStyles.js';
-import { plantStyles } from './styles/plantStyles.js';
 import { setMapInstance } from './utils/javascript/mapInstance.js';
 
 // Import utility functions
 import { loadPlants, loadAreas, loadGasAreas, loadMunicipalities, loadMunicipalityCentroids } from './utils/javascript/loadData.js';
 import { searchAddress } from './utils/javascript/addressLookup.js';
-import { updateSelectedPlants } from './utils/javascript/eventListeners.js';
 import { clearSelection, selectAll } from './utils/javascript/selectionFunctions.js';
 import { toggleGasAreas } from './utils/javascript/toggleGasAreas.js';
 import { initDivider } from './utils/javascript/divider.js';
 import { FocusManager } from './utils/javascript/focusLayers/FocusManager.js';
-import { updateGraph } from './graphs/graphManager.js';
-import { focusState } from './utils/javascript/focusLayers/FocusState.js';
 import { initializeLasso, toggleLassoSelect } from './utils/javascript/lassoSelect.js';
 import { toggleMunicipalities } from './utils/javascript/municipalitiesFunctions.js';
 import { initMapFocusDropdown, changeFocus } from './utils/javascript/mapFocusDropdown.js';

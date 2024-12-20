@@ -2,7 +2,6 @@ import { plantStyles } from '../../styles/plantStyles.js';
 import { areaStyles, gasAreaStyles } from '../../styles/areaStyles.js'; // Import gas area styles
 import { addPlantEventListeners, addAreaEventListeners, addMunicipalityEventListeners } from './eventListeners.js';
 import { highlightStyles } from '../../styles/highlightStyles.js';
-import { graphConfig } from '../../graphs/config/graphConfig.js';
 import { createMunicipalityTooltip } from './municipalityTooltip.js'; // Update import
 
 

@@ -12,6 +12,7 @@ import { yearState } from './YearState.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 import { updateSelectedMunicipalities } from '../eventListeners.js';
 import { showToast } from '../../../graphs/components/toast.js';
+import { MainFuelManager } from './MainFuelManager.js';
 
 
 class FocusManager {
@@ -32,11 +33,16 @@ class FocusManager {
         }
 
         this.mapboxMap = map;
+        
+        // Initialize MainFuelManager first
+        this.mainFuelManager = new MainFuelManager(this.mapboxMap);
+        
         this.focuses = {
             price: new PriceFocus(this.mapboxMap, this.measureContainer),
             production: new ProductionFocus(this.mapboxMap, this.measureContainer),
             default: new DefaultFocus(this.mapboxMap, this.measureContainer)
         };
+        
         this.initialized = true;
         this.currentFocus = this.focuses.default;
     }
