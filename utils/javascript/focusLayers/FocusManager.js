@@ -215,7 +215,11 @@ class FocusManager {
             if (yearSlider) {
                 if (value === 'price') {
                     yearSlider.min = '2019';
-                    yearSlider.value = Math.max(2019, yearSlider.value);
+                    // Ensure year is at least 2019 for price focus
+                    if (yearState.year < '2019') {
+                        yearState.year = '2019';
+                        showToast("Showing price data from 2019 (earliest available)");
+                    }
                 } else {
                     yearSlider.min = '2000';
                 }

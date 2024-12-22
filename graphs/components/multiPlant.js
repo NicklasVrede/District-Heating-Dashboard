@@ -528,6 +528,14 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         currentCharts.price.destroy();
     }
 
+    // Use 2019 data for any year before 2019
+    const effectiveYear = currentYear < '2019' ? '2019' : currentYear;
+    
+    // Create title text with note about earliest data
+    const titleText = currentYear < '2019' ? 
+        `Price Comparison (2019) - Earliest Available Data` : 
+        `Price Comparison (${currentYear})`;
+
     const ctx = canvas.getContext('2d');
     const plantNames = [];
     const mwhData = [];
@@ -541,9 +549,9 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         plantNames.push(plantData?.name?.split(' ')[0] || paddedForsyid);
         
         // Get raw prices directly
-        mwhData.push(plantData?.prices?.[currentYear]?.mwh_price || 0);
-        apartmentData.push(plantData?.prices?.[currentYear]?.apartment_price || 0);
-        houseData.push(plantData?.prices?.[currentYear]?.house_price || 0);
+        mwhData.push(plantData?.prices?.[effectiveYear]?.mwh_price || 0);
+        apartmentData.push(plantData?.prices?.[effectiveYear]?.apartment_price || 0);
+        houseData.push(plantData?.prices?.[effectiveYear]?.house_price || 0);
     });
 
     currentCharts.price = new Chart(ctx, {
@@ -600,7 +608,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             plugins: {
                 title: {
                     display: true,
-                    text: `Price Comparison (${currentYear})`
+                    text: titleText
                 },
                 legend: {
                     position: 'left',
