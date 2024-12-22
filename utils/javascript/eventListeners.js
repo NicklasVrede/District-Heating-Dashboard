@@ -54,6 +54,7 @@ export function addPlantEventListeners(map) {
             
             highlightArea(map, properties.forsyid);
             highlightPlant(map, properties.forsyid);
+            highlightConnectedAreas(map, feature);
             plantTooltip.innerHTML = `
                 <div class="mapboxgl-popup-content tooltip-content">
                     <h3 class="tooltip-title">${feature.properties.name}</h3>
@@ -92,6 +93,7 @@ export function addPlantEventListeners(map) {
         resetAreaHighlight(map);
         removePlantHighlight(map);
         plantTooltip.style.visibility = 'hidden';
+        map.setLayoutProperty('connected-areas', 'visibility', 'none');
     });
 
     // Event listener for clicking on a plant
@@ -133,6 +135,7 @@ export function addAreaEventListeners(map) {
                 
                 highlightPlant(map, feature.properties.forsyid);
                 highlightArea(map, feature.properties.forsyid);
+                highlightConnectedAreas(map, feature);
                 areaTooltip.innerHTML = `
                     <div class="mapboxgl-popup-content tooltip-content">
                         <h3 class="tooltip-title">${feature.properties.forsytekst}</h3>
@@ -170,6 +173,7 @@ export function addAreaEventListeners(map) {
             removePlantHighlight(map);
             resetAreaHighlight(map);
             areaTooltip.style.visibility = 'hidden';
+            map.setLayoutProperty('connected-areas', 'visibility', 'none');
         }
     });
 
@@ -280,4 +284,24 @@ export function updateSelectedMunicipalities(map) {
     // Update year slider visibility based on selection count
     const hasMoreThanTwoSelections = selectionSet.size > 2;
     yearState.visible = hasMoreThanTwoSelections || ['price', 'production'].includes(focusState.focus);
+}
+
+function highlightConnectedAreas(map, feature) {
+    let fv_net = feature.properties.fv_net?.toString();
+    
+    // Only proceed if we have a valid non-zero fv_net
+    if (!fv_net || fv_net === '0') {
+        map.setLayoutProperty('connected-areas', 'visibility', 'none');
+        return;
+    }
+
+    // Create a Mapbox expression to find areas with matching fv_net
+    const connectedFilter = [
+        'all',
+        ['==', ['get', 'fv_net'], fv_net],
+        ['!=', ['get', 'forsyid'], feature.properties.forsyid]  // Exclude current area/plant
+    ];
+    
+    map.setFilter('connected-areas', connectedFilter);
+    map.setLayoutProperty('connected-areas', 'visibility', 'visible');
 }

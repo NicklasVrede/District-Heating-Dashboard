@@ -41,7 +41,7 @@ grouped_df = df.groupby(['fv_net_navn', 'aar']).agg({
     'vaerk_postnr': 'first',
     'vaerk_postdistrikt': 'first',
     'vaerk_kommune': 'first',
-    'fv_net': 'first',
+    'fv_net': 'max',
     'selskab_id': 'first',
     'cvr': 'first',
     'selskab_navn': 'first',

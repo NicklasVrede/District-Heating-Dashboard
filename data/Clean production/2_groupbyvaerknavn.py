@@ -24,7 +24,7 @@ grouped_df = (production_df.groupby(['vaerk_navn', 'aar'])
                  'vaerk_id': lambda x: ';'.join(sorted(set(str(i) for i in x))),
                  'vrkanl_ny': lambda x: ';'.join(sorted(set(str(i) for i in x))),
                  'vaerk_kommune': 'first',
-                 'fv_net': 'first',
+                 'fv_net': 'max',
                  'selskab_id': 'first',
                  'cvr': 'first',
                  'selskab_navn': 'first',

@@ -28,6 +28,10 @@ def load_plants(file_path):
     
     return plants
 
+def load_areas(file_path):
+    areas = gpd.read_file(file_path)
+    return areas
+
 def create_plants_gdf(plants):
     # Create geometry first
     geometry = gpd.points_from_xy(
@@ -155,9 +159,38 @@ def create_plants_geojson(plants):
         'features': features
     }
 
+def add_fv_net_to_areas(areas, plants):
+    # Create a forsyid to fv_net mapping from plants, excluding '0' values
+    forsyid_to_fv_net = {}
+    for plant in plants.values():
+        if 'forsyid' in plant and plant.get('fv_net'):
+            try:
+                # Convert to float first, then to int to handle "152.0" properly
+                fv_net = int(float(plant['fv_net']))  # This will convert "152.0" to 152
+                if fv_net != 0:  # Only add non-zero values
+                    forsyid_to_fv_net[plant['forsyid']] = str(fv_net)  # Convert 152 to "152"
+            except ValueError:
+                continue  # Skip if conversion fails
+    
+    # Add fv_net to areas based on forsyid
+    areas['fv_net'] = areas['forsyid'].map(lambda x: forsyid_to_fv_net.get(x, ''))
+    
+    # Double-check that all values are properly formatted
+    areas['fv_net'] = areas['fv_net'].apply(lambda x: str(int(float(x))) if x and x != '0' else '')
+    
+    return areas
+
 def main():
+    # Load all required data
     municipalities = load_municipalities('maps/municipalities.geojson')
     plants = load_plants('data/plants.csv')
+    areas = load_areas('maps/areas.geojson')  # Load areas
+    
+    # Add fv_net to areas
+    areas = add_fv_net_to_areas(areas, plants)
+    
+    # Save updated areas
+    areas.to_file('maps/areas.geojson', driver='GeoJSON')
     
     # Create and save plants GeoJSON
     plants_geojson = create_plants_geojson(plants)

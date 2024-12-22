@@ -57,7 +57,7 @@ filtered_df = (to_filter
                   'vrkanl_ny': 'first',
                   'vaerk_postnr': 'first',
                   'vaerk_kommune': 'first',
-                  'fv_net': 'first',
+                  'fv_net': 'max',
                   'selskab_id': 'first',
                   'cvr': 'first',
                   'selskab_navn': 'first',
