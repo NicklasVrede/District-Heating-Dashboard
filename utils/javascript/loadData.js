@@ -140,6 +140,18 @@ export function loadAreas(map) {
                 filter: ['in', 'forsyid', '']
             });
 
+            // Add connected areas layer
+            map.addLayer({
+                id: 'connected-areas',
+                type: 'line',
+                source: 'areas',
+                layout: {
+                    'visibility': 'none'  // Hidden by default
+                },
+                paint: highlightStyles.connectedAreas.paint,
+                filter: ['in', 'forsyid', ''] 
+            });
+
             // Add event listeners for areas
             addAreaEventListeners(map);
         });

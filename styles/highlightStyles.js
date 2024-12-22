@@ -45,5 +45,15 @@ export const highlightStyles = {
     municipalityHover: {
         lineColor: '#ff0000',
         lineWidth: 3   
+    },
+
+
+    connectedAreas: {
+        paint: {
+            'line-color': '#ff0000',
+            'line-width': 2,
+            'line-dasharray': [2, 2],  //dotted line
+            'line-opacity': 0.8
+        }
     }
 };
