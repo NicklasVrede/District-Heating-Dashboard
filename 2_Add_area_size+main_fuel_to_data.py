@@ -36,11 +36,11 @@ areas_gdf = gpd.read_file('maps/areas.geojson')
 municipalities_gdf = gpd.read_file('maps/municipalities_with_forsyid.geojson')
 
 # Add main fuel type to plants
-plant_gdf['main_fuel'] = plant_gdf['forsyid'].apply(get_main_fuel_type)
+plant_gdf['current_main_fuel'] = plant_gdf['forsyid'].apply(get_main_fuel_type)
 
 # Add main fuel type to municipalities by mapping lau_1 to forsyid
 municipalities_gdf['forsyid'] = municipalities_gdf['lau_1']  # Create forsyid column from lau_1
-municipalities_gdf['main_fuel'] = municipalities_gdf['forsyid'].apply(get_main_fuel_type)
+municipalities_gdf['current_main_fuel'] = municipalities_gdf['forsyid'].apply(get_main_fuel_type)
 
 # Project the GeoDataFrame to UTM (you may need to adjust the EPSG code based on your location)
 areas_gdf = areas_gdf.to_crs(epsg=32633)  # Example: UTM zone 33N

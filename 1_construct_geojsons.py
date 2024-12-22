@@ -10,7 +10,23 @@ def load_municipalities(file_path):
 def load_plants(file_path):
     with open(file_path, 'r', encoding='utf-8') as csvfile:
         csv_reader = csv.DictReader(csvfile)
-        return {row['name']: row for row in csv_reader}
+        plants = {row['name']: row for row in csv_reader}
+    
+    # Load production data to get fv_net
+    with open('data/production_data_with_forsyid.csv', 'r', encoding='utf-8') as prodfile:
+        prod_reader = csv.DictReader(prodfile)
+        # Create a forsyid to fv_net mapping
+        fv_net_map = {}
+        for row in prod_reader:
+            if 'forsyid' in row and 'fv_net' in row and row['fv_net']:  # Only if fv_net has a value
+                fv_net_map[row['forsyid']] = row['fv_net']
+    
+    # Add fv_net to plants using forsyid
+    for plant in plants.values():
+        if 'forsyid' in plant:
+            plant['fv_net'] = fv_net_map.get(plant['forsyid'], '')
+    
+    return plants
 
 def create_plants_gdf(plants):
     # Create geometry first
@@ -110,6 +126,14 @@ def create_plants_geojson(plants):
     features = []
     for plant in plants.values():
         if 'latitude' in plant and 'longitude' in plant and plant['latitude'] and plant['longitude'] and 'forsyid' in plant:
+            # Convert fv_net to string without decimals
+            fv_net = plant.get('fv_net', '')
+            if fv_net:
+                try:
+                    fv_net = str(int(float(fv_net)))  # Convert "190.0" to "190"
+                except ValueError:
+                    fv_net = ''  # Keep empty if conversion fails
+            
             feature = {
                 'type': 'Feature',
                 'geometry': {
@@ -119,11 +143,11 @@ def create_plants_geojson(plants):
                 'properties': {
                     'forsyid': plant['forsyid'],
                     'name': plant['name'],
-                    'address': plant['address']
+                    'address': plant['address'],
+                    'fv_net': fv_net,
+                    'CVRP': plant.get('CVRP', '')
                 }
             }
-            if 'CVRP' in plant:
-                feature['properties']['CVRP'] = plant['CVRP']
             features.append(feature)
 
     return {

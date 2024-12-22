@@ -9,12 +9,9 @@ let isHoveringPlant = false;
 let areaTooltip = null;
 
 // Helper function to format fuel type
-export function formatFuelType(fuel, properties) {
-    // Try currentMainFuel first, fall back to static main_fuel if not available
-    const fuelType = fuel || properties?.main_fuel;
-    
+export function formatFuelType(fuel) {
     // Handle undefined or null fuel types
-    if (!fuelType) {
+    if (!fuel) {
         return 'Not specified';
     }
 
@@ -26,12 +23,12 @@ export function formatFuelType(fuel, properties) {
     };
 
     // Check if the fuel is in our replacement dictionary
-    if (replacements[fuelType]) {
-        return replacements[fuelType];
+    if (replacements[fuel]) {
+        return replacements[fuel];
     }
 
     // If not in dictionary, just capitalize first letter
-    return fuelType.charAt(0).toUpperCase() + fuelType.slice(1);
+    return fuel.charAt(0).toUpperCase() + fuel.slice(1);
 }
 
 export function addPlantEventListeners(map) {
@@ -64,6 +61,10 @@ export function addPlantEventListeners(map) {
                         <div class="tooltip-row">
                             <span class="tooltip-label">Main fuel:</span>
                             <span class="tooltip-value">${formatFuelType(feature.properties.currentMainFuel, feature.properties)}</span>
+                        </div>
+                        <div class="tooltip-row">
+                            <span class="tooltip-label">Network:</span>
+                            <span class="tooltip-value">${feature.properties.fv_net || 'Not specified'}</span>
                         </div>
                         <div class="tooltip-row">
                             <span class="tooltip-label">Supply area:</span>
