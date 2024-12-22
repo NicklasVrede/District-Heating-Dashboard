@@ -100,7 +100,7 @@ map.on('load', () => {
             document.querySelector('.map-controls').classList.add('loaded');
             
             // Toggle municipalities on by default
-            toggleMunicipalities(map, document.querySelector('[onclick="toggleMunicipalities(this)"]'));
+            //toggleMunicipalities(map, document.querySelector('[onclick="toggleMunicipalities(this)"]'));
         });
     }).catch(error => {
         console.error('Error loading map data:', error);
