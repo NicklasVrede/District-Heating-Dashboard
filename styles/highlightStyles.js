@@ -51,9 +51,9 @@ export const highlightStyles = {
     connectedAreas: {
         paint: {
             'line-color': '#ff0000',
-            'line-width': 2,
-            'line-dasharray': [2, 2],  //dotted line
-            'line-opacity': 0.8
+            'line-width': 1.5,
+            'line-dasharray': [2, 2],
+            'line-opacity': 0.6
         }
     }
 };
