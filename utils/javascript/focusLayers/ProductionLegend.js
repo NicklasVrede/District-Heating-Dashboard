@@ -71,19 +71,40 @@ export class ProductionLegend {
         const legendItems = this.legend.querySelectorAll('.legend-item');
 
         legendItems.forEach(item => {
-            item.addEventListener('click', () => {
+            // Prevent double-tap zoom on mobile
+            item.addEventListener('touchstart', (e) => {
+                e.preventDefault(); // Prevents the default zoom behavior
                 clickCount++;
-                const category = item.dataset.category;
 
                 if (clickCount === 1) {
                     clickTimeout = setTimeout(() => {
-                        this.toggleCategoryVisibility(category);
+                        this.toggleCategoryVisibility(item.dataset.category);
                         clickCount = 0;
                     }, 250);
                 } else if (clickCount === 2) {
                     clearTimeout(clickTimeout);
-                    this.showOnlyCategory(category);
+                    this.showOnlyCategory(item.dataset.category);
                     clickCount = 0;
+                }
+            });
+
+            // Keep existing click handler for desktop
+            item.addEventListener('click', (e) => {
+                // Only handle click events that aren't from touch
+                if (e.pointerType !== 'touch') {
+                    clickCount++;
+                    const category = item.dataset.category;
+
+                    if (clickCount === 1) {
+                        clickTimeout = setTimeout(() => {
+                            this.toggleCategoryVisibility(category);
+                            clickCount = 0;
+                        }, 250);
+                    } else if (clickCount === 2) {
+                        clearTimeout(clickTimeout);
+                        this.showOnlyCategory(category);
+                        clickCount = 0;
+                    }
                 }
             });
 
