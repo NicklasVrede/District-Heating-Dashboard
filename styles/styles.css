@@ -530,6 +530,14 @@ body, html {
     border-color: #0056b3;
 }
 
+.network-split-button img {
+    filter: none; /* Default state */
+}
+
+.network-split-button.active img {
+    filter: brightness(0) invert(1); /* Makes the icon white when active */
+}
+
 /* Update the staggered animation for the new button */
 .map-controls.loaded > *:nth-child(6) {
     opacity: 1;

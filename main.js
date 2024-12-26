@@ -19,6 +19,9 @@ import { addInstructions } from './utils/javascript/instructions.js';
 // Import the loadData function
 import { loadData } from './utils/javascript/dataManager.js';
 
+// Import the toggleNetworkSplit function
+import { toggleNetworkSplit } from './utils/javascript/networkSplit.js';
+
 // Export the sets so they're available to other modules that import from main.js
 export { allPlantIds, allMunicipalityIds };
 
@@ -164,3 +167,6 @@ window.closeDisclaimer = function() {
     modal.style.display = 'none';
     localStorage.setItem('disclaimerShown', 'true');
 };
+
+// Update or add to your window exports
+window.toggleNetworkSplit = () => toggleNetworkSplit(map);
