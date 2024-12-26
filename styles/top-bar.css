@@ -314,31 +314,35 @@
 #year-slider {
     width: 150px;
     -webkit-appearance: none;
-    height: 4px;
-    border-radius: 2px;
+    height: 10px;
+    border-radius: 5px;
     background: #d3d3d3;
     outline: none;
     margin: 0;
     padding: 0;
+    cursor: pointer;
 }
 
 #year-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: #007bff;
-    cursor: pointer;
+    cursor: grab;
     transition: background .15s ease-in-out;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 #year-slider::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-    border: 0;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #fff;
     border-radius: 50%;
     background: #007bff;
-    cursor: pointer;
+    cursor: grab;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 #year-label {
@@ -475,4 +479,13 @@
 .tutorial-button:hover {
     background-color: #e0e0e0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Active state when dragging */
+#year-slider:active::-webkit-slider-thumb {
+    cursor: grabbing;
+}
+
+#year-slider:active::-moz-range-thumb {
+    cursor: grabbing;
 }
