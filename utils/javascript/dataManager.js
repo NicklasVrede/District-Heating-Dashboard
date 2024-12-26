@@ -10,11 +10,12 @@ export async function loadData() {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/data/data_dict.json`);
+        const response = await fetch(`${BASE_URL}/data/data_dict_merged.json`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         cachedData = await response.json();
+        window.dataDict = cachedData;
         return cachedData;
     } catch (error) {
         console.error('Error loading data:', error);

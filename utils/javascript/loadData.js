@@ -6,7 +6,7 @@ import { createMunicipalityTooltip } from './municipalityTooltip.js'; // Update 
 
 
 export function loadPlants(map) {
-    return fetch('data/plants.geojson')
+    return fetch('data/plants_merged.geojson')
         .then(response => response.json())
         .then(geojson => {
             // Add the GeoJSON source to the map
@@ -108,7 +108,7 @@ export function loadPlants(map) {
 }
 
 export function loadAreas(map) {
-    return fetch('maps/areas.geojson')
+    return fetch('maps/areas_merged.geojson')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);

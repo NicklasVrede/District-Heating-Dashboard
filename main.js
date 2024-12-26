@@ -16,6 +16,9 @@ import { allPlantIds, allMunicipalityIds, initializeIdSets } from './utils/javas
 // Import the addInstructions function
 import { addInstructions } from './utils/javascript/instructions.js';
 
+// Import the loadData function
+import { loadData } from './utils/javascript/dataManager.js';
+
 // Export the sets so they're available to other modules that import from main.js
 export { allPlantIds, allMunicipalityIds };
 
@@ -118,12 +121,10 @@ map.scrollZoom.setWheelZoomRate(1);
 // After your map is initialized
 initDivider(map);
 
-// After your map initialization
-fetch('./data/data_dict.json')
-    .then(response => response.json())
-    .then(data => {
-        window.dataDict = data;
-        initializeIdSets(); // initialise plant and municipality id sets
+// Replace the fetch call with:
+loadData()
+    .then(() => {
+        initializeIdSets(); // initialize plant and municipality id sets
     })
     .catch(error => console.error('Error loading data dictionary:', error));
 
