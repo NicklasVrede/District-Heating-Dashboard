@@ -154,6 +154,7 @@ for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid
     
     # Add prices based on network membership
     prices = {}
+    network = data_df[data_df['forsyid'] == padded_forsyid]['fv_net'].iloc[0]  # Get network for this forsyid
     for year in price_data.keys():  # Iterate through all years
         if network in price_data[year]:
             prices[year] = price_data[year][network]
