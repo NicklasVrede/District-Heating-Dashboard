@@ -2,6 +2,8 @@ const BASE_URL = window.location.hostname === 'localhost' || window.location.hos
     ? '.'
     : '/Visualisering';
 
+import { getNetworkSplitState } from './networkSplit.js';
+
 let cachedData = null;
 
 export async function loadData() {
@@ -10,7 +12,10 @@ export async function loadData() {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/data/data_dict_merged.json`);
+        const isNetworkSplit = getNetworkSplitState();
+        const dataFile = isNetworkSplit ? 'data_dict.json' : 'data_dict_merged.json';
+        
+        const response = await fetch(`${BASE_URL}/data/${dataFile}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -25,4 +30,9 @@ export async function loadData() {
 
 export function getCachedData() {
     return cachedData;
+}
+
+export function clearCache() {
+    cachedData = null;
+    window.dataDict = null;
 } 

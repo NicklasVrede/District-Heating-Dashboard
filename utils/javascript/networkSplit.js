@@ -1,3 +1,5 @@
+import { loadData, clearCache } from './dataManager.js';
+
 // Track the active state
 let isNetworkSplitActive = false;
 
@@ -18,8 +20,6 @@ export function toggleNetworkSplit(map) {
     
     // Toggle between merged and unmerged data
     if (isNetworkSplitActive) {
-        console.log('Network split mode activated');
-        // Load unmerged data
         fetch('data/plants.geojson')
             .then(response => response.json())
             .then(data => {
@@ -32,8 +32,6 @@ export function toggleNetworkSplit(map) {
                 map.getSource('areas').setData(data);
             });
     } else {
-        console.log('Network split mode deactivated');
-        // Load merged data
         fetch('data/plants_merged.geojson')
             .then(response => response.json())
             .then(data => {
@@ -46,6 +44,10 @@ export function toggleNetworkSplit(map) {
                 map.getSource('areas').setData(data);
             });
     }
+
+    // Clear and reload the cached data
+    clearCache();
+    loadData().catch(error => console.error('Error reloading data:', error));
     
     return isNetworkSplitActive;
 }

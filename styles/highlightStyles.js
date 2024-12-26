@@ -50,7 +50,7 @@ export const highlightStyles = {
 
     connectedAreas: {
         paint: {
-            'line-color': '#e74c3c',
+            'line-color': '#2d3030',
             'line-width': 1.5,
             'line-dasharray': [2, 2],
             'line-opacity': 0.6

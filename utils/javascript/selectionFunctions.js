@@ -65,16 +65,20 @@ export function selectAll(map) {
 }
 
 export function modifySelection(map, forsyid, action = 'add') {
+    console.log('Attempting to select forsyid:', forsyid);
+    
     if (!['add', 'remove', 'toggle'].includes(action)) {
         console.warn('Invalid selection action:', action);
         return;
     }
 
     const isCurrentlySelected = selectionSet.has(forsyid);
+    console.log('Currently selected?', isCurrentlySelected);
     let selectionChanged = false;
 
     if ((action === 'add' || action === 'toggle') && !isCurrentlySelected) {
         const plantData = getCachedData()?.[forsyid.toString().padStart(8, '0')];
+        console.log('Plant data:', plantData);
         
         // Skip data validation for municipalities
         if (municipalitiesVisible || (plantData && (
