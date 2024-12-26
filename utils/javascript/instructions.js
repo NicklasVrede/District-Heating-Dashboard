@@ -38,8 +38,8 @@ export function addInstructions() {
                             <img src="assets/icons/tutorial.png" class="tutorial-button-icon" alt="Tutorial Icon" width="16" height="16">
                         </button>
                     </li>
-                </ul>
+                </ul>in
             </div>
         `;
     }
-} 
+}
