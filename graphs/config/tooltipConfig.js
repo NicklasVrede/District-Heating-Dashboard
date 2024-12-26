@@ -29,7 +29,7 @@ export const legendTooltips = {
         'Halm': 'Energy from straw combustion',
         'Brændselsfrit': 'Energy from fuel-free sources including ambient heat, hydropower, and other fuel-free sources',
         'Solvarme': 'Energy from solar thermal systems',
-        'El': 'Energy from electricity'
+        'El': 'Electricity used in heat pumps, electric boilers, and auxiliary equipment like pumps and control systems'
     },
     prices: {
         'MWh Price': 'Price per megawatt-hour of energy',
