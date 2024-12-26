@@ -21,6 +21,9 @@ combined_df = combined_df.drop_duplicates()
 # Convert fv_net to integer, replacing any empty or NaN values with 0
 combined_df['fv_net'] = pd.to_numeric(combined_df['fv_net'], errors='coerce').fillna(0).astype(int)
 
+# Ensure forsyid is 8 digits by converting to string and padding with zeros
+combined_df['forsyid'] = combined_df['forsyid'].astype(str).str.zfill(8)
+
 # Reorder columns - first three columns as specified
 first_columns = ['forsyid', 'fv_net', 'fv_net_navn']
 other_columns = [col for col in combined_df.columns if col not in first_columns]
