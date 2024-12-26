@@ -26,6 +26,16 @@ def load_plants(file_path):
         if 'forsyid' in plant:
             plant['fv_net'] = fv_net_map.get(plant['forsyid'], '')
     
+    # Load and apply the additional fv_net mapping
+    with open('data/forsy_fv_net_mapping.csv', 'r', encoding='utf-8') as mapfile:
+        map_reader = csv.DictReader(mapfile)
+        fv_net_mapping = {row['forsyid']: row['fv_net'] for row in map_reader if 'forsyid' in row and 'fv_net' in row}
+    
+    # Override fv_net values using the mapping where available
+    for plant in plants.values():
+        if 'forsyid' in plant and plant['forsyid'] in fv_net_mapping:
+            plant['fv_net'] = fv_net_mapping[plant['forsyid']]
+    
     return plants
 
 def load_areas(file_path):
