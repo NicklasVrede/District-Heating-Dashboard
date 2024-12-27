@@ -22,6 +22,9 @@ import { loadData } from './utils/javascript/dataManager.js';
 // Import the toggleNetworkSplit function
 import { toggleNetworkSplit } from './utils/javascript/networkSplit.js';
 
+// Import the MainFuelManager
+import { MainFuelManager } from './utils/javascript/focusLayers/MainFuelManager.js';
+
 // Export the sets so they're available to other modules that import from main.js
 export { allPlantIds, allMunicipalityIds };
 
@@ -92,6 +95,9 @@ map.on('load', () => {
         loadMunicipalityCentroids(map)
     ]).then(() => {
         map.once('idle', () => {
+            // Initialize MainFuelManager before hiding loading spinner
+            const mainFuelManager = new MainFuelManager(map);
+            
             // Hide loading spinner
             for (let i = 0; i < totalLoadingTasks; i++) {
                 updateLoadingState(false);
