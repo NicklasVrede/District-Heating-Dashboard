@@ -146,6 +146,15 @@ for forsyid, group in data_df.groupby(['forsyid', 'aar']).sum().groupby('forsyid
     if network_prices:
         data_dict[padded_forsyid]['prices'] = network_prices
 
+# Load the original data dictionary to get municipality entries
+with open('data/data_dict.json', 'r', encoding='utf-8') as f:
+    original_data_dict = json.load(f)
+
+# Add municipality entries from the original dictionary
+for forsyid, entry in original_data_dict.items():
+    if entry.get('type') == 'municipality':
+        data_dict[forsyid] = entry
+
 # Save the merged data dictionary
 with open('data/data_dict_merged.json', 'w', encoding='utf-8') as f:
     json.dump(data_dict, f, indent=4, ensure_ascii=False)
