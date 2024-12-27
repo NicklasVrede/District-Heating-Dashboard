@@ -19,6 +19,10 @@ export class PriceFocus {
             this.updatePriceData();
         });
         
+        this.mainFuelManager.addDataUpdateListener(() => {
+            this.updatePriceData();
+        });
+        
         this.createLegend();
     }
 

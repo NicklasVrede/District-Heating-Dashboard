@@ -17,6 +17,7 @@ export class MainFuelManager {
         }
         
         this.map = map;
+        this.dataUpdateListeners = new Set();
         
         // Initialize with current year
         this.updateMainFuel(yearState.year);
@@ -27,6 +28,14 @@ export class MainFuelManager {
         });
 
         MainFuelManager.instance = this;
+    }
+
+    addDataUpdateListener(callback) {
+        this.dataUpdateListeners.add(callback);
+    }
+
+    removeDataUpdateListener(callback) {
+        this.dataUpdateListeners.delete(callback);
     }
 
     calculateMainFuel(yearData) {
@@ -76,5 +85,8 @@ export class MainFuelManager {
 
             source.setData(data);
         });
+
+        // Notify listeners after data update
+        this.dataUpdateListeners.forEach(callback => callback());
     }
 } 
