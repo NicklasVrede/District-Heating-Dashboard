@@ -546,3 +546,8 @@ body, html {
     transition-delay: 1s;
 }
 
+
+.toggle-municipalities-button img {
+    margin-left: auto;
+}
+
