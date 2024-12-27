@@ -155,7 +155,7 @@ body, html {
 #toggle-gas-areas {
     display: flex;
     align-items: right;
-    margin-left: 15px;
+    margin-left: auto;
     padding: 0;
 }
 
