@@ -28,7 +28,7 @@ export function addInstructions() {
                     </li>
                     <li>
                         <img src="assets/icons/no-connection.png" alt="Split Networks Icon" width="16" height="16">
-                        <span>Split networks shows detailed local pricing but may not reflect full fuel mix in interconnected areas.</span>
+                        <span>Splitting networks shows detailed local pricing but may not accurately reflect full fuel mix in interconnected areas.</span>
                     </li>
                     <li style="display: flex; align-items: center;">
                         <img src="assets/icons/tutorial.png" alt="Tutorial Icon" width="16" height="16">
