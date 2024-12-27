@@ -669,10 +669,11 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
         const paddedForsyid = forsyid.toString().padStart(8, '0');
         const plantData = data[paddedForsyid];
         
-        if (plantData?.production?.[effectiveYear]) {
+        if (plantData) {  // Changed condition to always add the plant
             plantNames.push(plantData.name.split(' ')[0]);
-            heatProduction.push(plantData.production[effectiveYear].varmeprod || 0);
-            electricityProduction.push(plantData.production[effectiveYear].elprod || 0);
+            // Use 0 as fallback value when no production data exists
+            heatProduction.push(plantData.production?.[effectiveYear]?.varmeprod || 0);
+            electricityProduction.push(plantData.production?.[effectiveYear]?.elprod || 0);
         }
     });
 
