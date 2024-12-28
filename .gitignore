@@ -1,0 +1,32 @@
+# Python files
+*.py
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Data files
+data/Clean production/*
+
+# IDE specific files (optional but recommended)
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
