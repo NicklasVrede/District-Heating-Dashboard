@@ -3,8 +3,9 @@ export function initDivider(map) {
     const mapDiv = document.getElementById('map');
     const graphDiv = document.getElementById('graph-container');
     
+    let isDragging = false;
     let resizeRAF = null;
-    
+
     // Add transition styles when not dragging
     function addTransitions() {
         mapDiv.style.transition = 'width 1s ease';
@@ -81,12 +82,12 @@ export function initDivider(map) {
     divider.addEventListener('touchstart', startResize);
     
     function startResize(e) {
-        // Only prevent default if the event is cancelable
+        isDragging = true;
+        
         if (e.cancelable) {
             e.preventDefault();
         }
         
-        // Add appropriate event listeners based on event type
         if (e.type === 'mousedown') {
             document.addEventListener('mousemove', resize);
             document.addEventListener('mouseup', stopResize);
@@ -95,7 +96,7 @@ export function initDivider(map) {
             document.addEventListener('touchend', stopResize);
         }
         
-        removeTransitions(); // Remove transitions while dragging
+        removeTransitions();
     }
     
     let resizeTimeout;
@@ -127,22 +128,21 @@ export function initDivider(map) {
     }
     
     function stopResize() {
-        // Remove both mouse and touch event listeners
+        isDragging = false;
+        
         document.removeEventListener('mousemove', resize);
         document.removeEventListener('mouseup', stopResize);
         document.removeEventListener('touchmove', resize);
         document.removeEventListener('touchend', stopResize);
         
-        // Cancel any pending resize
         if (resizeTimeout) {
             cancelAnimationFrame(resizeTimeout);
         }
         
-        // Final map resize
         if (map) {
             map.resize();
         }
         
-        addTransitions(); // Re-add transitions after dragging
+        addTransitions();
     }
 }
