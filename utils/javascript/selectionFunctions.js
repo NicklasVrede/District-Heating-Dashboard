@@ -44,7 +44,7 @@ export function selectAll(map) {
             
             features.forEach(feature => {
                 if (feature.properties.lau_1) {
-                    selectionSet.add(feature.properties.lau_1);
+                    modifySelection(map, feature.properties.lau_1, 'add', false);
                 }
             });
             updateSelectedMunicipalities(map);
@@ -56,7 +56,7 @@ export function selectAll(map) {
             
             features.forEach(feature => {
                 if (feature.properties.forsyid) {
-                    selectionSet.add(feature.properties.forsyid);
+                    modifySelection(map, feature.properties.forsyid, 'add', false);
                 }
             });
             updateSelectedPlants(map);
@@ -68,7 +68,7 @@ export function selectAll(map) {
     });
 }
 
-export function modifySelection(map, forsyid, action = 'add') {
+export function modifySelection(map, forsyid, action = 'add', updateUI = true) {
     if (!['add', 'remove', 'toggle'].includes(action)) {
         console.warn('Invalid selection action:', action);
         return false;
@@ -109,7 +109,7 @@ export function modifySelection(map, forsyid, action = 'add') {
         selectionChanged = true;
     }
 
-    if (selectionChanged) {
+    if (selectionChanged && updateUI) {
         updateSelectedPlants(map);
         updateSelectedMunicipalities(map);
         updateSelectedPlantsWindow();

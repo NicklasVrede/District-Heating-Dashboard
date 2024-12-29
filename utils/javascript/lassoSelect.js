@@ -79,21 +79,20 @@ function handleLassoSelection(e) {
         filter: ['within', lassoPolygon.geometry]
     });
     
-    // Add to selection set
+    // Batch process all selections first
     selectedFeatures.forEach(feature => {
-        modifySelection(map, feature.properties.forsyid, 'add');
+        modifySelection(map, feature.properties.forsyid, 'add', false); // Add silent parameter to skip updates
     });
     
-    // Update UI
+    // Then do a single update at the end
     updateSelectedPlants(map);
     updateSelectedPlantsWindow(selectionSet);
     updateGraph();
     
     // Change button styling to indicate completion
     const lassoButton = document.querySelector('.lasso-select-button');
-    lassoButton.classList.remove('active'); // Remove active class
-    lassoButton.classList.add('completed'); // Add completed class if needed
-
+    lassoButton.classList.remove('active');
+    
     // Clear the drawing
     draw.deleteAll();
 }
