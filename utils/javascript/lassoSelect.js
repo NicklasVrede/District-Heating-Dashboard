@@ -100,13 +100,32 @@ function handleLassoSelection(e) {
 
 export function toggleLassoSelect() {
     isLassoActive = !isLassoActive;
+    const lassoButton = document.querySelector('.lasso-select-button');
     
     if (isLassoActive) {
         draw.changeMode('draw_polygon');
-        document.querySelector('.lasso-select-button').classList.add('active');
+        lassoButton.classList.add('active');
+        // Add keyboard listeners when lasso is active
+        document.addEventListener('keydown', handleLassoKeypress);
     } else {
         draw.changeMode('simple_select');
         draw.deleteAll();
-        document.querySelector('.lasso-select-button').classList.remove('active');
+        lassoButton.classList.remove('active');
+        // Remove keyboard listeners when lasso is inactive
+        document.removeEventListener('keydown', handleLassoKeypress);
+    }
+}
+
+function handleLassoKeypress(e) {
+    if (e.key === 'Enter') {
+        // Finalize the selection
+        const feature = draw.getAll().features[0];
+        if (feature) {
+            handleLassoSelection({ target: draw._map, features: [feature] });
+        }
+    } else if (e.key === 'Escape' || e.key === 'Backspace') {
+        // Cancel the selection
+        draw.deleteAll();
+        toggleLassoSelect();
     }
 }
