@@ -54,18 +54,34 @@ export function initDivider(map) {
             const graphWidth = 700;
             const percentage = ((window.innerWidth - graphWidth) / window.innerWidth) * 100;
             
-            addTransitions(); // Add transitions for smooth initial setup
-            
-            mapDiv.style.width = percentage + '%';
-            graphDiv.style.width = (100 - percentage) + '%';
-            graphDiv.style.left = percentage + '%';
-            divider.style.left = percentage + '%';
-        } else {
-            // Set default widths for smaller screens (50-50 split)
+            // Set initial position at 50% without transition
+            removeTransitions();
             mapDiv.style.width = '50%';
             graphDiv.style.width = '50%';
             graphDiv.style.left = '50%';
             divider.style.left = '50%';
+            
+            // Then animate to final position after a brief delay
+            setTimeout(() => {
+                addTransitions();
+                mapDiv.style.width = percentage + '%';
+                graphDiv.style.width = (100 - percentage) + '%';
+                graphDiv.style.left = percentage + '%';
+                divider.style.left = percentage + '%';
+            }, 100);
+            
+        } else {
+            // Set default widths for smaller screens (50-50 split)
+            removeTransitions();
+            mapDiv.style.width = '50%';
+            graphDiv.style.width = '50%';
+            graphDiv.style.left = '50%';
+            divider.style.left = '50%';
+            
+            // Add transitions back after initial position is set
+            requestAnimationFrame(() => {
+                addTransitions();
+            });
         }
     }
     
