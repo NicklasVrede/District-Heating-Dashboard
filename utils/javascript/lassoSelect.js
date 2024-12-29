@@ -33,6 +33,30 @@ export function initializeLasso(map) {
                     'line-color': '#3388ff',
                     'line-width': 2
                 }
+            },
+            {
+                'id': 'gl-draw-line-active',
+                'type': 'line',
+                'filter': ['all',
+                    ['==', '$type', 'LineString'],
+                    ['==', 'active', 'true']
+                ],
+                'paint': {
+                    'line-color': '#3388ff',
+                    'line-width': 2
+                }
+            },
+            {
+                'id': 'gl-draw-polygon-midpoint',
+                'type': 'circle',
+                'filter': ['all',
+                    ['==', '$type', 'Point'],
+                    ['==', 'meta', 'midpoint']
+                ],
+                'paint': {
+                    'circle-radius': 3,
+                    'circle-color': '#3388ff'
+                }
             }
         ]
     });
