@@ -6,8 +6,10 @@ import { yearState } from './focusLayers/YearState.js';
 let isNetworkSplitActive = false;
 
 export function toggleNetworkSplit(map) {
-    // Get the button
+    // Get the button and overlay
     const button = document.querySelector('.network-split-button');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const mapOverlay = document.getElementById('map-overlay');
     
     // Toggle state
     isNetworkSplitActive = !isNetworkSplitActive;
@@ -18,6 +20,19 @@ export function toggleNetworkSplit(map) {
     // Clear any existing selection
     if (window.clearSelection) {
         window.clearSelection();
+    }
+    
+    // Show loading spinner and overlay with fade effect
+    if (loadingSpinner) {
+        loadingSpinner.classList.remove('fade-out');
+        loadingSpinner.style.display = 'flex';
+    }
+    if (mapOverlay) {
+        mapOverlay.style.display = 'block';
+        // Use setTimeout to ensure the display: block has taken effect
+        setTimeout(() => {
+            mapOverlay.classList.add('active');
+        }, 10);
     }
     
     // Create promises for both fetches
@@ -33,15 +48,42 @@ export function toggleNetworkSplit(map) {
             map.getSource('plants').setData(plantsData);
             map.getSource('areas').setData(areasData);
             
-            // Clear and reload the cached data before updating main fuel
             clearCache();
             return loadData();
         })
         .then(() => {
-            // Update main fuel after data is loaded
             MainFuelManager.getInstance(map).updateMainFuel(yearState.year);
+            
+            // Hide loading spinner and overlay with fade
+            if (loadingSpinner) {
+                loadingSpinner.classList.add('fade-out');
+            }
+            if (mapOverlay) {
+                mapOverlay.classList.remove('active');
+                mapOverlay.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingSpinner.style.display = 'none';
+                    mapOverlay.style.display = 'none';
+                    mapOverlay.classList.remove('fade-out');
+                }, 700);
+            }
         })
-        .catch(error => console.error('Error updating network split:', error));
+        .catch(error => {
+            console.error('Error updating network split:', error);
+            // Ensure loading spinner and overlay are hidden on error
+            if (loadingSpinner) {
+                loadingSpinner.classList.add('fade-out');
+            }
+            if (mapOverlay) {
+                mapOverlay.classList.remove('active');
+                mapOverlay.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingSpinner.style.display = 'none';
+                    mapOverlay.style.display = 'none';
+                    mapOverlay.classList.remove('fade-out');
+                }, 700); // Increased to match the CSS transition
+            }
+        });
     
     return isNetworkSplitActive;
 }

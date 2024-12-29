@@ -527,3 +527,32 @@ body, html {
     margin-left: auto;
 }
 
+.map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0);  /* Start fully transparent */
+    display: none;
+    z-index: 1000;
+    cursor: wait;
+    transition: all 0.7s ease;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+}
+
+/* Active state class */
+.map-overlay.active {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+/* Fade out state */
+.map-overlay.fade-out {
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+}
+

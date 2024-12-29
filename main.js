@@ -38,6 +38,7 @@ export const selectionSet = new Set();
 let loadingCounter = 0;
 const totalLoadingTasks = 5;
 const loadingSpinner = document.getElementById('loading-spinner');
+const mapOverlay = document.getElementById('map-overlay');
 
 function updateLoadingState(increment = true) {
     if (increment) {
@@ -46,20 +47,29 @@ function updateLoadingState(increment = true) {
         loadingCounter--;
     }
     
-    if (loadingSpinner) {
+    if (loadingSpinner && mapOverlay) {
         if (loadingCounter > 0) {
             loadingSpinner.classList.remove('fade-out');
             loadingSpinner.style.display = 'flex';
+            mapOverlay.style.display = 'block';
+            // Use setTimeout to ensure the display: block has taken effect
+            setTimeout(() => {
+                mapOverlay.classList.add('active');
+            }, 10);
         } else {
             loadingSpinner.classList.add('fade-out');
+            mapOverlay.classList.remove('active');
+            mapOverlay.classList.add('fade-out');
             setTimeout(() => {
                 loadingSpinner.style.display = 'none';
-            }, 500);
+                mapOverlay.style.display = 'none';
+                mapOverlay.classList.remove('fade-out');
+            }, 300); // Match the transition duration
         }
     }
 }
 
-// Show loading spinner immediately
+// Show loading spinner and overlay immediately
 updateLoadingState();
 
 // Initialize map
