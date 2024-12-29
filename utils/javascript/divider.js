@@ -85,12 +85,9 @@ export function initDivider(map) {
         }
     }
     
-    // Set initial width on load
+    // Set initial width on load only
     setInitialWidth();
     
-    // Update on window resize
-    window.addEventListener('resize', setInitialWidth);
-        
     // Mouse events
     divider.addEventListener('mousedown', startResize);
     
