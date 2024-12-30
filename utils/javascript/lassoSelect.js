@@ -3,6 +3,8 @@ import { updateSelectedPlants } from './eventListeners.js';
 import { updateSelectedPlantsWindow } from './selectedPlantsWindow.js';
 import { updateGraph } from '../../graphs/graphManager.js';
 import { modifySelection } from './selectionFunctions.js';
+import { municipalitiesVisible } from './municipalitiesFunctions.js';
+import { updateSelectedMunicipalities } from './eventListeners.js';
 
 let draw;
 let isLassoActive = false;
@@ -61,11 +63,8 @@ export function initializeLasso(map) {
         ]
     });
 
-    // Add draw control but don't show it initially
     map.addControl(draw);
     draw.changeMode('simple_select');
-
-    // Add event listener for when drawing is completed
     map.on('draw.create', handleLassoSelection);
 }
 
@@ -73,19 +72,47 @@ function handleLassoSelection(e) {
     const map = e.target;
     const lassoPolygon = e.features[0];
     
-    // Query features within the lasso polygon
-    const selectedFeatures = map.queryRenderedFeatures({
-        layers: ['plants'],
-        filter: ['within', lassoPolygon.geometry]
-    });
+    if (municipalitiesVisible) {
+        // For municipalities, check which polygons intersect with the lasso
+        const selectedFeatures = map.queryRenderedFeatures({
+            layers: ['municipalities-fill']
+        });
+        
+        // Filter features that intersect with the lasso polygon
+        const intersectingFeatures = selectedFeatures.filter(feature => {
+            try {
+                // Use globally available turf object
+                return turf.booleanIntersects(feature.geometry, lassoPolygon.geometry);
+            } catch (error) {
+                console.warn('Error checking intersection:', error);
+                return false;
+            }
+        });
+        
+        // Batch process all selections first
+        intersectingFeatures.forEach(feature => {
+            modifySelection(map, feature.properties.lau_1, 'add', false);
+        });
+        
+        // Update UI
+        updateSelectedMunicipalities(map);
+    } else {
+        // For plants (points), use existing point-in-polygon check
+        const selectedFeatures = map.queryRenderedFeatures({
+            layers: ['plants'],
+            filter: ['within', lassoPolygon.geometry]
+        });
+        
+        // Batch process all selections first
+        selectedFeatures.forEach(feature => {
+            modifySelection(map, feature.properties.forsyid, 'add', false);
+        });
+        
+        // Update UI
+        updateSelectedPlants(map);
+    }
     
-    // Batch process all selections first
-    selectedFeatures.forEach(feature => {
-        modifySelection(map, feature.properties.forsyid, 'add', false); // Add silent parameter to skip updates
-    });
-    
-    // Then do a single update at the end
-    updateSelectedPlants(map);
+    // Common updates
     updateSelectedPlantsWindow(selectionSet);
     updateGraph();
     
@@ -104,26 +131,22 @@ export function toggleLassoSelect() {
     if (isLassoActive) {
         draw.changeMode('draw_polygon');
         lassoButton.classList.add('active');
-        // Add keyboard listeners when lasso is active
         document.addEventListener('keydown', handleLassoKeypress);
     } else {
         draw.changeMode('simple_select');
         draw.deleteAll();
         lassoButton.classList.remove('active');
-        // Remove keyboard listeners when lasso is inactive
         document.removeEventListener('keydown', handleLassoKeypress);
     }
 }
 
 function handleLassoKeypress(e) {
     if (e.key === 'Enter') {
-        // Finalize the selection
         const feature = draw.getAll().features[0];
         if (feature) {
             handleLassoSelection({ target: draw._map, features: [feature] });
         }
     } else if (e.key === 'Escape' || e.key === 'Backspace') {
-        // Cancel the selection
         draw.deleteAll();
         toggleLassoSelect();
     }
