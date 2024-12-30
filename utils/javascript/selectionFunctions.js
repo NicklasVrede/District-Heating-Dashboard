@@ -69,6 +69,8 @@ export function selectAll(map) {
 }
 
 export function modifySelection(map, forsyid, action = 'add', updateUI = true) {
+    //console.log('Attempting to modify selection for forsyid:', forsyid);
+    
     if (!['add', 'remove', 'toggle'].includes(action)) {
         console.warn('Invalid selection action:', action);
         return false;
