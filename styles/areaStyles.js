@@ -19,8 +19,8 @@ export const areaStyles = {
         layout: {},
         paint: {
             'line-color': '#0000ff',
-            'line-width': 0.6,
-            'line-opacity': 0.1
+            'line-width': 0,
+            'line-opacity': 0
         }
     },
     municipalitiesFill: {
