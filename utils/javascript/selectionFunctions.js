@@ -74,6 +74,10 @@ export function modifySelection(map, id, action = 'add', updateUI = true) {
         return false;
     }
 
+    // Reset counters at the start of each selection attempt
+    newSelectionAttempts = 0;
+    noDataCount = 0;
+
     const isCurrentlySelected = selectionSet.has(id);
     let selectionChanged = false;
 
@@ -100,8 +104,6 @@ export function modifySelection(map, id, action = 'add', updateUI = true) {
                     } else {
                         showToast(`${validSelections} municipalities selected, ${noDataCount} could not be selected due to missing data`);
                     }
-                    noDataCount = 0;
-                    newSelectionAttempts = 0;
                 }, 300);
                 return false;
             }
@@ -125,8 +127,6 @@ export function modifySelection(map, id, action = 'add', updateUI = true) {
                     } else {
                         showToast(`${validSelections} plants selected, ${noDataCount} could not be selected due to missing data`);
                     }
-                    noDataCount = 0;
-                    newSelectionAttempts = 0;
                 }, 300);
                 return false;
             }
