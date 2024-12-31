@@ -97,40 +97,43 @@ map.on('load', () => {
     window.map = map;
     setMapInstance(map);
     
-    Promise.all([
-        loadPlants(map),
-        loadAreas(map),
-        loadGasAreas(map),
-        loadMunicipalities(map),
-        loadMunicipalityCentroids(map)
-    ]).then(() => {
-        map.once('idle', () => {
-            // Initialize MainFuelManager before hiding loading spinner
-            const mainFuelManager = new MainFuelManager(map);
+    // First load the data dictionary
+    loadData()
+        .then(() => {
+            initializeIdSets();
             
-            // Hide loading spinner
+            return Promise.all([
+                loadPlants(map),
+                loadAreas(map),
+                loadGasAreas(map),
+                loadMunicipalities(map),
+                loadMunicipalityCentroids(map)
+            ]);
+        })
+        .then(() => {
+            map.once('idle', () => {
+                const mainFuelManager = MainFuelManager.getInstance(map);
+                
+                // Hide loading spinner
+                for (let i = 0; i < totalLoadingTasks; i++) {
+                    updateLoadingState(false);
+                }
+                
+                // Initialize features
+                initializeLasso(map);
+                initMapFocusDropdown(focusManager);
+                addInstructions();
+                
+                // Show controls by adding loaded class
+                document.querySelector('.map-controls').classList.add('loaded');
+            });
+        })
+        .catch(error => {
+            console.error('Error loading map data:', error);
             for (let i = 0; i < totalLoadingTasks; i++) {
                 updateLoadingState(false);
             }
-            
-            // Initialize features
-            initializeLasso(map);
-            initMapFocusDropdown(focusManager);
-            addInstructions();
-            
-            // Show controls by adding loaded class
-            document.querySelector('.map-controls').classList.add('loaded');
-            
-            // Toggle municipalities on by default
-            //toggleMunicipalities(map, document.querySelector('[onclick="toggleMunicipalities(this)"]'));
         });
-    }).catch(error => {
-        console.error('Error loading map data:', error);
-        // Ensure loading spinner is hidden on error
-        for (let i = 0; i < totalLoadingTasks; i++) {
-            updateLoadingState(false);
-        }
-    });
 });
 
 // Configure map settings
@@ -139,13 +142,6 @@ map.scrollZoom.setWheelZoomRate(1);
 
 // After your map is initialized
 initDivider(map);
-
-// Replace the fetch call with:
-loadData()
-    .then(() => {
-        initializeIdSets(); // initialize plant and municipality id sets
-    })
-    .catch(error => console.error('Error loading data dictionary:', error));
 
 // Update the resetCamera function
 function resetCamera() {

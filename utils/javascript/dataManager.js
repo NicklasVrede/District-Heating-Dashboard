@@ -20,7 +20,6 @@ export async function loadData() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         cachedData = await response.json();
-        window.dataDict = cachedData;
         return cachedData;
     } catch (error) {
         console.error('Error loading data:', error);
@@ -34,5 +33,4 @@ export function getCachedData() {
 
 export function clearCache() {
     cachedData = null;
-    window.dataDict = null;
 } 

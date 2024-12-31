@@ -1,5 +1,6 @@
 import { yearState } from './YearState.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
+import { getCachedData } from '../dataManager.js';
 
 export class MainFuelManager {
     static instance = null;
@@ -60,6 +61,7 @@ export class MainFuelManager {
 
     updateMainFuel(year) {
         const effectiveYear = Math.min(Math.max(year, '2000'), '2023');
+        const dataDict = getCachedData();
         
         // Update both plants and municipality centroids
         ['plants', 'municipality-centroids'].forEach(sourceId => {
@@ -74,7 +76,7 @@ export class MainFuelManager {
                     feature.properties.lau_1.padStart(8, '0') : 
                     feature.properties.forsyid.padStart(8, '0');
                 
-                const plantData = window.dataDict?.[id]?.production;
+                const plantData = dataDict?.[id]?.production;
                 
                 if (plantData && plantData[effectiveYear]) {
                     const yearData = plantData[effectiveYear];
