@@ -68,46 +68,71 @@ export function selectAll(map) {
     });
 }
 
-export function modifySelection(map, forsyid, action = 'add', updateUI = true) {
-    //console.log('Attempting to modify selection for forsyid:', forsyid);
-    
+export function modifySelection(map, id, action = 'add', updateUI = true) {
     if (!['add', 'remove', 'toggle'].includes(action)) {
         console.warn('Invalid selection action:', action);
         return false;
     }
 
-    const isCurrentlySelected = selectionSet.has(forsyid);
+    const isCurrentlySelected = selectionSet.has(id);
     let selectionChanged = false;
 
     if ((action === 'add' || action === 'toggle') && !isCurrentlySelected) {
         newSelectionAttempts++;
-        const plantData = getCachedData()?.[forsyid.toString().padStart(8, '0')];
         
-        // Skip data validation for municipalities
-        if (municipalitiesVisible || (plantData && (
-            Object.values(plantData.production || {}).some(year => Object.values(year).some(v => v > 0)) ||
-            Object.values(plantData.prices || {}).some(year => year.mwh_price > 0)
-        ))) {
-            selectionSet.add(forsyid);
-            selectionChanged = true;
+        if (municipalitiesVisible) {
+            // For municipalities, check data using lau_1
+            const municipalityData = getCachedData()?.[id.toString()];
+            
+            if (municipalityData && (
+                Object.values(municipalityData.production || {}).some(year => Object.values(year).some(v => v > 0)) ||
+                Object.values(municipalityData.prices || {}).some(year => year.mwh_price > 0)
+            )) {
+                selectionSet.add(id);
+                selectionChanged = true;
+            } else {
+                noDataCount++;
+                clearTimeout(toastDebounceTimer);
+                toastDebounceTimer = setTimeout(() => {
+                    const validSelections = newSelectionAttempts - noDataCount;
+                    if (newSelectionAttempts === 1) {
+                        showToast("Municipality could not be selected due to missing data");
+                    } else {
+                        showToast(`${validSelections} municipalities selected, ${noDataCount} could not be selected due to missing data`);
+                    }
+                    noDataCount = 0;
+                    newSelectionAttempts = 0;
+                }, 300);
+                return false;
+            }
         } else {
-            noDataCount++;
-            clearTimeout(toastDebounceTimer);
-            toastDebounceTimer = setTimeout(() => {
-                const validSelections = newSelectionAttempts - noDataCount;
-                if (newSelectionAttempts === 1) {
-                    showToast("Plant could not be selected due to missing data");
-                } else {
-                    showToast(`${validSelections} plants selected, ${noDataCount} could not be selected due to missing data`);
-                }
-                // Reset counters after showing toast
-                noDataCount = 0;
-                newSelectionAttempts = 0;
-            }, 300);
-            return false;
+            // For plants, check data using forsyid (padded with zeros)
+            const plantData = getCachedData()?.[id.toString().padStart(8, '0')];
+            
+            if (plantData && (
+                Object.values(plantData.production || {}).some(year => Object.values(year).some(v => v > 0)) ||
+                Object.values(plantData.prices || {}).some(year => year.mwh_price > 0)
+            )) {
+                selectionSet.add(id);
+                selectionChanged = true;
+            } else {
+                noDataCount++;
+                clearTimeout(toastDebounceTimer);
+                toastDebounceTimer = setTimeout(() => {
+                    const validSelections = newSelectionAttempts - noDataCount;
+                    if (newSelectionAttempts === 1) {
+                        showToast("Plant could not be selected due to missing data");
+                    } else {
+                        showToast(`${validSelections} plants selected, ${noDataCount} could not be selected due to missing data`);
+                    }
+                    noDataCount = 0;
+                    newSelectionAttempts = 0;
+                }, 300);
+                return false;
+            }
         }
     } else if (action === 'remove' && isCurrentlySelected) {
-        selectionSet.delete(forsyid);
+        selectionSet.delete(id);
         selectionChanged = true;
     }
 
