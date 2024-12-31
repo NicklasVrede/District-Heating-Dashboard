@@ -104,6 +104,17 @@ export function addPlantEventListeners(map) {
         const features = map.queryRenderedFeatures(e.point, { layers: ['plants'] });
         if (features.length) {
             const feature = features[0];
+            //const properties = feature.properties;
+            //console.log('Plant feature details:', {
+            //    name: properties.navn1203,
+            //    type: properties.type1203,
+            //    value: properties.vaerdi1203,
+            //    forsyid: properties.forsyid,
+            //    forsytekst: properties.forsytekst,
+            //    fv_net: properties.fv_net,
+            //    cvr: properties.cvr_kode,
+            //    cvrName: properties.cvrname
+            //});
             modifySelection(map, feature.properties.forsyid, isCtrlPressed || isMetaPressed ? 'remove' : 'add');
         }
     });
@@ -185,6 +196,17 @@ export function addAreaEventListeners(map) {
             const features = map.queryRenderedFeatures(e.point, { layers: ['areas'] });
             if (features.length) {
                 const feature = features[0];
+                const properties = feature.properties;
+                console.log('Area feature details:', {
+                    name: properties.navn1203,
+                    type: properties.type1203,
+                    value: properties.vaerdi1203,
+                    forsyid: properties.forsyid,
+                    forsytekst: properties.forsytekst,
+                    fv_net: properties.fv_net,
+                    cvr: properties.cvr_kode,
+                    cvrName: properties.cvrname
+                });
                 modifySelection(map, feature.properties.forsyid, isCtrlPressed || isMetaPressed ? 'remove' : 'add');
             }
         }
