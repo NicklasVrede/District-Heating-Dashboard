@@ -24,6 +24,11 @@ var/
 # Data files
 data/Clean production/*
 maps/areas_old.geojson
+data/Fv_net_name_mapping.csv
+data/data_names_mapping.csv
+data/forsy_fv_net_mapping.csv
+data/plants_underway.csv
+
 
 # IDE specific files (optional but recommended)
 .idea/

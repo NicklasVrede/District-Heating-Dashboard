@@ -63,8 +63,11 @@ export function initializeLasso(map) {
         ]
     });
 
+    // Add draw control but don't show it initially
     map.addControl(draw);
     draw.changeMode('simple_select');
+
+    // Add event listener for when drawing is completed
     map.on('draw.create', handleLassoSelection);
 }
 
@@ -81,7 +84,7 @@ function handleLassoSelection(e) {
         // Filter features that intersect with the lasso polygon
         const intersectingFeatures = selectedFeatures.filter(feature => {
             try {
-                // Use globally available turf object
+                // Check if the municipality polygon intersects with the lasso
                 return turf.booleanIntersects(feature.geometry, lassoPolygon.geometry);
             } catch (error) {
                 console.warn('Error checking intersection:', error);
