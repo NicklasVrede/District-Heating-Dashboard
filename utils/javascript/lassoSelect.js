@@ -106,9 +106,14 @@ function handleLassoSelection(e) {
             filter: ['within', lassoPolygon.geometry]
         });
         
-        // Batch process all selections first
-        selectedFeatures.forEach(feature => {
-            modifySelection(map, feature.properties.forsyid, 'add', false);
+        // Create a Set of unique forsyids
+        const uniqueForsyids = new Set(
+            selectedFeatures.map(feature => feature.properties.forsyid)
+        );
+        
+        // Process only unique forsyids
+        Array.from(uniqueForsyids).forEach(forsyid => {
+            modifySelection(map, forsyid, 'add', false);
         });
         
         // Update UI

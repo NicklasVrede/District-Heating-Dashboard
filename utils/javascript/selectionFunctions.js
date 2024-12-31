@@ -11,6 +11,8 @@ import { getCachedData } from './dataManager.js';
 let toastDebounceTimer = null;
 let noDataCount = 0;
 let newSelectionAttempts = 0;
+let lastSelectionTime = 0;
+const SELECTION_BATCH_TIMEOUT = 300; // ms
 
 export function clearSelection(map) {
     selectionSet.clear();
@@ -74,6 +76,14 @@ export function modifySelection(map, id, action = 'add', updateUI = true) {
         return false;
     }
 
+    // Reset counters if it's been longer than SELECTION_BATCH_TIMEOUT since last selection
+    const now = Date.now();
+    if (now - lastSelectionTime > SELECTION_BATCH_TIMEOUT) {
+        newSelectionAttempts = 0;
+        noDataCount = 0;
+    }
+    lastSelectionTime = now;
+
     const isCurrentlySelected = selectionSet.has(id);
     let selectionChanged = false;
 
@@ -81,7 +91,6 @@ export function modifySelection(map, id, action = 'add', updateUI = true) {
         newSelectionAttempts++;
         
         if (municipalitiesVisible) {
-            // For municipalities, check data using lau_1
             const municipalityData = getCachedData()?.[id.toString()];
             
             if (municipalityData && (
@@ -100,8 +109,7 @@ export function modifySelection(map, id, action = 'add', updateUI = true) {
                     } else {
                         showToast(`${validSelections} municipalities selected, ${noDataCount} could not be selected due to missing data`);
                     }
-                    noDataCount = 0;
-                    newSelectionAttempts = 0;
+                    // Don't reset counters here anymore
                 }, 300);
                 return false;
             }
@@ -125,8 +133,7 @@ export function modifySelection(map, id, action = 'add', updateUI = true) {
                     } else {
                         showToast(`${validSelections} plants selected, ${noDataCount} could not be selected due to missing data`);
                     }
-                    noDataCount = 0;
-                    newSelectionAttempts = 0;
+                    // Don't reset counters here anymore
                 }, 300);
                 return false;
             }
