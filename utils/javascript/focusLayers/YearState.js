@@ -1,6 +1,7 @@
 class YearStateClass {
     constructor() {
-        this._year = new Date().getFullYear().toString();
+        const maxYear = '2024';
+        this._year = Math.min(new Date().getFullYear(), parseInt(maxYear)).toString();
         this._listeners = new Set();
         this._visible = false;
         
@@ -16,6 +17,9 @@ class YearStateClass {
         const container = document.getElementById('year-slider-container');
         
         if (slider && label && container) {
+            // Ensure max year is 2024
+            slider.max = '2024';
+            
             // Set initial values
             slider.value = this._year;
             label.textContent = this._year;

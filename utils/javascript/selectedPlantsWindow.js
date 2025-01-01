@@ -8,6 +8,7 @@ import { clearGraph } from './clearGraph.js';
 import { municipalitiesVisible } from './municipalitiesFunctions.js';
 import { modifySelection } from './selectionFunctions.js';
 import { highlightStyles } from '../../styles/highlightStyles.js';
+import { getCachedData } from './dataManager.js';
 
 
 
@@ -59,40 +60,17 @@ export function updateSelectedPlantsWindow() {
     // Get plants data from map source
     const plants = Array.from(selectionSet)
         .map(forsyid => {
-            // First, check in the plants layer
-            const plantFeature = source._data.features.find(f => 
-                f.properties.forsyid === forsyid
-            );
-
-            
-            if (!plantFeature) {
-                // If not found in plants, check in municipalities
-                const municipalityFeature = map.queryRenderedFeatures({ layers: ['municipalities-fill'] }).find(f => 
-                    f.properties.lau_1 === forsyid // Assuming lau_1 is the property to match
-                );
-
-                
-                if (!municipalityFeature) {
-                    console.warn(`No feature found for forsyid: ${forsyid} in both plants and municipalities.`);
-                    return null;
-                }
-
-                // If found in municipalities, use its properties
-                const currentPrice = window.dataDict?.[forsyid]?.prices?.[yearState.year]?.mwh_price || 0;
-
-                return {
-                    forsyid,
-                    name: municipalityFeature.properties.name || 'Unknown Municipality',
-                    price: currentPrice
-                };
+            const dataDict = getCachedData();
+            if (!dataDict?.[forsyid]) {
+                console.warn(`No data found for forsyid: ${forsyid} in dataDict`);
+                return null;
             }
 
-            // If found in plants, use its properties
-            const currentPrice = window.dataDict?.[forsyid]?.prices?.[yearState.year]?.mwh_price || 0;
-
+            const currentPrice = dataDict[forsyid]?.prices?.[yearState.year]?.mwh_price || 0;
+            
             return {
                 forsyid,
-                name: plantFeature.properties.name || 'Unknown Plant',
+                name: dataDict[forsyid].name || 'Unknown',
                 price: currentPrice
             };
         })
