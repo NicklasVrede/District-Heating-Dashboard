@@ -64,10 +64,6 @@ export function addPlantEventListeners(map) {
                             <span class="tooltip-value">${formatFuelType(feature.properties.currentMainFuel, feature.properties)}</span>
                         </div>
                         <div class="tooltip-row">
-                            <span class="tooltip-label">Network:</span>
-                            <span class="tooltip-value">${feature.properties.fv_net || 'Not specified'}</span>
-                        </div>
-                        <div class="tooltip-row">
                             <span class="tooltip-label">Supply area:</span>
                             <span class="tooltip-value">${feature.properties.total_area_km2} km²</span>
                         </div>
