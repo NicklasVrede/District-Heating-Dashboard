@@ -111,22 +111,29 @@ map.on('load', () => {
             ]);
         })
         .then(() => {
-            map.once('idle', () => {
-                const mainFuelManager = MainFuelManager.getInstance(map);
-                
-                // Hide loading spinner
-                for (let i = 0; i < totalLoadingTasks; i++) {
-                    updateLoadingState(false);
-                }
-                
-                // Initialize features
-                initializeLasso(map);
-                initMapFocusDropdown(focusManager);
-                addInstructions();
-                
-                // Show controls by adding loaded class
-                document.querySelector('.map-controls').classList.add('loaded');
+            // Wait for map idle and a brief timeout to ensure sources are ready
+            return new Promise(resolve => {
+                map.once('idle', () => {
+                    // Add a small delay to ensure sources are ready
+                    setTimeout(resolve, 500);
+                });
             });
+        })
+        .then(() => {
+            const mainFuelManager = MainFuelManager.getInstance(map);
+            
+            // Hide loading spinner
+            for (let i = 0; i < totalLoadingTasks; i++) {
+                updateLoadingState(false);
+            }
+            
+            // Initialize features
+            initializeLasso(map);
+            initMapFocusDropdown(focusManager);
+            addInstructions();
+            
+            // Show controls by adding loaded class
+            document.querySelector('.map-controls').classList.add('loaded');
         })
         .catch(error => {
             console.error('Error loading map data:', error);
