@@ -147,6 +147,12 @@ export function addAreaEventListeners(map) {
                     <div class="mapboxgl-popup-content tooltip-content">
                         <h3 class="tooltip-title">${feature.properties.forsytekst}</h3>
                         <div class="tooltip-body">
+                            <!-- Temporarily commented out navn1203 display
+                            <div class="tooltip-row">
+                                <span class="tooltip-label">Name:</span>
+                                <span class="tooltip-value">${feature.properties.navn1203 || 'N/A'}</span>
+                            </div>
+                            -->
                             <div class="tooltip-row">
                                 <span class="tooltip-label">Main fuel:</span>
                                 <span class="tooltip-value">${plantData ? formatFuelType(plantData.currentMainFuel, plantData) : 'unknown'}</span>
