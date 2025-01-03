@@ -20,10 +20,7 @@ export class MainFuelManager {
         this.map = map;
         this.dataUpdateListeners = new Set();
         
-        // Initialize with current year
-        this.updateMainFuel(yearState.year);
-        
-        // Add listener for year changes
+        // Only add the listener, don't update immediately
         yearState.addListener((year) => {
             this.updateMainFuel(year);
         });
@@ -59,14 +56,35 @@ export class MainFuelManager {
         return mainFuel;
     }
 
+    initialize() {
+        // Get cached data to verify it's loaded
+        const dataDict = getCachedData();
+        if (!dataDict) {
+            console.error('Data not loaded when initializing MainFuelManager');
+            return Promise.reject('Data not loaded');
+        }
+
+        // Initial update with current year
+        this.updateMainFuel(yearState.year);
+        return Promise.resolve();
+    }
+
     updateMainFuel(year) {
         const effectiveYear = Math.min(Math.max(year, '2000'), '2023');
         const dataDict = getCachedData();
         
+        if (!dataDict) {
+            console.error('No data available for main fuel update');
+            return;
+        }
+
         // Update both plants and municipality centroids
         ['plants', 'municipality-centroids'].forEach(sourceId => {
             const source = this.map.getSource(sourceId);
-            if (!source) return;
+            if (!source) {
+                console.warn(`Source ${sourceId} not found`);
+                return;
+            }
 
             const data = source._data;
             if (!data || !data.features) return;
