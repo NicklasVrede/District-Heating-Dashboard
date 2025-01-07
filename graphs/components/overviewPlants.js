@@ -16,9 +16,6 @@ export function createOverviewPlants(data, selectedForsyids) {
                 <div class="production-graph">
                     <canvas id="fuelDistributionChart"></canvas>
                 </div>
-                <div class="total-production-graph">
-                    <canvas id="totalProductionChart"></canvas>
-                </div>
                 <div class="price-graph">
                     <canvas id="priceDistributionChart"></canvas>
                 </div>
@@ -27,7 +24,6 @@ export function createOverviewPlants(data, selectedForsyids) {
     `;
 
     createFuelDistributionChart(data, selectedForsyids);
-    createTotalProductionChart(data, selectedForsyids);
     createPriceDistributionChart(data, selectedForsyids);
 
     return true;
@@ -468,7 +464,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
     // Create datasets
     const datasets = [
         {
-            label: 'Avg. MWh Price',
+            label: 'Average MWh Price',
             data: aggregatedPrices.mwh_price,
             borderColor: '#FF6384',
             backgroundColor: 'rgba(255, 99, 132, 0.1)',
@@ -476,7 +472,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
             fill: true
         },
         {
-            label: 'Avg. Apartment',
+            label: 'Average Apartment Price (Yearly)',
             data: aggregatedPrices.apartment_price,
             borderColor: '#36A2EB',
             backgroundColor: 'rgba(54, 162, 235, 0.1)',
@@ -484,7 +480,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
             fill: true
         },
         {
-            label: 'Avg. House',
+            label: 'Average House Price (Yearly)',
             data: aggregatedPrices.house_price,
             borderColor: '#4BC0C0',
             backgroundColor: 'rgba(75, 192, 192, 0.1)',
@@ -531,17 +527,11 @@ function createPriceDistributionChart(data, selectedForsyids) {
                         label: function(context) {
                             const price = context.raw;
                             const label = context.dataset.label;
-                            if (price === 0) {
-                                return 'No price data available';
-                            }
-                            // Map the dataset label to a more descriptive tooltip label
-                            const tooltipLabel = {
-                                'Avg. MWh Price': 'Avg. MWh Price',
-                                'Avg. Apartment': 'Avg. Apartment Price',
-                                'Avg. House': 'Avg. House Price'
-                            }[label] || label;
-                            
-                            return `${tooltipLabel}: ${price.toFixed(0)} DKK`;
+                            return price === 0 ? 
+                                'No price data available' : 
+                                label.includes('Price') ? 
+                                    `${label}: ${price.toFixed(0)} DKK` : 
+                                    `Price: ${price.toFixed(0)} DKK`;
                         }
                     }
                 },
@@ -565,137 +555,6 @@ function createPriceDistributionChart(data, selectedForsyids) {
                         },
                         beginAtZero: true
                     }
-                }
-            }
-        }
-    });
-}
-
-function createTotalProductionChart(data, selectedForsyids) {
-    const ctx = document.getElementById('totalProductionChart').getContext('2d');
-    
-    // Get all available years from the data
-    const years = new Set();
-    selectedForsyids.forEach(forsyid => {
-        const plantData = data[forsyid.toString().padStart(8, '0')];
-        if (plantData?.production) {
-            Object.keys(plantData.production)
-                .filter(year => !isNaN(parseInt(year)))
-                .forEach(year => years.add(year));
-        }
-    });
-    const productionYears = Array.from(years).sort();
-
-    // Initialize aggregated data
-    const aggregatedProduction = {
-        heat: productionYears.map(() => 0),
-        electricity: productionYears.map(() => 0)
-    };
-
-    // Aggregate production data
-    selectedForsyids.forEach(forsyid => {
-        const plantData = data[forsyid.toString().padStart(8, '0')];
-        if (!plantData?.production) return;
-
-        productionYears.forEach((year, index) => {
-            aggregatedProduction.heat[index] += plantData.production[year]?.varmeprod || 0;
-            aggregatedProduction.electricity[index] += plantData.production[year]?.elprod || 0;
-        });
-    });
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: productionYears,
-            datasets: [
-                {
-                    label: 'Heat',
-                    data: aggregatedProduction.heat,
-                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Electricity',
-                    data: aggregatedProduction.electricity,
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    stacked: true,
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        font: {
-                            size: 10
-                        }
-                    }
-                },
-                y: {
-                    stacked: true,
-                    beginAtZero: true,
-                    ticks: {
-                        font: {
-                            size: 10
-                        },
-                        callback: function(value) {
-                            if (value >= 1000) {
-                                return `${(value/1000).toFixed(1)}k TJ`;
-                            }
-                            return `${value.toLocaleString()} TJ`;
-                        }
-                    },
-                    grid: {
-                        color: '#E4E4E4'
-                    }
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Total Production Over Time'
-                },
-                legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        title: function(tooltipItems) {
-                            return tooltipItems[0].label;
-                        },
-                        label: function(context) {
-                            const index = context.dataIndex;
-                            const heatValue = aggregatedProduction.heat[index];
-                            const electricityValue = aggregatedProduction.electricity[index];
-                            const total = heatValue + electricityValue;
-                            
-                            return [
-                                `Heat: ${heatValue.toLocaleString()} TJ`,
-                                `Electricity: ${electricityValue.toLocaleString()} TJ`,
-                                `Total: ${total.toLocaleString()} TJ`
-                            ];
-                        }
-                    }
-                },
-                datalabels: {
-                    display: false
                 }
             }
         }

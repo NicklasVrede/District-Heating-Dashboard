@@ -46,8 +46,10 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
 
     // Create the structure only when needed
     graphContainer.innerHTML = `
-        <div class="graphs-container">
+        <div class="graph-header">
             <h2 class="graph-title">${municipalitiesVisible ? 'Multiple Municipalities Comparison' : 'Multiple Plants Comparison'}</h2>
+        </div>
+        <div class="graphs-container">
             ${focus === 'price' ? `
                 <div class="price-graph">
                     <canvas id="priceChart"></canvas>
@@ -558,21 +560,21 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             labels: plantNames,
             datasets: [
                 {
-                    label: 'MWh',
+                    label: 'MWh Price',
                     data: mwhData,
                     backgroundColor: 'rgba(75, 192, 192, 0.7)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Apartment',
+                    label: 'Apartment Price (Yearly)',
                     data: apartmentData,
                     backgroundColor: 'rgba(54, 162, 235, 0.7)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'House',
+                    label: 'House Price (Yearly)',
                     data: houseData,
                     backgroundColor: 'rgba(255, 99, 132, 0.7)',
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -609,7 +611,6 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     text: titleText
                 },
                 legend: {
-                    display: true,
                     position: 'left',
                     align: 'start',
                     labels: {
@@ -622,24 +623,12 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     }
                 },
                 tooltip: {
-                    mode: 'index',
-                    intersect: false,
                     callbacks: {
                         title: function(tooltipItems) {
                             return tooltipItems[0].label;
                         },
                         label: function(context) {
-                            const value = context.raw;
-                            if (value === 0) return null;
-                            
-                            // Map the dataset label to a more descriptive tooltip label
-                            const tooltipLabel = {
-                                'MWh': 'MWh Price',
-                                'Apartment': 'Apartment Price (75 m²)',
-                                'House': 'House Price (130 m²)'
-                            }[context.dataset.label] || context.dataset.label;
-                            
-                            return `${tooltipLabel}: ${value.toFixed(0)} DKK`;
+                            return `${context.dataset.label}: ${context.raw.toLocaleString()} DKK`;
                         }
                     }
                 }
@@ -705,7 +694,7 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
             labels: plantNames,
             datasets: [
                 {
-                    label: 'Heating',
+                    label: 'Heat Production',
                     data: heatProduction,
                     backgroundColor: 'rgba(255, 99, 132, 0.6)',
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -720,7 +709,7 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
                     }
                 },
                 {
-                    label: 'Electricity',
+                    label: 'Electricity Production',
                     data: electricityProduction,
                     backgroundColor: 'rgba(54, 162, 235, 0.6)',
                     borderColor: 'rgba(54, 162, 235, 1)',

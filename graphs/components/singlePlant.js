@@ -321,7 +321,6 @@ export function createSinglePlantGraph(data, forsyid, focus) {
         }
     });
 
-<<<<<<< HEAD
     // Add the total production chart
     const totalCtx = document.getElementById('totalProductionChart').getContext('2d');
     const totalChart = new Chart(totalCtx, {
@@ -433,8 +432,6 @@ export function createSinglePlantGraph(data, forsyid, focus) {
         }
     });
 
-=======
->>>>>>> parent of 60c1fb0 (total production graph)
     // Update info box with plant facts
     updateInfoBox(plantData);
 
