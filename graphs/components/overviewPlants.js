@@ -537,8 +537,8 @@ function createPriceDistributionChart(data, selectedForsyids) {
                             // Map the dataset label to a more descriptive tooltip label
                             const tooltipLabel = {
                                 'Avg. MWh Price': 'Avg. MWh Price',
-                                'Avg. Apartment': 'Avg. Apartment Price',
-                                'Avg. House': 'Avg. House Price'
+                                'Avg. Apartment': 'Avg. Apartment Price (75 m²)',
+                                'Avg. House': 'Avg. House Price (130 m²)'
                             }[label] || label;
                             
                             return `${tooltipLabel}: ${price.toFixed(0)} DKK`;
