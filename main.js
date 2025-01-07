@@ -65,7 +65,7 @@ function updateLoadingState(increment = true) {
                 loadingSpinner.style.display = 'none';
                 mapOverlay.style.display = 'none';
                 mapOverlay.classList.remove('fade-out');
-            }, 300); // Match the transition duration
+            }, 300);
         }
     }
 }
