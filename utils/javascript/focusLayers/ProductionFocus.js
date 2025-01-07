@@ -6,6 +6,7 @@ import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 import { allPlantIds, allMunicipalityIds, selectionSet } from '../../../main.js';
 import { updateSelectedMunicipalities, updateSelectedPlants } from '../eventListeners.js';
 import { MainFuelManager } from './MainFuelManager.js';
+import { getCachedData } from '../../../utils/javascript/dataManager.js';
 
 
 export class ProductionFocus {
@@ -72,12 +73,13 @@ export class ProductionFocus {
         const source = this.map.getSource('plants');
         if (!source) return;
 
+        const dataDict = getCachedData();
         const data = source._data;
         if (!data || !data.features) return;
 
         data.features = data.features.map(feature => {
             const forsyid = feature.properties.forsyid;
-            const plantData = window.dataDict?.[forsyid]?.production;
+            const plantData = dataDict?.[forsyid]?.production;
             
             if (plantData) {
                 for (let year = 2000; year <= 2023; year++) {
@@ -235,7 +237,7 @@ export class ProductionFocus {
     }
 
     getPlantData() {
-        const dataDict = window.dataDict;
+        const dataDict = getCachedData();
 
         if (!dataDict) {
             console.warn('No data available');
