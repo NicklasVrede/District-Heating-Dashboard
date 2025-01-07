@@ -17,40 +17,60 @@ export function createTwoPlantComparison(data, validForsyids) {
         return;
     }
 
-    // Store chart instances for cleanup
-    const charts = [];
+    // Add transition class before clearing content
+    graphContainer.classList.add('transitioning');
+    
+    // Store current scroll position
+    const scrollPosition = graphContainer.scrollTop;
 
-    // Clear existing content and create two-plant container
-    graphContainer.innerHTML = `
-        <div class="two-plant-container">
-            <div class="plant-column">
-                <h2 class="graph-title"></h2>
-                <div class="production-graph">
-                    <canvas id="productionChart1"></canvas>
-                </div>
-                <div class="total-production-graph">
-                    <canvas id="totalProductionChart1"></canvas>
-                </div>
-                <div class="price-graph">
-                    <canvas id="priceChart1"></canvas>
-                </div>
-                <div class="info-box"></div>
+    // Create new content with opacity 0
+    const newContent = document.createElement('div');
+    newContent.className = 'two-plant-container fade-in';
+    newContent.innerHTML = `
+        <div class="plant-column">
+            <h2 class="graph-title"></h2>
+            <div class="production-graph">
+                <canvas id="productionChart1"></canvas>
             </div>
-            <div class="plant-column">
-                <h2 class="graph-title"></h2>
-                <div class="production-graph">
-                    <canvas id="productionChart2"></canvas>
-                </div>
-                <div class="total-production-graph">
-                    <canvas id="totalProductionChart2"></canvas>
-                </div>
-                <div class="price-graph">
-                    <canvas id="priceChart2"></canvas>
-                </div>
-                <div class="info-box"></div>
+            <div class="total-production-graph">
+                <canvas id="totalProductionChart1"></canvas>
             </div>
+            <div class="price-graph">
+                <canvas id="priceChart1"></canvas>
+            </div>
+            <div class="info-box"></div>
+        </div>
+        <div class="plant-column">
+            <h2 class="graph-title"></h2>
+            <div class="production-graph">
+                <canvas id="productionChart2"></canvas>
+            </div>
+            <div class="total-production-graph">
+                <canvas id="totalProductionChart2"></canvas>
+            </div>
+            <div class="price-graph">
+                <canvas id="priceChart2"></canvas>
+            </div>
+            <div class="info-box"></div>
         </div>
     `;
+
+    // Replace content with transition
+    graphContainer.innerHTML = '';
+    graphContainer.appendChild(newContent);
+    
+    // Force browser reflow
+    newContent.offsetHeight;
+    
+    // Trigger fade in
+    requestAnimationFrame(() => {
+        newContent.classList.add('visible');
+        graphContainer.classList.remove('transitioning');
+        graphContainer.scrollTop = scrollPosition;
+    });
+
+    // Store chart instances for cleanup
+    const charts = [];
 
     // Calculate max values across both plants before creating charts
     const maxValues = {
@@ -428,44 +448,7 @@ function createPriceChart(plantData, index, maxValues) {
                     display: false
                 },
                 legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    },
-                    onHover: function(event, legendItem, legend) {
-                        const tooltip = legendTooltips.prices[legendItem.text];
-                        if (tooltip) {
-                            // Create or get tooltip element
-                            let tooltipEl = document.getElementById('chart-tooltip');
-                            if (!tooltipEl) {
-                                tooltipEl = document.createElement('div');
-                                tooltipEl.id = 'chart-tooltip';
-                                tooltipEl.style.cssText = tooltipStyle;
-                                document.body.appendChild(tooltipEl);
-                            }
-                            
-                            // Get mouse position from the event
-                            const mouseX = event.native.clientX;
-                            const mouseY = event.native.clientY;
-                            
-                            tooltipEl.innerHTML = tooltip;
-                            tooltipEl.style.left = (mouseX + 10) + 'px';
-                            tooltipEl.style.top = (mouseY + 10) + 'px';
-                            tooltipEl.style.display = 'block';
-                        }
-                    },
-                    onLeave: function() {
-                        const tooltipEl = document.getElementById('chart-tooltip');
-                        if (tooltipEl) {
-                            tooltipEl.style.display = 'none';
-                        }
-                    }
+                    display: false
                 },
                 title: {
                     display: true,
