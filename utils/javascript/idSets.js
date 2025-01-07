@@ -26,7 +26,4 @@ export function initializeIdSets() {
         }
     });
 
-    console.log(`📋 Initialized ID sets:
-    Plants: ${allPlantIds.size}
-    Municipalities: ${allMunicipalityIds.size}`);
 } 

@@ -132,7 +132,7 @@ export class PriceFocus {
             // 2. Calculate price ranges and update rankings
             if (municipalitiesVisible || !this.priceRanges[currentYear] || this.lastViewType !== municipalitiesVisible) {
                 const priceRange = this.calculatePriceRange(currentYear, data.features);
-                console.log('Price range:', priceRange);
+                //console.log('Price range:', priceRange);
                 this.updateRankings(currentYear, data.features);
             }
             
