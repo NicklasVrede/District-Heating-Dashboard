@@ -34,8 +34,8 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     // Clear and setup graph containers
     graphContainer.innerHTML = `
         <div class="graphs-wrapper">
-            <h2 class="graph-title"></h2>
             <div class="graphs-container">
+                <h2 class="graph-title"></h2>
                 <div class="production-graph">
                     <canvas id="productionChart"></canvas>
                 </div>
@@ -407,9 +407,6 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                             ];
                         }
                     }
-                },
-                datalabels: {
-                    display: false  // Global default
                 }
             }
         }
