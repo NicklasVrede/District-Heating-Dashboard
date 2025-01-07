@@ -111,27 +111,17 @@ map.on('load', () => {
             ]);
         })
         .then(() => {
-            // Wait for map idle and ensure all sources are loaded
+            // Wait for map idle and a brief timeout to ensure sources are ready
             return new Promise(resolve => {
-                const checkSources = () => {
-                    const requiredSources = ['plants', 'areas', 'gas-areas', 'municipalities', 'municipality-centroids'];
-                    const allSourcesLoaded = requiredSources.every(source => map.getSource(source));
-                    
-                    if (allSourcesLoaded) {
-                        resolve();
-                    } else {
-                        map.once('sourcedata', checkSources);
-                    }
-                };
-                
-                checkSources();
+                map.once('idle', () => {
+                    // Add a small delay to ensure sources are ready
+                    setTimeout(resolve, 500);
+                });
             });
         })
         .then(() => {
-            // Initialize MainFuelManager first and wait for it
-            return MainFuelManager.getInstance(map).initialize();
-        })
-        .then(() => {
+            const mainFuelManager = MainFuelManager.getInstance(map);
+            
             // Hide loading spinner
             for (let i = 0; i < totalLoadingTasks; i++) {
                 updateLoadingState(false);
