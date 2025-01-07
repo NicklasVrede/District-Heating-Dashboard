@@ -7,7 +7,7 @@ export function createOverviewPlants(data, selectedForsyids) {
     if (!selectedForsyids || selectedForsyids.length <= 10) return false;
 
     const graphContainer = document.getElementById('graph-container');
-    
+
     // Create the structure
     graphContainer.innerHTML = `
         <div class="graphs-wrapper">
@@ -15,6 +15,9 @@ export function createOverviewPlants(data, selectedForsyids) {
             <div class="graphs-container">
                 <div class="production-graph">
                     <canvas id="fuelDistributionChart"></canvas>
+                </div>
+                <div class="total-production-graph">
+                    <canvas id="totalProductionChart"></canvas>
                 </div>
                 <div class="price-graph">
                     <canvas id="priceDistributionChart"></canvas>
@@ -24,6 +27,7 @@ export function createOverviewPlants(data, selectedForsyids) {
     `;
 
     createFuelDistributionChart(data, selectedForsyids);
+    createTotalProductionChart(data, selectedForsyids);
     createPriceDistributionChart(data, selectedForsyids);
 
     return true;
@@ -31,7 +35,7 @@ export function createOverviewPlants(data, selectedForsyids) {
 
 function createFuelDistributionChart(data, selectedForsyids) {
     const ctx = document.getElementById('fuelDistributionChart').getContext('2d');
-    
+
     // Get all available years from the data
     const years = new Set();
     selectedForsyids.forEach(forsyid => {
@@ -76,7 +80,7 @@ function createFuelDistributionChart(data, selectedForsyids) {
         .map(([category, values]) => {
             // Calculate total production for this category
             const totalCategory = values.reduce((sum, val) => sum + val, 0);
-            
+
             // Skip categories with no production
             if (totalCategory === 0) return null;
 
@@ -160,7 +164,7 @@ function createFuelDistributionChart(data, selectedForsyids) {
 
                         return function(e, legendItem, legend) {
                             clickCount++;
-                            
+
                             if (clickCount === 1) {
                                 clickTimeout = setTimeout(() => {
                                     // Single click behavior
@@ -169,7 +173,7 @@ function createFuelDistributionChart(data, selectedForsyids) {
                                     const meta = chart.getDatasetMeta(index);
                                     meta.hidden = !meta.hidden;
                                     chart.update();
-                                    
+
                                     clickCount = 0;
                                 }, 250);
                             } else if (clickCount === 2) {
@@ -177,16 +181,16 @@ function createFuelDistributionChart(data, selectedForsyids) {
                                 // Double click behavior
                                 const chart = legend.chart;
                                 const datasets = chart.data.datasets;
-                                
+
                                 // If all others are already hidden, show all (reset)
                                 const allOthersHidden = datasets.every((dataset, i) => 
                                     i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
-                                
+
                                 datasets.forEach((dataset, i) => {
                                     const meta = chart.getDatasetMeta(i);
                                     meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
                                 });
-                                
+
                                 chart.update();
                                 clickCount = 0;
                             }
@@ -202,10 +206,10 @@ function createFuelDistributionChart(data, selectedForsyids) {
                                 tooltipEl.style.cssText = tooltipStyle;
                                 document.body.appendChild(tooltipEl);
                             }
-                            
+
                             const mouseX = event.native.clientX;
                             const mouseY = event.native.clientY;
-                            
+
                             tooltipEl.innerHTML = tooltip;
                             tooltipEl.style.left = (mouseX + 10) + 'px';
                             tooltipEl.style.top = (mouseY + 10) + 'px';
@@ -255,7 +259,7 @@ function createFuelDistributionChart(data, selectedForsyids) {
 
 function createAggregatedPieChart(originalChart, aggregatedProduction, year, initialData) {
     const ctx = originalChart.ctx;
-    
+
     // Create reset button
     const container = ctx.canvas.parentElement;
     const resetBtn = document.createElement('button');
@@ -373,32 +377,32 @@ function createAggregatedPieChart(originalChart, aggregatedProduction, year, ini
             beforeInit: function(chart) {
                 let lastClick = 0;
                 let lastClickedIndex = -1;
-                
+
                 chart.legend.options.onClick = function(e, legendItem, legend) {
                     const index = legendItem.index;
                     const chart = legend.chart;
                     const meta = chart.getDatasetMeta(0);
                     const currentTime = new Date().getTime();
-                    
+
                     // Check for double click (within 300ms)
                     if (currentTime - lastClick < 300 && lastClickedIndex === index) {
                         // Double click - focus on this segment
                         const data = chart.data;
                         const labels = data.labels;
                         const datasets = data.datasets;
-                        
+
                         // Show only the clicked segment
                         meta.data.forEach((dataPoint, i) => {
                             dataPoint.hidden = i !== index;
                         });
-                        
+
                         chart.update();
                     } else {
                         // Single click - toggle visibility
                         meta.data[index].hidden = !meta.data[index].hidden;
                         chart.update();
                     }
-                    
+
                     lastClick = currentTime;
                     lastClickedIndex = index;
                 };
@@ -418,17 +422,17 @@ function createAggregatedPieChart(originalChart, aggregatedProduction, year, ini
 
 function createPriceDistributionChart(data, selectedForsyids) {
     const ctx = document.getElementById('priceDistributionChart').getContext('2d');
-    
+
     // Define years we want to show
     const years = ['2019', '2020', '2021', '2022', '2023', '2024'];
-    
+
     // Initialize aggregated price data
     const aggregatedPrices = {
         mwh_price: years.map(() => 0),
         apartment_price: years.map(() => 0),
         house_price: years.map(() => 0)
     };
-    
+
     // Count plants with price data for averaging
     const plantCounts = {
         mwh_price: years.map(() => 0),
@@ -464,7 +468,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
     // Create datasets
     const datasets = [
         {
-            label: 'Average MWh Price',
+            label: 'Avg. MWh Price',
             data: aggregatedPrices.mwh_price,
             borderColor: '#FF6384',
             backgroundColor: 'rgba(255, 99, 132, 0.1)',
@@ -472,7 +476,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
             fill: true
         },
         {
-            label: 'Average Apartment Price (Yearly)',
+            label: 'Avg. Apartment',
             data: aggregatedPrices.apartment_price,
             borderColor: '#36A2EB',
             backgroundColor: 'rgba(54, 162, 235, 0.1)',
@@ -480,7 +484,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
             fill: true
         },
         {
-            label: 'Average House Price (Yearly)',
+            label: 'Avg. House',
             data: aggregatedPrices.house_price,
             borderColor: '#4BC0C0',
             backgroundColor: 'rgba(75, 192, 192, 0.1)',
@@ -527,11 +531,17 @@ function createPriceDistributionChart(data, selectedForsyids) {
                         label: function(context) {
                             const price = context.raw;
                             const label = context.dataset.label;
-                            return price === 0 ? 
-                                'No price data available' : 
-                                label.includes('Price') ? 
-                                    `${label}: ${price.toFixed(0)} DKK` : 
-                                    `Price: ${price.toFixed(0)} DKK`;
+                            if (price === 0) {
+                                return 'No price data available';
+                            }
+                            // Map the dataset label to a more descriptive tooltip label
+                            const tooltipLabel = {
+                                'Avg. MWh Price': 'Avg. MWh Price',
+                                'Avg. Apartment': 'Avg. Apartment Price',
+                                'Avg. House': 'Avg. House Price'
+                            }[label] || label;
+
+                            return `${tooltipLabel}: ${price.toFixed(0)} DKK`;
                         }
                     }
                 },
@@ -555,6 +565,137 @@ function createPriceDistributionChart(data, selectedForsyids) {
                         },
                         beginAtZero: true
                     }
+                }
+            }
+        }
+    });
+}
+
+function createTotalProductionChart(data, selectedForsyids) {
+    const ctx = document.getElementById('totalProductionChart').getContext('2d');
+
+    // Get all available years from the data
+    const years = new Set();
+    selectedForsyids.forEach(forsyid => {
+        const plantData = data[forsyid.toString().padStart(8, '0')];
+        if (plantData?.production) {
+            Object.keys(plantData.production)
+                .filter(year => !isNaN(parseInt(year)))
+                .forEach(year => years.add(year));
+        }
+    });
+    const productionYears = Array.from(years).sort();
+
+    // Initialize aggregated data
+    const aggregatedProduction = {
+        heat: productionYears.map(() => 0),
+        electricity: productionYears.map(() => 0)
+    };
+
+    // Aggregate production data
+    selectedForsyids.forEach(forsyid => {
+        const plantData = data[forsyid.toString().padStart(8, '0')];
+        if (!plantData?.production) return;
+
+        productionYears.forEach((year, index) => {
+            aggregatedProduction.heat[index] += plantData.production[year]?.varmeprod || 0;
+            aggregatedProduction.electricity[index] += plantData.production[year]?.elprod || 0;
+        });
+    });
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: productionYears,
+            datasets: [
+                {
+                    label: 'Heat',
+                    data: aggregatedProduction.heat,
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Electricity',
+                    data: aggregatedProduction.electricity,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 10
+                        }
+                    }
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true,
+                    ticks: {
+                        font: {
+                            size: 10
+                        },
+                        callback: function(value) {
+                            if (value >= 1000) {
+                                return `${(value/1000).toFixed(1)}k TJ`;
+                            }
+                            return `${value.toLocaleString()} TJ`;
+                        }
+                    },
+                    grid: {
+                        color: '#E4E4E4'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Total Production Over Time'
+                },
+                legend: {
+                    position: 'left',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            return tooltipItems[0].label;
+                        },
+                        label: function(context) {
+                            const index = context.dataIndex;
+                            const heatValue = aggregatedProduction.heat[index];
+                            const electricityValue = aggregatedProduction.electricity[index];
+                            const total = heatValue + electricityValue;
+
+                            return [
+                                `Heat: ${heatValue.toLocaleString()} TJ`,
+                                `Electricity: ${electricityValue.toLocaleString()} TJ`,
+                                `Total: ${total.toLocaleString()} TJ`
+                            ];
+                        }
+                    }
+                },
+                datalabels: {
+                    display: false
                 }
             }
         }
