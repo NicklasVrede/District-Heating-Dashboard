@@ -407,9 +407,6 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                             ];
                         }
                     }
-                },
-                datalabels: {
-                    display: false
                 }
             }
         }
