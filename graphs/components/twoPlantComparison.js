@@ -268,6 +268,10 @@ function createProductionChart(plantData, index, maxValue) {
                             size: 11
                         }
                     }
+                },
+                title: {
+                    display: true,
+                    text: 'Production Distribution Over Time'
                 }
             }
         }
@@ -616,7 +620,8 @@ function createTotalProductionChart(plantData, index, maxValue) {
             },
             plugins: {
                 title: {
-                    display: false
+                    display: true,
+                    text: 'Total Production Over Time'
                 },
                 legend: {
                     display: true,
