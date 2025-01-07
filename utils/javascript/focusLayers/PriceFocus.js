@@ -3,6 +3,7 @@ import { priceColors } from './colors.js';
 import { municipalitiesVisible } from '../municipalitiesFunctions.js';
 import { allPlantIds, allMunicipalityIds } from '../../../main.js';
 import { MainFuelManager } from './MainFuelManager.js';
+import { getCachedData } from '../dataManager.js';
 
 export class PriceFocus {
     constructor(map, measureContainer) {
@@ -77,6 +78,7 @@ export class PriceFocus {
     }
 
     calculatePriceRange(year, features) {
+        const dataDict = getCachedData();
         let minPrice = Infinity;
         let maxPrice = -Infinity;
 
@@ -85,7 +87,7 @@ export class PriceFocus {
                 feature.properties.lau_1.padStart(8, '0') : 
                 feature.properties.forsyid.padStart(8, '0');
             
-            const price = window.dataDict?.[id]?.prices?.[year]?.mwh_price;
+            const price = dataDict?.[id]?.prices?.[year]?.mwh_price;
             
             if (price && price > 0) {
                 minPrice = Math.min(minPrice, price);
@@ -104,39 +106,55 @@ export class PriceFocus {
     updatePriceData() {
         try {
             const currentYear = yearState.year;
+            const dataDict = getCachedData();
             
+            if (!dataDict) {
+                console.error('No data available from DataManager');
+                return;
+            }
+
+            // 1. First, verify we have data
             const source = municipalitiesVisible ? 
                 this.map.getSource('municipalities') : 
                 this.map.getSource('plants');
             
-            if (!source) return;
+            if (!source) {
+                console.log('Source not found:', municipalitiesVisible ? 'municipalities' : 'plants');
+                return;
+            }
 
             const data = source._data;
-            if (!data || !data.features) return;
+            if (!data || !data.features) {
+                console.log('No features found in source');
+                return;
+            }
 
-            if (municipalitiesVisible) {
-                this.priceRanges = {};
-                this.calculatePriceRange(currentYear, data.features);
-                this.updateRankings(currentYear, data.features);
-            } else if (!this.priceRanges[currentYear] || this.lastViewType !== municipalitiesVisible) {
-                this.calculatePriceRange(currentYear, data.features);
+            // 2. Calculate price ranges and update rankings
+            if (municipalitiesVisible || !this.priceRanges[currentYear] || this.lastViewType !== municipalitiesVisible) {
+                const priceRange = this.calculatePriceRange(currentYear, data.features);
+                console.log('Price range:', priceRange);
                 this.updateRankings(currentYear, data.features);
             }
             
             this.lastViewType = municipalitiesVisible;
             
+            // 3. Update feature properties with current prices
             data.features = data.features.map(feature => {
                 const id = municipalitiesVisible ? 
-                    feature.properties.lau_1 : 
-                    feature.properties.forsyid;
+                    feature.properties.lau_1.padStart(8, '0') : 
+                    feature.properties.forsyid.padStart(8, '0');
                 
-                const priceData = window.dataDict?.[id]?.prices?.[currentYear]?.mwh_price ?? null;
+                const priceData = dataDict[id]?.prices?.[currentYear]?.mwh_price ?? null;
+                
                 feature.properties.current_price = priceData;
                 feature.properties.price_rank = this.priceRankings?.[id]?.rank || 0;
                 return feature;
             });
             
+            // 4. Update the source data
             source.setData(data);
+            
+            // 5. Update the visual style
             this.updateCircleStyle(currentYear);
             
         } catch (error) {
@@ -230,13 +248,14 @@ export class PriceFocus {
     }
 
     updateRankings(year) {
+        const dataDict = getCachedData();
         const relevantIds = municipalitiesVisible ? 
             Array.from(allMunicipalityIds).map(id => id.padStart(8, '0')) : 
             Array.from(allPlantIds).map(id => id.padStart(8, '0'));
         
         const priceData = relevantIds
             .map(id => {
-                const price = window.dataDict?.[id]?.prices?.[year]?.mwh_price || 0;
+                const price = dataDict?.[id]?.prices?.[year]?.mwh_price || 0;
                 return { id, price };
             })
             .filter(item => item.price > 0)
