@@ -609,7 +609,16 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     text: titleText
                 },
                 legend: {
-                    display: false
+                    position: 'left',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    }
                 },
                 tooltip: {
                     callbacks: {
