@@ -34,13 +34,10 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     // Clear and setup graph containers
     graphContainer.innerHTML = `
         <div class="graphs-wrapper">
+            <h2 class="graph-title"></h2>
             <div class="graphs-container">
-                <h2 class="graph-title"></h2>
                 <div class="production-graph">
                     <canvas id="productionChart"></canvas>
-                </div>
-                <div class="total-production-graph">
-                    <canvas id="totalProductionChart"></canvas>
                 </div>
                 <div class="price-graph">
                     <canvas id="priceChart"></canvas>
@@ -89,26 +86,42 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     // Create datasets for each fuel type
     const datasets = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
         const values = productionYears.map(year => {
-            // Get the total production for this year, excluding elprod and varmeprod
+            // Calculate total production for this year, excluding elprod and varmeprod
             const yearData = plantData.production[year];
             const yearTotal = Object.entries(yearData)
                 .filter(([key, _]) => key !== 'elprod' && key !== 'varmeprod')
                 .reduce((sum, [_, val]) => sum + (val || 0), 0);
 
-            // Calculate the sum for this category
             let categoryValue = 0;
             if (Array.isArray(fuelTypes)) {
+                // Sum up all fuel types in this category
                 categoryValue = fuelTypes.reduce((sum, fuelType) => 
-                    sum + (yearData?.[fuelType] || 0), 0);
+                    sum + (plantData.production[year]?.[fuelType] || 0), 0);
             } else {
-                categoryValue = yearData?.[fuelTypes] || 0;
+                // Single fuel type
+                categoryValue = plantData.production[year]?.[fuelTypes] || 0;
             }
 
-            return yearTotal > 0 ? (categoryValue / yearTotal) * 100 : 0;
+            return categoryValue;
         });
 
-        const hasProduction = values.some(val => val > 0);
-        if (!hasProduction) return null;
+        // Calculate total production for this category
+        const totalCategory = values.reduce((sum, val) => sum + val, 0);
+        
+        // If total is 0, this category is not present at all
+        if (totalCategory === 0) {
+            return null;  // Will be filtered out
+        }
+
+        // Calculate percentage contribution for threshold check
+        const totalAll = productionYears.reduce((sum, year) => {
+            const yearData = plantData.production[year];
+            return sum + Object.entries(yearData)
+                .filter(([key, _]) => key !== 'elprod' && key !== 'varmeprod')
+                .reduce((s, [_, val]) => s + (val || 0), 0);
+        }, 0);
+        
+        const percentage = (totalCategory / totalAll) * 100;
 
         return {
             label: category,
@@ -116,10 +129,10 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             backgroundColor: graphConfig.colors[category],
             borderColor: graphConfig.colors[category],
             fill: true,
-            borderWidth: 1,
+            hidden: percentage < LEGEND_THRESHOLD_PERCENTAGE,
             pointRadius: 0
         };
-    }).filter(dataset => dataset !== null);
+    }).filter(dataset => dataset !== null);  // Remove null datasets
 
     // Store initial data for reset functionality
     const initialData = {
@@ -131,7 +144,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
         datasets: datasets
     };
 
-    // Create production chart with percentage-based Y-axis
+    // Create chart
     const chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -155,29 +168,32 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             },
             scales: {
                 x: {
-                    stacked: true,
-                    grid: {
-                        display: false
-                    }
-                },
-                y: {
-                    stacked: true,
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: {
-                        callback: function(value) {
-                            return `${value}%`;
-                        }
+                    title: {
+                        display: true,
+                        text: 'Year'
                     },
                     grid: {
                         color: '#E4E4E4'
                     }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Production (TJ)'
+                    },
+                    stacked: true,
+                    grid: {
+                        color: '#E4E4E4'
+                    },
+                    beginAtZero: true,
+                    min: 0,
+                    max: roundedMaxProduction
                 }
             },
             plugins: {
                 title: {
                     display: true,
-                    text: 'Production Distribution Over Time'
+                    text: 'Production Distribution'
                 },
                 tooltip: {
                     mode: 'index',
@@ -189,14 +205,14 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                                 0
                             );
                             const percentage = ((value / total) * 100).toFixed(1);
-                            return `${context.dataset.label}: ${value.toFixed(0)}% (${percentage}%)`;
+                            return `${context.dataset.label}: ${value.toFixed(0)} TJ (${percentage}%)`;
                         },
                         footer: function(tooltipItems) {
                             const total = tooltipItems.reduce(
                                 (sum, item) => sum + item.raw, 
                                 0
                             );
-                            return `Total: ${total.toFixed(0)}%`;
+                            return `Total: ${total.toFixed(0)} TJ`;
                         }
                     }
                 },
@@ -305,126 +321,13 @@ export function createSinglePlantGraph(data, forsyid, focus) {
         }
     });
 
-    // Add the total production chart
-    const totalCtx = document.getElementById('totalProductionChart').getContext('2d');
-    const totalChart = new Chart(totalCtx, {
-        type: 'bar',
-        data: {
-            labels: productionYears,
-            datasets: [
-                {
-                    label: 'Heat',
-                    data: productionYears.map(year => 
-                        plantData.production[year]?.varmeprod || 0
-                    ),
-                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Electricity',
-                    data: productionYears.map(year => 
-                        plantData.production[year]?.elprod || 0
-                    ),
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    stacked: true,
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        font: {
-                            size: 10
-                        },
-                        maxRotation: 45,
-                        minRotation: 45,
-                        autoSkip: false,
-                        callback: function(val, index) {
-                            const year = this.getLabelForValue(val);
-                            return parseInt(year) % 2 === 0 ? year : '';
-                        }
-                    }
-                },
-                y: {
-                    stacked: true,
-                    beginAtZero: true,
-                    max: roundedMaxProduction,
-                    ticks: {
-                        stepSize: Math.ceil(roundedMaxProduction / 10),
-                        font: {
-                            size: 10
-                        },
-                        callback: function(value) {
-                            if (value >= 1000) {
-                                return `${(value/1000).toFixed(1)}k TJ`;
-                            }
-                            return `${value.toLocaleString()} TJ`;
-                        }
-                    },
-                    grid: {
-                        color: '#E4E4E4'
-                    }
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Total Production Over Time'
-                },
-                legend: {
-                    display: true,
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const index = context.dataIndex;
-                            const heatValue = context.chart.data.datasets[0].data[index];
-                            const electricityValue = context.chart.data.datasets[1].data[index];
-                            const total = heatValue + electricityValue;
-                            
-                            return [
-                                `Heat: ${heatValue.toLocaleString()} TJ`,
-                                `Electricity: ${electricityValue.toLocaleString()} TJ`,
-                                `Total: ${total.toLocaleString()} TJ`
-                            ];
-                        }
-                    }
-                },
-                datalabels: {
-                    display: false
-                }
-            }
-        }
-    });
-
     // Update info box with plant facts
     updateInfoBox(plantData);
 
     // Return cleanup function
     return function cleanup() {
         graphContainer.classList.remove('single-plant');
-        if (chart) chart.destroy();
-        if (totalChart) totalChart.destroy();
-        if (priceChart) priceChart.destroy();
+        // ... any other cleanup code ...
     };
 }
 
@@ -618,17 +521,9 @@ function createPriceChart(plantData, container) {
                         label: function(context) {
                             const price = context.raw;
                             const label = context.dataset.label;
-                            if (price === 0) {
-                                return 'No price data available';
-                            }
-                            // Map the dataset label to a more descriptive tooltip label
-                            const tooltipLabel = {
-                                'MWh Price': 'MWh Price',
-                                'Apartment Price (per year)': 'Apartment Price (75 m²)',
-                                'House Price (per year)': 'House Price (130 m²)'
-                            }[label] || label;
-                            
-                            return `${tooltipLabel}: ${price.toFixed(0)} DKK`;
+                            return price === 0 ? 
+                                'No price data available' : 
+                                `${label}: ${price.toFixed(0)} DKK`;
                         }
                     }
                 },
