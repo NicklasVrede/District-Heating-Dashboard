@@ -177,7 +177,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Production Distribution'
+                    text: 'Production Distribution Over Time'
                 },
                 tooltip: {
                     mode: 'index',
@@ -377,7 +377,8 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             },
             plugins: {
                 title: {
-                    display: false
+                    display: true,
+                    text: 'Total Production Over Time'
                 },
                 legend: {
                     display: true,
