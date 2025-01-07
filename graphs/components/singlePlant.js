@@ -25,7 +25,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
 
     const plantId = forsyid.toString().padStart(8, '0');
     const plantData = data[plantId];
-    
+
     if (!plantData?.production) {
         showToast("No data available for the selected plant");
         return;
@@ -38,6 +38,9 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                 <h2 class="graph-title"></h2>
                 <div class="production-graph">
                     <canvas id="productionChart"></canvas>
+                </div>
+                <div class="total-production-graph">
+                    <canvas id="totalProductionChart"></canvas>
                 </div>
                 <div class="price-graph">
                     <canvas id="priceChart"></canvas>
@@ -86,42 +89,26 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     // Create datasets for each fuel type
     const datasets = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
         const values = productionYears.map(year => {
-            // Calculate total production for this year, excluding elprod and varmeprod
+            // Get the total production for this year, excluding elprod and varmeprod
             const yearData = plantData.production[year];
             const yearTotal = Object.entries(yearData)
                 .filter(([key, _]) => key !== 'elprod' && key !== 'varmeprod')
                 .reduce((sum, [_, val]) => sum + (val || 0), 0);
 
+            // Calculate the sum for this category
             let categoryValue = 0;
             if (Array.isArray(fuelTypes)) {
-                // Sum up all fuel types in this category
                 categoryValue = fuelTypes.reduce((sum, fuelType) => 
-                    sum + (plantData.production[year]?.[fuelType] || 0), 0);
+                    sum + (yearData?.[fuelType] || 0), 0);
             } else {
-                // Single fuel type
-                categoryValue = plantData.production[year]?.[fuelTypes] || 0;
+                categoryValue = yearData?.[fuelTypes] || 0;
             }
 
-            return categoryValue;
+            return yearTotal > 0 ? (categoryValue / yearTotal) * 100 : 0;
         });
 
-        // Calculate total production for this category
-        const totalCategory = values.reduce((sum, val) => sum + val, 0);
-        
-        // If total is 0, this category is not present at all
-        if (totalCategory === 0) {
-            return null;  // Will be filtered out
-        }
-
-        // Calculate percentage contribution for threshold check
-        const totalAll = productionYears.reduce((sum, year) => {
-            const yearData = plantData.production[year];
-            return sum + Object.entries(yearData)
-                .filter(([key, _]) => key !== 'elprod' && key !== 'varmeprod')
-                .reduce((s, [_, val]) => s + (val || 0), 0);
-        }, 0);
-        
-        const percentage = (totalCategory / totalAll) * 100;
+        const hasProduction = values.some(val => val > 0);
+        if (!hasProduction) return null;
 
         return {
             label: category,
@@ -129,10 +116,10 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             backgroundColor: graphConfig.colors[category],
             borderColor: graphConfig.colors[category],
             fill: true,
-            hidden: percentage < LEGEND_THRESHOLD_PERCENTAGE,
+            borderWidth: 1,
             pointRadius: 0
         };
-    }).filter(dataset => dataset !== null);  // Remove null datasets
+    }).filter(dataset => dataset !== null);
 
     // Store initial data for reset functionality
     const initialData = {
@@ -144,7 +131,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
         datasets: datasets
     };
 
-    // Create chart
+    // Create production chart with percentage-based Y-axis
     const chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -168,26 +155,23 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             },
             scales: {
                 x: {
-                    title: {
-                        display: true,
-                        text: 'Year'
+                    stacked: true,
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function(value) {
+                            return `${value}%`;
+                        }
                     },
                     grid: {
                         color: '#E4E4E4'
                     }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Production (TJ)'
-                    },
-                    stacked: true,
-                    grid: {
-                        color: '#E4E4E4'
-                    },
-                    beginAtZero: true,
-                    min: 0,
-                    max: roundedMaxProduction
                 }
             },
             plugins: {
@@ -205,14 +189,14 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                                 0
                             );
                             const percentage = ((value / total) * 100).toFixed(1);
-                            return `${context.dataset.label}: ${value.toFixed(0)} TJ (${percentage}%)`;
+                            return `${context.dataset.label}: ${value.toFixed(0)}% (${percentage}%)`;
                         },
                         footer: function(tooltipItems) {
                             const total = tooltipItems.reduce(
                                 (sum, item) => sum + item.raw, 
                                 0
                             );
-                            return `Total: ${total.toFixed(0)} TJ`;
+                            return `Total: ${total.toFixed(0)}%`;
                         }
                     }
                 },
@@ -258,11 +242,11 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                                 tooltipEl.style.cssText = tooltipStyle;
                                 document.body.appendChild(tooltipEl);
                             }
-                            
+
                             // Get mouse position from the event
                             const mouseX = event.native.clientX;
                             const mouseY = event.native.clientY;
-                            
+
                             tooltipEl.innerHTML = tooltip;
                             tooltipEl.style.left = (mouseX + 10) + 'px';
                             tooltipEl.style.top = (mouseY + 10) + 'px';
@@ -281,7 +265,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
 
                         return function(e, legendItem, legend) {
                             clickCount++;
-                            
+
                             if (clickCount === 1) {
                                 clickTimeout = setTimeout(() => {
                                     // Single click behavior
@@ -290,7 +274,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                                     const meta = chart.getDatasetMeta(index);
                                     meta.hidden = !meta.hidden;
                                     chart.update();
-                                    
+
                                     clickCount = 0;
                                 }, 250); // Adjust this delay as needed
                             } else if (clickCount === 2) {
@@ -298,16 +282,16 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                                 // Double click behavior
                                 const chart = legend.chart;
                                 const datasets = chart.data.datasets;
-                                
+
                                 // If all others are already hidden, show all (reset)
                                 const allOthersHidden = datasets.every((dataset, i) => 
                                     i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
-                                
+
                                 datasets.forEach((dataset, i) => {
                                     const meta = chart.getDatasetMeta(i);
                                     meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
                                 });
-                                
+
                                 chart.update();
                                 clickCount = 0;
                             }
@@ -416,7 +400,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                             const heatValue = context.chart.data.datasets[0].data[index];
                             const electricityValue = context.chart.data.datasets[1].data[index];
                             const total = heatValue + electricityValue;
-                            
+
                             return [
                                 `Heat: ${heatValue.toLocaleString()} TJ`,
                                 `Electricity: ${electricityValue.toLocaleString()} TJ`,
@@ -438,13 +422,15 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     // Return cleanup function
     return function cleanup() {
         graphContainer.classList.remove('single-plant');
-        // ... any other cleanup code ...
+        if (chart) chart.destroy();
+        if (totalChart) totalChart.destroy();
+        if (priceChart) priceChart.destroy();
     };
 }
 
 function createPieChart(originalChart, yearData, year, initialData) {
     const ctx = originalChart.ctx;
-    
+
     // Create reset button
     const container = ctx.canvas.parentElement;
     const resetBtn = document.createElement('button');
@@ -464,7 +450,7 @@ function createPieChart(originalChart, yearData, year, initialData) {
     // Prepare pie data
     const pieData = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
         let value;
-        
+
         if (Array.isArray(fuelTypes)) {
             value = fuelTypes.reduce((sum, fuelType) => 
                 sum + (yearData[fuelType] || 0), 0);
@@ -573,9 +559,9 @@ function createPieChart(originalChart, yearData, year, initialData) {
 
 function createPriceChart(plantData, container) {
     const ctx = document.getElementById('priceChart').getContext('2d');
-    
+
     const years = ['2019', '2020', '2021', '2022', '2023', '2024'];
-    
+
     const datasets = [
         {
             label: 'MWh Price',
@@ -641,7 +627,7 @@ function createPriceChart(plantData, container) {
                                 'Apartment Price (per year)': 'Apartment Price (75 m²)',
                                 'House Price (per year)': 'House Price (130 m²)'
                             }[label] || label;
-                            
+
                             return `${tooltipLabel}: ${price.toFixed(0)} DKK`;
                         }
                     }
@@ -697,15 +683,15 @@ function updateInfoBox(plantData) {
 
     // Format the commissioning date
     const commissionDate = new Date(plantData.idrift).getFullYear();
-    
+
     // Get the latest year's production data
     const productionYears = Object.keys(plantData.production || {})
         .filter(year => !isNaN(parseInt(year)))
         .sort((a, b) => b - a);  // Sort descending to get latest year first
-    
+
     const latestYear = productionYears[0];
     const latestProduction = plantData.production?.[latestYear] || {};
-    
+
     // Choose between population or area based on data type
     const areaOrPopulation = plantData.population ? 
         `<li><strong>Population:</strong> ${plantData.population.toLocaleString('da-DK')} (2024)</li>` :
@@ -721,7 +707,7 @@ function updateInfoBox(plantData) {
             <li><strong>Heat Production (${latestYear}):</strong> ${latestProduction.varmeprod?.toFixed(1) || 'N/A'} TJ</li>
         </ul>
     `;
-    
+
     // Show the info box
     infoBox.classList.add('visible');
-} 
+}
