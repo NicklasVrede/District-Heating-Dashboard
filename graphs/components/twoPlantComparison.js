@@ -459,11 +459,17 @@ function createPriceChart(plantData, index, maxValues) {
                         label: function(context) {
                             const price = context.raw;
                             const label = context.dataset.label;
-                            return price === 0 ? 
-                                'No price data available' : 
-                                label.includes('Price') ? 
-                                    `${label}: ${price.toFixed(0)} DKK` : 
-                                    `Price: ${price.toFixed(0)} DKK`;
+                            if (price === 0) {
+                                return 'No price data available';
+                            }
+                            // Map the dataset label to a more descriptive tooltip label
+                            const tooltipLabel = {
+                                'MWh Price': 'MWh Price',
+                                'Apartment Price (Yearly)': 'Apartment Price (75 m²)',
+                                'House Price (Yearly)': 'House Price (130 m²)'
+                            }[label] || label;
+                            
+                            return `${tooltipLabel}: ${price.toFixed(0)} DKK`;
                         }
                     }
                 },
@@ -533,7 +539,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
             labels: productionYears,
             datasets: [
                 {
-                    label: 'Heat Production',
+                    label: 'Heat',
                     data: heatProduction,
                     backgroundColor: 'rgba(255, 99, 132, 0.6)',
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -543,7 +549,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                     }
                 },
                 {
-                    label: 'Electricity Production',
+                    label: 'Electricity',
                     data: electricityProduction,
                     backgroundColor: 'rgba(54, 162, 235, 0.6)',
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -626,8 +632,8 @@ function createTotalProductionChart(plantData, index, maxValue) {
                             const total = heatValue + electricityValue;
                             
                             return [
-                                `Heat Production: ${heatValue.toLocaleString()} TJ`,
-                                `Electricity Production: ${electricityValue.toLocaleString()} TJ`,
+                                `Heat: ${heatValue.toLocaleString()} TJ`,
+                                `Electricity: ${electricityValue.toLocaleString()} TJ`,
                                 `Total: ${total.toLocaleString()} TJ`
                             ];
                         }

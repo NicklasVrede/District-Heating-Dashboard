@@ -558,21 +558,21 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             labels: plantNames,
             datasets: [
                 {
-                    label: 'MWh Price',
+                    label: 'MWh',
                     data: mwhData,
                     backgroundColor: 'rgba(75, 192, 192, 0.7)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Apartment Price (Yearly)',
+                    label: 'Apartment',
                     data: apartmentData,
                     backgroundColor: 'rgba(54, 162, 235, 0.7)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'House Price (Yearly)',
+                    label: 'House',
                     data: houseData,
                     backgroundColor: 'rgba(255, 99, 132, 0.7)',
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -609,15 +609,37 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     text: titleText
                 },
                 legend: {
-                    display: false
+                    display: true,
+                    position: 'left',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    }
                 },
                 tooltip: {
+                    mode: 'index',
+                    intersect: false,
                     callbacks: {
                         title: function(tooltipItems) {
                             return tooltipItems[0].label;
                         },
                         label: function(context) {
-                            return `${context.dataset.label}: ${context.raw.toLocaleString()} DKK`;
+                            const value = context.raw;
+                            if (value === 0) return null;
+                            
+                            // Map the dataset label to a more descriptive tooltip label
+                            const tooltipLabel = {
+                                'MWh': 'MWh Price',
+                                'Apartment': 'Apartment Price (75 m²)',
+                                'House': 'House Price (130 m²)'
+                            }[context.dataset.label] || context.dataset.label;
+                            
+                            return `${tooltipLabel}: ${value.toFixed(0)} DKK`;
                         }
                     }
                 }
@@ -683,7 +705,7 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
             labels: plantNames,
             datasets: [
                 {
-                    label: 'Heat Production',
+                    label: 'Heating',
                     data: heatProduction,
                     backgroundColor: 'rgba(255, 99, 132, 0.6)',
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -698,7 +720,7 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
                     }
                 },
                 {
-                    label: 'Electricity Production',
+                    label: 'Electricity',
                     data: electricityProduction,
                     backgroundColor: 'rgba(54, 162, 235, 0.6)',
                     borderColor: 'rgba(54, 162, 235, 1)',
