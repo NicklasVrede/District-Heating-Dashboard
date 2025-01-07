@@ -313,7 +313,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             labels: productionYears,
             datasets: [
                 {
-                    label: 'Heat',
+                    label: 'Heat Production',
                     data: productionYears.map(year => 
                         plantData.production[year]?.varmeprod || 0
                     ),
@@ -322,7 +322,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                     borderWidth: 1
                 },
                 {
-                    label: 'Electricity',
+                    label: 'Electricity Production',
                     data: productionYears.map(year => 
                         plantData.production[year]?.elprod || 0
                     ),
@@ -401,8 +401,8 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                             const total = heatValue + electricityValue;
                             
                             return [
-                                `Heat: ${heatValue.toLocaleString()} TJ`,
-                                `Electricity: ${electricityValue.toLocaleString()} TJ`,
+                                `Heat Production: ${heatValue.toLocaleString()} TJ`,
+                                `Electricity Production: ${electricityValue.toLocaleString()} TJ`,
                                 `Total: ${total.toLocaleString()} TJ`
                             ];
                         }
@@ -617,17 +617,9 @@ function createPriceChart(plantData, container) {
                         label: function(context) {
                             const price = context.raw;
                             const label = context.dataset.label;
-                            if (price === 0) {
-                                return 'No price data available';
-                            }
-                            // Map the dataset label to a more descriptive tooltip label
-                            const tooltipLabel = {
-                                'MWh Price': 'MWh Price',
-                                'Apartment Price (per year)': 'Apartment Price (75 m²)',
-                                'House Price (per year)': 'House Price (130 m²)'
-                            }[label] || label;
-                            
-                            return `${tooltipLabel}: ${price.toFixed(0)} DKK`;
+                            return price === 0 ? 
+                                'No price data available' : 
+                                `${label}: ${price.toFixed(0)} DKK`;
                         }
                     }
                 },

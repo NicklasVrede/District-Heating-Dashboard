@@ -139,6 +139,7 @@
     padding: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 4px 20px;
     list-style: none;
 }
 
