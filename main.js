@@ -25,25 +25,6 @@ import { toggleNetworkSplit } from './utils/javascript/networkSplit.js';
 // Import the MainFuelManager
 import { MainFuelManager } from './utils/javascript/focusLayers/MainFuelManager.js';
 
-// Import the DataManager
-import { getCachedData } from './utils/javascript/dataManager.js';
-
-// Make data accessible through window in a controlled way
-Object.defineProperty(window, 'dataDict', {
-    get() {
-        const data = getCachedData();
-        if (!data) {
-            console.warn('⚠️ Attempted to access dataDict before data was loaded');
-            return {};
-        }
-        return data;
-    },
-    set(value) {
-        console.warn('⚠️ Direct dataDict setting is not allowed. Use DataManager methods instead.');
-        console.trace('Stack trace for attempted dataDict setter:');
-    },
-    configurable: true
-});
 
 // Export the sets so they're available to other modules that import from main.js
 export { allPlantIds, allMunicipalityIds };
