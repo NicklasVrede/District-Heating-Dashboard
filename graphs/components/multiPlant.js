@@ -20,6 +20,9 @@ const LEGEND_THRESHOLD_PERCENTAGE = 0;
 
 Chart.register(ChartDataLabels);
 
+// Add this at the top of the file with other let declarations
+let wheelEventListener = null;
+
 // Common legend configuration
 const commonLegendConfig = {
     position: 'left',
@@ -134,6 +137,11 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
 
     const graphContainer = document.getElementById('graph-container');
     
+    // Remove existing wheel event listener if it exists
+    if (wheelEventListener) {
+        graphContainer.removeEventListener('wheel', wheelEventListener);
+    }
+
     // Only create the structure if we have valid data to show
     if (!selectedForsyids?.length) return;
 
@@ -223,8 +231,8 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
         createOrUpdatePlotlyGraph.animationPlayed.add(focus);
     }
 
-    // Add wheel event listener for year control
-    graphContainer.addEventListener('wheel', (e) => {
+    // Create the wheel event listener
+    wheelEventListener = (e) => {
         e.preventDefault(); // Prevent default scroll
         
         const yearSlider = document.getElementById('year-slider');
@@ -252,9 +260,18 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
             // Trigger the input event on the slider to ensure all listeners are notified
             yearSlider.dispatchEvent(new Event('input'));
         }
-    }, { passive: false });
+    };
 
-    return () => cleanupCharts();
+    // Add the wheel event listener
+    graphContainer.addEventListener('wheel', wheelEventListener, { passive: false });
+
+    return () => {
+        cleanupCharts();
+        if (wheelEventListener) {
+            graphContainer.removeEventListener('wheel', wheelEventListener);
+            wheelEventListener = null;
+        }
+    };
 }
 
 function setupYearSliderListener(data, validForsyids, focus) {
