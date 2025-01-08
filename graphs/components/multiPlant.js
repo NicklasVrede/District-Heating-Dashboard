@@ -223,6 +223,37 @@ export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
         createOrUpdatePlotlyGraph.animationPlayed.add(focus);
     }
 
+    // Add wheel event listener for year control
+    graphContainer.addEventListener('wheel', (e) => {
+        e.preventDefault(); // Prevent default scroll
+        
+        const yearSlider = document.getElementById('year-slider');
+        if (!yearSlider) return;
+        
+        const currentYear = parseInt(yearState.year);
+        const minYear = parseInt(yearSlider.min);
+        const maxYear = parseInt(yearSlider.max);
+        
+        // Determine direction (up or down)
+        const delta = e.deltaY > 0 ? -1 : 1;
+        const newYear = Math.min(Math.max(currentYear + delta, minYear), maxYear);
+        
+        if (newYear !== currentYear) {
+            // Update both the slider value and yearState
+            yearSlider.value = newYear.toString();
+            yearState.year = newYear.toString();
+            
+            // Update the year label if it exists
+            const yearLabel = document.getElementById('year-label');
+            if (yearLabel) {
+                yearLabel.textContent = newYear.toString();
+            }
+            
+            // Trigger the input event on the slider to ensure all listeners are notified
+            yearSlider.dispatchEvent(new Event('input'));
+        }
+    }, { passive: false });
+
     return () => cleanupCharts();
 }
 
