@@ -327,16 +327,28 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
             maintainAspectRatio: false,
             layout: {
                 padding: {
-                    left: 0
+                    left: 0,
+                    top: 2
                 }
             },
             scales: {
                 x: {
                     stacked: true,
+                    position: 'top',
                     title: {
                         display: false
                     },
                     ticks: {
+                        display: true,
+                        autoSkip: false,
+                        maxRotation: 0,
+                        minRotation: 0,
+                        padding: 0,
+                        font: {
+                            size: 14
+                        }
+                    },
+                    grid: {
                         display: false
                     }
                 },
@@ -357,7 +369,11 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
             plugins: {
                 title: {
                     display: true,
-                    text: titleText
+                    text: titleText,
+                    padding: {
+                        top: 0,
+                        bottom: 10
+                    }
                 },
                 legend: commonLegendConfig,
                 tooltip: {
@@ -765,6 +781,9 @@ function createTotalProductionChart(data, validForsyids){
                 x: {
                     stacked: true,
                     title: {
+                        display: false
+                    },
+                    ticks: {
                         display: false
                     }
                 },
