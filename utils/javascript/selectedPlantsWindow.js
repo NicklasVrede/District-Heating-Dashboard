@@ -146,6 +146,43 @@ export function updateSelectedPlantsWindow() {
             if (e.ctrlKey || e.metaKey) {
                 const forsyid = plant.forsyid;
                 modifySelection(map, forsyid, 'remove');
+            } else {
+                // Get plant coordinates from the map source
+                const plantsSource = map.getSource('plants');
+                const plantFeature = plantsSource._data.features.find(
+                    feature => feature.properties.forsyid === plant.forsyid
+                );
+
+                if (plantFeature) {
+                    // Find all features with the same forsyid
+                    const connectedFeatures = plantsSource._data.features.filter(
+                        feature => feature.properties.forsyid === plant.forsyid
+                    );
+
+                    if (connectedFeatures.length === 1) {
+                        // Single entity - fly to it directly
+                        map.flyTo({
+                            center: plantFeature.geometry.coordinates,
+                            zoom: 10,
+                            speed: 1.2,
+                            curve: 1.42,
+                            easing: (t) => t
+                        });
+                    } else {
+                        // Multiple connected entities - fit bounds to show all
+                        const coordinates = connectedFeatures.map(f => f.geometry.coordinates);
+                        const bounds = coordinates.reduce((bounds, coord) => {
+                            return bounds.extend(coord);
+                        }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
+
+                        map.fitBounds(bounds, {
+                            padding: 100,
+                            speed: 1.2,
+                            curve: 1.42,
+                            easing: (t) => t
+                        });
+                    }
+                }
             }
         });
         
