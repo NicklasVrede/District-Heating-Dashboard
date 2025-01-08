@@ -25,6 +25,12 @@ import { toggleNetworkSplit } from './utils/javascript/networkSplit.js';
 // Import the MainFuelManager
 import { MainFuelManager } from './utils/javascript/focusLayers/MainFuelManager.js';
 
+// Import the year state and initialize year state function
+import { yearState, initializeYearState } from './utils/javascript/focusLayers/YearState.js';
+import { updateGraph } from './graphs/graphManager.js';
+
+// Initialize year state with the update graph function
+initializeYearState(updateGraph);
 
 // Export the sets so they're available to other modules that import from main.js
 export { allPlantIds, allMunicipalityIds };
