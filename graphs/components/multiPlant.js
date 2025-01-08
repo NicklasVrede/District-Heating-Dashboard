@@ -69,6 +69,57 @@ const commonLegendConfig = {
     }
 };
 
+// Shared click handler factory
+function createClickHandler() {
+    let clickTimeout = null;
+    let clickCount = 0;
+
+    return function(chart, datasetIndex) {
+        clickCount++;
+        
+        if (clickCount === 1) {
+            clickTimeout = setTimeout(() => {
+                // Single click - toggle visibility
+                const meta = chart.getDatasetMeta(datasetIndex);
+                meta.hidden = !meta.hidden;
+                chart.update();
+                clickCount = 0;
+            }, 250);
+        } else if (clickCount === 2) {
+            clearTimeout(clickTimeout);
+            // Double click - show only this dataset
+            const datasets = chart.data.datasets;
+            
+            // Check if all others are already hidden
+            const allOthersHidden = datasets.every((dataset, i) => 
+                i === datasetIndex || chart.getDatasetMeta(i).hidden);
+            
+            datasets.forEach((dataset, i) => {
+                const meta = chart.getDatasetMeta(i);
+                meta.hidden = !allOthersHidden && (i !== datasetIndex);
+            });
+            
+            chart.update();
+            clickCount = 0;
+        }
+    };
+}
+
+// Create click handlers for legend and chart
+function createChartClickHandlers(chart) {
+    const clickHandler = createClickHandler();
+
+    return {
+        legendClick: function(e, legendItem, legend) {
+            clickHandler(legend.chart, legendItem.datasetIndex);
+        },
+        chartClick: function(e, elements) {
+            if (!elements || !elements.length) return;
+            clickHandler(e.chart, elements[0].datasetIndex);
+        }
+    };
+}
+
 export function createOrUpdatePlotlyGraph(data, selectedForsyids, focus) {
     // Reset any specific settings or data
     if (focus === 'none') {
@@ -316,6 +367,8 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
     }
 
     // Create new chart with filtered datasets
+    const handlers = createChartClickHandlers();
+    
     currentCharts.production = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -377,42 +430,7 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                 },
                 legend: {
                     ...commonLegendConfig,
-                    onClick: (function() {
-                        let clickTimeout = null;
-                        let clickCount = 0;
-
-                        return function(e, legendItem, legend) {
-                            clickCount++;
-                            const datasetIndex = legendItem.datasetIndex;
-                            
-                            if (clickCount === 1) {
-                                clickTimeout = setTimeout(() => {
-                                    // Single click - toggle visibility
-                                    const meta = legend.chart.getDatasetMeta(datasetIndex);
-                                    meta.hidden = !meta.hidden;
-                                    legend.chart.update();
-                                    
-                                    clickCount = 0;
-                                }, 250);
-                            } else if (clickCount === 2) {
-                                clearTimeout(clickTimeout);
-                                // Double click - show only this dataset
-                                const datasets = legend.chart.data.datasets;
-                                
-                                // Check if all others are already hidden
-                                const allOthersHidden = datasets.every((dataset, i) => 
-                                    i === datasetIndex || legend.chart.getDatasetMeta(i).hidden);
-                                
-                                datasets.forEach((dataset, i) => {
-                                    const meta = legend.chart.getDatasetMeta(i);
-                                    meta.hidden = !allOthersHidden && (i !== datasetIndex);
-                                });
-                                
-                                legend.chart.update();
-                                clickCount = 0;
-                            }
-                        };
-                    })()
+                    onClick: handlers.legendClick
                 },
                 tooltip: {
                     callbacks: {
@@ -504,45 +522,7 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                     animation: false
                 }
             },
-            onClick: (function() {
-                let clickTimeout = null;
-                let clickCount = 0;
-
-                return function(e, elements, chart) {
-                    if (!elements || !elements.length) return;
-                    
-                    clickCount++;
-                    const element = elements[0];
-                    const datasetIndex = element.datasetIndex;
-                    
-                    if (clickCount === 1) {
-                        clickTimeout = setTimeout(() => {
-                            // Single click - toggle visibility
-                            const meta = chart.getDatasetMeta(datasetIndex);
-                            meta.hidden = !meta.hidden;
-                            chart.update();
-                            
-                            clickCount = 0;
-                        }, 250);
-                    } else if (clickCount === 2) {
-                        clearTimeout(clickTimeout);
-                        // Double click - show only this dataset
-                        const datasets = chart.data.datasets;
-                        
-                        // Check if all others are already hidden
-                        const allOthersHidden = datasets.every((dataset, i) => 
-                            i === datasetIndex || chart.getDatasetMeta(i).hidden);
-                        
-                        datasets.forEach((dataset, i) => {
-                            const meta = chart.getDatasetMeta(i);
-                            meta.hidden = !allOthersHidden && (i !== datasetIndex);
-                        });
-                        
-                        chart.update();
-                        clickCount = 0;
-                    }
-                };
-            })(),
+            onClick: handlers.chartClick,
             onHover: (event, elements) => {
                 const canvas = event.chart.canvas;
                 canvas.style.cursor = elements.length ? 'pointer' : 'default';
@@ -634,6 +614,8 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         chart.update();
     };
 
+    const handlers = createChartClickHandlers();
+    
     currentCharts.price = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -697,42 +679,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                 },
                 legend: {
                     ...priceLegendConfig,
-                    onClick: (function() {
-                        let clickTimeout = null;
-                        let clickCount = 0;
-
-                        return function(e, legendItem, legend) {
-                            clickCount++;
-                            const datasetIndex = legendItem.datasetIndex;
-                            
-                            if (clickCount === 1) {
-                                clickTimeout = setTimeout(() => {
-                                    // Single click - toggle visibility
-                                    const meta = legend.chart.getDatasetMeta(datasetIndex);
-                                    meta.hidden = !meta.hidden;
-                                    legend.chart.update();
-                                    
-                                    clickCount = 0;
-                                }, 250);
-                            } else if (clickCount === 2) {
-                                clearTimeout(clickTimeout);
-                                // Double click - show only this dataset
-                                const datasets = legend.chart.data.datasets;
-                                
-                                // Check if all others are already hidden
-                                const allOthersHidden = datasets.every((dataset, i) => 
-                                    i === datasetIndex || legend.chart.getDatasetMeta(i).hidden);
-                                
-                                datasets.forEach((dataset, i) => {
-                                    const meta = legend.chart.getDatasetMeta(i);
-                                    meta.hidden = !allOthersHidden && (i !== datasetIndex);
-                                });
-                                
-                                legend.chart.update();
-                                clickCount = 0;
-                            }
-                        };
-                    })()
+                    onClick: handlers.legendClick
                 },
                 tooltip: {
                     callbacks: {
@@ -751,6 +698,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     animation: false
                 }
             },
+            onClick: handlers.chartClick,
             onHover: (event, elements) => {
                 const canvas = event.chart.canvas;
                 canvas.style.cursor = elements.length ? 'pointer' : 'default';
@@ -760,46 +708,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                 } else {
                     handleChartHover(null, window.map, false);
                 }
-            },
-            onClick: (function() {
-                let clickTimeout = null;
-                let clickCount = 0;
-
-                return function(e, elements, chart) {
-                    if (!elements || !elements.length) return;
-                    
-                    clickCount++;
-                    const element = elements[0];
-                    const datasetIndex = element.datasetIndex;
-                    
-                    if (clickCount === 1) {
-                        clickTimeout = setTimeout(() => {
-                            // Single click - toggle visibility
-                            const meta = chart.getDatasetMeta(datasetIndex);
-                            meta.hidden = !meta.hidden;
-                            chart.update();
-                            
-                            clickCount = 0;
-                        }, 250);
-                    } else if (clickCount === 2) {
-                        clearTimeout(clickTimeout);
-                        // Double click - show only this dataset
-                        const datasets = chart.data.datasets;
-                        
-                        // Check if all others are already hidden
-                        const allOthersHidden = datasets.every((dataset, i) => 
-                            i === datasetIndex || chart.getDatasetMeta(i).hidden);
-                        
-                        datasets.forEach((dataset, i) => {
-                            const meta = chart.getDatasetMeta(i);
-                            meta.hidden = !allOthersHidden && (i !== datasetIndex);
-                        });
-                        
-                        chart.update();
-                        clickCount = 0;
-                    }
-                };
-            })()
+            }
         }
     });
 }
@@ -883,6 +792,8 @@ function createTotalProductionChart(data, validForsyids) {
         chart.update();
     };
 
+    const handlers = createChartClickHandlers();
+    
     currentCharts.totalProduction = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -956,42 +867,7 @@ function createTotalProductionChart(data, validForsyids) {
                 },
                 legend: {
                     ...totalProductionLegendConfig,
-                    onClick: (function() {
-                        let clickTimeout = null;
-                        let clickCount = 0;
-
-                        return function(e, legendItem, legend) {
-                            clickCount++;
-                            const datasetIndex = legendItem.datasetIndex;
-                            
-                            if (clickCount === 1) {
-                                clickTimeout = setTimeout(() => {
-                                    // Single click - toggle visibility
-                                    const meta = legend.chart.getDatasetMeta(datasetIndex);
-                                    meta.hidden = !meta.hidden;
-                                    legend.chart.update();
-                                    
-                                    clickCount = 0;
-                                }, 250);
-                            } else if (clickCount === 2) {
-                                clearTimeout(clickTimeout);
-                                // Double click - show only this dataset
-                                const datasets = legend.chart.data.datasets;
-                                
-                                // Check if all others are already hidden
-                                const allOthersHidden = datasets.every((dataset, i) => 
-                                    i === datasetIndex || legend.chart.getDatasetMeta(i).hidden);
-                                
-                                datasets.forEach((dataset, i) => {
-                                    const meta = legend.chart.getDatasetMeta(i);
-                                    meta.hidden = !allOthersHidden && (i !== datasetIndex);
-                                });
-                                
-                                legend.chart.update();
-                                clickCount = 0;
-                            }
-                        };
-                    })()
+                    onClick: handlers.legendClick
                 },
                 tooltip: {
                     callbacks: {
@@ -1018,45 +894,7 @@ function createTotalProductionChart(data, validForsyids) {
                     animation: false
                 }
             },
-            onClick: (function() {
-                let clickTimeout = null;
-                let clickCount = 0;
-
-                return function(e, elements, chart) {
-                    if (!elements || !elements.length) return;
-                    
-                    clickCount++;
-                    const element = elements[0];
-                    const datasetIndex = element.datasetIndex;
-                    
-                    if (clickCount === 1) {
-                        clickTimeout = setTimeout(() => {
-                            // Single click - toggle visibility
-                            const meta = chart.getDatasetMeta(datasetIndex);
-                            meta.hidden = !meta.hidden;
-                            chart.update();
-                            
-                            clickCount = 0;
-                        }, 250);
-                    } else if (clickCount === 2) {
-                        clearTimeout(clickTimeout);
-                        // Double click - show only this dataset
-                        const datasets = chart.data.datasets;
-                        
-                        // Check if all others are already hidden
-                        const allOthersHidden = datasets.every((dataset, i) => 
-                            i === datasetIndex || chart.getDatasetMeta(i).hidden);
-                        
-                        datasets.forEach((dataset, i) => {
-                            const meta = chart.getDatasetMeta(i);
-                            meta.hidden = !allOthersHidden && (i !== datasetIndex);
-                        });
-                        
-                        chart.update();
-                        clickCount = 0;
-                    }
-                };
-            })()
+            onClick: handlers.chartClick
         }
     });
 } 
