@@ -313,7 +313,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
             labels: productionYears,
             datasets: [
                 {
-                    label: 'Heat',
+                    label: 'Heating',
                     data: productionYears.map(year => 
                         plantData.production[year]?.varmeprod || 0
                     ),
@@ -390,6 +390,32 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                         padding: 8,
                         font: {
                             size: 11
+                        }
+                    },
+                    onHover: function(event, legendItem, legend) {
+                        const tooltip = legendTooltips.productionTypes[legendItem.text];
+                        if (tooltip) {
+                            let tooltipEl = document.getElementById('chart-tooltip');
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chart-tooltip';
+                                tooltipEl.style.cssText = tooltipStyle;
+                                document.body.appendChild(tooltipEl);
+                            }
+
+                            const mouseX = event.native.clientX;
+                            const mouseY = event.native.clientY;
+
+                            tooltipEl.innerHTML = tooltip;
+                            tooltipEl.style.left = (mouseX + 10) + 'px';
+                            tooltipEl.style.top = (mouseY + 10) + 'px';
+                            tooltipEl.style.display = 'block';
+                        }
+                    },
+                    onLeave: function() {
+                        const tooltipEl = document.getElementById('chart-tooltip');
+                        if (tooltipEl) {
+                            tooltipEl.style.display = 'none';
                         }
                     }
                 },
@@ -572,7 +598,7 @@ function createPriceChart(plantData, container) {
             fill: true
         },
         {
-            label: 'Apartment Price (per year)',
+            label: 'Apartment',
             data: years.map(year => plantData.prices?.[year]?.apartment_price || 0),
             borderColor: '#36A2EB',
             backgroundColor: 'rgba(54, 162, 235, 0.1)',
@@ -580,7 +606,7 @@ function createPriceChart(plantData, container) {
             fill: true
         },
         {
-            label: 'House Price (per year)',
+            label: 'House',
             data: years.map(year => plantData.prices?.[year]?.house_price || 0),
             borderColor: '#4BC0C0',
             backgroundColor: 'rgba(75, 192, 192, 0.1)',
@@ -604,7 +630,43 @@ function createPriceChart(plantData, container) {
             },
             plugins: {
                 legend: {
-                    display: false
+                    display: true,
+                    position: 'left',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    },
+                    onHover: function(event, legendItem, legend) {
+                        const tooltip = legendTooltips.prices[legendItem.text];
+                        if (tooltip) {
+                            let tooltipEl = document.getElementById('chart-tooltip');
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chart-tooltip';
+                                tooltipEl.style.cssText = tooltipStyle;
+                                document.body.appendChild(tooltipEl);
+                            }
+
+                            const mouseX = event.native.clientX;
+                            const mouseY = event.native.clientY;
+
+                            tooltipEl.innerHTML = tooltip;
+                            tooltipEl.style.left = (mouseX + 10) + 'px';
+                            tooltipEl.style.top = (mouseY + 10) + 'px';
+                            tooltipEl.style.display = 'block';
+                        }
+                    },
+                    onLeave: function() {
+                        const tooltipEl = document.getElementById('chart-tooltip');
+                        if (tooltipEl) {
+                            tooltipEl.style.display = 'none';
+                        }
+                    }
                 },
                 datalabels: {
                     display: false

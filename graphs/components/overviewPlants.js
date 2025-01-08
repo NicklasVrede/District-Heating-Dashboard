@@ -104,6 +104,47 @@ function createFuelDistributionChart(data, selectedForsyids) {
         aggregatedProduction
     };
 
+    // Create fuel-specific legend config
+    const fuelLegendConfig = {
+        position: 'left',
+        align: 'start',
+        labels: {
+            boxWidth: 12,
+            boxHeight: 12,
+            padding: 8,
+            font: {
+                size: 11
+            }
+        },
+        onHover: function(event, legendItem, legend) {
+            const tooltip = legendTooltips.production[legendItem.text];
+            
+            if (tooltip) {
+                let tooltipEl = document.getElementById('chart-tooltip');
+                if (!tooltipEl) {
+                    tooltipEl = document.createElement('div');
+                    tooltipEl.id = 'chart-tooltip';
+                    tooltipEl.style.cssText = tooltipStyle;
+                    document.body.appendChild(tooltipEl);
+                }
+
+                const mouseX = event.native.clientX;
+                const mouseY = event.native.clientY;
+
+                tooltipEl.innerHTML = tooltip;
+                tooltipEl.style.left = (mouseX + 10) + 'px';
+                tooltipEl.style.top = (mouseY + 10) + 'px';
+                tooltipEl.style.display = 'block';
+            }
+        },
+        onLeave: function() {
+            const tooltipEl = document.getElementById('chart-tooltip');
+            if (tooltipEl) {
+                tooltipEl.style.display = 'none';
+            }
+        }
+    };
+
     new Chart(ctx, {
         type: 'line',
         data: {
@@ -147,82 +188,45 @@ function createFuelDistributionChart(data, selectedForsyids) {
                         }
                     }
                 },
-                legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    },
-                    onClick: (function() {
-                        let clickTimeout = null;
-                        let clickCount = 0;
+                legend: fuelLegendConfig,
+                onClick: (function() {
+                    let clickTimeout = null;
+                    let clickCount = 0;
 
-                        return function(e, legendItem, legend) {
-                            clickCount++;
+                    return function(e, legendItem, legend) {
+                        clickCount++;
 
-                            if (clickCount === 1) {
-                                clickTimeout = setTimeout(() => {
-                                    // Single click behavior
-                                    const index = legendItem.datasetIndex;
-                                    const chart = legend.chart;
-                                    const meta = chart.getDatasetMeta(index);
-                                    meta.hidden = !meta.hidden;
-                                    chart.update();
-
-                                    clickCount = 0;
-                                }, 250);
-                            } else if (clickCount === 2) {
-                                clearTimeout(clickTimeout);
-                                // Double click behavior
+                        if (clickCount === 1) {
+                            clickTimeout = setTimeout(() => {
+                                // Single click behavior
+                                const index = legendItem.datasetIndex;
                                 const chart = legend.chart;
-                                const datasets = chart.data.datasets;
-
-                                // If all others are already hidden, show all (reset)
-                                const allOthersHidden = datasets.every((dataset, i) => 
-                                    i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
-
-                                datasets.forEach((dataset, i) => {
-                                    const meta = chart.getDatasetMeta(i);
-                                    meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
-                                });
-
+                                const meta = chart.getDatasetMeta(index);
+                                meta.hidden = !meta.hidden;
                                 chart.update();
+
                                 clickCount = 0;
-                            }
-                        };
-                    })(),
-                    onHover: function(event, legendItem, legend) {
-                        const tooltip = legendTooltips.production[legendItem.text];
-                        if (tooltip) {
-                            let tooltipEl = document.getElementById('chart-tooltip');
-                            if (!tooltipEl) {
-                                tooltipEl = document.createElement('div');
-                                tooltipEl.id = 'chart-tooltip';
-                                tooltipEl.style.cssText = tooltipStyle;
-                                document.body.appendChild(tooltipEl);
-                            }
+                            }, 250);
+                        } else if (clickCount === 2) {
+                            clearTimeout(clickTimeout);
+                            // Double click behavior
+                            const chart = legend.chart;
+                            const datasets = chart.data.datasets;
 
-                            const mouseX = event.native.clientX;
-                            const mouseY = event.native.clientY;
+                            // If all others are already hidden, show all (reset)
+                            const allOthersHidden = datasets.every((dataset, i) => 
+                                i === legendItem.datasetIndex || chart.getDatasetMeta(i).hidden);
 
-                            tooltipEl.innerHTML = tooltip;
-                            tooltipEl.style.left = (mouseX + 10) + 'px';
-                            tooltipEl.style.top = (mouseY + 10) + 'px';
-                            tooltipEl.style.display = 'block';
+                            datasets.forEach((dataset, i) => {
+                                const meta = chart.getDatasetMeta(i);
+                                meta.hidden = !allOthersHidden && (i !== legendItem.datasetIndex);
+                              });
+
+                            chart.update();
+                            clickCount = 0;
                         }
-                    },
-                    onLeave: function() {
-                        const tooltipEl = document.getElementById('chart-tooltip');
-                        if (tooltipEl) {
-                            tooltipEl.style.display = 'none';
-                        }
-                    }
-                }
+                    };
+                })(),
             },
             scales: {
                 x: {
@@ -468,7 +472,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
     // Create datasets
     const datasets = [
         {
-            label: 'Avg. MWh Price',
+            label: 'MWh Price',
             data: aggregatedPrices.mwh_price,
             borderColor: '#FF6384',
             backgroundColor: 'rgba(255, 99, 132, 0.1)',
@@ -476,7 +480,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
             fill: true
         },
         {
-            label: 'Avg. Apartment',
+            label: 'Apartment',
             data: aggregatedPrices.apartment_price,
             borderColor: '#36A2EB',
             backgroundColor: 'rgba(54, 162, 235, 0.1)',
@@ -484,7 +488,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
             fill: true
         },
         {
-            label: 'Avg. House',
+            label: 'House',
             data: aggregatedPrices.house_price,
             borderColor: '#4BC0C0',
             backgroundColor: 'rgba(75, 192, 192, 0.1)',
@@ -492,6 +496,47 @@ function createPriceDistributionChart(data, selectedForsyids) {
             fill: true
         }
     ];
+
+    // Create price-specific legend config
+    const priceLegendConfig = {
+        position: 'left',
+        align: 'start',
+        labels: {
+            boxWidth: 12,
+            boxHeight: 12,
+            padding: 8,
+            font: {
+                size: 11
+            }
+        },
+        onHover: function(event, legendItem, legend) {
+            const tooltip = legendTooltips.prices[legendItem.text];
+            
+            if (tooltip) {
+                let tooltipEl = document.getElementById('chart-tooltip');
+                if (!tooltipEl) {
+                    tooltipEl = document.createElement('div');
+                    tooltipEl.id = 'chart-tooltip';
+                    tooltipEl.style.cssText = tooltipStyle;
+                    document.body.appendChild(tooltipEl);
+                }
+
+                const mouseX = event.native.clientX;
+                const mouseY = event.native.clientY;
+
+                tooltipEl.innerHTML = tooltip;
+                tooltipEl.style.left = (mouseX + 10) + 'px';
+                tooltipEl.style.top = (mouseY + 10) + 'px';
+                tooltipEl.style.display = 'block';
+            }
+        },
+        onLeave: function() {
+            const tooltipEl = document.getElementById('chart-tooltip');
+            if (tooltipEl) {
+                tooltipEl.style.display = 'none';
+            }
+        }
+    };
 
     new Chart(ctx, {
         type: 'line',
@@ -507,18 +552,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
                 intersect: false,
             },
             plugins: {
-                legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    }
-                },
+                legend: priceLegendConfig,
                 datalabels: {
                     display: false
                 },
@@ -603,13 +637,54 @@ function createTotalProductionChart(data, selectedForsyids) {
         });
     });
 
+    // Create production-specific legend config
+    const productionLegendConfig = {
+        position: 'left',
+        align: 'start',
+        labels: {
+            boxWidth: 12,
+            boxHeight: 12,
+            padding: 8,
+            font: {
+                size: 11
+            }
+        },
+        onHover: function(event, legendItem, legend) {
+            const tooltip = legendTooltips.productionTypes[legendItem.text];
+            
+            if (tooltip) {
+                let tooltipEl = document.getElementById('chart-tooltip');
+                if (!tooltipEl) {
+                    tooltipEl = document.createElement('div');
+                    tooltipEl.id = 'chart-tooltip';
+                    tooltipEl.style.cssText = tooltipStyle;
+                    document.body.appendChild(tooltipEl);
+                }
+
+                const mouseX = event.native.clientX;
+                const mouseY = event.native.clientY;
+
+                tooltipEl.innerHTML = tooltip;
+                tooltipEl.style.left = (mouseX + 10) + 'px';
+                tooltipEl.style.top = (mouseY + 10) + 'px';
+                tooltipEl.style.display = 'block';
+            }
+        },
+        onLeave: function() {
+            const tooltipEl = document.getElementById('chart-tooltip');
+            if (tooltipEl) {
+                tooltipEl.style.display = 'none';
+            }
+        }
+    };
+
     new Chart(ctx, {
         type: 'bar',
         data: {
             labels: productionYears,
             datasets: [
                 {
-                    label: 'Heat',
+                    label: 'Heating',
                     data: aggregatedProduction.heat,
                     backgroundColor: 'rgba(255, 99, 132, 0.6)',
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -663,37 +738,7 @@ function createTotalProductionChart(data, selectedForsyids) {
                     display: true,
                     text: 'Total Production Over Time'
                 },
-                legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        title: function(tooltipItems) {
-                            return tooltipItems[0].label;
-                        },
-                        label: function(context) {
-                            const index = context.dataIndex;
-                            const heatValue = aggregatedProduction.heat[index];
-                            const electricityValue = aggregatedProduction.electricity[index];
-                            const total = heatValue + electricityValue;
-
-                            return [
-                                `Heat: ${heatValue.toLocaleString()} TJ`,
-                                `Electricity: ${electricityValue.toLocaleString()} TJ`,
-                                `Total: ${total.toLocaleString()} TJ`
-                            ];
-                        }
-                    }
-                },
+                legend: productionLegendConfig,
                 datalabels: {
                     display: false
                 }

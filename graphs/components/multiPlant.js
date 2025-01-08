@@ -34,6 +34,34 @@ const commonLegendConfig = {
         font: {
             size: 11
         }
+    },
+    onHover: function(event, legendItem, legend) {
+        const tooltip = legendTooltips.production[legendItem.text];
+        if (tooltip) {
+            // Create or get tooltip element
+            let tooltipEl = document.getElementById('chart-tooltip');
+            if (!tooltipEl) {
+                tooltipEl = document.createElement('div');
+                tooltipEl.id = 'chart-tooltip';
+                tooltipEl.style.cssText = tooltipStyle;
+                document.body.appendChild(tooltipEl);
+            }
+
+            // Get mouse position from the event
+            const mouseX = event.native.clientX;
+            const mouseY = event.native.clientY;
+
+            tooltipEl.innerHTML = tooltip;
+            tooltipEl.style.left = (mouseX + 10) + 'px';
+            tooltipEl.style.top = (mouseY + 10) + 'px';
+            tooltipEl.style.display = 'block';
+        }
+    },
+    onLeave: function() {
+        const tooltipEl = document.getElementById('chart-tooltip');
+        if (tooltipEl) {
+            tooltipEl.style.display = 'none';
+        }
     }
 };
 
@@ -503,6 +531,33 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         houseData.push(plantData?.prices?.[effectiveYear]?.house_price || 0);
     });
 
+    // Create price-specific legend config
+    const priceLegendConfig = {
+        ...commonLegendConfig,
+        onHover: function(event, legendItem, legend) {
+            // Check for price tooltips
+            const tooltip = legendTooltips.prices[legendItem.text];
+            
+            if (tooltip) {
+                let tooltipEl = document.getElementById('chart-tooltip');
+                if (!tooltipEl) {
+                    tooltipEl = document.createElement('div');
+                    tooltipEl.id = 'chart-tooltip';
+                    tooltipEl.style.cssText = tooltipStyle;
+                    document.body.appendChild(tooltipEl);
+                }
+
+                const mouseX = event.native.clientX;
+                const mouseY = event.native.clientY;
+
+                tooltipEl.innerHTML = tooltip;
+                tooltipEl.style.left = (mouseX + 10) + 'px';
+                tooltipEl.style.top = (mouseY + 10) + 'px';
+                tooltipEl.style.display = 'block';
+            }
+        }
+    };
+
     currentCharts.price = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -516,14 +571,14 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     borderWidth: 1
                 },
                 {
-                    label: 'Apartment Price (Yearly)',
+                    label: 'Apartment',
                     data: apartmentData,
                     backgroundColor: 'rgba(54, 162, 235, 0.7)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'House Price (Yearly)',
+                    label: 'House',
                     data: houseData,
                     backgroundColor: 'rgba(255, 99, 132, 0.7)',
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -564,7 +619,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     display: true,
                     text: titleText
                 },
-                legend: commonLegendConfig,
+                legend: priceLegendConfig, 
                 tooltip: {
                     callbacks: {
                         title: function(tooltipItems) {
@@ -594,8 +649,8 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
     });
 }
 
-function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
-    const effectiveYear = Math.min(Math.max(currentYear, '2000'), '2023');
+function createTotalProductionChart(data, validForsyids){
+    const effectiveYear = Math.min(Math.max(yearState.year, '2000'), '2023');
     const canvas = document.getElementById('totalProductionChart');
     
     if (currentCharts.totalProduction) {
@@ -622,15 +677,42 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
 
     // Create title with note if year was clamped
     let titleText = `Heat and Electricity Production (${effectiveYear})`;
-    if (currentYear !== effectiveYear) {
-        if (currentYear > '2023') {
+    if (yearState.year !== effectiveYear) {
+        if (yearState.year > '2023') {
             titleText = `Heat and Electricity Production (2023) - Latest Available Data`;
-        } else if (currentYear < '2000') {
+        } else if (yearState.year < '2000') {
             titleText = `Heat and Electricity Production (2000) - Earliest Available Data`;
         }
     }
 
-    // Create new chart
+    // Update the commonLegendConfig for this specific chart
+   const totalProductionLegendConfig = {
+        ...commonLegendConfig,
+        onHover: function(event, legendItem, legend) {
+            // Check for production type tooltips first
+            const tooltip = legendTooltips.productionTypes[legendItem.text];
+            
+            if (tooltip) {
+                let tooltipEl = document.getElementById('chart-tooltip');
+                if (!tooltipEl) {
+                    tooltipEl = document.createElement('div');
+                    tooltipEl.id = 'chart-tooltip';
+                    tooltipEl.style.cssText = tooltipStyle;
+                    document.body.appendChild(tooltipEl);
+                }
+
+                const mouseX = event.native.clientX;
+                const mouseY = event.native.clientY;
+
+                tooltipEl.innerHTML = tooltip;
+                tooltipEl.style.left = (mouseX + 10) + 'px';
+                tooltipEl.style.top = (mouseY + 10) + 'px';
+                tooltipEl.style.display = 'block';
+            }
+        }
+    };
+
+    // Create new chart with updated legend config
     currentCharts.totalProduction = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -699,7 +781,7 @@ function createTotalProductionChart(data, validForsyids, currentYear = '2023') {
                     display: true,
                     text: titleText
                 },
-                legend: commonLegendConfig,
+                legend: totalProductionLegendConfig,  // Usethe updated legend config
                 tooltip: {
                     callbacks: {
                         title: function(tooltipItems) {

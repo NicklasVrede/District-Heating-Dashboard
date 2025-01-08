@@ -3,6 +3,62 @@ import { showToast } from './toast.js';
 import { legendTooltips, tooltipStyle } from '../config/tooltipConfig.js';
 
 const LEGEND_THRESHOLD_PERCENTAGE = 0;
+const LEGEND_WIDTH = 80;
+
+// Common legend configuration
+const commonLegendConfig = {
+    position: 'left',
+    align: 'start',
+    x: 0,
+    maxWidth: LEGEND_WIDTH,
+    width: LEGEND_WIDTH,
+    labels: {
+        boxWidth: 12,
+        boxHeight: 12,
+        padding: 8,
+        font: {
+            size: 11
+        }
+    },
+    onHover: function(event, legendItem, legend) {
+        // Checkfor production type tooltips
+        let tooltip = legendTooltips.productionTypes[legendItem.text];
+        
+        // If not found, check for price tooltips
+        if (!tooltip) {
+            tooltip = legendTooltips.prices[legendItem.text];
+        }
+        
+        // If still not found, check for fuel type tooltips
+        if (!tooltip) {
+            tooltip = legendTooltips.production[legendItem.text];
+        }
+
+        if (tooltip) {
+            let tooltipEl = document.getElementById('chart-tooltip');
+            if (!tooltipEl) {
+                tooltipEl = document.createElement('div');
+                tooltipEl.id = 'chart-tooltip';
+                tooltipEl.style.cssText = tooltipStyle;
+                document.body.appendChild(tooltipEl);
+            }
+
+            const mouseX = event.native.clientX;
+            const mouseY = event.native.clientY;
+
+            tooltipEl.innerHTML = tooltip;
+            tooltipEl.style.left = (mouseX + 10) + 'px';
+            tooltipEl.style.top = (mouseY + 10) + 'px';
+            tooltipEl.style.display = 'block';
+        }
+    },
+    onLeave: function() {
+        const tooltipEl = document.getElementById('chart-tooltip');
+        if (tooltipEl) {
+            tooltipEl.style.display = 'none';
+        }
+    }
+};
 
 export function createTwoPlantComparison(data, validForsyids) {
     // Input validation
@@ -200,6 +256,11 @@ function createProductionChart(plantData, index, maxValue) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    left: 0
+                }
+            },
             interaction: {
                 mode: 'nearest',
                 axis: 'x',
@@ -257,18 +318,7 @@ function createProductionChart(plantData, index, maxValue) {
                         }
                     }
                 },
-                legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    }
-                },
+                legend: commonLegendConfig,
                 title: {
                     display: true,
                     text: 'Production Distribution Over Time'
@@ -339,6 +389,11 @@ function createPieChart(originalChart, yearData, year, initialData) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    left: 0
+                }
+            },
             plugins: {
                 datalabels: {
                     display: false
@@ -356,9 +411,7 @@ function createPieChart(originalChart, yearData, year, initialData) {
                         }
                     }
                 },
-                legend: {
-                    position: 'left'
-                }
+                legend: commonLegendConfig
             }
         }
     });
@@ -388,7 +441,7 @@ function createPriceChart(plantData, index, maxValues) {
             fill: true
         },
         {
-            label: 'Apartment Price (Yearly)',
+            label: 'Apartment',
             data: years.map(year => plantData.prices?.[year]?.apartment_price || 0),
             borderColor: '#36A2EB',
             backgroundColor: 'rgba(54, 162, 235, 0.1)',
@@ -396,7 +449,7 @@ function createPriceChart(plantData, index, maxValues) {
             fill: true
         },
         {
-            label: 'House Price (Yearly)',
+            label: 'House',
             data: years.map(year => plantData.prices?.[year]?.house_price || 0),
             borderColor: '#4BC0C0',
             backgroundColor: 'rgba(75, 192, 192, 0.1)',
@@ -423,6 +476,11 @@ function createPriceChart(plantData, index, maxValues) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    left: 0
+                }
+            },
             interaction: {
                 mode: 'index',
                 intersect: false,
@@ -431,46 +489,7 @@ function createPriceChart(plantData, index, maxValues) {
                 datalabels: {
                     display: false
                 },
-                legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    },
-                    onHover: function(event, legendItem, legend) {
-                        const tooltip = legendTooltips.prices[legendItem.text];
-                        if (tooltip) {
-                            // Create or get tooltip element
-                            let tooltipEl = document.getElementById('chart-tooltip');
-                            if (!tooltipEl) {
-                                tooltipEl = document.createElement('div');
-                                tooltipEl.id = 'chart-tooltip';
-                                tooltipEl.style.cssText = tooltipStyle;
-                                document.body.appendChild(tooltipEl);
-                            }
-                            
-                            // Get mouse position from the event
-                            const mouseX = event.native.clientX;
-                            const mouseY = event.native.clientY;
-                            
-                            tooltipEl.innerHTML = tooltip;
-                            tooltipEl.style.left = (mouseX + 10) + 'px';
-                            tooltipEl.style.top = (mouseY + 10) + 'px';
-                            tooltipEl.style.display = 'block';
-                        }
-                    },
-                    onLeave: function() {
-                        const tooltipEl = document.getElementById('chart-tooltip');
-                        if (tooltipEl) {
-                            tooltipEl.style.display = 'none';
-                        }
-                    }
-                },
+                legend: commonLegendConfig,
                 title: {
                     display: true,
                     text: 'Price Development'
@@ -554,7 +573,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
             labels: productionYears,
             datasets: [
                 {
-                    label: 'Heat Production',
+                    label: 'Heating',
                     data: heatProduction,
                     backgroundColor: 'rgba(255, 99, 132, 0.6)',
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -564,7 +583,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                     }
                 },
                 {
-                    label: 'Electricity Production',
+                    label: 'Electricity',
                     data: electricityProduction,
                     backgroundColor: 'rgba(54, 162, 235, 0.6)',
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -578,6 +597,11 @@ function createTotalProductionChart(plantData, index, maxValue) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    left: 0
+                }
+            },
             scales: {
                 x: {
                     stacked: true,
@@ -623,19 +647,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                     display: true,
                     text: 'Total Production Over Time'
                 },
-                legend: {
-                    display: true,
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    }
-                },
+                legend: commonLegendConfig,
                 tooltip: {
                     callbacks: {
                         title: function(tooltipItems) {
