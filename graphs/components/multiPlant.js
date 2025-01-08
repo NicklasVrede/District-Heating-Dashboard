@@ -379,7 +379,7 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
         const plantData = data[paddedForsyid];
         
         if (plantData) {
-            plantNames.push(plantData.name.split(' ')[0]);
+            plantNames.push(plantData.name.split(' ').slice(0, 2).join(' '));
             
             // Calculate total production for this plant in the current year, excluding elprod and varmeprod
             const yearTotal = Object.entries(plantData.production[effectiveYear] || {})
@@ -627,7 +627,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         const paddedForsyid = forsyid.toString().padStart(8, '0');
         const plantData = data[paddedForsyid];
         
-        plantNames.push(plantData?.name?.split(' ')[0] || paddedForsyid);
+        plantNames.push(plantData?.name?.split(' ').slice(0, 2).join(' ') || paddedForsyid);
         
         // Get raw prices directly
         mwhData.push(plantData?.prices?.[effectiveYear]?.mwh_price || 0);
@@ -805,7 +805,7 @@ function createTotalProductionChart(data, validForsyids) {
         const plantData = data[paddedForsyid];
         
         if (plantData) {  // Changed condition to always add the plant
-            plantNames.push(plantData.name.split(' ')[0]);
+            plantNames.push(plantData.name.split(' ').slice(0, 2).join(' '));
             // Use 0 as fallback value when no production data exists
             heatProduction.push(plantData.production?.[effectiveYear]?.varmeprod || 0);
             electricityProduction.push(plantData.production?.[effectiveYear]?.elprod || 0);
