@@ -6,6 +6,7 @@ import { legendTooltips, tooltipStyle } from '../config/tooltipConfig.js';
 import { municipalitiesVisible } from '../../utils/javascript/municipalitiesFunctions.js';
 import { highlightStyles } from '../../styles/highlightStyles.js';
 import { highlightPlant, removePlantHighlight, highlightArea, resetAreaHighlight } from '../../utils/javascript/eventListeners.js';
+import { chartFilterState } from '../../utils/javascript/focusLayers/ChartFilterState.js';
 
 // Keep track of current charts
 let currentCharts = {
@@ -70,35 +71,41 @@ const commonLegendConfig = {
 };
 
 // Shared click handler factory
-function createClickHandler() {
+function createClickHandler(chartType) {
     let clickTimeout = null;
     let clickCount = 0;
 
     return function(chart, datasetIndex) {
+        console.log(`Click detected for ${chartType}, dataset ${datasetIndex}`);
         clickCount++;
         
         if (clickCount === 1) {
             clickTimeout = setTimeout(() => {
-                // Single click - toggle visibility
+                console.log(`Single click executed for ${chartType}, dataset ${datasetIndex}`);
                 const meta = chart.getDatasetMeta(datasetIndex);
                 meta.hidden = !meta.hidden;
+                // Save filter state
+                chartFilterState.updateFilter(chartType, datasetIndex, meta.hidden);
+                console.log('Updated filter state:', chartFilterState.getFilterState(chartType));
                 chart.update();
                 clickCount = 0;
             }, 250);
         } else if (clickCount === 2) {
+            console.log(`Double click executed for ${chartType}, dataset ${datasetIndex}`);
             clearTimeout(clickTimeout);
-            // Double click - show only this dataset
             const datasets = chart.data.datasets;
             
-            // Check if all others are already hidden
             const allOthersHidden = datasets.every((dataset, i) => 
                 i === datasetIndex || chart.getDatasetMeta(i).hidden);
             
             datasets.forEach((dataset, i) => {
                 const meta = chart.getDatasetMeta(i);
                 meta.hidden = !allOthersHidden && (i !== datasetIndex);
+                // Save filter state
+                chartFilterState.updateFilter(chartType, i, meta.hidden);
             });
             
+            console.log('Updated filter state after double click:', chartFilterState.getFilterState(chartType));
             chart.update();
             clickCount = 0;
         }
@@ -106,8 +113,8 @@ function createClickHandler() {
 }
 
 // Create click handlers for legend and chart
-function createChartClickHandlers(chart) {
-    const clickHandler = createClickHandler();
+function createChartClickHandlers(chartType) {
+    const clickHandler = createClickHandler(chartType);
 
     return {
         legendClick: function(e, legendItem, legend) {
@@ -366,8 +373,17 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
         }
     }
 
-    // Create new chart with filtered datasets
-    const handlers = createChartClickHandlers();
+    // Get saved filter state before creating datasets
+    const savedFilters = chartFilterState.getFilterState('production');
+    console.log('Applying saved production filters:', savedFilters);
+
+    datasets.forEach((dataset, i) => {
+        if (savedFilters[i] !== undefined) {
+            dataset.hidden = savedFilters[i];
+        }
+    });
+
+    const handlers = createChartClickHandlers('production');
     
     currentCharts.production = new Chart(ctx, {
         type: 'bar',
@@ -614,35 +630,44 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         chart.update();
     };
 
-    const handlers = createChartClickHandlers();
+    // Get saved filter state
+    const savedFilters = chartFilterState.getFilterState('price');
+    console.log('Applying saved price filters:', savedFilters);
+
+    const datasets = [
+       {
+            label: 'MWh Price',
+            data: mwhData,
+            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+           hidden: savedFilters[0] || false, // Apply saved state
+        },
+        {
+            label: 'Apartment',
+            data: apartmentData,
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            hidden: savedFilters[1] || false, // Apply saved state
+        },
+        {
+            label: 'House',
+            data: houseData,
+            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+            hidden: savedFilters[2] || false, // Apply saved state
+        }
+    ];
+
+    const handlers = createChartClickHandlers('price');
     
     currentCharts.price = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: plantNames,
-            datasets: [
-                {
-                    label: 'MWh Price',
-                    data: mwhData,
-                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Apartment',
-                    data: apartmentData,
-                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'House',
-                    data: houseData,
-                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }
-            ]
+            datasets: datasets
         },
         options: {
             responsive: true,
@@ -792,39 +817,47 @@ function createTotalProductionChart(data, validForsyids) {
         chart.update();
     };
 
-    const handlers = createChartClickHandlers();
+    // Get saved filter state
+    const savedFilters = chartFilterState.getFilterState('totalProduction');
+    console.log('Applying saved total production filters:', savedFilters);
+
+    const datasets = [
+        {
+            label: 'Heating',
+            data: heatProduction,
+            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+            hidden: savedFilters[0] || false, // Apply saved state
+            datalabels: {
+                display: true,
+                align: 'center',
+                anchor: 'center',
+                formatter: function(value) {
+                    return value > 0 ? value.toLocaleString() : '';
+                }
+            }
+        },
+        {
+            label: 'Electricity',
+            data: electricityProduction,
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            hidden: savedFilters[1] || false, // Apply saved state
+            datalabels: {
+                display: false
+            }
+        }
+    ];
+
+    const handlers = createChartClickHandlers('totalProduction');
     
     currentCharts.totalProduction = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: plantNames,
-            datasets: [
-                {
-                    label: 'Heating',
-                    data: heatProduction,
-                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1,
-                    datalabels: {
-                        display: true,
-                        align: 'center',
-                        anchor: 'center',
-                        formatter: function(value) {
-                            return value > 0 ? value.toLocaleString() : '';
-                        }
-                    }
-                },
-                {
-                    label: 'Electricity',
-                    data: electricityProduction,
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1,
-                    datalabels: {
-                        display: false
-                    }
-                }
-            ]
+            datasets: datasets
         },
         options: {
             responsive: true,
