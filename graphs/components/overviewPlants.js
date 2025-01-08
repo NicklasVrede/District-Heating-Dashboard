@@ -116,6 +116,39 @@ function createFuelDistributionChart(data, selectedForsyids) {
                 size: 11
             }
         },
+        onClick: (function() {
+            let lastClick = 0;
+            let lastClickedIndex = -1;
+
+            return function(e, legendItem, legend) {
+                const currentTime = new Date().getTime();
+                const index = legendItem.datasetIndex;
+                const chart = legend.chart;
+
+                // Check for double click (within 300ms)
+                if (currentTime - lastClick < 300 && lastClickedIndex === index) {
+                    // Double click - show only this dataset
+                    const datasets = chart.data.datasets;
+                    
+                    // If all others are already hidden, show all (reset)
+                    const allOthersHidden = datasets.every((dataset, i) => 
+                        i === index || chart.getDatasetMeta(i).hidden);
+
+                    datasets.forEach((dataset, i) => {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.hidden = !allOthersHidden && (i !== index);
+                    });
+                } else {
+                    // Single click - toggle visibility
+                    const meta = chart.getDatasetMeta(index);
+                    meta.hidden = !meta.hidden;
+                }
+
+                chart.update();
+                lastClick = currentTime;
+                lastClickedIndex = index;
+            };
+        })(),
         onHover: function(event, legendItem, legend) {
             event.native.target.style.cursor = 'pointer';
             const tooltip = legendTooltips.production[legendItem.text];
@@ -517,6 +550,39 @@ function createPriceDistributionChart(data, selectedForsyids) {
                 size: 11
             }
         },
+        onClick: (function() {
+            let lastClick = 0;
+            let lastClickedIndex = -1;
+
+            return function(e, legendItem, legend) {
+                const currentTime = new Date().getTime();
+                const index = legendItem.datasetIndex;
+                const chart = legend.chart;
+
+                // Check for double click (within 300ms)
+                if (currentTime - lastClick < 300 && lastClickedIndex === index) {
+                    // Double click - show only this dataset
+                    const datasets = chart.data.datasets;
+                    
+                    // If all others are already hidden, show all (reset)
+                    const allOthersHidden = datasets.every((dataset, i) => 
+                        i === index || chart.getDatasetMeta(i).hidden);
+
+                    datasets.forEach((dataset, i) => {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.hidden = !allOthersHidden && (i !== index);
+                    });
+                } else {
+                    // Single click - toggle visibility
+                    const meta = chart.getDatasetMeta(index);
+                    meta.hidden = !meta.hidden;
+                }
+
+                chart.update();
+                lastClick = currentTime;
+                lastClickedIndex = index;
+            };
+        })(),
         onHover: function(event, legendItem, legend) {
             event.native.target.style.cursor = 'pointer';
             const tooltip = legendTooltips.prices[legendItem.text];
@@ -661,6 +727,39 @@ function createTotalProductionChart(data, selectedForsyids) {
                 size: 11
             }
         },
+        onClick: (function() {
+            let lastClick = 0;
+            let lastClickedIndex = -1;
+
+            return function(e, legendItem, legend) {
+                const currentTime = new Date().getTime();
+                const index = legendItem.datasetIndex;
+                const chart = legend.chart;
+
+                // Check for double click (within 300ms)
+                if (currentTime - lastClick < 300 && lastClickedIndex === index) {
+                    // Double click - show only this dataset
+                    const datasets = chart.data.datasets;
+                    
+                    // If all others are already hidden, show all (reset)
+                    const allOthersHidden = datasets.every((dataset, i) => 
+                        i === index || chart.getDatasetMeta(i).hidden);
+
+                    datasets.forEach((dataset, i) => {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.hidden = !allOthersHidden && (i !== index);
+                    });
+                } else {
+                    // Single click - toggle visibility
+                    const meta = chart.getDatasetMeta(index);
+                    meta.hidden = !meta.hidden;
+                }
+
+                chart.update();
+                lastClick = currentTime;
+                lastClickedIndex = index;
+            };
+        })(),
         onHover: function(event, legendItem, legend) {
             event.native.target.style.cursor = 'pointer';
             const tooltip = legendTooltips.productionTypes[legendItem.text];
