@@ -375,7 +375,45 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                         bottom: 10
                     }
                 },
-                legend: commonLegendConfig,
+                legend: {
+                    ...commonLegendConfig,
+                    onClick: (function() {
+                        let clickTimeout = null;
+                        let clickCount = 0;
+
+                        return function(e, legendItem, legend) {
+                            clickCount++;
+                            const datasetIndex = legendItem.datasetIndex;
+                            
+                            if (clickCount === 1) {
+                                clickTimeout = setTimeout(() => {
+                                    // Single click - toggle visibility
+                                    const meta = legend.chart.getDatasetMeta(datasetIndex);
+                                    meta.hidden = !meta.hidden;
+                                    legend.chart.update();
+                                    
+                                    clickCount = 0;
+                                }, 250);
+                            } else if (clickCount === 2) {
+                                clearTimeout(clickTimeout);
+                                // Double click - show only this dataset
+                                const datasets = legend.chart.data.datasets;
+                                
+                                // Check if all others are already hidden
+                                const allOthersHidden = datasets.every((dataset, i) => 
+                                    i === datasetIndex || legend.chart.getDatasetMeta(i).hidden);
+                                
+                                datasets.forEach((dataset, i) => {
+                                    const meta = legend.chart.getDatasetMeta(i);
+                                    meta.hidden = !allOthersHidden && (i !== datasetIndex);
+                                });
+                                
+                                legend.chart.update();
+                                clickCount = 0;
+                            }
+                        };
+                    })()
+                },
                 tooltip: {
                     callbacks: {
                         title: function(tooltipItems) {
@@ -580,6 +618,22 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         }
     };
 
+    // Function to toggle dataset visibility
+    const toggleDataset = (chart, datasetIndex) => {
+        const meta = chart.getDatasetMeta(datasetIndex);
+        meta.hidden = meta.hidden === null ? !chart.data.datasets[datasetIndex].hidden : null;
+        chart.update();
+    };
+
+    // Function to show only one dataset
+    const showOnlyDataset = (chart, datasetIndex) => {
+        chart.data.datasets.forEach((dataset, index) => {
+            const meta = chart.getDatasetMeta(index);
+            meta.hidden = index !== datasetIndex;
+        });
+        chart.update();
+    };
+
     currentCharts.price = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -641,7 +695,45 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                     display: true,
                     text: titleText
                 },
-                legend: priceLegendConfig, 
+                legend: {
+                    ...priceLegendConfig,
+                    onClick: (function() {
+                        let clickTimeout = null;
+                        let clickCount = 0;
+
+                        return function(e, legendItem, legend) {
+                            clickCount++;
+                            const datasetIndex = legendItem.datasetIndex;
+                            
+                            if (clickCount === 1) {
+                                clickTimeout = setTimeout(() => {
+                                    // Single click - toggle visibility
+                                    const meta = legend.chart.getDatasetMeta(datasetIndex);
+                                    meta.hidden = !meta.hidden;
+                                    legend.chart.update();
+                                    
+                                    clickCount = 0;
+                                }, 250);
+                            } else if (clickCount === 2) {
+                                clearTimeout(clickTimeout);
+                                // Double click - show only this dataset
+                                const datasets = legend.chart.data.datasets;
+                                
+                                // Check if all others are already hidden
+                                const allOthersHidden = datasets.every((dataset, i) => 
+                                    i === datasetIndex || legend.chart.getDatasetMeta(i).hidden);
+                                
+                                datasets.forEach((dataset, i) => {
+                                    const meta = legend.chart.getDatasetMeta(i);
+                                    meta.hidden = !allOthersHidden && (i !== datasetIndex);
+                                });
+                                
+                                legend.chart.update();
+                                clickCount = 0;
+                            }
+                        };
+                    })()
+                },
                 tooltip: {
                     callbacks: {
                         title: function(tooltipItems) {
@@ -668,12 +760,51 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                 } else {
                     handleChartHover(null, window.map, false);
                 }
-            }
+            },
+            onClick: (function() {
+                let clickTimeout = null;
+                let clickCount = 0;
+
+                return function(e, elements, chart) {
+                    if (!elements || !elements.length) return;
+                    
+                    clickCount++;
+                    const element = elements[0];
+                    const datasetIndex = element.datasetIndex;
+                    
+                    if (clickCount === 1) {
+                        clickTimeout = setTimeout(() => {
+                            // Single click - toggle visibility
+                            const meta = chart.getDatasetMeta(datasetIndex);
+                            meta.hidden = !meta.hidden;
+                            chart.update();
+                            
+                            clickCount = 0;
+                        }, 250);
+                    } else if (clickCount === 2) {
+                        clearTimeout(clickTimeout);
+                        // Double click - show only this dataset
+                        const datasets = chart.data.datasets;
+                        
+                        // Check if all others are already hidden
+                        const allOthersHidden = datasets.every((dataset, i) => 
+                            i === datasetIndex || chart.getDatasetMeta(i).hidden);
+                        
+                        datasets.forEach((dataset, i) => {
+                            const meta = chart.getDatasetMeta(i);
+                            meta.hidden = !allOthersHidden && (i !== datasetIndex);
+                        });
+                        
+                        chart.update();
+                        clickCount = 0;
+                    }
+                };
+            })()
         }
     });
 }
 
-function createTotalProductionChart(data, validForsyids){
+function createTotalProductionChart(data, validForsyids) {
     const effectiveYear = Math.min(Math.max(yearState.year, '2000'), '2023');
     const canvas = document.getElementById('totalProductionChart');
     
@@ -736,7 +867,22 @@ function createTotalProductionChart(data, validForsyids){
         }
     };
 
-    // Create new chart with updated legend config
+    // Function to toggle dataset visibility
+    const toggleDataset = (chart, datasetIndex) => {
+        const meta = chart.getDatasetMeta(datasetIndex);
+        meta.hidden = meta.hidden === null ? !chart.data.datasets[datasetIndex].hidden : null;
+        chart.update();
+    };
+
+    // Function to show only one dataset
+    const showOnlyDataset = (chart, datasetIndex) => {
+        chart.data.datasets.forEach((dataset, index) => {
+            const meta = chart.getDatasetMeta(index);
+            meta.hidden = index !== datasetIndex;
+        });
+        chart.update();
+    };
+
     currentCharts.totalProduction = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -808,7 +954,45 @@ function createTotalProductionChart(data, validForsyids){
                     display: true,
                     text: titleText
                 },
-                legend: totalProductionLegendConfig,  // Usethe updated legend config
+                legend: {
+                    ...totalProductionLegendConfig,
+                    onClick: (function() {
+                        let clickTimeout = null;
+                        let clickCount = 0;
+
+                        return function(e, legendItem, legend) {
+                            clickCount++;
+                            const datasetIndex = legendItem.datasetIndex;
+                            
+                            if (clickCount === 1) {
+                                clickTimeout = setTimeout(() => {
+                                    // Single click - toggle visibility
+                                    const meta = legend.chart.getDatasetMeta(datasetIndex);
+                                    meta.hidden = !meta.hidden;
+                                    legend.chart.update();
+                                    
+                                    clickCount = 0;
+                                }, 250);
+                            } else if (clickCount === 2) {
+                                clearTimeout(clickTimeout);
+                                // Double click - show only this dataset
+                                const datasets = legend.chart.data.datasets;
+                                
+                                // Check if all others are already hidden
+                                const allOthersHidden = datasets.every((dataset, i) => 
+                                    i === datasetIndex || legend.chart.getDatasetMeta(i).hidden);
+                                
+                                datasets.forEach((dataset, i) => {
+                                    const meta = legend.chart.getDatasetMeta(i);
+                                    meta.hidden = !allOthersHidden && (i !== datasetIndex);
+                                });
+                                
+                                legend.chart.update();
+                                clickCount = 0;
+                            }
+                        };
+                    })()
+                },
                 tooltip: {
                     callbacks: {
                         title: function(tooltipItems) {
@@ -834,16 +1018,45 @@ function createTotalProductionChart(data, validForsyids){
                     animation: false
                 }
             },
-            onHover: (event, elements) => {
-                const canvas = event.chart.canvas;
-                canvas.style.cursor = elements.length ? 'pointer' : 'default';
-                if (elements && elements.length > 0) {
-                    const forsyid = validForsyids[elements[0].index];
-                    handleChartHover(forsyid, window.map, true);
-                } else {
-                    handleChartHover(null, window.map, false);
-                }
-            }
+            onClick: (function() {
+                let clickTimeout = null;
+                let clickCount = 0;
+
+                return function(e, elements, chart) {
+                    if (!elements || !elements.length) return;
+                    
+                    clickCount++;
+                    const element = elements[0];
+                    const datasetIndex = element.datasetIndex;
+                    
+                    if (clickCount === 1) {
+                        clickTimeout = setTimeout(() => {
+                            // Single click - toggle visibility
+                            const meta = chart.getDatasetMeta(datasetIndex);
+                            meta.hidden = !meta.hidden;
+                            chart.update();
+                            
+                            clickCount = 0;
+                        }, 250);
+                    } else if (clickCount === 2) {
+                        clearTimeout(clickTimeout);
+                        // Double click - show only this dataset
+                        const datasets = chart.data.datasets;
+                        
+                        // Check if all others are already hidden
+                        const allOthersHidden = datasets.every((dataset, i) => 
+                            i === datasetIndex || chart.getDatasetMeta(i).hidden);
+                        
+                        datasets.forEach((dataset, i) => {
+                            const meta = chart.getDatasetMeta(i);
+                            meta.hidden = !allOthersHidden && (i !== datasetIndex);
+                        });
+                        
+                        chart.update();
+                        clickCount = 0;
+                    }
+                };
+            })()
         }
     });
 } 
