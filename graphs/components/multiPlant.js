@@ -36,6 +36,7 @@ const commonLegendConfig = {
         }
     },
     onHover: function(event, legendItem, legend) {
+        event.native.target.style.cursor = 'pointer';
         const tooltip = legendTooltips.production[legendItem.text];
         if (tooltip) {
             // Create or get tooltip element
@@ -57,7 +58,10 @@ const commonLegendConfig = {
             tooltipEl.style.display = 'block';
         }
     },
-    onLeave: function() {
+    onLeave: function(event) {
+        if (event?.native?.target) {
+            event.native.target.style.cursor = 'default';
+        }
         const tooltipEl = document.getElementById('chart-tooltip');
         if (tooltipEl) {
             tooltipEl.style.display = 'none';
@@ -486,6 +490,8 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                 };
             })(),
             onHover: (event, elements) => {
+                const canvas = event.chart.canvas;
+                canvas.style.cursor = elements.length ? 'pointer' : 'default';
                 if (elements && elements.length > 0) {
                     const forsyid = validForsyids[elements[0].index];
                     handleChartHover(forsyid, window.map, true);
@@ -535,7 +541,7 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
     const priceLegendConfig = {
         ...commonLegendConfig,
         onHover: function(event, legendItem, legend) {
-            // Check for price tooltips
+            event.native.target.style.cursor = 'pointer';
             const tooltip = legendTooltips.prices[legendItem.text];
             
             if (tooltip) {
@@ -638,6 +644,8 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
                 }
             },
             onHover: (event, elements) => {
+                const canvas = event.chart.canvas;
+                canvas.style.cursor = elements.length ? 'pointer' : 'default';
                 if (elements && elements.length > 0) {
                     const forsyid = validForsyids[elements[0].index];
                     handleChartHover(forsyid, window.map, true);
@@ -689,7 +697,7 @@ function createTotalProductionChart(data, validForsyids){
    const totalProductionLegendConfig = {
         ...commonLegendConfig,
         onHover: function(event, legendItem, legend) {
-            // Check for production type tooltips first
+            event.native.target.style.cursor = 'pointer';
             const tooltip = legendTooltips.productionTypes[legendItem.text];
             
             if (tooltip) {
@@ -808,6 +816,8 @@ function createTotalProductionChart(data, validForsyids){
                 }
             },
             onHover: (event, elements) => {
+                const canvas = event.chart.canvas;
+                canvas.style.cursor = elements.length ? 'pointer' : 'default';
                 if (elements && elements.length > 0) {
                     const forsyid = validForsyids[elements[0].index];
                     handleChartHover(forsyid, window.map, true);

@@ -21,6 +21,7 @@ const commonLegendConfig = {
         }
     },
     onHover: function(event, legendItem, legend) {
+        event.native.target.style.cursor = 'pointer';
         // Checkfor production type tooltips
         let tooltip = legendTooltips.productionTypes[legendItem.text];
         
@@ -52,7 +53,10 @@ const commonLegendConfig = {
             tooltipEl.style.display = 'block';
         }
     },
-    onLeave: function() {
+    onLeave: function(event) {
+       if (event?.native?.target) {
+            event.native.target.style.cursor = 'default';
+        }
         const tooltipEl = document.getElementById('chart-tooltip');
         if (tooltipEl) {
             tooltipEl.style.display = 'none';
@@ -265,6 +269,10 @@ function createProductionChart(plantData, index, maxValue) {
                 mode: 'nearest',
                 axis: 'x',
                 intersect: false
+            },
+            onHover: (event, elements) => {
+                const canvas = event.chart.canvas;
+                canvas.style.cursor = elements.length ? 'pointer' : 'default';
             },
             onClick: function(event, elements) {
                 if (elements.length > 0) {

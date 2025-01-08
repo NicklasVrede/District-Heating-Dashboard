@@ -117,6 +117,7 @@ function createFuelDistributionChart(data, selectedForsyids) {
             }
         },
         onHover: function(event, legendItem, legend) {
+            event.native.target.style.cursor = 'pointer';
             const tooltip = legendTooltips.production[legendItem.text];
             
             if (tooltip) {
@@ -137,7 +138,10 @@ function createFuelDistributionChart(data, selectedForsyids) {
                 tooltipEl.style.display = 'block';
             }
         },
-        onLeave: function() {
+        onLeave: function(event) {
+            if (event?.native?.target) {
+                event.native.target.style.cursor = 'default';
+            }
             const tooltipEl = document.getElementById('chart-tooltip');
             if (tooltipEl) {
                 tooltipEl.style.display = 'none';
@@ -158,6 +162,10 @@ function createFuelDistributionChart(data, selectedForsyids) {
                 mode: 'nearest',
                 axis: 'x',
                 intersect: false
+            },
+            onHover: (event, elements) => {
+                const canvas = event.chart.canvas;
+                canvas.style.cursor = elements.length ? 'pointer' : 'default';
             },
             plugins: {
                 datalabels: {
@@ -510,6 +518,7 @@ function createPriceDistributionChart(data, selectedForsyids) {
             }
         },
         onHover: function(event, legendItem, legend) {
+            event.native.target.style.cursor = 'pointer';
             const tooltip = legendTooltips.prices[legendItem.text];
             
             if (tooltip) {
@@ -530,7 +539,10 @@ function createPriceDistributionChart(data, selectedForsyids) {
                 tooltipEl.style.display = 'block';
             }
         },
-        onLeave: function() {
+        onLeave: function(event) {
+            if (event?.native?.target) {
+                event.native.target.style.cursor = 'default';
+            }
             const tooltipEl = document.getElementById('chart-tooltip');
             if (tooltipEl) {
                 tooltipEl.style.display = 'none';
@@ -650,6 +662,7 @@ function createTotalProductionChart(data, selectedForsyids) {
             }
         },
         onHover: function(event, legendItem, legend) {
+            event.native.target.style.cursor = 'pointer';
             const tooltip = legendTooltips.productionTypes[legendItem.text];
             
             if (tooltip) {
@@ -670,7 +683,10 @@ function createTotalProductionChart(data, selectedForsyids) {
                 tooltipEl.style.display = 'block';
             }
         },
-        onLeave: function() {
+        onLeave: function(event) {
+            if (event?.native?.target) {
+                event.native.target.style.cursor = 'default';
+            }
             const tooltipEl = document.getElementById('chart-tooltip');
             if (tooltipEl) {
                 tooltipEl.style.display = 'none';

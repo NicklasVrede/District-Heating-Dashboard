@@ -146,6 +146,10 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                 axis: 'x',
                 intersect: false
             },
+            onHover: (event, elements) => {
+                const canvas = event.chart.canvas;
+                canvas.style.cursor = elements.length ? 'pointer' : 'default';
+            },
             onClick: function(event, elements) {
                 if (elements.length > 0) {
                     const index = elements[0].index;
@@ -393,6 +397,7 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                         }
                     },
                     onHover: function(event, legendItem, legend) {
+                        event.native.target.style.cursor = 'pointer';
                         const tooltip = legendTooltips.productionTypes[legendItem.text];
                         if (tooltip) {
                             let tooltipEl = document.getElementById('chart-tooltip');
@@ -412,7 +417,10 @@ export function createSinglePlantGraph(data, forsyid, focus) {
                             tooltipEl.style.display = 'block';
                         }
                     },
-                    onLeave: function() {
+                    onLeave: function(event) {
+                        if (event?.native?.target) {
+                            event.native.target.style.cursor = 'default';
+                        }
                         const tooltipEl = document.getElementById('chart-tooltip');
                         if (tooltipEl) {
                             tooltipEl.style.display = 'none';
@@ -642,6 +650,7 @@ function createPriceChart(plantData, container) {
                         }
                     },
                     onHover: function(event, legendItem, legend) {
+                        event.native.target.style.cursor = 'pointer';
                         const tooltip = legendTooltips.prices[legendItem.text];
                         if (tooltip) {
                             let tooltipEl = document.getElementById('chart-tooltip');
@@ -661,7 +670,10 @@ function createPriceChart(plantData, container) {
                             tooltipEl.style.display = 'block';
                         }
                     },
-                    onLeave: function() {
+                    onLeave: function(event) {
+                        if (event?.native?.target) {
+                            event.native.target.style.cursor = 'default';
+                        }
                         const tooltipEl = document.getElementById('chart-tooltip');
                         if (tooltipEl) {
                             tooltipEl.style.display = 'none';
