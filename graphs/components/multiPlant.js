@@ -975,7 +975,17 @@ function createTotalProductionChart(data, validForsyids) {
                     animation: false
                 }
             },
-            onClick: handlers.chartClick
+            onClick: handlers.chartClick,
+            onHover: (event, elements) => {
+                const canvas = event.chart.canvas;
+                canvas.style.cursor = elements.length ? 'pointer' : 'default';
+                if (elements && elements.length > 0) {
+                    const forsyid = validForsyids[elements[0].index];
+                    handleChartHover(forsyid, window.map, true);
+                } else {
+                    handleChartHover(null, window.map, false);
+                }
+            }
         }
     });
 } 
