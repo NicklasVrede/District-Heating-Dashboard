@@ -689,7 +689,13 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             backgroundColor: 'rgba(75, 192, 192, 0.7)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
-           hidden: savedFilters[0] || false, // Apply saved state
+            hidden: savedFilters[0] || false,
+            datalabels: {
+                display: (context) => context.dataset.data[context.dataIndex] < 2000,
+                align: 'center',
+                anchor: 'center',
+                formatter: (value) => value < 2000 ? value.toLocaleString() : ''
+            }
         },
         {
             label: 'Apartment',
@@ -697,7 +703,13 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             backgroundColor: 'rgba(54, 162, 235, 0.7)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
-            hidden: savedFilters[1] || false, // Apply saved state
+            hidden: savedFilters[1] || false,
+            datalabels: {
+                display: (context) => context.dataset.data[context.dataIndex] < 2000,
+                align: 'center',
+                anchor: 'center',
+                formatter: (value) => value < 2000 ? value.toLocaleString() : ''
+            }
         },
         {
             label: 'House',
@@ -705,7 +717,13 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
             backgroundColor: 'rgba(255, 99, 132, 0.7)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1,
-            hidden: savedFilters[2] || false, // Apply saved state
+            hidden: savedFilters[2] || false,
+            datalabels: {
+                display: (context) => context.dataset.data[context.dataIndex] < 2000,
+                align: 'center',
+                anchor: 'center',
+                formatter: (value) => value < 2000 ? value.toLocaleString() : ''
+            }
         }
     ];
 
