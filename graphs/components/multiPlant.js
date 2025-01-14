@@ -379,7 +379,13 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
         const plantData = data[paddedForsyid];
         
         if (plantData) {
-            plantNames.push(plantData.name.split(' ').slice(0, 2).join(' '));
+            // Truncate plant name to first word + first letter of second word (if exists)
+            const nameParts = plantData.name.split(' ');
+            let truncatedName = nameParts[0];
+            if (nameParts.length > 1) {
+                truncatedName += ' ' + nameParts[1].charAt(0);
+            }
+            plantNames.push(truncatedName);
             
             // Calculate total production for this plant in the current year, excluding elprod and varmeprod
             const yearTotal = Object.entries(plantData.production[effectiveYear] || {})
@@ -460,9 +466,13 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                         autoSkip: false,
                         maxRotation: 0,
                         minRotation: 0,
-                        padding: 0,
+                        padding: 5,
                         font: {
-                            size: 14
+                            size: 11
+                        },
+                        callback: function(value, index) {
+                            const label = this.getLabelForValue(value);
+                            return label.length > 12 ? label.substring(0, 12) + '...' : label;
                         }
                     },
                     grid: {
@@ -497,67 +507,7 @@ function createProductionChart(data, validForsyids, currentYear, focus) {
                     onClick: handlers.legendClick
                 },
                 tooltip: {
-                    callbacks: {
-                        title: function(tooltipItems) {
-                            return tooltipItems[0].label; // Plant name
-                        },
-                        label: function(context) {
-                            // Get all datasets for this plant
-                            const allDatasets = context.chart.data.datasets;
-                            let tooltipLines = [];
-                            
-                            allDatasets.forEach(dataset => {
-                                const value = dataset.data[context.dataIndex];
-                                if (value > 0) { // Only show non-zero values
-                                    // Create colored box using HTML
-                                    const colorBox = `<span style="display:inline-block; width:10px; height:10px; margin-right:5px; background-color:${dataset.backgroundColor}"></span>`;
-                                    // Bold the line if it matches the hovered dataset
-                                    const isHovered = dataset.label === context.dataset.label;
-                                    const labelText = isHovered ? 
-                                        `<strong>${dataset.label}: ${value.toFixed(1)}%</strong>` : 
-                                        `${dataset.label}: ${value.toFixed(1)}%`;
-                                    tooltipLines.push(`${colorBox}${labelText}`);
-                                }
-                            });
-                            
-                            return tooltipLines;
-                        }
-                    },
-                    enabled: false, // Disable default tooltip
-                    external: function(context) {
-                        // Get tooltip element
-                        let tooltipEl = document.getElementById('chart-tooltip');
-                        
-                        if (!tooltipEl) {
-                            tooltipEl = document.createElement('div');
-                            tooltipEl.id = 'chart-tooltip';
-                            tooltipEl.style.cssText = tooltipStyle;
-                            document.body.appendChild(tooltipEl);
-                        }
-
-                        // Hide if no tooltip
-                        const tooltipModel = context.tooltip;
-                        if (tooltipModel.opacity === 0) {
-                            tooltipEl.style.display = 'none';
-                            return;
-                        }
-
-                        // Set Text
-                        if (tooltipModel.body) {
-                            const titleLines = tooltipModel.title || [];
-                            const bodyLines = tooltipModel.body.map(b => b.lines).flat();
-
-                            let innerHtml = `<div style="font-weight: bold; margin-bottom: 5px;">${titleLines[0]}</div>`;
-                            innerHtml += bodyLines.join('<br>');
-
-                            tooltipEl.innerHTML = innerHtml;
-                        }
-
-                        const position = context.chart.canvas.getBoundingClientRect();
-                        tooltipEl.style.display = 'block';
-                        tooltipEl.style.left = position.left + context.tooltip.caretX + 10 + 'px';
-                        tooltipEl.style.top = position.top + context.tooltip.caretY + 'px';
-                    }
+                    enabled: false
                 },
                 datalabels: {
                     display: false
