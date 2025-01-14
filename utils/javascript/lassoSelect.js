@@ -8,6 +8,7 @@ import { updateSelectedMunicipalities } from './eventListeners.js';
 
 let draw;
 let isLassoActive = false;
+let hint = null;
 
 export function initializeLasso(map) {
     draw = new MapboxDraw({
@@ -69,9 +70,25 @@ export function initializeLasso(map) {
 
     // Add event listener for when drawing is completed
     map.on('draw.create', handleLassoSelection);
+    
+    // Add event listener for when drawing is stopped
+    map.on('draw.modechange', () => {
+        if (hint) {
+            hint.remove();
+            hint = null;
+        }
+        document.removeEventListener('mousemove', updateHintPosition);
+    });
 }
 
 function handleLassoSelection(e) {
+    // Remove hint message
+    if (hint) {
+        hint.remove();
+        hint = null;
+    }
+    document.removeEventListener('mousemove', updateHintPosition);
+    
     const map = e.target;
     const lassoPolygon = e.features[0];
     
@@ -140,11 +157,34 @@ export function toggleLassoSelect() {
         draw.changeMode('draw_polygon');
         lassoButton.classList.add('active');
         document.addEventListener('keydown', handleLassoKeypress);
+        document.addEventListener('mousemove', updateHintPosition);
+        
+        // Create hint message
+        hint = document.createElement('div');
+        hint.id = 'lasso-hint';
+        hint.style.position = 'fixed';
+        hint.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        hint.style.color = 'white';
+        hint.style.padding = '4px 8px';
+        hint.style.borderRadius = '3px';
+        hint.style.zIndex = '1000';
+        hint.style.pointerEvents = 'none';
+        hint.style.fontSize = '12px';
+        hint.style.whiteSpace = 'nowrap';
+        hint.textContent = 'Double-click to finish';
+        document.body.appendChild(hint);
     } else {
         draw.changeMode('simple_select');
         draw.deleteAll();
         lassoButton.classList.remove('active');
         document.removeEventListener('keydown', handleLassoKeypress);
+        document.removeEventListener('mousemove', updateHintPosition);
+        
+        // Remove hint if it exists
+        if (hint) {
+            hint.remove();
+            hint = null;
+        }
     }
 }
 
@@ -155,7 +195,22 @@ function handleLassoKeypress(e) {
             handleLassoSelection({ target: draw._map, features: [feature] });
         }
     } else if (e.key === 'Escape' || e.key === 'Backspace') {
+        // Remove hint before clearing the lasso
+        if (hint) {
+            hint.remove();
+            hint = null;
+        }
+        document.removeEventListener('mousemove', updateHintPosition);
+        
         draw.deleteAll();
         toggleLassoSelect();
+    }
+}
+
+function updateHintPosition(e) {
+    if (hint) {
+        // Position hint slightly above the cursor
+        hint.style.left = (e.clientX + 10) + 'px';
+        hint.style.top = (e.clientY - 30) + 'px';
     }
 }
