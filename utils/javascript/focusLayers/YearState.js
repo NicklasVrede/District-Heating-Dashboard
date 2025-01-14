@@ -29,6 +29,9 @@ class YearStateClass {
                 e.preventDefault();
                 
                 const currentYear = parseInt(this._year);
+                const slider = document.getElementById('year-slider');
+                if (!slider) return;
+                
                 const minYear = parseInt(slider.min);
                 const maxYear = parseInt(slider.max);
                 
@@ -41,7 +44,9 @@ class YearStateClass {
                     this.year = newYear.toString();
                     
                     // Update the year label
-                    label.textContent = newYear.toString();
+                    if (label) {
+                        label.textContent = newYear.toString();
+                    }
                     
                     // Update the graphs using the imported function
                     if (this.updateGraphCallback) {
