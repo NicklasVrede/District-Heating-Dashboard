@@ -29,6 +29,9 @@ import { MainFuelManager } from './utils/javascript/focusLayers/MainFuelManager.
 import { yearState, initializeYearState } from './utils/javascript/focusLayers/YearState.js';
 import { updateGraph } from './graphs/graphManager.js';
 
+// Import the loading spinner module
+import { updateLoadingState, totalLoadingTasks } from './utils/javascript/loadingSpinner.js';
+
 // Initialize year state with the update graph function
 initializeYearState(updateGraph);
 
@@ -42,41 +45,6 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja2FzdnJlZGUyMyIsImEiOiJjbTJ0Mm1kdDgwMzZ0M
 export const selectionSet = new Set();
 
 // Initialize loading spinner after disclaimer check
-let loadingCounter = 0;
-const totalLoadingTasks = 5;
-const loadingSpinner = document.getElementById('loading-spinner');
-const mapOverlay = document.getElementById('map-overlay');
-
-function updateLoadingState(increment = true) {
-    if (increment) {
-        loadingCounter++;
-    } else {
-        loadingCounter--;
-    }
-    
-    if (loadingSpinner && mapOverlay) {
-        if (loadingCounter > 0) {
-            loadingSpinner.classList.remove('fade-out');
-            loadingSpinner.style.display = 'flex';
-            mapOverlay.style.display = 'block';
-            // Use setTimeout to ensure the display: block has taken effect
-            setTimeout(() => {
-                mapOverlay.classList.add('active');
-            }, 10);
-        } else {
-            loadingSpinner.classList.add('fade-out');
-            mapOverlay.classList.remove('active');
-            mapOverlay.classList.add('fade-out');
-            setTimeout(() => {
-                loadingSpinner.style.display = 'none';
-                mapOverlay.style.display = 'none';
-                mapOverlay.classList.remove('fade-out');
-            }, 300);
-        }
-    }
-}
-
-// Show loading spinner and overlay immediately
 updateLoadingState();
 
 // Initialize map
