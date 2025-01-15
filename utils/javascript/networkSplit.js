@@ -1,15 +1,14 @@
 import { loadData, clearCache } from './dataManager.js';
 import { MainFuelManager } from './focusLayers/MainFuelManager.js';
 import { yearState } from './focusLayers/YearState.js';
+import { updateLoadingState } from './loadingSpinner.js';
 
 // Track the active state
 let isNetworkSplitActive = false;
 
 export function toggleNetworkSplit(map) {
-    // Get the button and overlay
+    // Get the button
     const button = document.querySelector('.network-split-button');
-    const loadingSpinner = document.getElementById('loading-spinner');
-    const mapOverlay = document.getElementById('map-overlay');
     
     // Toggle state
     isNetworkSplitActive = !isNetworkSplitActive;
@@ -22,66 +21,45 @@ export function toggleNetworkSplit(map) {
         window.clearSelection();
     }
     
-    // Show loading spinner and overlay with fade effect
-    if (loadingSpinner) {
-        loadingSpinner.classList.remove('fade-out');
-        loadingSpinner.style.display = 'flex';
-    }
-    if (mapOverlay) {
-        mapOverlay.style.display = 'block';
-        // Use setTimeout to ensure the display: block has taken effect
-        setTimeout(() => {
-            mapOverlay.classList.add('active');
-        }, 10);
-    }
+    // Show loading spinner
+    updateLoadingState(true, 'Loading network data...');
     
     // Create promises for both fetches
     const plantsPromise = fetch(isNetworkSplitActive ? 'data/plants.geojson' : 'data/plants_merged.geojson')
-        .then(response => response.json());
+        .then(response => response.json())
+        .then(data => {
+            updateLoadingState(true, 'Updating plant data...');
+            map.getSource('plants').setData(data);
+        });
     
     const areasPromise = fetch(isNetworkSplitActive ? 'maps/areas.geojson' : 'maps/areas_merged.geojson')
-        .then(response => response.json());
+        .then(response => response.json())
+        .then(data => {
+            updateLoadingState(true, 'Updating area data...');
+            map.getSource('areas').setData(data);
+        });
     
     // Wait for both fetches to complete
     Promise.all([plantsPromise, areasPromise])
-        .then(([plantsData, areasData]) => {
-            map.getSource('plants').setData(plantsData);
-            map.getSource('areas').setData(areasData);
-            
+        .then(() => {
+            updateLoadingState(true, 'Refreshing data cache...');
             clearCache();
             return loadData();
         })
         .then(() => {
+            updateLoadingState(true, 'Updating fuel display...');
             MainFuelManager.getInstance(map).updateMainFuel(yearState.year);
             
-            // Hide loading spinner and overlay with fade
-            if (loadingSpinner) {
-                loadingSpinner.classList.add('fade-out');
-            }
-            if (mapOverlay) {
-                mapOverlay.classList.remove('active');
-                mapOverlay.classList.add('fade-out');
-                setTimeout(() => {
-                    loadingSpinner.style.display = 'none';
-                    mapOverlay.style.display = 'none';
-                    mapOverlay.classList.remove('fade-out');
-                }, 700);
+            // Hide loading spinner
+            for (let i = 0; i < 5; i++) {  // Match the number of updateLoadingState calls
+                updateLoadingState(false);
             }
         })
         .catch(error => {
             console.error('Error updating network split:', error);
-            // Ensure loading spinner and overlay are hidden on error
-            if (loadingSpinner) {
-                loadingSpinner.classList.add('fade-out');
-            }
-            if (mapOverlay) {
-                mapOverlay.classList.remove('active');
-                mapOverlay.classList.add('fade-out');
-                setTimeout(() => {
-                    loadingSpinner.style.display = 'none';
-                    mapOverlay.style.display = 'none';
-                    mapOverlay.classList.remove('fade-out');
-                }, 700); // Increased to match the CSS transition
+            // Ensure loading spinner is hidden on error
+            for (let i = 0; i < 5; i++) {
+                updateLoadingState(false);
             }
         });
     

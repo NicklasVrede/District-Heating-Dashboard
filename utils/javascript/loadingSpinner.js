@@ -1,7 +1,7 @@
 let loadingCounter = 0;
 const totalLoadingTasks = 5;
 const loadingSpinner = document.getElementById('loading-spinner');
-const mapOverlay = document.getElementById('map-overlay');
+const mapOverlay = document.querySelector('.map-overlay');
 
 // Create and append progress bar elements
 const progressBar = document.createElement('div');
@@ -26,9 +26,31 @@ const loadingMessages = {
     5: 'Initializing map...'
 };
 
+function showOverlay() {
+    if (mapOverlay) {
+        mapOverlay.style.display = 'block';
+        // Use setTimeout to ensure the display: block has taken effect
+        setTimeout(() => {
+            mapOverlay.classList.add('active');
+        }, 10);
+    }
+}
+
+function hideOverlay() {
+    if (mapOverlay) {
+        mapOverlay.classList.remove('active');
+        mapOverlay.classList.add('fade-out');
+        setTimeout(() => {
+            mapOverlay.style.display = 'none';
+            mapOverlay.classList.remove('fade-out');
+        }, 700); // Match the CSS transition time
+    }
+}
+
 export function updateLoadingState(increment = true, message) {
     if (increment) {
         loadingCounter++;
+        showOverlay();
     } else {
         loadingCounter--;
     }
@@ -50,28 +72,21 @@ export function updateLoadingState(increment = true, message) {
         loadingText.textContent = message || loadingMessages[loadingCounter] || 'Loading...';
     }
     
-    if (loadingSpinner && mapOverlay) {
+    if (loadingSpinner) {
         if (loadingCounter > 0) {
             loadingSpinner.classList.remove('fade-out');
             loadingSpinner.style.display = 'flex';
-            mapOverlay.style.display = 'block';
-            setTimeout(() => {
-                mapOverlay.classList.add('active');
-            }, 10);
         } else {
             // Wait for progress bar to reach 100% before starting fade out
             setTimeout(() => {
                 loadingSpinner.classList.add('fade-out');
-                mapOverlay.classList.remove('active');
-                mapOverlay.classList.add('fade-out');
+                hideOverlay();
                 
                 // Wait for fade out animation to complete before hiding
                 setTimeout(() => {
                     loadingSpinner.style.display = 'none';
-                    mapOverlay.style.display = 'none';
-                    mapOverlay.classList.remove('fade-out');
                 }, 300);
-            }, 300); // Wait for progress bar to complete
+            }, 300);
         }
     }
 }
