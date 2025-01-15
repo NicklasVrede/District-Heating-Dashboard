@@ -76,7 +76,7 @@ map.on('load', () => {
     loadData()
         .then(() => {
             initializeIdSets();
-            
+            updateLoadingState(true, 'Loading plants...');
             return Promise.all([
                 loadPlants(map),
                 loadAreas(map),
@@ -86,6 +86,7 @@ map.on('load', () => {
             ]);
         })
         .then(() => {
+            updateLoadingState(true, 'Initializing map sources...');
             // Wait for map idle and ensure all sources are loaded
             return new Promise(resolve => {
                 const checkSources = () => {
@@ -103,7 +104,7 @@ map.on('load', () => {
             });
         })
         .then(() => {
-            // Initialize MainFuelManager first and wait for it
+            updateLoadingState(true, 'Setting up fuel manager...');
             return MainFuelManager.getInstance(map).initialize();
         })
         .then(() => {
