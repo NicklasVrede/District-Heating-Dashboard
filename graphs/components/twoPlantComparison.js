@@ -444,25 +444,25 @@ function createPriceChart(plantData, index, maxValues) {
             label: 'MWh Price',
             data: years.map(year => plantData.prices?.[year]?.mwh_price || 0),
             borderColor: '#FF6384',
-            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+            backgroundColor: '#FF6384',
             tension: 0.1,
-            fill: true
+            fill: false
         },
         {
             label: 'Apartment',
             data: years.map(year => plantData.prices?.[year]?.apartment_price || 0),
             borderColor: '#36A2EB',
-            backgroundColor: 'rgba(54, 162, 235, 0.1)',
+            backgroundColor: '#36A2EB',
             tension: 0.1,
-            fill: true
+            fill: false
         },
         {
             label: 'House',
             data: years.map(year => plantData.prices?.[year]?.house_price || 0),
             borderColor: '#4BC0C0',
-            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+            backgroundColor: '#4BC0C0',
             tension: 0.1,
-            fill: true
+            fill: false
         }
     ];
 
