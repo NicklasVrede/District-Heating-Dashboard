@@ -26,6 +26,8 @@ const loadingMessages = {
     5: 'Initializing map...'
 };
 
+let maxProgress = 0;
+
 function showOverlay() {
     if (mapOverlay) {
         mapOverlay.style.display = 'block';
@@ -56,15 +58,17 @@ export function updateLoadingState(increment = true, message) {
     }
     
     // Update progress bar
-    let progress = (loadingCounter / totalLoadingTasks) * 100;
+    let currentProgress = (loadingCounter / totalLoadingTasks) * 100;
+    // Ensure progress never goes backwards
+    maxProgress = Math.max(maxProgress, currentProgress);
     
-    // Force progress to 100% when all tasks are complete
+    // Reset maxProgress when all tasks are complete
     if (loadingCounter === 0) {
-        progress = 100;
+        maxProgress = 100;
     }
     
     if (progressBar) {
-        progressBar.style.width = `${progress}%`;
+        progressBar.style.width = `${maxProgress}%`;
     }
     
     // Update loading text

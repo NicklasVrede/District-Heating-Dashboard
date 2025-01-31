@@ -1,7 +1,7 @@
 import { loadData, clearCache } from './dataManager.js';
 import { MainFuelManager } from './focusLayers/MainFuelManager.js';
 import { yearState } from './focusLayers/YearState.js';
-import { updateLoadingState } from './loadingSpinner.js';
+import { updateLoadingState, totalLoadingTasks } from './loadingSpinner.js';
 
 // Track the active state
 let isNetworkSplitActive = false;
@@ -21,7 +21,7 @@ export function toggleNetworkSplit(map) {
         window.clearSelection();
     }
     
-    // Show loading spinner
+    // Show initial loading spinner
     updateLoadingState(true, 'Loading network data...');
     
     // Create promises for both fetches
@@ -50,15 +50,17 @@ export function toggleNetworkSplit(map) {
             updateLoadingState(true, 'Updating fuel display...');
             MainFuelManager.getInstance(map).updateMainFuel(yearState.year);
             
-            // Hide loading spinner
-            for (let i = 0; i < 5; i++) {  // Match the number of updateLoadingState calls
-                updateLoadingState(false);
-            }
+            // Hide loading spinner - decrement for each task we completed
+            updateLoadingState(false); // Network data
+            updateLoadingState(false); // Plant data
+            updateLoadingState(false); // Area data
+            updateLoadingState(false); // Cache refresh
+            updateLoadingState(false); // Fuel display
         })
         .catch(error => {
             console.error('Error updating network split:', error);
-            // Ensure loading spinner is hidden on error
-            for (let i = 0; i < 5; i++) {
+            // Ensure loading spinner is hidden on error by decrementing the counter
+            for (let i = 0; i < totalLoadingTasks; i++) {
                 updateLoadingState(false);
             }
         });
