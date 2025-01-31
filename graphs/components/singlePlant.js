@@ -195,8 +195,8 @@ export function createProductionChart(plantData, canvasId, maxValue = null) {
             },
             onClick: function(event, elements) {
                 if (elements.length > 0) {
-                    const index = elements[0].index;
-                    const year = productionYears[index];
+                    const clickIndex = elements[0].index;
+                    const year = productionYears[clickIndex];
                     createPieChart(this, plantData.production[year], year, {
                         data: plantData,
                         canvasId: canvasId,
@@ -670,4 +670,109 @@ export function updateInfoBox(plantData, infoBox) {
     `;
 
     infoBox.classList.add('visible');
+}
+
+function createPieChart(originalChart, yearData, year, initialData) {
+    if (!yearData) return;
+
+    const total = Object.values(yearData).reduce((sum, val) => sum + (val || 0), 0);
+    if (total === 0) return;
+
+    const pieData = Object.entries(graphConfig.fuelTypes).map(([category, fuelTypes]) => {
+        let value;
+        if (Array.isArray(fuelTypes)) {
+            value = fuelTypes.reduce((sum, fuel) => sum + (yearData[fuel] || 0), 0);
+        } else {
+            value = yearData[fuelTypes] || 0;
+        }
+        return {
+            category,
+            value,
+            color: graphConfig.colors[category]
+        };
+    }).filter(item => item.value > 0);
+
+    pieData.sort((a, b) => b.value - a.value);
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'pieChart';
+    
+    const resetBtn = document.createElement('button');
+    resetBtn.textContent = 'Back to Timeline';
+    resetBtn.style.cssText = `
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 8px 16px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        z-index: 10;
+    `;
+
+    const container = originalChart.canvas.parentElement;
+    container.style.position = 'relative';
+    
+    // Store the original canvas ID before clearing
+    const originalCanvasId = originalChart.canvas.id;
+    
+    container.innerHTML = '';
+    container.appendChild(resetBtn);
+    container.appendChild(canvas);
+
+    const newChart = new Chart(canvas, {
+        type: 'pie',
+        data: {
+            labels: pieData.map(d => d.category),
+            datasets: [{
+                data: pieData.map(d => d.value),
+                backgroundColor: pieData.map(d => d.color)
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                datalabels: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: `Production Distribution ${year}`
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `${context.label}: ${value.toFixed(0)} TJ (${percentage}%)`;
+                        }
+                    }
+                },
+                legend: {
+                    position: 'left',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    resetBtn.onclick = () => {
+        // Recreate the original canvas with the correct ID
+        container.innerHTML = `<canvas id="${originalCanvasId}"></canvas>`;
+        
+        // Recreate the production chart
+        createProductionChart(initialData.data, initialData.canvasId, initialData.maxValue);
+    };
+
+    return newChart;
 }

@@ -1,7 +1,7 @@
 export const graphConfig = {
     // Colors for each attribute
     colors: {
-        'Kul': '#2C3E50',
+        'Kul': '#263542',
         'Olie': '#8E44AD',
         'Gas': '#E74C3C',
         'Affald': '#95A5A6',
