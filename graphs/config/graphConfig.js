@@ -7,8 +7,8 @@ export const graphConfig = {
         'Affald': '#95A5A6',
         'Bioaffald': '#27AE60',
         'Biogas & Bioolie': '#A8E6CF',
-        'Træ-biomasse': '#D35400',
-        'Halm': '#F39C12',
+        'Træ-biomasse': '#8B4513',
+        'Halm': '#FF7F00',
         'Brændselsfrit': '#3498DB',
         'Solvarme': '#F1C40F',
         'El': '#4834d4'
