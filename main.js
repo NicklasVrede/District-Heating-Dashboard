@@ -131,7 +131,8 @@ map.on('load', () => {
 
 // Configure map settings
 map.scrollZoom.enable();
-map.scrollZoom.setWheelZoomRate(1);
+map.scrollZoom.setWheelZoomRate(0.005);
+map.scrollZoom.setZoomRate(0.0005);
 
 // After your map is initialized
 initDivider(map);
