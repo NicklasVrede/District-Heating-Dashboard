@@ -92,6 +92,10 @@
     color: #666;
     line-height: 1.2;
     white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .production-legend .legend-item:hover {
