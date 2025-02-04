@@ -636,8 +636,8 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
        {
             label: 'MWh Price',
             data: mwhData,
-            backgroundColor: 'rgba(75, 192, 192, 0.7)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: '#FF6384',
+            borderColor: '#FF6384',
             borderWidth: 1,
             hidden: savedFilters[0] || false,
             datalabels: {
@@ -650,8 +650,8 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         {
             label: 'Apartment',
             data: apartmentData,
-            backgroundColor: 'rgba(54, 162, 235, 0.7)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: '#36A2EB',
+            borderColor: '#36A2EB',
             borderWidth: 1,
             hidden: savedFilters[1] || false,
             datalabels: {
@@ -664,8 +664,8 @@ function createPriceChart(data, validForsyids, currentYear, focus) {
         {
             label: 'House',
             data: houseData,
-            backgroundColor: 'rgba(255, 99, 132, 0.7)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: '#4BC0C0',
+            borderColor: '#4BC0C0',
             borderWidth: 1,
             hidden: savedFilters[2] || false,
             datalabels: {
