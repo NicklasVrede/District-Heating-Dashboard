@@ -575,6 +575,24 @@ function createTotalProductionChart(plantData, index, maxValue) {
         plantData.production[year]?.elprod || 0
     );
 
+    // Calculate local max value for this plant
+    const localMaxValue = Math.max(
+        ...heatProduction.map((heat, i) => heat + electricityProduction[i])
+    );
+
+    // Use the larger of the local max and the other plant's max
+    const effectiveMaxValue = Math.max(localMaxValue, maxValue);
+
+    // Adaptive rounding based on the scale of the values
+    let roundedMax;
+    if (effectiveMaxValue >= 10000) {
+        roundedMax = Math.ceil(effectiveMaxValue / 1000) * 1000;
+    } else if (effectiveMaxValue >= 1000) {
+        roundedMax = Math.ceil(effectiveMaxValue / 100) * 100;
+    } else {
+        roundedMax = Math.ceil(effectiveMaxValue / 10) * 10;
+    }
+
     return new Chart(ctx, {
         type: 'bar',
         data: {
@@ -632,9 +650,9 @@ function createTotalProductionChart(plantData, index, maxValue) {
                 y: {
                     stacked: true,
                     beginAtZero: true,
-                    max: maxValue,
+                    max: roundedMax,
                     ticks: {
-                        stepSize: Math.ceil(maxValue / 10),
+                        stepSize: Math.ceil(roundedMax / 5),
                         font: {
                             size: 10
                         },
