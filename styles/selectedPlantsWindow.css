@@ -26,6 +26,10 @@
     justify-content: space-between;
     align-items: center;
     font-family: Arial, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .selected-plants-list {
@@ -88,6 +92,10 @@
     padding: 0 4px;
     margin-left: 4px;
     flex-shrink: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .delete-button:hover {
@@ -124,11 +132,19 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .plant-count {
     color: #666;
     font-size: 12px;
     font-weight: normal;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
  
