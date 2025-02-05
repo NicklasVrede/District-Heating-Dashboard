@@ -2,7 +2,7 @@
 import { setMapInstance } from './utils/javascript/mapInstance.js';
 
 // Import utility functions
-import { loadPlants, loadAreas, loadGasAreas, loadMunicipalities, loadMunicipalityCentroids } from './utils/javascript/loadData.js';
+import { loadPlants, loadAreas, loadGasAreas, loadMunicipalities, loadMunicipalityCentroids, loadConnectionLines } from './utils/javascript/loadData.js';
 import { searchAddress } from './utils/javascript/addressLookup.js';
 import { clearSelection, selectAll } from './utils/javascript/selectionFunctions.js';
 import { toggleGasAreas } from './utils/javascript/toggleGasAreas.js';
@@ -82,7 +82,8 @@ map.on('load', () => {
                 loadAreas(map),
                 loadGasAreas(map),
                 loadMunicipalities(map),
-                loadMunicipalityCentroids(map)
+                loadMunicipalityCentroids(map),
+                loadConnectionLines(map)
             ]);
         })
         .then(() => {

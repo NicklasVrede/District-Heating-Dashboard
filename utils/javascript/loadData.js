@@ -15,6 +15,33 @@ export function loadPlants(map) {
                 data: geojson
             });
 
+            // Create connections source
+            const connections = {
+                type: 'FeatureCollection',
+                features: createConnectionFeatures(geojson.features)
+            };
+            
+            map.addSource('plant-connections', {
+                type: 'geojson',
+                data: connections
+            });
+
+            // Add connections layer (but hidden)
+            map.addLayer({
+                id: 'plant-connections',
+                type: 'line',
+                source: 'plant-connections',
+                layout: {
+                    'visibility': 'none'  // Changed from 'visible' to 'none'
+                },
+                paint: {
+                    'line-color': '#0000ff',
+                    'line-width': 2,
+                    'line-dasharray': [3, 3],
+                    'line-opacity': 0.7
+                }
+            });
+
             // Add base plant layer
             map.addLayer(plantStyles);
 
@@ -107,6 +134,112 @@ export function loadPlants(map) {
         });
 }
 
+// Helper function to create connection features
+function createConnectionFeatures(plants) {
+    const connections = [];
+    const maxDistance = 50; // Maximum distance in kilometers
+
+    // Group plants by fv_net
+    const networkGroups = {};
+    plants.forEach(plant => {
+        const netId = plant.properties.fv_net;
+        if (netId && netId !== '0' && netId !== '') {
+            if (!networkGroups[netId]) {
+                networkGroups[netId] = [];
+            }
+            networkGroups[netId].push(plant);
+        }
+    });
+
+    // Create MST connections within each network group
+    Object.values(networkGroups).forEach(group => {
+        if (group.length < 2) return;
+
+        // Create all possible edges with distances
+        const edges = [];
+        for (let i = 0; i < group.length; i++) {
+            for (let j = i + 1; j < group.length; j++) {
+                const plant1 = group[i];
+                const plant2 = group[j];
+                
+                // Calculate distance between plants
+                const distance = calculateDistance(
+                    plant1.geometry.coordinates[1],
+                    plant1.geometry.coordinates[0],
+                    plant2.geometry.coordinates[1],
+                    plant2.geometry.coordinates[0]
+                );
+
+                // Only create connection if within maxDistance
+                if (distance <= maxDistance) {
+                    edges.push({
+                        plant1: i,
+                        plant2: j,
+                        distance: distance
+                    });
+                }
+            }
+        }
+
+        // Sort edges by distance
+        edges.sort((a, b) => a.distance - b.distance);
+
+        // Initialize disjoint set for MST
+        const parent = Array(group.length).fill().map((_, i) => i);
+        
+        // Find set representative
+        function find(x) {
+            if (parent[x] !== x) {
+                parent[x] = find(parent[x]);
+            }
+            return parent[x];
+        }
+        
+        // Union two sets
+        function union(x, y) {
+            parent[find(x)] = find(y);
+        }
+
+        // Create MST using Kruskal's algorithm
+        edges.forEach(edge => {
+            if (find(edge.plant1) !== find(edge.plant2)) {
+                union(edge.plant1, edge.plant2);
+                
+                // Add connection to result
+                connections.push({
+                    type: 'Feature',
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: [
+                            group[edge.plant1].geometry.coordinates,
+                            group[edge.plant2].geometry.coordinates
+                        ]
+                    },
+                    properties: {
+                        fv_net: group[edge.plant1].properties.fv_net,
+                        distance: edge.distance
+                    }
+                });
+            }
+        });
+    });
+
+    return connections;
+}
+
+// Helper function to calculate distance between two points in kilometers
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth's radius in kilometers
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+}
+
 export function loadAreas(map) {
     return fetch('maps/areas_merged.geojson')
         .then(response => {
@@ -154,6 +287,37 @@ export function loadAreas(map) {
 
             // Add event listeners for areas
             addAreaEventListeners(map);
+        });
+}
+
+// New function to load connection lines
+export function loadConnectionLines(map) {
+    return fetch('maps/area-connections.geojson')
+        .then(response => response.json())
+        .then(connections => {
+            // Add source for the connections
+            map.addSource('area-connections', {
+                type: 'geojson',
+                data: connections
+            });
+
+            // Add the connections layer
+            map.addLayer({
+                id: 'area-connections',
+                type: 'line',
+                source: 'area-connections',
+                layout: {
+                    'visibility': 'none'
+                },
+                paint: {
+                    'line-color': '#6666ff',
+                    'line-width': 1.5,
+                    'line-opacity': 0.4
+                }
+            });
+        })
+        .catch(error => {
+            console.warn('Error loading connections:', error);
         });
 }
 
