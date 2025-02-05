@@ -593,6 +593,12 @@ function createTotalProductionChart(plantData, index, maxValue) {
         roundedMax = Math.ceil(effectiveMaxValue / 10) * 10;
     }
 
+    // Calculate if we're dealing with small values
+    const maxProductionValue = Math.max(
+        ...heatProduction.map((heat, i) => heat + electricityProduction[i])
+    );
+    const isSmallScale = maxProductionValue < (roundedMax * 0.04); // Less than x% of max scale
+
     return new Chart(ctx, {
         type: 'bar',
         data: {
@@ -605,7 +611,21 @@ function createTotalProductionChart(plantData, index, maxValue) {
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1,
                     datalabels: {
-                        display: false
+                        display: context => {
+                            if (!isSmallScale) return false;
+                            // Show labels every 6th year (index 0, 6, 12, etc.)
+                            return context.dataIndex % 6 === 0;
+                        },
+                        align: 'end',
+                        anchor: 'end',
+                        offset: -4,
+                        color: 'rgba(255, 99, 132, 1)',
+                        font: {
+                            size: 10
+                        },
+                        formatter: function(value) {
+                            return value.toFixed(1) + ' TJ';
+                        }
                     }
                 },
                 {
@@ -615,7 +635,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1,
                     datalabels: {
-                        display: false
+                        display: false  // Always hide data labels for electricity
                     }
                 }
             ]
