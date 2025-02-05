@@ -180,7 +180,7 @@
     justify-content: space-between;
     padding: 16px;
     border-bottom: 1px solid #eee;
-    margin-bottom: 16px;
+    margin-bottom: 0px;
 }
 
 @keyframes pulse {
