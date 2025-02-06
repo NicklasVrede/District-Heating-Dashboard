@@ -366,7 +366,7 @@ export function loadConnectionLines(map) {
                 }
             });
 
-            // Add the selected connections layer with an empty filter
+            // Add the selected connections layer
             map.addLayer({
                 id: 'selected-connections',
                 type: 'line',
@@ -379,7 +379,24 @@ export function loadConnectionLines(map) {
                     'line-width': 1.5,
                     'line-opacity': 0.8
                 },
-                filter: ['in', 'forsyid', ''] // Empty filter that won't match anything
+                filter: ['in', 'forsyid', '']
+            });
+
+            // Add the selected plant connections layer
+            map.addLayer({
+                id: 'selected-plant-connections',
+                type: 'line',
+                source: 'plant-connections',
+                layout: {
+                    'visibility': 'visible'
+                },
+                paint: {
+                    'line-color': '#ff9999',
+                    'line-width': 2,
+                    'line-dasharray': [3, 3],
+                    'line-opacity': 0.8
+                },
+                filter: ['in', 'fv_net', '']
             });
         })
         .catch(error => {

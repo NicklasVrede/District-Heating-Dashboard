@@ -254,6 +254,21 @@ export function highlightArea(map, forsyid) {
             0.8,
             0.4  // Default opacity
         ]);
+
+        // Highlight the plant connections (dotted lines) for the same network
+        map.setPaintProperty('plant-connections', 'line-color', [
+            'case',
+            ['==', ['get', 'fv_net'], fv_net],
+            '#ff9999',
+            '#0000ff'  // Default color
+        ]);
+
+        map.setPaintProperty('plant-connections', 'line-opacity', [
+            'case',
+            ['==', ['get', 'fv_net'], fv_net],
+            0.8,
+            0.7  // Default opacity
+        ]);
     } else {
         // Use forsyid when networks are split or when fv_net is invalid/empty/undefined
         map.setPaintProperty('area-connections', 'line-color', [
@@ -269,6 +284,10 @@ export function highlightArea(map, forsyid) {
             0.8,
             0.4  // Default opacity
         ]);
+
+        // Reset plant connections to default
+        map.setPaintProperty('plant-connections', 'line-color', '#0000ff');
+        map.setPaintProperty('plant-connections', 'line-opacity', 0.7);
     }
 
     // Also highlight connected areas using existing function
@@ -283,6 +302,10 @@ export function resetAreaHighlight(map) {
     // Reset area connections to default styles
     map.setPaintProperty('area-connections', 'line-color', '#6666ff');
     map.setPaintProperty('area-connections', 'line-opacity', 0.4);
+
+    // Reset plant connections to default styles
+    map.setPaintProperty('plant-connections', 'line-color', '#0000ff');
+    map.setPaintProperty('plant-connections', 'line-opacity', 0.7);
 }
 
 export function highlightPlant(map, forsyid) {
@@ -341,10 +364,19 @@ export function updateSelectedPlants(map) {
             connectionFilter.push(['in', ['get', 'forsyid'], ['literal', Array.from(individualIds)]]);
         }
 
+        // Update both connection layers
         map.setFilter('selected-connections', connectionFilter);
+        
+        // Update plant connections if we have valid networks
+        if (validNetworks.size > 0) {
+            map.setFilter('selected-plant-connections', ['in', ['get', 'fv_net'], ['literal', Array.from(validNetworks)]]);
+        } else {
+            map.setFilter('selected-plant-connections', ['in', 'fv_net', '']);
+        }
     } else {
         // For split networks, use forsyid
         map.setFilter('selected-connections', filters);
+        map.setFilter('selected-plant-connections', ['in', 'fv_net', '']); // Hide plant connections when split
     }
 
     const hasMoreThanTwoSelections = selectionSet.size > 2;
