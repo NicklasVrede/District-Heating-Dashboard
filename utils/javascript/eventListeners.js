@@ -239,8 +239,8 @@ export function highlightArea(map, forsyid) {
         areaStyles.line.paint['line-color']
     ]);
 
-    if (!isNetworkSplit && fv_net && fv_net !== '0') {
-        // Use fv_net for merged networks
+    if (!isNetworkSplit && fv_net && fv_net !== '0' && fv_net !== '') {
+        // Use fv_net for merged networks (only when fv_net exists and is valid)
         map.setPaintProperty('area-connections', 'line-color', [
             'case',
             ['==', ['get', 'fv_net'], fv_net],
@@ -255,7 +255,7 @@ export function highlightArea(map, forsyid) {
             0.4  // Default opacity
         ]);
     } else {
-        // Use forsyid for split networks
+        // Use forsyid when networks are split or when fv_net is invalid/empty/undefined
         map.setPaintProperty('area-connections', 'line-color', [
             'case',
             ['==', ['get', 'forsyid'], forsyid],
@@ -315,21 +315,33 @@ export function updateSelectedPlants(map) {
     });
 
     if (!isNetworkSplit) {
-        // For merged networks, use fv_net
+        // For merged networks, use fv_net (only when it exists and is valid)
         const validNetworks = new Set();
+        const individualIds = new Set();
+
         features.forEach(feature => {
             const fv_net = feature.properties.fv_net;
-            if (fv_net && fv_net !== '0') {
+            if (fv_net && fv_net !== '0' && fv_net !== '') {
                 validNetworks.add(fv_net);
+            } else {
+                individualIds.add(feature.properties.forsyid);
             }
         });
 
+        // Create a combined filter for both networked and individual connections
+        const connectionFilter = ['any'];
+        
+        // Add network-based conditions
         if (validNetworks.size > 0) {
-            const networkFilter = ['in', 'fv_net', ...Array.from(validNetworks)];
-            map.setFilter('selected-connections', networkFilter);
-        } else {
-            map.setFilter('selected-connections', ['in', 'fv_net', '']);
+            connectionFilter.push(['in', ['get', 'fv_net'], ['literal', Array.from(validNetworks)]]);
         }
+        
+        // Add individual area conditions
+        if (individualIds.size > 0) {
+            connectionFilter.push(['in', ['get', 'forsyid'], ['literal', Array.from(individualIds)]]);
+        }
+
+        map.setFilter('selected-connections', connectionFilter);
     } else {
         // For split networks, use forsyid
         map.setFilter('selected-connections', filters);

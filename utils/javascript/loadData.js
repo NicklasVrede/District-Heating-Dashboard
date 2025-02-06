@@ -366,7 +366,7 @@ export function loadConnectionLines(map) {
                 }
             });
 
-            // Add the selected connections layer
+            // Add the selected connections layer with an empty filter
             map.addLayer({
                 id: 'selected-connections',
                 type: 'line',
@@ -379,13 +379,13 @@ export function loadConnectionLines(map) {
                     'line-width': 1.5,
                     'line-opacity': 0.8
                 },
-                filter: ['in', 'fv_net', '']  // Empty filter initially
+                filter: ['in', 'forsyid', ''] // Empty filter that won't match anything
             });
         })
         .catch(error => {
             console.warn('Error loading connections:', error);
         });
-}
+}   
 
 export function loadGasAreas(map) {
     return fetch('maps/gas_areas.geojson')
