@@ -32,6 +32,9 @@ import { updateGraph } from './graphs/graphManager.js';
 // Import the loading spinner module
 import { updateLoadingState, totalLoadingTasks } from './utils/javascript/loadingSpinner.js';
 
+// Import the initializeShapes function
+import { initializeShapes } from './utils/javascript/initializeShapes.js';
+
 // Initialize year state with the update graph function
 initializeYearState(updateGraph);
 
@@ -72,7 +75,10 @@ map.on('load', () => {
     window.map = map;
     setMapInstance(map);
     
-    // First load the data dictionary
+    // Initialize shapes first
+    initializeShapes(map);
+    
+    // Then load the data dictionary
     loadData()
         .then(() => {
             initializeIdSets();

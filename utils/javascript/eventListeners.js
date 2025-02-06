@@ -4,6 +4,7 @@ import { areaStyles } from '../../styles/areaStyles.js';
 import { focusState } from './focusLayers/FocusState.js';
 import { yearState } from './focusLayers/YearState.js';
 import { modifySelection } from './selectionFunctions.js';
+import { getNetworkSplitState } from './networkSplit.js';
 
 let isHoveringPlant = false;
 let areaTooltip = null;
@@ -216,25 +217,72 @@ export function addAreaEventListeners(map) {
 }
 
 export function highlightArea(map, forsyid) {
+    // Get the fv_net value for this forsyid
+    const features = map.queryRenderedFeatures({ layers: ['areas'] });
+    const feature = features.find(f => f.properties.forsyid === forsyid);
+    const fv_net = feature?.properties?.fv_net;
+    const isNetworkSplit = getNetworkSplitState();
+
+    // Highlight the area fill
     map.setPaintProperty('areas', 'fill-color', [
         'case',
         ['==', ['get', 'forsyid'], forsyid],
-        highlightStyles.areaFillColor,          // Use the correct property name
-        areaStyles.fill.paint['fill-color']     // Keep default color for others
+        highlightStyles.areaFillColor,
+        areaStyles.fill.paint['fill-color']
     ]);
     
+    // Highlight the area border
     map.setPaintProperty('areas-border', 'line-color', [
         'case',
         ['==', ['get', 'forsyid'], forsyid],
-        highlightStyles.areaBorderColor,        // Use the correct property name
-        areaStyles.line.paint['line-color']     // Keep default color for others
+        '#ff9999',
+        areaStyles.line.paint['line-color']
     ]);
+
+    if (!isNetworkSplit && fv_net && fv_net !== '0') {
+        // Use fv_net for merged networks
+        map.setPaintProperty('area-connections', 'line-color', [
+            'case',
+            ['==', ['get', 'fv_net'], fv_net],
+            '#ff9999',
+            '#6666ff'  // Default color
+        ]);
+
+        map.setPaintProperty('area-connections', 'line-opacity', [
+            'case',
+            ['==', ['get', 'fv_net'], fv_net],
+            0.8,
+            0.4  // Default opacity
+        ]);
+    } else {
+        // Use forsyid for split networks
+        map.setPaintProperty('area-connections', 'line-color', [
+            'case',
+            ['==', ['get', 'forsyid'], forsyid],
+            '#ff9999',
+            '#6666ff'  // Default color
+        ]);
+
+        map.setPaintProperty('area-connections', 'line-opacity', [
+            'case',
+            ['==', ['get', 'forsyid'], forsyid],
+            0.8,
+            0.4  // Default opacity
+        ]);
+    }
+
+    // Also highlight connected areas using existing function
+    highlightConnectedAreas(map, feature);
 }
 
 export function resetAreaHighlight(map) {
-    // Reset to default styles from areaStyles.js
+    // Reset area fill and border to default styles
     map.setPaintProperty('areas', 'fill-color', areaStyles.fill.paint['fill-color']);
     map.setPaintProperty('areas-border', 'line-color', areaStyles.line.paint['line-color']);
+    
+    // Reset area connections to default styles
+    map.setPaintProperty('area-connections', 'line-color', '#6666ff');
+    map.setPaintProperty('area-connections', 'line-opacity', 0.4);
 }
 
 export function highlightPlant(map, forsyid) {
@@ -260,6 +308,32 @@ export function updateSelectedPlants(map) {
     
     map.setFilter('selected-plants', filters);
     map.setFilter('selected-areas', filters);
+
+    const isNetworkSplit = getNetworkSplitState();
+    const features = map.querySourceFeatures('areas', {
+        filter: filters
+    });
+
+    if (!isNetworkSplit) {
+        // For merged networks, use fv_net
+        const validNetworks = new Set();
+        features.forEach(feature => {
+            const fv_net = feature.properties.fv_net;
+            if (fv_net && fv_net !== '0') {
+                validNetworks.add(fv_net);
+            }
+        });
+
+        if (validNetworks.size > 0) {
+            const networkFilter = ['in', 'fv_net', ...Array.from(validNetworks)];
+            map.setFilter('selected-connections', networkFilter);
+        } else {
+            map.setFilter('selected-connections', ['in', 'fv_net', '']);
+        }
+    } else {
+        // For split networks, use forsyid
+        map.setFilter('selected-connections', filters);
+    }
 
     const hasMoreThanTwoSelections = selectionSet.size > 2;
     yearState.visible = hasMoreThanTwoSelections || ['price', 'production'].includes(focusState.focus);
