@@ -31,6 +31,12 @@ export function toggleMunicipalities(map, button) {
     map.setLayoutProperty('areas', 'visibility', otherLayersVisibility);
     map.setLayoutProperty('plants', 'visibility', otherLayersVisibility);
     map.setLayoutProperty('areas-border', 'visibility', otherLayersVisibility);
+    
+    // Also toggle visibility of connection lines
+    map.setLayoutProperty('area-connections', 'visibility', otherLayersVisibility);
+    map.setLayoutProperty('selected-connections', 'visibility', otherLayersVisibility);
+    map.setLayoutProperty('plant-connections', 'visibility', otherLayersVisibility);
+    map.setLayoutProperty('selected-plant-connections', 'visibility', otherLayersVisibility);
 
     // Toggle network split button visibility
     const networkSplitButton = document.querySelector('.network-split-button');
