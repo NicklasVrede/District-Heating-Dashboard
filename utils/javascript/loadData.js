@@ -351,7 +351,7 @@ export function loadConnectionLines(map) {
                 data: connections
             });
 
-            // Add the connections layer
+            // Add the connections layer with dotted lines
             map.addLayer({
                 id: 'area-connections',
                 type: 'line',
@@ -362,11 +362,12 @@ export function loadConnectionLines(map) {
                 paint: {
                     'line-color': '#6666ff',
                     'line-width': 1.5,
-                    'line-opacity': 0.4
+                    'line-opacity': 0.4,
+                    'line-dasharray': [2, 2]  // Added dotted line pattern
                 }
             });
 
-            // Add the selected connections layer
+            // Add the selected connections layer with dotted lines
             map.addLayer({
                 id: 'selected-connections',
                 type: 'line',
@@ -377,7 +378,8 @@ export function loadConnectionLines(map) {
                 paint: {
                     'line-color': '#ff9999',
                     'line-width': 1.5,
-                    'line-opacity': 0.8
+                    'line-opacity': 0.8,
+                    'line-dasharray': [2, 2]  // Added dotted line pattern
                 },
                 filter: ['in', 'forsyid', '']
             });
