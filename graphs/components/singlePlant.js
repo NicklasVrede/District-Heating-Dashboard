@@ -124,7 +124,28 @@ export function createSinglePlantGraph(data, forsyid, focus) {
     };
 }
 
-// Export the chart creation functions to be reused
+// Add this common legend configuration that can be reused
+const commonLegendConfig = {
+    position: 'left',
+    align: 'start',
+    labels: {
+        boxWidth: 12,
+        boxHeight: 12,
+        padding: 8,
+        font: {
+            size: 11
+        },
+        textAlign: 'left',
+        generateLabels: function(chart) {
+            const originalLabels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+            return originalLabels.map(label => ({
+                ...label,
+                text: label.text.padEnd(15, '\u00A0')
+            }));
+        }
+    }
+};
+
 export function createProductionChart(plantData, canvasId, maxValue = null) {
     const ctx = document.getElementById(canvasId).getContext('2d');
     
@@ -269,16 +290,7 @@ export function createProductionChart(plantData, canvasId, maxValue = null) {
                     }
                 },
                 legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    },
+                    ...commonLegendConfig,
                     onClick: function(e, legendItem, legend) {
                         clickHandlers.production(legend.chart, legendItem.datasetIndex);
                     },
@@ -382,16 +394,7 @@ export function createPriceChart(plantData, canvasId, maxValues = null) {
             },
             plugins: {
                 legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    },
+                    ...commonLegendConfig,
                     onClick: function(e, legendItem, legend) {
                         clickHandlers.price(legend.chart, legendItem.datasetIndex);
                     },
@@ -584,16 +587,7 @@ export function createTotalProductionChart(plantData, canvasId, maxValue = null)
                     text: 'Total Production Over Time'
                 },
                 legend: {
-                    position: 'left',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 12,
-                        boxHeight: 12,
-                        padding: 8,
-                        font: {
-                            size: 11
-                        }
-                    },
+                    ...commonLegendConfig,
                     onClick: function(e, legendItem, legend) {
                         clickHandlers.totalProduction(legend.chart, legendItem.datasetIndex);
                     },
