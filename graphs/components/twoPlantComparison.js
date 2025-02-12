@@ -193,7 +193,7 @@ export function createTwoPlantComparison(data, validForsyids) {
         // Create and store chart instances with shared max values
         charts.push(createProductionChart(plantData, index + 1, roundedMaxProduction));
         charts.push(createPriceChart(plantData, index + 1, maxValues.prices));
-        charts.push(createTotalProductionChart(plantData, index + 1, maxProductionValue));
+        charts.push(createTotalProductionChart(plantData, index + 1, roundedMaxProduction));
 
         updateInfoBox(plantData, index + 1);
     });
@@ -575,6 +575,11 @@ function createTotalProductionChart(plantData, index, maxValue) {
         plantData.production[year]?.elprod || 0
     );
 
+    // Only round if value is 1000 or above
+    const roundedMax = maxValue >= 1000 ? 
+        Math.ceil(maxValue / 1000) * 1000 : 
+        maxValue;
+
     return new Chart(ctx, {
         type: 'bar',
         data: {
@@ -588,9 +593,9 @@ function createTotalProductionChart(plantData, index, maxValue) {
                     borderWidth: 1,
                     datalabels: {
                         display: context => {
-                            if (maxValue < (maxValue * 0.04)) return false;
-                            // Show labels every 6th year (index 0, 6, 12, etc.)
-                            return context.dataIndex % 6 === 0;
+                            const totalValue = heatProduction[context.dataIndex] + 
+                                            electricityProduction[context.dataIndex];
+                            return totalValue < (maxValue * 0.02) && context.dataIndex % 6 === 0;
                         },
                         align: 'end',
                         anchor: 'end',
@@ -638,15 +643,15 @@ function createTotalProductionChart(plantData, index, maxValue) {
                         minRotation: 45,
                         autoSkip: false,
                         callback: function(val, index) {
-                            const year = this.getLabelForValue(val);
-                            return parseInt(year) % 2 === 0 ? year : '';
+                            // Show label only for every 6th year
+                            return index % 6 === 0 ? this.getLabelForValue(val) : '';
                         }
                     }
                 },
                 y: {
                     stacked: true,
                     beginAtZero: true,
-                    max: maxValue,  // Use exact maxValue without rounding
+                    max: roundedMax,
                     ticks: {
                         stepSize: maxValue / 6,  // Divide range into 6 steps
                         font: {
