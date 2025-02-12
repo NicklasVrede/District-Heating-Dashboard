@@ -575,29 +575,13 @@ function createTotalProductionChart(plantData, index, maxValue) {
         plantData.production[year]?.elprod || 0
     );
 
-    // Calculate local max value for this plant
-    const localMaxValue = Math.max(
-        ...heatProduction.map((heat, i) => heat + electricityProduction[i])
-    );
-
-    // Use the larger of the local max and the other plant's max
-    const effectiveMaxValue = Math.max(localMaxValue, maxValue);
-
-    // Adaptive rounding based on the scale of the values
-    let roundedMax;
-    if (effectiveMaxValue >= 10000) {
-        roundedMax = Math.ceil(effectiveMaxValue / 1000) * 1000;
-    } else if (effectiveMaxValue >= 1000) {
-        roundedMax = Math.ceil(effectiveMaxValue / 100) * 100;
-    } else {
-        roundedMax = Math.ceil(effectiveMaxValue / 10) * 10;
-    }
-
-    // Calculate if we're dealing with small values
+    // Calculate the actual maximum total production
     const maxProductionValue = Math.max(
         ...heatProduction.map((heat, i) => heat + electricityProduction[i])
     );
-    const isSmallScale = maxProductionValue < (roundedMax * 0.04); // Less than x% of max scale
+
+    // Add just a small buffer (5%) and round up to nearest nice number
+    const roundedMax = Math.ceil(maxProductionValue * 1.05);
 
     return new Chart(ctx, {
         type: 'bar',
@@ -612,7 +596,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                     borderWidth: 1,
                     datalabels: {
                         display: context => {
-                            if (!isSmallScale) return false;
+                            if (maxProductionValue < (roundedMax * 0.04)) return false;
                             // Show labels every 6th year (index 0, 6, 12, etc.)
                             return context.dataIndex % 6 === 0;
                         },
@@ -672,7 +656,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                     beginAtZero: true,
                     max: roundedMax,
                     ticks: {
-                        stepSize: Math.ceil(roundedMax / 5),
+                        stepSize: Math.ceil(roundedMax / 6),
                         font: {
                             size: 10
                         },
