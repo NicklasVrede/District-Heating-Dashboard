@@ -61,8 +61,56 @@ const commonLegendConfig = {
         if (tooltipEl) {
             tooltipEl.style.display = 'none';
         }
+    },
+    onClick: function(e, legendItem, legend) {
+        const chartType = legend.chart.config.type === 'bar' ? 'totalProduction' :
+                         legend.chart.options.plugins.title.text.includes('Price') ? 'price' : 
+                         'production';
+        clickHandlers[chartType](legend.chart, legendItem.datasetIndex);
     }
 };
+
+// Add click handlers at the module level
+const clickHandlers = {
+    production: createClickHandler('production'),
+    price: createClickHandler('price'),
+    totalProduction: createClickHandler('totalProduction')
+};
+
+function createClickHandler(chartType) {
+    let clickTimeout = null;
+    let clickCount = 0;
+
+    return function(chart, datasetIndex) {
+        clickCount++;
+        
+        if (clickCount === 1) {
+            clickTimeout = setTimeout(() => {
+                // Single click behavior
+                const meta = chart.getDatasetMeta(datasetIndex);
+                meta.hidden = !meta.hidden;
+                chart.update();
+                clickCount = 0;
+            }, 250);
+        } else if (clickCount === 2) {
+            clearTimeout(clickTimeout);
+            // Double click behavior
+            const datasets = chart.data.datasets;
+            
+            // If all others are already hidden, show all (reset)
+            const allOthersHidden = datasets.every((dataset, i) => 
+                i === datasetIndex || chart.getDatasetMeta(i).hidden);
+            
+            datasets.forEach((dataset, i) => {
+                const meta = chart.getDatasetMeta(i);
+                meta.hidden = !allOthersHidden && (i !== datasetIndex);
+            });
+            
+            chart.update();
+            clickCount = 0;
+        }
+    };
+}
 
 export function createTwoPlantComparison(data, validForsyids) {
     // Input validation
