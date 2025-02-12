@@ -171,9 +171,6 @@ export function createTwoPlantComparison(data, validForsyids) {
         }
     });
 
-    // Round up to nearest thousand
-    const roundedMaxProduction = Math.ceil(maxProductionValue / 1000) * 1000;
-
     // Create charts for both plants with shared max values
     validForsyids.forEach((forsyid, index) => {
         const plantId = forsyid.toString().padStart(8, '0');
@@ -191,9 +188,9 @@ export function createTwoPlantComparison(data, validForsyids) {
         titleElement.textContent = plantData.name || `Plant ${index + 1}`;
 
         // Create and store chart instances with shared max values
-        charts.push(createProductionChart(plantData, index + 1, roundedMaxProduction));
+        charts.push(createProductionChart(plantData, index + 1, maxProductionValue));
         charts.push(createPriceChart(plantData, index + 1, maxValues.prices));
-        charts.push(createTotalProductionChart(plantData, index + 1, roundedMaxProduction));
+        charts.push(createTotalProductionChart(plantData, index + 1, maxProductionValue));
 
         updateInfoBox(plantData, index + 1);
     });
@@ -575,11 +572,6 @@ function createTotalProductionChart(plantData, index, maxValue) {
         plantData.production[year]?.elprod || 0
     );
 
-    // Only round if value is 1000 or above
-    const roundedMax = maxValue >= 1000 ? 
-        Math.ceil(maxValue / 1000) * 1000 : 
-        maxValue;
-
     return new Chart(ctx, {
         type: 'bar',
         data: {
@@ -651,7 +643,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                 y: {
                     stacked: true,
                     beginAtZero: true,
-                    max: roundedMax,
+                    max: maxValue,  // Use exact maxValue without rounding
                     ticks: {
                         stepSize: maxValue / 6,  // Divide range into 6 steps
                         font: {
