@@ -193,7 +193,7 @@ export function createTwoPlantComparison(data, validForsyids) {
         // Create and store chart instances with shared max values
         charts.push(createProductionChart(plantData, index + 1, roundedMaxProduction));
         charts.push(createPriceChart(plantData, index + 1, maxValues.prices));
-        charts.push(createTotalProductionChart(plantData, index + 1, roundedMaxProduction));
+        charts.push(createTotalProductionChart(plantData, index + 1, maxProductionValue));
 
         updateInfoBox(plantData, index + 1);
     });
@@ -575,14 +575,6 @@ function createTotalProductionChart(plantData, index, maxValue) {
         plantData.production[year]?.elprod || 0
     );
 
-    // Calculate the actual maximum total production
-    const maxProductionValue = Math.max(
-        ...heatProduction.map((heat, i) => heat + electricityProduction[i])
-    );
-
-    // Add just a small buffer (5%) and round up to nearest nice number
-    const roundedMax = Math.ceil(maxProductionValue * 1.05);
-
     return new Chart(ctx, {
         type: 'bar',
         data: {
@@ -596,7 +588,7 @@ function createTotalProductionChart(plantData, index, maxValue) {
                     borderWidth: 1,
                     datalabels: {
                         display: context => {
-                            if (maxProductionValue < (roundedMax * 0.04)) return false;
+                            if (maxValue < (maxValue * 0.04)) return false;
                             // Show labels every 6th year (index 0, 6, 12, etc.)
                             return context.dataIndex % 6 === 0;
                         },
@@ -654,17 +646,14 @@ function createTotalProductionChart(plantData, index, maxValue) {
                 y: {
                     stacked: true,
                     beginAtZero: true,
-                    max: roundedMax,
+                    max: maxValue,  // Use exact maxValue without rounding
                     ticks: {
-                        stepSize: Math.ceil(roundedMax / 6),
+                        stepSize: maxValue / 6,  // Divide range into 6 steps
                         font: {
                             size: 10
                         },
                         callback: function(value) {
-                            if (value >= 1000) {
-                                return `${(value/1000).toFixed(1)}k TJ`;
-                            }
-                            return `${value.toLocaleString()} TJ`;
+                            return `${value.toFixed(1)} TJ`;
                         }
                     },
                     grid: {
