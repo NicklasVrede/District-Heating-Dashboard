@@ -82,7 +82,7 @@ map.on('load', () => {
     loadData()
         .then(() => {
             initializeIdSets();
-            updateLoadingState(true, 'Loading plants...');
+            updateLoadingState(true, 'Loading map layers...');
             return Promise.all([
                 loadPlants(map),
                 loadAreas(map),

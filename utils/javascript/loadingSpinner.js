@@ -1,5 +1,5 @@
 let loadingCounter = 0;
-const totalLoadingTasks = 5;
+const totalLoadingTasks = 4;
 const loadingSpinner = document.getElementById('loading-spinner');
 const mapOverlay = document.querySelector('.map-overlay');
 
@@ -19,11 +19,10 @@ if (loadingSpinner) {
 
 const loadingMessages = {
     0: 'Loading data dictionary...',
-    1: 'Loading plants...',
-    2: 'Loading areas...',
-    3: 'Loading gas areas...',
-    4: 'Loading municipalities...',
-    5: 'Initializing map...'
+    1: 'Loading map layers...',
+    2: 'Initializing map sources...',
+    3: 'Setting up fuel manager...',
+    4: 'Finalizing...'
 };
 
 let maxProgress = 0;
