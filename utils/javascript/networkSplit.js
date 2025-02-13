@@ -20,50 +20,39 @@ export function toggleNetworkSplit(map) {
     if (window.clearSelection) {
         window.clearSelection();
     }
+
+    // Show the spinner
+    updateLoadingState(true, 'Updating network data...');
     
-    // Show initial loading spinner
-    updateLoadingState(true, 'Loading network data...');
-    
-    // Create promises for both fetches
-    const plantsPromise = fetch(isNetworkSplitActive ? 'data/plants.geojson' : 'data/plants_merged.geojson')
-        .then(response => response.json())
-        .then(data => {
-            updateLoadingState(true, 'Updating plant data...');
-            map.getSource('plants').setData(data);
-        });
-    
-    const areasPromise = fetch(isNetworkSplitActive ? 'maps/areas.geojson' : 'maps/areas_merged.geojson')
-        .then(response => response.json())
-        .then(data => {
-            updateLoadingState(true, 'Updating area data...');
-            map.getSource('areas').setData(data);
-        });
-    
-    // Wait for both fetches to complete
-    Promise.all([plantsPromise, areasPromise])
-        .then(() => {
-            updateLoadingState(true, 'Refreshing data cache...');
-            clearCache();
-            return loadData();
-        })
-        .then(() => {
-            updateLoadingState(true, 'Updating fuel display...');
-            MainFuelManager.getInstance(map).updateMainFuel(yearState.year);
-            
-            // Hide loading spinner - decrement for each task we completed
-            updateLoadingState(false); // Network data
-            updateLoadingState(false); // Plant data
-            updateLoadingState(false); // Area data
-            updateLoadingState(false); // Cache refresh
-            updateLoadingState(false); // Fuel display
-        })
-        .catch(error => {
-            console.error('Error updating network split:', error);
-            // Ensure loading spinner is hidden on error by decrementing the counter
-            for (let i = 0; i < totalLoadingTasks; i++) {
+    // Force delay before starting operations
+    setTimeout(() => {
+        // Create promises for both fetches
+        const plantsPromise = fetch(isNetworkSplitActive ? 'data/plants.geojson' : 'data/plants_merged.geojson')
+            .then(response => response.json())
+            .then(data => {
+                map.getSource('plants').setData(data);
+            });
+        
+        const areasPromise = fetch(isNetworkSplitActive ? 'maps/areas.geojson' : 'maps/areas_merged.geojson')
+            .then(response => response.json())
+            .then(data => {
+                map.getSource('areas').setData(data);
+            });
+        
+        Promise.all([plantsPromise, areasPromise])
+            .then(() => {
+                clearCache();
+                return loadData();
+            })
+            .then(() => {
+                MainFuelManager.getInstance(map).updateMainFuel(yearState.year);
                 updateLoadingState(false);
-            }
-        });
+            })
+            .catch(error => {
+                console.error('Error updating network split:', error);
+                updateLoadingState(false);
+            });
+    }, 500);
     
     return isNetworkSplitActive;
 }
