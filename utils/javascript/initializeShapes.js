@@ -19,18 +19,18 @@ export function initializeShapes(map) {
     addShape('circle', (ctx, size) => {
         ctx.beginPath();
         ctx.arc(size/2, size/2, size/2.2, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';  // White fill
+        ctx.fillStyle = '#ffffff';
         ctx.fill();
-        ctx.strokeStyle = '#404040';  // Darker gray border (was #808080)
-        ctx.lineWidth = 3;  // Thicker line (was 2)
+        ctx.strokeStyle = '#404040';
+        ctx.lineWidth = 3;
         ctx.stroke();
     });
 
     // Add square (for network plants) - only border, no fill
     addShape('square', (ctx, size) => {
-        const offset = size/10;  // Reduced from size/8 to size/10 to make squares bigger
-        ctx.strokeStyle = '#404040';  // Darker gray border (was #808080)
-        ctx.lineWidth = 3;  // Thicker line (was 2)
+        const offset = size/14; 
+        ctx.strokeStyle = '#404040'; 
+        ctx.lineWidth = 3;
         ctx.strokeRect(offset, offset, size - 2*offset, size - 2*offset);
     });
 } 

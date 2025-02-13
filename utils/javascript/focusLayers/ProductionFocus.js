@@ -116,7 +116,7 @@ export class ProductionFocus {
                 
                 const iconSizeConfig = municipalitiesVisible ? 
                     [5, 0.375, 10, 1.125, 15, 1.5] : 
-                    [5, 0.3, 10, 0.6, 15, 0.85];
+                    [5, 0.3, 10, 0.7, 15, 1.5];
 
                 this.map.addLayer({
                     'id': layerId,
@@ -140,8 +140,8 @@ export class ProductionFocus {
                     ['linear'],
                     ['zoom'],
                     ...(municipalitiesVisible ? 
-                        [5, 0.375, 10, 1.125, 15, 1.5] : 
-                        [5, 0.3, 10, 0.6, 15, 0.85])
+                        [5, 0.5, 10, 1.5, 15, 2.0] : 
+                        [5, 0.4, 10, 0.8, 15, 1.2])
                 ]);
             }
 
