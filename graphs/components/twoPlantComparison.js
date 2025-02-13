@@ -487,27 +487,30 @@ function createPriceChart(plantData, index, maxValues) {
     const datasets = [
         {
             label: 'MWh Price',
-            data: years.map(year => plantData.prices?.[year]?.mwh_price || 0),
+            data: years.map(year => plantData.prices?.[year]?.mwh_price || null),
             borderColor: '#FF6384',
             backgroundColor: '#FF6384',
             tension: 0.1,
-            fill: false
+            fill: false,
+            spanGaps: true
         },
         {
             label: 'Apartment',
-            data: years.map(year => plantData.prices?.[year]?.apartment_price || 0),
+            data: years.map(year => plantData.prices?.[year]?.apartment_price || null),
             borderColor: '#36A2EB',
             backgroundColor: '#36A2EB',
             tension: 0.1,
-            fill: false
+            fill: false,
+            spanGaps: true
         },
         {
             label: 'House',
-            data: years.map(year => plantData.prices?.[year]?.house_price || 0),
+            data: years.map(year => plantData.prices?.[year]?.house_price || null),
             borderColor: '#4BC0C0',
             backgroundColor: '#4BC0C0',
             tension: 0.1,
-            fill: false
+            fill: false,
+            spanGaps: true
         }
     ];
 
