@@ -32,13 +32,13 @@ export function loadPlants(map) {
                 type: 'line',
                 source: 'plant-connections',
                 layout: {
-                    'visibility': 'visible'  // Changed from 'visible' to 'none'
+                    'visibility': 'visible'
                 },
                 paint: {
-                    'line-color': '#0000ff',
-                    'line-width': 2,
-                    'line-dasharray': [3, 3],
-                    'line-opacity': 0.7
+                    'line-color': '#999999',
+                    'line-width': 1,
+                    'line-dasharray': [2, 2],
+                    'line-opacity': 0.4
                 }
             });
 
@@ -394,9 +394,9 @@ export function loadConnectionLines(map) {
                 },
                 paint: {
                     'line-color': '#ff9999',
-                    'line-width': 2,
-                    'line-dasharray': [3, 3],
-                    'line-opacity': 0.8
+                    'line-width': 1.5,
+                    'line-dasharray': [2, 2],
+                    'line-opacity': 0.6
                 },
                 filter: ['in', 'fv_net', '']
             });
