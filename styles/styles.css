@@ -411,7 +411,7 @@ body, html {
     font-size: 14px;
     margin-bottom: 10px;
     text-align: center;
-    transition: opacity 0.3s ease-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
 @keyframes spin {
@@ -570,7 +570,7 @@ body, html {
     width: 0%;
     height: 100%;
     background-color: #3498db;
-    transition: width 0.3s ease-in-out;
+    transition: width 0.05s ease-out;
     position: absolute;
     left: 0;
     top: 0;
