@@ -2,7 +2,7 @@
 
 Interactive map showing Denmark's heating infrastructure - plants, fuel types, prices, and network connections.
 
-🌐 **Live Demo**: [https://nicklasvrede.github.io/Visualisering/](https://nicklasvrede.github.io/Visualisering/)
+🌐 **Live Demo**: [https://nicklasvrede.github.io/District-Heating-Dashboard/](https://nicklasvrede.github.io/District-Heating-Dashboard/)
 
 ## What it does
 
