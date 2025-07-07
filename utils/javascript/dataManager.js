@@ -1,6 +1,7 @@
+const REPO_NAME = window.REPO_NAME || 'District-Heating-Dashboard';
 const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? '.'
-    : '/Visualisering';
+    : `/${REPO_NAME}`;
 
 import { getNetworkSplitState } from './networkSplit.js';
 
